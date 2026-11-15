@@ -19,6 +19,22 @@ MUTATIONS = [
     ("nearest VQ index", "tokenizer/vector_quantizer.py", "forward", "nearest", "test_vq.py"),
     ("single base commit", "streaming/receiver.py", "decode_base", "commit", "test_reference_state.py"),
     ("reference fingerprint", "streaming/receiver.py", "start_frame", "reference", "test_streaming.py"),
+    ("display ACK reference", "streaming/session.py", "_display_ack", "ack", "test_adaptive_stream.py"),
+    ("deadline send guard", "streaming/transport.py", "send", "expiry", "test_adaptive_stream.py"),
+    (
+        "retain better base",
+        "streaming/sender.py",
+        "allocation_points",
+        "retention",
+        "test_adaptive_stream.py",
+    ),
+    (
+        "charge unsent bytes",
+        "streaming/sender.py",
+        "allocation_points",
+        "remaining",
+        "test_adaptive_stream.py",
+    ),
 ]
 
 
@@ -30,7 +46,7 @@ class Mutator(ast.NodeTransformer):
         if node.name != self.function:
             return node
         for child in ast.walk(node):
-            if self.changed:
+            if self.changed and self.kind != "expiry":
                 break
             self.mutate(child)
         return node
@@ -42,6 +58,8 @@ class Mutator(ast.NodeTransformer):
             "order": "first_token_index !=",
             "commit": "self.context.committed",
             "reference": "reference_fingerprint !=",
+            "ack": "DisplayAck.from_bytes(wire) != expected",
+            "expiry": "time.perf_counter()",
         }
         if isinstance(child, ast.If) and self.kind in predicates:
             if predicates[self.kind] in ast.unparse(child.test):
@@ -59,6 +77,14 @@ class Mutator(ast.NodeTransformer):
                 if child.value.func.attr == "masked_fill":
                     child.value = child.value.func.value
                     self.changed = True
+        elif self.kind == "retention" and isinstance(child, ast.Compare):
+            if ast.unparse(child) == "k >= delivered_tokens":
+                child.ops[0] = ast.Gt()
+                self.changed = True
+        elif self.kind == "remaining" and isinstance(child, ast.BinOp):
+            if isinstance(child.op, ast.Sub) and ast.unparse(child.right) == "delivered_bytes":
+                child.op = ast.Add()
+                self.changed = True
 
 
 def check_mutation(spec):

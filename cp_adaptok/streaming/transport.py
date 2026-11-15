@@ -5,11 +5,16 @@ import time
 from .bitstream import MAX_RECORD_BYTES, StreamError
 
 
-def send_record(connection, data):
+def record_size(data):
     if not 0 < len(data) <= MAX_RECORD_BYTES:
         raise StreamError("invalid transport record size")
-    connection.sendall(struct.pack(">I", len(data)) + data)
     return 4 + len(data)
+
+
+def send_record(connection, data):
+    size = record_size(data)
+    connection.sendall(struct.pack(">I", len(data)) + data)
+    return size
 
 
 def receive_exact(connection, count):
@@ -47,9 +52,10 @@ class PacedRecordWriter:
         self.bandwidth_bps = bandwidth_bps
 
     def send(self, data, finish_by=None):
-        if not 0 < len(data) <= MAX_RECORD_BYTES:
-            raise StreamError("invalid transport record size")
-        duration = 0 if self.bandwidth_bps is None else 8 * (4 + len(data)) / self.bandwidth_bps
+        size = record_size(data)
+        if finish_by is not None and not math.isfinite(finish_by):
+            raise ValueError("deadline must be finite")
+        duration = 0 if self.bandwidth_bps is None else 8 * size / self.bandwidth_bps
         if finish_by is not None and time.perf_counter() + duration > finish_by:
             return 0
         if duration:

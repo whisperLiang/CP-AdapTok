@@ -106,6 +106,50 @@ def test_display_controls_are_versioned_checked_and_identify_reference():
         DisplayRequest(0, 0)
 
 
+@pytest.mark.parametrize("identity", [(0, 8.5), (-1, 8), (True, 8)])
+def test_display_identity_requires_canonical_integers(identity):
+    with pytest.raises(StreamError):
+        DisplayRequest(*identity)
+
+
+@pytest.mark.parametrize("fingerprint", ["ab", "ff" * 17, "gg" * 16, " " * 32])
+def test_ack_rejects_malformed_reference_before_serializing(fingerprint):
+    with pytest.raises(StreamError):
+        DisplayAck(DisplayRequest(0, 8), fingerprint)
+
+
+@pytest.mark.parametrize("deadline", [float("nan"), float("inf")])
+def test_invalid_deadline_cannot_bypass_expiry_guard(deadline):
+    left, right = socket.socketpair()
+    with left, right:
+        writer = PacedRecordWriter(left)
+        with pytest.raises(ValueError):
+            writer.send(b"packet", finish_by=deadline)
+        assert writer.bytes_sent == 0
+
+
+@torch.no_grad()
+def test_sender_rejects_display_ack_with_wrong_reference(codec):
+    left, right = socket.socketpair()
+    with left, right, ThreadPoolExecutor(1) as pool:
+        left.settimeout(2)
+        right.settimeout(2)
+
+        def bad_ack():
+            while True:
+                wire = receive_record(right)
+                if wire[:4] == b"CPDS":
+                    request = DisplayRequest.from_bytes(wire)
+                    send_record(right, DisplayAck(request, "ee" * 16).to_bytes())
+                    return
+
+        future = pool.submit(bad_ack)
+        sender = SocketSender(left, CodecEncoder(codec), [8, 32])
+        with pytest.raises(StreamError, match="ACK identity/reference"):
+            sender.send_frame(torch.rand(1, 3, 16, 24))
+        future.result(timeout=2)
+
+
 @torch.no_grad()
 def test_online_socket_truncation_preserves_bytes_and_multiframe_state(codec):
     clip = torch.rand(3, 3, 16, 24)

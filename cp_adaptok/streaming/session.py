@@ -39,6 +39,8 @@ class DisplayRequest:
     tokens: int
 
     def __post_init__(self):
+        if type(self.frame_id) is not int or type(self.tokens) is not int:
+            raise StreamError("display identity/budget must be integers")
         if not 0 <= self.frame_id < 2**64 or not 0 < self.tokens <= 8192:
             raise StreamError("invalid display identity/budget")
 
@@ -54,6 +56,15 @@ class DisplayRequest:
 class DisplayAck:
     request: DisplayRequest
     state_fingerprint: str
+
+    def __post_init__(self):
+        try:
+            fingerprint = bytes.fromhex(self.state_fingerprint)
+        except (ValueError, TypeError) as error:
+            raise StreamError("invalid ACK reference fingerprint") from error
+        if len(fingerprint) != 16:
+            raise StreamError("ACK reference fingerprint must contain 128 bits")
+        object.__setattr__(self, "state_fingerprint", fingerprint.hex())
 
     def to_bytes(self):
         return _crc_record(
