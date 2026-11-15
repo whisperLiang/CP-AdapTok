@@ -46,4 +46,4 @@ python scripts/run_streaming_experiments.py --checkpoint checkpoints/s3_smoke/st
 python -m cp_adaptok.cli.stream_demo --mode localhost --progressive --config configs/streaming.yaml --checkpoint checkpoints/s3_smoke/step100.pt --allow-untrained --allocation rate-only --bandwidth-kbps 32 128 512 2048 128 512 2048 512 --playback-delay-ms 1200 --no-save-frames
 ```
 
-逐项命令和退出码见 `results/streaming_verified/commands.json`；逐帧预测、实际质量、deadline、字节、ACK、状态摘要在各场景的 `stream_demo.json`。未训练模型的画质仍不合格；官方权重、原生 CUDA、正式长序列 RD 和30/60 FPS验收仍待完成。
+逐项命令和退出码见 `results/streaming_verified/commands.json`；逐帧预测、实际质量、deadline、字节、ACK、状态摘要在各场景的 `stream_demo.json`。本报告使用的旧结构模型画质仍不合格；官方权重已取得并验证（见 [权重记录](pretrained_weights.md)），原生 CUDA、正式长序列 RD 和30/60 FPS验收仍待完成。

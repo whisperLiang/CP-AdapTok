@@ -4,12 +4,12 @@
 
 ## 版本与环境
 
-- 本报告生成前的代码提交：`41842026ba6cf13fa8e117e0db86e2248c5bb313`；测量文件各自保留实际 commit、dirty 状态、source SHA256 和模型 ID。
+- 本报告生成前的代码提交：`efa3bcaeabd22371d44ed821644daf5b0546fce1`；测量文件各自保留实际 commit、dirty 状态、source SHA256 和模型 ID。
 - 选用 checkpoint：`checkpoints/s3_smoke/step100.pt`，Stage 3 结构训练 100 步，状态 `untrained_backbone_smoke`。
 - checkpoint SHA256：`3aae8b811bc78e885e0905b0f15ef7aa79866dafab49837f3a20685151169eeb`。
 - 模型 ID：`c663834c3bd7bf95953d6293845849f2`；codebook ID：`860d03bc14f8dde91ae57b9c8787c8ed`。
 - NVIDIA H100 PCIe；torch 2.6.0；driver 580.159.03；PyTorch CUDA 12.4。关键 benchmark 串行运行，初始化/指标/I/O 不混入 pipeline FPS，状态计算没有省略。
-- 官方 LD/DMCI 权重缺失；官方两个 OneDrive 分享的匿名 API 都返回 401；nvcc 和 inference_extensions_cuda 不可用。原生 Stage 0、native-parity teacher 未执行。
+- 官方 LD/DMCI 权重已于2026-11-15取得并通过官方大小/QuickXorHash、ZIP CRC及严格参数加载检查，见 [权重记录](pretrained_weights.md)。此前401/403已通过新版匿名浏览器会话解决；nvcc及两个原生扩展仍缺失。以下历史实验仍使用原有随机骨干 checkpoint，原生 Stage 0、native-parity teacher 未执行。
 - 固定上游：见 [manifest](../third_party/manifest.json)，AdapTok `a72076cf6474f930a181aa78971de70d65289b49`，DCVC `cbdae87a5445114cdc7f48816da63ea80bdeac40`。源码未修改；保留原始许可和文件级 notices。
 
 ## 四项核心特性
@@ -163,6 +163,7 @@ docs/architecture.md
 docs/bitstream_spec.md
 docs/evaluation.md
 docs/implementation_report.md
+docs/pretrained_weights.md
 docs/requirements_zh.txt
 docs/streaming_report.md
 docs/training.md

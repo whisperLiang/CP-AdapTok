@@ -158,7 +158,7 @@ python scripts/run_streaming_experiments.py --checkpoint checkpoints/s3_smoke/st
 python -m cp_adaptok.cli.stream_demo --mode localhost --progressive --config configs/streaming.yaml --checkpoint checkpoints/s3_smoke/step100.pt --allow-untrained --allocation rate-only --bandwidth-kbps 32 128 512 2048 128 512 2048 512 --playback-delay-ms 1200 --no-save-frames
 ```
 
-逐项命令和退出码见 `results/streaming_verified/commands.json`；逐帧预测、实际质量、deadline、字节、ACK、状态摘要在各场景的 `stream_demo.json`。未训练模型的画质仍不合格；官方权重、原生 CUDA、正式长序列 RD 和30/60 FPS验收仍待完成。
+逐项命令和退出码见 `results/streaming_verified/commands.json`；逐帧预测、实际质量、deadline、字节、ACK、状态摘要在各场景的 `stream_demo.json`。本报告使用的旧结构模型画质仍不合格；官方权重已取得并验证（见 [权重记录](pretrained_weights.md)），原生 CUDA、正式长序列 RD 和30/60 FPS验收仍待完成。
 """
     (ROOT / "docs/streaming_report.md").write_text(text)
     return summary
@@ -224,7 +224,7 @@ def main():
 - checkpoint SHA256：`{checkpoint_sha}`。
 - 模型 ID：`{evaluation["model_id"]}`；codebook ID：`{evaluation["codebook_id"]}`。
 - NVIDIA H100 PCIe；torch {versions["torch"]}；driver 580.159.03；PyTorch CUDA 12.4。关键 benchmark 串行运行，初始化/指标/I/O 不混入 pipeline FPS，状态计算没有省略。
-- 官方 LD/DMCI 权重缺失；官方两个 OneDrive 分享的匿名 API 都返回 401；nvcc 和 inference_extensions_cuda 不可用。原生 Stage 0、native-parity teacher 未执行。
+- 官方 LD/DMCI 权重已于2026-11-15取得并通过官方大小/QuickXorHash、ZIP CRC及严格参数加载检查，见 [权重记录](pretrained_weights.md)。此前401/403已通过新版匿名浏览器会话解决；nvcc及两个原生扩展仍缺失。以下历史实验仍使用原有随机骨干 checkpoint，原生 Stage 0、native-parity teacher 未执行。
 - 固定上游：见 [manifest](../third_party/manifest.json)，AdapTok `a72076cf6474f930a181aa78971de70d65289b49`，DCVC `cbdae87a5445114cdc7f48816da63ea80bdeac40`。源码未修改；保留原始许可和文件级 notices。
 
 ## 四项核心特性

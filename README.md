@@ -2,7 +2,7 @@
 
 时间因果、学习式有序 1D VQ Token 与可追加 rANS 视频流研究原型。主模型显式复用固定版本 DCVC-UF LD / DMCI 的 PyTorch 模块，保留 AdapTok 的 learned queries、VQ、前缀训练和质量分配思想。
 
-**当前是工程验证原型。缺少官方预训练权重和原生 CUDA 扩展，尚未完成正式训练、有效 RD 对照或 30/60 FPS 目标。** `--allow-untrained` 和 `--smoke` 的输出会记录随机骨干状态，不能作为训练效果。
+**当前是工程验证原型。官方 LD/DMCI 预训练权重已下载并通过完整性及严格加载校验；原生 CUDA 扩展、正式训练、有效 RD 对照及 30/60 FPS 验收仍待完成。** 现有结构测试 checkpoint 的骨干仍是随机初始化；`--allow-untrained` 和 `--smoke` 用于工程验证，不能据此认定已完成正式训练。权重位置、SHA256 和使用边界见 [官方权重记录](docs/pretrained_weights.md)。
 
 在本机使用：
 

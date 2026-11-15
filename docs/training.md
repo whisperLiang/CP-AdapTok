@@ -1,12 +1,14 @@
 # 训练与恢复
 
-正式 Stage 0–4 需要官方 LD/DMCI 权重。latent distillation 还需要真实 native encoder/decoder CUDA 扩展；preflight 会列出所有缺失条件并退出 2。两个官方 OneDrive 分享的匿名 API 均返回 HTTP 401，本机也没有 nvcc；未执行原生码流复现或正式蒸馏。
+官方 LD/DMCI 权重已于2026-11-15下载至配置指定路径，并通过官方大小/QuickXorHash、ZIP CRC、有限参数和严格 state_dict 加载校验，见 [权重记录](pretrained_weights.md)。此前旧 OneDrive API 返回401；本次通过新版匿名浏览器会话及个人内容接口取得同一官方目录中的文件。latent distillation 仍需要真实 native encoder/decoder CUDA 扩展；本机缺少 MLCodec_extensions_cpp、inference_extensions_cuda 和 nvcc，尚未执行原生码流复现或正式蒸馏。
+
+加载现有 CP checkpoint 时，其完整 state_dict 会覆盖骨干参数，因此旧 smoke checkpoint 仍代表随机骨干。新一轮预训练骨干实验应从官方 LD/DMCI 权重初始化，使用新的保存路径，再训练 CP 新增模块；下载资源不会改变已经保存的实验结果。
 
 `NativeLatentTeacher` 使用独立的 native encoder/decoder 真正生成、解析并解码上游码流，再要求官方 PyTorch quantized prior 的重建与 native 像素输出满足显式容差。Proxy 不导出内部 y_hat，因此此路径是“官方量化 prior 表示经真实码流解码重建核对”，不是声称已从 Proxy 提取内部 latent。该数值核对尚未在本机执行；失败会停止训练，不能退回原始 encoder latent。teacher 只进入 loss，不进入学生 Decoder、reference 或码流。
 
 | Stage | 实现 | 本机执行状态 |
 |---|---|---|
-| 0 | 独立 Proxy 实际码流 + 官方 SPS/IP 元数据、PSNR/感知指标/耗时/字节统计 | 缺官方权重/扩展 |
+| 0 | 独立 Proxy 实际码流 + 官方 SPS/IP 元数据、PSNR/感知指标/耗时/字节统计 | 权重已就绪，缺原生扩展 |
 | 1 | 冻结官方骨干；训练 queries、VQ、统一 decoder；每帧抽 2–4 档 log-spaced 前缀，两端加权 | 100 步结构训练，非正式模型 |
 | 2 | reconstructed base-only 闭环、4→8→16→32 帧课程、truncated BPTT | 短 BPTT 行为测试及 checkpoint 恢复；长训练未执行 |
 | 3 | learned block probability tables + CausalScorer；实际解码失真 labels 和 prediction errors | 100 步结构训练；随机骨干不支持有效质量结论 |
