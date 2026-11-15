@@ -88,11 +88,13 @@ class CodecDecoder:
 
     @torch.no_grad()
     def decode_prefix(self, k=None, use_cache=False):
-        self.decode_base()
+        if self.stream is None:
+            raise StreamError("frame header must arrive first")
         k = len(self.stream.token_ids) if k is None else k
         h = self.stream.header
         if k < h.k_ref or k > len(self.stream.token_ids) or k % h.packet_tokens:
             raise StreamError("display prefix must be received, packet aligned, and at least K_ref")
+        self.decode_base()
         if k == h.k_ref:
             self.display = self.base_frame
             self.last_timing_ms = {"attention_update_ms": 0.0, "latent_ld_reconstruction_ms": 0.0}

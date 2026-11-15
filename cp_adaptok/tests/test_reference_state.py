@@ -20,6 +20,9 @@ def test_enhancement_cannot_change_reference_and_peers_remain_synchronized(codec
         assert base.shape == x.shape
         fingerprint = receiver.get_state().fingerprint()
         assert fingerprint == sender.get_state().fingerprint()
+        torch.testing.assert_close(receiver.get_state().feature, sender.get_state().feature, rtol=0, atol=0)
+        if receiver.get_state().memory is not None:
+            torch.testing.assert_close(receiver.get_state().memory, sender.get_state().memory, rtol=0, atol=0)
         receiver.append_packets(wire.packets[1:])
         receiver.decode_prefix(32, use_cache=True)
         assert receiver.get_state().fingerprint() == fingerprint

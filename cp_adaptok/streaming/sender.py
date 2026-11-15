@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import torch
 
 from .bitstream import FrameHeader
-from .packetizer import ProgressivePacketStream, packetize
+from .packetizer import ProgressivePacketStream, packetize, validate_budgets
 
 
 def synchronize(device):
@@ -74,6 +74,8 @@ class CodecEncoder:
         synchronize(self.model.device)
         start = time.perf_counter()
         c = self.model.config
+        budgets = sorted({c.k_ref, c.n_max}) if budgets is None else budgets
+        validate_budgets(budgets, c)
         frame_id = self.state.frame_id + 1
         encoded = self.model.encode_full(
             rgb, self.state, frame_id, force_intra or frame_id % self.intra_period == 0
@@ -109,7 +111,6 @@ class CodecEncoder:
         self.state = ctx.commit(feature, ids_digest(base_ids)).detach()
         self.state.fingerprint()  # paid once in the measured state update, then safely cached
         self.base_commits += 1
-        budgets = budgets or [c.k_ref, c.n_max]
         scores = self.model.scorer(encoded.features, budgets)[0].cpu().tolist()
         synchronize(self.model.device)
         end = time.perf_counter()

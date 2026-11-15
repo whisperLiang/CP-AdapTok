@@ -33,7 +33,7 @@ def main(argv=None):
                 args.resolution,
                 args.frames,
                 args.warmup,
-                args.budgets or [model.config.k_ref, model.config.n_max],
+                args.budgets or sorted({model.config.k_ref, model.config.n_max}),
                 not args.reference_attention,
             )
         )

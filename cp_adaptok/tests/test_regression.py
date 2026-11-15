@@ -15,6 +15,10 @@ def test_missing_weights_are_explicit_and_machine_readable(tmp_path):
         preflight(config, "train", False)
     assert "ld_checkpoint" in str(error.value) and "intra_checkpoint" in str(error.value)
     assert len(error.value.conditions) >= 2
+    for purpose, loss in [("baseline", {}), ("train", {"latent": 1.0})]:
+        with pytest.raises(MissingPrerequisites) as unavailable:
+            preflight({**config, "loss": loss}, purpose, False)
+        assert any("ld_checkpoint" in item for item in unavailable.value.conditions)
 
 
 def test_checkpoint_restores_model_optimizer_and_sampling_rng(codec, tmp_path):

@@ -24,6 +24,7 @@ class OnlineTokenAllocator:
     def allocate(
         self, points, bandwidth_bps, deadline_s, queued_bytes=0, buffer_s=0, mode="scorer", fixed_k=None
     ):
+        """deadline_s is remaining slack at this call, after encoding and previous work."""
         available = self.available_bytes(bandwidth_bps, deadline_s, queued_bytes, buffer_s)
         feasible = self.feasible_points(points, available, mode, fixed_k)
         if not feasible:

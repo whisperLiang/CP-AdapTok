@@ -29,25 +29,30 @@ def native_evaluation(config, device):
     rows = []
     for spec in config["data"][config["evaluation"]["split"]]:
         model.reset()
-        for frame in read_video(spec):
-            rgb = frame[None].to(device)
-            synchronize(rgb.device)
-            start = time.perf_counter()
-            reconstruction, counts, raw = model.round_trip(rgb)
-            synchronize(rgb.device)
-            rows.append(
-                {
-                    **counts,
-                    **suite(rgb, reconstruction),
-                    "latency_ms": (time.perf_counter() - start) * 1000,
-                    "source": spec["path"],
-                    "frame_type": "I" if model.frame_id == 1 else "P",
-                }
-            )
+        rows.extend(native_sequence(model, suite, spec, device))
     report = metadata(config, "native_pretrained")
     report.update(real_entropy_bitstream=True, records=rows, metric_errors=suite.errors)
     write_json(resolve(paths["output"]) / "native_baseline.json", report)
     return report
+
+
+def native_sequence(model, suite, spec, device):
+    return [native_frame(model, suite, frame[None].to(device), spec) for frame in read_video(spec)]
+
+
+def native_frame(model, suite, rgb, spec):
+    synchronize(rgb.device)
+    start = time.perf_counter()
+    reconstruction, counts, _ = model.round_trip(rgb)
+    synchronize(rgb.device)
+    elapsed_ms = (time.perf_counter() - start) * 1000
+    return {
+        **counts,
+        **suite(rgb, reconstruction),
+        "latency_ms": elapsed_ms,
+        "source": spec["path"],
+        "frame_type": "I" if model.frame_id == 1 else "P",
+    }
 
 
 def main(argv=None):

@@ -72,3 +72,23 @@ def test_online_sender_selects_actual_immutable_packets(codec):
     assert packets == encoded.packets[: point.tokens // codec.config.packet_tokens]
     assert encoded.bytes_at(point.tokens) <= 2500
     assert encoder.select_prefix(encoded, 8, 0.001) is None
+
+
+@torch.no_grad()
+def test_invalid_sender_budget_does_not_commit_a_reference(codec):
+    encoder = CodecEncoder(codec)
+    with pytest.raises(ValueError):
+        encoder.encode_frame(torch.rand(1, 3, 16, 24), budgets=[8, 33])
+    assert encoder.get_state().frame_id == -1
+    assert encoder.base_commits == 0
+
+
+@torch.no_grad()
+def test_invalid_display_budget_does_not_commit_a_reference(codec):
+    encoded = CodecEncoder(codec).encode_frame(torch.rand(1, 3, 16, 24))
+    receiver = CodecDecoder(codec)
+    receiver.start_frame(encoded.header_bytes)
+    receiver.append_packets(encoded.packets)
+    with pytest.raises(StreamError):
+        receiver.decode_prefix(33)
+    assert receiver.get_state().frame_id == -1

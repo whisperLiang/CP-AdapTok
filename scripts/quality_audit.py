@@ -61,6 +61,7 @@ def main():
         rows.extend(file_rows)
         functions.extend(file_functions)
     duplicates = []
+    rows = list({(r["file"], r["function"], r["line"]): r for r in rows}.values())
     for i, a in enumerate(functions):
         for b in functions[i + 1 :]:
             matcher = SequenceMatcher(None, a[2], b[2], autojunk=False)

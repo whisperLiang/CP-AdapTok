@@ -12,7 +12,7 @@
 
 默认测试 2 帧真实 1080p RGB，benchmark 可取同一原始 17 帧片段中的 8 帧。720p 需提供原生匹配视频；本次额外准备的 720p 是从真实 1080p 原图做中心裁剪，明确不称为独立原生 720p 数据集。可选 4K 因缺数据未测。保持分辨率检查，不能静默 resize 来满足 benchmark 参数。
 
-Fixed-K、Rate-only、Causal Scorer 用当前预测和实际 bytes；Offline Oracle 使用全段真实失真及全局 byte budget，明确非因果。实际失真只用于输出评估标签和 oracle，不会泄漏给在线选择。
+Fixed-K、Rate-only、Causal Scorer 用当前预测和实际 bytes。在线截止时间是调用时的剩余 slack，评估会减去已经发生的实际 encoding/local-base 时间；若基础包也来不及，则返回等待可靠恢复，不伪造可行选择。可用 allocation.playback_delay_s 指定显式播放缓冲时延。Offline Oracle 使用全段真实失真及全局 byte budget，明确非因果。实际失真只用于输出评估标签和 oracle，不会泄漏给在线选择。
 
 native LD、固定空间 control、learned query 必须各自训练并以实际 bpp 做 RD 匹配。`ablation_spatial.yaml` 是显式控制组；没有训练 control 时仅允许带 untrained 标记的工程检查，不能生成等率优势结论。AdapTok 原生的分辨率和时间块与本项目不同，其原始代码作为对照资料保留，未冒充同条件基线。
 

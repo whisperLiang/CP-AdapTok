@@ -9,6 +9,7 @@ from cp_adaptok.data import check_splits, read_video, save_rgb
 from cp_adaptok.metrics import MetricSuite, summarize_latency
 from cp_adaptok.runtime import metadata, resolve, write_json
 from cp_adaptok.streaming.online_allocator import OnlineTokenAllocator, RDPoint, offline_oracle
+from cp_adaptok.streaming.packetizer import validate_budgets
 from cp_adaptok.streaming.receiver import CodecDecoder
 from cp_adaptok.streaming.sender import CodecEncoder, synchronize
 
@@ -21,16 +22,11 @@ def serialize_prefix(encoded, k):
     return out.getvalue()
 
 
-def validate_budgets(budgets, config):
-    if sorted(set(budgets)) != list(budgets):
-        raise ValueError("budgets must be increasing and unique")
-    if any(k < config.k_ref or k > config.n_max or k % config.packet_tokens for k in budgets):
-        raise ValueError("budgets must be packet aligned in [K_ref,N_max]")
-
-
-def _online_choices(allocator, measured, predicted, fps, config):
+def _online_choices(allocator, measured, predicted, frame, config):
     fixed = min(measured, key=lambda p: abs(p.tokens - config.get("fixed_k", 512)))
-    options = {"bandwidth_bps": config.get("bandwidth_bps", 500_000), "deadline_s": 1 / fps}
+    playback_delay = config.get("playback_delay_s", 1 / frame["fps"])
+    remaining = max(0.0, playback_delay - frame["encode_timing_ms"]["encode_total_ms"] / 1000)
+    options = {"bandwidth_bps": config.get("bandwidth_bps", 500_000), "deadline_s": remaining}
     choices = {}
     actual = {p.tokens: p for p in measured}
     for mode in ("fixed", "rate-only", "scorer"):
@@ -53,7 +49,7 @@ def _sequence_allocations(name, frames, config, allocator):
     for frame in frames:
         points = [RDPoint(r["tokens"], r["total_bytes"], r["mse"]) for r in frame["prefixes"]]
         predicted = [RDPoint(r["tokens"], r["total_bytes"], r["predicted_mse"]) for r in frame["prefixes"]]
-        choices, fixed_bytes = _online_choices(allocator, points, predicted, frame["fps"], config)
+        choices, fixed_bytes = _online_choices(allocator, points, predicted, frame, config)
         fixed_total += fixed_bytes
         measured.append(points)
         output.append(
@@ -223,7 +219,7 @@ def evaluate_sequences(
     check_splits(config["data"])
     output = resolve(output or config["paths"]["output"])
     output.mkdir(parents=True, exist_ok=True)
-    budgets = budgets or config["evaluation"]["budgets"]
+    budgets = config["evaluation"]["budgets"] if budgets is None else budgets
     validate_budgets(budgets, model.config)
     metrics = MetricSuite(model.device, metric_names or config["evaluation"]["metrics"])
     records = []
