@@ -1,4 +1,6 @@
+import math
 import struct
+import time
 
 from .bitstream import MAX_RECORD_BYTES, StreamError
 
@@ -25,3 +27,35 @@ def receive_record(connection):
     if not 0 < size <= MAX_RECORD_BYTES:
         raise StreamError("transport record exceeds allocation limit")
     return receive_exact(connection, size)
+
+
+class PacedRecordWriter:
+    """Application-level forward-link serialization; TCP remains reliable and ordered.
+
+    Sleeping before sendall prevents a receiver from seeing a simulated record
+    before its wire serialization time. There is no unbounded application queue.
+    """
+
+    def __init__(self, connection, bandwidth_bps=None):
+        self.connection = connection
+        self.bytes_sent = 0
+        self.set_bandwidth(bandwidth_bps)
+
+    def set_bandwidth(self, bandwidth_bps):
+        if bandwidth_bps is not None and (not math.isfinite(bandwidth_bps) or bandwidth_bps <= 0):
+            raise ValueError("bandwidth must be finite and positive")
+        self.bandwidth_bps = bandwidth_bps
+
+    def send(self, data, finish_by=None):
+        if not 0 < len(data) <= MAX_RECORD_BYTES:
+            raise StreamError("invalid transport record size")
+        duration = 0 if self.bandwidth_bps is None else 8 * (4 + len(data)) / self.bandwidth_bps
+        if finish_by is not None and time.perf_counter() + duration > finish_by:
+            return 0
+        if duration:
+            time.sleep(duration)
+        if finish_by is not None and time.perf_counter() > finish_by:
+            return 0
+        size = send_record(self.connection, data)
+        self.bytes_sent += size
+        return size

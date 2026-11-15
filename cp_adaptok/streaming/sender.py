@@ -58,12 +58,29 @@ class CodecEncoder:
         return self.state
 
     def select_prefix(
-        self, encoded, bandwidth_bps, deadline_s, queued_bytes=0, buffer_s=0, mode="scorer", fixed_k=None
+        self,
+        encoded,
+        bandwidth_bps,
+        deadline_s,
+        queued_bytes=0,
+        buffer_s=0,
+        mode="scorer",
+        fixed_k=None,
+        delivered_tokens=0,
+        control_bytes=0,
     ):
+        """Select immutable packets; RDPoint.bytes charges only the remaining wire bytes."""
         from .online_allocator import OnlineTokenAllocator, RDPoint
 
+        if delivered_tokens:
+            validate_budgets([delivered_tokens], self.model.config)
+        if delivered_tokens < 0 or not isinstance(control_bytes, int) or control_bytes < 0:
+            raise ValueError("invalid delivered prefix/control overhead")
+        delivered_bytes = encoded.bytes_at(delivered_tokens) if delivered_tokens else 0
         points = [
-            RDPoint(k, encoded.bytes_at(k), prediction) for k, prediction in encoded.predicted_mse.items()
+            RDPoint(k, encoded.bytes_at(k) - delivered_bytes + control_bytes, prediction)
+            for k, prediction in encoded.predicted_mse.items()
+            if k > delivered_tokens
         ]
         allocator = OnlineTokenAllocator(self.model.config.k_ref)
         point = allocator.allocate(points, bandwidth_bps, deadline_s, queued_bytes, buffer_s, mode, fixed_k)
