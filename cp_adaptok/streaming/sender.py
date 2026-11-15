@@ -31,8 +31,7 @@ class EncodedPacketFrame:
         return self.header.to_bytes()
 
     def prefix_packets(self, k):
-        if k < self.header.k_ref or k > self.header.n_max or k % self.header.packet_tokens:
-            raise ValueError("budget must be a valid packet-aligned prefix >= K_ref")
+        validate_budgets([k], self.header)
         return self.packets[: k // self.header.packet_tokens]
 
     def bytes_at(self, k, transport=True):

@@ -3,7 +3,7 @@ import time
 import torch
 
 from .bitstream import FrameHeader, StreamError
-from .packetizer import ProgressivePacketStream
+from .packetizer import ProgressivePacketStream, validate_budgets
 from .sender import ids_digest, synchronize
 
 
@@ -92,8 +92,12 @@ class CodecDecoder:
             raise StreamError("frame header must arrive first")
         k = len(self.stream.token_ids) if k is None else k
         h = self.stream.header
-        if k < h.k_ref or k > len(self.stream.token_ids) or k % h.packet_tokens:
-            raise StreamError("display prefix must be received, packet aligned, and at least K_ref")
+        try:
+            validate_budgets([k], h)
+        except ValueError as error:
+            raise StreamError(str(error)) from error
+        if k > len(self.stream.token_ids):
+            raise StreamError("display prefix must already be received")
         self.decode_base()
         if k == h.k_ref:
             self.display = self.base_frame

@@ -22,6 +22,13 @@ MUTATIONS = [
     ("display ACK reference", "streaming/session.py", "_display_ack", "ack", "test_adaptive_stream.py"),
     ("deadline send guard", "streaming/transport.py", "send", "expiry", "test_adaptive_stream.py"),
     (
+        "integer budget boundary",
+        "streaming/packetizer.py",
+        "validate_budgets",
+        "budget_type",
+        "test_adaptive_stream.py",
+    ),
+    (
         "retain better base",
         "streaming/sender.py",
         "allocation_points",
@@ -67,6 +74,7 @@ class Mutator(ast.NodeTransformer):
             "reference": "reference_fingerprint !=",
             "ack": "DisplayAck.from_bytes(wire) != expected",
             "expiry": "time.perf_counter()",
+            "budget_type": "type(k) is not int",
         }
         if isinstance(child, ast.If) and self.kind in predicates:
             if predicates[self.kind] in ast.unparse(child.test):

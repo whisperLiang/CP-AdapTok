@@ -2,6 +2,8 @@ from .bitstream import PACKET_HEADER_BYTES, Packet, StreamError
 
 
 def validate_budgets(budgets, config):
+    if any(type(k) is not int for k in budgets):
+        raise ValueError("budgets must contain canonical integers")
     if not budgets or sorted(set(budgets)) != list(budgets):
         raise ValueError("budgets must be nonempty, increasing and unique")
     if any(k < config.k_ref or k > config.n_max or k % config.packet_tokens for k in budgets):

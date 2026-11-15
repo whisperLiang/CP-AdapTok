@@ -9,8 +9,9 @@ import numpy as np
 import pytest
 import torch
 
-from cp_adaptok.cli.stream_demo import localhost_demo
+from cp_adaptok.cli.stream_demo import localhost_demo, main
 from cp_adaptok.streaming.bitstream import StreamError
+from cp_adaptok.streaming.receiver import CodecDecoder
 from cp_adaptok.streaming.sender import CodecEncoder
 from cp_adaptok.streaming.session import (
     END_SESSION,
@@ -241,6 +242,40 @@ def test_session_cannot_report_success_with_missing_reference_packet(codec):
 def test_online_policy_rejects_invalid_external_settings(options):
     with pytest.raises(ValueError):
         AllocationConfig(**options)
+
+
+@pytest.mark.parametrize(
+    "options, message",
+    [
+        (["--allocation", "rate-only"], "requires --bandwidth-kbps"),
+        (["--bandwidth-kbps", "100"], "require --allocation"),
+        (["--allocation", "fixed", "--bandwidth-kbps", "100"], "requires fixed_k"),
+        (["--allocation", "scorer", "--bandwidth-kbps", "nan"], "finite and positive"),
+    ],
+)
+def test_invalid_cli_policy_fails_before_loading_model(options, message, capsys):
+    with pytest.raises(SystemExit) as error:
+        main(["--mode", "localhost", *options])
+    assert error.value.code == 2
+    assert message in capsys.readouterr().err
+
+
+@torch.no_grad()
+def test_fractional_type_budgets_cannot_commit_a_reference(codec):
+    encoder = CodecEncoder(codec)
+    rgb = torch.rand(1, 3, 16, 24)
+    with pytest.raises(ValueError):
+        encoder.encode_frame(rgb, budgets=[8.0, 32])
+    assert encoder.base_commits == 0
+    encoded = encoder.encode_frame(rgb)
+    with pytest.raises(ValueError):
+        encoded.prefix_packets(8.0)
+    receiver = CodecDecoder(codec)
+    receiver.start_frame(encoded.header_bytes)
+    receiver.append_packets(encoded.packets)
+    with pytest.raises(StreamError):
+        receiver.decode_prefix(8.0)
+    assert receiver.base_commits == 0
 
 
 @torch.no_grad()
