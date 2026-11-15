@@ -36,4 +36,8 @@ Header 检查 frame_id、reference_id、model/codebook/CDF ID 和参考 feature/
 
 `CodecEncoder.select_prefix` 只根据当前 Scorer 预测、实际前缀字节、带宽、排队字节与截止时间选择现有 packet slice。不能修改 IDs 或重排。Offline Oracle 采用整段实际失真的 byte-constrained MILP，明确是非因果对照，不进入主发送器。
 
-Glossary：reference prefix = 唯一影响未来状态的前 K_ref 个 ID；display prefix = 当前已收到并显示的前 K 个 ID；packet = 独立终止的 entropy block；frozen context = 一帧内不可由增强重建更新的时序条件；model ID = 参数与结构配置摘要；entropy ID = 整数 CDF 表摘要。
+`SocketSender` 在 EncodeOnce 和本地基础提交后发送原始 FrameHeader/Packet；`SocketReceiver` 独立拥有当前 decoder/state/cache，只读取这些字节和 CPDS 显示请求。CPAK 确认绑定帧号、已显示K和唯一基础参考摘要。接收端初始化只需共享权重；CPDS 仅声明当前显示点，不需要预先共享预算表或源 RGB。会话选择先等待基础显示，再按尚未发送的实际字节和当前带宽选择增强；已经显示的前缀以零增量成本保留为候选。若增强尾部被舍弃，下一 P 帧继续使用同一基础闭环。
+
+`PacedRecordWriter` 在 record 序列化时延之后向真实 socket 交付，应用层队列至多一帧；每个增强包独立复查 deadline。播放时间从源释放时刻计算，积压保留，接收显示与 ACK 延迟都记录。CRC/帧/K/参考校验失败、基础缺失、非规范整数预算都在边界拒绝；错误不会被标成正常会话完成。
+
+Glossary：reference prefix = 唯一影响未来状态的前 K_ref 个 ID；display prefix = 当前已收到并显示的前 K 个 ID；packet = 独立终止的 entropy block；frozen context = 一帧内不可由增强重建更新的时序条件；model ID = 参数与结构配置摘要；entropy ID = 整数 CDF 表摘要；release time = 源视频时间轴上的帧释放时刻；deadline = release time + 播放时延；display ACK = 显示完成并确认基础状态一致的控制记录；enhancement tail omission = 舍弃尚未发送的连续增强尾部。

@@ -4,7 +4,7 @@
 
 ## 版本与环境
 
-- 本报告生成前的代码提交：`b3529254b87d119cf1f2366e228985e48a4c6b16`；测量文件各自保留实际 commit、dirty 状态、source SHA256 和模型 ID。
+- 本报告生成前的代码提交：`41842026ba6cf13fa8e117e0db86e2248c5bb313`；测量文件各自保留实际 commit、dirty 状态、source SHA256 和模型 ID。
 - 选用 checkpoint：`checkpoints/s3_smoke/step100.pt`，Stage 3 结构训练 100 步，状态 `untrained_backbone_smoke`。
 - checkpoint SHA256：`3aae8b811bc78e885e0905b0f15ef7aa79866dafab49837f3a20685151169eeb`。
 - 模型 ID：`c663834c3bd7bf95953d6293845849f2`；codebook ID：`860d03bc14f8dde91ae57b9c8787c8ed`。
@@ -25,8 +25,8 @@
 
 ## 测试与 ub-mode
 
-- 最终 pytest：**47 passed**；八个有意义的行为变异：**8/8 killed**。
-- package 行/分支合并 coverage：84.36%。最大生产函数圈复杂度 9；AST 相似度 ≥0.8 的重复函数对数 0。
+- 最终 pytest：**80 passed**；有意义的行为变异：**14/14 killed**。
+- package 行/分支合并 coverage：85.37%。最大生产函数圈复杂度 9；AST 相似度 ≥0.8 的重复函数对数 0。
 - CRAP≥10 条目数 0，细节见 `results/quality_audit.json`；不得用该审计代替未执行 native CUDA 实验。
 - 本会话没有 crapper/dryer/mutator 命名工具，使用 radon+coverage、AST 检查与隔离副本行为变异作为明确记录的替代工具。详见 [操作日志](work_log.md)。
 - 实际执行了所有五个要求入口：pytest 成功，正式 train/eval/benchmark/stream 的退出码分别为 [2, 2, 2, 2]，原因为缺正式权重/扩展/训练 checkpoint。显式 untrained 替代运行另行保存，未混称成功。
@@ -45,7 +45,7 @@
 
 预算增加后实际 MSE 变差比例为 **62.5%**，没有隐瞒非单调性。当前 checkpoint 的密集/缓存重建最大像素差为 **0**，PSNR/LPIPS/DISTS 均分别记录；默认 float64 累加通过此检查。早期 fp32 的差异及失败精度证据保留于 `results/smoke100_full_eval`。
 
-I/P 分别保存了真实 header、packet、payload 与 framing 字节；第一帧最大预算示例：`{"frame_header_bytes": 108, "packet_header_bytes": 448, "payload_bytes": 2720, "side_info_bytes": 0, "total_bytes": 3276, "transport_framing_bytes": 68}`。FrameHeader 固定108 bytes，Packet overhead 28 bytes，TCP 应用 framing 4 bytes/record。socket demo 两帧双向应用总字节 6882，包含显示 ACK；未抓取 TCP/IP/link 层开销。
+I/P 分别保存了真实 header、packet、payload 与 framing 字节；第一帧最大预算示例：`{"frame_header_bytes": 108, "packet_header_bytes": 448, "payload_bytes": 2720, "side_info_bytes": 0, "total_bytes": 3276, "transport_framing_bytes": 68}`。FrameHeader 固定108 bytes，Packet overhead 28 bytes，TCP 应用 framing 4 bytes/record。首轮交付的旧 socket demo 两帧双向应用总字节 6882；后续严格会话控制的字节另见下述在线 TCP 报告。均未抓取 TCP/IP/link 层开销。
 
 ## 实际码流性能
 
@@ -67,7 +67,8 @@ I/P 分别保存了真实 header、packet、payload 与 framing 字节；第一�
 - 固定空间 control：独立配置与实际码流入口已跑随机结构检查，未训练，不据此作等码率优势比较。见 `results/final_spatial_control`。
 - 训练：Stage 1结构100步 + resume至103；Stage 3结构100步；Stage 2/4各2步及短BPTT精确恢复测试。所有 checkpoint 均保留 untrained_backbone_smoke 状态。
 - Scorer 保存真实预算标签和预测误差；在线 Fixed-K/Rate-only/Scorer 扣除已发生编码时间，基础也超时则等待；Offline Oracle 是明确非因果的全段 byte MILP。
-- 未完成：官方 CUDA baseline/teacher 数值核对；正式长序列训练和全数据集 RD；训练好的空间/AdapTok同条件对照；泛化 Scorer 校准；4K；compile/CUDA Graph/fused entropy 的质量和兼容性验证；真实网络丢包/截止时间实验；物理线路开销统计。
+- 后续已完成：在线预算接入实际 TCP，基础可靠交付、逐包截止检查、增强尾部舍弃、已观测 ACK 耗时预留及七组原生1080p实验。见 [在线 TCP 后续报告](streaming_report.md)，全部检查通过不代表全部截止时间达标。
+- 未完成：官方 CUDA baseline/teacher 数值核对；正式长序列训练和全数据集 RD；训练好的空间/AdapTok同条件对照；泛化 Scorer 校准；4K；compile/CUDA Graph/fused entropy 的质量和兼容性验证；真实物理网络丢包/拥塞实验；物理线路开销统计。
 - Git 是本地新仓库，未配置远程，因此只完成有序本地提交，没有推送。没有创建需清理的 worktree，也没有修改已有 InfoTok 项目或其训练。
 
 ## 复现命令
@@ -82,6 +83,7 @@ python -m cp_adaptok.cli.eval --config configs/s1_tokenizer.yaml --budgets 128 2
 python -m cp_adaptok.cli.benchmark --resolution 1920 1080 --measure actual-bitstream --checkpoint checkpoints/s3_smoke/step100.pt --allow-untrained --frames 8 --warmup 2 --output results/optimized_benchmark_two
 python -m cp_adaptok.cli.stream_demo --mode localhost --progressive --checkpoint checkpoints/s3_smoke/step100.pt --allow-untrained --output results/optimized_stream
 python scripts/mutation_check.py
+python scripts/run_streaming_experiments.py --checkpoint checkpoints/s3_smoke/step100.pt --allow-untrained --output results/streaming_verified
 python scripts/quality_audit.py
 python scripts/build_report.py
 ```
@@ -100,6 +102,7 @@ configs/s1_tokenizer.yaml
 configs/s2_causal.yaml
 configs/s3_entropy_scorer.yaml
 configs/s4_finetune.yaml
+configs/streaming.yaml
 cp_adaptok/__init__.py
 cp_adaptok/backbones/__init__.py
 cp_adaptok/backbones/causal_state.py
@@ -132,8 +135,10 @@ cp_adaptok/streaming/online_allocator.py
 cp_adaptok/streaming/packetizer.py
 cp_adaptok/streaming/receiver.py
 cp_adaptok/streaming/sender.py
+cp_adaptok/streaming/session.py
 cp_adaptok/streaming/transport.py
 cp_adaptok/tests/conftest.py
+cp_adaptok/tests/test_adaptive_stream.py
 cp_adaptok/tests/test_budget_alloc.py
 cp_adaptok/tests/test_causality.py
 cp_adaptok/tests/test_entropy_training.py
@@ -159,6 +164,7 @@ docs/bitstream_spec.md
 docs/evaluation.md
 docs/implementation_report.md
 docs/requirements_zh.txt
+docs/streaming_report.md
 docs/training.md
 docs/work_log.md
 scripts/build_report.py
@@ -169,6 +175,7 @@ scripts/run_acceptance.py
 scripts/run_benchmarks.sh
 scripts/run_full_eval.sh
 scripts/run_smoke.sh
+scripts/run_streaming_experiments.py
 third_party/AdapTok  (pinned Git submodule)
 third_party/DCVC     (pinned Git submodule)
 third_party/manifest.json

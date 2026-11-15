@@ -91,6 +91,79 @@ def environment():
     return versions
 
 
+def streaming_results():
+    path = ROOT / "results/streaming_verified/summary.json"
+    if not path.is_file():
+        return None
+    summary = json.loads(path.read_text())
+    labels = {
+        "all_prefixes_png": "全部五档 PNG",
+        "tight_deadline": "300 ms 截止时间",
+        "fixed": "固定目标 2048",
+        "rate_only": "Rate-only",
+        "scorer": "Causal Scorer",
+        "truncated_tail": "2048 目标截尾到512",
+        "delayed_ack": "100 ms ACK 延迟",
+    }
+    table = [
+        "| 场景 | 帧数 | 实际发送 Token 前缀 | 双向应用 bytes | 基础 ACK 迟到帧 | 显示迟到次数 |",
+        "|---|---:|---|---:|---:|---:|",
+    ]
+    for row in summary["scenarios"]:
+        name = row["scenario"]
+        base_late = "—" if name == "all_prefixes_png" else str(row["base_wait_frames"])
+        display_late = "—" if name == "all_prefixes_png" else str(row["deadline_missed_displays"])
+        table.append(
+            f"| {labels[name]} | {row['frames']} | {', '.join(map(str, row['delivered_tokens']))} | "
+            f"{row['application_bytes']} | {base_late} | {display_late} |"
+        )
+    sample = read("results/streaming_verified/truncated_tail/stream_demo.json")
+    text = f"""# 在线 TCP 后续验证
+
+本轮把在线预算选择接入真实 localhost TCP：完整编码一次，先可靠交付并确认基础前缀，再按当前带宽和剩余时间选择增强包。每个增强包发送前复查截止时间；接收端仅使用模型和线路字节。**状态仍为 `{sample["status"]}`；这些结果验证工程行为，不验证 RD 或 Scorer 泛化。**
+
+## 实测条件与结果
+
+- 代码提交 `{sample["git_commit"]}`；每份 JSON 同时记录源码 SHA256、模型 ID、配置与 GPU 快照。
+- 同一个 Stage 3 结构 checkpoint，N_max=2048、K_ref=128、原生1920×1080 RGB，H100 PCIe。在线场景为8帧/50 FPS源时间轴，每个 CLI 独立进程。源时钟从发送循环开始，包含首帧 kernel 冷启动和积压；checkpoint 加载及模型构建先完成。
+- Fixed/Rate-only/Scorer 截止时间1200 ms，当前逐帧带宽为32/128/512/2048/128/512/2048/512 kbps；固定目标无法及时交付时仍可靠保留基础图。
+- 截尾场景为2500 ms、2048 kbps，只舍弃未发送的连续增强尾部；ACK 延迟场景为1200 ms、2048 kbps。除两帧五档 PNG 外，显示指 Tensor 就绪并转到 CPU，不含实体显示器扫描。
+
+{chr(10).join(table)}
+
+七组的发送/接收基础提交次数、参考摘要、原包前缀 SHA256 以及双向应用字节全部核对。截尾场景8帧均从2048截到512，省去96个增强包，后续 P 帧无漂移；300 ms 场景所有基础帧迟到，省去120个增强包，不能宣称达到实时目标。表中策略结果受同一帧历史因果状态约束；每次独立冷启动存在调度波动，不能据此推断策略质量优势。
+
+## 修复并复现的问题
+
+1. 基础显示后按整帧计费会重复扣除基础字节；现在只计未发送字节和62-byte 显示交换控制。
+2. 排除已显示前缀会迫使 Scorer 选择预测更差的增强；现在保留零字节成本的基础候选。
+3. 固定25 ms解码预留在先前实测中造成6.46 ms增强显示迟到；现在取配置下限与已观测显示 ACK 耗时上界的1.25倍中较大者，包含当前基础及历史确认，不读取未来耗时。旧失败证据在 `results/streaming_followup`，修复后证据在 `results/streaming_verified`。
+4. 控制字段必须为规范整数，ACK 摘要必须完整128 bit，NaN/Inf截止时间在 I/O 前拒绝；基础缺失不能正常结束会话。红测试日志和行为变异覆盖这些约束。
+5. Python API 的 `8.0` Token 预算此前也能通过范围检查并提交参考；现在所有编码/包切片/显示入口统一要求规范整数，在基础提交前拒绝非法值。
+
+## 字节与时间口径
+
+FrameHeader/Packet bytes 不变。新增 CPDS/CPAK 含 CRC 与 length framing 分别23/39 bytes，每次显示共62 bytes；正常结束/确认共26 bytes。两帧五档 PNG 运行双向应用总字节7334，相比旧字符串 ACK 演示增加了完整校验控制，不能混用旧6882-byte测量。
+
+源释放时间为 `origin + frame_id / source_fps`，不会随处理速度放慢。预算扣除编码、实际基础交付及显示 ACK 已花时间；报告区分真实显示迟到与发送端 ACK 迟到。预留仅为因果估计，不能保证冷启动和突发抖动下的硬实时。
+
+前向 record 按当前带宽做应用层交付整形，ACK 路径未限速，但其字节计入总量并保守计入选择预算。没有模拟 TCP 随机丢包、内核重传、无线拥塞，也没有统计 TCP/IP/link 头。未发送尾部舍弃不等同于物理丢包。
+
+## 复现
+
+```bash
+cd /home/whisperliang/CP-AdapTok
+source .venv/bin/activate
+python scripts/run_streaming_experiments.py --checkpoint checkpoints/s3_smoke/step100.pt --allow-untrained --output results/streaming_verified
+python -m cp_adaptok.cli.stream_demo --mode localhost --progressive --config configs/streaming.yaml --checkpoint checkpoints/s3_smoke/step100.pt --allow-untrained --allocation rate-only --bandwidth-kbps 32 128 512 2048 128 512 2048 512 --playback-delay-ms 1200 --no-save-frames
+```
+
+逐项命令和退出码见 `results/streaming_verified/commands.json`；逐帧预测、实际质量、deadline、字节、ACK、状态摘要在各场景的 `stream_demo.json`。未训练模型的画质仍不合格；官方权重、原生 CUDA、正式长序列 RD 和30/60 FPS验收仍待完成。
+"""
+    (ROOT / "docs/streaming_report.md").write_text(text)
+    return summary
+
+
 def main():
     evaluation = read("results/optimized_eval/eval/evaluation.json")
     two = read("results/optimized_benchmark_two/benchmark.json")
@@ -106,6 +179,7 @@ def main():
     checkpoint_sha = sha256(checkpoint)
     revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     versions = environment()
+    streaming = streaming_results()
     plots(evaluation, two, five)
     rows = evaluation["budget_summary"]
     with (ROOT / "results/budget_quality.csv").open("w") as handle:
@@ -166,7 +240,7 @@ def main():
 
 ## 测试与 ub-mode
 
-- 最终 pytest：**{tests} passed**；八个有意义的行为变异：**{sum(x["killed"] for x in mutations)}/8 killed**。
+- 最终 pytest：**{tests} passed**；有意义的行为变异：**{sum(x["killed"] for x in mutations)}/{len(mutations)} killed**。
 - package 行/分支合并 coverage：{coverage:.2f}%。最大生产函数圈复杂度 {qa["max_complexity"]}；AST 相似度 ≥0.8 的重复函数对数 {len(qa["duplicates_over_08"])}。
 - CRAP≥10 条目数 {len(qa["crap_over_10"])}，细节见 `results/quality_audit.json`；不得用该审计代替未执行 native CUDA 实验。
 - 本会话没有 crapper/dryer/mutator 命名工具，使用 radon+coverage、AST 检查与隔离副本行为变异作为明确记录的替代工具。详见 [操作日志](work_log.md)。
@@ -180,7 +254,7 @@ def main():
 
 预算增加后实际 MSE 变差比例为 **{evaluation["quality_drop_ratio"]:.1%}**，没有隐瞒非单调性。当前 checkpoint 的密集/缓存重建最大像素差为 **{errors:g}**，PSNR/LPIPS/DISTS 均分别记录；默认 float64 累加通过此检查。早期 fp32 的差异及失败精度证据保留于 `results/smoke100_full_eval`。
 
-I/P 分别保存了真实 header、packet、payload 与 framing 字节；第一帧最大预算示例：`{json.dumps(counts, ensure_ascii=False)}`。FrameHeader 固定108 bytes，Packet overhead 28 bytes，TCP 应用 framing 4 bytes/record。socket demo 两帧双向应用总字节 {stream["total_application_bytes"]}，包含显示 ACK；未抓取 TCP/IP/link 层开销。
+I/P 分别保存了真实 header、packet、payload 与 framing 字节；第一帧最大预算示例：`{json.dumps(counts, ensure_ascii=False)}`。FrameHeader 固定108 bytes，Packet overhead 28 bytes，TCP 应用 framing 4 bytes/record。首轮交付的旧 socket demo 两帧双向应用总字节 {stream["total_application_bytes"]}；后续严格会话控制的字节另见下述在线 TCP 报告。均未抓取 TCP/IP/link 层开销。
 
 ## 实际码流性能
 
@@ -201,7 +275,8 @@ I/P 分别保存了真实 header、packet、payload 与 framing 字节；第一�
 - 固定空间 control：独立配置与实际码流入口已跑随机结构检查，未训练，不据此作等码率优势比较。见 `results/final_spatial_control`。
 - 训练：Stage 1结构100步 + resume至103；Stage 3结构100步；Stage 2/4各2步及短BPTT精确恢复测试。所有 checkpoint 均保留 untrained_backbone_smoke 状态。
 - Scorer 保存真实预算标签和预测误差；在线 Fixed-K/Rate-only/Scorer 扣除已发生编码时间，基础也超时则等待；Offline Oracle 是明确非因果的全段 byte MILP。
-- 未完成：官方 CUDA baseline/teacher 数值核对；正式长序列训练和全数据集 RD；训练好的空间/AdapTok同条件对照；泛化 Scorer 校准；4K；compile/CUDA Graph/fused entropy 的质量和兼容性验证；真实网络丢包/截止时间实验；物理线路开销统计。
+- 后续已完成：在线预算接入实际 TCP，基础可靠交付、逐包截止检查、增强尾部舍弃、已观测 ACK 耗时预留及七组原生1080p实验。见 [在线 TCP 后续报告](streaming_report.md)，全部检查通过不代表全部截止时间达标。
+- 未完成：官方 CUDA baseline/teacher 数值核对；正式长序列训练和全数据集 RD；训练好的空间/AdapTok同条件对照；泛化 Scorer 校准；4K；compile/CUDA Graph/fused entropy 的质量和兼容性验证；真实物理网络丢包/拥塞实验；物理线路开销统计。
 - Git 是本地新仓库，未配置远程，因此只完成有序本地提交，没有推送。没有创建需清理的 worktree，也没有修改已有 InfoTok 项目或其训练。
 
 ## 复现命令
@@ -216,6 +291,7 @@ python -m cp_adaptok.cli.eval --config configs/s1_tokenizer.yaml --budgets 128 2
 python -m cp_adaptok.cli.benchmark --resolution 1920 1080 --measure actual-bitstream --checkpoint checkpoints/s3_smoke/step100.pt --allow-untrained --frames 8 --warmup 2 --output results/optimized_benchmark_two
 python -m cp_adaptok.cli.stream_demo --mode localhost --progressive --checkpoint checkpoints/s3_smoke/step100.pt --allow-untrained --output results/optimized_stream
 python scripts/mutation_check.py
+python scripts/run_streaming_experiments.py --checkpoint checkpoints/s3_smoke/step100.pt --allow-untrained --output results/streaming_verified
 python scripts/quality_audit.py
 python scripts/build_report.py
 ```
@@ -239,6 +315,7 @@ third_party/manifest.json
     summary = {
         "tests_passed": tests,
         "mutation_killed": sum(x["killed"] for x in mutations),
+        "mutation_total": len(mutations),
         "coverage_percent": coverage,
         "max_cyclomatic_complexity": qa["max_complexity"],
         "duplicates": qa["duplicates_over_08"],
@@ -250,6 +327,7 @@ third_party/manifest.json
         "trained_rd_validated": False,
         "target_30fps_met": False,
         "target_60fps_met": False,
+        "streaming_followup": streaming,
     }
     (ROOT / "results/delivery_summary.json").write_text(json.dumps(summary, indent=2) + "\n")
     print(json.dumps(summary, indent=2))

@@ -8,6 +8,12 @@
 
 `benchmark --measure actual-bitstream` 包括最大序列编码、所有最大序列 packet 的 entropy encode、发送端基础 entropy decode/重建/提交、Scorer、接收端 entropy decode、冻结 context、基础及每个请求显示前缀的重建。模型初始化、指标和 PNG I/O 不进入这项 pipeline 时间；socket demo 的独立 FPS 则包括显示 PNG、socket 与 ACK 等待。明确区分两种口径。
 
+`stream_demo --allocation ...` 已将选择接入可靠 TCP。在线源时间轴为 `origin + t / source_fps`，每帧截止时间为释放时间加播放时延，不随编码变慢而重置；当前基础交付/显示 ACK 时间也会被扣除。显示 Tensor/PNG 的实际迟到和发送端 ACK 迟到分别记录。解码预留使用配置下限与已观测显示 ACK 耗时的1.25倍中的较大值；该因果估计不能保证抖动下的硬实时。每个增强包发出前再次检查剩余时间，不足则截去未发送尾部；基础即使迟到也可靠交付后再推进下一参考。
+
+会话分别统计 codec+framing、发送方向控制、接收 ACK 及总应用 bytes，并核对接收计数。未发送字节与62-byte显示交换作为在线增量成本，保留已显示前缀为零成本选项。`--no-save-frames` 的 FPS 为含 socket/CPU Tensor 就绪/ACK 的口径，不得标为实体显示 FPS。逐帧带宽 profile 只在当前帧提供一个值，未来值不传入分配器；实际失真在会话结束后才计算。Scorer 仍为结构训练状态，三种策略的字节和迟到结果不支持压缩优势结论。
+
+`scripts/run_streaming_experiments.py` 顺序运行七组真实1080p会话，保留完整命令、退出码、预测、实际质量、帧/前缀/状态ACK以及包摘要。应用层限速/尾部截断没有模拟内核拥塞控制、重传或无线随机丢包。结果见 [后续在线报告](streaming_report.md)。`results/followup_validation` 下的覆盖率 benchmark 带插桩，仅验证入口，不用于性能对比。
+
 所有显示点都重跑完整后端，不能把 cache Attention 的更新速度当作完整 decoder 的增量执行。报告实际 reconstruction 次数、attention 更新、后续 latent/LD reconstruction 时间、总 pipeline P50/P95、稳态 P 帧 FPS、峰值显存。重建次数也包括预算列表未显式包含 K_ref 时仍必须进行的基础状态重建。参考状态摘要在基础提交时真实计算并计时，不能靠测量区间外预计算提高 FPS。设备整数摘要与可失效缓存是已测试优化；不同算法配置由不同 model ID 绑定，旧实验文件不跨模型复用。
 
 默认测试 2 帧真实 1080p RGB，benchmark 可取同一原始 17 帧片段中的 8 帧。720p 需提供原生匹配视频；本次额外准备的 720p 是从真实 1080p 原图做中心裁剪，明确不称为独立原生 720p 数据集。可选 4K 因缺数据未测。保持分辨率检查，不能静默 resize 来满足 benchmark 参数。

@@ -25,6 +25,20 @@ python -m cp_adaptok.cli.stream_demo --mode localhost --progressive \
   --checkpoint checkpoints/s3_smoke/step100.pt --allow-untrained
 ```
 
+在线预算已接入真实 TCP，按当前帧带宽、实际未发送字节和源播放截止时间选择前缀；基础显示 ACK 之后才追加增强。运行8帧带宽变化、超时、尾部舍弃与慢 ACK 场景：
+
+```bash
+python scripts/run_streaming_experiments.py \
+  --checkpoint checkpoints/s3_smoke/step100.pt --allow-untrained \
+  --output results/streaming_verified
+python -m cp_adaptok.cli.stream_demo --mode localhost --progressive --config configs/streaming.yaml \
+  --checkpoint checkpoints/s3_smoke/step100.pt --allow-untrained \
+  --allocation rate-only --bandwidth-kbps 32 128 512 2048 128 512 2048 512 \
+  --playback-delay-ms 1200 --no-save-frames
+```
+
+`--allocation` 支持 `fixed`（需 `--fixed-k`）、`rate-only` 和 `scorer`；`--enhancement-cap 512` 模拟未发送增强尾部的舍弃，`--ack-delay-ms` 设置接收端确认延迟。`--no-save-frames` 以重建 Tensor 就绪作为显示完成，省去 PNG 写盘。带宽整形在应用层进行，未模拟 TCP 随机丢包或物理链路头；冷启动和实际迟到均保留。详见 [实测结果与复现口径](docs/streaming_report.md)。
+
 结构训练和恢复：
 
 ```bash
@@ -54,6 +68,7 @@ pip install -e '.[eval,dev]'
 - [训练与恢复](docs/training.md)
 - [评估口径](docs/evaluation.md)
 - [二进制格式](docs/bitstream_spec.md)
+- [在线 TCP 场景与实测结果](docs/streaming_report.md)
 - [真实实施与实验报告](docs/implementation_report.md)
 - [ub-mode 操作日志](docs/work_log.md)
 
