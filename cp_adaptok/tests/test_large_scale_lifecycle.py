@@ -19,6 +19,19 @@ def test_yaml_integer_budget_keys_survive_json_checkpoint_roundtrip():
     assert stable_hash(config) == stable_hash(json.loads(json.dumps(config)))
 
 
+def test_resume_at_update_target_finishes_missing_validation_even_with_an_older_best():
+    from cp_adaptok.large_scale import final_validation_needed
+
+    training = {"full_validate_every": 2000}
+    state = {"best_by_tier": {"quick": {"step": 1000}}, "validations": [{"step": 1000, "tier": "quick"}]}
+    assert final_validation_needed(state, 2000, training)
+    state["validations"].append({"step": 2000, "tier": "quick"})
+    assert final_validation_needed(state, 2000, training)
+    state["validations"].append({"step": 2000, "tier": "full"})
+    assert not final_validation_needed(state, 2000, training)
+    assert final_validation_needed(state, 8000, training)
+
+
 def test_recorded_configuration_reopens_but_changed_learning_rate_is_rejected(tmp_path):
     from cp_adaptok.large_scale import reuse_phase_configuration
 

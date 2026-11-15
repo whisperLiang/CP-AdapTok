@@ -292,8 +292,13 @@ def execute_phase(model, config, manifest, splits, artifact, actual_resume):
 
         final = load_checkpoint(checkpoint)
         state = final.get("training_state") or {}
-        if not state.get("best_by_tier"):
+        if final_validation_needed(state, final["step"], config["training"]):
             observer.validate(model, final["step"], checkpoint, state, final=True)
+            final["training_state"] = state
+            temporary = checkpoint.with_suffix(".validation.tmp")
+            torch.save(final, temporary)
+            temporary.replace(checkpoint)
+            observer.checkpoint(final["step"], checkpoint, state)
         observer._phase_state(report["completed_steps"], state, "complete", checkpoint)
         identity = config["experiment"]
         report.update(phase=identity["phase"], branch=identity["branch"], pilot=identity["phase"] == "pilot",
@@ -310,6 +315,14 @@ def execute_phase(model, config, manifest, splits, artifact, actual_resume):
     finally:
         del model
         torch.cuda.empty_cache()
+
+
+def final_validation_needed(state, step, training):
+    expected = {"quick"}
+    if step % training["full_validate_every"] == 0:
+        expected.add("full")
+    completed = {row["tier"] for row in state.get("validations", []) if row["step"] == step}
+    return not expected.issubset(completed)
 
 
 def run_all(manifest, splits, resume=False):

@@ -306,6 +306,21 @@ def subprocess_sha():
     return subprocess.check_output(["git", "-C", str(resolve(".")), "rev-parse", "HEAD"], text=True).strip()
 
 
+def selected_validation_table(phases):
+    lines = []
+    for name, phase in phases.items():
+        best = phase["statistics"].get("best_by_tier", {})
+        selected = best.get("full") or best.get("quick")
+        if not selected:
+            continue
+        report = read_json(resolve(selected["report"]) / "validation.json", {})
+        for row in report.get("budget_summary", []):
+            values = ["—" if row.get(k) is None else f"{row[k]:.6f}" for k in ("psnr", "lpips", "dists", "bpp")]
+            lines.append(f"| {name} | {selected['step']} | {'full' if 'full' in best else 'quick'} | "
+                         f"{row['tokens']} | {' | '.join(values)} |")
+    return "\n".join(lines)
+
+
 def write_report_markdown(summary, root):
     rows = []
     for name, phase in summary["phases"].items():
@@ -323,6 +338,7 @@ def write_report_markdown(summary, root):
     checkpoints = "\n".join(f"- `{name}`：`{phase['checkpoint']}`" for name, phase in summary["phases"].items())
     probe = summary.get("native1080_training_probe", {})
     numeric = summary.get("resume_numerics", {})
+    formal_validation = selected_validation_table(summary["phases"])
     text = f"""# CP-AdapTok 大规模训练执行报告
 
 Git SHA：`{summary['git_sha']}`。实验：`{summary['run_id']}`。日期和日志时区：Asia/Shanghai。
@@ -355,7 +371,15 @@ Git SHA：`{summary['git_sha']}`。实验：`{summary['run_id']}`。日期和日
 
 {checkpoints}
 
+各阶段当前最佳的实际独立验证（`—` 表示该层级未测量；Quick 的 bpp 绝不冒充真实 RD）：
+
+| 阶段/分支 | 步骤 | 层级 | Token | PSNR dB | LPIPS | DISTS | 真实 bpp |
+|---|---|---|---|---|---|---|---|
+{formal_validation}
+
 本报告中的耗时为优化更新墙钟，不含所有数据准备、初始化和验证开销；这些会话耗时另存各阶段 `sessions/`。
+按更新记录的 GPU 峰值是进程累计峰值，不能直接当作每分支独立峰值；独立 1080p 探测另行重置过计数器。
+CP Decoder 计数包含监督预算与 Base 参考解码，不含 Teacher 内部的原生编解码调用。
 
 ## 已完成 Pilot 与验收（不计入正式预算）
 
