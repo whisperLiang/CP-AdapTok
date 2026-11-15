@@ -186,7 +186,7 @@ def report_missing(path, error, config):
     )
 
 
-def save_checkpoint(path, model, optimizer, generator, step, config, status):
+def save_checkpoint(path, model, optimizer, generator, step, config, status, *, scheduler=None, training_state=None):
     path = resolve(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(".tmp")
@@ -197,6 +197,9 @@ def save_checkpoint(path, model, optimizer, generator, step, config, status):
             "model_config": asdict(model.config),
             "model": model.state_dict(),
             "optimizer": optimizer.state_dict(),
+            "scheduler": scheduler.state_dict() if scheduler is not None else None,
+            "rng_streams": generator.state_dict() if hasattr(generator, "state_dict") else None,
+            "training_state": training_state,
             "step": step,
             "config": config,
             "status": status,

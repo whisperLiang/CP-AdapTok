@@ -58,9 +58,10 @@ class AdapTokVQBottleneck(nn.Module):
         similarities = chunk @ weight.T / self.temperature
         if self.sampling_topk:
             values, candidates = similarities.topk(self.sampling_topk, dim=-1)
-            selected = torch.multinomial(values.softmax(-1), 1)
+            selected = torch.multinomial(values.softmax(-1), 1, generator=getattr(self, "sampling_generator", None))
             return candidates.gather(-1, selected).squeeze(-1)
-        return torch.multinomial(similarities.softmax(-1), 1).squeeze(-1)
+        return torch.multinomial(similarities.softmax(-1), 1,
+                                 generator=getattr(self, "sampling_generator", None)).squeeze(-1)
 
     @torch.no_grad()
     def initialize_codebook(self, samples, seed, iterations=20):
@@ -100,7 +101,8 @@ class AdapTokVQBottleneck(nn.Module):
             dead = dead[:0]
         dead = dead[: self.dead_max_replacements]
         if len(dead):
-            choices = torch.randperm(len(self._candidates), device=dead.device)[: len(dead)]
+            choices = torch.randperm(len(self._candidates), device=dead.device,
+                                     generator=getattr(self, "sampling_generator", None))[: len(dead)]
             dead = dead[: len(choices)]
             self.codebook.weight[dead] = self._candidates[choices]
             for value in optimizer.state.get(self.codebook.weight, {}).values():

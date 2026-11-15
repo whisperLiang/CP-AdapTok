@@ -10,14 +10,17 @@ from cp_adaptok.runtime import write_json
 def initialize_from_training_data(model, config, output):
     settings = config["training"]["vq"]["initialization"]
     generator = torch.Generator().manual_seed(config["seed"] + 71)
-    collected, count = [], 0
+    collected, count, windows = [], 0, []
     policy = model.vq.strategy, model.vq.temperature, model.vq.sampling_topk
     model.vq.set_training_policy("continuous")
     sources = config["data"]["train"]
+    order = torch.randperm(len(sources), generator=generator).tolist()
     try:
         for i in range(settings.get("clips", 16)):
-            source = sources[i % len(sources)]
+            source = sources[order[i % len(order)]]
             spec = sample_training_spec(source, min(4, source["frames"]), generator)
+            windows.append({"path": spec.path, "content_id": spec.content_id,
+                            "start": spec.start, "frames": spec.frames})
             clip = read_video(spec, config["training"]["crop"], generator)
             state = model.empty_state()
             for frame in clip:
@@ -43,6 +46,7 @@ def initialize_from_training_data(model, config, output):
                 "seed": config["seed"],
                 "source_split": "train",
                 "source_paths": [x["path"] for x in sources],
+                "actual_windows": windows,
                 "method": "reproducible spherical kmeans",
             },
         )

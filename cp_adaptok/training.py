@@ -7,11 +7,18 @@ import torch
 from torch.nn import functional as F
 
 from cp_adaptok.backbones.native_baseline import NativeLatentTeacher
-from cp_adaptok.data import check_splits, read_video, sample_training_spec
+from cp_adaptok.data import (
+    TrainingClipLoader,
+    check_splits,
+    plan_training_samples,
+    read_video,
+    sample_training_spec,
+)
 from cp_adaptok.diagnostics import gradient_norms, vq_diagnostics
 from cp_adaptok.runtime import metadata, resolve, save_checkpoint, write_json
 from cp_adaptok.streaming.sender import ids_digest
 from cp_adaptok.tokenizer.prefix_masking import sample_budgets, sample_nested_budgets
+from cp_adaptok.training_state import TrainingRNGStreams, make_scheduler
 
 
 def active_budget_weights(budgets, settings, step=0):
@@ -194,6 +201,7 @@ def auxiliary_objective(model, encoded, rgb, budgets, config):
             "predicted_mse": prediction.item(),
             "prediction_error": (prediction - actual).item(),
             "entropy_bits_per_token": entropy.item(),
+            "total_loss": loss.detach().item(),
         }
         for k, actual, prediction in zip(budgets, labels, predicted[0])
     ]
@@ -277,13 +285,20 @@ def sequence_length(training, step):
     return length
 
 
-def restore_training(model, optimizer, generator, artifact, stage):
+def restore_training(model, optimizer, generator, artifact, stage, scheduler=None):
     if artifact is None or "optimizer" not in artifact or artifact["config"].get("stage") != stage:
         raise ValueError("resume requires a training checkpoint with optimizer from the same training stage")
     optimizer.load_state_dict(artifact["optimizer"])
+    if scheduler is not None:
+        if artifact.get("scheduler") is None:
+            raise ValueError("scheduled training resume requires scheduler state")
+        scheduler.load_state_dict(artifact["scheduler"])
     if "vq_training_state" in artifact:
         model.vq.restore_training_state(artifact["vq_training_state"])
-    generator.set_state(artifact["sampling_rng"])
+    if isinstance(generator, TrainingRNGStreams) and artifact.get("rng_streams"):
+        generator.load_state_dict(artifact["rng_streams"])
+    else:
+        generator.set_state(artifact["sampling_rng"])
     torch.set_rng_state(artifact["torch_rng"])
     random.setstate(artifact["python_rng"])
     if "numpy_rng" in artifact:
@@ -333,19 +348,20 @@ def make_teacher(model, config):
     )
 
 
-def optimization_step(model, optimizer, generator, step, config, perceptual, teacher, fixed_samples=None):
+def optimization_step(model, optimizer, generator, step, config, perceptual, teacher, fixed_samples=None,
+                      loader=None):
     train = config["training"]
     config = dict(decayed_teacher_config(config, step), prefix_step=step)
     optimizer.zero_grad(set_to_none=True)
     set_quantization_step(model, config, step)
-    budgets = training_budgets(model, config, generator)
+    budget_rng = generator.budget_rng if isinstance(generator, TrainingRNGStreams) else generator
+    budgets = training_budgets(model, config, budget_rng)
     diagnostic = diagnostic_step(train, step)
     records = []
-    for _ in range(train["gradient_accumulation"]):
-        index = int(torch.randint(len(config["data"]["train"]), (), generator=generator))
-        spec, clip = training_sample(config, index, step, generator, fixed_samples)
+    count = train["gradient_accumulation"] * train.get("batch_sequences", 1)
+    for spec, clip, transform in optimization_samples(config, step, generator, fixed_samples, loader):
         sampled = train_clip(
-            model, clip, budgets, config, perceptual, teacher, 1 / train["gradient_accumulation"], diagnostic
+            model, clip, budgets, config, perceptual, teacher, 1 / count, diagnostic
         )
         for record in sampled:
             record.update(
@@ -354,6 +370,10 @@ def optimization_step(model, optimizer, generator, step, config, perceptual, tea
                 input_shape=list(clip.shape[-2:]),
                 quantization=model.vq.strategy,
                 temperature=model.vq.temperature,
+                content_id=spec.content_id,
+                window_start=spec.start,
+                window_length=spec.frames,
+                augmentation=transform,
             )
         records += sampled
     gradients = gradient_norms(model) if diagnostic else None
@@ -366,6 +386,20 @@ def optimization_step(model, optimizer, generator, step, config, perceptual, tea
     recovered = model.vq.finish_update(optimizer)
     records[-1].update(gradient_norms=gradients, recovered_codes=recovered)
     return budgets, records, norm.item()
+
+
+def optimization_samples(config, step, generator, fixed_samples, loader):
+    train = config["training"]
+    if loader is not None and fixed_samples is None:
+        plans = plan_training_samples(config, sequence_length(train, step), resolution_at(train, step), generator)
+        yield from loader.load(plans, train.get("cpu_prefetch", True))
+        return
+    data_rng = generator.data_rng if isinstance(generator, TrainingRNGStreams) else generator
+    count = train["gradient_accumulation"] * train.get("batch_sequences", 1)
+    for _ in range(count):
+        index = int(torch.randint(len(config["data"]["train"]), (), generator=data_rng))
+        spec, clip = training_sample(config, index, step, data_rng, fixed_samples)
+        yield spec, clip, None
 
 
 def decayed_teacher_config(config, step):
@@ -442,23 +476,26 @@ def validate_training(model, config, step, output, status):
     model.train()
 
 
-def run_training(model, config, max_steps, artifact=None, resume=False, status="trained"):
+def run_training(model, config, max_steps, artifact=None, resume=False, status="trained", observer=None):
     check_splits(config["data"])
     validate_prefix_training(model, config)
     train = config["training"]
     configure_stage(model, config["stage"], config)
     model.vq.configure_dead_codes(**train.get("vq", {}).get("dead_codes", {}))
     optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=train["lr"])
-    generator = torch.Generator().manual_seed(config["seed"])
+    scheduler = make_scheduler(optimizer, train)
+    generator = TrainingRNGStreams(config["seed"], model.device)
+    model.vq.sampling_generator = generator.quantization_rng
     output = resolve(config["paths"]["output"])
     output.mkdir(parents=True, exist_ok=True)
     checkpoint = resolve(config["paths"]["save_checkpoint"])
     perceptual, teacher = perceptual_networks(config, model.device), make_teacher(model, config)
     model.train()
-    initialize_queries(model, train, resume)
+    initialize_queries(model, train, resume, transferring=artifact is not None)
     _ = model.model_id
     # Auxiliary constructors consume RNG while initializing their pretrained weights.
-    step = restore_training(model, optimizer, generator, artifact, config["stage"]) if resume else 0
+    step = restore_training(model, optimizer, generator, artifact, config["stage"], scheduler) if resume else 0
+    started_step = step
     start = time.perf_counter()
     fixed_samples = {} if "fixed_sample_seed" in train else None
     try:
@@ -476,6 +513,9 @@ def run_training(model, config, max_steps, artifact=None, resume=False, status="
             checkpoint,
             start,
             status,
+            scheduler,
+            observer,
+            (artifact.get("training_state") or {}) if resume else {},
         )
     except torch.cuda.OutOfMemoryError:
         write_json(
@@ -484,7 +524,10 @@ def run_training(model, config, max_steps, artifact=None, resume=False, status="
                 "started_step": step,
                 "memory": torch.cuda.memory_summary(),
                 "resume_checkpoint": str(checkpoint),
-                "suggestions": ["reduce crop", "reduce tbptt", "increase accumulation"],
+                "suggestions": ["reduce batch_sequences", "reduce tbptt to 1",
+                                "adjust gradient_accumulation", "inspect retained graphs and validation caches"],
+                "configured_crop": train.get("crop"),
+                "native_resolution_must_be_preserved": bool(config.get("experiment")),
             },
         )
         raise
@@ -494,13 +537,16 @@ def run_training(model, config, max_steps, artifact=None, resume=False, status="
         checkpoint=str(checkpoint),
         trained_rd_validated=False,
         elapsed_s=time.perf_counter() - start,
+        updates_this_session=step - started_step,
     )
-    write_json(output / "training_report.json", report)
+    write_json(output / "sessions" / f"{time.time_ns()}.json", report)
+    if step > started_step or not (output / "training_report.json").exists():
+        write_json(output / "training_report.json", report)
     return report
 
 
-def initialize_queries(model, train, resume):
-    if resume:
+def initialize_queries(model, train, resume, transferring=False):
+    if resume or transferring:
         return
     if train.get("query_initialization_scale"):
         model.tokenizer.rescale_initial_queries(train["query_initialization_scale"])
@@ -523,7 +569,19 @@ def training_loop(
     checkpoint,
     start,
     status,
+    scheduler=None,
+    observer=None,
+    training_state=None,
 ):
+    train = config["training"]
+    with TrainingClipLoader(train.get("frame_cache_bytes", 256 * 2**20)) as loader:
+        return training_updates(model, optimizer, generator, config, step, max_steps, perceptual, teacher,
+                                fixed_samples, output, checkpoint, start, status, scheduler, observer,
+                                training_state or {}, loader)
+
+
+def training_updates(model, optimizer, generator, config, step, max_steps, perceptual, teacher,
+                     fixed_samples, output, checkpoint, start, status, scheduler, observer, state, loader):
     train = config["training"]
     while step < max_steps:
         settings = train.get("vq", {})
@@ -531,13 +589,36 @@ def training_loop(
             from cp_adaptok.training_initialization import initialize_from_training_data
 
             initialize_from_training_data(model, config, output)
+        update_start = time.perf_counter()
+        timing = None
+        if observer is not None and model.device.type == "cuda":
+            timing = (torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True))
+            timing[0].record()
+        lr = optimizer.param_groups[0]["lr"]
         budgets, records, norm = optimization_step(
-            model, optimizer, generator, step, config, perceptual, teacher, fixed_samples
+            model, optimizer, generator, step, config, perceptual, teacher, fixed_samples, loader
         )
+        if scheduler is not None:
+            scheduler.step()
+        if timing is not None:
+            timing[1].record()
+            timing[1].synchronize()
+            state["last_gpu_timeline_s"] = timing[0].elapsed_time(timing[1]) / 1000
         step += 1
         record_update(output, step, start, norm, records, budgets, status)
+        if observer is not None:
+            observer.update(step, records, budgets, norm, lr, time.perf_counter() - update_start, state)
         if step % train["save_every"] == 0 or step == max_steps:
-            save_checkpoint(checkpoint, model, optimizer, generator, step, config, status)
-        if step % train["validate_every"] == 0 and model.vq.strategy != "continuous":
+            state["recoverable_updates"] = step
+            save_checkpoint(checkpoint, model, optimizer, generator, step, config, status,
+                            scheduler=scheduler, training_state=state)
+        if observer is not None:
+            validated = observer.validate(model, step, checkpoint, state, final=step == max_steps)
+            if validated:
+                save_checkpoint(checkpoint, model, optimizer, generator, step, config, status,
+                                scheduler=scheduler, training_state=state)
+            if step % train["save_every"] == 0 or step == max_steps:
+                observer.checkpoint(step, checkpoint, state)
+        elif step % train["validate_every"] == 0 and model.vq.strategy != "continuous":
             validate_training(model, config, step, output, status)
     return step
