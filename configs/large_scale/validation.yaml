@@ -1,0 +1,12 @@
+quick: {sequences: 3, frames: 4, metrics: [psnr], crop: [720, 1280]}
+full: {sequences: 12, frames: 32, metrics: [psnr, ms-ssim, lpips, dists], crop: [1080, 1920]}
+final: {sequences: null, frames: 64, metrics: [psnr, ms-ssim, lpips, dists], crop: [1080, 1920]}
+budgets: [128, 256, 512, 1024, 2048]
+selection:
+  rule: mean_budget_mse_plus_endpoints_and_regression_v1
+  endpoint_weight: 0.25
+  regression_weight: 0.001
+  lpips_weight: 0.001
+  dists_weight: 0.001
+  bpp_weight: 0.0001
+  final_test_for_selection: false

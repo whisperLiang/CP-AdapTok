@@ -1,0 +1,7 @@
+extends: common.yaml
+prefix_training:
+  mode: progressive_nested
+  always_include_base: true
+  always_include_max: true
+  sample_intermediate: 1
+  one_sided: true

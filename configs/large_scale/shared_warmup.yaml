@@ -1,0 +1,22 @@
+extends: common.yaml
+stage: 1
+training:
+  lr: 0.0003
+  scheduler: {warmup_steps: 100, total_steps: 2000, min_lr_ratio: 0.1}
+  save_every: 100
+  validate_every: 500
+  full_validate_every: 2000
+  # Only fresh S0 initialization; every subsequent stage transfers weights unchanged.
+  query_initialization_scale: 50.0
+  grid_query_initialization_scale: 50.0
+  vq:
+    strategy: stochastic_training
+    temperature: 0.1
+    final_temperature: 0.01
+    anneal_steps: 2000
+    warmup_steps: 200
+    initialization: {clips: 16, max_samples: 32768, iterations: 10}
+teacher: {policy: i_only, decay_steps: 1500, minimum_factor: 0.0}
+loss: {latent: 1.0, lpips: 0.0, dists: 0.0, estimated_rate: 0.0}
+large_scale:
+  updates: 2000
