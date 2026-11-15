@@ -7,6 +7,7 @@ requires both official extensions, pretrained weights and their supported CUDA A
 import io
 
 import torch
+from torch.nn import functional as F
 
 from cp_adaptok.backbones.intra_adapter import restore_rgb
 from third_party.DCVC.src.models.image_model import DMCI
@@ -49,8 +50,11 @@ class NativeBaseline:
     def __init__(self, ld_checkpoint, intra_checkpoint, device, qp=32):
         self.qp, self.device = qp, torch.device(device)
         self.custom_stream = torch.cuda.Stream(device=self.device)
-        torch.cuda.set_stream(self.custom_stream)
-        self.pairs = [self._create_pair(ld_checkpoint, intra_checkpoint) for _ in range(2)]
+        caller = torch.cuda.current_stream(self.device)
+        self.custom_stream.wait_stream(caller)
+        with torch.cuda.stream(self.custom_stream):
+            self.pairs = [self._create_pair(ld_checkpoint, intra_checkpoint) for _ in range(2)]
+        caller.wait_stream(self.custom_stream)
         self.reset()
 
     def _create_pair(self, ld_checkpoint, intra_checkpoint):
@@ -91,7 +95,13 @@ class NativeBaseline:
         """Return an independent copy of the actual native decoder's quantized input."""
         if self.last_decoded_network is None:
             raise ValueError("decode a native frame before requesting its latent")
-        return self.last_decoded_network.proxy.get_decoded_latent()
+        caller = torch.cuda.current_stream(self.device)
+        self.custom_stream.wait_stream(caller)
+        with torch.cuda.stream(self.custom_stream):
+            snapshot = self.last_decoded_network.proxy.get_decoded_latent()
+        self.custom_stream.synchronize()
+        snapshot.record_stream(caller)
+        return snapshot
 
     def _initialize_reference(self, encoded, decoded):
         self.pairs[0][1].add_ref_feature_from_frame(encoded["x_hat"])
@@ -99,6 +109,16 @@ class NativeBaseline:
 
     @torch.no_grad()
     def round_trip(self, rgb, force_intra=False):
+        caller = torch.cuda.current_stream(self.device)
+        self.custom_stream.wait_stream(caller)
+        rgb.record_stream(self.custom_stream)
+        with torch.cuda.stream(self.custom_stream):
+            result = self._round_trip(rgb, force_intra)
+        self.custom_stream.synchronize()
+        result[0].record_stream(caller)
+        return result
+
+    def _round_trip(self, rgb, force_intra):
         height, width = rgb.shape[-2:]
         intra = self._is_intra(force_intra)
         x = (rgb2ycbcr(rgb) - 0.5).half().to(memory_format=torch.channels_last)
@@ -137,12 +157,16 @@ class NativeLatentTeacher:
 
     @torch.no_grad()
     def target(self, rgb):
-        _, counts, _ = self.native.round_trip(rgb)
+        height, width = rgb.shape[-2:]
+        padded = F.pad(rgb, (0, (-width) % 64, 0, (-height) % 64), mode="replicate")
+        _, counts, _ = self.native.round_trip(padded)
         y_hat = self.native.decoded_latent().detach().float()
         self.last_provenance = {
             "native_bitstream": True,
             "bytes": counts["total_bytes"],
             "latent_source": "native_decoder_quantized_y_hat",
             "latent_shape": list(y_hat.shape),
+            "original_shape": [height, width],
+            "padded_shape": list(padded.shape[-2:]),
         }
         return y_hat

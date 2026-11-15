@@ -6,9 +6,10 @@ from cp_adaptok.tokenizer.learned_queries import LearnedQueryTokenizer
 from cp_adaptok.tokenizer.prefix_masking import prefix_mask, sample_budgets
 
 
-def test_cached_softmax_matches_all_prefixes_and_masks():
+@pytest.mark.parametrize('precision', ['float32', 'float64'])
+def test_cached_softmax_matches_all_prefixes_and_masks(precision):
     torch.manual_seed(3)
-    p = TokenGridProjector(dim=24, heads=4, n_max=64, grid=(3, 4)).eval()
+    p = TokenGridProjector(dim=24, heads=4, n_max=64, grid=(3, 4), precision=precision).eval()
     tokens = torch.randn(2, 64, 24)
     cache = p.new_cache(batch_size=2)
     for start in range(0, 64, 8):

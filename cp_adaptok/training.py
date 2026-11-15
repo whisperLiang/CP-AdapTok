@@ -70,7 +70,12 @@ def frame_objective(model, encoded, rgb, budgets, config, perceptual, teacher_ta
     pixels = rgb.shape[-1] * rgb.shape[-2]
     rate = torch.stack([estimated[:, :k].sum(-1).mean() / pixels for k in budgets]).mean()
     loss = loss + weights["monotonic"] * monotonic + weights["estimated_rate"] * rate
-    records = [
+    records = objective_records(budgets, distortions, estimated, pixels, latents, teacher_target, loss)
+    return loss, records
+
+
+def objective_records(budgets, distortions, estimated, pixels, latents, teacher_target, loss):
+    return [
         {
             "tokens": k,
             "mse": value.detach().item(),
@@ -85,7 +90,6 @@ def frame_objective(model, encoded, rgb, budgets, config, perceptual, teacher_ta
         }
         for i, (k, value) in enumerate(zip(budgets, distortions))
     ]
-    return loss, records
 
 
 def perceptual_objective(rgb, reconstructions, perceptual, weights):
@@ -132,12 +136,7 @@ def train_clip(model, clip, budgets, config, perceptual, teacher, gradient_scale
     for t, original in enumerate(clip):
         rgb = original[None].to(model.device)
         frame_type = "I" if t == 0 else "P"
-        supervised = (
-            teacher is not None
-            and config["loss"].get("latent", 0) > 0
-            and teacher_applies(config.get("teacher", {"policy": "i_only"}), frame_type)
-        )
-        target = teacher.target(rgb) if supervised else None
+        target = teacher_target(teacher, config, frame_type, rgb)
         with torch.autocast(
             device_type=model.device.type,
             dtype=torch.bfloat16,
@@ -152,39 +151,48 @@ def train_clip(model, clip, budgets, config, perceptual, teacher, gradient_scale
             _, feature = model.decode_embeddings(
                 encoded.vq.embeddings[:, : model.config.k_ref], encoded.context
             )
-            digest = (
-                ids_digest(encoded.prefix(model.config.k_ref))
-                if encoded.vq.ids is not None
-                else "continuous-diagnostic"
-            )
+            digest = training_digest(encoded, model.config.k_ref)
             state = encoded.context.commit(feature, digest)
         chunk_losses.append(loss / len(clip) * gradient_scale)
         records.append(
-            {
-                "frame": t,
-                "budgets": labels,
-                "vq_usage": encoded.vq.usage.item(),
-                "vq_perplexity": encoded.vq.perplexity.item(),
-                "teacher": dict(
-                    teacher.last_provenance,
-                    reference_condition="independent_native_history"
-                    if frame_type == "P"
-                    else "intra_no_history",
-                )
-                if supervised
-                else None,
-                "frame_type": frame_type,
-                "diagnostics": vq_diagnostics(model.vq, encoded.features, encoded.vq) if diagnostic else None,
-                "query_layers": dict(model.tokenizer.last_diagnostics)
-                if diagnostic and hasattr(model.tokenizer, "last_diagnostics")
-                else None,
-            }
+            frame_record(model, encoded, labels, teacher if target is not None else None, t, diagnostic)
         )
         if (t + 1) % tbptt == 0 or t == len(clip) - 1:
             torch.stack(chunk_losses).sum().backward()
             chunk_losses = []
             state = state.detach()
     return records
+
+
+def teacher_target(teacher, config, frame_type, rgb):
+    supervised = teacher is not None and config["loss"].get("latent", 0) > 0
+    if supervised and teacher_applies(config.get("teacher", {"policy": "i_only"}), frame_type):
+        return teacher.target(rgb)
+    return None
+
+
+def training_digest(encoded, k_ref):
+    return ids_digest(encoded.prefix(k_ref)) if encoded.vq.ids is not None else "continuous-diagnostic"
+
+
+def frame_record(model, encoded, labels, teacher, t, diagnostic):
+    frame_type = encoded.context.frame_type
+    provenance = dict(teacher.last_provenance) if teacher else None
+    if provenance is not None:
+        provenance["reference_condition"] = (
+            "independent_native_history" if frame_type == "P" else "intra_no_history"
+        )
+    layers = getattr(model.tokenizer, "last_diagnostics", {})
+    return {
+        "frame": t,
+        "budgets": labels,
+        "vq_usage": encoded.vq.usage.item(),
+        "vq_perplexity": encoded.vq.perplexity.item(),
+        "teacher": provenance,
+        "frame_type": frame_type,
+        "diagnostics": vq_diagnostics(model.vq, encoded.features, encoded.vq) if diagnostic else None,
+        "query_layers": dict(layers) if diagnostic else None,
+    }
 
 
 def sequence_length(training, step):
@@ -250,10 +258,7 @@ def make_teacher(model, config):
 
 def optimization_step(model, optimizer, generator, step, config, perceptual, teacher, fixed_samples=None):
     train = config["training"]
-    teacher_settings = config.get("teacher", {})
-    if teacher_settings.get("decay_steps"):
-        factor = max(teacher_settings.get("minimum_factor", 0.0), 1 - step / teacher_settings["decay_steps"])
-        config = dict(config, loss=dict(config["loss"], latent=config["loss"]["latent"] * factor))
+    config = decayed_teacher_config(config, step)
     optimizer.zero_grad(set_to_none=True)
     set_quantization_step(model, config, step)
     candidates = tuple(train["budgets"])
@@ -262,10 +267,7 @@ def optimization_step(model, optimizer, generator, step, config, perceptual, tea
         if train.get("all_budgets") or len(candidates) == 1
         else sample_budgets(candidates, generator)
     )
-    diagnostic = (
-        step in train.get("diagnostic_steps", [0, 10, 50, 100])
-        or step % train.get("diagnostic_every", 100) == 0
-    )
+    diagnostic = diagnostic_step(train, step)
     records = []
     for _ in range(train["gradient_accumulation"]):
         index = int(torch.randint(len(config["data"]["train"]), (), generator=generator))
@@ -292,6 +294,21 @@ def optimization_step(model, optimizer, generator, step, config, perceptual, tea
     recovered = model.vq.finish_update(optimizer)
     records[-1].update(gradient_norms=gradients, recovered_codes=recovered)
     return budgets, records, norm.item()
+
+
+def decayed_teacher_config(config, step):
+    settings = config.get("teacher", {})
+    if not settings.get("decay_steps"):
+        return config
+    factor = max(settings.get("minimum_factor", 0.0), 1 - step / settings["decay_steps"])
+    return dict(config, loss=dict(config["loss"], latent=config["loss"]["latent"] * factor))
+
+
+def diagnostic_step(train, step):
+    return (
+        step in train.get("diagnostic_steps", [0, 10, 50, 100])
+        or step % train.get("diagnostic_every", 100) == 0
+    )
 
 
 def training_sample(config, index, step, generator, fixed_samples=None):
@@ -365,37 +382,33 @@ def run_training(model, config, max_steps, artifact=None, resume=False, status="
     checkpoint = resolve(config["paths"]["save_checkpoint"])
     perceptual, teacher = perceptual_networks(config, model.device), make_teacher(model, config)
     model.train()
-    if not resume and train.get("query_initialization_scale"):
-        model.tokenizer.rescale_initial_queries(train["query_initialization_scale"])
-    if not resume and train.get("grid_query_initialization_scale"):
-        with torch.no_grad():
-            model.decoder.projector.query.mul_(train["grid_query_initialization_scale"])
+    initialize_queries(model, train, resume)
     _ = model.model_id
     # Auxiliary constructors consume RNG while initializing their pretrained weights.
     step = restore_training(model, optimizer, generator, artifact, config["stage"]) if resume else 0
     start = time.perf_counter()
     fixed_samples = {} if "fixed_sample_seed" in train else None
     try:
-        while step < max_steps:
-            vq_settings = train.get("vq", {})
-            if vq_settings.get("initialization") and step == vq_settings.get("warmup_steps", 0):
-                from cp_adaptok.training_initialization import initialize_from_training_data
-
-                initialize_from_training_data(model, config, output)
-            budgets, records, norm = optimization_step(
-                model, optimizer, generator, step, config, perceptual, teacher, fixed_samples
-            )
-            step += 1
-            record_update(output, step, start, norm, records, budgets, status)
-            if step % train["save_every"] == 0 or step == max_steps:
-                save_checkpoint(checkpoint, model, optimizer, generator, step, config, status)
-            if step % train["validate_every"] == 0 and model.vq.strategy != "continuous":
-                validate_training(model, config, step, output, status)
+        step = training_loop(
+            model,
+            optimizer,
+            generator,
+            config,
+            step,
+            max_steps,
+            perceptual,
+            teacher,
+            fixed_samples,
+            output,
+            checkpoint,
+            start,
+            status,
+        )
     except torch.cuda.OutOfMemoryError:
         write_json(
             output / "oom.json",
             {
-                "step": step,
+                "started_step": step,
                 "memory": torch.cuda.memory_summary(),
                 "resume_checkpoint": str(checkpoint),
                 "suggestions": ["reduce crop", "reduce tbptt", "increase accumulation"],
@@ -411,3 +424,47 @@ def run_training(model, config, max_steps, artifact=None, resume=False, status="
     )
     write_json(output / "training_report.json", report)
     return report
+
+
+def initialize_queries(model, train, resume):
+    if resume:
+        return
+    if train.get("query_initialization_scale"):
+        model.tokenizer.rescale_initial_queries(train["query_initialization_scale"])
+    if train.get("grid_query_initialization_scale"):
+        with torch.no_grad():
+            model.decoder.projector.query.mul_(train["grid_query_initialization_scale"])
+
+
+def training_loop(
+    model,
+    optimizer,
+    generator,
+    config,
+    step,
+    max_steps,
+    perceptual,
+    teacher,
+    fixed_samples,
+    output,
+    checkpoint,
+    start,
+    status,
+):
+    train = config["training"]
+    while step < max_steps:
+        settings = train.get("vq", {})
+        if settings.get("initialization") and step == settings.get("warmup_steps", 0):
+            from cp_adaptok.training_initialization import initialize_from_training_data
+
+            initialize_from_training_data(model, config, output)
+        budgets, records, norm = optimization_step(
+            model, optimizer, generator, step, config, perceptual, teacher, fixed_samples
+        )
+        step += 1
+        record_update(output, step, start, norm, records, budgets, status)
+        if step % train["save_every"] == 0 or step == max_steps:
+            save_checkpoint(checkpoint, model, optimizer, generator, step, config, status)
+        if step % train["validate_every"] == 0 and model.vq.strategy != "continuous":
+            validate_training(model, config, step, output, status)
+    return step

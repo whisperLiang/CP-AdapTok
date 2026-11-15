@@ -4,6 +4,8 @@ from dataclasses import dataclass
 
 import torch
 
+from cp_adaptok.profiling import measure
+
 from .bitstream import FrameHeader
 from .packetizer import ProgressivePacketStream, packetize, validate_budgets
 
@@ -124,19 +126,25 @@ class CodecEncoder:
             ctx.reference_fingerprint,
             ctx.qp,
         )
-        ids = encoded.vq.ids[0].cpu().tolist()
-        packets = packetize(header, ids, self.entropy)
+        with measure(self.model, "encoder.ids_to_cpu"):
+            ids = encoded.vq.ids[0].cpu().tolist()
+        with measure(self.model, "encoder.rans_packetize"):
+            packets = packetize(header, ids, self.entropy)
         entropy_end = time.perf_counter()
         # Sender reference also traverses serialized rANS packets, with no continuous side channel.
         local_stream = ProgressivePacketStream(header, self.entropy)
-        for packet in packets[: c.k_ref // c.packet_tokens]:
-            local_stream.append(packet)
-        base_ids = torch.tensor([local_stream.token_ids], device=self.model.device, dtype=torch.long)
-        _, feature = self.model.decode_ids(base_ids, ctx)
-        self.state = ctx.commit(feature, ids_digest(base_ids)).detach()
-        self.state.fingerprint()  # paid once in the measured state update, then safely cached
+        with measure(self.model, "encoder.local_rans_decode"):
+            for packet in packets[: c.k_ref // c.packet_tokens]:
+                local_stream.append(packet)
+            base_ids = torch.tensor([local_stream.token_ids], device=self.model.device, dtype=torch.long)
+        with measure(self.model, "encoder.local_base_decode"):
+            _, feature = self.model.decode_ids(base_ids, ctx)
+        with measure(self.model, "encoder.state_fingerprint"):
+            self.state = ctx.commit(feature, ids_digest(base_ids)).detach()
+            self.state.fingerprint()  # paid once in the measured state update, then safely cached
         self.base_commits += 1
-        scores = self.model.scorer(encoded.features, budgets)[0].cpu().tolist()
+        with measure(self.model, "encoder.scorer"):
+            scores = self.model.scorer(encoded.features, budgets)[0].cpu().tolist()
         synchronize(self.model.device)
         end = time.perf_counter()
         timing = {

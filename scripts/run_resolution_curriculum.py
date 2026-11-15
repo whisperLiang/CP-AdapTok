@@ -48,7 +48,8 @@ def main():
             config,
             budgets=config["evaluation"]["budgets"],
             status="trained",
-            output=output / "test_native1080",
+            split="validation",
+            output=output / "validation_native1080",
             max_frames=8,
         )
         print(

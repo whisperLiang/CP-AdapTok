@@ -71,6 +71,45 @@ def test_teacher_default_never_supervises_mismatched_p_history():
         teacher_applies({"policy": "matched_p"}, "P")
 
 
+def test_closed_loop_training_never_requests_native_p_target(codec):
+    from cp_adaptok.training import configure_stage, train_clip
+
+    class IntraTeacher:
+        last_provenance = {"latent_source": "exact-test-intra"}
+
+        def reset(self):
+            self.calls = 0
+
+        def target(self, rgb):
+            self.calls += 1
+            assert self.calls == 1
+            return rgb.new_zeros((1, 256, 4, 4))
+
+    model = copy.deepcopy(codec).train()
+    config = {
+        "stage": 2,
+        "training": {"tbptt": 2, "amp_bf16": False},
+        "loss": {"mse": 1.0, "vq": 0.1, "latent": 1.0, "estimated_rate": 0.0, "monotonic": 0.1},
+        "teacher": {"policy": "i_only"},
+    }
+    configure_stage(model, 2, config)
+    teacher = IntraTeacher()
+    records = train_clip(model, torch.rand(4, 3, 16, 24), [8, 32], config, {}, teacher, 1.0)
+    assert teacher.calls == 1
+    assert records[0]["teacher"]["reference_condition"] == "intra_no_history"
+    assert all(row["teacher"] is None for row in records[1:])
+
+
+def test_disabled_teacher_and_auxiliary_training_do_not_require_native_extensions(monkeypatch):
+    import importlib.util
+
+    from cp_adaptok.runtime import preflight
+
+    monkeypatch.setattr(importlib.util, "find_spec", lambda _: None)
+    for settings in [{"stage": 2, "teacher": {"policy": "none"}}, {"stage": 3}]:
+        preflight(dict(settings, loss={"latent": 1.0}, paths={}, data={}), "train", allow_untrained=True)
+
+
 def test_temperature_schedule_is_absolute_step_based_for_resume():
     config = {"temperature": 1.0, "final_temperature": 0.1, "anneal_steps": 100}
     assert temperature_at(config, 0) == 1
@@ -224,3 +263,49 @@ def test_continuous_query_to_decoder_path_can_overfit(codec):
     assert losses[-1] < losses[0] * 0.9
     assert model.tokenizer.queries.grad.norm() > 0
     assert model.vq.project_in.weight.grad.norm() > 0
+
+
+def test_optional_profiling_preserves_packets_and_strict_reference_state(codec):
+    from cp_adaptok.profiling import PipelineProfiler
+    from cp_adaptok.streaming.sender import CodecEncoder
+
+    model = copy.deepcopy(codec).eval()
+    frame = torch.rand(1, 3, 32, 48)
+    expected = CodecEncoder(model).encode_frame(frame)
+    model.pipeline_profiler = PipelineProfiler(model.device)
+    sender = CodecEncoder(model)
+    actual = sender.encode_frame(frame)
+    assert actual.packets == expected.packets
+    assert actual.token_ids == expected.token_ids
+    assert actual.header_bytes == expected.header_bytes
+    assert all(row["wall_ms"] >= 0 and row["cuda_ms"] is None for row in model.pipeline_profiler.records)
+    assert any(row["name"] == "encoder.local_base_decode" for row in model.pipeline_profiler.records)
+
+
+def test_initialization_collects_real_pre_vq_features_and_restores_training_policy(codec, tmp_path):
+    import json
+
+    import cv2
+    import numpy as np
+
+    from cp_adaptok.training_initialization import initialize_from_training_data
+
+    model = copy.deepcopy(codec).train()
+    source = tmp_path / "source"
+    source.mkdir()
+    generator = np.random.default_rng(19)
+    for i in range(4):
+        cv2.imwrite(str(source / f"{i:05d}.png"), generator.integers(0, 256, (64, 64, 3), dtype=np.uint8))
+    config = {
+        "seed": 19,
+        "data": {"train": [{"path": str(source), "frames": 4}]},
+        "training": {"crop": 32, "vq": {"initialization": {"clips": 1, "max_samples": 128, "iterations": 2}}},
+    }
+    original = model.vq.codebook.weight.detach().clone()
+    initialize_from_training_data(model, config, tmp_path)
+    assert model.vq.strategy == "deterministic_nearest"
+    assert not torch.equal(original, model.vq.codebook.weight)
+    report = json.loads((tmp_path / "codebook_initialization.json").read_text())
+    assert report["samples"] == 128
+    assert report["distinct_samples"] >= 32
+    assert report["source_split"] == "train"

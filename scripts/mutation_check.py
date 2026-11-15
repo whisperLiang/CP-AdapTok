@@ -1,5 +1,6 @@
 """Behavior mutations in isolated temporary copies; never edit the live checkout."""
 
+import argparse
 import ast
 import json
 import os
@@ -16,7 +17,7 @@ MUTATIONS = [
     ("contiguous packets", "streaming/packetizer.py", "append", "order", "test_packet_roundtrip.py"),
     ("softmax normalization", "decoder/prefix_cache.py", "append", "denominator", "test_prefix.py"),
     ("missing token mask", "decoder/token_grid_projector.py", "forward", "mask", "test_prefix.py"),
-    ("nearest VQ index", "tokenizer/vector_quantizer.py", "forward", "nearest", "test_vq.py"),
+    ("nearest VQ index", "tokenizer/vector_quantizer.py", "_select_indices", "nearest", "test_vq.py"),
     ("single base commit", "streaming/receiver.py", "decode_base", "commit", "test_reference_state.py"),
     ("reference fingerprint", "streaming/receiver.py", "start_frame", "reference", "test_streaming.py"),
     ("display ACK reference", "streaming/session.py", "_display_ack", "ack", "test_adaptive_stream.py"),
@@ -111,7 +112,7 @@ class Mutator(ast.NodeTransformer):
                 self.changed = True
 
 
-def check_mutation(spec):
+def check_mutation(spec, output=None):
     name, file, function, kind, test = spec
     with tempfile.TemporaryDirectory(prefix="cp_adaptok_mutation_") as temporary:
         directory = Path(temporary)
@@ -134,7 +135,7 @@ def check_mutation(spec):
             text=True,
             timeout=45,
         )
-        log = ROOT / "results/mutations" / f"{kind}.txt"
+        log = (output or ROOT / "results/mutations") / f"{kind}.txt"
         log.parent.mkdir(parents=True, exist_ok=True)
         log.write_text(result.stdout + result.stderr)
         # A collection failure is not a killed behavior mutation.
@@ -143,8 +144,11 @@ def check_mutation(spec):
 
 
 def main():
-    results = [check_mutation(spec) for spec in MUTATIONS]
-    (ROOT / "results/mutations/summary.json").write_text(json.dumps(results, indent=2) + "\n")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, default=ROOT / "results/mutations")
+    args = parser.parse_args()
+    results = [check_mutation(spec, args.output) for spec in MUTATIONS]
+    (args.output / "summary.json").write_text(json.dumps(results, indent=2) + "\n")
     print(json.dumps(results, indent=2))
     return 0 if all(item["killed"] for item in results) else 1
 

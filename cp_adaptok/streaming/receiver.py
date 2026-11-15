@@ -2,6 +2,8 @@ import time
 
 import torch
 
+from cp_adaptok.profiling import measure
+
 from .bitstream import FrameHeader, StreamError
 from .packetizer import ProgressivePacketStream, validate_budgets
 from .sender import ids_digest, synchronize
@@ -64,8 +66,9 @@ class CodecDecoder:
     def append_packets(self, packets):
         if self.stream is None:
             raise StreamError("frame header must arrive first")
-        for packet in packets:
-            self.stream.append(packet)
+        with measure(self.model, "decoder.packet_parse_rans"):
+            for packet in packets:
+                self.stream.append(packet)
         return len(self.stream.token_ids)
 
     def _ids(self, k):
@@ -79,8 +82,9 @@ class CodecDecoder:
             return self.base_frame
         ids = self._ids(self.model.config.k_ref)
         frame, feature = self.model.decode_ids(ids, self.context)
-        self.state = self.context.commit(feature, ids_digest(ids)).detach()
-        self.state.fingerprint()
+        with measure(self.model, "decoder.state_commit"):
+            self.state = self.context.commit(feature, ids_digest(ids)).detach()
+            self.state.fingerprint()
         self.base_commits += 1
         self.reconstructions += 1
         self.base_frame = self.display = frame
@@ -105,10 +109,12 @@ class CodecDecoder:
             return self.display
         synchronize(self.model.device)
         start = time.perf_counter()
-        grid = self._prefix_grid(k, use_cache)
+        with measure(self.model, "decoder.prefix_attention_cache"):
+            grid = self._prefix_grid(k, use_cache)
         synchronize(self.model.device)
         attention_end = time.perf_counter()
-        latent = self.model.decoder.from_grid(grid, self.context.latent_shape, self.context.frame_type)
+        with measure(self.model, "decoder.grid_to_latent"):
+            latent = self.model.decoder.from_grid(grid, self.context.latent_shape, self.context.frame_type)
         self.display, _ = self.model.decode_latent(latent, self.context)
         self.reconstructions += 1
         synchronize(self.model.device)

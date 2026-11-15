@@ -85,6 +85,7 @@ class FrameEvaluator:
     def __init__(self, model, config, metrics, budgets, output, compare_cache):
         self.model, self.metrics, self.budgets = model, metrics, budgets
         self.output, self.compare_cache = output, compare_cache
+        self.save_frames = config.get("evaluation", {}).get("save_frames", True)
         self.sender = CodecEncoder(model, config["evaluation"]["intra_period"])
         self.receiver = CodecDecoder(model)
         self.previous = {}
@@ -125,7 +126,8 @@ class FrameEvaluator:
             prev_original, prev_dense = self.previous[k]
             row["temporal_error"] = ((original - prev_original) - (dense - prev_dense)).square().mean().item()
         self.previous[k] = original, dense
-        save_rgb(directory / f"frame{t:03d}_k{k}.png", dense)
+        if self.save_frames:
+            save_rgb(directory / f"frame{t:03d}_k{k}.png", dense)
         return row
 
     def _base(self, encoded):
@@ -146,13 +148,15 @@ class FrameEvaluator:
         count, base_ms = self._base(encoded)
         fingerprint = self.receiver.get_state().fingerprint()
         directory = self.output / name
+        directory.mkdir(parents=True, exist_ok=True)
         rows = []
         for k in self.budgets:
             end = k // self.model.config.packet_tokens
             self.receiver.append_packets(encoded.packets[count:end])
             count = end
             rows.append(self._prefix_row(original, encoded, k, spec["fps"], t, directory))
-        save_rgb(directory / f"frame{t:03d}_original.png", original)
+        if self.save_frames:
+            save_rgb(directory / f"frame{t:03d}_original.png", original)
         (directory / f"frame{t:03d}.cpat").write_bytes(serialize_prefix(encoded, self.budgets[-1]))
         fingerprints = {
             fingerprint,

@@ -9,6 +9,7 @@ from cp_adaptok.backbones.causal_state import CausalState, FrozenFrameContext
 from cp_adaptok.backbones.intra_adapter import IntraBackboneAdapter, prepare_rgb, restore_rgb
 from cp_adaptok.backbones.ld_adapter import CausalLDBackboneAdapter
 from cp_adaptok.decoder.prefix_latent_decoder import UnifiedPrefixLatentDecoder
+from cp_adaptok.profiling import measure
 from cp_adaptok.streaming.causal_scorer import CausalScorer
 from cp_adaptok.streaming.entropy_codec import BlockEntropyModel
 from cp_adaptok.tokenizer.learned_queries import LearnedQueryTokenizer
@@ -149,23 +150,36 @@ class CausalProgressiveCodec(nn.Module):
             raise ValueError("stream model uses B=1; batch independent sequences outside the state machine")
         frame_id = state.frame_id + 1 if frame_id is None else frame_id
         frame_type = "I" if state.feature is None or force_intra else "P"
-        context = self.begin_frame(state, frame_id, frame_type, *rgb.shape[-2:])
+        with measure(self, "encoder.reference_context"):
+            context = self.begin_frame(state, frame_id, frame_type, *rgb.shape[-2:])
         adapter = self.intra if frame_type == "I" else self.ld
-        y = adapter.encode_latent(prepare_rgb(rgb), context)
-        features = self.tokenizer(y, context.context, frame_type)
-        return EncodedFrame(context, features, self.vq(features))
+        with measure(self, "encoder.preprocess"):
+            prepared = prepare_rgb(rgb)
+        with measure(self, "encoder.ld_dmci"):
+            y = adapter.encode_latent(prepared, context)
+        with measure(self, "encoder.learned_queries"):
+            features = self.tokenizer(y, context.context, frame_type)
+        with measure(self, "encoder.vq_search"):
+            quantized = self.vq(features)
+        return EncodedFrame(context, features, quantized)
 
     def decode_embeddings(self, embeddings, context, mask=None):
-        y_hat = self.decoder(embeddings, context.latent_shape, context.frame_type, mask)
+        with measure(self, "decoder.token_to_latent"):
+            y_hat = self.decoder(embeddings, context.latent_shape, context.frame_type, mask)
         return self.decode_latent(y_hat, context)
 
     def decode_latent(self, y_hat, context):
         adapter = self.intra if context.frame_type == "I" else self.ld
-        yuv, feature = adapter.decode_latent(y_hat, context)
-        return restore_rgb(yuv, context.height, context.width), feature
+        with measure(self, "decoder.ld_dmci"):
+            yuv, feature = adapter.decode_latent(y_hat, context)
+        with measure(self, "decoder.postprocess"):
+            rgb = restore_rgb(yuv, context.height, context.width)
+        return rgb, feature
 
     def decode_ids(self, ids, context):
-        return self.decode_embeddings(self.vq.embed(ids), context)
+        with measure(self, "decoder.embedding_lookup"):
+            embeddings = self.vq.embed(ids)
+        return self.decode_embeddings(embeddings, context)
 
     def empty_state(self):
         return CausalState.empty(self.model_id)

@@ -85,8 +85,17 @@ def _model_prerequisites(config, purpose, allow_untrained):
     return missing
 
 
+def native_teacher_requested(config, purpose):
+    return (
+        purpose == "train"
+        and config.get("stage") != 3
+        and config.get("loss", {}).get("latent", 0) > 0
+        and config.get("teacher", {}).get("policy", "i_only") != "none"
+    )
+
+
 def _native_prerequisites(config, purpose):
-    native_teacher = purpose == "train" and config.get("loss", {}).get("latent", 0) > 0
+    native_teacher = native_teacher_requested(config,purpose)
     if purpose != "baseline" and not native_teacher:
         return []
     missing = _missing_files(config.get("paths", {}), ["ld_checkpoint", "intra_checkpoint"])

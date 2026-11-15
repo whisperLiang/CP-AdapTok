@@ -88,6 +88,8 @@ class AdapTokVQBottleneck(nn.Module):
 
     @torch.no_grad()
     def finish_update(self, optimizer):
+        if not self.training:
+            raise RuntimeError("dead-code recovery is training only")
         if not len(self.usage_window) or self._candidates is None:
             return []
         self.usage_window[self.usage_updates % len(self.usage_window)].copy_(self.pending_counts)

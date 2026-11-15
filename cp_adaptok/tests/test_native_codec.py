@@ -81,3 +81,33 @@ def test_teacher_targets_are_exact_native_decoded_i_p_latents(native_assets):
         assert teacher.last_provenance["latent_source"] == "native_decoder_quantized_y_hat"
         torch.testing.assert_close(target, teacher.native.decoded_latent().float(), rtol=0, atol=0)
     assert teacher.native.frame_id == 2
+
+
+def test_native_teacher_uses_the_same_padding_domain_as_cp_encoder(native_assets):
+    from torch.nn import functional as F
+
+    paths, clip = native_assets
+    teacher = NativeLatentTeacher(*paths, "cuda:0")
+    rgb = clip[:1, :, :70, :90]
+    target = teacher.target(rgb)
+    assert target.shape == (1, 256, 8, 8)
+    teacher.reset()
+    teacher.native.round_trip(F.pad(rgb, (0, 38, 0, 58), mode="replicate"))
+    torch.testing.assert_close(target, teacher.native.decoded_latent().float(), rtol=0, atol=0)
+
+
+def test_native_teacher_preserves_the_callers_stream_and_waits_for_rgb(native_assets):
+    paths, clip = native_assets
+    caller = torch.cuda.current_stream()
+    teacher = NativeLatentTeacher(*paths, "cuda:0")
+    assert torch.cuda.current_stream() == caller
+    producer = torch.cuda.Stream()
+    producer.wait_stream(caller)
+    with torch.cuda.stream(producer):
+        torch.cuda._sleep(2_000_000)
+        rgb = clip[:1].clone()
+        actual = teacher.target(rgb)
+    caller.wait_stream(producer)
+    teacher.reset()
+    expected = teacher.target(clip[:1])
+    torch.testing.assert_close(actual, expected, rtol=0, atol=0)

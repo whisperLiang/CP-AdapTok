@@ -8,7 +8,15 @@ from cp_adaptok.streaming.sender import CodecEncoder
 
 
 @torch.no_grad()
-def test_enhancement_cannot_change_reference_and_peers_remain_synchronized(codec):
+@pytest.mark.parametrize('precision', ['float32', 'float64'])
+def test_enhancement_cannot_change_reference_and_peers_remain_synchronized(codec, precision):
+    from dataclasses import replace
+
+    from cp_adaptok.models.causal_progressive_codec import CausalProgressiveCodec
+
+    model = CausalProgressiveCodec(replace(codec.config, attention_precision=precision))
+    model.load_state_dict(codec.state_dict(),strict=True)
+    codec = model.eval()
     sender, receiver = CodecEncoder(codec), CodecDecoder(codec)
     torch.manual_seed(31)
     frames = [torch.rand(1, 3, 32, 48) for _ in range(4)]
