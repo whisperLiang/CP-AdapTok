@@ -193,6 +193,53 @@ def budget_summary(records, budgets):
     return summaries
 
 
+def gain_metric_summary(values, sequence_values, metric, bootstrap_samples, seed):
+    sign = 1 if metric == "psnr" else -1
+    values = np.asarray(values, dtype=float)
+    means = np.array([np.mean(group) for group in sequence_values.values()])
+    confidence = None
+    if len(means) > 1:
+        rng = np.random.default_rng(seed)
+        samples = rng.choice(means, size=(bootstrap_samples, len(means)), replace=True).mean(1)
+        confidence = np.percentile(samples, [2.5, 97.5]).tolist()
+    return {
+        "mean_delta": float(values.mean()), "median_delta": float(np.median(values)),
+        "mean_improvement": float(sign * values.mean()),
+        "regression_fraction": float(np.mean(sign * values < 0)),
+        "improvement_fraction": float(np.mean(sign * values > 0)),
+        "sequence_mean_delta": float(means.mean()), "sequence_bootstrap_ci95": confidence,
+        "bootstrap_unit": "independent sequence; all its consecutive frames stay together",
+        "bootstrap_samples": bootstrap_samples, "bootstrap_seed": seed,
+    }
+
+
+def pair_gain(records, low, high, bootstrap_samples, seed):
+    grouped = {name: {} for name in ("psnr", "lpips", "dists")}
+    for frame in records:
+        prefixes = {row["tokens"]: row for row in frame["prefixes"]}
+        source = frame.get("source", {})
+        sequence = source.get("content_id", source.get("path", frame["sequence"]))
+        for name, values in grouped.items():
+            a, b = prefixes[low].get(name), prefixes[high].get(name)
+            if a is not None and b is not None:
+                values.setdefault(sequence, []).append(b - a)
+    result = {"low": low, "high": high, "independent_sequences": len(grouped["psnr"])}
+    for name, values in grouped.items():
+        flat = [value for group in values.values() for value in group]
+        result[name] = gain_metric_summary(flat, values, name, bootstrap_samples, seed) if flat else None
+    return result
+
+
+def prefix_gain_summary(records, bootstrap_samples=2000, seed=19):
+    if not records or bootstrap_samples < 1:
+        raise ValueError("gain summary requires frames and positive bootstrap count")
+    budgets = [row["tokens"] for row in records[0]["prefixes"]]
+    pairs = list(zip(budgets, budgets[1:]))
+    if len(budgets) > 2:
+        pairs.append((budgets[0], budgets[-1]))
+    return [pair_gain(records, low, high, bootstrap_samples, seed) for low, high in pairs]
+
+
 def _quality_summary(records, compare_cache):
     pairs = [
         (a["mse"], b["mse"]) for frame in records for a, b in zip(frame["prefixes"], frame["prefixes"][1:])
@@ -250,6 +297,11 @@ def evaluate_sequences(
         link_layer_overhead="not captured; codec records and actual TCP application framing counted",
         allocation=allocation_comparison(records, config.get("allocation", {}), model.config.k_ref),
         budget_summary=budget_summary(records, budgets),
+        budget_summary_by_frame_type={
+            frame_type: budget_summary([row for row in records if row["frame_type"] == frame_type], budgets)
+            for frame_type in ("I", "P")
+        },
+        prefix_gains=prefix_gain_summary(records),
         **_quality_summary(records, compare_cache),
     )
     write_json(output / "evaluation.json", report)

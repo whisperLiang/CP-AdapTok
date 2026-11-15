@@ -20,3 +20,14 @@ def sample_budgets(candidates, generator, count=None):
     weights[0] = weights[-1] = 2
     indices = torch.multinomial(weights, count, replacement=False, generator=generator).tolist()
     return sorted(candidates[i] for i in indices)
+
+
+def sample_nested_budgets(candidates, generator, sample_intermediate=1):
+    """One EncodeOnce sequence, with reference and maximum supervised every update."""
+    if len(candidates) < 2 or sorted(set(candidates)) != list(candidates):
+        raise ValueError("need at least two increasing unique budgets")
+    if type(sample_intermediate) is not int or sample_intermediate < 1:
+        raise ValueError("at least one intermediate budget must be requested")
+    middle = candidates[1:-1]
+    indices = torch.randperm(len(middle), generator=generator)[:sample_intermediate].tolist()
+    return sorted([candidates[0], candidates[-1], *(middle[i] for i in indices)])

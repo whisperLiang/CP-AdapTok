@@ -11,7 +11,67 @@ from cp_adaptok.data import check_splits, read_video, sample_training_spec
 from cp_adaptok.diagnostics import gradient_norms, vq_diagnostics
 from cp_adaptok.runtime import metadata, resolve, save_checkpoint, write_json
 from cp_adaptok.streaming.sender import ids_digest
-from cp_adaptok.tokenizer.prefix_masking import sample_budgets
+from cp_adaptok.tokenizer.prefix_masking import sample_budgets, sample_nested_budgets
+
+
+def active_budget_weights(budgets, settings, step=0):
+    weights = settings.get("weights")
+    for point in settings.get("weight_schedule", []):
+        if step >= point["step"]:
+            weights = point["weights"]
+    if weights is None:
+        return [1.0] * len(budgets)
+    values = [float(weights.get(k, weights.get(str(k), float("nan")))) for k in budgets]
+    if any(not np.isfinite(value) or value <= 0 for value in values):
+        raise ValueError("every budget needs an explicit finite positive weight")
+    return values
+
+
+def prefix_distortion(distortions, budgets, settings, step=0):
+    weights = active_budget_weights(budgets, settings, step)
+    return torch.stack([weight * value for weight, value in zip(weights, distortions)]).mean()
+
+
+def progressive_penalty(distortions, settings):
+    pairs = zip(distortions, distortions[1:])
+    if settings.get("mode") == "progressive_nested" and settings.get("one_sided", True):
+        pairs = ((low.detach(), high) for low, high in pairs)
+    values = [F.relu(high - low + settings.get("margin", 0.0)) for low, high in pairs]
+    return torch.stack(values).mean() if values else distortions[0].new_zeros(())
+
+
+def training_budgets(model, config, generator):
+    train, settings = config["training"], config.get("prefix_training", {})
+    candidates = list(settings.get("budgets", train["budgets"]))
+    if settings.get("mode") == "progressive_nested":
+        return sample_nested_budgets(candidates, generator, settings.get("sample_intermediate", 1))
+    return candidates if train.get("all_budgets") or len(candidates) == 1 else sample_budgets(candidates, generator)
+
+
+def validate_prefix_training(model, config):
+    from cp_adaptok.streaming.packetizer import validate_budgets
+
+    settings = config.get("prefix_training", {})
+    if not settings:
+        return
+    if settings.get("mode") not in ("legacy", "progressive_nested"):
+        raise ValueError("unknown prefix training mode")
+    budgets = settings.get("budgets", config["training"]["budgets"])
+    validate_budgets(budgets, model.config)
+    if budgets != config["training"]["budgets"] or budgets[0] != model.config.k_ref or budgets[-1] != model.config.n_max:
+        raise ValueError("training budgets must span K_ref to N_max consistently")
+    if not settings.get("always_include_base", True) or not settings.get("always_include_max", True):
+        raise ValueError("progressive training requires both endpoints")
+    if settings.get("margin", 0) < 0:
+        raise ValueError("progress margin must be nonnegative")
+    active_budget_weights(budgets, settings)
+
+
+def prefix_gradient_records(distortions, embeddings, packet_tokens):
+    from cp_adaptok.diagnostics_prefix import gradient_groups
+
+    return [gradient_groups(torch.autograd.grad(value, embeddings, retain_graph=True)[0], packet_tokens)
+            for value in distortions]
 
 
 def configure_stage(model, stage, config):
@@ -39,8 +99,10 @@ def perceptual_networks(config, device):
     return suite.networks
 
 
-def frame_objective(model, encoded, rgb, budgets, config, perceptual, teacher_target=None):
+def frame_objective(model, encoded, rgb, budgets, config, perceptual, teacher_target=None, diagnostic=False):
     weights = config["loss"]
+    settings = config.get("prefix_training", {})
+    step = config.get("prefix_step", 0)
     reconstructions, latents, distortions = [], [], []
     for k in budgets:
         latent = model.decoder(
@@ -50,19 +112,16 @@ def frame_objective(model, encoded, rgb, budgets, config, perceptual, teacher_ta
         latents.append(latent)
         reconstructions.append(reconstruction)
         distortions.append(F.mse_loss(reconstruction, rgb))
-    loss = weights["mse"] * torch.stack(distortions).mean() + weights["vq"] * encoded.vq.loss
+    loss = weights["mse"] * prefix_distortion(distortions, budgets, settings, step) + weights["vq"] * encoded.vq.loss
     if teacher_target is not None:
         loss = (
             loss
             + weights["latent"]
-            * torch.stack([F.mse_loss(y.float(), teacher_target.float()) for y in latents]).mean()
+            * prefix_distortion([F.mse_loss(y.float(), teacher_target.float()) for y in latents],
+                                budgets, settings, step)
         )
     loss = loss + perceptual_objective(rgb, reconstructions, perceptual, weights)
-    monotonic = (
-        torch.stack([F.relu(b - a) for a, b in zip(distortions, distortions[1:])]).mean()
-        if len(budgets) > 1
-        else rgb.new_zeros(())
-    )
+    monotonic = progressive_penalty(distortions, settings)
     estimated = (
         model.vq.expected_bits(encoded.features, model.entropy_model.logits, model.config.packet_tokens)
         if weights["estimated_rate"]
@@ -72,6 +131,13 @@ def frame_objective(model, encoded, rgb, budgets, config, perceptual, teacher_ta
     rate = torch.stack([estimated[:, :k].sum(-1).mean() / pixels for k in budgets]).mean()
     loss = loss + weights["monotonic"] * monotonic + weights["estimated_rate"] * rate
     records = objective_records(budgets, distortions, estimated, pixels, latents, teacher_target, loss)
+    budget_weights = active_budget_weights(budgets, settings, step)
+    for row, weight in zip(records, budget_weights):
+        row.update(distortion_weight=weight, progressive_penalty=monotonic.detach().item())
+    if diagnostic and settings.get("monitor_gradients", False):
+        gradients = prefix_gradient_records(distortions, encoded.vq.embeddings, model.config.packet_tokens)
+        for row, groups in zip(records, gradients):
+            row["embedding_gradient_by_group"] = groups
     return loss, records
 
 
@@ -147,7 +213,7 @@ def train_clip(model, clip, budgets, config, perceptual, teacher, gradient_scale
             if config["stage"] == 3:
                 loss, labels = auxiliary_objective(model, encoded, rgb, budgets, config)
             else:
-                loss, labels = frame_objective(model, encoded, rgb, budgets, config, perceptual, target)
+                loss, labels = frame_objective(model, encoded, rgb, budgets, config, perceptual, target, diagnostic)
             # Differentiable base-only loop, independent of sampled enhancement budgets.
             _, feature = model.decode_embeddings(
                 encoded.vq.embeddings[:, : model.config.k_ref], encoded.context
@@ -262,15 +328,10 @@ def make_teacher(model, config):
 
 def optimization_step(model, optimizer, generator, step, config, perceptual, teacher, fixed_samples=None):
     train = config["training"]
-    config = decayed_teacher_config(config, step)
+    config = dict(decayed_teacher_config(config, step), prefix_step=step)
     optimizer.zero_grad(set_to_none=True)
     set_quantization_step(model, config, step)
-    candidates = tuple(train["budgets"])
-    budgets = (
-        list(candidates)
-        if train.get("all_budgets") or len(candidates) == 1
-        else sample_budgets(candidates, generator)
-    )
+    budgets = training_budgets(model, config, generator)
     diagnostic = diagnostic_step(train, step)
     records = []
     for _ in range(train["gradient_accumulation"]):
@@ -376,6 +437,7 @@ def validate_training(model, config, step, output, status):
 
 def run_training(model, config, max_steps, artifact=None, resume=False, status="trained"):
     check_splits(config["data"])
+    validate_prefix_training(model, config)
     train = config["training"]
     configure_stage(model, config["stage"], config)
     model.vq.configure_dead_codes(**train.get("vq", {}).get("dead_codes", {}))

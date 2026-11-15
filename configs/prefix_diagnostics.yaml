@@ -1,0 +1,9 @@
+extends: train_multiscene.yaml
+paths:
+  checkpoint: results/optimization_20261115/auxiliary/latest.pt
+  output: results/prefix_utilization/diagnostics
+training:
+  query_initialization_scale: 1.0
+  grid_query_initialization_scale: 1.0
+evaluation:
+  save_frames: false
