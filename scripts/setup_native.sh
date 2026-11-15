@@ -67,6 +67,9 @@ info = dict(torch=torch.__version__, cuda=torch.version.cuda, gpu=torch.cuda.get
                                hasattr(inference_extensions_cuda.DMCLDProxy, 'get_decoded_latent'),
             patch_sha256=hashlib.sha256(Path('native_patches/decoded_latent.patch').read_bytes()).hexdigest(),
             upstream=subprocess.check_output(['git','-C','third_party/DCVC','rev-parse','HEAD'],text=True).strip())
+info['patched_source_sha256'] = {
+    name: hashlib.sha256((Path('.build/native-dcvc/src/layers/extensions/inference')/name).read_bytes()).hexdigest()
+    for name in ['dmci_proxy.h', 'dmc_ld_proxy.h', 'bind.cpp']}
 Path('results/native_environment.json').write_text(json.dumps(info, indent=2)+'\n')
 print(json.dumps(info, indent=2))
 PY
