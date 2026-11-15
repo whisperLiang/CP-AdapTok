@@ -22,6 +22,7 @@ ACK = struct.Struct(">4sBQH16s")
 END_SESSION = _crc_record(b"CPEN\x01")
 END_ACK = _crc_record(b"CPED\x01")
 DISPLAY_EXCHANGE_BYTES = DISPLAY.size + ACK.size + 16  # CRC32 and framing for both records
+DISPLAY_RESERVE_MULTIPLIER = 1.25
 
 
 def _parse_control(wire, layout, magic):
@@ -194,6 +195,7 @@ class SocketSender:
         self.budgets, self.allocation = tuple(budgets), allocation
         self.writer = PacedRecordWriter(connection)
         self.ack_bytes = 0
+        self.observed_display_ack_s = 0
 
     @torch.no_grad()
     def send_frame(self, rgb, bandwidth_bps=None, release_time=None):
@@ -221,12 +223,15 @@ class SocketSender:
     def _display_ack(self, encoded, k):
         request = DisplayRequest(encoded.header.frame_id, k)
         self.writer.send(request.to_bytes())
+        request_sent = time.perf_counter()
         wire = receive_record(self.connection)
         self.ack_bytes += 4 + len(wire)
         expected = DisplayAck(request, self.encoder.get_state().fingerprint())
         if DisplayAck.from_bytes(wire) != expected:
             raise StreamError("display ACK identity/reference mismatch; stop and resynchronize")
-        return time.perf_counter()
+        received = time.perf_counter()
+        self.observed_display_ack_s = max(self.observed_display_ack_s, received - request_sent)
+        return received
 
     def _send_all_displays(self, encoded, release_time):
         delivered = 0
@@ -240,10 +245,13 @@ class SocketSender:
         deadline = release_time + policy.playback_delay_s
         delivered = self._send_packets(encoded, 0, c.k_ref)
         base_ack = self._display_ack(encoded, delivered)
+        decode_reserve = max(
+            policy.decode_reserve_s, DISPLAY_RESERVE_MULTIPLIER * self.observed_display_ack_s
+        )
         selected = self.encoder.select_prefix(
             encoded,
             self.writer.bandwidth_bps,
-            max(0, deadline - time.perf_counter() - policy.decode_reserve_s),
+            max(0, deadline - time.perf_counter() - decode_reserve),
             buffer_s=policy.buffer_s,
             mode=policy.mode,
             fixed_k=policy.fixed_k,
@@ -252,7 +260,7 @@ class SocketSender:
         )
         target = c.k_ref if selected is None else selected[0].tokens
         limit = min(target, policy.enhancement_cap or target)
-        reserve = policy.decode_reserve_s + DISPLAY_EXCHANGE_BYTES * 8 / self.writer.bandwidth_bps
+        reserve = decode_reserve + DISPLAY_EXCHANGE_BYTES * 8 / self.writer.bandwidth_bps
         delivered = self._send_packets(encoded, delivered, limit, finish_by=deadline - reserve)
         if delivered > c.k_ref:
             self._display_ack(encoded, delivered)
@@ -264,6 +272,8 @@ class SocketSender:
                 "base_wait_required": base_ack > deadline,
                 "final_ack_before_deadline": time.perf_counter() <= deadline,
                 "bandwidth_bps": self.writer.bandwidth_bps,
+                "effective_decode_reserve_s": decode_reserve,
+                "observed_display_ack_s": self.observed_display_ack_s,
                 "selected_predicted_mse": encoded.predicted_mse.get(target),
                 "delivered_predicted_mse": encoded.predicted_mse.get(delivered),
                 "deadline_or_cap_trimmed_packets": (target - delivered) // c.packet_tokens,

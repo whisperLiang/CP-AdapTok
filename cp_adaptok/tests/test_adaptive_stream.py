@@ -202,6 +202,25 @@ def test_expired_frames_deliver_base_reliably_before_next_reference(codec):
 
 
 @torch.no_grad()
+def test_observed_slow_display_ack_reserves_time_before_selecting_enhancement(codec):
+    left, right = socket.socketpair()
+    with left, right, ThreadPoolExecutor(1) as pool:
+        left.settimeout(3)
+        right.settimeout(3)
+        receiver = SocketReceiver(right, codec, ack_delay_s=0.3)
+        future = pool.submit(receiver.run)
+        policy = AllocationConfig(playback_delay_s=0.5, decode_reserve_s=0)
+        sender = SocketSender(left, CodecEncoder(codec), [8, 16, 32], policy)
+        row = sender.send_frame(torch.rand(1, 3, 16, 24), bandwidth_bps=1_000_000)
+        sender.finish()
+        report = future.result(timeout=3)
+    assert not row["base_wait_required"]
+    assert row["delivered_tokens"] == 8
+    assert row["effective_decode_reserve_s"] >= 0.3
+    assert len(report["events"]) == 1
+
+
+@torch.no_grad()
 def test_session_cannot_report_success_with_missing_reference_packet(codec):
     encoded = CodecEncoder(codec).encode_frame(torch.rand(1, 3, 16, 24))
     left, right = socket.socketpair()

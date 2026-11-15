@@ -35,6 +35,13 @@ MUTATIONS = [
         "remaining",
         "test_adaptive_stream.py",
     ),
+    (
+        "observed display reserve",
+        "streaming/session.py",
+        "_send_adaptive",
+        "latency",
+        "test_adaptive_stream.py",
+    ),
 ]
 
 
@@ -84,6 +91,10 @@ class Mutator(ast.NodeTransformer):
         elif self.kind == "remaining" and isinstance(child, ast.BinOp):
             if isinstance(child.op, ast.Sub) and ast.unparse(child.right) == "delivered_bytes":
                 child.op = ast.Add()
+                self.changed = True
+        elif self.kind == "latency" and isinstance(child, ast.Call):
+            if ast.unparse(child.func) == "max" and "self.observed_display_ack_s" in ast.unparse(child):
+                child.args[1] = ast.Constant(0)
                 self.changed = True
 
 
