@@ -13,6 +13,26 @@ from cp_adaptok.streaming.receiver import CodecDecoder
 from cp_adaptok.streaming.sender import CodecEncoder
 
 
+def compare_prefixes(receivers, rgb, budgets, metrics):
+    rows = []
+    for k in budgets:
+        outputs = [r.decode_prefix(k, use_cache=False) for r in receivers]
+        cache_errors = []
+        for receiver, dense in zip(receivers, outputs):
+            cached = receiver.decode_prefix(k, use_cache=True)
+            cache_errors.append((cached - dense).abs().max().item())
+        rows.append(
+            {
+                "tokens": k,
+                "cross_precision_max_error": (outputs[0] - outputs[1]).abs().max().item(),
+                "cache_max_errors": cache_errors,
+                "fp64": metrics(rgb, outputs[0]),
+                "fp32": metrics(rgb, outputs[1]),
+            }
+        )
+    return rows
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", required=True)
@@ -42,27 +62,12 @@ def main():
                 "different_token_ids": sum(
                     a != b for a, b in zip(encoded[0].token_ids, encoded[1].token_ids)
                 ),
-                "prefixes": [],
             }
             for receiver, wire in zip(receivers, encoded):
                 receiver.start_frame(wire.header_bytes)
                 receiver.append_packets(wire.packets)
                 receiver.decode_base()
-            for k in config["evaluation"]["budgets"]:
-                outputs = [r.decode_prefix(k, use_cache=False) for r in receivers]
-                cache_errors = []
-                for receiver, dense in zip(receivers, outputs):
-                    cached = receiver.decode_prefix(k, use_cache=True)
-                    cache_errors.append((cached - dense).abs().max().item())
-                row["prefixes"].append(
-                    {
-                        "tokens": k,
-                        "cross_precision_max_error": (outputs[0] - outputs[1]).abs().max().item(),
-                        "cache_max_errors": cache_errors,
-                        "fp64": metrics(rgb, outputs[0]),
-                        "fp32": metrics(rgb, outputs[1]),
-                    }
-                )
+            row["prefixes"] = compare_prefixes(receivers, rgb, config["evaluation"]["budgets"], metrics)
             row["reference_feature_max_error"] = (
                 (senders[0].state.feature - senders[1].state.feature).abs().max().item()
             )

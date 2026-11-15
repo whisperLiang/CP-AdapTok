@@ -11,6 +11,48 @@ from cp_adaptok.runtime import build_model, load_checkpoint, read_config, resolv
 from cp_adaptok.training import run_training
 
 
+def warmup_sampling_policy(steps):
+    return {
+        "strategy": "stochastic_training",
+        "temperature": 0.1,
+        "final_temperature": 0.01,
+        "anneal_steps": steps,
+        "warmup_steps": steps // 2,
+        "initialization": {"clips": 8, "max_samples": 32768, "iterations": 10},
+    }
+
+
+def representation_ablation(config, name, steps):
+    train, vq = config["training"], config["training"]["vq"]
+    train["query_initialization_scale"] = 50.0
+    vq.update(warmup_sampling_policy(steps))
+    if name in ("balanced_continuous", "content_continuous"):
+        vq.clear()
+        vq["strategy"] = "continuous"
+    if name == "balanced_decoder":
+        train["grid_query_initialization_scale"] = 50.0
+    if name.startswith("content_"):
+        config["model"]["query_content_only"] = True
+        train["grid_query_initialization_scale"] = 50.0
+
+
+def teacher_ablation(config, name, steps):
+    train = config["training"]
+    train["query_initialization_scale"] = 50.0
+    train["vq"].update(warmup_sampling_policy(steps))
+    policy = {"teacher_T1": "legacy_ip", "teacher_T2": "i_only", "teacher_T3": "none"}[name]
+    config["teacher"] = {"policy": policy, "allow_mismatched_p_diagnostic": policy == "legacy_ip"}
+
+
+def quantizer_ablation(vq, name, steps):
+    if name in ("warmup", "initialized", "dead"):
+        vq["warmup_steps"] = steps // 2
+    if name in ("initialized", "dead"):
+        vq["initialization"] = {"clips": 8, "max_samples": 32768, "iterations": 10}
+    if name == "annealed":
+        vq.update(temperature=1.0, final_temperature=0.05, anneal_steps=steps)
+
+
 def experiment_config(name, root, steps):
     config = read_config("configs/diagnostic_continuous.yaml")
     config["purpose"] = "train"
@@ -25,44 +67,13 @@ def experiment_config(name, root, steps):
         train["sequence_length"] = int(name.split("_")[-1])
     else:
         vq["strategy"] = "deterministic_nearest" if name == "hard" else "stochastic_training"
-    if name in ("warmup", "initialized", "dead"):
-        vq["warmup_steps"] = steps // 2
-    if name in ("initialized", "dead"):
-        vq["initialization"] = {"clips": 8, "max_samples": 32768, "iterations": 10}
-    if name == "annealed":
-        vq.update(temperature=1.0, final_temperature=0.05, anneal_steps=steps)
+    quantizer_ablation(vq, name, steps)
     if name.startswith("balanced_") or name.startswith("content_"):
-        train["query_initialization_scale"] = 50.0
-        vq.update(
-            strategy="stochastic_training",
-            temperature=0.1,
-            final_temperature=0.01,
-            anneal_steps=steps,
-            warmup_steps=steps // 2,
-            initialization={"clips": 8, "max_samples": 32768, "iterations": 10},
-        )
-        if name in ("balanced_continuous", "content_continuous"):
-            vq.clear()
-            vq["strategy"] = "continuous"
-        if name == "balanced_decoder":
-            train["grid_query_initialization_scale"] = 50.0
-    if name.startswith("content_"):
-        config["model"]["query_content_only"] = True
-        train["grid_query_initialization_scale"] = 50.0
+        representation_ablation(config, name, steps)
     if name == "dead":
         vq["dead_codes"] = {"window": 20, "max_replacements": 16, "min_count": 1}
     if name.startswith("teacher_"):
-        train["query_initialization_scale"] = 50.0
-        vq.update(
-            strategy="stochastic_training",
-            warmup_steps=steps // 2,
-            initialization={"clips": 8, "max_samples": 32768, "iterations": 10},
-            temperature=0.1,
-            final_temperature=0.01,
-            anneal_steps=steps,
-        )
-        policy = {"teacher_T1": "legacy_ip", "teacher_T2": "i_only", "teacher_T3": "none"}[name]
-        config["teacher"] = {"policy": policy, "allow_mismatched_p_diagnostic": policy == "legacy_ip"}
+        teacher_ablation(config, name, steps)
     return config
 
 
