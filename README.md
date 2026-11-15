@@ -2,7 +2,7 @@
 
 时间因果、学习式有序 1D VQ Token 与可追加 rANS 视频流研究原型。主模型显式复用固定版本 DCVC-UF LD / DMCI 的 PyTorch 模块，保留 AdapTok 的 learned queries、VQ、前缀训练和质量分配思想。
 
-**当前是工程验证原型。官方 LD/DMCI 权重与原生 CUDA 扩展已就绪，使用真实 native decoded-latent 完成100步新增模块训练；发现码本塌缩，画质与30/60 FPS目标仍未达成。** 新旧实验分别保存，详见 [官方骨干后续报告](docs/pretrained_native_report.md) 与 [官方权重记录](docs/pretrained_weights.md)。旧 smoke checkpoint 的骨干仍为随机初始化。
+**当前仍是研究验证原型。已实际完成 VQ/Teacher 修复、短程多视频及1080p延长训练；确定性码本使用恢复，但有效渐进画质与30/60 FPS目标仍未达成。** 同一模型32帧实际码流在逐位一致的整数指纹融合后由16.66提升至18.38 FPS；该模型质量验收失败。完整证据、失败结论与恢复命令见 [优化验收报告](docs/optimization_report.md)。原100步实验和权重仍保留，详见 [原生骨干历史报告](docs/pretrained_native_report.md) 与 [官方权重记录](docs/pretrained_weights.md)。旧 smoke checkpoint 的骨干仍为随机初始化。
 
 在本机使用：
 
@@ -88,5 +88,8 @@ pip install -e '.[eval,dev]'
 - [在线 TCP 场景与实测结果](docs/streaming_report.md)
 - [真实实施与实验报告](docs/implementation_report.md)
 - [ub-mode 操作日志](docs/work_log.md)
+- [本轮优化验收报告](docs/optimization_report.md)
+- [量化与教师策略说明](docs/quantization_training.md)
+- [本轮 ub-mode 操作日志](docs/optimization_work_log.md)
 
 `third_party` 是固定提交的 Git submodule，清单见 `third_party/manifest.json`。上游源码保持原样；固定空间 Tokenizer 只通过 `configs/ablation_spatial.yaml` 显式启用为实验对照。

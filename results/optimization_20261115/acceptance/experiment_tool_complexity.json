@@ -1,0 +1,227 @@
+[
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "read",
+    "complexity": 2
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "csv_table",
+    "complexity": 2
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "mean_prefix_metric",
+    "complexity": 2
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "deterministic_statistics",
+    "complexity": 3
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "quality_drop_ratio",
+    "complexity": 3
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "ablation_summary",
+    "complexity": 2
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "ablation_summaries",
+    "complexity": 2
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "rd_summaries",
+    "complexity": 5
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "capacity_summaries",
+    "complexity": 2
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "metric_range",
+    "complexity": 2
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "measured_quality_curve",
+    "complexity": 3
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "compare_native_rate",
+    "complexity": 6
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "markdown_table",
+    "complexity": 5
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "plot_rd_curve",
+    "complexity": 3
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "plot_rd",
+    "complexity": 6
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "figures",
+    "complexity": 7
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "read_jsonl",
+    "complexity": 2
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "plot_diagnostic_training",
+    "complexity": 5
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "plot_extended_training",
+    "complexity": 6
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "training_curves",
+    "complexity": 1
+  },
+  {
+    "file": "scripts/build_optimization_report.py",
+    "function": "main",
+    "complexity": 1
+  },
+  {
+    "file": "scripts/compare_attention_precision.py",
+    "function": "compare_prefixes",
+    "complexity": 4
+  },
+  {
+    "file": "scripts/compare_attention_precision.py",
+    "function": "main",
+    "complexity": 9
+  },
+  {
+    "file": "scripts/prepare_optimization_data.py",
+    "function": "official_train_names",
+    "complexity": 2
+  },
+  {
+    "file": "scripts/prepare_optimization_data.py",
+    "function": "native_sequence",
+    "complexity": 8
+  },
+  {
+    "file": "scripts/prepare_optimization_data.py",
+    "function": "verified_frame",
+    "complexity": 5
+  },
+  {
+    "file": "scripts/prepare_optimization_data.py",
+    "function": "extract_sequence",
+    "complexity": 2
+  },
+  {
+    "file": "scripts/prepare_optimization_data.py",
+    "function": "import_sequences",
+    "complexity": 5
+  },
+  {
+    "file": "scripts/prepare_optimization_data.py",
+    "function": "main",
+    "complexity": 8
+  },
+  {
+    "file": "scripts/run_optimization_experiments.py",
+    "function": "warmup_sampling_policy",
+    "complexity": 1
+  },
+  {
+    "file": "scripts/run_optimization_experiments.py",
+    "function": "representation_ablation",
+    "complexity": 4
+  },
+  {
+    "file": "scripts/run_optimization_experiments.py",
+    "function": "teacher_ablation",
+    "complexity": 1
+  },
+  {
+    "file": "scripts/run_optimization_experiments.py",
+    "function": "quantizer_ablation",
+    "complexity": 4
+  },
+  {
+    "file": "scripts/run_optimization_experiments.py",
+    "function": "experiment_config",
+    "complexity": 7
+  },
+  {
+    "file": "scripts/run_optimization_experiments.py",
+    "function": "diagnostic_reconstruction",
+    "complexity": 4
+  },
+  {
+    "file": "scripts/run_optimization_experiments.py",
+    "function": "main",
+    "complexity": 4
+  },
+  {
+    "file": "scripts/write_optimization_report.py",
+    "function": "read",
+    "complexity": 1
+  },
+  {
+    "file": "scripts/write_optimization_report.py",
+    "function": "precision_summary",
+    "complexity": 8
+  },
+  {
+    "file": "scripts/write_optimization_report.py",
+    "function": "ip_summary",
+    "complexity": 5
+  },
+  {
+    "file": "scripts/write_optimization_report.py",
+    "function": "teacher_frame_summaries",
+    "complexity": 3
+  },
+  {
+    "file": "scripts/write_optimization_report.py",
+    "function": "evaluation_latency_summary",
+    "complexity": 6
+  },
+  {
+    "file": "scripts/write_optimization_report.py",
+    "function": "long_sequence_summary",
+    "complexity": 4
+  },
+  {
+    "file": "scripts/write_optimization_report.py",
+    "function": "verification_summary",
+    "complexity": 5
+  },
+  {
+    "file": "scripts/write_optimization_report.py",
+    "function": "main",
+    "complexity": 6
+  },
+  {
+    "file": "scripts/evaluate_capacity_native.py",
+    "function": "main",
+    "complexity": 3
+  }
+]

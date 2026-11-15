@@ -17,39 +17,53 @@ def read(path, default=None):
 def csv_table(path, rows):
     if not rows:
         return
-    with path.open("w") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+    with path.open("w", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
 
+def mean_prefix_metric(records, name, index=-1):
+    return float(np.mean([row["prefixes"][index][name] for row in records]))
+
+
+def deterministic_statistics(records):
+    counts = np.sum([r["vq"]["deterministic"]["counts"] for r in records], axis=0)
+    return {
+        "deterministic_perplexity": float(np.mean([r["vq"]["deterministic"]["perplexity"] for r in records])),
+        "deterministic_distinct_codes": int((counts > 0).sum()),
+    }
+
+
+def quality_drop_ratio(records):
+    regressions = [
+        b["mse"] > a["mse"] for row in records for a, b in zip(row["prefixes"], row["prefixes"][1:])
+    ]
+    return float(np.mean(regressions))
+
+
+def ablation_summary(path):
+    report = read(path)
+    records = report["records"]
+    deltas = [r["prefixes"][-1]["psnr"] - r["prefixes"][0]["psnr"] for r in records]
+    return {
+        "experiment": path.parent.name,
+        "updates": 100,
+        "frames_per_update": len(records),
+        "continuous_diagnostic": report["continuous_only_diagnostic"],
+        "base_psnr": mean_prefix_metric(records, "psnr", 0),
+        "max_psnr": mean_prefix_metric(records, "psnr"),
+        "delta_psnr": float(np.mean(deltas)),
+        **deterministic_statistics(records),
+        "quality_drop_ratio": quality_drop_ratio(records),
+        "max_lpips": mean_prefix_metric(records, "lpips"),
+        "max_dists": mean_prefix_metric(records, "dists"),
+    }
+
+
 def ablation_summaries():
-    summaries = []
-    for path in sorted((RESULTS / "ablations").glob("*/diagnostic_evaluation.json")):
-        report = read(path)
-        records = report["records"]
-        counts = np.sum([r["vq"]["deterministic"]["counts"] for r in records], axis=0)
-        deltas = [r["prefixes"][-1]["psnr"] - r["prefixes"][0]["psnr"] for r in records]
-        adjacent = [(a["mse"], b["mse"]) for r in records for a, b in zip(r["prefixes"], r["prefixes"][1:])]
-        summaries.append(
-            {
-                "experiment": path.parent.name,
-                "updates": 100,
-                "frames_per_update": len(records),
-                "continuous_diagnostic": report["continuous_only_diagnostic"],
-                "base_psnr": float(np.mean([r["prefixes"][0]["psnr"] for r in records])),
-                "max_psnr": float(np.mean([r["prefixes"][-1]["psnr"] for r in records])),
-                "delta_psnr": float(np.mean(deltas)),
-                "deterministic_perplexity": float(
-                    np.mean([r["vq"]["deterministic"]["perplexity"] for r in records])
-                ),
-                "deterministic_distinct_codes": int((counts > 0).sum()),
-                "quality_drop_ratio": float(np.mean([b > a for a, b in adjacent])),
-                "max_lpips": float(np.mean([r["prefixes"][-1]["lpips"] for r in records])),
-                "max_dists": float(np.mean([r["prefixes"][-1]["dists"] for r in records])),
-            }
-        )
-    return summaries
+    paths = sorted((RESULTS / "ablations").glob("*/diagnostic_evaluation.json"))
+    return [ablation_summary(path) for path in paths]
 
 
 def rd_summaries():
@@ -81,19 +95,26 @@ def capacity_summaries():
                 "n_max": config["model"]["n_max"],
                 "codebook_size": config["model"]["codebook_size"],
                 "grid": str(config["model"]["grid"]),
-                "base_psnr": float(np.mean([r["prefixes"][0]["psnr"] for r in records])),
-                "max_psnr": float(np.mean([r["prefixes"][-1]["psnr"] for r in records])),
-                "deterministic_perplexity": float(
-                    np.mean([r["vq"]["deterministic"]["perplexity"] for r in records])
-                ),
+                "base_psnr": mean_prefix_metric(records, "psnr", 0),
+                "max_psnr": mean_prefix_metric(records, "psnr"),
+                "deterministic_perplexity": deterministic_statistics(records)["deterministic_perplexity"],
             }
         )
     return rows
 
 
-def compare_native_rate(rd):
+def metric_range(rows, name):
+    values = [r[name] for r in rows]
+    return min(values), max(values)
+
+
+def measured_quality_curve(rows):
     from scipy.interpolate import PchipInterpolator
 
+    return PchipInterpolator(np.log([r["bpp"] for r in rows]), [r["psnr"] for r in rows])
+
+
+def compare_native_rate(rd):
     native = read(RESULTS / "native_controls/rd_summary.json", [])
     cp = [r for r in rd if r["model"] == "extended"]
     if not native or not cp:
@@ -104,8 +125,9 @@ def compare_native_rate(rd):
         max(np.log(cp[0]["bpp"]), np.log(native[0]["bpp"])),
         min(np.log(cp[-1]["bpp"]), np.log(native[-1]["bpp"])),
     )
-    quality_lo = max(min(r["psnr"] for r in cp), min(r["psnr"] for r in native))
-    quality_hi = min(max(r["psnr"] for r in cp), max(r["psnr"] for r in native))
+    cp_quality, native_quality = metric_range(cp, "psnr"), metric_range(native, "psnr")
+    quality_lo = max(cp_quality[0], native_quality[0])
+    quality_hi = min(cp_quality[1], native_quality[1])
     result = {
         "bd_rate": None,
         "common_psnr_range": [quality_lo, quality_hi],
@@ -113,8 +135,7 @@ def compare_native_rate(rd):
         "framing": "CP application records versus native SPS/IP; overhead definitions retained",
     }
     if hi > lo:
-        cp_curve = PchipInterpolator(np.log([r["bpp"] for r in cp]), [r["psnr"] for r in cp])
-        native_curve = PchipInterpolator(np.log([r["bpp"] for r in native]), [r["psnr"] for r in native])
+        cp_curve, native_curve = measured_quality_curve(cp), measured_quality_curve(native)
         result.update(
             common_bpp_range=[float(np.exp(lo)), float(np.exp(hi))],
             bd_psnr=float((cp_curve.integrate(lo, hi) - native_curve.integrate(lo, hi)) / (hi - lo)),
@@ -134,6 +155,22 @@ def markdown_table(rows, fields):
     return "\n".join(output)
 
 
+def plot_rd_curve(ax, rows, style, label):
+    ax.plot([r["bpp"] for r in rows], [r["psnr"] for r in rows], style, label=label)
+
+
+def plot_rd(ax, rd):
+    for name in dict.fromkeys(r["model"] for r in rd):
+        data = [r for r in rd if r["model"] == name]
+        plot_rd_curve(ax, data, ".-", name)
+    native = read(RESULTS / "native_controls/rd_summary.json", [])
+    if native:
+        plot_rd_curve(ax, native, "s--", "Native LD (SPS/IP)")
+    ax.set_xscale("log")
+    ax.set(xlabel="Measured bpp\n(CP records / native SPS/IP)", ylabel="1080p PSNR (dB)")
+    ax.legend(fontsize=7)
+
+
 def figures(ablations, rd):
     import matplotlib
 
@@ -150,24 +187,65 @@ def figures(ablations, rd):
     ]
     labels = [r["experiment"] for r in selected]
     axes[0].bar(labels, [r["deterministic_perplexity"] for r in selected])
-    axes[0].set_ylabel("Deterministic perplexity (4-frame diagnostic)")
+    axes[0].set_ylabel("Deterministic perplexity\n(4-frame diagnostic)")
     axes[1].bar(labels, [r["max_psnr"] for r in selected])
     axes[1].set_ylabel("Max-prefix PSNR (overfit clip, dB)")
     for ax in axes[:2]:
         ax.tick_params(axis="x", rotation=60)
-    for name in dict.fromkeys(r["model"] for r in rd):
-        data = [r for r in rd if r["model"] == name]
-        axes[2].plot([r["bpp"] for r in data], [r["psnr"] for r in data], ".-", label=name)
-    native = read(RESULTS / "native_controls/rd_summary.json", [])
-    if native:
-        axes[2].plot(
-            [r["bpp"] for r in native], [r["psnr"] for r in native], "s--", label="Native LD (SPS/IP)"
-        )
-    axes[2].set_xscale("log")
-    axes[2].set(xlabel="Actual application bpp", ylabel="1080p PSNR (dB)")
-    axes[2].legend(fontsize=7)
+    plot_rd(axes[2], rd)
     fig.savefig(RESULTS / "optimization_summary.png", dpi=180)
     plt.close(fig)
+
+
+def read_jsonl(path):
+    return [json.loads(line) for line in path.read_text().splitlines()]
+
+
+def plot_diagnostic_training(ax):
+    exported = []
+    for name in ["continuous_4", "hard", "stochastic", "warmup", "initialized"]:
+        path = RESULTS / "ablations" / name / "train.jsonl"
+        rows = read_jsonl(path)
+        values = []
+        for row in rows:
+            losses = [frame["budgets"][0]["total_loss"] for frame in row["records"]]
+            values.append(float(np.mean(losses)))
+            exported.append({"experiment": name, "step": row["step"], "total_loss": values[-1]})
+        ax.plot([r["step"] for r in rows], values, label=name)
+    ax.set(
+        yscale="log",
+        xlabel="Completed updates",
+        ylabel="Mean training objective",
+        title="Matched four-frame diagnostics",
+    )
+    ax.legend(fontsize=7)
+    return exported
+
+
+def plot_extended_training(ax):
+    rows = read_jsonl(RESULTS / "multiscene_extended/train.jsonl")
+    values = np.array(
+        [np.mean([p["mse"] for frame in row["records"] for p in frame["budgets"]]) for row in rows]
+    )
+    ax.plot([r["step"] for r in rows], values, alpha=0.25, label="Actual sampled clip MSE")
+    smooth = np.convolve(values, np.ones(30) / 30, mode="valid")
+    ax.plot([r["step"] for r in rows][29:], smooth, label="30-update moving mean")
+    ax.set(xlabel="Completed updates", ylabel="Image MSE", title="1080p multi-scene extension")
+    ax.legend(fontsize=7)
+
+
+def training_curves():
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    fig, axes = plt.subplots(1, 2, figsize=(10, 3.5), layout="constrained")
+    exported = plot_diagnostic_training(axes[0])
+    plot_extended_training(axes[1])
+    fig.savefig(RESULTS / "training_curves.png", dpi=180)
+    plt.close(fig)
+    csv_table(RESULTS / "training_curves.csv", exported)
 
 
 def main():
@@ -176,6 +254,7 @@ def main():
     csv_table(RESULTS / "vq_ablations.csv", ablations)
     csv_table(RESULTS / "rd_comparison.csv", rd)
     csv_table(RESULTS / "capacity_ablations.csv", capacity)
+    csv_table(RESULTS / "capacity_native1080.csv", read(RESULTS / "capacity_native1080.json", []))
     comparison = compare_native_rate(rd)
     write_json(RESULTS / "native_comparison.json", comparison)
     write_json(
@@ -189,6 +268,7 @@ def main():
         },
     )
     figures(ablations, rd)
+    training_curves()
     (RESULTS / "tables.md").write_text(
         markdown_table(
             ablations,
