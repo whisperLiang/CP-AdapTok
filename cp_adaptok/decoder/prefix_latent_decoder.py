@@ -5,9 +5,17 @@ from .token_grid_projector import TokenGridProjector
 
 
 class UnifiedPrefixLatentDecoder(nn.Module):
-    def __init__(self, dim=192, heads=6, n_max=2048, grid=(17, 30), precision="float64"):
+    def __init__(self, dim=192, heads=6, n_max=2048, grid=(17, 30), precision="float64",
+                 aggregation="global_softmax_v1", packet_tokens=128):
         super().__init__()
-        self.projector = TokenGridProjector(dim, heads, n_max, grid, precision)
+        if aggregation == "global_softmax_v1":
+            self.projector = TokenGridProjector(dim, heads, n_max, grid, precision)
+        elif aggregation == "shared_progressive_v2":
+            from .progressive_token_aggregator import SharedProgressiveTokenAggregator
+
+            self.projector = SharedProgressiveTokenAggregator(dim, heads, n_max, grid, precision, packet_tokens)
+        else:
+            raise ValueError("unknown token aggregation architecture")
         self.spatial = nn.Sequential(
             nn.Conv2d(dim, 128, 3, padding=1),
             nn.GELU(),

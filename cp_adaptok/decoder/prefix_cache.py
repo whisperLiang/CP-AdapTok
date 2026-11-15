@@ -34,3 +34,12 @@ class PrefixAttentionCache:
         self.maximum = maximum
         self.tokens += key.shape[-2]
         return self.weighted_value / self.exp_sum
+
+
+@dataclass
+class ProgressiveTokenCache:
+    """One receiver/frame owns this packet-ordered accumulation."""
+
+    query: torch.Tensor
+    accumulated: torch.Tensor
+    tokens: int = 0

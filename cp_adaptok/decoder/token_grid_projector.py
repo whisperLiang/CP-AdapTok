@@ -27,11 +27,12 @@ class TokenGridProjector(nn.Module):
     def _heads(self, x):
         return x.view(x.shape[0], x.shape[1], self.heads, self.dim // self.heads).transpose(1, 2)
 
-    def _keys_values(self, tokens, first=0):
+    def _keys_values(self, tokens, first=0, include_positions=True):
         end = first + tokens.shape[1]
         if end > self.n_max:
             raise ValueError("prefix exceeds model N_max")
-        k, v = self.kv(self.token_norm(tokens + self.positions[:, first:end])).chunk(2, dim=-1)
+        positioned = tokens + self.positions[:, first:end] if include_positions else tokens
+        k, v = self.kv(self.token_norm(positioned)).chunk(2, dim=-1)
         return self._heads(k), self._heads(v)
 
     def _finish(self, attention):
@@ -67,3 +68,8 @@ class TokenGridProjector(nn.Module):
             raise RuntimeError("prefix cache is inference only")
         k, v = self._keys_values(tokens, first_index)
         return self._finish(cache.append(k, v, first_index))
+
+    def decode_grid(self, cache):
+        if cache.tokens == 0:
+            raise ValueError("cannot decode an empty cache")
+        return self._finish(cache.weighted_value / cache.exp_sum)

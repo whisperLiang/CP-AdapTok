@@ -1,0 +1,7 @@
+extends: prefix_nested.yaml
+model:
+  token_aggregation: shared_progressive_v2
+paths:
+  checkpoint: null
+  output: results/prefix_utilization/decoder_ablations/research
+  save_checkpoint: results/prefix_utilization/decoder_ablations/research/latest.pt

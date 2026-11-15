@@ -214,20 +214,29 @@ def gain_metric_summary(values, sequence_values, metric, bootstrap_samples, seed
 
 
 def pair_gain(records, low, high, bootstrap_samples, seed):
-    grouped = {name: {} for name in ("psnr", "lpips", "dists")}
-    for frame in records:
-        prefixes = {row["tokens"]: row for row in frame["prefixes"]}
-        source = frame.get("source", {})
-        sequence = source.get("content_id", source.get("path", frame["sequence"]))
-        for name, values in grouped.items():
-            a, b = prefixes[low].get(name), prefixes[high].get(name)
-            if a is not None and b is not None:
-                values.setdefault(sequence, []).append(b - a)
+    grouped = {name: metric_deltas_by_sequence(records, low, high, name) for name in ("psnr", "lpips", "dists")}
     result = {"low": low, "high": high, "independent_sequences": len(grouped["psnr"])}
     for name, values in grouped.items():
         flat = [value for group in values.values() for value in group]
         result[name] = gain_metric_summary(flat, values, name, bootstrap_samples, seed) if flat else None
     return result
+
+
+def metric_deltas_by_sequence(records, low, high, name):
+    grouped = {}
+    for frame in records:
+        prefixes = {row["tokens"]: row for row in frame["prefixes"]}
+        source = frame.get("source", {})
+        sequence = source.get("content_id", source.get("path", frame["sequence"]))
+        a, b = prefixes[low].get(name), prefixes[high].get(name)
+        if a is not None and b is not None:
+            grouped.setdefault(sequence, []).append(b - a)
+    return grouped
+
+
+def frame_type_summaries(records, budgets):
+    return {kind: budget_summary([row for row in records if row["frame_type"] == kind], budgets)
+            for kind in ("I", "P")}
 
 
 def prefix_gain_summary(records, bootstrap_samples=2000, seed=19):
@@ -297,10 +306,7 @@ def evaluate_sequences(
         link_layer_overhead="not captured; codec records and actual TCP application framing counted",
         allocation=allocation_comparison(records, config.get("allocation", {}), model.config.k_ref),
         budget_summary=budget_summary(records, budgets),
-        budget_summary_by_frame_type={
-            frame_type: budget_summary([row for row in records if row["frame_type"] == frame_type], budgets)
-            for frame_type in ("I", "P")
-        },
+        budget_summary_by_frame_type=frame_type_summaries(records, budgets),
         prefix_gains=prefix_gain_summary(records),
         **_quality_summary(records, compare_cache),
     )

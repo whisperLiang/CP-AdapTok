@@ -51,6 +51,10 @@ MUTATIONS = [
         "test_adaptive_stream.py",
     ),
     ("sample temporal windows", "data.py", "sample_training_spec", "temporal", "test_temporal_sampling.py"),
+    ("one-sided progress gradient", "training.py", "progressive_penalty", "detach_low", "test_prefix_gradient.py"),
+    ("nested maximum endpoint", "tokenizer/prefix_masking.py", "sample_nested_budgets", "nested_max", "test_prefix_gradient.py"),
+    ("packet softmax axis", "decoder/progressive_token_aggregator.py", "_group_delta", "packet_axis", "test_progressive_aggregator.py"),
+    ("progressive append order", "decoder/progressive_token_aggregator.py", "append", "progressive_order", "test_progressive_aggregator.py"),
 ]
 
 
@@ -77,6 +81,7 @@ class Mutator(ast.NodeTransformer):
             "ack": "DisplayAck.from_bytes(wire) != expected",
             "expiry": "time.perf_counter()",
             "budget_type": "type(k) is not int",
+            "progressive_order": "first_index != cache.tokens",
         }
         if isinstance(child, ast.If) and self.kind in predicates:
             if predicates[self.kind] in ast.unparse(child.test):
@@ -109,6 +114,17 @@ class Mutator(ast.NodeTransformer):
         elif self.kind == "temporal" and isinstance(child, ast.Assign):
             if any(isinstance(target, ast.Name) and target.id == "offset" for target in child.targets):
                 child.value = ast.Constant(0)
+                self.changed = True
+        elif self.kind == "detach_low" and isinstance(child, ast.Attribute) and child.attr == "detach":
+            child.attr = "clone"
+            self.changed = True
+        elif self.kind == "nested_max" and isinstance(child, ast.Subscript):
+            if ast.unparse(child) == "candidates[-1]":
+                child.slice = ast.Constant(0)
+                self.changed = True
+        elif self.kind == "packet_axis" and isinstance(child, ast.Call):
+            if isinstance(child.func, ast.Attribute) and child.func.attr == "softmax":
+                child.args[0] = ast.Constant(-2)
                 self.changed = True
 
 

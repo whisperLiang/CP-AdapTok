@@ -13,6 +13,16 @@ from scripts.prepare_optimization_data import ARCHIVE_URL, verified_frame
 from scripts.remote_archive import RangeReader
 
 
+def candidate_paths(archive, name, frames):
+    prefix = f"DAVIS/JPEGImages/Full-Resolution/{name}/"
+    paths = sorted(p for p in archive.namelist() if p.startswith(prefix) and p.endswith(".jpg"))[:frames]
+    if len(paths) != frames:
+        return None
+    with Image.open(io.BytesIO(archive.read(paths[0]))) as image:
+        size = image.size
+    return paths if size == (1920, 1080) else None
+
+
 def extract_heldout(archive, output, sequences, frames):
     train = set(archive.read("DAVIS/ImageSets/2017/train.txt").decode().splitlines())
     validation = archive.read("DAVIS/ImageSets/2017/val.txt").decode().splitlines()
@@ -20,13 +30,8 @@ def extract_heldout(archive, output, sequences, frames):
         raise ValueError("official splits overlap")
     records = []
     for name in validation:
-        prefix = f"DAVIS/JPEGImages/Full-Resolution/{name}/"
-        paths = sorted(p for p in archive.namelist() if p.startswith(prefix) and p.endswith(".jpg"))[:frames]
-        if len(paths) < frames:
-            continue
-        with Image.open(io.BytesIO(archive.read(paths[0]))) as image:
-            size = image.size
-        if size != (1920, 1080):
+        paths = candidate_paths(archive, name, frames)
+        if paths is None:
             continue
         digest = hashlib.sha256()
         for path in paths:
@@ -36,7 +41,7 @@ def extract_heldout(archive, output, sequences, frames):
         records.append({"path": str(output / name), "frames": frames, "fps": 30,
                         "purpose": "heldout-official-DAVIS-val-native1080-nominal-fps",
                         "content_id": f"DAVIS2017:{name}", "sha256": digest.hexdigest(),
-                        "size": list(size), "official_split": "val"})
+                        "size": [1920, 1080], "official_split": "val"})
         print(f"heldout {name}: {frames} native 1080p frames", flush=True)
         if len(records) == sequences:
             break

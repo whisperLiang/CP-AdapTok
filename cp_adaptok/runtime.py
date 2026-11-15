@@ -4,7 +4,7 @@ import json
 import os
 import random
 import subprocess
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -218,6 +218,28 @@ def load_checkpoint(path):
     if checkpoint.get("format_version") != 1:
         raise ValueError("unsupported checkpoint format")
     return checkpoint
+
+
+def migrate_global_aggregation(model, artifact):
+    """Explicit research migration only. Standard loading remains strict and versioned."""
+    source_config = CodecConfig(**artifact["model_config"])
+    if source_config.token_aggregation != "global_softmax_v1" or model.config.token_aggregation != "shared_progressive_v2":
+        raise ValueError("migration requires explicit global-to-progressive architecture change")
+    if replace(model.config, token_aggregation="global_softmax_v1") != source_config:
+        raise ValueError("migration cannot alter any other architecture setting")
+    target, source = model.state_dict(), artifact["model"]
+    new = {"decoder.projector.gate.weight", "decoder.projector.gate.bias"}
+    if set(target) - set(source) != new or set(source) - set(target):
+        raise ValueError("unexpected missing or extra parameters in architecture migration")
+    for name, value in source.items():
+        if value.shape != target[name].shape or value.dtype != target[name].dtype:
+            raise ValueError(f"incompatible migration tensor: {name}")
+        target[name] = value
+    model.load_state_dict(target, strict=True)
+    model._model_id = None
+    return {"reused_parameters": sorted(source), "new_parameters": sorted(new),
+            "new_initialization": "zero gate weights/bias; alpha=1/sqrt(max_packet_groups)",
+            "optimizer_restored": False, "strict_load": True}
 
 
 def _load_requested_artifact(config, checkpoint_override):

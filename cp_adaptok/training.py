@@ -120,7 +120,8 @@ def frame_objective(model, encoded, rgb, budgets, config, perceptual, teacher_ta
             * prefix_distortion([F.mse_loss(y.float(), teacher_target.float()) for y in latents],
                                 budgets, settings, step)
         )
-    loss = loss + perceptual_objective(rgb, reconstructions, perceptual, weights)
+    loss = loss + perceptual_objective(rgb, reconstructions, perceptual, weights,
+                                       active_budget_weights(budgets, settings, step))
     monotonic = progressive_penalty(distortions, settings)
     estimated = (
         model.vq.expected_bits(encoded.features, model.entropy_model.logits, model.config.packet_tokens)
@@ -131,14 +132,19 @@ def frame_objective(model, encoded, rgb, budgets, config, perceptual, teacher_ta
     rate = torch.stack([estimated[:, :k].sum(-1).mean() / pixels for k in budgets]).mean()
     loss = loss + weights["monotonic"] * monotonic + weights["estimated_rate"] * rate
     records = objective_records(budgets, distortions, estimated, pixels, latents, teacher_target, loss)
-    budget_weights = active_budget_weights(budgets, settings, step)
+    annotate_prefix_records(records, distortions, encoded.vq.embeddings, model.config.packet_tokens,
+                            settings, step, monotonic, diagnostic)
+    return loss, records
+
+
+def annotate_prefix_records(records, distortions, embeddings, packet_tokens, settings, step, monotonic, diagnostic):
+    budget_weights = active_budget_weights([row["tokens"] for row in records], settings, step)
     for row, weight in zip(records, budget_weights):
         row.update(distortion_weight=weight, progressive_penalty=monotonic.detach().item())
     if diagnostic and settings.get("monitor_gradients", False):
-        gradients = prefix_gradient_records(distortions, encoded.vq.embeddings, model.config.packet_tokens)
+        gradients = prefix_gradient_records(distortions, embeddings, packet_tokens)
         for row, groups in zip(records, gradients):
             row["embedding_gradient_by_group"] = groups
-    return loss, records
 
 
 def objective_records(budgets, distortions, estimated, pixels, latents, teacher_target, loss):
@@ -159,14 +165,15 @@ def objective_records(budgets, distortions, estimated, pixels, latents, teacher_
     ]
 
 
-def perceptual_objective(rgb, reconstructions, perceptual, weights):
+def perceptual_objective(rgb, reconstructions, perceptual, weights, budget_weights=None):
     loss = rgb.new_zeros(())
+    budget_weights = [1.0] * len(reconstructions) if budget_weights is None else budget_weights
     for name, network in perceptual.items():
         values = [
             network(rgb * 2 - 1, rec * 2 - 1) if name == "lpips" else network(rgb, rec)
             for rec in reconstructions
         ]
-        loss = loss + weights[name] * torch.stack([v.mean() for v in values]).mean()
+        loss = loss + weights[name] * torch.stack([w * v.mean() for w, v in zip(budget_weights, values)]).mean()
     return loss
 
 
@@ -271,8 +278,8 @@ def sequence_length(training, step):
 
 
 def restore_training(model, optimizer, generator, artifact, stage):
-    if artifact is None or artifact["config"].get("stage") != stage:
-        raise ValueError("resume requires a checkpoint from the same training stage")
+    if artifact is None or "optimizer" not in artifact or artifact["config"].get("stage") != stage:
+        raise ValueError("resume requires a training checkpoint with optimizer from the same training stage")
     optimizer.load_state_dict(artifact["optimizer"])
     if "vq_training_state" in artifact:
         model.vq.restore_training_state(artifact["vq_training_state"])

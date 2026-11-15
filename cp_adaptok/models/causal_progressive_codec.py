@@ -32,6 +32,7 @@ class CodecConfig:
     attention_precision: str = "float64"
     state_fingerprint: str = "mixed_int64_v1"
     query_content_only: bool = False
+    token_aggregation: str = "global_softmax_v1"
 
     def __post_init__(self):
         object.__setattr__(self, "grid", tuple(self.grid))
@@ -57,6 +58,8 @@ class CodecConfig:
             raise ValueError("reference and maximum budgets must be packet aligned")
 
     def _validate_formats(self):
+        if self.token_aggregation not in ("global_softmax_v1", "shared_progressive_v2"):
+            raise ValueError("unsupported token aggregation architecture")
         if not 2 <= self.codebook_size <= 32768 or not 0 <= self.qp < 64:
             raise ValueError("invalid codebook/QP")
         if self.attention_precision not in ("float32", "float64"):
@@ -88,7 +91,8 @@ class CausalProgressiveCodec(nn.Module):
             c.n_max, c.dim, c.heads, c.layers, c.kv_grid, c.query_content_only
         )
         self.vq = AdapTokVQBottleneck(c.dim, c.codebook_size, c.embedding_dim)
-        self.decoder = UnifiedPrefixLatentDecoder(c.dim, c.heads, c.n_max, c.grid, c.attention_precision)
+        self.decoder = UnifiedPrefixLatentDecoder(c.dim, c.heads, c.n_max, c.grid, c.attention_precision,
+                                                 c.token_aggregation, c.packet_tokens)
         self.entropy_model = BlockEntropyModel(c.codebook_size, c.n_max // c.packet_tokens)
         self.scorer = CausalScorer(c.dim)
         self._model_id = None
@@ -108,6 +112,8 @@ class CausalProgressiveCodec(nn.Module):
             identity_config = asdict(self.config)
             if not self.config.query_content_only:
                 identity_config.pop("query_content_only")
+            if self.config.token_aggregation == "global_softmax_v1":
+                identity_config.pop("token_aggregation")
             digest = hashlib.sha256(json.dumps(identity_config, sort_keys=True).encode())
             for name, tensor in sorted(self.state_dict().items()):
                 digest.update(name.encode())

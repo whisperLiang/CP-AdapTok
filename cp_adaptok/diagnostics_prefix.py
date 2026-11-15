@@ -78,9 +78,9 @@ def intervene_ids(ids, donor, k_ref, mode, generator=None):
         order = torch.randperm(suffix.shape[1], generator=generator).to(ids.device)
         suffix.copy_(ids[:, k_ref:][:, order])
     elif mode == "constant":
-        suffix.fill_(int(ids[0, 0]))
+        suffix.zero_()  # Valid Code 0 is fixed across frames, never chosen using their content.
     elif mode == "all_constant":
-        changed.fill_(int(ids[0, 0]))
+        changed.zero_()
     elif mode != "original":
         raise ValueError("unknown diagnostic intervention")
     return changed
@@ -145,11 +145,32 @@ def global_attention_components(projector, tokens, packet_tokens, include_positi
 
 
 @torch.no_grad()
+def progressive_attention_components(projector, tokens, packet_tokens, include_positions=True):
+    cache = projector.new_cache(tokens.shape[0])
+    gates = []
+    for part in group_slices(tokens.shape[1], packet_tokens):
+        group = tokens[:, part]
+        gates.append(projector.group_gate(group, part.start, include_positions).mean().item())
+        delta = projector._group_delta(cache.query, group, part.start, include_positions)
+        cache.accumulated = cache.accumulated + delta
+    attended = cache.accumulated.transpose(1, 2).reshape(tokens.shape[0], -1, projector.dim)
+    readout = projector.out(attended.to(projector.query.dtype))
+    grid = projector._finish(cache.accumulated)
+    stats = {"query_norm": projector.query.norm().item(), "attention_readout_norm": readout.norm().item(),
+             "attention_to_query_ratio": (readout.norm() / projector.query.norm().clamp_min(1e-20)).item(),
+             "grid_norm": grid.norm().item(), "group_attention_mass": gates,
+             "per_grid_group_attention_mass": [gates] * (projector.grid[0] * projector.grid[1]),
+             "attention_semantics": "independent packet softmax; group masses are gates, not global probabilities"}
+    return stats, grid, readout
+
+
+@torch.no_grad()
 def attention_diagnostics(projector, embeddings, budgets, packet_tokens):
     rows, previous_grid, previous_readout, previous_k = [], None, None, 0
+    components = progressive_attention_components if hasattr(projector, "group_gate") else global_attention_components
     for k in budgets:
-        stats, grid, readout = global_attention_components(projector, embeddings[:, :k], packet_tokens)
-        _, no_position, _ = global_attention_components(projector, embeddings[:, :k], packet_tokens, False)
+        stats, grid, readout = components(projector, embeddings[:, :k], packet_tokens)
+        _, no_position, _ = components(projector, embeddings[:, :k], packet_tokens, False)
         stats.update(tokens=k, position_grid_rmse=rmse(grid, no_position),
                      new_group_attention_mass=sum(stats["group_attention_mass"][previous_k // packet_tokens:]))
         if previous_grid is not None:
@@ -209,6 +230,9 @@ def diagnose_clip(model, clip, budgets, metric_names=("psnr", "lpips", "dists"))
         common = {"frame": t, "frame_type": encoded.context.frame_type}
         stats = token_group_statistics(ids, content, model.decoder.projector.positions,
                                        model.config.packet_tokens, model.config.codebook_size, previous)
+        stats.update(pre_vq_distribution=distribution_stats(encoded.features),
+                     temporal_previous_frame_type=previous[2] if previous is not None else None,
+                     temporal_comparison_same_frame_type=previous is not None and previous[2] == encoded.context.frame_type)
         groups.append(dict(common, **stats))
         attention.append(dict(common, prefixes=attention_diagnostics(
             model.decoder.projector, content, budgets, model.config.packet_tokens)))
@@ -218,10 +242,11 @@ def diagnose_clip(model, clip, budgets, metric_names=("psnr", "lpips", "dists"))
         with torch.no_grad():
             _, feature = model.decode_ids(ids[:, :model.config.k_ref], encoded.context)
             state = encoded.context.commit(feature, ids_digest(ids[:, :model.config.k_ref])).detach()
-        previous = ids, content
+        previous = ids, content, encoded.context.frame_type
         print(f"diagnosed frame {t} ({encoded.context.frame_type})", flush=True)
     return {"per_group_statistics": groups, "attention_mass": attention,
             "gradient_by_group": gradients, "token_interventions": interventions,
             "metric_errors": metrics.errors,
             "semantics": {"one_base_commit_per_frame": True, "fixed_history_per_intervention": True,
+                          "fixed_constant_code_id": 0,
                           "donor_is_diagnostic_only": True, "interventions_are_valid_streams": False}}

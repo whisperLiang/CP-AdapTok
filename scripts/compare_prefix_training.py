@@ -9,7 +9,15 @@ import torch
 
 from cp_adaptok.data import read_video, sample_training_spec
 from cp_adaptok.evaluation import evaluate_sequences
-from cp_adaptok.runtime import build_model, load_checkpoint, read_config, resolve, seed_everything, write_json
+from cp_adaptok.runtime import (
+    build_model,
+    load_checkpoint,
+    migrate_global_aggregation,
+    read_config,
+    resolve,
+    seed_everything,
+    write_json,
+)
 from cp_adaptok.streaming.sender import ids_digest
 from cp_adaptok.training import run_training
 from scripts.run_optimization_experiments import diagnostic_reconstruction
@@ -74,7 +82,7 @@ def evaluate_variant(model, config, output):
     write_json(output / "entropy_calibration.json", calibration)
     # Retain a separate calibrated artifact; the representation optimizer is never resumed from it.
     artifact = load_checkpoint(config["paths"]["save_checkpoint"])
-    artifact.update(model=model.state_dict(), entropy_calibration=calibration)
+    artifact.update(model=model.state_dict(), entropy_calibration=calibration, inference_only=True)
     artifact.pop("optimizer")
     torch.save(artifact, output / "calibrated.pt")
     report = evaluate_sequences(model.eval(), config, split="validation",
@@ -85,7 +93,7 @@ def evaluate_variant(model, config, output):
     return {"elapsed_s": time.perf_counter() - started, "calibration": calibration}
 
 
-def run_variant(name, config, steps):
+def run_variant(name, config, steps, migration_source=None):
     output = resolve(config["paths"]["output"])
     output.mkdir(parents=True, exist_ok=True)
     checkpoint = resolve(config["paths"]["save_checkpoint"])
@@ -97,6 +105,9 @@ def run_variant(name, config, steps):
     resume = checkpoint.is_file()
     model, _, artifact = build_model(config, config["device"],
                                      checkpoint_override=str(checkpoint) if resume else None)
+    if migration_source and not resume:
+        migration = migrate_global_aggregation(model, load_checkpoint(migration_source))
+        write_json(output / "migration.json", dict(migration, source=migration_source))
     report = run_training(model, copy.deepcopy(config), steps, artifact, resume, status="trained")
     validation = evaluate_variant(model, config, output)
     summary = {"variant": name, "updates": report["completed_steps"], "training_elapsed_s": report["elapsed_s"],

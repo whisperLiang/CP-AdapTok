@@ -134,7 +134,7 @@ class CodecDecoder:
         if k < self.cache.tokens:
             raise StreamError("prefix cache cannot rewind; request the reference decoder explicitly")
         if k == self.cache.tokens:
-            return projector._finish(self.cache.weighted_value / self.cache.exp_sum)
+            return projector.decode_grid(self.cache)
         first = self.cache.tokens
         embeddings = self.model.vq.embed(self._ids(k)[:, first:])
         return projector.append(self.cache, embeddings, first)

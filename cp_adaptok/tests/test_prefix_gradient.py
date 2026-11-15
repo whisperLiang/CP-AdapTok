@@ -2,7 +2,7 @@ import pytest
 import torch
 
 from cp_adaptok.tokenizer.prefix_masking import sample_nested_budgets
-from cp_adaptok.training import prefix_distortion, progressive_penalty
+from cp_adaptok.training import prefix_distortion, progressive_penalty, validate_prefix_training
 
 
 def test_nested_sampling_always_supervises_base_max_and_an_intermediate():
@@ -41,3 +41,18 @@ def test_scheduled_weights_use_only_reached_training_stage():
     settings = {"weights": {8: 1, 32: 1}, "weight_schedule": [{"step": 10, "weights": {8: 0.5, 32: 1.5}}]}
     assert prefix_distortion(values, [8, 32], settings, 0) == 3.5
     assert prefix_distortion(values, [8, 32], settings, 10) == 4.25
+
+
+def test_invalid_prefix_training_is_rejected_before_updating_parameters(codec):
+    import copy
+
+    config = {"training": {"budgets": [8, 16, 32]},
+              "prefix_training": {"mode": "progressive_nested", "budgets": [8, 16, 32],
+                                  "weights": {8: 1, 16: 1, 32: 1}}}
+    validate_prefix_training(codec, config)
+    for change in ({"mode": "typo"}, {"budgets": [8, 32]}, {"always_include_base": False},
+                   {"margin": -0.1}, {"weights": {8: 1, 32: 1}}):
+        invalid = copy.deepcopy(config)
+        invalid["prefix_training"].update(change)
+        with pytest.raises(ValueError):
+            validate_prefix_training(codec, invalid)

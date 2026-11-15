@@ -335,6 +335,7 @@ def test_default_model_identity_remains_compatible_with_existing_packets(codec):
 
     config = asdict(codec.config)
     config.pop("query_content_only")
+    config.pop("token_aggregation")  # Default additions must not enter historical identity bytes.
     digest = hashlib.sha256(json.dumps(config, sort_keys=True).encode())
     for name, tensor in sorted(codec.state_dict().items()):
         digest.update(name.encode())
