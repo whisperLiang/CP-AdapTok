@@ -107,6 +107,7 @@ class CodecEncoder:
         base_ids = torch.tensor([local_stream.token_ids], device=self.model.device, dtype=torch.long)
         _, feature = self.model.decode_ids(base_ids, ctx)
         self.state = ctx.commit(feature, ids_digest(base_ids)).detach()
+        self.state.fingerprint()  # paid once in the measured state update, then safely cached
         self.base_commits += 1
         budgets = budgets or [c.k_ref, c.n_max]
         scores = self.model.scorer(encoded.features, budgets)[0].cpu().tolist()

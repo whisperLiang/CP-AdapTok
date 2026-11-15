@@ -1,4 +1,5 @@
 import random
+from dataclasses import replace
 
 import pytest
 
@@ -72,3 +73,28 @@ def test_cdf_exact_deterministic_positive():
     assert cdf == quantize_cdf([0, 1e-30, 100, 100])
     assert cdf[0] == 0 and cdf[-1] == 65536
     assert all(b > a for a, b in zip(cdf, cdf[1:]))
+
+
+def test_malformed_valid_crc_packets_leave_the_prefix_unchanged():
+    h = header()
+    entropy = ProgressiveEntropyCodec.uniform(32)
+    packets = packetize(h, [0] * h.n_max, entropy)
+    first = Packet.from_bytes(packets[0])
+    malformed = [
+        replace(first, frame_id=1),
+        replace(first, block_id=1),
+        replace(first, token_count=63),
+        replace(first, payload=b"x" * 200),
+        replace(first, payload=b"\x00" * 4),
+    ]
+    stream = ProgressivePacketStream(h, entropy)
+    for packet in malformed:
+        with pytest.raises(StreamError):
+            stream.append(packet.to_bytes())
+        assert stream.token_ids == []
+    for packet in packets:
+        stream.append(packet)
+    extra = Packet(h.frame_id, h.n_max, h.packet_tokens, 4, entropy.encode([0] * 64, 4))
+    with pytest.raises(StreamError, match="N_max"):
+        stream.append(extra.to_bytes())
+    assert stream.token_ids == [0] * h.n_max

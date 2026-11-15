@@ -52,16 +52,37 @@ class AdapTokVQBottleneck(nn.Module):
             raise ValueError("codebook index out of range")
         return self.project_out(F.embedding(ids, self.codebook_vectors()))
 
+    def project_features(self, features):
+        z = self.project_in(features.float())
+        return F.normalize(z, dim=-1) if self.normalized else z
+
+    @staticmethod
+    def distances(chunk, weight):
+        return chunk.square().sum(-1, keepdim=True) + weight.square().sum(-1) - 2 * chunk @ weight.T
+
+    def expected_bits(self, features, block_logits, packet_tokens, temperature=0.1):
+        """Differentiable rate surrogate only; measured bitrate always comes from rANS bytes."""
+        with torch.autocast(device_type=features.device.type, enabled=False):
+            z = self.project_features(features)
+            weight = self.codebook_vectors()
+            b, n, _ = z.shape
+            block = torch.arange(n, device=z.device).repeat(b) // packet_tokens
+            costs = -block_logits.float().log_softmax(-1) / torch.log(z.new_tensor(2.0))
+            output = []
+            for start in range(0, b * n, self.chunk_size):
+                chunk = z.flatten(0, 1)[start : start + self.chunk_size]
+                probabilities = (-self.distances(chunk, weight) / temperature).softmax(-1)
+                output.append((probabilities * costs[block[start : start + len(chunk)]]).sum(-1))
+            return torch.cat(output).view(b, n)
+
     def forward(self, features):
         with torch.autocast(device_type=features.device.type, enabled=False):
-            z = self.project_in(features.float())
-            z = F.normalize(z, dim=-1) if self.normalized else z
+            z = self.project_features(features)
             weight = self.codebook_vectors()
             flat = z.flatten(0, 1)
             indices = []
             for chunk in flat.split(self.chunk_size):
-                distance = chunk.square().sum(-1, keepdim=True) + weight.square().sum(-1)
-                distance = distance - 2 * chunk @ weight.T
+                distance = self.distances(chunk, weight)
                 indices.append(distance.argmin(-1))
             ids = torch.cat(indices).view(z.shape[:2])
             quantized = F.embedding(ids, weight)

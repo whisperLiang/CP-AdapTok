@@ -29,20 +29,38 @@ class CodecConfig:
     kv_grid: tuple = (17, 30)
     qp: int = 32
     attention_precision: str = "float64"
+    state_fingerprint: str = "mixed_int64_v1"
 
     def __post_init__(self):
         object.__setattr__(self, "grid", tuple(self.grid))
         object.__setattr__(self, "kv_grid", tuple(self.kv_grid))
-        if not (1 <= self.k_ref <= self.n_max <= 8192) or self.dim % self.heads:
+        self._validate_queries()
+        self._validate_stream_layout()
+        self._validate_formats()
+
+    def _validate_queries(self):
+        if min(self.dim, self.heads, self.layers, self.embedding_dim) <= 0 or self.dim % self.heads:
+            raise ValueError("invalid attention dimensions")
+        if len(self.grid) != 2 or len(self.kv_grid) != 2:
+            raise ValueError("grids must have two dimensions")
+        if min(*self.grid, *self.kv_grid) < 1:
+            raise ValueError("grid dimensions must be positive")
+
+    def _validate_stream_layout(self):
+        if not (1 <= self.k_ref <= self.n_max <= 8192):
             raise ValueError("invalid model configuration")
         if self.packet_tokens not in (8, 16, 32, 64, 128, 256):
             raise ValueError("invalid packet size")
         if self.n_max % self.packet_tokens or self.k_ref % self.packet_tokens:
             raise ValueError("reference and maximum budgets must be packet aligned")
+
+    def _validate_formats(self):
         if not 2 <= self.codebook_size <= 32768 or not 0 <= self.qp < 64:
             raise ValueError("invalid codebook/QP")
         if self.attention_precision not in ("float32", "float64"):
             raise ValueError("invalid attention accumulation precision")
+        if self.state_fingerprint != "mixed_int64_v1":
+            raise ValueError("unsupported state fingerprint algorithm")
 
 
 @dataclass

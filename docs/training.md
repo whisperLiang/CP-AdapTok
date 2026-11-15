@@ -15,7 +15,7 @@
 
 默认 crop 256，可设 512；smoke 明确改成 64 crop / 2 帧，关闭不可用的 native teacher 和感知训练 loss。结构模型 N_max=2048、dim=192、heads=6、VQ=8192×16 不缩小。每 100 步在独立 UVG 片段的完整 1080p 上验证；测试使用 BasketballDrive，训练使用 MCL-JCV01。划分检查拒绝跨 split 重复真实路径。仅使用短片不能证明数据集级泛化。
 
-loss 包含 RGB MSE、可选 LPIPS/DISTS、latent 蒸馏、VQ、熵模型估计率以及相邻采样前缀的软单调惩罚。估计率与真实字节码率分别记录。V1 的硬 VQ indices 估计率对概率表训练有效，对 argmin 没有 encoder 梯度；正式 Stage 4 的 bottleneck 码率微调还需校准可微 rate surrogate/交替优化，这是明确的研究未完成项。
+loss 包含 RGB MSE、可选 LPIPS/DISTS、latent 蒸馏、VQ、熵模型估计率以及相邻采样前缀的软单调惩罚。估计率与真实字节码率分别记录。Stage 3 用硬 indices 的交叉熵训练概率表；Stage 1/2/4 使用距离 soft assignment 对概率表的期望 bit cost，按各预算的像素数归一化，向 tokenizer/VQ 提供可微 rate 梯度。行为测试验证其将特征推向低成本码字，但真实 RD 校准仍需正式模型实验。
 
 bf16 autocast、梯度累积、梯度裁剪、seed、独立验证、OOM memory summary 均已接入。参考 feature 在 BPTT chunk 边界 detach；增强预算采样不决定 reference。原生 teacher 在 autocast 之外运行，以免隐式 bf16 干扰其与 CUDA Proxy 的核对。
 

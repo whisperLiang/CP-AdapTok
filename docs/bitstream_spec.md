@@ -13,10 +13,10 @@ Python struct：`>4sBBBBQqHHHHHHHH16s16s16s16s`，后跟 big-endian CRC32(4 byte
 | frame_id/reference_id | 8+8 | unsigned 当前帧、signed 参考帧；I ref=-1，P ref=frame_id−1 |
 | H/W/Hpad/Wpad | 2×4 | 原图和规范 padding |
 | N_max/K_ref/packet_tokens/codebook_size | 2×4 | 固定最大长度及 packet 对齐约束 |
-| model/codebook/entropy/reference fingerprints | 16×4 | SHA256 前 128 bit；包括整数 CDF、码本、实际参考 feature/memory |
+| model/codebook/entropy/reference fingerprints | 16×4 | 模型、码本、整数 CDF 的 SHA256 前128 bit；reference 是版本化整数状态摘要再取 SHA128 |
 | CRC32 | 4 | 以上全部字段 |
 
-wire_version 固定 rANS 算法、precision 和 packet 编码方式；codebook/entropy 的内容版本由各自摘要绑定。模型摘要包含结构配置、Attention precision 和全部 state_dict 参数。Header 不含本次“最终目标 K”，追加预算永远不需要重写它。
+wire_version 固定 rANS 算法、precision 和 packet 编码方式；codebook/entropy 的内容版本由各自摘要绑定。模型摘要包含结构配置、Attention precision、state_fingerprint=mixed_int64_v1 和全部 state_dict 参数。状态摘要检测意外漂移，不是密码学认证。Header 不含本次“最终目标 K”，追加预算永远不需要重写它。
 
 ## Packet：28-byte overhead + payload
 

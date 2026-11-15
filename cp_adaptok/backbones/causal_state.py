@@ -1,12 +1,32 @@
 import hashlib
 import struct
-from dataclasses import dataclass, replace
+from dataclasses import dataclass, field, replace
 
 import torch
 
 
 def tensor_digest(tensor):
-    return hashlib.sha256(tensor.detach().float().cpu().contiguous().numpy().tobytes()).hexdigest()[:32]
+    """Device-side, integer-only non-authenticating fingerprint; transfer just 16 bytes.
+
+    Mix float32 bit patterns with position, using modulo-2^64 integer arithmetic.
+    Integer reductions are order independent, unlike floating summary statistics.
+    This detects accidental drift; CRC/fingerprints are not cryptographic authentication.
+    """
+    words = tensor.detach().float().contiguous().view(torch.int32).flatten().to(torch.int64)
+    positions = torch.arange(1, words.numel() + 1, device=words.device, dtype=torch.int64)
+    mixed = words ^ (positions * -7046029254386353131)
+    mixed = (mixed ^ ((mixed >> 30) & ((1 << 34) - 1))) * -4658895280553007687
+    mixed = (mixed ^ ((mixed >> 27) & ((1 << 37) - 1))) * -7723592293110705685
+    mixed = mixed ^ ((mixed >> 31) & ((1 << 33) - 1))
+    summary = torch.stack((mixed.sum(), (mixed * (positions * 2 + 1)).sum()))
+    raw = summary.cpu().numpy().astype(">i8", copy=False).tobytes()
+    return hashlib.sha256(raw).hexdigest()[:32]
+
+
+def state_versions(tensors):
+    if any(tensor is not None and tensor.is_inference() for tensor in tensors):
+        return None
+    return tuple(None if tensor is None else tensor._version for tensor in tensors)
 
 
 @dataclass(frozen=True)
@@ -16,6 +36,8 @@ class CausalState:
     feature: torch.Tensor | None = None
     memory: torch.Tensor | None = None
     base_digest: str = ""
+    _cached_fingerprint: str | None = field(default=None, init=False, repr=False, compare=False)
+    _cached_versions: tuple | None = field(default=(), init=False, repr=False, compare=False)
 
     @classmethod
     def empty(cls, model_id):
@@ -24,6 +46,13 @@ class CausalState:
     def fingerprint(self):
         if self.frame_id == -1:
             return "00" * 16
+        versions = state_versions((self.feature, self.memory))
+        if (
+            versions is not None
+            and self._cached_fingerprint is not None
+            and self._cached_versions == versions
+        ):
+            return self._cached_fingerprint
         digest = hashlib.sha256(
             self.model_id.encode() + struct.pack(">q", self.frame_id) + self.base_digest.encode()
         )
@@ -33,14 +62,22 @@ class CausalState:
             else:
                 digest.update(str(tuple(tensor.shape)).encode())
                 digest.update(bytes.fromhex(tensor_digest(tensor)))
-        return digest.hexdigest()[:32]
+        result = digest.hexdigest()[:32]
+        object.__setattr__(self, "_cached_fingerprint", result)
+        object.__setattr__(self, "_cached_versions", versions)
+        return result
 
     def detach(self):
-        return replace(
+        detached = replace(
             self,
             feature=None if self.feature is None else self.feature.detach(),
             memory=None if self.memory is None else self.memory.detach(),
         )
+        versions = state_versions((self.feature, self.memory))
+        if versions is not None and self._cached_versions == versions:
+            object.__setattr__(detached, "_cached_fingerprint", self._cached_fingerprint)
+            object.__setattr__(detached, "_cached_versions", self._cached_versions)
+        return detached
 
 
 @dataclass

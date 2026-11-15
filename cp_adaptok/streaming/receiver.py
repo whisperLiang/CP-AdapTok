@@ -80,6 +80,7 @@ class CodecDecoder:
         ids = self._ids(self.model.config.k_ref)
         frame, feature = self.model.decode_ids(ids, self.context)
         self.state = self.context.commit(feature, ids_digest(ids)).detach()
+        self.state.fingerprint()
         self.base_commits += 1
         self.reconstructions += 1
         self.base_frame = self.display = frame

@@ -30,7 +30,9 @@ VQ 使用 normalized nearest-neighbor、确定性 argmin、16 维/8192 codebook 
 
 编码方先把整帧 IDs 分包为 rANS bytes，再实际解包基础前缀并本地重建。双方只提交 `ids[:K_ref]` 对应 feature，`commit` 对同一 context 只能执行一次。显示 `decode_base` 是幂等接口。P 帧 memory 来自上一基础状态；I 帧清空 memory 并从独立前缀生成参考。
 
-Header 检查 frame_id、reference_id、model/codebook/CDF ID、参考 feature/memory 的 SHA 指纹。增强包丢失后可正常推进；基础包缺失必须可靠恢复或显式 reset + I 帧。重复、乱序、损坏、跨帧包均显式拒绝。当前接收器只保留当前显示帧的 packet/cache，会拒绝已经切到下一帧后才抵达的旧增强包。
+Header 检查 frame_id、reference_id、model/codebook/CDF ID 和参考 feature/memory 指纹。状态指纹对每个 float32 bit pattern 及其位置做确定性的 int64 modulo-2^64 混合/双重累加，再以 SHA256 截取128 bit，只传回16-byte设备摘要，避免把大 feature/memory 搬到 CPU。它检测意外漂移，不提供攻击者认证。普通 Tensor 按 PyTorch mutation version 缓存结果；inference Tensor 没有 version counter，明确每次重新计算，不能隐藏原地修改。该算法版本绑定 model ID，不能混用不同配置的流。指纹计算在双方基础状态提交中计时，后续重复读取只命中合法缓存。
+
+增强包丢失后可正常推进；基础包缺失必须可靠恢复或显式 reset + I 帧。重复、乱序、损坏、跨帧包均显式拒绝。当前接收器只保留当前显示帧的 packet/cache，会拒绝已经切到下一帧后才抵达的旧增强包。
 
 `CodecEncoder.select_prefix` 只根据当前 Scorer 预测、实际前缀字节、带宽、排队字节与截止时间选择现有 packet slice。不能修改 IDs 或重排。Offline Oracle 采用整段实际失真的 byte-constrained MILP，明确是非因果对照，不进入主发送器。
 

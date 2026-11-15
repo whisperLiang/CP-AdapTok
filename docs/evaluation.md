@@ -8,7 +8,7 @@
 
 `benchmark --measure actual-bitstream` 包括最大序列编码、所有最大序列 packet 的 entropy encode、发送端基础 entropy decode/重建/提交、Scorer、接收端 entropy decode、冻结 context、基础及每个请求显示前缀的重建。模型初始化、指标和 PNG I/O 不进入这项 pipeline 时间；socket demo 的独立 FPS 则包括显示 PNG、socket 与 ACK 等待。明确区分两种口径。
 
-所有显示点都重跑完整后端，不能把 cache Attention 的更新速度当作完整 decoder 的增量执行。报告实际 reconstruction 次数、attention 更新、后续 latent/LD reconstruction 时间、总 pipeline P50/P95、稳态 P 帧 FPS、峰值显存。重建次数也包括预算列表未显式包含 K_ref 时仍必须进行的基础状态重建。
+所有显示点都重跑完整后端，不能把 cache Attention 的更新速度当作完整 decoder 的增量执行。报告实际 reconstruction 次数、attention 更新、后续 latent/LD reconstruction 时间、总 pipeline P50/P95、稳态 P 帧 FPS、峰值显存。重建次数也包括预算列表未显式包含 K_ref 时仍必须进行的基础状态重建。参考状态摘要在基础提交时真实计算并计时，不能靠测量区间外预计算提高 FPS。设备整数摘要与可失效缓存是已测试优化；不同算法配置由不同 model ID 绑定，旧实验文件不跨模型复用。
 
 默认测试 2 帧真实 1080p RGB，benchmark 可取同一原始 17 帧片段中的 8 帧。720p 需提供原生匹配视频；本次额外准备的 720p 是从真实 1080p 原图做中心裁剪，明确不称为独立原生 720p 数据集。可选 4K 因缺数据未测。保持分辨率检查，不能静默 resize 来满足 benchmark 参数。
 

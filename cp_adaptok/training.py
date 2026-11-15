@@ -57,9 +57,20 @@ def frame_objective(model, encoded, rgb, budgets, config, perceptual, teacher_ta
         )
     loss = loss + perceptual_objective(rgb, reconstructions, perceptual, weights)
     monotonic = torch.stack([F.relu(b - a) for a, b in zip(distortions, distortions[1:])]).mean()
-    rate = model.entropy_model.loss(encoded.vq.ids.detach(), model.config.packet_tokens)
+    estimated = model.vq.expected_bits(
+        encoded.features, model.entropy_model.logits, model.config.packet_tokens
+    )
+    pixels = rgb.shape[-1] * rgb.shape[-2]
+    rate = torch.stack([estimated[:, :k].sum(-1).mean() / pixels for k in budgets]).mean()
     loss = loss + weights["monotonic"] * monotonic + weights["estimated_rate"] * rate
-    records = [{"tokens": k, "mse": value.detach().item()} for k, value in zip(budgets, distortions)]
+    records = [
+        {
+            "tokens": k,
+            "mse": value.detach().item(),
+            "estimated_bpp": estimated[:, :k].sum().detach().item() / pixels,
+        }
+        for k, value in zip(budgets, distortions)
+    ]
     return loss, records
 
 

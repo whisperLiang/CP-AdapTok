@@ -25,3 +25,17 @@ def test_indices_select_the_nearest_known_code():
         vq.codebook.weight.copy_(torch.tensor([[-1.0, 0.0], [1.0, 0.0], [0.0, 1.0]]))
     result = vq(torch.tensor([[[0.9, 0.0], [0.0, 0.8], [-0.8, 0.0]]]))
     assert result.ids.tolist() == [[1, 2, 0]]
+
+
+def test_soft_rate_surrogate_provides_encoder_gradient_toward_cheaper_codes():
+    vq = AdapTokVQBottleneck(input_dim=2, codebook_size=2, embedding_dim=2, normalized=False)
+    with torch.no_grad():
+        vq.project_in.weight.copy_(torch.eye(2))
+        vq.project_in.bias.zero_()
+        vq.codebook.weight.copy_(torch.tensor([[-1.0, 0.0], [1.0, 0.0]]))
+    features = torch.tensor([[[0.1, 0.0], [0.1, 0.0]]], requires_grad=True)
+    logits = torch.log(torch.tensor([[0.9, 0.1]]))
+    bits = vq.expected_bits(features, logits, packet_tokens=2)
+    assert bits.shape == (1, 2)
+    bits.mean().backward()
+    assert features.grad[0, 0, 0] > 0

@@ -14,6 +14,7 @@ model:
   kv_grid: [17, 30]
   qp: 32
   attention_precision: float64
+  state_fingerprint: mixed_int64_v1
 paths:
   ld_checkpoint: checkpoints/cvpr2026_video_ld.pth.tar
   intra_checkpoint: checkpoints/cvpr2026_image.pth.tar
