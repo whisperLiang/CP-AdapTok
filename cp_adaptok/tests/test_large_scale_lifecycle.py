@@ -19,6 +19,56 @@ def test_yaml_integer_budget_keys_survive_json_checkpoint_roundtrip():
     assert stable_hash(config) == stable_hash(json.loads(json.dumps(config)))
 
 
+def test_recorded_configuration_reopens_but_changed_learning_rate_is_rejected(tmp_path):
+    from cp_adaptok.large_scale import reuse_phase_configuration
+
+    original = {"training": {"lr": 0.001}, "weights": {128: 1, 2048: 1}, "experiment": {}}
+    stored = copy.deepcopy(original)
+    path = tmp_path / "config.json"
+    reuse_phase_configuration(stored, path, 0.8)
+    path.write_text(json.dumps(stored))
+    same = copy.deepcopy(original)
+    reuse_phase_configuration(same, path, 0.8)
+    assert same["experiment"]["config_hash"] == stored["experiment"]["config_hash"]
+    with pytest.raises(MissingPrerequisites, match="headroom"):
+        reuse_phase_configuration(copy.deepcopy(original), path, 0.6)
+    changed = copy.deepcopy(original)
+    changed["training"]["lr"] = 0.002
+    with pytest.raises(ValueError, match="different phase"):
+        reuse_phase_configuration(changed, path, 0.8)
+
+
+def test_final_selection_is_sealed_before_test_and_cannot_change(tmp_path):
+    from cp_adaptok.large_scale_analysis import evaluate_experiment, seal_selection
+
+    manifest = {"run_id": "test", "manifest_hashes": {"test": "held-out"}}
+    directory = tmp_path / "test"
+    directory.mkdir()
+    selected = {"B0": {"checkpoint": "fixed", "sha256": "aaa"}}
+    seal_selection(tmp_path, manifest, selected)
+    seal_selection(tmp_path, manifest, selected)
+    assert manifest["final_test_frozen"]
+    with pytest.raises(ValueError, match="already sealed"):
+        seal_selection(tmp_path, manifest, {"B0": {"checkpoint": "different", "sha256": "bbb"}})
+    with pytest.raises(MissingPrerequisites, match="S1-S4"):
+        evaluate_experiment({"phases": {}}, {})
+
+
+def test_plot_curves_uses_real_recorded_values_and_delta(tmp_path):
+    from cp_adaptok.large_scale_analysis import delta_psnr_groups, plot_curves
+
+    train = {"run_id": "test", "phase": "s1", "branch": "B0", "step": "1", "loss": "0.1"}
+    append_csv(tmp_path / "training_metrics.csv", list(train), train)
+    validation = [{"run_id": "test", "phase": "s1", "branch": "B0", "tier": "quick", "step": "1",
+                   "tokens": str(k), "psnr": str(p)} for k, p in ((128, 20), (2048, 21))]
+    for row in validation:
+        append_csv(tmp_path / "validation_metrics.csv", list(row), row)
+    assert delta_psnr_groups(validation)["s1/B0 quick"] == [(1, 1)]
+    paths = plot_curves(tmp_path, "test")
+    assert len(paths) == 3
+    assert all(__import__("pathlib").Path(p).stat().st_size > 1000 for p in paths)
+
+
 def test_resource_limit_uses_current_free_memory_without_claiming_exclusivity():
     settings = {"gpu_min_free_mib": 40000, "gpu_reserve_mib": 8000}
     assert memory_fraction({"total_mib": 80000, "free_mib": 79000}, settings) == 0.8

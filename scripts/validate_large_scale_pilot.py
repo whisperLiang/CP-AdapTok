@@ -4,7 +4,7 @@ import argparse
 
 import torch
 
-from cp_adaptok.large_scale import experiment, gpu_snapshot, memory_fraction
+from cp_adaptok.large_scale import gpu_snapshot, memory_fraction, read_experiment
 from cp_adaptok.large_scale_validation import validate_checkpoint
 from cp_adaptok.runtime import build_model, read_config, resolve, seed_everything, write_json
 
@@ -15,7 +15,7 @@ def main():
     parser.add_argument("--frames", type=int, default=32)
     parser.add_argument("--sequences", type=int, default=2)
     args = parser.parse_args()
-    manifest, splits = experiment(args.run_id)
+    manifest, splits = read_experiment(args.run_id)
     output = resolve("results/large_scale") / manifest["run_id"] / "pilot" / "shared"
     config = read_config(output / "config.json")
     snapshot = gpu_snapshot()

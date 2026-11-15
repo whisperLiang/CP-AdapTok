@@ -68,6 +68,9 @@ def calibrate_entropy(model, config):
 def validation_specs(splits, tier, settings):
     rows = splits["test" if tier == "final" else "validation"]
     dimensions = settings.get("crop")
+    if tier != "quick" and dimensions:
+        # Report native1080 RD without averaging 4K and 1080p denominators together.
+        rows = [row for row in rows if row["resolution"] == list(reversed(dimensions))]
     specs = video_specs(rows, crop=dimensions, frames=settings["frames"])
     count = settings["sequences"]
     return specs[:count] if count is not None else specs

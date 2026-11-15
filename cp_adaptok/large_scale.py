@@ -127,6 +127,21 @@ def experiment_id(requested, current):
     return value
 
 
+def read_experiment(run_id=None):
+    """Readers never rewrite the training writer's active pointer or mutable manifest."""
+    common = read_config("configs/large_scale/common.yaml")
+    root = resolve(common["large_scale"]["output_root"])
+    run_id = experiment_id(run_id, read_json(root / "active_run.json", {}))
+    path = root / run_id / "experiment_manifest.json"
+    if not path.exists():
+        raise MissingPrerequisites([f"existing experiment {run_id}"])
+    manifest = read_json(path, {})
+    splits, hashes = load_manifests(manifest["manifest_directory"])
+    if hashes != manifest["manifest_hashes"]:
+        raise ValueError("experiment dataset manifests changed")
+    return manifest, splits
+
+
 def new_experiment(directory, common, run_id, seed):
     splits, hashes = load_manifests(common["large_scale"]["manifest_dir"])
     snapshot_dir = directory / "manifests"
@@ -241,26 +256,28 @@ def prepare_phase(config, splits, resume):
     fraction = memory_fraction(snapshot, settings)
     output = resolve(config["paths"]["output"])
     previous = output / "config.json"
-    if previous.is_file():
-        stored = read_json(previous, {})
-        config["gpu_memory_fraction"] = stored["gpu_memory_fraction"]
-        if fraction < stored["gpu_memory_fraction"]:
-            raise MissingPrerequisites(["GPU free-memory headroom fell below the recorded training limit"])
-    else:
-        config["gpu_memory_fraction"] = fraction
-    if previous.exists():
-        # Keep the original identity for checkpoints made before canonical budget-key hashing.
-        config["experiment"]["config_hash"] = stored["experiment"]["config_hash"]
-    else:
-        config["experiment"]["config_hash"] = stable_hash(config)
-    if previous.exists() and stable_hash(read_json(previous, {})) != stable_hash(config):
-        raise ValueError("refusing to overwrite a different phase configuration; choose a new run-id")
+    reuse_phase_configuration(config, previous, fraction)
     checkpoint = resolve(config["paths"]["save_checkpoint"])
     if checkpoint.exists() and not resume:
         raise ValueError("phase already has a checkpoint; use --resume or a new run-id")
     preflight(config, "train")
     write_json(previous, config)
     return output, checkpoint
+
+
+def reuse_phase_configuration(config, previous, fraction):
+    if previous.is_file():
+        stored = read_json(previous, {})
+        config["gpu_memory_fraction"] = stored["gpu_memory_fraction"]
+        if fraction < stored["gpu_memory_fraction"]:
+            raise MissingPrerequisites(["GPU free-memory headroom fell below the recorded training limit"])
+        # Keep the original identity for checkpoints made before canonical budget-key hashing.
+        config["experiment"]["config_hash"] = stored["experiment"]["config_hash"]
+        if stable_hash(stored) != stable_hash(config):
+            raise ValueError("refusing to overwrite a different phase configuration; choose a new run-id")
+    else:
+        config["gpu_memory_fraction"] = fraction
+        config["experiment"]["config_hash"] = stable_hash(config)
 
 
 def execute_phase(model, config, manifest, splits, artifact, actual_resume):

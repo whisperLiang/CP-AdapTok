@@ -26,8 +26,7 @@ RD_FIELDS = ["run_id", "branch", "phase", "split", "tokens", "psnr", "lpips", "d
              "i_psnr", "p_psnr", "model_id", "entropy_id"]
 
 
-def fit_auxiliary(manifest, splits, branch):
-    """Stage3 is retrained for this VQ, then calibrated independently of held-out content."""
+def auxiliary_configuration(manifest, splits, branch):
     root = resolve("results/large_scale") / manifest["run_id"]
     config = read_config(root / "s4" / branch / "config.json")
     source = resolve(config["paths"]["save_checkpoint"]).with_name("best_validation.pt")
@@ -48,15 +47,19 @@ def fit_auxiliary(manifest, splits, branch):
     config["experiment"].update(phase="stage3", target_updates=count, initial_checkpoint_sha256=file_hash(source))
     config["experiment"].pop("config_hash", None)
     config["experiment"]["config_hash"] = stable_hash(config)
-    previous = output / "config.json"
-    if previous.exists() and stable_hash(read_json(previous, {})) != stable_hash(config):
-        raise ValueError("Stage3 inputs changed; refuse to reuse previous auxiliary weights")
-    write_json(previous, config)
+    return config, output, target, count
+
+
+def fit_auxiliary(manifest, splits, branch):
+    """Stage3 is retrained for this VQ, then calibrated independently of held-out content."""
+    config, output, target, count = auxiliary_configuration(manifest, splits, branch)
+    check_auxiliary_configuration(output / "config.json", config)
+    resume = target.exists()
     seed_everything(config["seed"], config["device"], config["gpu_memory_fraction"])
-    model, _, artifact = build_model(config, config["device"], checkpoint_override=str(target) if target.exists() else None)
+    model, _, artifact = build_model(config, config["device"], checkpoint_override=str(target) if resume else None)
     observer = TrainingObserver(config, splits, manifest)
     try:
-        run_training(model, config, count, artifact, target.exists(), "trained", observer=observer)
+        run_training(model, config, count, artifact, resume, "trained", observer=observer)
         artifact = load_checkpoint(target)
         observer._phase_state(artifact["step"], artifact["training_state"], "complete", target)
         output_rd = output / "development_calibrated"
@@ -67,45 +70,21 @@ def fit_auxiliary(manifest, splits, branch):
         torch.cuda.empty_cache()
 
 
+def check_auxiliary_configuration(previous, config):
+    if previous.exists() and stable_hash(read_json(previous, {})) != stable_hash(config):
+        raise ValueError("Stage3 inputs changed; refuse to reuse previous auxiliary weights")
+    write_json(previous, config)
+
+
 def evaluate_experiment(manifest, splits):
-    if any(manifest["phases"].get(f"s4/{branch}", {}).get("status") != "complete" for branch in ("B0", "B1")):
-        raise MissingPrerequisites(["both B0 and B1 must finish S1-S4 before final model selection and testing"])
+    require_representation_complete(manifest)
     settings = read_config("configs/large_scale/common.yaml")["large_scale"]
     memory_fraction(gpu_snapshot(), settings)
     root = resolve(settings["output_root"])
-    selected = {}
-    for branch in ("B0", "B1"):
-        config, path, development = fit_auxiliary(manifest, splits, branch)
-        selected[branch] = {"checkpoint": str(path), "sha256": file_hash(path),
-                            "model_id": development["model_id"], "entropy_id": development["entropy_id"],
-                            "config": config}
-    seal_path = root / manifest["run_id"] / "final_selection.json"
-    seal = {"run_id": manifest["run_id"], "selected": selected,
-            "test_manifest_hash": manifest["manifest_hashes"]["test"],
-            "policy": "fixed before final test; final results must not tune this experiment"}
-    if seal_path.exists() and read_json(seal_path, {}) != seal:
-        raise ValueError("final selection is already sealed; cannot change it after reading final test")
-    write_json(seal_path, seal)
-    manifest["final_test_frozen"] = True
-    reports = {}
-    for branch, selected_model in selected.items():
-        output = root / manifest["run_id"] / "final_test" / branch
-        if (output / "validation.json").exists():
-            report = read_json(output / "validation.json", {})
-            if report["model_id"] != selected_model["model_id"]:
-                raise ValueError("saved final test has a different sealed model")
-        else:
-            config = selected_model["config"]
-            seed_everything(config["seed"], config["device"], config["gpu_memory_fraction"])
-            model, _, _ = build_model(config, config["device"], checkpoint_override=selected_model["checkpoint"])
-            try:
-                report = validate_checkpoint(model, config, splits, "final", output, selected_model["checkpoint"])
-            finally:
-                del model
-                torch.cuda.empty_cache()
-        if report["model_id"] != selected_model["model_id"] or report["entropy_id"] != selected_model["entropy_id"]:
-            raise ValueError("final stream model/probability identity differs from the sealed artifact")
-        reports[branch] = report
+    selected = select_auxiliary_models(manifest, splits)
+    seal_selection(root, manifest, selected)
+    reports = {branch: evaluate_selected_model(root, manifest, splits, branch, model)
+               for branch, model in selected.items()}
     comparison = compare_reports(reports["B0"], reports["B1"])
     write_json(root / manifest["run_id"] / "comparison.json", comparison)
     write_rd_table(root / "rd_comparison.csv", manifest["run_id"], reports)
@@ -113,6 +92,50 @@ def evaluate_experiment(manifest, splits):
     write_json(root / manifest["run_id"] / "experiment_manifest.json", manifest)
     write_json(root / "experiment_manifest.json", manifest)
     return build_report(manifest)
+
+
+def require_representation_complete(manifest):
+    if any(manifest["phases"].get(f"s4/{branch}", {}).get("status") != "complete" for branch in ("B0", "B1")):
+        raise MissingPrerequisites(["both B0 and B1 must finish S1-S4 before final model selection and testing"])
+
+
+def select_auxiliary_models(manifest, splits):
+    selected = {}
+    for branch in ("B0", "B1"):
+        config, path, development = fit_auxiliary(manifest, splits, branch)
+        selected[branch] = {"checkpoint": str(path), "sha256": file_hash(path),
+                            "model_id": development["model_id"], "entropy_id": development["entropy_id"],
+                            "config": config}
+    return selected
+
+
+def seal_selection(root, manifest, selected):
+    seal_path = root / manifest["run_id"] / "final_selection.json"
+    seal = {"run_id": manifest["run_id"], "selected": selected,
+            "test_manifest_hash": manifest["manifest_hashes"]["test"],
+            "policy": "fixed before final test; final results must not tune this experiment"}
+    if seal_path.exists() and stable_hash(read_json(seal_path, {})) != stable_hash(seal):
+        raise ValueError("final selection is already sealed; cannot change it after reading final test")
+    write_json(seal_path, seal)
+    manifest["final_test_frozen"] = True
+
+
+def evaluate_selected_model(root, manifest, splits, branch, selected_model):
+    output = root / manifest["run_id"] / "final_test" / branch
+    if (output / "validation.json").exists():
+        report = read_json(output / "validation.json", {})
+    else:
+        config = selected_model["config"]
+        seed_everything(config["seed"], config["device"], config["gpu_memory_fraction"])
+        model, _, _ = build_model(config, config["device"], checkpoint_override=selected_model["checkpoint"])
+        try:
+            report = validate_checkpoint(model, config, splits, "final", output, selected_model["checkpoint"])
+        finally:
+            del model
+            torch.cuda.empty_cache()
+    if report["model_id"] != selected_model["model_id"] or report["entropy_id"] != selected_model["entropy_id"]:
+        raise ValueError("final stream model/probability identity differs from the sealed artifact")
+    return report
 
 
 def compare_reports(baseline, nested, seed=47, bootstrap_samples=2000):
@@ -181,8 +204,6 @@ def plot_curves(root, run_id):
     import matplotlib
 
     matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-
     output = root / run_id / "figures"
     output.mkdir(parents=True, exist_ok=True)
     train = [r for r in csv_rows(root / "training_metrics.csv") if r["run_id"] == run_id]
@@ -198,24 +219,61 @@ def plot_curves(root, run_id):
         groups = curve_groups(rows, metric)
         if not groups:
             continue
-        fig, ax = plt.subplots(figsize=(7, 4))
-        for name, values in groups.items():
-            ax.plot([x for x, y in values], [y for x, y in values], label=name, linewidth=1)
-        ax.set(xlabel="Optimizer updates in phase", ylabel=label)
-        ax.legend(fontsize=6)
-        ax.grid(alpha=0.2)
-        fig.tight_layout()
-        path = output / f"{metric}.png"
-        fig.savefig(path, dpi=160)
-        plt.close(fig)
-        plots.append(str(path))
+        plots.append(save_plot(groups, "Optimizer updates in phase", label, output / f"{metric}.png"))
+    delta = delta_psnr_groups(validation)
+    if delta:
+        plots.append(save_plot(delta, "Optimizer updates in phase", "K2048 - K128 PSNR (dB)", output / "delta_psnr.png"))
+    plots.extend(pilot_diagnostic_plots(root, output))
     return plots
+
+
+def save_plot(groups, xlabel, ylabel, path):
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots(figsize=(7, 4))
+    for name, values in groups.items():
+        ax.plot([x for x, y in values], [y for x, y in values], label=name, linewidth=1, marker=".")
+    ax.set(xlabel=xlabel, ylabel=ylabel)
+    ax.ticklabel_format(useOffset=False)
+    ax.legend(fontsize=6)
+    ax.grid(alpha=0.2)
+    fig.tight_layout()
+    fig.savefig(path, dpi=160)
+    plt.close(fig)
+    return str(path)
+
+
+def delta_psnr_groups(rows):
+    points = {}
+    for row in rows:
+        key = row["phase"], row["branch"], row["tier"], int(row["step"])
+        points.setdefault(key, {})[int(row["tokens"])] = float(row["psnr"])
+    result = {}
+    for (phase, branch, tier, step), values in points.items():
+        if 128 in values and 2048 in values:
+            result.setdefault(f"{phase}/{branch} {tier}", []).append((step, values[2048] - values[128]))
+    return result
+
+
+def pilot_diagnostic_plots(root, output):
+    path = root / "pilot_20261116/pilot/shared/pilot_real_rd/validation.json"
+    if not path.exists():
+        return []
+    report = read_json(path, {})
+    rd = {"Pilot: native1080, 64 held-out frames": [(r["bpp"], r["psnr"]) for r in report["budget_summary"]]}
+    temporal = {}
+    for row in report["records"]:
+        for prefix in row["prefixes"]:
+            if prefix["tokens"] in (128, 2048):
+                temporal.setdefault(f"{row['sequence']} K{prefix['tokens']}", []).append((row["frame_id"], prefix["mse"]))
+    return [save_plot(rd, "Measured rANS bpp (includes headers/framing)", "PSNR (dB)", output / "pilot_real_rd.png"),
+            save_plot(temporal, "Frame in 32-frame GOP", "RGB MSE", output / "pilot_continuous_frame_error.png")]
 
 
 def curve_groups(rows, metric):
     groups = {}
     for row in rows:
-        if not row.get(metric):
+        if row.get(metric) in (None, ""):
             continue
         suffix = f" K{row['tokens']} {row['tier']}" if "tokens" in row else ""
         name = f"{row['phase']}/{row['branch']}{suffix}"
@@ -231,6 +289,9 @@ def build_report(manifest):
                "convergence_verified": False, "single_training_seed": True, "equal_flops_claim": False,
                "figures": plot_curves(root, manifest["run_id"]),
                "interpretation": "Actual completed updates only; a pilot is not sufficient large-scale training."}
+    summary["pilot_evidence"] = read_json(root / "pilot_20261116/pilot/shared/pilot_rd_summary.json", {})
+    summary["native1080_training_probe"] = read_json(root / "native1080_training_probe.json", {})
+    summary["resume_numerics"] = read_json(root / "native_resume_numeric/acceptance.json", {})
     if not (root / "rd_comparison.csv").exists():
         write_rd_table(root / "rd_comparison.csv", manifest["run_id"], {})
     write_json(root / "final_summary.json", summary)
@@ -252,6 +313,16 @@ def write_report_markdown(summary, root):
         rows.append(f"| {name} | {phase['status']} | {phase['completed_updates']}/{phase['target_updates']} | "
                     f"{stats.get('frames', 0)} | {stats.get('training_wall_s', 0):.1f} | "
                     f"{stats.get('distinct_videos', 0)} | {stats.get('distinct_windows', 0)} |")
+    pilot = summary.get("pilot_evidence", {})
+    native_rows = []
+    for i, value in enumerate(pilot.get("budget_summary", [])):
+        types = pilot["budget_summary_by_frame_type"]
+        native_rows.append(f"| {value['tokens']} | {value['psnr']:.6f} | {value['lpips']:.6f} | "
+                           f"{value['dists']:.6f} | {value['bpp']:.8f} | {types['I'][i]['psnr']:.4f} | "
+                           f"{types['P'][i]['psnr']:.4f} |")
+    checkpoints = "\n".join(f"- `{name}`：`{phase['checkpoint']}`" for name, phase in summary["phases"].items())
+    probe = summary.get("native1080_training_probe", {})
+    numeric = summary.get("resume_numerics", {})
     text = f"""# CP-AdapTok 大规模训练执行报告
 
 Git SHA：`{summary['git_sha']}`。实验：`{summary['run_id']}`。日期和日志时区：Asia/Shanghai。
@@ -279,6 +350,37 @@ Git SHA：`{summary['git_sha']}`。实验：`{summary['run_id']}`。日期和日
 各阶段状态、Checkpoint、上游版本、配置与模型结构哈希、验证记录见 `experiment_manifest.json`；
 所有优化器、Scheduler、四个 RNG 及累计训练状态保存到 `latest.pt`。
 原始逐帧训练日志为各阶段 `train.jsonl`，实际窗口和增强为 `samples.jsonl`。
+
+实际 Checkpoint：
+
+{checkpoints}
+
+本报告中的耗时为优化更新墙钟，不含所有数据准备、初始化和验证开销；这些会话耗时另存各阶段 `sessions/`。
+
+## 已完成 Pilot 与验收（不计入正式预算）
+
+`pilot_20261116` 实际完成 200 更新、1600 处理帧、6552 次 Decoder 调用，访问 60 条视频、379 个时间窗口。
+更新墙钟 125.574 秒，吞吐 12.742 帧/秒，GPU 峰值分配 5082.12 MiB。
+快速验证 K128 PSNR：步骤 100 为 12.8768 dB，步骤 200 为 12.8525 dB；确定性 Perplexity 为 27.524 → 15.346。
+最佳检查点为步骤 100。画质仍低，后续 Token 收益尚不稳定；这些值不能证明收敛或渐进压缩优势。
+
+在该最佳模型上，另用训练数据校准熵表，再对两条独立原生 1080p 视频各评估 32 帧：
+
+| Token | PSNR dB | LPIPS | DISTS | 真实 bpp | I PSNR | P PSNR |
+|---|---|---|---|---|---|---|
+{chr(10).join(native_rows)}
+
+这是 Pilot 的真实 rANS 诊断，包含 Frame Header、Packet 与 framing，旧 Scorer 尚未重训；
+不能当作正式 B0/B1 结果。增强预算未改变后续参考状态，64 帧发送/接收状态及追加缓存检查通过。
+正式 Full/Final 评估只汇总原始尺寸恰为 1920×1080 的序列，避免混入 4K bpp 分母。
+
+额外原生 1080p **真实训练**资源探测：`{json.dumps(probe, ensure_ascii=False)}`。
+该探测从已有权重开始，优化器为新建；若结果中 step 为 1，说明跨阶段未沿用旧动量步数。
+
+CUDA 恢复实测：数据、增强、预算、RNG、Scheduler 完全继续；最大模型权重差异
+`{numeric.get('max_model_absolute_difference')}`，检查容差 `{numeric.get('arithmetic_tolerance')}`。
+本机 `adaptive_avg_pool2d_backward_cuda` 不支持逐位确定性，严格探测失败日志保留，
+不承诺 CUDA 浮点更新逐位重放；CPU 端到端恢复测试要求逐位一致并通过。
 
 ## 固定计划与公平性
 
