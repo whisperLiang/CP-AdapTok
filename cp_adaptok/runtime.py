@@ -145,7 +145,7 @@ def metadata(config=None, status="unknown"):
         "torch": str(torch.__version__),
         "cuda": torch.version.cuda,
         "gpu_snapshot": gpu,
-        "gpu_shared": True,
+        "gpu_shared": "not assumed isolated; see gpu_snapshot and serial benchmark commands",
         "status": status,
         "config": config,
         "upstreams": json.loads((ROOT / "third_party/manifest.json").read_text()),

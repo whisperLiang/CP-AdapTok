@@ -43,8 +43,9 @@ def analyze_file(file, coverage):
     for node in ast.walk(ast.parse(source)):
         if isinstance(node, ast.FunctionDef):
             body = ast.Module(body=node.body, type_ignores=[])
-            tokens = [type(n).__name__ + ':' + str(getattr(n, 'attr', getattr(n, 'id', '')))
-                      for n in ast.walk(body)]
+            tokens = [
+                type(n).__name__ + ":" + str(getattr(n, "attr", getattr(n, "id", ""))) for n in ast.walk(body)
+            ]
             if node.end_lineno - node.lineno >= 7 and len(tokens) > 50:
                 functions.append((key, node.name, tokens))
     return rows, functions
@@ -63,7 +64,7 @@ def main():
     for i, a in enumerate(functions):
         for b in functions[i + 1 :]:
             matcher = SequenceMatcher(None, a[2], b[2], autojunk=False)
-            if matcher.real_quick_ratio() < .8 or matcher.quick_ratio() < .8:
+            if matcher.real_quick_ratio() < 0.8 or matcher.quick_ratio() < 0.8:
                 continue
             similarity = matcher.ratio()
             if similarity >= 0.8:

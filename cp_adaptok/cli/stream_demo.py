@@ -6,17 +6,14 @@ from concurrent.futures import ThreadPoolExecutor
 
 import torch
 
+from cp_adaptok.cli.common import add_inference_options, inference_config, load_inference
 from cp_adaptok.data import read_video, save_rgb
 from cp_adaptok.metrics import MetricSuite
 from cp_adaptok.runtime import (
     MissingPrerequisites,
-    build_model,
     metadata,
-    preflight,
-    read_config,
     report_missing,
     resolve,
-    seed_everything,
     write_json,
 )
 from cp_adaptok.streaming.receiver import CodecDecoder
@@ -146,23 +143,14 @@ def main(argv=None):
     parser = argparse.ArgumentParser(
         description="Append-only rANS over real loopback TCP; base display ACK gates enhancements"
     )
-    parser.add_argument("--config", default="configs/s1_tokenizer.yaml")
+    add_inference_options(parser, "results/stream_demo")
     parser.add_argument("--mode", choices=("localhost",), required=True)
     parser.add_argument("--progressive", action="store_true")
-    parser.add_argument("--allow-untrained", action="store_true")
-    parser.add_argument("--checkpoint")
-    parser.add_argument("--device")
     parser.add_argument("--max-frames", type=int)
-    parser.add_argument("--output", default="results/stream_demo")
     args = parser.parse_args(argv)
-    config = read_config(args.config)
-    if args.checkpoint:
-        config["paths"]["checkpoint"] = args.checkpoint
-    device = args.device or config["device"]
+    config = inference_config(args)
     try:
-        preflight(config, "stream_demo", args.allow_untrained)
-        seed_everything(config["seed"], device, config["gpu_memory_fraction"])
-        model, status, _ = build_model(config, device, args.allow_untrained, args.checkpoint)
+        model, status = load_inference(config, args, "stream_demo")
         report = metadata(config, status)
         report["artifact"] = model.artifact_provenance
         report.update(localhost_demo(model.eval(), config, args.progressive, args.output, args.max_frames))

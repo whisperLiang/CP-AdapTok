@@ -1,41 +1,29 @@
 import argparse
 
+from cp_adaptok.cli.common import add_inference_options, inference_config, load_inference
 from cp_adaptok.evaluation import benchmark_pipeline
 from cp_adaptok.runtime import (
     MissingPrerequisites,
-    build_model,
     metadata,
-    preflight,
-    read_config,
     report_missing,
     resolve,
-    seed_everything,
     write_json,
 )
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description="End-to-end actual-bitstream pipeline timing")
-    parser.add_argument("--config", default="configs/s1_tokenizer.yaml")
+    add_inference_options(parser, "results/benchmark")
     parser.add_argument("--resolution", nargs=2, type=int, default=[1920, 1080], metavar=("WIDTH", "HEIGHT"))
     parser.add_argument("--measure", choices=("actual-bitstream",), required=True)
     parser.add_argument("--frames", type=int, default=8)
     parser.add_argument("--warmup", type=int, default=2)
     parser.add_argument("--budgets", nargs="+", type=int)
-    parser.add_argument("--checkpoint")
-    parser.add_argument("--allow-untrained", action="store_true")
-    parser.add_argument("--device")
-    parser.add_argument("--output", default="results/benchmark")
     parser.add_argument("--reference-attention", action="store_true")
     args = parser.parse_args(argv)
-    config = read_config(args.config)
-    if args.checkpoint:
-        config["paths"]["checkpoint"] = args.checkpoint
-    device = args.device or config["device"]
+    config = inference_config(args)
     try:
-        preflight(config, "benchmark", args.allow_untrained)
-        seed_everything(config["seed"], device, config["gpu_memory_fraction"])
-        model, status, _ = build_model(config, device, args.allow_untrained, args.checkpoint)
+        model, status = load_inference(config, args, "benchmark")
         report = metadata(config, status)
         report["artifact"] = model.artifact_provenance
         report.update(
