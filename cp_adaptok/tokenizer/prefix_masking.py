@@ -11,7 +11,12 @@ def sample_budgets(candidates, generator, count=None):
     """Log-spaced candidates with twice the endpoint probability, without replacement."""
     if len(candidates) < 2 or sorted(set(candidates)) != list(candidates):
         raise ValueError("need at least two increasing unique budgets")
-    count = int(torch.randint(2, min(4, len(candidates)) + 1, (), generator=generator)) if count is None else count
-    weights = torch.ones(len(candidates)); weights[0] = weights[-1] = 2
+    count = (
+        int(torch.randint(2, min(4, len(candidates)) + 1, (), generator=generator))
+        if count is None
+        else count
+    )
+    weights = torch.ones(len(candidates))
+    weights[0] = weights[-1] = 2
     indices = torch.multinomial(weights, count, replacement=False, generator=generator).tolist()
     return sorted(candidates[i] for i in indices)

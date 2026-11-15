@@ -1,6 +1,6 @@
-from dataclasses import dataclass, replace
 import hashlib
 import struct
+from dataclasses import dataclass, replace
 
 import torch
 
@@ -24,7 +24,9 @@ class CausalState:
     def fingerprint(self):
         if self.frame_id == -1:
             return "00" * 16
-        digest = hashlib.sha256(self.model_id.encode() + struct.pack(">q", self.frame_id) + self.base_digest.encode())
+        digest = hashlib.sha256(
+            self.model_id.encode() + struct.pack(">q", self.frame_id) + self.base_digest.encode()
+        )
         for tensor in (self.feature, self.memory):
             if tensor is None:
                 digest.update(b"none")
@@ -34,8 +36,11 @@ class CausalState:
         return digest.hexdigest()[:32]
 
     def detach(self):
-        return replace(self, feature=None if self.feature is None else self.feature.detach(),
-                       memory=None if self.memory is None else self.memory.detach())
+        return replace(
+            self,
+            feature=None if self.feature is None else self.feature.detach(),
+            memory=None if self.memory is None else self.memory.detach(),
+        )
 
 
 @dataclass
@@ -60,5 +65,10 @@ class FrozenFrameContext:
         if self.committed:
             raise RuntimeError("base state already committed for this frame")
         self.committed = True
-        return CausalState(self.model_id, self.frame_id, feature,
-                           self.memory if self.frame_type == "P" else None, base_digest)
+        return CausalState(
+            self.model_id,
+            self.frame_id,
+            feature,
+            self.memory if self.frame_type == "P" else None,
+            base_digest,
+        )

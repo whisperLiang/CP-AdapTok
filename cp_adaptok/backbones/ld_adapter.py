@@ -34,7 +34,9 @@ class CausalLDBackboneAdapter(nn.Module):
         return self.model.encoder(x_t, frozen_context.context, self.quant("q_encoder", frozen_context.qp))
 
     def decode_latent(self, y_hat, frozen_context):
-        feature = self.model.decoder(y_hat, frozen_context.context, self.quant("q_decoder", frozen_context.qp))
+        feature = self.model.decoder(
+            y_hat, frozen_context.context, self.quant("q_decoder", frozen_context.qp)
+        )
         return self.model.recon_head(feature), feature
 
     @staticmethod

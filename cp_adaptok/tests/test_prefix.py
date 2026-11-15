@@ -38,7 +38,7 @@ def test_queries_are_one_ordered_full_sequence(n):
     y = torch.randn(1, 128, 4, 8)
     output = model(y, None, "P")
     assert output.shape == (1, n, 24)
-    assert torch.equal(output[:, :min(n, 128)], model(y, None, "P")[:, :min(n, 128)])
+    assert torch.equal(output[:, : min(n, 128)], model(y, None, "P")[:, : min(n, 128)])
 
 
 def test_budget_sampling_covers_endpoints():

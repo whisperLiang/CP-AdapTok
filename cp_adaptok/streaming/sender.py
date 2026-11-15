@@ -1,6 +1,6 @@
-from dataclasses import dataclass
 import hashlib
 import time
+from dataclasses import dataclass
 
 import torch
 
@@ -33,7 +33,7 @@ class EncodedPacketFrame:
     def prefix_packets(self, k):
         if k < self.header.k_ref or k > self.header.n_max or k % self.header.packet_tokens:
             raise ValueError("budget must be a valid packet-aligned prefix >= K_ref")
-        return self.packets[:k // self.header.packet_tokens]
+        return self.packets[: k // self.header.packet_tokens]
 
     def bytes_at(self, k, transport=True):
         packets = self.prefix_packets(k)
@@ -57,26 +57,52 @@ class CodecEncoder:
     def get_state(self):
         return self.state
 
+    def select_prefix(
+        self, encoded, bandwidth_bps, deadline_s, queued_bytes=0, buffer_s=0, mode="scorer", fixed_k=None
+    ):
+        from .online_allocator import OnlineTokenAllocator, RDPoint
+
+        points = [
+            RDPoint(k, encoded.bytes_at(k), prediction) for k, prediction in encoded.predicted_mse.items()
+        ]
+        allocator = OnlineTokenAllocator(self.model.config.k_ref)
+        point = allocator.allocate(points, bandwidth_bps, deadline_s, queued_bytes, buffer_s, mode, fixed_k)
+        return None if point is None else (point, encoded.prefix_packets(point.tokens))
+
     @torch.no_grad()
     def encode_frame(self, rgb, force_intra=False, budgets=None):
         synchronize(self.model.device)
         start = time.perf_counter()
         c = self.model.config
         frame_id = self.state.frame_id + 1
-        encoded = self.model.encode_full(rgb, self.state, frame_id,
-                                         force_intra or frame_id % self.intra_period == 0)
+        encoded = self.model.encode_full(
+            rgb, self.state, frame_id, force_intra or frame_id % self.intra_period == 0
+        )
         synchronize(self.model.device)
         network_end = time.perf_counter()
         ctx = encoded.context
-        header = FrameHeader(frame_id, ctx.frame_type, ctx.reference_id, ctx.height, ctx.width,
-                             c.n_max, c.k_ref, c.packet_tokens, c.codebook_size, self.model.model_id,
-                             self.codebook_id, self.entropy.entropy_id, ctx.reference_fingerprint, ctx.qp)
+        header = FrameHeader(
+            frame_id,
+            ctx.frame_type,
+            ctx.reference_id,
+            ctx.height,
+            ctx.width,
+            c.n_max,
+            c.k_ref,
+            c.packet_tokens,
+            c.codebook_size,
+            self.model.model_id,
+            self.codebook_id,
+            self.entropy.entropy_id,
+            ctx.reference_fingerprint,
+            ctx.qp,
+        )
         ids = encoded.vq.ids[0].cpu().tolist()
         packets = packetize(header, ids, self.entropy)
         entropy_end = time.perf_counter()
         # Sender reference also traverses serialized rANS packets, with no continuous side channel.
         local_stream = ProgressivePacketStream(header, self.entropy)
-        for packet in packets[:c.k_ref // c.packet_tokens]:
+        for packet in packets[: c.k_ref // c.packet_tokens]:
             local_stream.append(packet)
         base_ids = torch.tensor([local_stream.token_ids], device=self.model.device, dtype=torch.long)
         _, feature = self.model.decode_ids(base_ids, ctx)
@@ -86,8 +112,10 @@ class CodecEncoder:
         scores = self.model.scorer(encoded.features, budgets)[0].cpu().tolist()
         synchronize(self.model.device)
         end = time.perf_counter()
-        timing = {"encode_full_ms": (network_end - start) * 1000,
-                  "entropy_encode_packetize_ms": (entropy_end - network_end) * 1000,
-                  "sender_base_decode_state_scorer_ms": (end - entropy_end) * 1000,
-                  "encode_total_ms": (end - start) * 1000}
+        timing = {
+            "encode_full_ms": (network_end - start) * 1000,
+            "entropy_encode_packetize_ms": (entropy_end - network_end) * 1000,
+            "sender_base_decode_state_scorer_ms": (end - entropy_end) * 1000,
+            "encode_total_ms": (end - start) * 1000,
+        }
         return EncodedPacketFrame(header, packets, tuple(ids), timing, dict(zip(budgets, scores)))

@@ -39,13 +39,19 @@ class ProgressiveEntropyCodec:
             raise ValueError("no probability table")
         self.lookup = []
         for cdf in self.cdfs:
-            if cdf[0] != 0 or cdf[-1] != TOTAL or any(b <= a for a, b in zip(cdf, cdf[1:])):
-                raise ValueError("CDF must be strictly increasing from 0 to 65536")
+            self.validate_cdf(cdf)
             if len(cdf) != len(self.cdfs[0]):
                 raise ValueError("all blocks must use the same alphabet")
             self.lookup.append(np.repeat(np.arange(len(cdf) - 1), np.diff(cdf)).tolist())
         raw = np.asarray(self.cdfs, dtype=">u4").tobytes()
         self.entropy_id = hashlib.sha256(raw).hexdigest()[:32]
+
+    @staticmethod
+    def validate_cdf(cdf):
+        if not cdf:
+            raise ValueError("empty CDF")
+        if cdf[0] != 0 or cdf[-1] != TOTAL or any(b <= a for a, b in zip(cdf, cdf[1:])):
+            raise ValueError("CDF must be strictly increasing from 0 to 65536")
 
     @classmethod
     def uniform(cls, codebook_size):
@@ -98,6 +104,7 @@ class ProgressiveEntropyCodec:
 
 class BlockEntropyModel(nn.Module):
     """Lightweight learned, block-parallel probability model, with fixed integer export."""
+
     def __init__(self, codebook_size, blocks):
         super().__init__()
         self.logits = nn.Parameter(torch.zeros(blocks, codebook_size))

@@ -13,11 +13,11 @@ class LearnedQueryTokenizer(nn.Module):
         if dim % heads or n_max < 1 or layers < 1:
             raise ValueError("invalid query/attention configuration")
         self.n_max, self.dim, self.kv_grid = n_max, dim, tuple(kv_grid)
-        self.queries = nn.Parameter(torch.randn(1, n_max, dim) * .02)
+        self.queries = nn.Parameter(torch.randn(1, n_max, dim) * 0.02)
         self.input = nn.ModuleDict({"I": nn.Conv2d(256, dim, 1), "P": nn.Conv2d(128, dim, 1)})
         self.history = nn.Conv2d(256, dim, 1)
         self.high_frequency = nn.Conv2d(dim, dim, 3, padding=1, groups=dim)
-        self.path_embedding = nn.Parameter(torch.randn(2, 1, dim) * .02)
+        self.path_embedding = nn.Parameter(torch.randn(2, 1, dim) * 0.02)
         self.blocks = nn.ModuleList([CrossAttentionBlock(dim, heads) for _ in range(layers)])
         self.norm = nn.LayerNorm(dim)
 
@@ -30,8 +30,13 @@ class LearnedQueryTokenizer(nn.Module):
         detail = self.high_frequency(spatial - F.avg_pool2d(spatial, 3, stride=1, padding=1))
         high = F.adaptive_avg_pool2d(detail, grid)
         pos = spatial_positions(*grid, self.dim, y.device, spatial.dtype)
-        keys = torch.cat((low.flatten(2).transpose(1, 2) + pos + self.path_embedding[0],
-                          high.flatten(2).transpose(1, 2) + pos + self.path_embedding[1]), dim=1)
+        keys = torch.cat(
+            (
+                low.flatten(2).transpose(1, 2) + pos + self.path_embedding[0],
+                high.flatten(2).transpose(1, 2) + pos + self.path_embedding[1],
+            ),
+            dim=1,
+        )
         query = self.queries.expand(y.shape[0], -1, -1)
         for block in self.blocks:
             query = block(query, keys)

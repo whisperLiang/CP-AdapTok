@@ -13,12 +13,12 @@ def prepare_rgb(rgb):
     if not torch.isfinite(rgb).all() or rgb.min() < 0 or rgb.max() > 1:
         raise ValueError("RGB must be finite and in [0,1]")
     h, w = rgb.shape[-2:]
-    centered = rgb2ycbcr(rgb) - .5
+    centered = rgb2ycbcr(rgb) - 0.5
     return F.pad(centered, (0, (-w) % 64, 0, (-h) % 64), mode="replicate")
 
 
 def restore_rgb(centered_yuv, height, width):
-    return ycbcr2rgb((centered_yuv[..., :height, :width] + .5).clamp(0, 1)).clamp(0, 1)
+    return ycbcr2rgb((centered_yuv[..., :height, :width] + 0.5).clamp(0, 1)).clamp(0, 1)
 
 
 class IntraBackboneAdapter(nn.Module):
@@ -39,7 +39,7 @@ class IntraBackboneAdapter(nn.Module):
         return self.model.enc(x_t, self.quant("q_scale_enc", frozen_context.qp))
 
     def decode_latent(self, y_hat, frozen_context):
-        yuv = self.model.dec(y_hat, self.quant("q_scale_dec", frozen_context.qp)).clamp(-.5, .5)
+        yuv = self.model.dec(y_hat, self.quant("q_scale_dec", frozen_context.qp)).clamp(-0.5, 0.5)
         return yuv, F.pixel_unshuffle(yuv, 8)
 
     @staticmethod

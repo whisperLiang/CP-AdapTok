@@ -2,8 +2,8 @@ import pytest
 import torch
 
 from cp_adaptok.backbones.intra_adapter import prepare_rgb, restore_rgb
-from cp_adaptok.streaming.sender import CodecEncoder
 from cp_adaptok.streaming.receiver import CodecDecoder
+from cp_adaptok.streaming.sender import CodecEncoder
 
 
 def test_padding_crop_and_color_round_trip():
@@ -22,13 +22,15 @@ def test_padding_crop_and_color_round_trip():
 def test_actual_upstream_1080p_ip_bytes_path(codec):
     # Explicitly random weights: this checks shapes/bitstream/state, never trained quality.
     import copy
+
     model = copy.deepcopy(codec).cuda().eval()
     sender, receiver = CodecEncoder(model), CodecDecoder(model)
     for _ in range(2):
         frame = torch.rand(1, 3, 1080, 1920, device="cuda")
         encoded = sender.encode_frame(frame)
         receiver.start_frame(encoded.header_bytes)
-        receiver.append_packets(encoded.packets); receiver.decode_base()
+        receiver.append_packets(encoded.packets)
+        receiver.decode_base()
         output = receiver.decode_prefix(32, use_cache=True)
         assert output.shape == frame.shape and torch.isfinite(output).all()
         assert receiver.get_state().fingerprint() == sender.get_state().fingerprint()

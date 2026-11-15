@@ -7,11 +7,17 @@ from torch.nn import functional as F
 
 def spatial_positions(height, width, dim, device, dtype):
     """Analytic coordinates for spatial K/V, never an assignment of 1D queries to pixels."""
-    y, x = torch.meshgrid(torch.linspace(-1, 1, height, device=device),
-                          torch.linspace(-1, 1, width, device=device), indexing="ij")
+    y, x = torch.meshgrid(
+        torch.linspace(-1, 1, height, device=device),
+        torch.linspace(-1, 1, width, device=device),
+        indexing="ij",
+    )
     frequency = torch.arange(1, math.ceil(dim / 4) + 1, device=device) * math.pi
-    pos = torch.cat([(c.flatten()[:, None] * frequency).sin() for c in (y, x)] +
-                    [(c.flatten()[:, None] * frequency).cos() for c in (y, x)], dim=-1)
+    pos = torch.cat(
+        [(c.flatten()[:, None] * frequency).sin() for c in (y, x)]
+        + [(c.flatten()[:, None] * frequency).cos() for c in (y, x)],
+        dim=-1,
+    )
     return pos[:, :dim].to(dtype).unsqueeze(0)
 
 

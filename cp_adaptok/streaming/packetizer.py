@@ -1,4 +1,4 @@
-from .bitstream import Packet, StreamError, PACKET_HEADER_BYTES
+from .bitstream import PACKET_HEADER_BYTES, Packet, StreamError
 
 
 def packetize(header, ids, entropy):
@@ -7,8 +7,10 @@ def packetize(header, ids, entropy):
     packets = []
     for first in range(0, len(ids), header.packet_tokens):
         block = first // header.packet_tokens
-        part = ids[first:first + header.packet_tokens]
-        packets.append(Packet(header.frame_id, first, len(part), block, entropy.encode(part, block)).to_bytes())
+        part = ids[first : first + header.packet_tokens]
+        packets.append(
+            Packet(header.frame_id, first, len(part), block, entropy.encode(part, block)).to_bytes()
+        )
     return tuple(packets)
 
 
@@ -24,7 +26,9 @@ class ProgressivePacketStream:
         if packet.frame_id != h.frame_id:
             raise StreamError("packet belongs to a different frame")
         if packet.first_token_index != len(self.token_ids):
-            raise StreamError("packet must extend the contiguous prefix; missing, duplicate or out-of-order packet")
+            raise StreamError(
+                "packet must extend the contiguous prefix; missing, duplicate or out-of-order packet"
+            )
         if packet.block_id != len(self.packets) or packet.token_count != h.packet_tokens:
             raise StreamError("invalid packet block/count")
         if len(self.token_ids) + packet.token_count > h.n_max:
@@ -42,7 +46,11 @@ class ProgressivePacketStream:
         packet_bytes = sum(map(len, self.packets))
         frame_bytes = len(self.header.to_bytes())
         overhead = len(self.packets) * PACKET_HEADER_BYTES
-        return {"frame_header_bytes": frame_bytes, "packet_header_bytes": overhead,
-                "payload_bytes": packet_bytes - overhead, "side_info_bytes": 0,
-                "total_bytes": frame_bytes + packet_bytes,
-                "transport_framing_bytes": 4 * (len(self.packets) + 1)}
+        return {
+            "frame_header_bytes": frame_bytes,
+            "packet_header_bytes": overhead,
+            "payload_bytes": packet_bytes - overhead,
+            "side_info_bytes": 0,
+            "total_bytes": frame_bytes + packet_bytes,
+            "transport_framing_bytes": 4 * (len(self.packets) + 1),
+        }

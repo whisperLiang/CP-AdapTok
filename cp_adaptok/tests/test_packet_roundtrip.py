@@ -2,15 +2,26 @@ import random
 
 import pytest
 
-from cp_adaptok.streaming.entropy_codec import ProgressiveEntropyCodec, quantize_cdf
 from cp_adaptok.streaming.bitstream import FrameHeader, Packet, StreamError
+from cp_adaptok.streaming.entropy_codec import ProgressiveEntropyCodec, quantize_cdf
 from cp_adaptok.streaming.packetizer import ProgressivePacketStream, packetize
 
 
 def header():
-    return FrameHeader(frame_id=0, frame_type="I", reference_id=-1, height=1080, width=1920,
-                       n_max=256, k_ref=64, packet_tokens=64, codebook_size=32,
-                       model_id="11" * 16, codebook_id="22" * 16, entropy_id="33" * 16)
+    return FrameHeader(
+        frame_id=0,
+        frame_type="I",
+        reference_id=-1,
+        height=1080,
+        width=1920,
+        n_max=256,
+        k_ref=64,
+        packet_tokens=64,
+        codebook_size=32,
+        model_id="11" * 16,
+        codebook_id="22" * 16,
+        entropy_id="33" * 16,
+    )
 
 
 @pytest.mark.parametrize("size", [2, 32, 4096, 8192])
@@ -50,7 +61,8 @@ def test_append_only_integrity_and_order():
     assert (h.to_bytes() + b"".join(packets)).startswith(prefix)
     with pytest.raises(StreamError):
         stream.append(packets[-1])
-    broken = bytearray(packets[0]); broken[-1] ^= 1
+    broken = bytearray(packets[0])
+    broken[-1] ^= 1
     with pytest.raises(StreamError, match="CRC"):
         Packet.from_bytes(bytes(broken))
 

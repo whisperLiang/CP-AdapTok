@@ -7,13 +7,16 @@ from .prefix_cache import PrefixAttentionCache
 class TokenGridProjector(nn.Module):
     """A single fixed query cross-attention; all K/V projections are token independent."""
 
-    def __init__(self, dim=192, heads=6, n_max=2048, grid=(17, 30)):
+    def __init__(self, dim=192, heads=6, n_max=2048, grid=(17, 30), precision="float64"):
         super().__init__()
         if dim % heads:
             raise ValueError("dim must be divisible by heads")
         self.dim, self.heads, self.grid, self.n_max = dim, heads, tuple(grid), n_max
-        self.query = nn.Parameter(torch.randn(1, grid[0] * grid[1], dim) * .02)
-        self.positions = nn.Parameter(torch.randn(1, n_max, dim) * .02)
+        if precision not in ("float32", "float64"):
+            raise ValueError("unsupported attention accumulation precision")
+        self.accumulation_dtype = getattr(torch, precision)
+        self.query = nn.Parameter(torch.randn(1, grid[0] * grid[1], dim) * 0.02)
+        self.positions = nn.Parameter(torch.randn(1, n_max, dim) * 0.02)
         self.token_norm = nn.LayerNorm(dim)
         self.q = nn.Linear(dim, dim)
         self.kv = nn.Linear(dim, dim * 2)
@@ -43,17 +46,21 @@ class TokenGridProjector(nn.Module):
             raise ValueError("empty prefix")
         q = self._heads(self.q(self.query.expand(tokens.shape[0], -1, -1)))
         k, v = self._keys_values(tokens)
-        scores = q.float() @ k.float().transpose(-1, -2) / q.shape[-1] ** .5
+        scores = (
+            q.to(self.accumulation_dtype)
+            @ k.to(self.accumulation_dtype).transpose(-1, -2)
+            / q.shape[-1] ** 0.5
+        )
         if mask is not None:
             if mask.shape != tokens.shape[:2] or not mask.any(-1).all():
                 raise ValueError("mask must include at least one token per sample")
             scores = scores.masked_fill(~mask[:, None, None, :].bool(), -torch.inf)
-        attention = scores.softmax(-1) @ v.float()
+        attention = scores.softmax(-1) @ v.to(self.accumulation_dtype)
         return self._finish(attention)
 
     def new_cache(self, batch_size):
         q = self._heads(self.q(self.query.expand(batch_size, -1, -1)))
-        return PrefixAttentionCache.empty(q)
+        return PrefixAttentionCache.empty(q.to(self.accumulation_dtype))
 
     def append(self, cache, tokens, first_index):
         if self.training:

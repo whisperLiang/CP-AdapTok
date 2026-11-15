@@ -1,7 +1,7 @@
 import torch
 
-from cp_adaptok.streaming.sender import CodecEncoder
 from cp_adaptok.streaming.receiver import CodecDecoder
+from cp_adaptok.streaming.sender import CodecEncoder
 
 
 @torch.no_grad()

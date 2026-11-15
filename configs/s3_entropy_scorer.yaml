@@ -1,0 +1,10 @@
+extends: base.yaml
+stage: 3
+paths:
+  checkpoint: checkpoints/s2_causal/latest.pt
+  save_checkpoint: checkpoints/s3_entropy_scorer/latest.pt
+  output: results/s3_entropy_scorer
+loss:
+  latent: 0.0
+  lpips: 0.0
+  vq: 0.0

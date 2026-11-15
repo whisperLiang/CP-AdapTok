@@ -9,6 +9,7 @@ from .sender import ids_digest, synchronize
 
 class CodecDecoder:
     """Independent state owner. The only frame input is validated serialized bytes."""
+
     def __init__(self, model):
         if model.training:
             raise ValueError("stream decoder requires eval model")
@@ -29,11 +30,20 @@ class CodecDecoder:
     def start_frame(self, header_bytes):
         h = FrameHeader.from_bytes(header_bytes)
         c = self.model.config
-        expected = (self.model.model_id, self.codebook_id, self.entropy.entropy_id,
-                    c.n_max, c.k_ref, c.packet_tokens, c.codebook_size)
+        expected = (
+            self.model.model_id,
+            self.codebook_id,
+            self.entropy.entropy_id,
+            c.n_max,
+            c.k_ref,
+            c.packet_tokens,
+            c.codebook_size,
+        )
         actual = (h.model_id, h.codebook_id, h.entropy_id, h.n_max, h.k_ref, h.packet_tokens, h.codebook_size)
         if expected != actual:
-            raise StreamError("model_id/codebook/entropy/config mismatch; explicit resynchronization required")
+            raise StreamError(
+                "model_id/codebook/entropy/config mismatch; explicit resynchronization required"
+            )
         if self.context is not None and not self.context.committed:
             raise StreamError("previous reference prefix missing; recover or reset explicitly")
         if self.state.frame_id >= 0 and h.frame_id != self.state.frame_id + 1:
@@ -42,7 +52,9 @@ class CodecDecoder:
         if h.reference_fingerprint != fingerprint:
             raise StreamError("reference fingerprint mismatch; explicit resynchronization required")
         try:
-            self.context = self.model.begin_frame(self.state, h.frame_id, h.frame_type, h.height, h.width, h.qp)
+            self.context = self.model.begin_frame(
+                self.state, h.frame_id, h.frame_type, h.height, h.width, h.qp
+            )
         except ValueError as error:
             raise StreamError(str(error)) from error
         self.context_builds += 1
@@ -82,24 +94,11 @@ class CodecDecoder:
             raise StreamError("display prefix must be received, packet aligned, and at least K_ref")
         if k == h.k_ref:
             self.display = self.base_frame
-            self.last_timing_ms = {"attention_update_ms": 0., "latent_ld_reconstruction_ms": 0.}
+            self.last_timing_ms = {"attention_update_ms": 0.0, "latent_ld_reconstruction_ms": 0.0}
             return self.display
         synchronize(self.model.device)
         start = time.perf_counter()
-        projector = self.model.decoder.projector
-        if use_cache:
-            if self.cache is None:
-                self.cache = projector.new_cache(1)
-            if k < self.cache.tokens:
-                raise StreamError("prefix cache cannot rewind; request the reference decoder explicitly")
-            if k > self.cache.tokens:
-                first = self.cache.tokens
-                embeddings = self.model.vq.embed(self._ids(k)[:, first:])
-                grid = projector.append(self.cache, embeddings, first)
-            else:
-                grid = projector._finish(self.cache.weighted_value / self.cache.exp_sum)
-        else:
-            grid = projector(self.model.vq.embed(self._ids(k)))
+        grid = self._prefix_grid(k, use_cache)
         synchronize(self.model.device)
         attention_end = time.perf_counter()
         latent = self.model.decoder.from_grid(grid, self.context.latent_shape, self.context.frame_type)
@@ -107,9 +106,25 @@ class CodecDecoder:
         self.reconstructions += 1
         synchronize(self.model.device)
         end = time.perf_counter()
-        self.last_timing_ms = {"attention_update_ms": 1000 * (attention_end - start),
-                               "latent_ld_reconstruction_ms": 1000 * (end - attention_end)}
+        self.last_timing_ms = {
+            "attention_update_ms": 1000 * (attention_end - start),
+            "latent_ld_reconstruction_ms": 1000 * (end - attention_end),
+        }
         return self.display
+
+    def _prefix_grid(self, k, use_cache):
+        projector = self.model.decoder.projector
+        if not use_cache:
+            return projector(self.model.vq.embed(self._ids(k)))
+        if self.cache is None:
+            self.cache = projector.new_cache(1)
+        if k < self.cache.tokens:
+            raise StreamError("prefix cache cannot rewind; request the reference decoder explicitly")
+        if k == self.cache.tokens:
+            return projector._finish(self.cache.weighted_value / self.cache.exp_sum)
+        first = self.cache.tokens
+        embeddings = self.model.vq.embed(self._ids(k)[:, first:])
+        return projector.append(self.cache, embeddings, first)
 
     def get_display_frame(self):
         if self.display is None:

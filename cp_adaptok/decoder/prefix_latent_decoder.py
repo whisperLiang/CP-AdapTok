@@ -5,11 +5,15 @@ from .token_grid_projector import TokenGridProjector
 
 
 class UnifiedPrefixLatentDecoder(nn.Module):
-    def __init__(self, dim=192, heads=6, n_max=2048, grid=(17, 30)):
+    def __init__(self, dim=192, heads=6, n_max=2048, grid=(17, 30), precision="float64"):
         super().__init__()
-        self.projector = TokenGridProjector(dim, heads, n_max, grid)
-        self.spatial = nn.Sequential(nn.Conv2d(dim, 128, 3, padding=1), nn.GELU(),
-                                     nn.Conv2d(128, 128, 3, padding=1, groups=128), nn.GELU())
+        self.projector = TokenGridProjector(dim, heads, n_max, grid, precision)
+        self.spatial = nn.Sequential(
+            nn.Conv2d(dim, 128, 3, padding=1),
+            nn.GELU(),
+            nn.Conv2d(128, 128, 3, padding=1, groups=128),
+            nn.GELU(),
+        )
         self.outputs = nn.ModuleDict({"I": nn.Conv2d(128, 256, 1), "P": nn.Conv2d(128, 128, 1)})
 
     def from_grid(self, grid, latent_shape, frame_type):

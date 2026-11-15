@@ -2,9 +2,9 @@ import pytest
 import torch
 
 from cp_adaptok.backbones.causal_state import CausalState
-from cp_adaptok.streaming.sender import CodecEncoder
-from cp_adaptok.streaming.receiver import CodecDecoder
 from cp_adaptok.streaming.bitstream import StreamError
+from cp_adaptok.streaming.receiver import CodecDecoder
+from cp_adaptok.streaming.sender import CodecEncoder
 
 
 @torch.no_grad()
@@ -40,7 +40,8 @@ def test_base_loss_requires_recovery_model_mismatch_and_one_commit(codec):
         receiver.start_frame(second.header_bytes)
     receiver.reset()
     receiver.start_frame(first.header_bytes)
-    receiver.append_packets(first.packets[:1]); receiver.decode_base()
+    receiver.append_packets(first.packets[:1])
+    receiver.decode_base()
     receiver.decode_base()  # idempotent API; no second state commit
     assert receiver.base_commits == 1
     with pytest.raises(StreamError):

@@ -1,0 +1,9 @@
+extends: base.yaml
+stage: 4
+paths:
+  checkpoint: checkpoints/s3_entropy_scorer/latest.pt
+  save_checkpoint: checkpoints/s4_finetune/latest.pt
+  output: results/s4_finetune
+training:
+  lr: 0.00001
+  fine_tune: [ld.model.encoder, ld.model.decoder, ld.model.recon_head, intra.model.enc, intra.model.dec]

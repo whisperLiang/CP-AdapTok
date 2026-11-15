@@ -1,7 +1,7 @@
 """Deterministic VQ with AdapTok's normalized nearest-neighbor/straight-through losses."""
 
-from dataclasses import dataclass
 import hashlib
+from dataclasses import dataclass
 
 import torch
 from torch import nn
@@ -21,13 +21,20 @@ class VQResult:
 
 
 class AdapTokVQBottleneck(nn.Module):
-    def __init__(self, input_dim=192, codebook_size=8192, embedding_dim=16, commitment=.25,
-                 normalized=True, chunk_size=512):
+    def __init__(
+        self,
+        input_dim=192,
+        codebook_size=8192,
+        embedding_dim=16,
+        commitment=0.25,
+        normalized=True,
+        chunk_size=512,
+    ):
         super().__init__()
         self.project_in = nn.Linear(input_dim, embedding_dim)
         self.project_out = nn.Linear(embedding_dim, input_dim)
         self.codebook = nn.Embedding(codebook_size, embedding_dim)
-        nn.init.normal_(self.codebook.weight, std=embedding_dim ** -.5)
+        nn.init.normal_(self.codebook.weight, std=embedding_dim**-0.5)
         self.normalized, self.beta, self.chunk_size = normalized, commitment, chunk_size
 
     def codebook_vectors(self):
@@ -64,6 +71,13 @@ class AdapTokVQBottleneck(nn.Module):
             counts = torch.bincount(ids.flatten(), minlength=len(weight)).float()
             probabilities = counts / counts.sum()
             perplexity = (-(probabilities * probabilities.clamp_min(1e-12).log()).sum()).exp()
-            return VQResult(ids, self.project_out(straight_through), torch.ones_like(ids, dtype=torch.bool),
-                            self.beta * commitment + codebook_loss, commitment, codebook_loss,
-                            (counts > 0).float().mean(), perplexity)
+            return VQResult(
+                ids,
+                self.project_out(straight_through),
+                torch.ones_like(ids, dtype=torch.bool),
+                self.beta * commitment + codebook_loss,
+                commitment,
+                codebook_loss,
+                (counts > 0).float().mean(),
+                perplexity,
+            )

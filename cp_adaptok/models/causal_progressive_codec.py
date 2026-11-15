@@ -1,6 +1,6 @@
-from dataclasses import asdict, dataclass
 import hashlib
 import json
+from dataclasses import asdict, dataclass
 
 import torch
 from torch import nn
@@ -28,8 +28,11 @@ class CodecConfig:
     grid: tuple = (17, 30)
     kv_grid: tuple = (17, 30)
     qp: int = 32
+    attention_precision: str = "float64"
 
     def __post_init__(self):
+        object.__setattr__(self, "grid", tuple(self.grid))
+        object.__setattr__(self, "kv_grid", tuple(self.kv_grid))
         if not (1 <= self.k_ref <= self.n_max <= 8192) or self.dim % self.heads:
             raise ValueError("invalid model configuration")
         if self.packet_tokens not in (8, 16, 32, 64, 128, 256):
@@ -38,6 +41,8 @@ class CodecConfig:
             raise ValueError("reference and maximum budgets must be packet aligned")
         if not 2 <= self.codebook_size <= 32768 or not 0 <= self.qp < 64:
             raise ValueError("invalid codebook/QP")
+        if self.attention_precision not in ("float32", "float64"):
+            raise ValueError("invalid attention accumulation precision")
 
 
 @dataclass
@@ -61,7 +66,7 @@ class CausalProgressiveCodec(nn.Module):
         self.intra = IntraBackboneAdapter(intra_checkpoint)
         self.tokenizer = LearnedQueryTokenizer(c.n_max, c.dim, c.heads, c.layers, c.kv_grid)
         self.vq = AdapTokVQBottleneck(c.dim, c.codebook_size, c.embedding_dim)
-        self.decoder = UnifiedPrefixLatentDecoder(c.dim, c.heads, c.n_max, c.grid)
+        self.decoder = UnifiedPrefixLatentDecoder(c.dim, c.heads, c.n_max, c.grid, c.attention_precision)
         self.entropy_model = BlockEntropyModel(c.codebook_size, c.n_max // c.packet_tokens)
         self.scorer = CausalScorer(c.dim)
         self._model_id = None
@@ -73,7 +78,7 @@ class CausalProgressiveCodec(nn.Module):
 
     @property
     def device(self):
-        return self.tokenizer.queries.device
+        return self.vq.codebook.weight.device
 
     @property
     def model_id(self):
@@ -89,14 +94,17 @@ class CausalProgressiveCodec(nn.Module):
         self._model_id = None
         return self.model_id
 
-    def begin_frame(self, state, frame_id, frame_type, height, width, qp=None):
+    def _validate_frame_request(self, state, frame_id, frame_type, height, width, qp):
         if state.model_id != self.model_id:
             raise ValueError("model_id mismatch")
         if frame_type not in ("I", "P") or frame_id < 0:
             raise ValueError("invalid frame type/id")
-        qp = self.config.qp if qp is None else qp
         if not 0 <= qp < 64 or min(height, width) < 1 or max(height, width) > 8192:
             raise ValueError("invalid shape/QP")
+
+    def begin_frame(self, state, frame_id, frame_type, height, width, qp=None):
+        qp = self.config.qp if qp is None else qp
+        self._validate_frame_request(state, frame_id, frame_type, height, width, qp)
         if frame_type == "I":
             return FrozenFrameContext(self.model_id, frame_id, "I", height, width, qp, -1, "00" * 16)
         if frame_id != state.frame_id + 1:
@@ -105,8 +113,18 @@ class CausalProgressiveCodec(nn.Module):
         expected = ((height + 63) // 64 * 8, (width + 63) // 64 * 8)
         if context.shape[-2:] != expected:
             raise ValueError("resolution change requires an I frame reset")
-        return FrozenFrameContext(self.model_id, frame_id, "P", height, width, qp, state.frame_id,
-                                  state.fingerprint(), context, memory)
+        return FrozenFrameContext(
+            self.model_id,
+            frame_id,
+            "P",
+            height,
+            width,
+            qp,
+            state.frame_id,
+            state.fingerprint(),
+            context,
+            memory,
+        )
 
     def encode_full(self, rgb, state, frame_id=None, force_intra=False):
         if rgb.shape[0] != 1:

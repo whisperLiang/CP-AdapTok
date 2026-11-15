@@ -5,6 +5,7 @@ from torch.nn import functional as F
 
 class CausalScorer(nn.Module):
     """Current ordered tokens, prefix budget and past-state summary only."""
+
     def __init__(self, dim=192, hidden=128):
         super().__init__()
         self.project = nn.Linear(dim, hidden)
