@@ -5,7 +5,7 @@ import torch
 
 from cp_adaptok.diagnostics import distribution_stats
 from cp_adaptok.tokenizer.vector_quantizer import AdapTokVQBottleneck
-from cp_adaptok.training import teacher_applies, temperature_at
+from cp_adaptok.training import set_quantization_step, teacher_applies, temperature_at
 
 
 def test_distribution_distinguishes_token_collapse_from_layer_norm_variance():
@@ -77,6 +77,37 @@ def test_temperature_schedule_is_absolute_step_based_for_resume():
     assert temperature_at(config, 100) == pytest.approx(0.1)
     assert temperature_at(config, 300) == pytest.approx(0.1)
     assert 0.1 < temperature_at(config, 50) < 1
+
+
+def test_scorer_and_entropy_train_on_actual_deterministic_tokens(codec):
+    model = copy.deepcopy(codec).train()
+    config = {"stage": 3, "training": {"vq": {"strategy": "stochastic_training", "warmup_steps": 20}}}
+    set_quantization_step(model, config, 0)
+    assert model.vq.strategy == "deterministic_nearest"
+    features = torch.randn(1, 32, 24)
+    assert torch.equal(model.vq(features).ids, model.vq(features).ids)
+
+
+def test_full_codebook_sampling_matches_adaptok_cosine_softmax_distribution():
+    torch.manual_seed(41)
+    vq = AdapTokVQBottleneck(2, 2, 2)
+    with torch.no_grad():
+        vq.project_in.weight.copy_(torch.eye(2))
+        vq.project_in.bias.zero_()
+        vq.codebook.weight.copy_(torch.tensor([[1.0, 0.0], [-1.0, 0.0]]))
+    vq.set_training_policy("stochastic_training", temperature=1.0)
+    ids = vq(torch.tensor([[[1.0, 0.0]]]).expand(1, 12000, 2)).ids
+    actual = (ids == 0).float().mean().item()
+    expected = torch.tensor([1.0, -1.0]).softmax(0)[0].item()
+    assert abs(actual - expected) < 0.015
+
+
+def test_query_initialization_rescales_the_learned_residual_without_spatial_assignment(codec):
+    model = copy.deepcopy(codec).train()
+    before = model.tokenizer.queries.detach().clone()
+    model.tokenizer.rescale_initial_queries(50.0)
+    torch.testing.assert_close(model.tokenizer.queries, before * 50, rtol=0, atol=0)
+    assert model.tokenizer.queries.shape == before.shape
 
 
 def test_dead_codes_wait_for_a_window_and_clear_only_replaced_optimizer_rows():

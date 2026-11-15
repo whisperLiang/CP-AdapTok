@@ -20,6 +20,20 @@ class LearnedQueryTokenizer(nn.Module):
         self.path_embedding = nn.Parameter(torch.randn(2, 1, dim) * 0.02)
         self.blocks = nn.ModuleList([CrossAttentionBlock(dim, heads) for _ in range(layers)])
         self.norm = nn.LayerNorm(dim)
+        self.diagnostics_enabled = False
+        self.last_diagnostics = {}
+
+    @torch.no_grad()
+    def rescale_initial_queries(self, scale):
+        if not self.training or scale <= 0:
+            raise ValueError("query rescaling is a positive, training-only initialization")
+        self.queries.mul_(scale)
+
+    def record_distribution(self, name, query):
+        if self.diagnostics_enabled and self.training:
+            from cp_adaptok.diagnostics import distribution_stats
+
+            self.last_diagnostics[name] = distribution_stats(query)
 
     def forward(self, y, context, frame_type):
         spatial = self.input[frame_type](y)
@@ -38,6 +52,10 @@ class LearnedQueryTokenizer(nn.Module):
             dim=1,
         )
         query = self.queries.expand(y.shape[0], -1, -1)
-        for block in self.blocks:
+        self.record_distribution("initial_query", query)
+        for index, block in enumerate(self.blocks):
             query = block(query, keys)
-        return self.norm(query)
+            self.record_distribution(f"block_{index}", query)
+        output = self.norm(query)
+        self.record_distribution("output", output)
+        return output

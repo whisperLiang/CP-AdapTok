@@ -1,7 +1,9 @@
 """Seekable HTTP range reader for extracting a bounded subset of a large ZIP."""
 
 import io
+import time
 import urllib.request
+from urllib.error import URLError
 
 
 class RangeReader(io.RawIOBase):
@@ -31,15 +33,25 @@ class RangeReader(io.RawIOBase):
             start = index * self.block_size
             end = min(start + self.block_size, self.size) - 1
             request = urllib.request.Request(self.url, headers={"Range": f"bytes={start}-{end}"})
-            with self.opener.open(request, timeout=90) as response:
-                if response.status != 206:
-                    raise ValueError("archive server did not honor HTTP Range")
-                data = response.read()
-                if len(data) != end - start + 1:
-                    raise ValueError("incomplete archive range")
+            data = self._fetch(request, end - start + 1)
             self.downloaded += len(data)
             self.blocks[index] = data
         return self.blocks[index]
+
+    def _fetch(self, request, expected):
+        for attempt in range(4):
+            try:
+                with self.opener.open(request, timeout=60) as response:
+                    if response.status != 206:
+                        raise ValueError("archive server did not honor HTTP Range")
+                    data = response.read()
+                    if len(data) != expected:
+                        raise ValueError("incomplete archive range")
+                    return data
+            except (URLError, OSError):
+                if attempt == 3:
+                    raise
+                time.sleep(1)
 
     def read(self, size=-1):
         size = self.size - self.position if size < 0 else min(size, self.size - self.position)

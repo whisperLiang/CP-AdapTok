@@ -1,6 +1,7 @@
 """Import original DAVIS train sequences, keeping official validation/test separate."""
 
 import argparse
+import binascii
 import hashlib
 import io
 import zipfile
@@ -38,20 +39,22 @@ def main():
             paths = sorted(p for p in z.namelist() if p.startswith(prefix) and p.endswith(".jpg"))
             if len(paths) < args.frames:
                 continue
-            image = Image.open(io.BytesIO(z.read(paths[0])))
+            first = output / "train" / name / Path(paths[0]).name
+            image = Image.open(first) if first.exists() else Image.open(io.BytesIO(z.read(paths[0])))
             width, height = image.size
             if height < 1080 or width < 1920:
                 continue
             digest = hashlib.sha256()
             for path in paths[: args.frames]:
-                data = z.read(path)
-                digest.update(data)
                 destination = output / "train" / name / Path(path).name
                 destination.parent.mkdir(parents=True, exist_ok=True)
+                data = destination.read_bytes() if destination.exists() else z.read(path)
+                info = z.getinfo(path)
+                if len(data) != info.file_size or binascii.crc32(data) != info.CRC:
+                    raise ValueError(f"archive CRC differs: {destination}")
+                digest.update(data)
                 if not destination.exists():
                     destination.write_bytes(data)
-                elif destination.read_bytes() != data:
-                    raise ValueError(f"existing source differs: {destination}")
             records.append(
                 {
                     "path": str((output / "train" / name).relative_to(resolve("."))),

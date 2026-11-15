@@ -31,14 +31,32 @@ def experiment_config(name, root, steps):
         vq["initialization"] = {"clips": 8, "max_samples": 32768, "iterations": 10}
     if name == "annealed":
         vq.update(temperature=1.0, final_temperature=0.05, anneal_steps=steps)
+    if name.startswith("balanced_"):
+        train["query_initialization_scale"] = 50.0
+        vq.update(
+            strategy="stochastic_training",
+            temperature=0.1,
+            final_temperature=0.01,
+            anneal_steps=steps,
+            warmup_steps=steps // 2,
+            initialization={"clips": 8, "max_samples": 32768, "iterations": 10},
+        )
+        if name == "balanced_continuous":
+            vq.clear()
+            vq["strategy"] = "continuous"
+        if name == "balanced_decoder":
+            train["grid_query_initialization_scale"] = 50.0
     if name == "dead":
         vq["dead_codes"] = {"window": 20, "max_replacements": 16, "min_count": 1}
     if name.startswith("teacher_"):
+        train["query_initialization_scale"] = 50.0
         vq.update(
             strategy="stochastic_training",
             warmup_steps=steps // 2,
             initialization={"clips": 8, "max_samples": 32768, "iterations": 10},
             temperature=0.1,
+            final_temperature=0.01,
+            anneal_steps=steps,
         )
         policy = {"teacher_T1": "legacy_ip", "teacher_T2": "i_only", "teacher_T3": "none"}[name]
         config["teacher"] = {"policy": policy, "allow_mismatched_p_diagnostic": policy == "legacy_ip"}

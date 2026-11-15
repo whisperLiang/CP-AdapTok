@@ -31,7 +31,8 @@ def main():
     state, records = model.empty_state(), []
     for t, frame in enumerate(clip):
         rgb = frame[None].to(model.device)
-        target = teacher.target(rgb)
+        native_reconstruction, _, _ = teacher.native.round_trip(rgb)
+        target = teacher.native.decoded_latent().detach().float()
         encoded = model.encode_full(rgb, state)
         adapter = model.intra if t == 0 else model.ld
         cp_y = adapter.encode_latent(prepare_rgb(rgb), encoded.context)
@@ -39,6 +40,8 @@ def main():
             encoded.vq.embeddings, encoded.context.latent_shape, encoded.context.frame_type
         )
         rec, _ = model.decode_latent(latent, encoded.context)
+        with torch.no_grad():
+            native_target_in_cp_context, _ = model.decode_latent(target, encoded.context)
         image_loss, teacher_loss = F.mse_loss(rec, rgb), F.mse_loss(latent, target)
         row = {
             "frame": t,
@@ -46,6 +49,9 @@ def main():
             "native_target": distribution_stats(target.flatten(2).transpose(1, 2)),
             "cp_encoder": distribution_stats(cp_y.flatten(2).transpose(1, 2)),
             "native_target_cp_encoder_mse": F.mse_loss(target, cp_y).item(),
+            "native_target_decode_cp_vs_native_mse": F.mse_loss(
+                native_target_in_cp_context, native_reconstruction
+            ).item(),
             "teacher_mse": teacher_loss.item(),
             "reconstruction_mse": image_loss.item(),
             "reference_conditions_match": t == 0,

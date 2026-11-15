@@ -53,14 +53,14 @@ def read_video(spec, crop=None, generator=None):
         frames = [rgb_tensor(cv2.imread(str(path))) for path in selected]
     else:
         frames = read_container(spec)
-    return crop_video(torch.stack(frames), crop, generator)
+    return crop_video(torch.stack(frames), crop, generator).float() / 255
 
 
 def rgb_tensor(bgr):
     if bgr is None:
         raise ValueError("unreadable video frame")
     rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
-    return torch.from_numpy(np.ascontiguousarray(rgb)).permute(2, 0, 1).float() / 255
+    return torch.from_numpy(np.ascontiguousarray(rgb)).permute(2, 0, 1)
 
 
 def read_container(spec):

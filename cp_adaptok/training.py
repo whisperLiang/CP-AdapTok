@@ -126,13 +126,16 @@ def train_clip(model, clip, budgets, config, perceptual, teacher, gradient_scale
     state = model.empty_state()
     chunk_losses, records = [], []
     tbptt = config["training"]["tbptt"]
+    model.tokenizer.diagnostics_enabled = diagnostic
     if teacher:
         teacher.reset()
     for t, original in enumerate(clip):
         rgb = original[None].to(model.device)
         frame_type = "I" if t == 0 else "P"
-        supervised = teacher is not None and teacher_applies(
-            config.get("teacher", {"policy": "i_only"}), frame_type
+        supervised = (
+            teacher is not None
+            and config["loss"].get("latent", 0) > 0
+            and teacher_applies(config.get("teacher", {"policy": "i_only"}), frame_type)
         )
         target = teacher.target(rgb) if supervised else None
         with torch.autocast(
@@ -172,6 +175,9 @@ def train_clip(model, clip, budgets, config, perceptual, teacher, gradient_scale
                 else None,
                 "frame_type": frame_type,
                 "diagnostics": vq_diagnostics(model.vq, encoded.features, encoded.vq) if diagnostic else None,
+                "query_layers": dict(model.tokenizer.last_diagnostics)
+                if diagnostic and hasattr(model.tokenizer, "last_diagnostics")
+                else None,
             }
         )
         if (t + 1) % tbptt == 0 or t == len(clip) - 1:
@@ -226,6 +232,8 @@ def set_quantization_step(model, config, step):
     strategy = settings.get("strategy", "deterministic_nearest")
     if step < settings.get("warmup_steps", 0):
         strategy = "continuous"
+    if config.get("stage") == 3:
+        strategy = "deterministic_nearest"
     model.vq.set_training_policy(strategy, temperature_at(settings, step), settings.get("sampling_topk", 0))
 
 
@@ -357,6 +365,11 @@ def run_training(model, config, max_steps, artifact=None, resume=False, status="
     checkpoint = resolve(config["paths"]["save_checkpoint"])
     perceptual, teacher = perceptual_networks(config, model.device), make_teacher(model, config)
     model.train()
+    if not resume and train.get("query_initialization_scale"):
+        model.tokenizer.rescale_initial_queries(train["query_initialization_scale"])
+    if not resume and train.get("grid_query_initialization_scale"):
+        with torch.no_grad():
+            model.decoder.projector.query.mul_(train["grid_query_initialization_scale"])
     _ = model.model_id
     # Auxiliary constructors consume RNG while initializing their pretrained weights.
     step = restore_training(model, optimizer, generator, artifact, config["stage"]) if resume else 0

@@ -1,0 +1,30 @@
+extends: pretrained_s1.yaml
+gpu_memory_fraction: 0.8
+training:
+  crop: 512
+  sequence_length: 4
+  tbptt: 2
+  lr: 0.0003
+  query_initialization_scale: 50.0
+  grid_query_initialization_scale: 50.0
+  save_every: 100
+  validate_every: 1000000
+  diagnostic_every: 100
+  vq:
+    strategy: stochastic_training
+    temperature: 0.1
+    final_temperature: 0.01
+    anneal_steps: 500
+    warmup_steps: 100
+    initialization: {clips: 8, max_samples: 32768, iterations: 10}
+teacher:
+  policy: i_only
+  decay_steps: 500
+  minimum_factor: 0.1
+loss:
+  lpips: 0.0
+  estimated_rate: 0.0
+paths:
+  checkpoint: null
+  save_checkpoint: checkpoints/optimization_20261115/d1/latest.pt
+  output: results/optimization_20261115/d1
