@@ -8,12 +8,14 @@ import numpy as np
 
 @dataclass(frozen=True)
 class RDPoint:
+    """A prefix and its byte cost; retaining an already delivered prefix costs zero."""
+
     tokens: int
     bytes: int
     distortion: float
 
     def __post_init__(self):
-        if self.tokens <= 0 or self.bytes <= 0 or not math.isfinite(self.distortion) or self.distortion < 0:
+        if self.tokens <= 0 or self.bytes < 0 or not math.isfinite(self.distortion) or self.distortion < 0:
             raise ValueError("invalid rate-distortion point")
 
 

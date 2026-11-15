@@ -40,6 +40,24 @@ class EncodedPacketFrame:
         framing = 4 * (len(packets) + 1) if transport else 0
         return len(self.header_bytes) + sum(map(len, packets)) + framing
 
+    def allocation_points(self, delivered_tokens=0, control_bytes=0):
+        from .online_allocator import RDPoint
+
+        if not isinstance(control_bytes, int) or control_bytes < 0:
+            raise ValueError("invalid control overhead")
+        if delivered_tokens:
+            self.prefix_packets(delivered_tokens)
+            if delivered_tokens not in self.predicted_mse:
+                raise ValueError("delivered prefix must have a causal quality prediction")
+        delivered_bytes = self.bytes_at(delivered_tokens) if delivered_tokens else 0
+        return [
+            RDPoint(
+                k, self.bytes_at(k) - delivered_bytes + (control_bytes if k > delivered_tokens else 0), mse
+            )
+            for k, mse in self.predicted_mse.items()
+            if k >= delivered_tokens
+        ]
+
 
 class CodecEncoder:
     def __init__(self, model, intra_period=32):
@@ -70,18 +88,9 @@ class CodecEncoder:
         control_bytes=0,
     ):
         """Select immutable packets; RDPoint.bytes charges only the remaining wire bytes."""
-        from .online_allocator import OnlineTokenAllocator, RDPoint
+        from .online_allocator import OnlineTokenAllocator
 
-        if delivered_tokens:
-            validate_budgets([delivered_tokens], self.model.config)
-        if delivered_tokens < 0 or not isinstance(control_bytes, int) or control_bytes < 0:
-            raise ValueError("invalid delivered prefix/control overhead")
-        delivered_bytes = encoded.bytes_at(delivered_tokens) if delivered_tokens else 0
-        points = [
-            RDPoint(k, encoded.bytes_at(k) - delivered_bytes + control_bytes, prediction)
-            for k, prediction in encoded.predicted_mse.items()
-            if k > delivered_tokens
-        ]
+        points = encoded.allocation_points(delivered_tokens, control_bytes)
         allocator = OnlineTokenAllocator(self.model.config.k_ref)
         point = allocator.allocate(points, bandwidth_bps, deadline_s, queued_bytes, buffer_s, mode, fixed_k)
         return None if point is None else (point, encoded.prefix_packets(point.tokens))

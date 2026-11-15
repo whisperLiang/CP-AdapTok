@@ -30,6 +30,23 @@ Python struct：`>4sQIHHI`，后跟 payload，再跟 CRC32(header+payload)。依
 
 ## TCP 应用 framing
 
-每 record 为 `uint32 length + FrameHeader/Packet`，大小上限1 MiB，接收精确循环支持任意 socket 分片和 EOF 检查。localhost demo 在基础图已经写出之后发 DISPLAYED ACK，发送方收到 ACK 才继续发增强包。ACK record 另行统计控制开销。TCP/IP/链路头未抓包统计。
+每 record 为 `uint32 length + body`，大小上限1 MiB，接收精确循环支持任意 socket 分片和 EOF 检查。body 可以是原样的 FrameHeader/Packet，也可以是下面的会话控制。TCP/IP/链路头未抓包统计。
 
 文件 `.cpat` 保存同样的 length-framed records；最大预算文件的旧前缀 bytes 完全不变。会话当前帧的 base 不完整时，不允许无声推进下一 P 帧；显式 reset 后可从任意新的 I 帧同步。
+
+## Socket session v1 控制记录
+
+会话控制不改 CPAT/CPTK 内容，也不在 FrameHeader 中加入最终 K。接收端通过线路上的请求确定何时显示，无需预先共享发送预算。
+
+| 控制 | struct / body | 含义 | 含 CRC 与 framing 字节 |
+|---|---|---|---:|
+| CPDS | `>4sBQH` + CRC32 | magic、version=1、frame_id、已收到的显示前缀 K | 23 |
+| CPAK | `>4sBQH16s` + CRC32 | 同一帧/K、基础参考状态摘要；显示完成后才发送 | 39 |
+| CPEN | `CPEN` + version=1 + CRC32 | 正常结束，当前基础包和显示必须完整 | 13 |
+| CPED | `CPED` + version=1 + CRC32 | 正常结束确认 | 13 |
+
+每次显示请求/确认共62 bytes。ACK 的帧号、K、CRC、参考摘要全部验证；重复/回退请求、请求未收到的 Token、未知控制、基础包缺失时的结束均失败。默认 PNG 模式先落盘再 ACK；`--no-save-frames` 表示重建 Tensor 已准备好并转到 CPU，没有实际显示设备的扫描延迟。
+
+在线会话先可靠发送并确认 K_ref。之后只用当前帧预测、当前带宽和绝对播放截止时间，按尚未发送的 packet bytes + 62-byte 控制开销选择增强前缀。保留已显示基础图的增量成本为0；Scorer 可在增强预测更差时保持基础图。每个增强包发送前重新检查剩余时间，基础包即使迟到也不跳过。`--enhancement-cap` 仅截去尚未发送的连续增强尾部，不能冒充 TCP 层随机丢包。
+
+带宽 profile 在当前帧才提供一个值，最后一个值保持；应用层按 record bytes 延迟交付，ACK 路径未限速。该实验是可靠 TCP 上的应用层整形与尾部舍弃，未模拟内核拥塞控制、重传或真实无线丢包。源视频时间轴不会随处理速度放慢，基础包阻塞产生的后续积压和迟到会如实记录。
