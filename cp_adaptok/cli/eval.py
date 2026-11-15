@@ -18,21 +18,27 @@ from cp_adaptok.runtime import (
 from cp_adaptok.streaming.sender import synchronize
 
 
-def native_evaluation(config, device):
+def native_evaluation(config, device, output=None, split=None, metric_names=None, max_frames=None):
     from cp_adaptok.backbones.native_baseline import NativeBaseline
 
     paths = config["paths"]
     model = NativeBaseline(
         resolve(paths["ld_checkpoint"]), resolve(paths["intra_checkpoint"]), device, config["model"]["qp"]
     )
-    suite = MetricSuite(device)
+    suite = MetricSuite(device, metric_names or config["evaluation"]["metrics"])
+    split = split or config["evaluation"]["split"]
     rows = []
-    for spec in config["data"][config["evaluation"]["split"]]:
+    for configured_spec in config["data"][split]:
+        spec = dict(configured_spec)
+        if max_frames:
+            spec["frames"] = min(spec["frames"], max_frames)
         model.reset()
         rows.extend(native_sequence(model, suite, spec, device))
     report = metadata(config, "native_pretrained")
-    report.update(real_entropy_bitstream=True, records=rows, metric_errors=suite.errors)
-    write_json(resolve(paths["output"]) / "native_baseline.json", report)
+    report.update(real_entropy_bitstream=True, split=split, records=rows, metric_errors=suite.errors)
+    target = resolve(output or paths["output"]) / "native_baseline.json"
+    write_json(target, report)
+    print({"report": str(target), "frames": len(rows), "status": report["status"]})
     return report
 
 
@@ -79,7 +85,7 @@ def main(argv=None):
         preflight(config, "baseline" if args.baseline else "eval", args.allow_untrained)
         seed_everything(config["seed"], device, config["gpu_memory_fraction"])
         if args.baseline:
-            native_evaluation(config, device)
+            native_evaluation(config, device, output, args.split, args.metrics, args.max_frames)
         else:
             model, status, _ = build_model(config, device, args.allow_untrained, args.checkpoint)
             report = evaluate_sequences(

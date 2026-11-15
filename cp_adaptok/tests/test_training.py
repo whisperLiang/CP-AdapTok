@@ -2,6 +2,7 @@ import copy
 
 import torch
 
+from cp_adaptok import training
 from cp_adaptok.runtime import load_checkpoint, save_checkpoint
 from cp_adaptok.training import configure_stage, train_clip
 
@@ -39,3 +40,31 @@ def test_short_bptt_and_checkpoint_resume_match_an_uninterrupted_update(codec, t
     continued = update(resumed, resumed_opt)
     torch.testing.assert_close(resumed.tokenizer.queries, model.tokenizer.queries, rtol=0, atol=0)
     assert continued == uninterrupted
+
+
+def test_resume_restores_rng_after_auxiliary_network_construction(codec, tmp_path, monkeypatch):
+    model = copy.deepcopy(codec)
+    config = {
+        "seed": 47,
+        "stage": 2,
+        "data": {},
+        "training": {"lr": 0.001},
+        "paths": {"output": str(tmp_path / "results"), "save_checkpoint": str(tmp_path / "latest.pt")},
+    }
+    configure_stage(model, 2, config)
+    optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=0.001)
+    generator = torch.Generator().manual_seed(47)
+    path = tmp_path / "completed.pt"
+    save_checkpoint(path, model, optimizer, generator, 1, config, "test")
+    artifact = load_checkpoint(path)
+
+    def construct_auxiliary(*args):
+        torch.rand(11)  # Teacher/perceptual constructors initialize weights before loading them.
+        return None
+
+    monkeypatch.setattr(training, "perceptual_networks", construct_auxiliary)
+    monkeypatch.setattr(training, "make_teacher", construct_auxiliary)
+    torch.rand(19)
+    report = training.run_training(model, config, 1, artifact=artifact, resume=True, status="test")
+    assert report["completed_steps"] == 1
+    assert torch.equal(torch.get_rng_state(), artifact["torch_rng"])

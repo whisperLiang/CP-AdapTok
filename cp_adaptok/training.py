@@ -241,13 +241,14 @@ def run_training(model, config, max_steps, artifact=None, resume=False, status="
     configure_stage(model, config["stage"], config)
     optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=train["lr"])
     generator = torch.Generator().manual_seed(config["seed"])
-    step = restore_training(model, optimizer, generator, artifact, config["stage"]) if resume else 0
     output = resolve(config["paths"]["output"])
     output.mkdir(parents=True, exist_ok=True)
     checkpoint = resolve(config["paths"]["save_checkpoint"])
     perceptual, teacher = perceptual_networks(config, model.device), make_teacher(model, config)
     model.train()
     _ = model.model_id
+    # Auxiliary constructors consume RNG while initializing their pretrained weights.
+    step = restore_training(model, optimizer, generator, artifact, config["stage"]) if resume else 0
     start = time.perf_counter()
     try:
         while step < max_steps:
