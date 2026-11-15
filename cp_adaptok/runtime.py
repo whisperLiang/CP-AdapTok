@@ -108,7 +108,7 @@ def _data_prerequisites(config):
     missing = []
     for split, specs in config.get("data", {}).items():
         for spec in specs:
-            if not resolve(spec["path"]).is_file():
+            if not resolve(spec["path"]).exists():
                 missing.append(f"{split} data={spec['path']}")
     return missing
 
@@ -194,6 +194,7 @@ def save_checkpoint(path, model, optimizer, generator, step, config, status):
             "torch_rng": torch.get_rng_state(),
             "cuda_rng": torch.cuda.get_rng_state_all() if torch.cuda.is_available() else [],
             "python_rng": random.getstate(),
+            "vq_training_state": model.vq.training_state(),
             "metadata": metadata(config, status),
         },
         temporary,
@@ -242,6 +243,9 @@ def _configure_model(config, artifact):
 def _initialization_status(model, artifact, existing):
     if artifact:
         model.load_state_dict(artifact["model"], strict=True)
+        settings = artifact["config"].get("training", {}).get("vq", {})
+        if settings.get("strategy") == "continuous" or artifact["step"] < settings.get("warmup_steps", 0):
+            model.vq.set_training_policy("continuous")
         return artifact["status"]
     return (
         "initialized_pretrained_backbones"

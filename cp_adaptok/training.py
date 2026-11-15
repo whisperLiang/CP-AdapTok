@@ -7,6 +7,7 @@ from torch.nn import functional as F
 
 from cp_adaptok.backbones.native_baseline import NativeLatentTeacher
 from cp_adaptok.data import check_splits, read_video, sample_training_spec
+from cp_adaptok.diagnostics import gradient_norms, vq_diagnostics
 from cp_adaptok.runtime import metadata, resolve, save_checkpoint, write_json
 from cp_adaptok.streaming.sender import ids_digest
 from cp_adaptok.tokenizer.prefix_masking import sample_budgets
@@ -56,9 +57,15 @@ def frame_objective(model, encoded, rgb, budgets, config, perceptual, teacher_ta
             * torch.stack([F.mse_loss(y.float(), teacher_target.float()) for y in latents]).mean()
         )
     loss = loss + perceptual_objective(rgb, reconstructions, perceptual, weights)
-    monotonic = torch.stack([F.relu(b - a) for a, b in zip(distortions, distortions[1:])]).mean()
-    estimated = model.vq.expected_bits(
-        encoded.features, model.entropy_model.logits, model.config.packet_tokens
+    monotonic = (
+        torch.stack([F.relu(b - a) for a, b in zip(distortions, distortions[1:])]).mean()
+        if len(budgets) > 1
+        else rgb.new_zeros(())
+    )
+    estimated = (
+        model.vq.expected_bits(encoded.features, model.entropy_model.logits, model.config.packet_tokens)
+        if weights["estimated_rate"]
+        else encoded.features.new_zeros(encoded.features.shape[:2])
     )
     pixels = rgb.shape[-1] * rgb.shape[-2]
     rate = torch.stack([estimated[:, :k].sum(-1).mean() / pixels for k in budgets]).mean()
@@ -68,8 +75,15 @@ def frame_objective(model, encoded, rgb, budgets, config, perceptual, teacher_ta
             "tokens": k,
             "mse": value.detach().item(),
             "estimated_bpp": estimated[:, :k].sum().detach().item() / pixels,
+            "teacher_mse": F.mse_loss(latents[i].float(), teacher_target.float()).detach().item()
+            if teacher_target is not None
+            else None,
+            "latent_delta_mse": F.mse_loss(latents[i].float(), latents[i - 1].float()).detach().item()
+            if i
+            else None,
+            "total_loss": loss.detach().item(),
         }
-        for k, value in zip(budgets, distortions)
+        for i, (k, value) in enumerate(zip(budgets, distortions))
     ]
     return loss, records
 
@@ -108,7 +122,7 @@ def auxiliary_objective(model, encoded, rgb, budgets, config):
     return loss, records
 
 
-def train_clip(model, clip, budgets, config, perceptual, teacher, gradient_scale):
+def train_clip(model, clip, budgets, config, perceptual, teacher, gradient_scale, diagnostic=False):
     state = model.empty_state()
     chunk_losses, records = [], []
     tbptt = config["training"]["tbptt"]
@@ -116,7 +130,11 @@ def train_clip(model, clip, budgets, config, perceptual, teacher, gradient_scale
         teacher.reset()
     for t, original in enumerate(clip):
         rgb = original[None].to(model.device)
-        target = teacher.target(rgb) if teacher else None
+        frame_type = "I" if t == 0 else "P"
+        supervised = teacher is not None and teacher_applies(
+            config.get("teacher", {"policy": "i_only"}), frame_type
+        )
+        target = teacher.target(rgb) if supervised else None
         with torch.autocast(
             device_type=model.device.type,
             dtype=torch.bfloat16,
@@ -131,7 +149,12 @@ def train_clip(model, clip, budgets, config, perceptual, teacher, gradient_scale
             _, feature = model.decode_embeddings(
                 encoded.vq.embeddings[:, : model.config.k_ref], encoded.context
             )
-            state = encoded.context.commit(feature, ids_digest(encoded.prefix(model.config.k_ref)))
+            digest = (
+                ids_digest(encoded.prefix(model.config.k_ref))
+                if encoded.vq.ids is not None
+                else "continuous-diagnostic"
+            )
+            state = encoded.context.commit(feature, digest)
         chunk_losses.append(loss / len(clip) * gradient_scale)
         records.append(
             {
@@ -139,7 +162,16 @@ def train_clip(model, clip, budgets, config, perceptual, teacher, gradient_scale
                 "budgets": labels,
                 "vq_usage": encoded.vq.usage.item(),
                 "vq_perplexity": encoded.vq.perplexity.item(),
-                "teacher": teacher.last_provenance if teacher else None,
+                "teacher": dict(
+                    teacher.last_provenance,
+                    reference_condition="independent_native_history"
+                    if frame_type == "P"
+                    else "intra_no_history",
+                )
+                if supervised
+                else None,
+                "frame_type": frame_type,
+                "diagnostics": vq_diagnostics(model.vq, encoded.features, encoded.vq) if diagnostic else None,
             }
         )
         if (t + 1) % tbptt == 0 or t == len(clip) - 1:
@@ -161,6 +193,8 @@ def restore_training(model, optimizer, generator, artifact, stage):
     if artifact is None or artifact["config"].get("stage") != stage:
         raise ValueError("resume requires a checkpoint from the same training stage")
     optimizer.load_state_dict(artifact["optimizer"])
+    if "vq_training_state" in artifact:
+        model.vq.restore_training_state(artifact["vq_training_state"])
     generator.set_state(artifact["sampling_rng"])
     torch.set_rng_state(artifact["torch_rng"])
     random.setstate(artifact["python_rng"])
@@ -169,8 +203,36 @@ def restore_training(model, optimizer, generator, artifact, stage):
     return artifact["step"]
 
 
+def teacher_applies(settings, frame_type):
+    policy = settings.get("policy", "i_only")
+    if policy == "legacy_ip":
+        if not settings.get("allow_mismatched_p_diagnostic", False):
+            raise ValueError("legacy I/P teacher is a mismatched-history diagnostic only")
+        return True
+    if policy not in ("none", "i_only"):
+        raise ValueError("P-frame teacher needs a numerically verified same-context target")
+    return policy == "i_only" and frame_type == "I"
+
+
+def temperature_at(settings, step):
+    initial = settings.get("temperature", 1.0)
+    final = settings.get("final_temperature", initial)
+    progress = min(1.0, step / max(1, settings.get("anneal_steps", 1)))
+    return initial * (final / initial) ** progress
+
+
+def set_quantization_step(model, config, step):
+    settings = config["training"].get("vq", {})
+    strategy = settings.get("strategy", "deterministic_nearest")
+    if step < settings.get("warmup_steps", 0):
+        strategy = "continuous"
+    model.vq.set_training_policy(strategy, temperature_at(settings, step), settings.get("sampling_topk", 0))
+
+
 def make_teacher(model, config):
-    if config["loss"].get("latent", 0) <= 0:
+    settings = config.get("teacher", {"policy": "i_only"})
+    enabled = teacher_applies(settings, "I")
+    if config["loss"].get("latent", 0) <= 0 or config.get("stage") == 3 or not enabled:
         return None
     paths = config["paths"]
     return NativeLatentTeacher(
@@ -178,28 +240,76 @@ def make_teacher(model, config):
     )
 
 
-def optimization_step(model, optimizer, generator, step, config, perceptual, teacher):
+def optimization_step(model, optimizer, generator, step, config, perceptual, teacher, fixed_samples=None):
     train = config["training"]
+    teacher_settings = config.get("teacher", {})
+    if teacher_settings.get("decay_steps"):
+        factor = max(teacher_settings.get("minimum_factor", 0.0), 1 - step / teacher_settings["decay_steps"])
+        config = dict(config, loss=dict(config["loss"], latent=config["loss"]["latent"] * factor))
     optimizer.zero_grad(set_to_none=True)
-    budgets = sample_budgets(tuple(train["budgets"]), generator)
+    set_quantization_step(model, config, step)
+    candidates = tuple(train["budgets"])
+    budgets = (
+        list(candidates)
+        if train.get("all_budgets") or len(candidates) == 1
+        else sample_budgets(candidates, generator)
+    )
+    diagnostic = (
+        step in train.get("diagnostic_steps", [0, 10, 50, 100])
+        or step % train.get("diagnostic_every", 100) == 0
+    )
     records = []
     for _ in range(train["gradient_accumulation"]):
         index = int(torch.randint(len(config["data"]["train"]), (), generator=generator))
-        spec = sample_training_spec(config["data"]["train"][index], sequence_length(train, step), generator)
-        clip = read_video(spec, train["crop"], generator)
+        spec, clip = training_sample(config, index, step, generator, fixed_samples)
         sampled = train_clip(
-            model, clip, budgets, config, perceptual, teacher, 1 / train["gradient_accumulation"]
+            model, clip, budgets, config, perceptual, teacher, 1 / train["gradient_accumulation"], diagnostic
         )
         for record in sampled:
-            record.update(source=spec.path, source_frame=spec.start + record["frame"])
+            record.update(
+                source=spec.path,
+                source_frame=spec.start + record["frame"],
+                input_shape=list(clip.shape[-2:]),
+                quantization=model.vq.strategy,
+                temperature=model.vq.temperature,
+            )
         records += sampled
+    gradients = gradient_norms(model) if diagnostic else None
     norm = torch.nn.utils.clip_grad_norm_(
         [p for p in model.parameters() if p.requires_grad], train["clip_grad_norm"]
     )
     if not torch.isfinite(norm):
         raise RuntimeError("nonfinite gradient norm; checkpoint remains at last completed update")
     optimizer.step()
+    recovered = model.vq.finish_update(optimizer)
+    records[-1].update(gradient_norms=gradients, recovered_codes=recovered)
     return budgets, records, norm.item()
+
+
+def training_sample(config, index, step, generator, fixed_samples=None):
+    train = config["training"]
+    length, crop = sequence_length(train, step), resolution_at(train, step)
+    key = index, length, str(crop)
+    if fixed_samples is not None and key in fixed_samples:
+        return fixed_samples[key]
+    rng = (
+        torch.Generator().manual_seed(train["fixed_sample_seed"])
+        if "fixed_sample_seed" in train
+        else generator
+    )
+    spec = sample_training_spec(config["data"]["train"][index], length, rng)
+    sample = spec, read_video(spec, crop, rng)
+    if fixed_samples is not None:
+        fixed_samples[key] = sample
+    return sample
+
+
+def resolution_at(training, step):
+    crop = training["crop"]
+    for point in training.get("resolution_schedule", []):
+        if step >= point["step"]:
+            crop = point["crop"]
+    return crop
 
 
 def record_update(output, step, start, norm, records, budgets, status):
@@ -239,6 +349,7 @@ def run_training(model, config, max_steps, artifact=None, resume=False, status="
     check_splits(config["data"])
     train = config["training"]
     configure_stage(model, config["stage"], config)
+    model.vq.configure_dead_codes(**train.get("vq", {}).get("dead_codes", {}))
     optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=train["lr"])
     generator = torch.Generator().manual_seed(config["seed"])
     output = resolve(config["paths"]["output"])
@@ -250,16 +361,22 @@ def run_training(model, config, max_steps, artifact=None, resume=False, status="
     # Auxiliary constructors consume RNG while initializing their pretrained weights.
     step = restore_training(model, optimizer, generator, artifact, config["stage"]) if resume else 0
     start = time.perf_counter()
+    fixed_samples = {} if "fixed_sample_seed" in train else None
     try:
         while step < max_steps:
+            vq_settings = train.get("vq", {})
+            if vq_settings.get("initialization") and step == vq_settings.get("warmup_steps", 0):
+                from cp_adaptok.training_initialization import initialize_from_training_data
+
+                initialize_from_training_data(model, config, output)
             budgets, records, norm = optimization_step(
-                model, optimizer, generator, step, config, perceptual, teacher
+                model, optimizer, generator, step, config, perceptual, teacher, fixed_samples
             )
             step += 1
             record_update(output, step, start, norm, records, budgets, status)
             if step % train["save_every"] == 0 or step == max_steps:
                 save_checkpoint(checkpoint, model, optimizer, generator, step, config, status)
-            if step % train["validate_every"] == 0:
+            if step % train["validate_every"] == 0 and model.vq.strategy != "continuous":
                 validate_training(model, config, step, output, status)
     except torch.cuda.OutOfMemoryError:
         write_json(

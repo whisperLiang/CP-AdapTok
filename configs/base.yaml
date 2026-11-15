@@ -58,6 +58,8 @@ loss:
   monotonic: 0.1
   entropy: 1.0
   scorer: 1.0
+teacher:
+  policy: i_only
 evaluation:
   split: test
   budgets: [128, 256, 512, 1024, 2048]

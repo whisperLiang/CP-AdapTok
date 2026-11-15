@@ -17,16 +17,20 @@ class VideoSpec:
     start: int = 0
     fps: float = 30
     purpose: str = "engineering"
+    content_id: str | None = None
 
 
 def check_splits(config):
     owners = {}
     for split, values in config.items():
         for value in values:
-            path = resolve(value["path"]).resolve()
-            if path in owners and owners[path] != split:
-                raise ValueError(f"train/validation/test leakage: {path}")
-            owners[path] = split
+            identities = [resolve(value["path"]).resolve()]
+            if value.get("content_id"):
+                identities.append(value["content_id"])
+            for identity in identities:
+                if identity in owners and owners[identity] != split:
+                    raise ValueError(f"train/validation/test leakage: {identity}")
+                owners[identity] = split
 
 
 def sample_training_spec(spec, length, generator):
@@ -40,6 +44,26 @@ def sample_training_spec(spec, length, generator):
 
 def read_video(spec, crop=None, generator=None):
     spec = VideoSpec(**spec) if isinstance(spec, dict) else spec
+    source = resolve(spec.path)
+    if source.is_dir():
+        paths = sorted(p for p in source.iterdir() if p.suffix.lower() in (".jpg", ".png", ".jpeg"))
+        selected = paths[spec.start : spec.start + spec.frames]
+        if len(selected) != spec.frames:
+            raise ValueError(f"not enough frames: {spec.path}")
+        frames = [rgb_tensor(cv2.imread(str(path))) for path in selected]
+    else:
+        frames = read_container(spec)
+    return crop_video(torch.stack(frames), crop, generator)
+
+
+def rgb_tensor(bgr):
+    if bgr is None:
+        raise ValueError("unreadable video frame")
+    rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
+    return torch.from_numpy(np.ascontiguousarray(rgb)).permute(2, 0, 1).float() / 255
+
+
+def read_container(spec):
     capture = cv2.VideoCapture(str(resolve(spec.path)))
     if not capture.isOpened():
         raise ValueError(f"cannot open video {spec.path}")
@@ -50,18 +74,21 @@ def read_video(spec, crop=None, generator=None):
             ok, bgr = capture.read()
             if not ok:
                 raise ValueError(f"not enough frames: {spec.path}")
-            rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
-            frames.append(torch.from_numpy(np.ascontiguousarray(rgb)).permute(2, 0, 1).float() / 255)
+            frames.append(rgb_tensor(bgr))
     finally:
         capture.release()
-    video = torch.stack(frames)
+    return frames
+
+
+def crop_video(video, crop, generator):
     if crop:
         h, w = video.shape[-2:]
-        if crop > min(h, w):
+        ch, cw = (crop, crop) if isinstance(crop, int) else crop
+        if ch > h or cw > w or min(ch, cw) < 1:
             raise ValueError("training crop exceeds source dimensions")
-        y = int(torch.randint(h - crop + 1, (), generator=generator))
-        x = int(torch.randint(w - crop + 1, (), generator=generator))
-        video = video[..., y : y + crop, x : x + crop]
+        y = int(torch.randint(h - ch + 1, (), generator=generator))
+        x = int(torch.randint(w - cw + 1, (), generator=generator))
+        video = video[..., y : y + ch, x : x + cw]
     return video
 
 
