@@ -1,5 +1,6 @@
 import copy
 
+import pytest
 import torch
 
 from cp_adaptok import training
@@ -68,3 +69,33 @@ def test_resume_restores_rng_after_auxiliary_network_construction(codec, tmp_pat
     report = training.run_training(model, config, 1, artifact=artifact, resume=True, status="test")
     assert report["completed_steps"] == 1
     assert torch.equal(torch.get_rng_state(), artifact["torch_rng"])
+
+
+def test_stage_three_updates_entropy_and_scorer_with_tokenizer_frozen(codec):
+    model = copy.deepcopy(codec)
+    configure_stage(model, 3, {})
+    queries = model.tokenizer.queries.detach().clone()
+    logits = model.entropy_model.logits.detach().clone()
+    features = torch.randn(1, model.config.n_max, model.config.dim)
+    before = model.scorer(features, [8, 32]).detach().clone()
+    optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=0.01)
+    ids = torch.zeros(1, model.config.n_max, dtype=torch.long)
+    loss = model.entropy_model.loss(ids, model.config.packet_tokens)
+    loss = loss + model.scorer(features, [8, 32]).square().mean()
+    loss.backward()
+    optimizer.step()
+    assert not torch.equal(model.entropy_model.logits, logits)
+    assert not torch.equal(model.scorer(features, [8, 32]), before)
+    assert torch.equal(model.tokenizer.queries, queries)
+    assert all(p.grad is None for p in model.ld.parameters())
+
+
+def test_stage_four_only_unfreezes_requested_backbone_modules(codec):
+    model = copy.deepcopy(codec)
+    configure_stage(model, 4, {"training": {"fine_tune": ["ld.model.encoder"]}})
+    assert all(p.requires_grad for p in model.ld.model.encoder.parameters())
+    assert not any(p.requires_grad for p in model.ld.model.feature_extractor.parameters())
+    assert not any(p.requires_grad for p in model.intra.parameters())
+    assert all(p.requires_grad for p in model.vq.parameters())
+    with pytest.raises(ValueError, match="stages 1-4"):
+        configure_stage(model, 0, {})
