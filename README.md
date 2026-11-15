@@ -2,16 +2,22 @@
 
 时间因果、学习式有序 1D VQ Token 与可追加 rANS 视频流研究原型。主模型显式复用固定版本 DCVC-UF LD / DMCI 的 PyTorch 模块，保留 AdapTok 的 learned queries、VQ、前缀训练和质量分配思想。
 
-**当前是工程验证原型。官方 LD/DMCI 预训练权重已下载并通过完整性及严格加载校验；原生 CUDA 扩展、正式训练、有效 RD 对照及 30/60 FPS 验收仍待完成。** 现有结构测试 checkpoint 的骨干仍是随机初始化；`--allow-untrained` 和 `--smoke` 用于工程验证，不能据此认定已完成正式训练。权重位置、SHA256 和使用边界见 [官方权重记录](docs/pretrained_weights.md)。
+**当前是工程验证原型。官方 LD/DMCI 权重与原生 CUDA 扩展已就绪，使用真实 native decoded-latent 完成100步新增模块训练；发现码本塌缩，画质与30/60 FPS目标仍未达成。** 新旧实验分别保存，详见 [官方骨干后续报告](docs/pretrained_native_report.md) 与 [官方权重记录](docs/pretrained_weights.md)。旧 smoke checkpoint 的骨干仍为随机初始化。
 
 在本机使用：
 
 ```bash
 cd /home/whisperliang/CP-AdapTok
-source .venv/bin/activate
+source .venv-native/bin/activate
 python -m pytest cp_adaptok/tests -q
-python scripts/run_acceptance.py
+python -m cp_adaptok.cli.eval --config configs/pretrained_s1.yaml \
+  --checkpoint checkpoints/pretrained_s1/step100.pt --max-frames 8 --output results/pretrained_s1_test
+python -m cp_adaptok.cli.eval --config configs/pretrained_s1.yaml --baseline native \
+  --max-frames 8 --output results/pretrained_native_baseline
+python -m scripts.benchmark_native
 ```
+
+`step100.pt` 保留本轮100步结果，`latest.pt` 已验证恢复至101步。该短程 checkpoint 状态为 `trained`，表示新增参数经过更新；其 RD 验收仍为 false。当前应先解决码本塌缩，再扩展训练量。
 
 运行已有结构训练 checkpoint 的真实 1080p 字节流评估：
 
@@ -49,9 +55,19 @@ python -m cp_adaptok.cli.train --config configs/s3_entropy_scorer.yaml --checkpo
   --max-steps 100 --smoke --allow-untrained
 ```
 
-正式流程依次使用 `configs/s0_baseline.yaml` 至 `s4_finetune.yaml`。安装官方模型到配置中的路径，使用匹配 PyTorch/CUDA 构建上游扩展，再移除 smoke/untrained 开关。数据默认指向本机已有的合法视频；迁移机器时修改 `configs/base.yaml`。这些短片只适合工程检查，不足以支持研究结论。
+阶段定义见 `configs/s0_baseline.yaml` 至 `s4_finetune.yaml`。本轮使用 `configs/pretrained_s1.yaml`，独立保存官方骨干实验并从64帧训练区间随机取连续窗口。迁移机器需修改数据位置或运行数据准备脚本；后续阶段须相应配置来源 checkpoint 和足够长的训练区间。这些短片不足以支持数据集级结论。
 
 新环境初始化：
+
+原生码流与 teacher 使用独立环境，构建脚本不会修改系统 CUDA 或上游 submodule：
+
+```bash
+bash scripts/setup_native.sh
+source .venv-native/bin/activate
+python scripts/prepare_pretrained_data.py
+```
+
+只运行纯 PyTorch 路径时也可安装基础环境：
 
 ```bash
 git submodule update --init --recursive
@@ -60,12 +76,13 @@ source .venv/bin/activate
 pip install -e '.[eval,dev]'
 ```
 
-本机 `.venv` 通过 `.pth` 只读复用 InfoTok 已安装的 PyTorch 2.6/cu124，新增测试工具安装在独立环境中，没有修改其环境。原生 UF CUDA Proxy 上游建议 PyTorch 2.9.1/CUDA 13；本原型的纯 PyTorch路径已在 2.6 验证，不能据此声称 Proxy ABI 可用。
+本机原有 `.venv` 通过 `.pth` 只读复用 InfoTok 的 PyTorch2.6/cu124；新 `.venv-native` 为 Python3.12/PyTorch2.9.1/cu130，两个环境独立。构建副本应用最小 latent 导出补丁，以取得原生解码器实际使用的量化 tensor；不再通过近似重算 prior 生成 teacher。
 
 文档：
 
 - [架构及接口形状](docs/architecture.md)
 - [训练与恢复](docs/training.md)
+- [官方骨干、原生码流与100步实测](docs/pretrained_native_report.md)
 - [评估口径](docs/evaluation.md)
 - [二进制格式](docs/bitstream_spec.md)
 - [在线 TCP 场景与实测结果](docs/streaming_report.md)

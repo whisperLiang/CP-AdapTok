@@ -20,7 +20,7 @@ b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302  cvpr2026_image
 - 按 [Microsoft QuickXorHash 算法](https://learn.microsoft.com/en-us/onedrive/developer/code-snippets/quickxorhash?view=odsp-graph-online) 重算，均与官方值一致；同时记录本地 SHA256。
 - PyTorch ZIP archive CRC 全部通过。
 - `torch.load(..., weights_only=True)` 读取并通过固定上游骨干的 `strict=True` 参数加载；图像398个 state_dict tensor，LD375个，所有浮点 Tensor 有限。
-- 原生 prerequisite 检查不再报告这两份权重缺失，仍报告两个未安装的原生扩展。
+- 下载完成时原生 prerequisite 仍缺两个扩展；后续已在独立 `.venv-native` 中构建成功，并使用实际 decoded-latent teacher 完成100步训练，见 [后续报告](pretrained_native_report.md)。旧环境和历史 smoke checkpoint 保持原样。
 
 机器可读清单：`checkpoints/official_weights_manifest.json`；下载/校验详情和剩余依赖：`results/weight_download/`。大文件保留在本机，按现有 Git ignore 规则不提交到源码仓库。
 

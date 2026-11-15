@@ -120,6 +120,8 @@ def streaming_results():
     sample = read("results/streaming_verified/truncated_tail/stream_demo.json")
     text = f"""# 在线 TCP 后续验证
 
+本页使用旧随机骨干结构模型，保留其历史场景结果。官方骨干版本的原生扩展、训练与真实 TCP 结果另见 [新报告](pretrained_native_report.md)。
+
 本轮把在线预算选择接入真实 localhost TCP：完整编码一次，先可靠交付并确认基础前缀，再按当前带宽和剩余时间选择增强包。每个增强包发送前复查截止时间；接收端仅使用模型和线路字节。**状态仍为 `{sample["status"]}`；这些结果验证工程行为，不验证 RD 或 Scorer 泛化。**
 
 ## 实测条件与结果
@@ -214,6 +216,8 @@ def main():
         )
     files.append("docs/implementation_report.md")
     body = f"""# CP-AdapTok 实施与实验报告
+
+本页保留随机骨干 smoke 阶段的历史测量。官方 CUDA 扩展、真实 decoded-latent teacher、100步官方骨干训练及最新测试已经完成，当前结果和码本塌缩问题见 [后续报告](pretrained_native_report.md)。本页中的“未执行”描述属于当时的实验状态。
 
 可运行的工程研究原型已落地；**正式训练、有效 RD 和 1080p 30/60 FPS 验收尚未完成**。本报告直接由本地 JSON、实际测试日志生成，没有把随机骨干输出当作训练效果。
 
