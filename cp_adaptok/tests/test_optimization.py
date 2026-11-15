@@ -309,3 +309,77 @@ def test_initialization_collects_real_pre_vq_features_and_restores_training_poli
     assert report["samples"] == 128
     assert report["distinct_samples"] >= 32
     assert report["source_split"] == "train"
+
+
+def test_content_readout_cannot_transmit_a_query_identity_without_spatial_values():
+    from cp_adaptok.tokenizer.lightweight_attention import CrossAttentionBlock
+
+    block = CrossAttentionBlock(24, 4)
+    with torch.no_grad():
+        block.kv.weight.zero_()
+        block.kv.bias.zero_()
+        block.out.bias.zero_()
+        for parameter in block.ff.parameters():
+            parameter.zero_()
+    queries, spatial = torch.randn(1, 32, 24), torch.randn(1, 8, 24)
+    residual = block(queries, spatial)
+    content = block(queries, spatial, include_query_residual=False)
+    torch.testing.assert_close(residual, queries, rtol=0, atol=0)
+    assert content.count_nonzero() == 0
+
+
+def test_default_model_identity_remains_compatible_with_existing_packets(codec):
+    import hashlib
+    import json
+    from dataclasses import asdict
+
+    config = asdict(codec.config)
+    config.pop("query_content_only")
+    digest = hashlib.sha256(json.dumps(config, sort_keys=True).encode())
+    for name, tensor in sorted(codec.state_dict().items()):
+        digest.update(name.encode())
+        digest.update(tensor.detach().cpu().contiguous().view(torch.uint8).numpy().tobytes())
+    assert codec.model_id == digest.hexdigest()[:32]
+
+
+def test_online_budget_selection_cannot_read_actual_distortion_labels():
+    from cp_adaptok.evaluation import allocation_comparison
+
+    rows = [
+        {
+            "sequence": "clip",
+            "frame_id": t,
+            "fps": 30,
+            "encode_timing_ms": {"encode_total_ms": 1},
+            "prefixes": [
+                {"tokens": 128, "total_bytes": 200, "mse": 0.1, "predicted_mse": 0.1},
+                {"tokens": 2048, "total_bytes": 2000, "mse": 0.01, "predicted_mse": 0.02},
+            ],
+        }
+        for t in range(2)
+    ]
+    changed = copy.deepcopy(rows)
+    for frame in changed:
+        for p in frame["prefixes"]:
+            p["mse"] = 1 - p["mse"]
+    first = allocation_comparison(rows, {}, 128)
+    second = allocation_comparison(changed, {}, 128)
+    assert [{k: v["tokens"] for k, v in r["online"].items()} for r in first] == [
+        {k: v["tokens"] for k, v in r["online"].items()} for r in second
+    ]
+
+
+def test_checkpoint_restores_numpy_rng_alongside_torch_and_sampling_rng(codec, tmp_path):
+    import numpy as np
+
+    from cp_adaptok.runtime import load_checkpoint, save_checkpoint
+    from cp_adaptok.training import restore_training
+
+    model = copy.deepcopy(codec)
+    optimizer = torch.optim.AdamW(model.vq.parameters(), lr=0.001)
+    generator = torch.Generator().manual_seed(19)
+    np.random.seed(19)
+    save_checkpoint(tmp_path / "rng.pt", model, optimizer, generator, 1, {"stage": 1}, "test")
+    expected = np.random.random(5)
+    restore_training(model, optimizer, generator, load_checkpoint(tmp_path / "rng.pt"), 1)
+    assert np.array_equal(np.random.random(5), expected)

@@ -31,7 +31,7 @@ def experiment_config(name, root, steps):
         vq["initialization"] = {"clips": 8, "max_samples": 32768, "iterations": 10}
     if name == "annealed":
         vq.update(temperature=1.0, final_temperature=0.05, anneal_steps=steps)
-    if name.startswith("balanced_"):
+    if name.startswith("balanced_") or name.startswith("content_"):
         train["query_initialization_scale"] = 50.0
         vq.update(
             strategy="stochastic_training",
@@ -41,11 +41,14 @@ def experiment_config(name, root, steps):
             warmup_steps=steps // 2,
             initialization={"clips": 8, "max_samples": 32768, "iterations": 10},
         )
-        if name == "balanced_continuous":
+        if name in ("balanced_continuous", "content_continuous"):
             vq.clear()
             vq["strategy"] = "continuous"
         if name == "balanced_decoder":
             train["grid_query_initialization_scale"] = 50.0
+    if name.startswith("content_"):
+        config["model"]["query_content_only"] = True
+        train["grid_query_initialization_scale"] = 50.0
     if name == "dead":
         vq["dead_codes"] = {"window": 20, "max_replacements": 16, "min_count": 1}
     if name.startswith("teacher_"):

@@ -2,6 +2,7 @@ import json
 import random
 import time
 
+import numpy as np
 import torch
 from torch.nn import functional as F
 
@@ -212,6 +213,9 @@ def restore_training(model, optimizer, generator, artifact, stage):
     generator.set_state(artifact["sampling_rng"])
     torch.set_rng_state(artifact["torch_rng"])
     random.setstate(artifact["python_rng"])
+    if "numpy_rng" in artifact:
+        rng = artifact["numpy_rng"]
+        np.random.set_state((rng[0], np.array(rng[1], dtype=np.uint32), *rng[2:]))
     if artifact["cuda_rng"] and model.device.type == "cuda":
         torch.cuda.set_rng_state_all(artifact["cuda_rng"])
     return artifact["step"]

@@ -12,15 +12,38 @@ def tensor_digest(tensor):
     Integer reductions are order independent, unlike floating summary statistics.
     This detects accidental drift; CRC/fingerprints are not cryptographic authentication.
     """
-    words = tensor.detach().float().contiguous().view(torch.int32).flatten().to(torch.int64)
+    words = tensor.detach().float().contiguous().view(torch.int32).flatten()
+    summary = fingerprint_summary(words)
+    raw = summary.cpu().numpy().astype(">i8", copy=False).tobytes()
+    return hashlib.sha256(raw).hexdigest()[:32]
+
+
+def fingerprint_summary(words):
     positions = torch.arange(1, words.numel() + 1, device=words.device, dtype=torch.int64)
+    return _mix(words, positions)
+
+
+def mix_fingerprint_words(words, positions):
+    words = words.to(torch.int64)
     mixed = words ^ (positions * -7046029254386353131)
     mixed = (mixed ^ ((mixed >> 30) & ((1 << 34) - 1))) * -4658895280553007687
     mixed = (mixed ^ ((mixed >> 27) & ((1 << 37) - 1))) * -7723592293110705685
     mixed = mixed ^ ((mixed >> 31) & ((1 << 33) - 1))
-    summary = torch.stack((mixed.sum(), (mixed * (positions * 2 + 1)).sum()))
-    raw = summary.cpu().numpy().astype(">i8", copy=False).tobytes()
-    return hashlib.sha256(raw).hexdigest()[:32]
+    return torch.stack((mixed.sum(), (mixed * (positions * 2 + 1)).sum()))
+
+
+_mix = mix_fingerprint_words
+
+
+def configure_fingerprint_backend(name="eager"):
+    """One pure integer algorithm; optional fusion never changes its hash semantics."""
+    global _mix
+    if name == "eager":
+        _mix = mix_fingerprint_words
+    elif name == "compiled":
+        _mix = torch.compile(mix_fingerprint_words, fullgraph=True, dynamic=True)
+    else:
+        raise ValueError("unknown integer fingerprint backend")
 
 
 def state_versions(tensors):

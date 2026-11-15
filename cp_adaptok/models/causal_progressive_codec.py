@@ -31,6 +31,7 @@ class CodecConfig:
     qp: int = 32
     attention_precision: str = "float64"
     state_fingerprint: str = "mixed_int64_v1"
+    query_content_only: bool = False
 
     def __post_init__(self):
         object.__setattr__(self, "grid", tuple(self.grid))
@@ -83,7 +84,9 @@ class CausalProgressiveCodec(nn.Module):
         c = self.config
         self.ld = CausalLDBackboneAdapter(ld_checkpoint)
         self.intra = IntraBackboneAdapter(intra_checkpoint)
-        self.tokenizer = LearnedQueryTokenizer(c.n_max, c.dim, c.heads, c.layers, c.kv_grid)
+        self.tokenizer = LearnedQueryTokenizer(
+            c.n_max, c.dim, c.heads, c.layers, c.kv_grid, c.query_content_only
+        )
         self.vq = AdapTokVQBottleneck(c.dim, c.codebook_size, c.embedding_dim)
         self.decoder = UnifiedPrefixLatentDecoder(c.dim, c.heads, c.n_max, c.grid, c.attention_precision)
         self.entropy_model = BlockEntropyModel(c.codebook_size, c.n_max // c.packet_tokens)
@@ -102,7 +105,10 @@ class CausalProgressiveCodec(nn.Module):
     @property
     def model_id(self):
         if self._model_id is None:
-            digest = hashlib.sha256(json.dumps(asdict(self.config), sort_keys=True).encode())
+            identity_config = asdict(self.config)
+            if not self.config.query_content_only:
+                identity_config.pop("query_content_only")
+            digest = hashlib.sha256(json.dumps(identity_config, sort_keys=True).encode())
             for name, tensor in sorted(self.state_dict().items()):
                 digest.update(name.encode())
                 digest.update(tensor.detach().cpu().contiguous().view(torch.uint8).numpy().tobytes())
@@ -158,6 +164,7 @@ class CausalProgressiveCodec(nn.Module):
         with measure(self, "encoder.ld_dmci"):
             y = adapter.encode_latent(prepared, context)
         with measure(self, "encoder.learned_queries"):
+            self.tokenizer.pipeline_profiler = getattr(self, "pipeline_profiler", None)
             features = self.tokenizer(y, context.context, frame_type)
         with measure(self, "encoder.vq_search"):
             quantized = self.vq(features)

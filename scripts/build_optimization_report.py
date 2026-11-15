@@ -68,6 +68,60 @@ def rd_summaries():
     return rows
 
 
+def capacity_summaries():
+    rows = []
+    for path in sorted((RESULTS / "capacity").glob("*/diagnostic_evaluation.json")):
+        config, report = read(path.parent / "config.json"), read(path)
+        records = report["records"]
+        rows.append(
+            {
+                "experiment": path.parent.name,
+                "updates": read(path.parent / "training_report.json")["completed_steps"],
+                "crop": str(config["training"]["crop"]),
+                "n_max": config["model"]["n_max"],
+                "codebook_size": config["model"]["codebook_size"],
+                "grid": str(config["model"]["grid"]),
+                "base_psnr": float(np.mean([r["prefixes"][0]["psnr"] for r in records])),
+                "max_psnr": float(np.mean([r["prefixes"][-1]["psnr"] for r in records])),
+                "deterministic_perplexity": float(
+                    np.mean([r["vq"]["deterministic"]["perplexity"] for r in records])
+                ),
+            }
+        )
+    return rows
+
+
+def compare_native_rate(rd):
+    from scipy.interpolate import PchipInterpolator
+
+    native = read(RESULTS / "native_controls/rd_summary.json", [])
+    cp = [r for r in rd if r["model"] == "extended"]
+    if not native or not cp:
+        return {"bd_rate": None, "reason": "missing measured rate points"}
+    native.sort(key=lambda r: r["bpp"])
+    cp.sort(key=lambda r: r["bpp"])
+    lo, hi = (
+        max(np.log(cp[0]["bpp"]), np.log(native[0]["bpp"])),
+        min(np.log(cp[-1]["bpp"]), np.log(native[-1]["bpp"])),
+    )
+    quality_lo = max(min(r["psnr"] for r in cp), min(r["psnr"] for r in native))
+    quality_hi = min(max(r["psnr"] for r in cp), max(r["psnr"] for r in native))
+    result = {
+        "bd_rate": None,
+        "common_psnr_range": [quality_lo, quality_hi],
+        "reason": "BD-rate needs a common quality interval; measured quality ranges do not overlap",
+        "framing": "CP application records versus native SPS/IP; overhead definitions retained",
+    }
+    if hi > lo:
+        cp_curve = PchipInterpolator(np.log([r["bpp"] for r in cp]), [r["psnr"] for r in cp])
+        native_curve = PchipInterpolator(np.log([r["bpp"] for r in native]), [r["psnr"] for r in native])
+        result.update(
+            common_bpp_range=[float(np.exp(lo)), float(np.exp(hi))],
+            bd_psnr=float((cp_curve.integrate(lo, hi) - native_curve.integrate(lo, hi)) / (hi - lo)),
+        )
+    return result
+
+
 def markdown_table(rows, fields):
     if not rows:
         return "未获得该项测量，不能判为通过。"
@@ -104,6 +158,12 @@ def figures(ablations, rd):
     for name in dict.fromkeys(r["model"] for r in rd):
         data = [r for r in rd if r["model"] == name]
         axes[2].plot([r["bpp"] for r in data], [r["psnr"] for r in data], ".-", label=name)
+    native = read(RESULTS / "native_controls/rd_summary.json", [])
+    if native:
+        axes[2].plot(
+            [r["bpp"] for r in native], [r["psnr"] for r in native], "s--", label="Native LD (SPS/IP)"
+        )
+    axes[2].set_xscale("log")
     axes[2].set(xlabel="Actual application bpp", ylabel="1080p PSNR (dB)")
     axes[2].legend(fontsize=7)
     fig.savefig(RESULTS / "optimization_summary.png", dpi=180)
@@ -112,9 +172,22 @@ def figures(ablations, rd):
 
 def main():
     ablations, rd = ablation_summaries(), rd_summaries()
+    capacity = capacity_summaries()
     csv_table(RESULTS / "vq_ablations.csv", ablations)
     csv_table(RESULTS / "rd_comparison.csv", rd)
-    write_json(RESULTS / "summary.json", {"vq_ablations": ablations, "rd": rd, "converged": False})
+    csv_table(RESULTS / "capacity_ablations.csv", capacity)
+    comparison = compare_native_rate(rd)
+    write_json(RESULTS / "native_comparison.json", comparison)
+    write_json(
+        RESULTS / "summary.json",
+        {
+            "vq_ablations": ablations,
+            "rd": rd,
+            "capacity": capacity,
+            "native_comparison": comparison,
+            "converged": False,
+        },
+    )
     figures(ablations, rd)
     (RESULTS / "tables.md").write_text(
         markdown_table(

@@ -1,0 +1,47 @@
+extends: d1_vq_512.yaml
+data:
+  train:
+  - path: data/davis2017/train/bear
+    frames: 16
+    fps: 30
+    purpose: official-DAVIS2017-train-native-pixels-nominal-fps
+    content_id: DAVIS2017:bear
+  - path: data/davis2017/train/bmx-bumps
+    frames: 16
+    fps: 30
+    purpose: official-DAVIS2017-train-native-pixels-nominal-fps
+    content_id: DAVIS2017:bmx-bumps
+  - path: data/davis2017/train/boxing-fisheye
+    frames: 16
+    fps: 30
+    purpose: official-DAVIS2017-train-native-pixels-nominal-fps
+    content_id: DAVIS2017:boxing-fisheye
+  - path: data/davis2017/train/breakdance-flare
+    frames: 16
+    fps: 30
+    purpose: official-DAVIS2017-train-native-pixels-nominal-fps
+    content_id: DAVIS2017:breakdance-flare
+  - path: data/davis2017/train/bus
+    frames: 16
+    fps: 30
+    purpose: official-DAVIS2017-train-native-pixels-nominal-fps
+    content_id: DAVIS2017:bus
+  - path: data/davis2017/train/car-turn
+    frames: 16
+    fps: 30
+    purpose: official-DAVIS2017-train-native-pixels-nominal-fps
+    content_id: DAVIS2017:car-turn
+  - path: data/davis2017/train/cat-girl
+    frames: 16
+    fps: 30
+    purpose: official-DAVIS2017-train-native-pixels-nominal-fps
+    content_id: DAVIS2017:cat-girl
+  - path: data/davis2017/train/classic-car
+    frames: 16
+    fps: 30
+    purpose: official-DAVIS2017-train-native-pixels-nominal-fps
+    content_id: DAVIS2017:classic-car
+paths:
+  checkpoint: null
+  save_checkpoint: checkpoints/multiscene_research/latest.pt
+  output: results/multiscene_research

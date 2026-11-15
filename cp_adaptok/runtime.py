@@ -95,7 +95,7 @@ def native_teacher_requested(config, purpose):
 
 
 def _native_prerequisites(config, purpose):
-    native_teacher = native_teacher_requested(config,purpose)
+    native_teacher = native_teacher_requested(config, purpose)
     if purpose != "baseline" and not native_teacher:
         return []
     missing = _missing_files(config.get("paths", {}), ["ld_checkpoint", "intra_checkpoint"])
@@ -190,6 +190,7 @@ def save_checkpoint(path, model, optimizer, generator, step, config, status):
     path = resolve(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(".tmp")
+    numpy_rng = np.random.get_state()
     torch.save(
         {
             "format_version": 1,
@@ -203,6 +204,7 @@ def save_checkpoint(path, model, optimizer, generator, step, config, status):
             "torch_rng": torch.get_rng_state(),
             "cuda_rng": torch.cuda.get_rng_state_all() if torch.cuda.is_available() else [],
             "python_rng": random.getstate(),
+            "numpy_rng": (numpy_rng[0], numpy_rng[1].tolist(), *numpy_rng[2:]),
             "vq_training_state": model.vq.training_state(),
             "metadata": metadata(config, status),
         },
@@ -264,6 +266,9 @@ def _initialization_status(model, artifact, existing):
 
 
 def build_model(config, device, allow_untrained=False, checkpoint_override=None):
+    from cp_adaptok.backbones.causal_state import configure_fingerprint_backend
+
+    configure_fingerprint_backend(config.get("runtime", {}).get("fingerprint_backend", "eager"))
     artifact, checkpoint_path = _load_requested_artifact(config, checkpoint_override)
     model, existing, control = _configure_model(config, artifact)
     status = _initialization_status(model, artifact, existing)

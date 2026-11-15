@@ -2,17 +2,20 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
+from cp_adaptok.profiling import measure
+
 from .lightweight_attention import CrossAttentionBlock, spatial_positions
 
 
 class LearnedQueryTokenizer(nn.Module):
     """Encode all queries once. No budget argument exists at this boundary."""
 
-    def __init__(self, n_max=2048, dim=192, heads=6, layers=2, kv_grid=(17, 30)):
+    def __init__(self, n_max=2048, dim=192, heads=6, layers=2, kv_grid=(17, 30), content_only=False):
         super().__init__()
         if dim % heads or n_max < 1 or layers < 1:
             raise ValueError("invalid query/attention configuration")
         self.n_max, self.dim, self.kv_grid = n_max, dim, tuple(kv_grid)
+        self.content_only = content_only
         self.queries = nn.Parameter(torch.randn(1, n_max, dim) * 0.02)
         self.input = nn.ModuleDict({"I": nn.Conv2d(256, dim, 1), "P": nn.Conv2d(128, dim, 1)})
         self.history = nn.Conv2d(256, dim, 1)
@@ -35,7 +38,7 @@ class LearnedQueryTokenizer(nn.Module):
 
             self.last_diagnostics[name] = distribution_stats(query)
 
-    def forward(self, y, context, frame_type):
+    def spatial_keys(self, y, context, frame_type):
         spatial = self.input[frame_type](y)
         grid = (min(spatial.shape[-2], self.kv_grid[0]), min(spatial.shape[-1], self.kv_grid[1]))
         low = F.adaptive_avg_pool2d(spatial, grid)
@@ -51,10 +54,21 @@ class LearnedQueryTokenizer(nn.Module):
             ),
             dim=1,
         )
+        return keys
+
+    def forward(self, y, context, frame_type):
+        with measure(self, "encoder.query_feature_projection"):
+            keys = self.spatial_keys(y, context, frame_type)
+        with measure(self, "encoder.query_cross_attention"):
+            return self.read_queries(y, keys)
+
+    def read_queries(self, y, keys):
         query = self.queries.expand(y.shape[0], -1, -1)
         self.record_distribution("initial_query", query)
         for index, block in enumerate(self.blocks):
-            query = block(query, keys)
+            query = block(
+                query, keys, include_query_residual=not self.content_only or index < len(self.blocks) - 1
+            )
             self.record_distribution(f"block_{index}", query)
         output = self.norm(query)
         self.record_distribution("output", output)
