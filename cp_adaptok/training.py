@@ -6,7 +6,7 @@ import torch
 from torch.nn import functional as F
 
 from cp_adaptok.backbones.native_baseline import NativeLatentTeacher
-from cp_adaptok.data import check_splits, read_video
+from cp_adaptok.data import check_splits, read_video, sample_training_spec
 from cp_adaptok.runtime import metadata, resolve, save_checkpoint, write_json
 from cp_adaptok.streaming.sender import ids_digest
 from cp_adaptok.tokenizer.prefix_masking import sample_budgets
@@ -185,11 +185,14 @@ def optimization_step(model, optimizer, generator, step, config, perceptual, tea
     records = []
     for _ in range(train["gradient_accumulation"]):
         index = int(torch.randint(len(config["data"]["train"]), (), generator=generator))
-        spec = dict(config["data"]["train"][index], frames=sequence_length(train, step))
+        spec = sample_training_spec(config["data"]["train"][index], sequence_length(train, step), generator)
         clip = read_video(spec, train["crop"], generator)
-        records += train_clip(
+        sampled = train_clip(
             model, clip, budgets, config, perceptual, teacher, 1 / train["gradient_accumulation"]
         )
+        for record in sampled:
+            record.update(source=spec.path, source_frame=spec.start + record["frame"])
+        records += sampled
     norm = torch.nn.utils.clip_grad_norm_(
         [p for p in model.parameters() if p.requires_grad], train["clip_grad_norm"]
     )

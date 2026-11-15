@@ -1,6 +1,6 @@
 """Read independent real-video sequences, preserving native resolution outside training crops."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 
 import cv2
@@ -27,6 +27,15 @@ def check_splits(config):
             if path in owners and owners[path] != split:
                 raise ValueError(f"train/validation/test leakage: {path}")
             owners[path] = split
+
+
+def sample_training_spec(spec, length, generator):
+    """Sample within the declared frame span using the checkpointed training RNG."""
+    spec = VideoSpec(**spec) if isinstance(spec, dict) else spec
+    if type(length) is not int or not 1 <= length <= spec.frames:
+        raise ValueError("training sequence length must fit the declared source span")
+    offset = int(torch.randint(spec.frames - length + 1, (), generator=generator))
+    return replace(spec, start=spec.start + offset, frames=length)
 
 
 def read_video(spec, crop=None, generator=None):
