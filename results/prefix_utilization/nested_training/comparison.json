@@ -1,0 +1,87 @@
+[
+  {
+    "variant": "B0",
+    "updates": 100,
+    "frames": 400,
+    "supervised_frames_by_budget": {
+      "128": 268,
+      "256": 232,
+      "512": 204,
+      "1024": 212,
+      "2048": 320
+    },
+    "train_base_psnr": 35.061084661514165,
+    "train_gain": 0.010312840053595451,
+    "validation_base_psnr": 12.702394667052117,
+    "validation_max_psnr": 12.747983547196773,
+    "validation_gain": 0.04558888014465623
+  },
+  {
+    "variant": "B1",
+    "updates": 100,
+    "frames": 400,
+    "supervised_frames_by_budget": {
+      "128": 400,
+      "256": 120,
+      "512": 140,
+      "1024": 140,
+      "2048": 400
+    },
+    "train_base_psnr": 35.02454362712779,
+    "train_gain": 0.012573232277290458,
+    "validation_base_psnr": 12.677094853331589,
+    "validation_max_psnr": 12.723619643573166,
+    "validation_gain": 0.04652479024157685
+  },
+  {
+    "variant": "B2",
+    "updates": 100,
+    "frames": 400,
+    "supervised_frames_by_budget": {
+      "128": 400,
+      "256": 120,
+      "512": 140,
+      "1024": 140,
+      "2048": 400
+    },
+    "train_base_psnr": 34.99200441540163,
+    "train_gain": 0.009757522928019569,
+    "validation_base_psnr": 12.676867972401357,
+    "validation_max_psnr": 12.726529631816105,
+    "validation_gain": 0.049661659414747206
+  },
+  {
+    "variant": "B3",
+    "updates": 100,
+    "frames": 400,
+    "supervised_frames_by_budget": {
+      "128": 400,
+      "256": 120,
+      "512": 140,
+      "1024": 140,
+      "2048": 400
+    },
+    "train_base_psnr": 34.97236901793292,
+    "train_gain": 0.014928735241710456,
+    "validation_base_psnr": 12.659507850444456,
+    "validation_max_psnr": 12.716978508914991,
+    "validation_gain": 0.05747065847053534
+  },
+  {
+    "variant": "scheduled",
+    "updates": 100,
+    "frames": 400,
+    "supervised_frames_by_budget": {
+      "128": 400,
+      "256": 120,
+      "512": 140,
+      "1024": 140,
+      "2048": 400
+    },
+    "train_base_psnr": 35.01946988773906,
+    "train_gain": 0.013368223673687396,
+    "validation_base_psnr": 12.695813415678902,
+    "validation_max_psnr": 12.740201562564902,
+    "validation_gain": 0.0443881468859999
+  }
+]

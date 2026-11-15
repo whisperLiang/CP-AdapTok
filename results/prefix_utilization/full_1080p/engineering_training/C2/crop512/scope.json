@@ -1,0 +1,8 @@
+{
+  "engineering_only": true,
+  "formal_quality_gate_passed": false,
+  "purpose": "native pixel resolutions and 4/8/16-frame base-only TBPTT checks",
+  "updates": 2,
+  "frames_per_update": 4,
+  "source_checkpoint": "results/prefix_utilization/decoder_ablations/C2/latest.pt"
+}

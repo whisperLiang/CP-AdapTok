@@ -18,7 +18,7 @@ def save_diagnostics(result, output):
     rows = result["token_interventions"]
     fields = list(dict.fromkeys(key for row in rows for key in row))
     with (output / "reconstruction_sensitivity.csv").open("w") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     plot_diagnostics(result, output)

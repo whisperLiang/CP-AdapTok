@@ -1,0 +1,205 @@
+{
+  "seed": 20261115,
+  "device": "cuda:0",
+  "gpu_memory_fraction": 0.8,
+  "model": {
+    "n_max": 2048,
+    "k_ref": 128,
+    "packet_tokens": 128,
+    "dim": 192,
+    "heads": 6,
+    "layers": 2,
+    "codebook_size": 8192,
+    "embedding_dim": 16,
+    "grid": [
+      17,
+      30
+    ],
+    "kv_grid": [
+      17,
+      30
+    ],
+    "qp": 32,
+    "attention_precision": "float64",
+    "state_fingerprint": "mixed_int64_v1"
+  },
+  "paths": {
+    "ld_checkpoint": "checkpoints/cvpr2026_video_ld.pth.tar",
+    "intra_checkpoint": "checkpoints/cvpr2026_image.pth.tar",
+    "checkpoint": "results/optimization_20261115/auxiliary/latest.pt",
+    "save_checkpoint": "checkpoints/multiscene_research/latest.pt",
+    "output": "results/prefix_utilization/diagnostics"
+  },
+  "data": {
+    "train": [
+      {
+        "path": "data/davis2017/train/bear",
+        "frames": 16,
+        "fps": 30,
+        "purpose": "official-DAVIS2017-train-native-pixels-nominal-fps",
+        "content_id": "DAVIS2017:bear"
+      },
+      {
+        "path": "data/davis2017/train/bmx-bumps",
+        "frames": 16,
+        "fps": 30,
+        "purpose": "official-DAVIS2017-train-native-pixels-nominal-fps",
+        "content_id": "DAVIS2017:bmx-bumps"
+      },
+      {
+        "path": "data/davis2017/train/boxing-fisheye",
+        "frames": 16,
+        "fps": 30,
+        "purpose": "official-DAVIS2017-train-native-pixels-nominal-fps",
+        "content_id": "DAVIS2017:boxing-fisheye"
+      },
+      {
+        "path": "data/davis2017/train/breakdance-flare",
+        "frames": 16,
+        "fps": 30,
+        "purpose": "official-DAVIS2017-train-native-pixels-nominal-fps",
+        "content_id": "DAVIS2017:breakdance-flare"
+      },
+      {
+        "path": "data/davis2017/train/bus",
+        "frames": 16,
+        "fps": 30,
+        "purpose": "official-DAVIS2017-train-native-pixels-nominal-fps",
+        "content_id": "DAVIS2017:bus"
+      },
+      {
+        "path": "data/davis2017/train/car-turn",
+        "frames": 16,
+        "fps": 30,
+        "purpose": "official-DAVIS2017-train-native-pixels-nominal-fps",
+        "content_id": "DAVIS2017:car-turn"
+      },
+      {
+        "path": "data/davis2017/train/cat-girl",
+        "frames": 16,
+        "fps": 30,
+        "purpose": "official-DAVIS2017-train-native-pixels-nominal-fps",
+        "content_id": "DAVIS2017:cat-girl"
+      },
+      {
+        "path": "data/davis2017/train/classic-car",
+        "frames": 16,
+        "fps": 30,
+        "purpose": "official-DAVIS2017-train-native-pixels-nominal-fps",
+        "content_id": "DAVIS2017:classic-car"
+      }
+    ],
+    "validation": [
+      {
+        "path": "data/pretrained_native/uvg_beauty.mp4",
+        "frames": 16,
+        "fps": 120,
+        "purpose": "independent-clip-engineering-validation"
+      }
+    ],
+    "test": [
+      {
+        "path": "data/pretrained_native/basketball.mp4",
+        "frames": 8,
+        "fps": 50,
+        "purpose": "independent-clip-engineering-test"
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/prefix_utilization/data/heldout1080/blackswan",
+        "frames": 8,
+        "fps": 30,
+        "purpose": "heldout-official-DAVIS-val-native1080-nominal-fps",
+        "content_id": "DAVIS2017:blackswan"
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/prefix_utilization/data/heldout1080/bmx-trees",
+        "frames": 8,
+        "fps": 30,
+        "purpose": "heldout-official-DAVIS-val-native1080-nominal-fps",
+        "content_id": "DAVIS2017:bmx-trees"
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/prefix_utilization/data/heldout1080/breakdance",
+        "frames": 8,
+        "fps": 30,
+        "purpose": "heldout-official-DAVIS-val-native1080-nominal-fps",
+        "content_id": "DAVIS2017:breakdance"
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/prefix_utilization/data/heldout1080/camel",
+        "frames": 8,
+        "fps": 30,
+        "purpose": "heldout-official-DAVIS-val-native1080-nominal-fps",
+        "content_id": "DAVIS2017:camel"
+      }
+    ]
+  },
+  "training": {
+    "crop": 512,
+    "sequence_length": 4,
+    "tbptt": 2,
+    "gradient_accumulation": 1,
+    "amp_bf16": true,
+    "lr": 0.0003,
+    "clip_grad_norm": 1.0,
+    "save_every": 100,
+    "validate_every": 1000000,
+    "budgets": [
+      128,
+      256,
+      512,
+      1024,
+      2048
+    ],
+    "query_initialization_scale": 1.0,
+    "grid_query_initialization_scale": 1.0,
+    "diagnostic_every": 100,
+    "vq": {
+      "strategy": "stochastic_training",
+      "temperature": 0.1,
+      "final_temperature": 0.01,
+      "anneal_steps": 500,
+      "warmup_steps": 100,
+      "initialization": {
+        "clips": 8,
+        "max_samples": 32768,
+        "iterations": 10
+      }
+    }
+  },
+  "loss": {
+    "mse": 1.0,
+    "latent": 1.0,
+    "lpips": 0.0,
+    "dists": 0.0,
+    "vq": 0.1,
+    "estimated_rate": 0.0,
+    "monotonic": 0.1,
+    "entropy": 1.0,
+    "scorer": 1.0
+  },
+  "teacher": {
+    "policy": "i_only",
+    "decay_steps": 500,
+    "minimum_factor": 0.1
+  },
+  "evaluation": {
+    "split": "test",
+    "budgets": [
+      128,
+      256,
+      512,
+      1024,
+      2048
+    ],
+    "metrics": [
+      "psnr",
+      "ms-ssim",
+      "lpips",
+      "dists"
+    ],
+    "intra_period": 32,
+    "save_frames": false
+  },
+  "stage": 1
+}

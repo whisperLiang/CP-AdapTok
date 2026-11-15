@@ -1,0 +1,32 @@
+[
+  {
+    "variant": "C0",
+    "updates": 100,
+    "train_base_psnr": 35.057932896600576,
+    "train_max_psnr": 35.07221882051735,
+    "train_gain": 0.014285923916771637,
+    "validation_base_psnr": 12.713921624953146,
+    "validation_max_psnr": 12.758642620428757,
+    "validation_gain": 0.04472099547561115
+  },
+  {
+    "variant": "C1",
+    "updates": 100,
+    "train_base_psnr": 34.997824201779984,
+    "train_max_psnr": 35.01368604817847,
+    "train_gain": 0.015861846398491863,
+    "validation_base_psnr": 12.67103277470559,
+    "validation_max_psnr": 12.72519488375119,
+    "validation_gain": 0.05416210904559904
+  },
+  {
+    "variant": "C2",
+    "updates": 100,
+    "train_base_psnr": 32.180533783146544,
+    "train_max_psnr": 32.09601074765735,
+    "train_gain": -0.0845230354891946,
+    "validation_base_psnr": 12.10976107055673,
+    "validation_max_psnr": 11.892270341140351,
+    "validation_gain": -0.2174907294163777
+  }
+]

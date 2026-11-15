@@ -4,6 +4,8 @@
 
 **当前仍是研究验证原型。已实际完成 VQ/Teacher 修复、短程多视频及1080p延长训练；确定性码本使用恢复，但有效渐进画质与30/60 FPS目标仍未达成。** 同一模型32帧实际码流在逐位一致的整数指纹融合后由16.66提升至18.38 FPS；该模型质量验收失败。完整证据、失败结论与恢复命令见 [优化验收报告](docs/optimization_report.md)。原100步实验和权重仍保留，详见 [原生骨干历史报告](docs/pretrained_native_report.md) 与 [官方权重记录](docs/pretrained_weights.md)。旧 smoke checkpoint 的骨干仍为随机初始化。
 
+2026-11-16 前缀信息利用专项已执行 5 组训练目标消融、3 组 Decoder 消融和 5 条独立 1080p 序列的真实 rANS 验证。Nested 模型平均前缀收益仅 **0.022 dB**；共享分组聚合虽改变长度曲线，却明显损害基础质量及感知指标，**未通过研究验收，不替换默认全局 Softmax**。诊断、真实 bpp、置信区间、失败实验与命令见 [前缀专项报告](docs/prefix_utilization_report.md)。`trained` 仅表示实际更新过参数，不能代表收敛或压缩有效。
+
 在本机使用：
 
 ```bash
@@ -17,7 +19,7 @@ python -m cp_adaptok.cli.eval --config configs/pretrained_s1.yaml --baseline nat
 python -m scripts.benchmark_native
 ```
 
-`step100.pt` 保留本轮100步结果，`latest.pt` 已验证恢复至101步。该短程 checkpoint 状态为 `trained`，表示新增参数经过更新；其 RD 验收仍为 false。当前应先解决码本塌缩，再扩展训练量。
+`step100.pt` 保留历史100步结果，`latest.pt` 已验证恢复至101步。该短程 checkpoint 状态为 `trained`，表示新增参数经过更新；其 RD 验收仍为 false。后续已恢复码本使用，当前优先解决前缀内容利用与泛化。
 
 运行已有结构训练 checkpoint 的真实 1080p 字节流评估：
 
@@ -91,5 +93,7 @@ pip install -e '.[eval,dev]'
 - [本轮优化验收报告](docs/optimization_report.md)
 - [量化与教师策略说明](docs/quantization_training.md)
 - [本轮 ub-mode 操作日志](docs/optimization_work_log.md)
+- [前缀信息利用专项验收](docs/prefix_utilization_report.md)
+- [前缀专项操作记录](docs/prefix_utilization_work_log.md)
 
 `third_party` 是固定提交的 Git submodule，清单见 `third_party/manifest.json`。上游源码保持原样；固定空间 Tokenizer 只通过 `configs/ablation_spatial.yaml` 显式启用为实验对照。

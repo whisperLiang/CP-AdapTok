@@ -1,0 +1,21 @@
+{
+  "source": "results/prefix_utilization/full_1080p/C2/basketball/frame000.cpat",
+  "model_id": "321f70b500f290b7355a436642f1604f",
+  "orders": [
+    "ascending packet order",
+    "reversed summation only (not packet reordering)"
+  ],
+  "results": {
+    "float64": {
+      "grid_reverse_max_error": 0.0,
+      "image_reverse_max_error": 0.0
+    },
+    "float32": {
+      "grid_reverse_max_error": 1.5050172805786133e-06,
+      "image_reverse_max_error": 0.0037314891815185547
+    }
+  },
+  "production_order": "ascending packets for both full and cached paths",
+  "production_precision": "float64",
+  "diagnostic_only": true
+}

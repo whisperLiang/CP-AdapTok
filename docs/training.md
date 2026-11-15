@@ -1,5 +1,23 @@
 # 训练与恢复
 
+## 前缀专项（2026-11-16）
+
+最新研究问题是前缀内容利用，早期码本完全塌缩已修复。下文100步阶段表保留历史口径；新专项实测及失败结论见 [报告](prefix_utilization_report.md)。全局 Softmax 仍为默认，`prefix_progressive_decoder.yaml` 仅用于失败结构消融的复现。
+
+`configs/prefix_nested.yaml` 对一次 Encoder/VQ 的同一序列监督 K_ref、N_max 和随机中间档。`prefix_training.weights` 为每档显式正权重，按实际采样预算数取平均；可用 `weight_schedule: [{step: ..., weights: {...}}]` 调度。MSE、latent 和感知失真均应用该权重；估计率另行记录。B2 的端点0.6、中间1.8权重用于平衡三档采样下五个预算的期望曝光，并非只重视最大预算。
+
+新模式的 `relu(D_high - D_low.detach() + margin)` 只直接推动高预算分支；默认 margin=0。`one_sided: false` 仅用于旧约束消融。共享参数仍可能间接影响基础质量，因此绝对基础失真、验证集低预算质量和内容干预均不能省略。残差 L2 对齐与高预算 MSE 等价，本轮没有增加重复的增量辅助损失。
+
+```bash
+.venv-native/bin/python -m scripts.compare_prefix_training --steps 100
+.venv-native/bin/python -m scripts.compare_prefix_decoders --steps 100
+.venv-native/bin/python -m scripts.run_prefix_validation --engineering-steps 2
+```
+
+这些命令保留完整配置与 checkpoint，重复运行同配置可恢复已完成的更新；前两个命令拒绝混合不一致配置。最后一条运行有限的512/720/原生1080p、4/8/16帧训练链路检查，再评估独立原生1080p视频。正式大规模训练质量门槛未通过，这些更新不能标成正式收敛。
+
+`migrate_global_aggregation` 是显式迁移入口，只允许聚合方式变更：逐项复用同形参数，枚举新 gate 参数，合成完整 state_dict 后 `strict=True` 加载，重建 optimizer。标准加载仍严格拒绝架构不符。训练专用 `latest.pt` 含 optimizer/RNG；train-only MLE 熵校准的 `calibrated.pt` 为推理产物，禁止 `--resume`。
+
 官方 LD/DMCI 权重已下载并验证，见 [权重记录](pretrained_weights.md)。独立 `.venv-native` 已成功构建两个原生扩展：Python3.12.13、PyTorch2.9.1/cu130、nvcc13.0.88、CUTLASS4.4.1。复现使用 `bash scripts/setup_native.sh`；固定的上游 Git submodule 保持原样。
 
 加载现有 CP checkpoint 时，其完整 state_dict 会覆盖骨干参数，因此旧 smoke checkpoint 仍代表随机骨干。新一轮预训练骨干实验应从官方 LD/DMCI 权重初始化，使用新的保存路径，再训练 CP 新增模块；下载资源不会改变已经保存的实验结果。
@@ -25,4 +43,4 @@ bf16 autocast、梯度累积、梯度裁剪、seed、独立验证、OOM memory s
 
 checkpoint 原子替换并保存 model、optimizer、配置、已完成 step、采样 generator、CPU/CUDA/Python RNG 和实验元数据。`--checkpoint` 不存在时直接失败；`--resume` 要求同一 stage。辅助 teacher/感知网络初始化结束后再恢复 RNG，避免构造过程消耗已恢复状态。切阶段用 warm start，不复用上一阶段的 optimizer。CPU短BPTT测试逐位一致；两个真实CUDA恢复进程的所有RNG相同，但bf16更新的模型最大差约9.4e-6，未承诺GPU逐位相同。
 
-当前应先解决码本塌缩，再开展较长训练。新增100步模型保存于 `checkpoints/pretrained_s1/step100.pt`；全部773个官方骨干 state tensor保持完全不变。其后期perplexity为1，独立8帧PSNR约14.56dB，五档画质近乎相同，尚无有效RD结果。旧 smoke 模型仍是 `untrained_backbone_smoke`。完整指标、实际命令和限制见 [后续报告](pretrained_native_report.md)。
+以上为早期100步实验：`checkpoints/pretrained_s1/step100.pt` 的全部773个官方骨干 state tensor保持完全不变，后期perplexity为1，独立8帧PSNR约14.56dB，五档画质近乎相同。后续已修复码本使用机制，但前缀信息利用仍未通过。旧 smoke 模型仍是 `untrained_backbone_smoke`；历史指标见 [报告](pretrained_native_report.md)。

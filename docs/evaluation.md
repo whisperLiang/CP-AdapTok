@@ -1,5 +1,26 @@
 # 评估口径
 
+## 前缀信息利用验收
+
+`scripts/diagnose_prefix_utilization.py` 在同一个 FrozenFrameContext 中进行后缀替换、同片段跨帧替换、打乱、固定 Code 和全常量 ID 对照；仅正常 K_ref 提交一次状态。干预是独立 Decoder 输入实验，不是合法正常网络流，不进入正式 RD。常量使用全视频固定的合法 Code 0，后缀对照保留基础 ID；全常量对照另行标记，允许替换基础 ID，目的仅是测量固定 Query/位置/历史的联合贡献。Code Embedding 方差不含 Decoder 位置向量，但静态 Encoder Query 仍可能影响 Code，因此 Code 多样性本身不是内容证据。
+
+真实流报告新增 `budget_summary_by_frame_type` 与 `prefix_gains`。相邻预算和最小/最大预算分别报告 PSNR/LPIPS/DISTS 原始差、改善幅度、中位数、倒退比例及按独立视频序列重采样的2000次 bootstrap 95% CI（seed=19）。感知指标的负差表示改善；只有一条序列时 CI 为 null，不能用连续帧冒充独立样本。
+
+```bash
+.venv-native/bin/python -m scripts.diagnose_prefix_utilization
+.venv-native/bin/python -m scripts.prepare_prefix_validation --sequences 4 --frames 16
+.venv-native/bin/python -m scripts.run_prefix_validation
+.venv-native/bin/python -m scripts.evaluate_prefix_gain \
+  --inputs results/prefix_utilization/full_1080p/C0/evaluation.json \
+           results/prefix_utilization/full_1080p/C1/evaluation.json \
+           results/prefix_utilization/full_1080p/C2/evaluation.json \
+  --labels C0 C1 C2 --output results/prefix_utilization/full_1080p/comparison
+```
+
+所有模型在相同训练数据上重新做确定性 Token 熵表 MLE，再以实际 rANS 和完整收发状态测试。新共享分组聚合器通过 `token_aggregation: shared_progressive_v2` 显式启用，绑定新 Model ID；旧模型使用 `global_softmax_v1`，默认字段不改变其历史身份字节，Packet 格式不变。缓存每次只处理新组，完整与缓存路径都按原 Packet 顺序累加，默认 FP64。单帧逆序加法诊断中 FP32 图像最大差约0.00373，不能直接推广 FP32 为严格状态路径。
+
+BD-rate 仅在至少四个严格递增实测工作点且质量区间重叠时作 PCHIP log-rate 积分；不排序掩盖倒退，不外推。专项质量门槛失败，正式长训及性能提升评估没有启动。验收入口的带 coverage 单帧 benchmark 仅验证可执行，不用于 FPS 声明。完整实测见 [前缀专项报告](prefix_utilization_report.md)。
+
 `eval` 的每一档都走 `bytes → CRC/metadata → rANS decode → ID lookup → 同一个 Decoder → 官方 I/P 重建 → RGB 裁剪`。同一帧只 encode_full 一次，所有预算复用同一组前置 packet bytes 和同一个 frozen context。发送端本地基础解码也经过序列化 packet。
 
 质量计算来自完整分辨率重建 RGB；PSNR、MS-SSIM、LPIPS 和 DISTS 分别记录。DISTS 默认安装包错误地在 sys.prefix 下查找 weights，本实现显式读取其分发的包内预训练 alpha/beta，不用随机权重代替。任何可选指标缺失都为 null 并保存原因，不能置零冒充结果。

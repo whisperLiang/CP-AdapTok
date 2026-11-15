@@ -1,0 +1,1080 @@
+{
+  "time": "2026-11-16T00:46:41.851119+08:00",
+  "timezone": "Asia/Shanghai",
+  "git_commit": "b6dba05933f52dba919438d2af8c1b6e086d14eb",
+  "git_dirty": true,
+  "source_sha256": "852e272dfb66c229d8fe9615e8182fab647f5782c89048d1afaa344aed3de4c5",
+  "torch": "2.9.1+cu130",
+  "cuda": "13.0",
+  "gpu_snapshot": "NVIDIA H100 PCIe, 6541 MiB, 97 %",
+  "gpu_shared": "not assumed isolated; see gpu_snapshot and serial benchmark commands",
+  "status": "trained",
+  "config": {
+    "seed": 20261115,
+    "device": "cuda:0",
+    "gpu_memory_fraction": 0.8,
+    "model": {
+      "n_max": 2048,
+      "k_ref": 128,
+      "packet_tokens": 128,
+      "dim": 192,
+      "heads": 6,
+      "layers": 2,
+      "codebook_size": 8192,
+      "embedding_dim": 16,
+      "grid": [
+        17,
+        30
+      ],
+      "kv_grid": [
+        17,
+        30
+      ],
+      "qp": 32,
+      "attention_precision": "float64",
+      "state_fingerprint": "mixed_int64_v1"
+    },
+    "paths": {
+      "ld_checkpoint": "checkpoints/cvpr2026_video_ld.pth.tar",
+      "intra_checkpoint": "checkpoints/cvpr2026_image.pth.tar",
+      "checkpoint": "results/optimization_20261115/auxiliary/latest.pt",
+      "save_checkpoint": "/home/whisperliang/CP-AdapTok/results/prefix_utilization/nested_training/B3/latest.pt",
+      "output": "/home/whisperliang/CP-AdapTok/results/prefix_utilization/nested_training/B3"
+    },
+    "data": {
+      "train": [
+        {
+          "path": "data/pretrained_native/mcl_jcv01.mp4",
+          "frames": 16,
+          "fps": 30,
+          "purpose": "fixed-real-clip-prefix-pilot"
+        }
+      ],
+      "validation": [
+        {
+          "path": "data/pretrained_native/uvg_beauty.mp4",
+          "frames": 4,
+          "fps": 120,
+          "purpose": "independent-clip-engineering-validation"
+        }
+      ],
+      "test": [
+        {
+          "path": "data/pretrained_native/basketball.mp4",
+          "frames": 32,
+          "fps": 50,
+          "purpose": "independent-clip-engineering-test"
+        }
+      ]
+    },
+    "training": {
+      "crop": 256,
+      "sequence_length": 4,
+      "tbptt": 2,
+      "gradient_accumulation": 1,
+      "amp_bf16": true,
+      "lr": 0.0003,
+      "clip_grad_norm": 1.0,
+      "save_every": 50,
+      "validate_every": 1000000,
+      "budgets": [
+        128,
+        256,
+        512,
+        1024,
+        2048
+      ],
+      "query_initialization_scale": 1.0,
+      "grid_query_initialization_scale": 1.0,
+      "diagnostic_every": 50,
+      "vq": {
+        "strategy": "deterministic_nearest",
+        "temperature": 0.1,
+        "final_temperature": 0.01,
+        "anneal_steps": 500,
+        "warmup_steps": 0,
+        "initialization": null
+      },
+      "diagnostic_steps": [
+        0
+      ],
+      "fixed_sample_seed": 19
+    },
+    "loss": {
+      "mse": 1.0,
+      "latent": 0.0,
+      "lpips": 0.0,
+      "dists": 0.0,
+      "vq": 0.1,
+      "estimated_rate": 0.0,
+      "monotonic": 0.1,
+      "entropy": 1.0,
+      "scorer": 1.0
+    },
+    "teacher": {
+      "policy": "none",
+      "decay_steps": 500,
+      "minimum_factor": 0.1
+    },
+    "evaluation": {
+      "split": "test",
+      "budgets": [
+        128,
+        256,
+        512,
+        1024,
+        2048
+      ],
+      "metrics": [
+        "psnr",
+        "ms-ssim",
+        "lpips",
+        "dists"
+      ],
+      "intra_period": 32,
+      "save_frames": false
+    },
+    "stage": 2,
+    "purpose": "train",
+    "prefix_training": {
+      "mode": "progressive_nested",
+      "budgets": [
+        128,
+        256,
+        512,
+        1024,
+        2048
+      ],
+      "always_include_base": true,
+      "always_include_max": true,
+      "sample_intermediate": 1,
+      "weighting": "balanced",
+      "weights": {
+        "128": 0.6,
+        "256": 1.8,
+        "512": 1.8,
+        "1024": 1.8,
+        "2048": 0.6
+      },
+      "margin": 0.0,
+      "monitor_gradients": true,
+      "one_sided": true
+    }
+  },
+  "upstreams": [
+    {
+      "name": "AdapTok",
+      "url": "https://github.com/VisionXLab/AdapTok",
+      "commit": "a72076cf6474f930a181aa78971de70d65289b49",
+      "license": "MIT",
+      "license_file": "third_party/AdapTok/LICENSE"
+    },
+    {
+      "name": "DCVC",
+      "url": "https://github.com/microsoft/DCVC",
+      "commit": "cbdae87a5445114cdc7f48816da63ea80bdeac40",
+      "license": "MIT",
+      "license_file": "third_party/DCVC/LICENSE.txt"
+    }
+  ],
+  "artifact": {
+    "checkpoint": "/home/whisperliang/CP-AdapTok/results/optimization_20261115/auxiliary/latest.pt",
+    "checkpoint_step": 300,
+    "initialization_status": "trained",
+    "effective_model_config": {
+      "n_max": 2048,
+      "k_ref": 128,
+      "packet_tokens": 128,
+      "dim": 192,
+      "heads": 6,
+      "layers": 2,
+      "codebook_size": 8192,
+      "embedding_dim": 16,
+      "grid": [
+        17,
+        30
+      ],
+      "kv_grid": [
+        17,
+        30
+      ],
+      "qp": 32,
+      "attention_precision": "float64",
+      "state_fingerprint": "mixed_int64_v1",
+      "query_content_only": false
+    },
+    "control": "learned_query"
+  },
+  "model_id": "fe001c0263d906f652fcdab0b75907ef",
+  "codebook_id": "d86568823a6593ea7046b5fc22e69a98",
+  "real_entropy_bitstream": true,
+  "split": "validation",
+  "sample_count": 4,
+  "records": [
+    {
+      "sequence": "uvg_beauty",
+      "source": {
+        "path": "data/pretrained_native/uvg_beauty.mp4",
+        "frames": 4,
+        "fps": 120,
+        "purpose": "independent-clip-engineering-validation"
+      },
+      "frame_id": 0,
+      "frame_type": "I",
+      "shape": [
+        1,
+        3,
+        1080,
+        1920
+      ],
+      "fps": 120,
+      "prefixes": [
+        {
+          "tokens": 128,
+          "mse": 0.05375257134437561,
+          "psnr": 12.696007557107222,
+          "lpips": 0.6601536273956299,
+          "dists": 0.45285820960998535,
+          "predicted_mse": 3.918846734128161e-18,
+          "prediction_error": -0.0537525713443756,
+          "dense_decode_ms": 0.034626980777829885,
+          "total_bytes": 328,
+          "codec_bytes": 320,
+          "bpp": 0.0012654320987654322,
+          "kbps": 314.88,
+          "cache_decode_ms": 0.02832198515534401,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.05375257134437561,
+            "psnr": 12.696007557107222,
+            "lpips": 0.6601536273956299,
+            "dists": 0.45285820960998535
+          },
+          "attention_update_ms": 0.0,
+          "latent_ld_reconstruction_ms": 0.0
+        },
+        {
+          "tokens": 256,
+          "mse": 0.05222164839506149,
+          "psnr": 12.821494236356244,
+          "lpips": 0.6722666621208191,
+          "dists": 0.44714754819869995,
+          "predicted_mse": 3.7621394350315214e-18,
+          "prediction_error": -0.052221648395061486,
+          "dense_decode_ms": 34.82642601011321,
+          "total_bytes": 550,
+          "codec_bytes": 538,
+          "bpp": 0.0021219135802469135,
+          "kbps": 528.0,
+          "cache_decode_ms": 35.07867601001635,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.05222164839506149,
+            "psnr": 12.821494236356244,
+            "lpips": 0.6722666621208191,
+            "dists": 0.44714754819869995
+          },
+          "attention_update_ms": 1.2287739955354482,
+          "latent_ld_reconstruction_ms": 33.803291007643566
+        },
+        {
+          "tokens": 512,
+          "mse": 0.05229877308011055,
+          "psnr": 12.815084994843106,
+          "lpips": 0.6703583598136902,
+          "dists": 0.44856929779052734,
+          "predicted_mse": 6.5188941886543474e-18,
+          "prediction_error": -0.05229877308011054,
+          "dense_decode_ms": 34.82494200579822,
+          "total_bytes": 990,
+          "codec_bytes": 970,
+          "bpp": 0.0038194444444444443,
+          "kbps": 950.4,
+          "cache_decode_ms": 34.90036301082,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.05229877308011055,
+            "psnr": 12.815084994843106,
+            "lpips": 0.6703583598136902,
+            "dists": 0.44856929779052734
+          },
+          "attention_update_ms": 1.0271169885527343,
+          "latent_ld_reconstruction_ms": 33.823761012172326
+        },
+        {
+          "tokens": 1024,
+          "mse": 0.05157662555575371,
+          "psnr": 12.875470753515415,
+          "lpips": 0.6760114431381226,
+          "dists": 0.444563090801239,
+          "predicted_mse": 3.587464780413495e-17,
+          "prediction_error": -0.05157662555575367,
+          "dense_decode_ms": 34.79482399416156,
+          "total_bytes": 1871,
+          "codec_bytes": 1835,
+          "bpp": 0.007218364197530865,
+          "kbps": 1796.16,
+          "cache_decode_ms": 35.27743899030611,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.05157662555575371,
+            "psnr": 12.875470753515415,
+            "lpips": 0.6760114431381226,
+            "dists": 0.444563090801239
+          },
+          "attention_update_ms": 1.0522720112930983,
+          "latent_ld_reconstruction_ms": 34.17863801587373
+        },
+        {
+          "tokens": 2048,
+          "mse": 0.05108329653739929,
+          "psnr": 12.917210843568157,
+          "lpips": 0.6793574094772339,
+          "dists": 0.4446521997451782,
+          "predicted_mse": 6.800959220658296e-17,
+          "prediction_error": -0.05108329653739922,
+          "dense_decode_ms": 34.838948980905116,
+          "total_bytes": 3650,
+          "codec_bytes": 3582,
+          "bpp": 0.01408179012345679,
+          "kbps": 3504.0,
+          "cache_decode_ms": 34.93279800750315,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.05108329653739929,
+            "psnr": 12.917210843568157,
+            "lpips": 0.6793574094772339,
+            "dists": 0.4446521997451782
+          },
+          "attention_update_ms": 1.1108159960713238,
+          "latent_ld_reconstruction_ms": 33.7755779910367
+        }
+      ],
+      "base_decode_ms": 36.12367997993715,
+      "encode_timing_ms": {
+        "encode_full_ms": 20.03817801596597,
+        "entropy_encode_packetize_ms": 1.2086759961675853,
+        "sender_base_decode_state_scorer_ms": 37.346179015003145,
+        "encode_total_ms": 58.5930330271367
+      },
+      "byte_counts": {
+        "frame_header_bytes": 108,
+        "packet_header_bytes": 448,
+        "payload_bytes": 3026,
+        "side_info_bytes": 0,
+        "total_bytes": 3582,
+        "transport_framing_bytes": 68
+      },
+      "state_fingerprint": "9f229838faab8e64963dcc5987b127c8",
+      "reconstructions": 9,
+      "context_builds": 1
+    },
+    {
+      "sequence": "uvg_beauty",
+      "source": {
+        "path": "data/pretrained_native/uvg_beauty.mp4",
+        "frames": 4,
+        "fps": 120,
+        "purpose": "independent-clip-engineering-validation"
+      },
+      "frame_id": 1,
+      "frame_type": "P",
+      "shape": [
+        1,
+        3,
+        1080,
+        1920
+      ],
+      "fps": 120,
+      "prefixes": [
+        {
+          "tokens": 128,
+          "mse": 0.05436548590660095,
+          "psnr": 12.646767259874736,
+          "lpips": 0.8055603504180908,
+          "dists": 0.5037450790405273,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.05436548590660095,
+          "dense_decode_ms": 0.028178008506074548,
+          "total_bytes": 351,
+          "codec_bytes": 343,
+          "bpp": 0.0013541666666666667,
+          "kbps": 336.96,
+          "cache_decode_ms": 0.027663016226142645,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.05436548590660095,
+            "psnr": 12.646767259874736,
+            "lpips": 0.8055603504180908,
+            "dists": 0.5037450790405273
+          },
+          "attention_update_ms": 0.0,
+          "latent_ld_reconstruction_ms": 0.0,
+          "temporal_error": 0.001770939095877111
+        },
+        {
+          "tokens": 256,
+          "mse": 0.05433652177453041,
+          "psnr": 12.64908165374793,
+          "lpips": 0.805339515209198,
+          "dists": 0.5029787421226501,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.05433652177453041,
+          "dense_decode_ms": 7.403472001897171,
+          "total_bytes": 593,
+          "codec_bytes": 581,
+          "bpp": 0.0022878086419753085,
+          "kbps": 569.28,
+          "cache_decode_ms": 7.650006009498611,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.05433652177453041,
+            "psnr": 12.64908165374793,
+            "lpips": 0.805339515209198,
+            "dists": 0.5029787421226501
+          },
+          "attention_update_ms": 1.1451099999248981,
+          "latent_ld_reconstruction_ms": 6.458286021370441,
+          "temporal_error": 0.0019921930506825447
+        },
+        {
+          "tokens": 512,
+          "mse": 0.0543331652879715,
+          "psnr": 12.649349935295612,
+          "lpips": 0.8051759600639343,
+          "dists": 0.5028615593910217,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.0543331652879715,
+          "dense_decode_ms": 7.45759200071916,
+          "total_bytes": 1080,
+          "codec_bytes": 1060,
+          "bpp": 0.004166666666666667,
+          "kbps": 1036.8,
+          "cache_decode_ms": 7.533844996942207,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.0543331652879715,
+            "psnr": 12.649349935295612,
+            "lpips": 0.8051759600639343,
+            "dists": 0.5028615593910217
+          },
+          "attention_update_ms": 1.0206080041825771,
+          "latent_ld_reconstruction_ms": 6.466646998887882,
+          "temporal_error": 0.00197253143414855
+        },
+        {
+          "tokens": 1024,
+          "mse": 0.0543343611061573,
+          "psnr": 12.64925435251082,
+          "lpips": 0.8047603964805603,
+          "dists": 0.5027352571487427,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.0543343611061573,
+          "dense_decode_ms": 7.459688000380993,
+          "total_bytes": 2049,
+          "codec_bytes": 2013,
+          "bpp": 0.007905092592592592,
+          "kbps": 1967.04,
+          "cache_decode_ms": 7.570452988147736,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.0543343611061573,
+            "psnr": 12.64925435251082,
+            "lpips": 0.8047603964805603,
+            "dists": 0.5027352571487427
+          },
+          "attention_update_ms": 1.0568590078037232,
+          "latent_ld_reconstruction_ms": 6.46730198059231,
+          "temporal_error": 0.0021730056032538414
+        },
+        {
+          "tokens": 2048,
+          "mse": 0.054327718913555145,
+          "psnr": 12.649785295337963,
+          "lpips": 0.8046125173568726,
+          "dists": 0.5025016069412231,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.054327718913555145,
+          "dense_decode_ms": 7.555699994554743,
+          "total_bytes": 3992,
+          "codec_bytes": 3924,
+          "bpp": 0.015401234567901234,
+          "kbps": 3832.32,
+          "cache_decode_ms": 7.626774022355676,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.054327718913555145,
+            "psnr": 12.649785295337963,
+            "lpips": 0.8046125173568726,
+            "dists": 0.5025016069412231
+          },
+          "attention_update_ms": 1.1152710067108274,
+          "latent_ld_reconstruction_ms": 6.465465005021542,
+          "temporal_error": 0.002348411362618208
+        }
+      ],
+      "base_decode_ms": 10.96007801243104,
+      "encode_timing_ms": {
+        "encode_full_ms": 13.452437007799745,
+        "entropy_encode_packetize_ms": 1.0388509836047888,
+        "sender_base_decode_state_scorer_ms": 11.878596007591113,
+        "encode_total_ms": 26.369883998995647
+      },
+      "byte_counts": {
+        "frame_header_bytes": 108,
+        "packet_header_bytes": 448,
+        "payload_bytes": 3368,
+        "side_info_bytes": 0,
+        "total_bytes": 3924,
+        "transport_framing_bytes": 68
+      },
+      "state_fingerprint": "4eff535cd62ded01de03cac7e35653e8",
+      "reconstructions": 18,
+      "context_builds": 2
+    },
+    {
+      "sequence": "uvg_beauty",
+      "source": {
+        "path": "data/pretrained_native/uvg_beauty.mp4",
+        "frames": 4,
+        "fps": 120,
+        "purpose": "independent-clip-engineering-validation"
+      },
+      "frame_id": 2,
+      "frame_type": "P",
+      "shape": [
+        1,
+        3,
+        1080,
+        1920
+      ],
+      "fps": 120,
+      "prefixes": [
+        {
+          "tokens": 128,
+          "mse": 0.05410230532288551,
+          "psnr": 12.667842290213912,
+          "lpips": 0.8704135417938232,
+          "dists": 0.5447663068771362,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.05410230532288551,
+          "dense_decode_ms": 0.02807899727486074,
+          "total_bytes": 342,
+          "codec_bytes": 334,
+          "bpp": 0.0013194444444444445,
+          "kbps": 328.32,
+          "cache_decode_ms": 0.025168003048747778,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.05410230532288551,
+            "psnr": 12.667842290213912,
+            "lpips": 0.8704135417938232,
+            "dists": 0.5447663068771362
+          },
+          "attention_update_ms": 0.0,
+          "latent_ld_reconstruction_ms": 0.0,
+          "temporal_error": 0.0014836839400231838
+        },
+        {
+          "tokens": 256,
+          "mse": 0.05407269671559334,
+          "psnr": 12.670219707332958,
+          "lpips": 0.8701875805854797,
+          "dists": 0.5444425344467163,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.05407269671559334,
+          "dense_decode_ms": 7.405740994727239,
+          "total_bytes": 574,
+          "codec_bytes": 562,
+          "bpp": 0.0022145061728395064,
+          "kbps": 551.04,
+          "cache_decode_ms": 7.658134010853246,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.05407269671559334,
+            "psnr": 12.670219707332958,
+            "lpips": 0.8701875805854797,
+            "dists": 0.5444425344467163
+          },
+          "attention_update_ms": 1.1403750104364008,
+          "latent_ld_reconstruction_ms": 6.472303997725248,
+          "temporal_error": 0.0014837560011073947
+        },
+        {
+          "tokens": 512,
+          "mse": 0.054069362580776215,
+          "psnr": 12.670487502557659,
+          "lpips": 0.8702757358551025,
+          "dists": 0.5443706512451172,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.054069362580776215,
+          "dense_decode_ms": 7.44190500699915,
+          "total_bytes": 1042,
+          "codec_bytes": 1022,
+          "bpp": 0.004020061728395061,
+          "kbps": 1000.32,
+          "cache_decode_ms": 7.5512790062930435,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.054069362580776215,
+            "psnr": 12.670487502557659,
+            "lpips": 0.8702757358551025,
+            "dists": 0.5443706512451172
+          },
+          "attention_update_ms": 1.0221600241493434,
+          "latent_ld_reconstruction_ms": 6.482639990281314,
+          "temporal_error": 0.0014838164206594229
+        },
+        {
+          "tokens": 1024,
+          "mse": 0.054071471095085144,
+          "psnr": 12.670318146339778,
+          "lpips": 0.870537519454956,
+          "dists": 0.5443400144577026,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.054071471095085144,
+          "dense_decode_ms": 7.475263002561405,
+          "total_bytes": 1974,
+          "codec_bytes": 1938,
+          "bpp": 0.007615740740740741,
+          "kbps": 1895.04,
+          "cache_decode_ms": 7.5525900174397975,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.054071471095085144,
+            "psnr": 12.670318146339778,
+            "lpips": 0.870537519454956,
+            "dists": 0.5443400144577026
+          },
+          "attention_update_ms": 1.0496970207896084,
+          "latent_ld_reconstruction_ms": 6.457783980295062,
+          "temporal_error": 0.0014841489028185606
+        },
+        {
+          "tokens": 2048,
+          "mse": 0.05406507849693298,
+          "psnr": 12.670831621222455,
+          "lpips": 0.8706334233283997,
+          "dists": 0.5443159341812134,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.05406507849693298,
+          "dense_decode_ms": 7.537055003922433,
+          "total_bytes": 3843,
+          "codec_bytes": 3775,
+          "bpp": 0.014826388888888889,
+          "kbps": 3689.28,
+          "cache_decode_ms": 7.668108999496326,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.05406507849693298,
+            "psnr": 12.670831621222455,
+            "lpips": 0.8706334233283997,
+            "dists": 0.5443159341812134
+          },
+          "attention_update_ms": 1.132571982452646,
+          "latent_ld_reconstruction_ms": 6.488454004283994,
+          "temporal_error": 0.0014842961682006717
+        }
+      ],
+      "base_decode_ms": 10.945773974526674,
+      "encode_timing_ms": {
+        "encode_full_ms": 13.55035201413557,
+        "entropy_encode_packetize_ms": 1.0661190026439726,
+        "sender_base_decode_state_scorer_ms": 11.844097985886037,
+        "encode_total_ms": 26.46056900266558
+      },
+      "byte_counts": {
+        "frame_header_bytes": 108,
+        "packet_header_bytes": 448,
+        "payload_bytes": 3219,
+        "side_info_bytes": 0,
+        "total_bytes": 3775,
+        "transport_framing_bytes": 68
+      },
+      "state_fingerprint": "b67139dd0ac3485b24f90aac79c9cd5a",
+      "reconstructions": 27,
+      "context_builds": 3
+    },
+    {
+      "sequence": "uvg_beauty",
+      "source": {
+        "path": "data/pretrained_native/uvg_beauty.mp4",
+        "frames": 4,
+        "fps": 120,
+        "purpose": "independent-clip-engineering-validation"
+      },
+      "frame_id": 3,
+      "frame_type": "P",
+      "shape": [
+        1,
+        3,
+        1080,
+        1920
+      ],
+      "fps": 120,
+      "prefixes": [
+        {
+          "tokens": 128,
+          "mse": 0.054608289152383804,
+          "psnr": 12.62741429458195,
+          "lpips": 0.8674429059028625,
+          "dists": 0.5584871768951416,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.054608289152383804,
+          "dense_decode_ms": 0.02776097971946001,
+          "total_bytes": 343,
+          "codec_bytes": 335,
+          "bpp": 0.0013233024691358024,
+          "kbps": 329.28,
+          "cache_decode_ms": 0.026394001906737685,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.054608289152383804,
+            "psnr": 12.62741429458195,
+            "lpips": 0.8674429059028625,
+            "dists": 0.5584871768951416
+          },
+          "attention_update_ms": 0.0,
+          "latent_ld_reconstruction_ms": 0.0,
+          "temporal_error": 0.0014447784051299095
+        },
+        {
+          "tokens": 256,
+          "mse": 0.05458137020468712,
+          "psnr": 12.629555660485824,
+          "lpips": 0.8674495220184326,
+          "dists": 0.558356761932373,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.05458137020468712,
+          "dense_decode_ms": 7.4346979963593185,
+          "total_bytes": 576,
+          "codec_bytes": 564,
+          "bpp": 0.0022222222222222222,
+          "kbps": 552.96,
+          "cache_decode_ms": 7.649609004147351,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.05458137020468712,
+            "psnr": 12.629555660485824,
+            "lpips": 0.8674495220184326,
+            "dists": 0.558356761932373
+          },
+          "attention_update_ms": 1.1462809925433248,
+          "latent_ld_reconstruction_ms": 6.453578011132777,
+          "temporal_error": 0.0014449658337980509
+        },
+        {
+          "tokens": 512,
+          "mse": 0.054577793926000595,
+          "psnr": 12.629840228091712,
+          "lpips": 0.8678364753723145,
+          "dists": 0.5584365129470825,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.054577793926000595,
+          "dense_decode_ms": 7.449966971762478,
+          "total_bytes": 1046,
+          "codec_bytes": 1026,
+          "bpp": 0.004035493827160494,
+          "kbps": 1004.16,
+          "cache_decode_ms": 7.591039990074933,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.054577793926000595,
+            "psnr": 12.629840228091712,
+            "lpips": 0.8678364753723145,
+            "dists": 0.5584365129470825
+          },
+          "attention_update_ms": 1.0261079878546298,
+          "latent_ld_reconstruction_ms": 6.5199200180359185,
+          "temporal_error": 0.0014449689770117402
+        },
+        {
+          "tokens": 1024,
+          "mse": 0.05458032339811325,
+          "psnr": 12.629638953865337,
+          "lpips": 0.8686326742172241,
+          "dists": 0.5586057901382446,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.05458032339811325,
+          "dense_decode_ms": 7.497240992961451,
+          "total_bytes": 1980,
+          "codec_bytes": 1944,
+          "bpp": 0.007638888888888889,
+          "kbps": 1900.8,
+          "cache_decode_ms": 7.594978989800438,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.05458032339811325,
+            "psnr": 12.629638953865337,
+            "lpips": 0.8686326742172241,
+            "dists": 0.5586057901382446
+          },
+          "attention_update_ms": 1.0746670013759285,
+          "latent_ld_reconstruction_ms": 6.472438020864502,
+          "temporal_error": 0.0014450113521888852
+        },
+        {
+          "tokens": 2048,
+          "mse": 0.05457470193505287,
+          "psnr": 12.63008627553139,
+          "lpips": 0.8689802885055542,
+          "dists": 0.5586743354797363,
+          "predicted_mse": 0.0,
+          "prediction_error": -0.05457470193505287,
+          "dense_decode_ms": 7.524103013565764,
+          "total_bytes": 3859,
+          "codec_bytes": 3791,
+          "bpp": 0.014888117283950618,
+          "kbps": 3704.64,
+          "cache_decode_ms": 7.6606869988609105,
+          "cache_max_error": 0.0,
+          "cache_metrics": {
+            "mse": 0.05457470193505287,
+            "psnr": 12.63008627553139,
+            "lpips": 0.8689802885055542,
+            "dists": 0.5586743354797363
+          },
+          "attention_update_ms": 1.1258639860898256,
+          "latent_ld_reconstruction_ms": 6.490707019111142,
+          "temporal_error": 0.0014450879534706473
+        }
+      ],
+      "base_decode_ms": 10.926305985776708,
+      "encode_timing_ms": {
+        "encode_full_ms": 13.496678991941735,
+        "entropy_encode_packetize_ms": 1.0691059869714081,
+        "sender_base_decode_state_scorer_ms": 11.860833008540794,
+        "encode_total_ms": 26.426617987453938
+      },
+      "byte_counts": {
+        "frame_header_bytes": 108,
+        "packet_header_bytes": 448,
+        "payload_bytes": 3235,
+        "side_info_bytes": 0,
+        "total_bytes": 3791,
+        "transport_framing_bytes": 68
+      },
+      "state_fingerprint": "50338eae0965054fff6d3cb2676977cd",
+      "reconstructions": 36,
+      "context_builds": 4
+    }
+  ],
+  "metric_errors": {},
+  "trained_rd_validated": false,
+  "interpretation": "engineering measurements; no generalization claim",
+  "link_layer_overhead": "not captured; codec records and actual TCP application framing counted",
+  "allocation": [
+    {
+      "sequence": "uvg_beauty",
+      "frame_id": 0,
+      "online": {
+        "fixed": {
+          "status": "base_wait_required"
+        },
+        "rate-only": {
+          "status": "base_wait_required"
+        },
+        "scorer": {
+          "status": "base_wait_required"
+        }
+      },
+      "priority": [
+        [
+          256,
+          7.058887346695482e-22
+        ],
+        [
+          512,
+          -6.26535171277915e-21
+        ],
+        [
+          1024,
+          -3.3320946215074464e-20
+        ],
+        [
+          2048,
+          -1.8063487578666673e-20
+        ]
+      ],
+      "offline_oracle": {
+        "tokens": 1024,
+        "bytes": 1871,
+        "actual_mse": 0.05157662555575371,
+        "noncausal": true
+      }
+    },
+    {
+      "sequence": "uvg_beauty",
+      "frame_id": 1,
+      "online": {
+        "fixed": {
+          "status": "base_wait_required"
+        },
+        "rate-only": {
+          "status": "base_wait_required"
+        },
+        "scorer": {
+          "status": "base_wait_required"
+        }
+      },
+      "priority": [
+        [
+          256,
+          0.0
+        ],
+        [
+          512,
+          0.0
+        ],
+        [
+          1024,
+          0.0
+        ],
+        [
+          2048,
+          0.0
+        ]
+      ],
+      "offline_oracle": {
+        "tokens": 256,
+        "bytes": 593,
+        "actual_mse": 0.05433652177453041,
+        "noncausal": true
+      }
+    },
+    {
+      "sequence": "uvg_beauty",
+      "frame_id": 2,
+      "online": {
+        "fixed": {
+          "status": "base_wait_required"
+        },
+        "rate-only": {
+          "status": "base_wait_required"
+        },
+        "scorer": {
+          "status": "base_wait_required"
+        }
+      },
+      "priority": [
+        [
+          256,
+          0.0
+        ],
+        [
+          512,
+          0.0
+        ],
+        [
+          1024,
+          0.0
+        ],
+        [
+          2048,
+          0.0
+        ]
+      ],
+      "offline_oracle": {
+        "tokens": 256,
+        "bytes": 574,
+        "actual_mse": 0.05407269671559334,
+        "noncausal": true
+      }
+    },
+    {
+      "sequence": "uvg_beauty",
+      "frame_id": 3,
+      "online": {
+        "fixed": {
+          "status": "base_wait_required"
+        },
+        "rate-only": {
+          "status": "base_wait_required"
+        },
+        "scorer": {
+          "status": "base_wait_required"
+        }
+      },
+      "priority": [
+        [
+          256,
+          0.0
+        ],
+        [
+          512,
+          0.0
+        ],
+        [
+          1024,
+          0.0
+        ],
+        [
+          2048,
+          0.0
+        ]
+      ],
+      "offline_oracle": {
+        "tokens": 512,
+        "bytes": 1046,
+        "actual_mse": 0.054577793926000595,
+        "noncausal": true
+      }
+    }
+  ],
+  "budget_summary": [
+    {
+      "tokens": 128,
+      "mse": 0.05420716293156147,
+      "psnr": 12.659507850444456,
+      "ms-ssim": null,
+      "lpips": 0.8008926063776016,
+      "dists": 0.5149641931056976,
+      "bpp": 0.0013155864197530863,
+      "kbps": 327.35999999999996
+    },
+    {
+      "tokens": 256,
+      "mse": 0.05380305927246809,
+      "psnr": 12.692587814480738,
+      "ms-ssim": null,
+      "lpips": 0.8038108199834824,
+      "dists": 0.5132313966751099,
+      "bpp": 0.0022116126543209875,
+      "kbps": 550.3199999999999
+    },
+    {
+      "tokens": 512,
+      "mse": 0.053819773718714714,
+      "psnr": 12.691190665197023,
+      "ms-ssim": null,
+      "lpips": 0.8034116327762604,
+      "dists": 0.5135595053434372,
+      "bpp": 0.0040104166666666665,
+      "kbps": 997.92
+    },
+    {
+      "tokens": 1024,
+      "mse": 0.05364069528877735,
+      "psnr": 12.706170551557838,
+      "ms-ssim": null,
+      "lpips": 0.8049855083227158,
+      "dists": 0.5125610381364822,
+      "bpp": 0.007594521604938271,
+      "kbps": 1889.76
+    },
+    {
+      "tokens": 2048,
+      "mse": 0.05351269897073507,
+      "psnr": 12.716978508914991,
+      "ms-ssim": null,
+      "lpips": 0.8058959096670151,
+      "dists": 0.5125360190868378,
+      "bpp": 0.014799382716049383,
+      "kbps": 3682.56
+    }
+  ],
+  "quality_drop_pairs": 4,
+  "quality_compared_pairs": 16,
+  "quality_drop_ratio": 0.25,
+  "cache_equivalence_verified": true
+}

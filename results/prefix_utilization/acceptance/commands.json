@@ -1,0 +1,127 @@
+[
+  {
+    "name": "baseline_pytest",
+    "command": ".venv-native/bin/python -m pytest cp_adaptok/tests -q",
+    "log": "results/prefix_utilization/acceptance/baseline_pytest.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "diagnostics",
+    "command": ".venv-native/bin/python -m scripts.diagnose_prefix_utilization",
+    "log": "results/prefix_utilization/diagnostics/run.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "nested",
+    "command": ".venv-native/bin/python -m scripts.compare_prefix_training --steps 100",
+    "log": "results/prefix_utilization/nested_training/run.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "decoder",
+    "command": ".venv-native/bin/python -m scripts.compare_prefix_decoders --steps 100",
+    "log": "results/prefix_utilization/decoder_ablations/run.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "data",
+    "command": ".venv-native/bin/python -m scripts.prepare_prefix_validation",
+    "log": "results/prefix_utilization/full_1080p/data_preparation.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "native_training_and_rd",
+    "command": ".venv-native/bin/python -m scripts.run_prefix_validation --engineering-steps 2",
+    "log": "results/prefix_utilization/full_1080p/run.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "global_constant_red",
+    "command": ".venv-native/bin/python -m pytest cp_adaptok/tests/test_prefix_information.py -q",
+    "log": "results/prefix_utilization/acceptance/global_constant_red.log",
+    "exit_code": 1,
+    "note": null
+  },
+  {
+    "name": "global_constant_green",
+    "command": ".venv-native/bin/python -m pytest cp_adaptok/tests/test_prefix_information.py -q",
+    "log": "results/prefix_utilization/acceptance/global_constant_green.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "old_stream",
+    "command": ".venv-native/bin/python -m scripts.verify_historical_stream --source results/pretrained_long_eval/eval/basketball --output results/prefix_utilization/acceptance/historical_stream.json",
+    "log": "results/prefix_utilization/acceptance/historical_stream.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "all_packet_prefixes",
+    "command": ".venv-native/bin/python -m scripts.verify_historical_stream --source results/prefix_utilization/full_1080p/C2/basketball --config results/prefix_utilization/full_1080p/C2/config.json --checkpoint results/prefix_utilization/full_1080p/C2/calibrated.pt --all-prefixes --max-frames 2 --output results/prefix_utilization/acceptance/progressive_all_packets.json",
+    "log": "results/prefix_utilization/acceptance/progressive_all_packets.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "sum_order",
+    "command": ".venv-native/bin/python -m scripts.measure_prefix_accumulation",
+    "log": "results/prefix_utilization/performance/accumulation_order.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "cli_train",
+    "command": "COVERAGE_FILE=results/prefix_utilization/acceptance/.coverage.train .venv-native/bin/python -m coverage run -m cp_adaptok.cli.train --config results/prefix_utilization/acceptance/config.json --max-steps 2",
+    "log": "results/prefix_utilization/acceptance/cli_train.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "cli_resume",
+    "command": "COVERAGE_FILE=results/prefix_utilization/acceptance/.coverage.resume .venv-native/bin/python -m coverage run -m cp_adaptok.cli.train --config results/prefix_utilization/acceptance/config.json --checkpoint results/prefix_utilization/acceptance/cli_training/latest.pt --resume --max-steps 3",
+    "log": "results/prefix_utilization/acceptance/cli_resume.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "cli_eval",
+    "command": "COVERAGE_FILE=results/prefix_utilization/acceptance/.coverage.eval .venv-native/bin/python -m coverage run -m cp_adaptok.cli.eval --config results/prefix_utilization/acceptance/config.json --max-frames 1 --budgets 128 2048 --metrics psnr ms-ssim lpips dists --output results/prefix_utilization/acceptance/cli_evaluation",
+    "log": "results/prefix_utilization/acceptance/cli_eval.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "cli_coverage_benchmark",
+    "command": "COVERAGE_FILE=results/prefix_utilization/acceptance/.coverage.benchmark .venv-native/bin/python -m coverage run -m cp_adaptok.cli.benchmark --config results/prefix_utilization/acceptance/config.json --frames 1 --warmup 0 --budgets 128 2048 --measure actual-bitstream --output results/prefix_utilization/acceptance/cli_benchmark",
+    "log": "results/prefix_utilization/acceptance/cli_benchmark.log",
+    "exit_code": 0,
+    "note": "instrumented entrypoint only; FPS excluded"
+  },
+  {
+    "name": "mutations",
+    "command": ".venv-native/bin/python -m scripts.mutation_check --output results/prefix_utilization/acceptance/mutations",
+    "log": "results/prefix_utilization/acceptance/mutations.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "report",
+    "command": ".venv-native/bin/python -m scripts.build_prefix_utilization_report",
+    "log": "results/prefix_utilization/report_build.log",
+    "exit_code": 0,
+    "note": null
+  },
+  {
+    "name": "final_pytest",
+    "command": "COVERAGE_FILE=results/prefix_utilization/acceptance/final_test_coverage.sqlite .venv-native/bin/python -m pytest cp_adaptok/tests -q --cov=cp_adaptok --cov-report=json:results/prefix_utilization/acceptance/coverage_final_tests.json",
+    "log": "results/prefix_utilization/acceptance/pytest_final.log",
+    "exit_code": 0
+  }
+]

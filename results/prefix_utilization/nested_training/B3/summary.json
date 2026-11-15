@@ -1,0 +1,15 @@
+{
+  "variant": "B3",
+  "updates": 100,
+  "training_elapsed_s": 28.087654995004414,
+  "evaluation": {
+    "elapsed_s": 12.529927779978607,
+    "calibration": {
+      "method": "train-only multinomial MLE; additive-one smoothing",
+      "observed_tokens": 8192,
+      "sequences": 1,
+      "test_tokens_used": false
+    }
+  },
+  "converged_claim": false
+}

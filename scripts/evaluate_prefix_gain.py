@@ -62,7 +62,7 @@ def summarize_reports(paths, labels, output):
     comparisons = {label: bd_rate(reference, summaries[label]["absolute"]) for label in labels[1:]}
     write_json(output / "summary.json", {"models": summaries, "bd_rate_vs_first": comparisons})
     with (output / "rd_comparison.csv").open("w") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     plot_rd(summaries, output)

@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "time": "2026-11-16T00:38:59.376345+08:00",
+    "timezone": "Asia/Shanghai",
+    "git_commit": "b6dba05933f52dba919438d2af8c1b6e086d14eb",
+    "git_dirty": true,
+    "source_sha256": "abf5b715594db84306967ad98bbfde3f1d561696727c902703229aad7039a006",
+    "torch": "2.9.1+cu130",
+    "cuda": "13.0",
+    "gpu_snapshot": "NVIDIA H100 PCIe, 17 MiB, 0 %",
+    "gpu_shared": "not assumed isolated; see gpu_snapshot and serial benchmark commands",
+    "status": "unknown",
+    "config": null,
+    "upstreams": [
+      {
+        "name": "AdapTok",
+        "url": "https://github.com/VisionXLab/AdapTok",
+        "commit": "a72076cf6474f930a181aa78971de70d65289b49",
+        "license": "MIT",
+        "license_file": "third_party/AdapTok/LICENSE"
+      },
+      {
+        "name": "DCVC",
+        "url": "https://github.com/microsoft/DCVC",
+        "commit": "cbdae87a5445114cdc7f48816da63ea80bdeac40",
+        "license": "MIT",
+        "license_file": "third_party/DCVC/LICENSE.txt"
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "path": "results/optimization_20261115/auxiliary/latest.pt",
+      "sha256": "856145d2d7e265184f4072559492f2dc5e1d8c9d03e9596f02be0c1465fa8757",
+      "step": 300,
+      "stage": 3,
+      "status": "trained",
+      "vq": {
+        "strategy": "deterministic_nearest",
+        "temperature": 0.01,
+        "final_temperature": 0.002,
+        "anneal_steps": 300,
+        "warmup_steps": 0,
+        "initialization": null
+      },
+      "time": "2026-11-15T23:12:26.963692+08:00",
+      "model_config": {
+        "n_max": 2048,
+        "k_ref": 128,
+        "packet_tokens": 128,
+        "dim": 192,
+        "heads": 6,
+        "layers": 2,
+        "codebook_size": 8192,
+        "embedding_dim": 16,
+        "grid": [
+          17,
+          30
+        ],
+        "kv_grid": [
+          17,
+          30
+        ],
+        "qp": 32,
+        "attention_precision": "float64",
+        "state_fingerprint": "mixed_int64_v1"
+      }
+    },
+    {
+      "path": "results/optimization_20261115/multiscene_extended/latest.pt",
+      "sha256": "b84d40d3703088bca5476165d08e8586941740eec8ea884d6e9812e05f006b1e",
+      "step": 1000,
+      "stage": 1,
+      "status": "trained",
+      "vq": {
+        "strategy": "deterministic_nearest",
+        "temperature": 0.01,
+        "final_temperature": 0.002,
+        "anneal_steps": 300,
+        "warmup_steps": 0,
+        "initialization": null
+      },
+      "time": "2026-11-15T23:09:45.356016+08:00",
+      "model_config": {
+        "n_max": 2048,
+        "k_ref": 128,
+        "packet_tokens": 128,
+        "dim": 192,
+        "heads": 6,
+        "layers": 2,
+        "codebook_size": 8192,
+        "embedding_dim": 16,
+        "grid": [
+          17,
+          30
+        ],
+        "kv_grid": [
+          17,
+          30
+        ],
+        "qp": 32,
+        "attention_precision": "float64",
+        "state_fingerprint": "mixed_int64_v1"
+      }
+    },
+    {
+      "path": "checkpoints/optimization_20261115/d4/latest.pt",
+      "sha256": "a3aaf0aaed9ef2248f424b8bab1c3f935f7ad9c4f028f7225ac2e1edb2437c73",
+      "step": 100,
+      "stage": 2,
+      "status": "trained",
+      "vq": {
+        "strategy": "stochastic_training",
+        "temperature": 0.01,
+        "final_temperature": 0.002,
+        "anneal_steps": 100,
+        "warmup_steps": 0,
+        "initialization": null
+      },
+      "time": "2026-11-15T22:56:49.546917+08:00",
+      "model_config": {
+        "n_max": 2048,
+        "k_ref": 128,
+        "packet_tokens": 128,
+        "dim": 192,
+        "heads": 6,
+        "layers": 2,
+        "codebook_size": 8192,
+        "embedding_dim": 16,
+        "grid": [
+          17,
+          30
+        ],
+        "kv_grid": [
+          17,
+          30
+        ],
+        "qp": 32,
+        "attention_precision": "float64",
+        "state_fingerprint": "mixed_int64_v1"
+      }
+    },
+    {
+      "path": "results/optimization_20261115/capacity/learned_512/latest.pt",
+      "sha256": "d826cfee6cb7ec279c05d5638d11316eee933d565b24b25b19400e5a565d292a",
+      "step": 100,
+      "stage": 1,
+      "status": "trained",
+      "vq": {
+        "strategy": "stochastic_training",
+        "temperature": 0.1,
+        "final_temperature": 0.01,
+        "anneal_steps": 100,
+        "warmup_steps": 50,
+        "initialization": {
+          "clips": 8,
+          "max_samples": 32768,
+          "iterations": 10
+        }
+      },
+      "time": "2026-11-15T23:22:31.665460+08:00",
+      "model_config": {
+        "n_max": 2048,
+        "k_ref": 128,
+        "packet_tokens": 128,
+        "dim": 192,
+        "heads": 6,
+        "layers": 2,
+        "codebook_size": 8192,
+        "embedding_dim": 16,
+        "grid": [
+          17,
+          30
+        ],
+        "kv_grid": [
+          17,
+          30
+        ],
+        "qp": 32,
+        "attention_precision": "float64",
+        "state_fingerprint": "mixed_int64_v1",
+        "query_content_only": false
+      }
+    }
+  ],
+  "selected": "results/optimization_20261115/auxiliary/latest.pt",
+  "reason": "latest selected representation with recalibrated deterministic VQ entropy; no continuous checkpoint"
+}

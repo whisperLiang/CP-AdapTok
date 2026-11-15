@@ -1,0 +1,15 @@
+{
+  "variant": "C0",
+  "updates": 100,
+  "training_elapsed_s": 25.45724988199072,
+  "evaluation": {
+    "elapsed_s": 13.256478310999228,
+    "calibration": {
+      "method": "train-only multinomial MLE; additive-one smoothing",
+      "observed_tokens": 8192,
+      "sequences": 1,
+      "test_tokens_used": false
+    }
+  },
+  "converged_claim": false
+}
