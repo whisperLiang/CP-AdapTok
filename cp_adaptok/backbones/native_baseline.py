@@ -1,4 +1,4 @@
-"""Separate upstream CUDA codec control and parity-checked latent teacher.
+"""Separate upstream CUDA codec control and exact decoded-latent teacher.
 
 No native Proxy is used by CP-AdapTok's new token stream. The native comparison
 requires both official extensions, pretrained weights and their supported CUDA ABI.
@@ -8,9 +8,7 @@ import io
 
 import torch
 
-from cp_adaptok.backbones.causal_state import CausalState, FrozenFrameContext
-from cp_adaptok.backbones.intra_adapter import IntraBackboneAdapter, prepare_rgb, restore_rgb
-from cp_adaptok.backbones.ld_adapter import CausalLDBackboneAdapter
+from cp_adaptok.backbones.intra_adapter import restore_rgb
 from third_party.DCVC.src.models.image_model import DMCI
 from third_party.DCVC.src.models.video_model_ld import DMC
 from third_party.DCVC.src.utils.common import get_state_dict
@@ -41,6 +39,12 @@ def serialize_native(encoded, intra, qp, height, width):
     return wire.getvalue(), sps_bytes
 
 
+def native_latent_api_available():
+    from inference_extensions_cuda import DMCIProxy, DMCLDProxy
+
+    return all(hasattr(cls, "get_decoded_latent") for cls in (DMCIProxy, DMCLDProxy))
+
+
 class NativeBaseline:
     def __init__(self, ld_checkpoint, intra_checkpoint, device, qp=32):
         self.qp, self.device = qp, torch.device(device)
@@ -57,6 +61,7 @@ class NativeBaseline:
 
     def reset(self):
         self.frame_id = 0
+        self.last_decoded_network = None
 
     def _is_intra(self, force_intra):
         return self.frame_id == 0 or force_intra
@@ -79,7 +84,14 @@ class NativeBaseline:
             if frame_header["nal_type"] == NalType.NAL_I
             else p_dec.decompress(payload, sps, qp, ec_part, reset)
         )
+        self.last_decoded_network = i_dec if frame_header["nal_type"] == NalType.NAL_I else p_dec
         return decoded, payload
+
+    def decoded_latent(self):
+        """Return an independent copy of the actual native decoder's quantized input."""
+        if self.last_decoded_network is None:
+            raise ValueError("decode a native frame before requesting its latent")
+        return self.last_decoded_network.proxy.get_decoded_latent()
 
     def _initialize_reference(self, encoded, decoded):
         self.pairs[0][1].add_ref_feature_from_frame(encoded["x_hat"])
@@ -107,78 +119,30 @@ class NativeBaseline:
 
 
 class NativeLatentTeacher:
-    """Quantized y_hat is supervised only after parity with real native decoding.
+    """Distill y_hat copied from the separate decoder of a real native bitstream.
 
-    The upstream Proxy does not export its internal y_hat. We reconstruct that
-    quantized representation via its official PyTorch prior, require pixel parity
-    against a real separately decoded native stream, and report the error. A failed
-    parity check is fatal, never replaced by an unquantized encoder latent.
+    The build-only extension patch exposes the very tensor passed to the native
+    image/residual decoder. No PyTorch re-encoding or approximate prior is used.
     """
 
-    def __init__(self, ld_checkpoint, intra_checkpoint, device, qp=32, tolerance=0.02):
+    def __init__(self, ld_checkpoint, intra_checkpoint, device, qp=32):
+        if not native_latent_api_available():
+            raise RuntimeError("native teacher needs decoded-latent API; run bash scripts/setup_native.sh")
         self.native = NativeBaseline(ld_checkpoint, intra_checkpoint, device, qp)
-        self.ld = CausalLDBackboneAdapter(ld_checkpoint).to(device).eval().requires_grad_(False)
-        self.intra = IntraBackboneAdapter(intra_checkpoint).to(device).eval().requires_grad_(False)
-        self.qp, self.tolerance = qp, tolerance
         self.reset()
 
     def reset(self):
         self.native.reset()
-        self.state = CausalState.empty("native-teacher")
         self.last_provenance = {}
-
-    def _frame_context(self, rgb):
-        t = self.state.frame_id + 1
-        frame_type = "I" if t == 0 else "P"
-        ctx = FrozenFrameContext("native-teacher", t, frame_type, *rgb.shape[-2:], self.qp, t - 1, "00" * 16)
-        if t:
-            ctx.context, ctx.memory = self.ld.begin_frame(self.state)
-        return ctx
-
-    def _intra_quantized(self, y):
-        net = self.intra.model
-        z_hat = net.hyper_enc(y).round()
-        params = net.y_prior_fusion(net.hyper_dec(z_hat))[..., : y.shape[-2], : y.shape[-1]]
-        _, _, y_hat, _ = net.forward_prior_4x(
-            y,
-            self.intra.quant("q_scale_y_enc", self.qp),
-            self.intra.quant("q_scale_y_dec", self.qp),
-            params,
-            net.y_spatial_prior_reduction,
-            net.y_spatial_prior_adaptor_1,
-            net.y_spatial_prior_adaptor_2,
-            net.y_spatial_prior_adaptor_3,
-            net.y_spatial_prior,
-        )
-        return y_hat
-
-    def _inter_quantized(self, y, ctx):
-        net = self.ld.model
-        z_hat = net.hyper_encoder(y).round()
-        params = net.res_prior_param_decoder(z_hat, ctx.memory, self.ld.quant("q_feature", self.qp))
-        _, _, y_hat, _ = net.forward_prior_2x(y, params, net.y_spatial_prior)
-        return y_hat
-
-    def _verify_native(self, pytorch_rgb, rgb):
-        native_rgb, counts, _ = self.native.round_trip(rgb)
-        error = (pytorch_rgb - native_rgb).abs().max().item()
-        if error > self.tolerance:
-            raise RuntimeError(f"native teacher parity failed: {error} > {self.tolerance}")
-        self.last_provenance = {
-            "native_bitstream": True,
-            "bytes": counts["total_bytes"],
-            "pixel_max_error": error,
-            "tolerance": self.tolerance,
-            "latent_source": "official_quantized_prior_verified_against_native_decode",
-        }
 
     @torch.no_grad()
     def target(self, rgb):
-        ctx = self._frame_context(rgb)
-        adapter = self.intra if ctx.frame_type == "I" else self.ld
-        y = adapter.encode_latent(prepare_rgb(rgb), ctx)
-        y_hat = self._intra_quantized(y) if ctx.frame_type == "I" else self._inter_quantized(y, ctx)
-        decoded, feature = adapter.decode_latent(y_hat, ctx)
-        self._verify_native(restore_rgb(decoded, *rgb.shape[-2:]), rgb)
-        self.state = ctx.commit(feature, "native").detach()
-        return y_hat.detach()
+        _, counts, _ = self.native.round_trip(rgb)
+        y_hat = self.native.decoded_latent().detach().float()
+        self.last_provenance = {
+            "native_bitstream": True,
+            "bytes": counts["total_bytes"],
+            "latent_source": "native_decoder_quantized_y_hat",
+            "latent_shape": list(y_hat.shape),
+        }
+        return y_hat

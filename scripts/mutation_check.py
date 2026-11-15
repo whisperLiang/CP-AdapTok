@@ -49,6 +49,7 @@ MUTATIONS = [
         "latency",
         "test_adaptive_stream.py",
     ),
+    ("sample temporal windows", "data.py", "sample_training_spec", "temporal", "test_temporal_sampling.py"),
 ]
 
 
@@ -103,6 +104,10 @@ class Mutator(ast.NodeTransformer):
         elif self.kind == "latency" and isinstance(child, ast.Call):
             if ast.unparse(child.func) == "max" and "self.observed_display_ack_s" in ast.unparse(child):
                 child.args[1] = ast.Constant(0)
+                self.changed = True
+        elif self.kind == "temporal" and isinstance(child, ast.Assign):
+            if any(isinstance(target, ast.Name) and target.id == "offset" for target in child.targets):
+                child.value = ast.Constant(0)
                 self.changed = True
 
 

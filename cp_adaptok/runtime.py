@@ -96,6 +96,11 @@ def _native_prerequisites(config, purpose):
         for name in extensions
         if importlib.util.find_spec(name) is None
     ]
+    if native_teacher and not missing:
+        from cp_adaptok.backbones.native_baseline import native_latent_api_available
+
+        if not native_latent_api_available():
+            missing.append("native teacher needs decoded-latent API; run bash scripts/setup_native.sh")
     return missing
 
 

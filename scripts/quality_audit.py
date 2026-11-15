@@ -4,6 +4,7 @@ This reports unverified functions honestly, including the unavailable native CUD
 path. Short boundary adapters are excluded from the duplication heuristic.
 """
 
+import argparse
 import ast
 import json
 from difflib import SequenceMatcher
@@ -52,7 +53,11 @@ def analyze_file(file, coverage):
 
 
 def main():
-    coverage = json.loads((ROOT / "results/coverage.json").read_text())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--coverage", type=Path, default=ROOT / "results/coverage.json")
+    parser.add_argument("--output", type=Path, default=ROOT / "results/quality_audit.json")
+    args = parser.parse_args()
+    coverage = json.loads(args.coverage.read_text())
     rows, functions = [], []
     for file in sorted((ROOT / "cp_adaptok").rglob("*.py")):
         if "tests" in file.parts:
@@ -77,7 +82,8 @@ def main():
         "duplicates_over_08": duplicates,
         "functions": rows,
     }
-    (ROOT / "results/quality_audit.json").write_text(json.dumps(report, indent=2) + "\n")
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps({key: value for key, value in report.items() if key != "functions"}, indent=2))
 
 

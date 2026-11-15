@@ -1,0 +1,49 @@
+--- a/dmci_proxy.h
++++ b/dmci_proxy.h
+@@ -138,6 +138,13 @@
+ 
+     DMCIProxy();
+     ~DMCIProxy();
++
++    // CP-AdapTok: copy the exact native decoder input for distillation.
++    at::Tensor get_decoded_latent() const
++    {
++        TORCH_CHECK(m_y_hat.defined(), "decode a frame before requesting its latent");
++        return m_y_hat.detach().clone();
++    }
+ 
+     py::tuple compress(const at::Tensor& x, const int qp, const int padding_b, const int padding_r);
+     at::Tensor decompress(const py::array_t<uint8_t>& bit_stream, const int qp, const int height,
+--- a/dmc_ld_proxy.h
++++ b/dmc_ld_proxy.h
+@@ -212,6 +212,13 @@
+ 
+     DMCLDProxy();
+     ~DMCLDProxy();
++
++    // CP-AdapTok: copy the exact native decoder input for distillation.
++    at::Tensor get_decoded_latent() const
++    {
++        TORCH_CHECK(m_y_hat.defined(), "decode a frame before requesting its latent");
++        return m_y_hat.detach().clone();
++    }
+ 
+     void add_ref_feature_from_frame(const at::Tensor& frame, const bool apply_adaptor);
+     py::tuple compress(const at::Tensor& x, const int qp, const bool reset_feature_memory,
+--- a/bind.cpp
++++ b/bind.cpp
+@@ -14,6 +14,7 @@
+         .def(py::init<>())
+         .def("set_param", &DMCIProxy::set_param)
+         .def("compress", &DMCIProxy::compress)
++        .def("get_decoded_latent", &DMCIProxy::get_decoded_latent)
+         .def("decompress", &DMCIProxy::decompress);
+ 
+     py::class_<DMCHTLProxy>(m, "DMCHTLProxy")
+@@ -35,5 +36,6 @@
+         .def("set_param", &DMCLDProxy::set_param)
+         .def("add_ref_feature_from_frame", &DMCLDProxy::add_ref_feature_from_frame)
+         .def("compress", &DMCLDProxy::compress)
++        .def("get_decoded_latent", &DMCLDProxy::get_decoded_latent)
+         .def("decompress", &DMCLDProxy::decompress);
+ }
