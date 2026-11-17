@@ -89,6 +89,23 @@ def test_nested_prefix_and_only_transmitted_values(small_model):
         torch.testing.assert_close(rgb, a, rtol=0, atol=0)
 
 
+def test_scatter_places_received_values_and_marks_absence(small_model):
+    table = small_model.positions
+    tokens = torch.arange(8 * 16).float().reshape(1, 8, 16)
+    maps = table.scatter(tokens)
+    for level, ((h, w), capacity) in enumerate(zip(table.shapes, table.counts)):
+        offset = sum(table.counts[:level])
+        sent = max(0, min(8 - offset, capacity))
+        mask = maps[level][:, -1].reshape(-1)
+        assert int(mask.sum()) == sent
+        for i in range(sent):
+            flat = int(table.order(level)[i])
+            torch.testing.assert_close(maps[level][0, :-1, flat // w, flat % w], tokens[0, offset + i])
+            assert mask[flat] == 1
+        missing = maps[level][:, :-1].flatten(2)[:, :, mask == 0]
+        assert missing.eq(0).all()
+
+
 def test_past_is_independent_of_future_and_gop_reset(small_model):
     model = small_model.eval()
     clip = torch.rand(1, 3, 3, 128, 256)
@@ -147,3 +164,40 @@ def test_real_native_1080p_forward_backward_and_crop():
     assert torch.isfinite(loss)
     assert all(torch.isfinite(p.grad).all() for p in model.parameters() if p.grad is not None)
     optimizer.step()
+
+
+@pytest.mark.gpu
+@pytest.mark.slow
+def test_native_bf16_tbptt4_exact_optimizer_resume(tmp_path, record_property):
+    from pathlib import Path
+
+    if not torch.cuda.is_available() or not Path("data/adaptok_hr/index.json").exists():
+        pytest.skip("CUDA and locally indexed native Train source required")
+    from adaptok_hr.config import ModelConfig
+    from adaptok_hr.data.dataset import ClipSampler, read_clip
+    from adaptok_hr.data.manifest import load_index
+    from adaptok_hr.models.model import AdapTokHR
+    from adaptok_hr.runtime import read_config, seed_everything
+    from adaptok_hr.training.checkpoint import restore_training, save_training
+    from adaptok_hr.training.train import JointTrainer
+
+    config = read_config("configs/adaptok_hr/default.yaml")
+    config["training"]["tbptt"] = 4
+    config["training"]["losses"]["perceptual"] = 0.0
+    seed_everything(123)
+    index = load_index("data/adaptok_hr/index.json")
+    source = index["splits"]["train"][0]
+    clip, _ = read_clip(source, 0, 4)
+    trainer = JointTrainer(AdapTokHR(ModelConfig(**config["model"])).cuda(), config["training"])
+    sampler = ClipSampler([source], 42)
+    first = trainer.update(clip, 1)
+    record_property("tbptt4_peak_gpu_mib", first["peak_gpu_mib"])
+    save_training(tmp_path / "native.pt", trainer, sampler, config, index["identity"], 1, 4)
+    expected_row = trainer.update(clip, 2)
+    expected = {k: v.detach().cpu().clone() for k, v in trainer.model.state_dict().items()}
+    restored = JointTrainer(AdapTokHR(ModelConfig(**config["model"])).cuda(), config["training"])
+    restore_training(tmp_path / "native.pt", restored, sampler, config, index["identity"])
+    actual_row = restored.update(clip, 2)
+    for key, value in expected.items():
+        torch.testing.assert_close(restored.model.state_dict()[key].cpu(), value, rtol=0, atol=0)
+    assert actual_row["budgets"] == expected_row["budgets"]

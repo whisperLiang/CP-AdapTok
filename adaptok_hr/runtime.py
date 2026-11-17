@@ -5,6 +5,7 @@ import json
 import platform
 import random
 import subprocess
+import sys
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -48,6 +49,7 @@ def seed_everything(seed):
     torch.backends.cudnn.allow_tf32 = False
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
+    torch.use_deterministic_algorithms(True)
 
 
 def environment():
@@ -55,6 +57,8 @@ def environment():
             "git": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
             "git_dirty": bool(subprocess.check_output(["git", "status", "--porcelain"], text=True).strip()),
             "source_sha256": source_identity(),
+            "deterministic_algorithms": torch.are_deterministic_algorithms_enabled(),
+            "python_trace_enabled": sys.gettrace() is not None,
             "branch": subprocess.check_output(["git", "branch", "--show-current"], text=True).strip(),
             "python": platform.python_version(), "torch": torch.__version__, "cuda": torch.version.cuda,
             "gpu": torch.cuda.get_device_name() if torch.cuda.is_available() else None,

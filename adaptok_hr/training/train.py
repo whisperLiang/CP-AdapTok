@@ -237,18 +237,26 @@ def run_training(args):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = training_parser(__doc__)
     parser.add_argument("--config", default="configs/adaptok_hr/default.yaml")
-    parser.add_argument("--output", required=True)
-    parser.add_argument("--steps", type=int, required=True)
-    parser.add_argument("--resume")
     parser.add_argument("--device", default="cuda")
     parser.add_argument("--checkpoints", default="checkpoints/adaptok_hr")
     parser.add_argument("--overfit", help="Train content ID; independent single-clip fit diagnostic")
     parser.add_argument("--overfit-frames", type=int, default=4)
-    args = parser.parse_args()
+    execute_training(run_training, parser.parse_args())
+
+
+def training_parser(description):
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument("--output", required=True)
+    parser.add_argument("--steps", type=int, required=True)
+    parser.add_argument("--resume")
+    return parser
+
+
+def execute_training(entry, args):
     with exclusive_run(args.output):
-        run_training(args)
+        entry(args)
 
 
 if __name__ == "__main__":

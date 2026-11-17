@@ -15,6 +15,7 @@ from ..runtime import file_hash, source_identity, stable_hash, write_json
 
 def rng_state():
     return {"python": random.getstate(), "numpy": np.random.get_state(), "torch": torch.get_rng_state(),
+            "deterministic_algorithms": torch.are_deterministic_algorithms_enabled(),
             "cuda": torch.cuda.get_rng_state_all() if torch.cuda.is_available() else []}
 
 
@@ -22,6 +23,7 @@ def restore_rng(state):
     random.setstate(state["python"])
     np.random.set_state(state["numpy"])
     torch.set_rng_state(state["torch"].cpu())
+    torch.use_deterministic_algorithms(state.get("deterministic_algorithms", False))
     if state["cuda"] and torch.cuda.is_available():
         torch.cuda.set_rng_state_all([s.cpu() for s in state["cuda"]])
 
