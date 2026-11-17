@@ -1,0 +1,45 @@
+
+==================================== ERRORS ====================================
+__ ERROR collecting experiments/original_adaptok_1080p/tests/test_metrics.py ___
+ImportError while importing test module '/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/test_metrics.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+experiments/original_adaptok_1080p/tests/test_metrics.py:5: in <module>
+    from experiments.original_adaptok_1080p.metrics import aggregate, boundary_mask, pixel_metrics
+E   ModuleNotFoundError: No module named 'experiments.original_adaptok_1080p.metrics'
+_ ERROR collecting experiments/original_adaptok_1080p/tests/test_reconstruction.py _
+ImportError while importing test module '/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/test_reconstruction.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+experiments/original_adaptok_1080p/tests/test_reconstruction.py:4: in <module>
+    from experiments.original_adaptok_1080p.model_adapter import validate_budget
+E   ModuleNotFoundError: No module named 'experiments.original_adaptok_1080p.model_adapter'
+__ ERROR collecting experiments/original_adaptok_1080p/tests/test_temporal.py __
+ImportError while importing test module '/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/test_temporal.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+experiments/original_adaptok_1080p/tests/test_temporal.py:4: in <module>
+    from experiments.original_adaptok_1080p.video_reader import temporal_windows
+E   ModuleNotFoundError: No module named 'experiments.original_adaptok_1080p.video_reader'
+___ ERROR collecting experiments/original_adaptok_1080p/tests/test_tiling.py ___
+ImportError while importing test module '/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/test_tiling.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+experiments/original_adaptok_1080p/tests/test_tiling.py:4: in <module>
+    from experiments.original_adaptok_1080p.tiling import TileLayout, extract_batches, stitch
+E   ModuleNotFoundError: No module named 'experiments.original_adaptok_1080p.tiling'
+=========================== short test summary info ============================
+ERROR experiments/original_adaptok_1080p/tests/test_metrics.py
+ERROR experiments/original_adaptok_1080p/tests/test_reconstruction.py
+ERROR experiments/original_adaptok_1080p/tests/test_temporal.py
+ERROR experiments/original_adaptok_1080p/tests/test_tiling.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 4 errors during collection !!!!!!!!!!!!!!!!!!!!
+4 errors in 1.65s

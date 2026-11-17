@@ -1,0 +1,23 @@
+{
+  "versions": {
+    "lpips": "0.1.4",
+    "DISTS-pytorch": "0.1",
+    "pytorch-msssim": "1.0.0"
+  },
+  "weight_sha256": {
+    "/home/whisperliang/CP-AdapTok/.venv-adaptok-official/lib/python3.10/site-packages/DISTS_pytorch/weights.pt": "f5e65c96230b7f6ca995691647d482237e4cab8a50c5c4a5784f219ef0748218",
+    "/home/whisperliang/CP-AdapTok/.venv-adaptok-official/lib/python3.10/site-packages/lpips/weights/v0.1/alex.pth": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+    "/home/whisperliang/CP-AdapTok/.venv-adaptok-official/lib/python3.10/site-packages/lpips/weights/v0.1/vgg.pth": "a78928a0af1e5f0fcb1f3b9e8f8c3a2a5a3de244d830ad5c1feddc79b8432868",
+    "/home/whisperliang/.cache/torch/hub/checkpoints/alexnet-owt-7be5be79.pth": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02",
+    "/home/whisperliang/.cache/torch/hub/checkpoints/vgg16-397923af.pth": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0"
+  },
+  "lpips_preprocess": "RGB [0,1] -> [-1,1]; LPIPS v0.1 alex and vgg",
+  "dists_preprocess": "RGB [0,1], upstream DISTS internal normalization, CP distributed alpha/beta",
+  "ms_ssim": "pytorch_msssim.ms_ssim(data_range=1, size_average=True)",
+  "resolution": [
+    1080,
+    1920
+  ],
+  "dtype": "float32",
+  "metric_batch_size": 1
+}

@@ -1,0 +1,32 @@
+{
+  "checkpoint": "checkpoints/original_adaptok_official/c514b22615a140c06f4c9792e93cbef9e5c79f32",
+  "revision": "c514b22615a140c06f4c9792e93cbef9e5c79f32",
+  "manifest": "data/manifests/cpat_test.json",
+  "content_ids": [
+    "DAVIS2017:cows",
+    "DAVIS2017:goat",
+    "DAVIS2017:parkour"
+  ],
+  "frames": 64,
+  "start": 0,
+  "tile_size": 128,
+  "strides": [
+    128,
+    96
+  ],
+  "padding": "reflect",
+  "temporal_frames": 16,
+  "budgets": [
+    512,
+    1024,
+    2048
+  ],
+  "tile_batch_size": 4,
+  "warmup_batches": 3,
+  "boundary_spacing": 128,
+  "boundary_half_width": 2,
+  "device": "cuda:0",
+  "dtype": "float32",
+  "output": "results/original_adaptok_1080p",
+  "cp_reference": "results/large_scale/formal_20261116/final_test"
+}
