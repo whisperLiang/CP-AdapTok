@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "cp_manifest_sha256": {
+    "train": "88e18e6a6a38f61e335f48882aab855460e76f72205d5724cb761e7d3604dcc1",
+    "validation": "6e1753a5026d60f8e4b279bd15043b73e2e3a1bda01263159f7b93ddedcb5d37",
+    "test": "09738a77219eb1d78269a0788c109b268de29b54dec3aab68a365599e08bed5e"
+  },
+  "external_sha256": {},
+  "color_format": "OpenCV decoded RGB float32/255; no resize",
+  "test_policy": "HR holdout excludes three historically evaluated exact-1080p videos; old CP-indexed sources, not a new independent dataset",
+  "summary": {
+    "train": {
+      "sources": 54,
+      "frames": 3827
+    },
+    "validation": {
+      "sources": 21,
+      "frames": 1323
+    },
+    "test": {
+      "sources": 4,
+      "frames": 261
+    },
+    "historical": {
+      "sources": 3,
+      "frames": 294
+    }
+  },
+  "identity": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82"
+}

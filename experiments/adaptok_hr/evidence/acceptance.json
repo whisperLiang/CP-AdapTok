@@ -1,0 +1,143 @@
+{
+  "code_and_native_1080p_pilot_complete": true,
+  "all_tests_pass": true,
+  "tests": {
+    "tests": 46,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "properties": {
+      "tbptt4_peak_gpu_mib": "2067.86865234375"
+    }
+  },
+  "mutations_all_killed": true,
+  "mutations": 14,
+  "crap_over_10": 0,
+  "duplicate_functions_over_08": 0,
+  "optimizer_log_sequence_equal": true,
+  "training_frame_count_equal": true,
+  "completed_joint_steps": 1000,
+  "training_frames": 4000,
+  "actual_binary_bytes": {
+    "validation_300/k256": {
+      "frames": 174,
+      "bytes": 97092
+    },
+    "validation_300/k512": {
+      "frames": 174,
+      "bytes": 169476
+    },
+    "validation_300/k1024": {
+      "frames": 174,
+      "bytes": 314244
+    },
+    "validation_300/k2048": {
+      "frames": 174,
+      "bytes": 603780
+    },
+    "validation_1000/k256": {
+      "frames": 174,
+      "bytes": 97092
+    },
+    "validation_1000/k512": {
+      "frames": 174,
+      "bytes": 169476
+    },
+    "validation_1000/k1024": {
+      "frames": 174,
+      "bytes": 314244
+    },
+    "validation_1000/k2048": {
+      "frames": 174,
+      "bytes": 603780
+    },
+    "historical/k256": {
+      "frames": 192,
+      "bytes": 107136
+    },
+    "historical/k512": {
+      "frames": 192,
+      "bytes": 187008
+    },
+    "historical/k1024": {
+      "frames": 192,
+      "bytes": 346752
+    },
+    "historical/k2048": {
+      "frames": 192,
+      "bytes": 666240
+    },
+    "final_test/k256": {
+      "frames": 239,
+      "bytes": 133362
+    },
+    "final_test/k512": {
+      "frames": 239,
+      "bytes": 232786
+    },
+    "final_test/k1024": {
+      "frames": 239,
+      "bytes": 431634
+    },
+    "final_test/k2048": {
+      "frames": 239,
+      "bytes": 829330
+    }
+  },
+  "rgb_parity_frames": 192,
+  "continuous_64_frame_benchmark": {
+    "256": {
+      "frames": 64,
+      "native_rgb_equal": true,
+      "sender_receiver_equal": true,
+      "joint_fps": 26.896787608519624
+    },
+    "512": {
+      "frames": 64,
+      "native_rgb_equal": true,
+      "sender_receiver_equal": true,
+      "joint_fps": 27.81507904158613
+    },
+    "1024": {
+      "frames": 64,
+      "native_rgb_equal": true,
+      "sender_receiver_equal": true,
+      "joint_fps": 26.22027113276434
+    },
+    "2048": {
+      "frames": 64,
+      "native_rgb_equal": true,
+      "sender_receiver_equal": true,
+      "joint_fps": 26.747590139944293
+    }
+  },
+  "metric_identity": {
+    "weights_equal": true,
+    "sha256_by_filename": {
+      "weights.pt": "f5e65c96230b7f6ca995691647d482237e4cab8a50c5c4a5784f219ef0748218",
+      "alex.pth": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+      "alexnet-owt-7be5be79.pth": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02",
+      "vgg16-397923af.pth": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0"
+    }
+  },
+  "protected_inputs": {
+    "cp_manifests_unchanged": true,
+    "official_weights_unchanged": true,
+    "official_source_unchanged": true,
+    "cp_and_official_paths_unchanged": true,
+    "sealed_cp_checkpoint_sha256": {
+      "B0": "df88cbec23291a41c83cefc3784e40834552ef732d98af2bda7543a42a608942",
+      "B1": "3d7e6785d96bcb13fae001a43614814969e715ccbc6e9ce053c4711030146822"
+    }
+  },
+  "gop33_native_roundtrip_pass": true,
+  "final_test_sealed": true,
+  "final_test_complete": true,
+  "joint_1080p30_all_conditions_met": false,
+  "quality_ready_for_scaling": false,
+  "fine_representation_effective": false,
+  "scorer_formal_training_complete": false,
+  "full_training_ablations_complete": false,
+  "interpretation": "engineering implementation and bounded pilot accepted; research quality/progressive-Fine/30FPS targets not achieved; no 5000-step or Phase2 claim",
+  "engineering_acceptance": true
+}

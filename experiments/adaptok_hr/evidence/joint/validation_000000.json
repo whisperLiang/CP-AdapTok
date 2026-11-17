@@ -1,0 +1,133 @@
+{
+  "budgets": {
+    "256": {
+      "frames": 24,
+      "mse": 0.06525999664639433,
+      "psnr_global": 11.853529528658342,
+      "psnr_frame_mean": 11.961546106052793,
+      "bytes": 13392,
+      "header_bytes": 3408,
+      "payload_bytes": 9984,
+      "side_information_bytes": 0,
+      "actual_bpp": 0.0021527777777777778,
+      "theoretical_code_bpp": 0.0016049382716049382,
+      "entropy_bpp": null,
+      "real_bitstream": true,
+      "sender_latency": {
+        "mean_ms": 50.483143706514966,
+        "p50_ms": 13.813208002829924,
+        "p95_ms": 17.50611273455433,
+        "fps": 19.80859206814705
+      },
+      "receiver_latency": {
+        "mean_ms": 5.973299538406233,
+        "p50_ms": 5.944439966697246,
+        "p95_ms": 6.19400259165559,
+        "fps": 167.4116614394354
+      },
+      "sender_plus_receiver_latency": {
+        "mean_ms": 56.456443244921196,
+        "p50_ms": 19.786568504059687,
+        "p95_ms": 23.4216261684196,
+        "fps": 17.712770102462304
+      }
+    },
+    "512": {
+      "frames": 24,
+      "mse": 0.06560745881870389,
+      "psnr_global": 11.830467834953675,
+      "psnr_frame_mean": 11.93857004972403,
+      "bytes": 23376,
+      "header_bytes": 3408,
+      "payload_bytes": 19968,
+      "side_information_bytes": 0,
+      "actual_bpp": 0.003757716049382716,
+      "theoretical_code_bpp": 0.0032098765432098763,
+      "entropy_bpp": null,
+      "real_bitstream": true,
+      "sender_latency": {
+        "mean_ms": 13.86009050232436,
+        "p50_ms": 13.881734979804605,
+        "p95_ms": 14.059292967431247,
+        "fps": 72.14960103127021
+      },
+      "receiver_latency": {
+        "mean_ms": 5.9753937869876,
+        "p50_ms": 5.993916973238811,
+        "p95_ms": 6.036629804293625,
+        "fps": 167.352987208586
+      },
+      "sender_plus_receiver_latency": {
+        "mean_ms": 19.83548428931196,
+        "p50_ms": 19.87886056303978,
+        "p95_ms": 20.051277393940836,
+        "fps": 50.414700514211006
+      }
+    },
+    "1024": {
+      "frames": 24,
+      "mse": 0.06564305179441969,
+      "psnr_global": 11.828112364753276,
+      "psnr_frame_mean": 11.937343750461386,
+      "bytes": 43344,
+      "header_bytes": 3408,
+      "payload_bytes": 39936,
+      "side_information_bytes": 0,
+      "actual_bpp": 0.006967592592592593,
+      "theoretical_code_bpp": 0.006419753086419753,
+      "entropy_bpp": null,
+      "real_bitstream": true,
+      "sender_latency": {
+        "mean_ms": 14.084410950696716,
+        "p50_ms": 14.045068470295519,
+        "p95_ms": 14.481216637068428,
+        "fps": 71.00048440084268
+      },
+      "receiver_latency": {
+        "mean_ms": 6.3426323370852815,
+        "p50_ms": 6.157302967039868,
+        "p95_ms": 6.462847167858854,
+        "fps": 157.66324561381467
+      },
+      "sender_plus_receiver_latency": {
+        "mean_ms": 20.427043287782,
+        "p50_ms": 20.17583849374205,
+        "p95_ms": 20.95566315401811,
+        "fps": 48.9547109638784
+      }
+    },
+    "2048": {
+      "frames": 24,
+      "mse": 0.06580266589298844,
+      "psnr_global": 11.817565112620168,
+      "psnr_frame_mean": 11.925961502064252,
+      "bytes": 83280,
+      "header_bytes": 3408,
+      "payload_bytes": 79872,
+      "side_information_bytes": 0,
+      "actual_bpp": 0.013387345679012346,
+      "theoretical_code_bpp": 0.012839506172839505,
+      "entropy_bpp": null,
+      "real_bitstream": true,
+      "sender_latency": {
+        "mean_ms": 14.549725368851796,
+        "p50_ms": 14.483620994724333,
+        "p95_ms": 14.748490127385594,
+        "fps": 68.72981961163407
+      },
+      "receiver_latency": {
+        "mean_ms": 6.408675217244308,
+        "p50_ms": 6.403198494808748,
+        "p95_ms": 6.5682323183864355,
+        "fps": 156.03848940717484
+      },
+      "sender_plus_receiver_latency": {
+        "mean_ms": 20.958400586096104,
+        "p50_ms": 20.915118948323652,
+        "p95_ms": 21.248862624634057,
+        "fps": 47.71356458676548
+      }
+    }
+  },
+  "metric_scope": "short validation RGB MSE; actual VQ packets; not final 64-frame evaluation"
+}

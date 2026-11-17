@@ -1,0 +1,455 @@
+{
+  "environment": {
+    "time": "2026-11-18T00:13:52.181506+08:00",
+    "timezone": "Asia/Shanghai",
+    "git": "c5b0a34120a53071318d61f74f3b0e5cd27585d6",
+    "git_dirty": true,
+    "source_sha256": "2c88b4e8a180af192cfb9bee8555087040499228a007a79793c6e5e94c70ed78",
+    "deterministic_algorithms": true,
+    "python_trace_enabled": true,
+    "branch": "experiment/adaptok-hr",
+    "python": "3.12.13",
+    "torch": "2.9.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA H100 PCIe",
+    "driver": "580.159.03"
+  },
+  "checkpoint_sha256": "e7ba64dfbdcb9178c87654294a372fba92228f957c49dfc7561894938032c0f5",
+  "budgets": {
+    "256": {
+      "budget": 256,
+      "warmup": 1,
+      "repeats": 2,
+      "batch_size": 1,
+      "input": {
+        "content_id": "DAVIS2017:car-roundabout",
+        "source_sha256": "a385402d832c276856837830ef48709bd6b484aa3fce4bdc8c90a70385769b21",
+        "frame_indices": [
+          0,
+          1
+        ],
+        "source_resolution": [
+          1920,
+          1080
+        ],
+        "crop": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "resized": false,
+        "engineering_crop": false,
+        "fps": 30,
+        "color_format": "RGB float32 [0,1]; OpenCV BGR->RGB"
+      },
+      "results": {
+        "I": {
+          "encoder": {
+            "mean_ms": 7.98356399172917,
+            "p50_ms": 7.98356399172917,
+            "p95_ms": 7.995882298564538,
+            "fps": 125.25734133727521
+          },
+          "sender_with_local_decode": {
+            "mean_ms": 23.591863020556048,
+            "p50_ms": 23.591863020556048,
+            "p95_ms": 23.688443840364926,
+            "fps": 42.387496024738724
+          },
+          "decoder": {
+            "mean_ms": 14.970459480537102,
+            "p50_ms": 14.970459480537102,
+            "p95_ms": 14.983135511283763,
+            "fps": 66.798216935164
+          },
+          "joint_sender_plus_receiver": {
+            "mean_ms": 38.56232250109315,
+            "p50_ms": 38.56232250109315,
+            "p95_ms": 38.646227290155366,
+            "fps": 25.932048049534682
+          },
+          "components_ms": {
+            "conv_encoder": {
+              "mean_ms": 6.563759885728359,
+              "p50_ms": 6.563759885728359,
+              "p95_ms": 6.578001483529806,
+              "fps": 152.3517035067521
+            },
+            "encoder_window_attention": {
+              "mean_ms": 0.27486400306224823,
+              "p50_ms": 0.27486400306224823,
+              "p95_ms": 0.27588640749454496,
+              "fps": 3638.162832742892
+            },
+            "decoder_window_attention": {
+              "mean_ms": 1.4970080256462097,
+              "p50_ms": 1.4970080256462097,
+              "p95_ms": 1.5023792028427123,
+              "fps": 667.9990907652833
+            },
+            "all_window_attention_cuda": {
+              "mean_ms": 1.771872028708458,
+              "p50_ms": 1.771872028708458,
+              "p95_ms": 1.776220801472664,
+              "fps": 564.3748441183498
+            },
+            "encoder_total_wall": {
+              "mean_ms": 7.093226013239473,
+              "p50_ms": 7.093226013239473,
+              "p95_ms": 7.110294501762837,
+              "fps": 140.97957658948195
+            },
+            "token_generation": {
+              "mean_ms": 0.4623704880941659,
+              "p50_ms": 0.4623704880941659,
+              "p95_ms": 0.4742212680866942,
+              "fps": 2162.7677928188637
+            },
+            "vq": {
+              "mean_ms": 1.25004249275662,
+              "p50_ms": 1.25004249275662,
+              "p95_ms": 1.2527213752036914,
+              "fps": 799.9728055602166
+            },
+            "token_lookup": {
+              "mean_ms": 0.10671949712559581,
+              "p50_ms": 0.10671949712559581,
+              "p95_ms": 0.10807988001033664,
+              "fps": 9370.35899656763
+            },
+            "token_scatter": {
+              "mean_ms": 1.107816002331674,
+              "p50_ms": 1.107816002331674,
+              "p95_ms": 1.108382985694334,
+              "fps": 902.676976948565
+            },
+            "decoder_low_fusion_attention": {
+              "mean_ms": 4.876540479017422,
+              "p50_ms": 4.876540479017422,
+              "p95_ms": 4.8818203184055164,
+              "fps": 205.0634059745344
+            },
+            "decoder_upsampling": {
+              "mean_ms": 8.539718517567962,
+              "p50_ms": 8.539718517567962,
+              "p95_ms": 8.590622968040407,
+              "fps": 117.09987840264216
+            },
+            "state_update": {
+              "mean_ms": 0.02303297515027225,
+              "p50_ms": 0.02303297515027225,
+              "p95_ms": 0.023637755657546222,
+              "fps": 43416.01523362821
+            },
+            "ids_gpu_to_cpu": {
+              "mean_ms": 0.08218249422498047,
+              "p50_ms": 0.08218249422498047,
+              "p95_ms": 0.0824520509922877,
+              "fps": 12168.041496312198
+            },
+            "bit_packing_cpu": {
+              "mean_ms": 0.22623047698289156,
+              "p50_ms": 0.22623047698289156,
+              "p95_ms": 0.2306238515302539,
+              "fps": 4420.270926076967
+            },
+            "bit_unpacking_cpu": {
+              "mean_ms": 0.18857949180528522,
+              "p50_ms": 0.18857949180528522,
+              "p95_ms": 0.199207168770954,
+              "fps": 5302.8035574119285
+            },
+            "framing_including_pack_crc": {
+              "mean_ms": 0.22843398619443178,
+              "p50_ms": 0.22843398619443178,
+              "p95_ms": 0.23158311960287392,
+              "fps": 4377.632315836091
+            },
+            "parsing_including_unpack_crc": {
+              "mean_ms": 0.18940350855700672,
+              "p50_ms": 0.18940350855700672,
+              "p95_ms": 0.19163416873198003,
+              "fps": 5279.733240522415
+            }
+          },
+          "peak_allocated_mib": 488.55810546875,
+          "peak_reserved_mib": 546.0,
+          "samples": [
+            {
+              "encoder_ms": 7.9698769841343164,
+              "sender_ms": 23.699175042565912,
+              "decoder_ms": 14.9563750019297,
+              "joint_ms": 38.65555004449561,
+              "bytes": 558
+            },
+            {
+              "encoder_ms": 7.997250999324024,
+              "sender_ms": 23.484550998546183,
+              "decoder_ms": 14.984543959144503,
+              "joint_ms": 38.469094957690686,
+              "bytes": 558
+            }
+          ],
+          "component_samples": [
+            {
+              "conv_encoder": 6.5795838832855225,
+              "encoder_window_attention": 0.2760000079870224,
+              "decoder_window_attention": 1.491040050983429,
+              "all_window_attention_cuda": 1.7670400589704514,
+              "encoder_total_wall": 7.112191000487655,
+              "token_generation": 0.4755380214191973,
+              "vq": 1.2530190288089216,
+              "token_lookup": 0.10823103366419673,
+              "token_scatter": 1.1084459838457406,
+              "decoder_low_fusion_attention": 4.870673990808427,
+              "decoder_upsampling": 8.5962790180929,
+              "state_update": 0.023704953491687775,
+              "ids_gpu_to_cpu": 0.08248200174421072,
+              "bit_packing_cpu": 0.2311120042577386,
+              "bit_unpacking_cpu": 0.20038802176713943,
+              "framing_including_pack_crc": 0.22493494907394052,
+              "parsing_including_unpack_crc": 0.19188201986253262
+            },
+            {
+              "conv_encoder": 6.547935888171196,
+              "encoder_window_attention": 0.27372799813747406,
+              "decoder_window_attention": 1.5029760003089905,
+              "all_window_attention_cuda": 1.7767039984464645,
+              "encoder_total_wall": 7.074261025991291,
+              "token_generation": 0.4492029547691345,
+              "vq": 1.2470659567043185,
+              "token_lookup": 0.10520796058699489,
+              "token_scatter": 1.1071860208176076,
+              "decoder_low_fusion_attention": 4.882406967226416,
+              "decoder_upsampling": 8.483158017043024,
+              "state_update": 0.022360996808856726,
+              "ids_gpu_to_cpu": 0.08188298670575023,
+              "bit_packing_cpu": 0.22134894970804453,
+              "bit_unpacking_cpu": 0.176770961843431,
+              "framing_including_pack_crc": 0.23193302331492305,
+              "parsing_including_unpack_crc": 0.18692499725148082
+            }
+          ]
+        },
+        "P": {
+          "encoder": {
+            "mean_ms": 7.992933475179598,
+            "p50_ms": 7.992933475179598,
+            "p95_ms": 7.998716438305564,
+            "fps": 125.11051206735215
+          },
+          "sender_with_local_decode": {
+            "mean_ms": 23.58038697275333,
+            "p50_ms": 23.58038697275333,
+            "p95_ms": 23.581055665272288,
+            "fps": 42.40812507256476
+          },
+          "decoder": {
+            "mean_ms": 15.181324473815039,
+            "p50_ms": 15.181324473815039,
+            "p95_ms": 15.278660817421041,
+            "fps": 65.87040555814573
+          },
+          "joint_sender_plus_receiver": {
+            "mean_ms": 38.76171144656837,
+            "p50_ms": 38.76171144656837,
+            "p95_ms": 38.85971648269333,
+            "fps": 25.79865446288315
+          },
+          "components_ms": {
+            "conv_encoder": {
+              "mean_ms": 6.536575980484486,
+              "p50_ms": 6.536575980484486,
+              "p95_ms": 6.536604753881693,
+              "fps": 152.9852942864256
+            },
+            "encoder_window_attention": {
+              "mean_ms": 0.27371199429035187,
+              "p50_ms": 0.27371199429035187,
+              "p95_ms": 0.2747919991612434,
+              "fps": 3653.4752618082443
+            },
+            "decoder_window_attention": {
+              "mean_ms": 1.4872159957885742,
+              "p50_ms": 1.4872159957885742,
+              "p95_ms": 1.4878064036369323,
+              "fps": 672.3972864948678
+            },
+            "all_window_attention_cuda": {
+              "mean_ms": 1.760927990078926,
+              "p50_ms": 1.760927990078926,
+              "p95_ms": 1.7614175871014595,
+              "fps": 567.8823924851006
+            },
+            "encoder_total_wall": {
+              "mean_ms": 7.103666022885591,
+              "p50_ms": 7.103666022885591,
+              "p95_ms": 7.10512850782834,
+              "fps": 140.77238383369107
+            },
+            "token_generation": {
+              "mean_ms": 0.44056499609723687,
+              "p50_ms": 0.44056499609723687,
+              "p95_ms": 0.446112611098215,
+              "fps": 2269.812647074872
+            },
+            "vq": {
+              "mean_ms": 1.244629529537633,
+              "p50_ms": 1.244629529537633,
+              "p95_ms": 1.2470545974792913,
+              "fps": 803.451931894537
+            },
+            "token_lookup": {
+              "mean_ms": 0.10545100667513907,
+              "p50_ms": 0.10545100667513907,
+              "p95_ms": 0.10602163092698902,
+              "fps": 9483.076848006593
+            },
+            "token_scatter": {
+              "mean_ms": 1.0896825406234711,
+              "p50_ms": 1.0896825406234711,
+              "p95_ms": 1.0931848926702514,
+              "fps": 917.6984697101244
+            },
+            "decoder_low_fusion_attention": {
+              "mean_ms": 4.997318494133651,
+              "p50_ms": 4.997318494133651,
+              "p95_ms": 5.0100143533200026,
+              "fps": 200.10731778931026
+            },
+            "decoder_upsampling": {
+              "mean_ms": 8.72864096891135,
+              "p50_ms": 8.72864096891135,
+              "p95_ms": 8.889625791925937,
+              "fps": 114.5653720392078
+            },
+            "state_update": {
+              "mean_ms": 0.020263512851670384,
+              "p50_ms": 0.020263512851670384,
+              "p95_ms": 0.020282869809307158,
+              "fps": 49349.784872940574
+            },
+            "ids_gpu_to_cpu": {
+              "mean_ms": 0.07917950279079378,
+              "p50_ms": 0.07917950279079378,
+              "p95_ms": 0.07930326682981104,
+              "fps": 12629.53118867362
+            },
+            "bit_packing_cpu": {
+              "mean_ms": 0.2300074847880751,
+              "p50_ms": 0.2300074847880751,
+              "p95_ms": 0.23474464833270758,
+              "fps": 4347.684602183197
+            },
+            "bit_unpacking_cpu": {
+              "mean_ms": 0.16886551748029888,
+              "p50_ms": 0.16886551748029888,
+              "p95_ms": 0.17007824790198356,
+              "fps": 5921.872120023956
+            },
+            "framing_including_pack_crc": {
+              "mean_ms": 0.22379649453796446,
+              "p50_ms": 0.22379649453796446,
+              "p95_ms": 0.2244881325168535,
+              "fps": 4468.34523509644
+            },
+            "parsing_including_unpack_crc": {
+              "mean_ms": 0.18350951722823083,
+              "p50_ms": 0.18350951722823083,
+              "p95_ms": 0.18426145252306014,
+              "fps": 5449.3086522389995
+            }
+          },
+          "peak_allocated_mib": 488.65869140625,
+          "peak_reserved_mib": 548.0,
+          "samples": [
+            {
+              "encoder_ms": 7.9865079605951905,
+              "sender_ms": 23.58112996444106,
+              "decoder_ms": 15.289475966710597,
+              "joint_ms": 38.87060593115166,
+              "bytes": 558
+            },
+            {
+              "encoder_ms": 7.999358989764005,
+              "sender_ms": 23.5796439810656,
+              "decoder_ms": 15.07317298091948,
+              "joint_ms": 38.65281696198508,
+              "bytes": 558
+            }
+          ],
+          "component_samples": [
+            {
+              "conv_encoder": 6.536607950925827,
+              "encoder_window_attention": 0.2749119997024536,
+              "decoder_window_attention": 1.4865599870681763,
+              "all_window_attention_cuda": 1.7614719867706299,
+              "encoder_total_wall": 7.105291006155312,
+              "token_generation": 0.44672901276499033,
+              "vq": 1.2473240494728088,
+              "token_lookup": 0.10481697972863913,
+              "token_scatter": 1.0857910383492708,
+              "decoder_low_fusion_attention": 4.983211983926594,
+              "decoder_upsampling": 8.907512994483113,
+              "state_update": 0.020242005120962858,
+              "ids_gpu_to_cpu": 0.07931701838970184,
+              "bit_packing_cpu": 0.22474396973848343,
+              "bit_unpacking_cpu": 0.16751803923398256,
+              "framing_including_pack_crc": 0.2230280078947544,
+              "parsing_including_unpack_crc": 0.18267403356730938
+            },
+            {
+              "conv_encoder": 6.536544010043144,
+              "encoder_window_attention": 0.2725119888782501,
+              "decoder_window_attention": 1.4878720045089722,
+              "all_window_attention_cuda": 1.7603839933872223,
+              "encoder_total_wall": 7.1020410396158695,
+              "token_generation": 0.4344009794294834,
+              "vq": 1.2419350096024573,
+              "token_lookup": 0.10608503362163901,
+              "token_scatter": 1.0935740428976715,
+              "decoder_low_fusion_attention": 5.011425004340708,
+              "decoder_upsampling": 8.549768943339586,
+              "state_update": 0.02028502058237791,
+              "ids_gpu_to_cpu": 0.07904198719188571,
+              "bit_packing_cpu": 0.23527099983766675,
+              "bit_unpacking_cpu": 0.1702129957266152,
+              "framing_including_pack_crc": 0.22456498118117452,
+              "parsing_including_unpack_crc": 0.1843450008891523
+            }
+          ]
+        }
+      },
+      "scope": "resident pixels, BF16 NN with FP32 VQ; synchronized wall; encoder excludes packing/local decode; decoder includes parse/lookup/state; joint includes encode+sender local decode+independent receiver decode+packing; excludes load,H2D,disk,metrics",
+      "component_scope": "separate component probes, not summed for throughput; encoder CUDA events split conv/windows; total encoder and downstream values synchronized wall; CRC framing/parsing include pack/unpack",
+      "flops": {
+        "parameters": 1618137,
+        "frames": {
+          "I": {
+            "flops": 9758645760,
+            "gflops": 9.75864576,
+            "operators": {
+              "aten.convolution": 7334469120,
+              "aten.addmm": 1651507200,
+              "aten._scaled_dot_product_efficient_attention": 68812800,
+              "aten.mm": 703856640
+            }
+          },
+          "P": {
+            "flops": 10360266240,
+            "gflops": 10.36026624,
+            "operators": {
+              "aten.convolution": 7936089600,
+              "aten.addmm": 1651507200,
+              "aten._scaled_dot_product_efficient_attention": 68812800,
+              "aten.mm": 703856640
+            }
+          }
+        },
+        "convention": "PyTorch FlopCounterMode; multiply-add=2; counts supported conv/mm/SDPA operators; excludes interpolation,norm,activation,packing and CPU operations"
+      },
+      "header_bytes": 142
+    }
+  }
+}

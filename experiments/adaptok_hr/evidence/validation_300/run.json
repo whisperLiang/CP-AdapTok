@@ -1,0 +1,41 @@
+{
+  "identity": "8dda6c624a7c92aa78750b1e4a1cfb7a4e551743a8349226f0d3e7000a78ed56",
+  "protocol": {
+    "checkpoint_sha256": "a62bea4a6d07345a1d342a5b42d6d6525fecec373e2dd00619343f820a6e113d",
+    "manifest_identity": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+    "split": "validation",
+    "ids": [
+      "DAVIS2017:blackswan",
+      "DAVIS2017:car-roundabout",
+      "DAVIS2017:dog"
+    ],
+    "frames": 64,
+    "budgets": [
+      256,
+      512,
+      1024,
+      2048
+    ],
+    "amp_bf16": true,
+    "metric_scope": "native full RGB, LPIPS-Alex, DISTS"
+  },
+  "environment": {
+    "time": "2026-11-17T23:32:45.858246+08:00",
+    "timezone": "Asia/Shanghai",
+    "git": "26dc99c237e361383149f7f7ce6b9dbb82fc6384",
+    "git_dirty": true,
+    "source_sha256": "636ca33641285522cc5477494c1c8940f8b4c38936ad04450f48151cbba42fe2",
+    "branch": "experiment/adaptok-hr",
+    "python": "3.12.13",
+    "torch": "2.9.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA H100 PCIe",
+    "driver": "580.159.03"
+  },
+  "completed_training_steps": 300,
+  "timing": "synchronized wall; sender includes local decode; receiver separate; excludes disk,metrics,H2D",
+  "motion_bins": [
+    0.01,
+    0.03
+  ]
+}

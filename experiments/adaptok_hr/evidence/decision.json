@@ -1,0 +1,20 @@
+{
+  "status": "native_1080p_pilot_complete_targets_not_met",
+  "completed_joint_steps": 1000,
+  "training_frames": 4000,
+  "selected_checkpoint": "/home/whisperliang/CP-AdapTok/checkpoints/adaptok_hr/joint/step_001000.pt",
+  "checkpoint_sha256": "e7ba64dfbdcb9178c87654294a372fba92228f957c49dfc7561894938032c0f5",
+  "selected_before_test": true,
+  "run_5000_updates": false,
+  "scorer_ready": false,
+  "convergence_verified": false,
+  "validation_k256_to_k2048_gain_db": 0.6339859950800779,
+  "validation_k1024_to_k2048_gain_db": -0.006422012658404697,
+  "k2048_lpips": 0.7696391621540333,
+  "k2048_dists": 0.6412970930680462,
+  "k2048_perplexity": 8.938990224142506,
+  "reason": "Stop after the bounded 1000-update pilot: perceptual quality remains poor, the final doubled prefix does not improve aggregate validation PSNR, and Fine-code usage is concentrated. Diagnose VQ/level contribution and decoder detail before committing a 5000-update or Scorer run.",
+  "next_experiment": "controlled Train/Validation study of per-level codebook initialization/diversity and decoder spatial-detail capacity, with matching compute/data splits; larger licensed dataset still needed",
+  "ablations_completed": false,
+  "phase2_formal_training_completed": false
+}

@@ -1,0 +1,20 @@
+{
+  "checkpoint_sha256": "e7ba64dfbdcb9178c87654294a372fba92228f957c49dfc7561894938032c0f5",
+  "manifest_identity": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+  "split": "test",
+  "ids": [
+    "DAVIS2017:bike-packing",
+    "DAVIS2017:dogs-jump",
+    "DAVIS2017:lab-coat",
+    "DAVIS2017:mbike-trick"
+  ],
+  "frames": 64,
+  "budgets": [
+    256,
+    512,
+    1024,
+    2048
+  ],
+  "amp_bf16": true,
+  "metric_scope": "native full RGB, LPIPS-Alex, DISTS"
+}

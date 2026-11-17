@@ -1,0 +1,80 @@
+[
+  {
+    "path": "experiments/adaptok_hr/evidence/samples/validation_1000_DAVIS2017_car-roundabout_0000.png",
+    "frame_metrics": {
+      "mse": 0.02067132480442524,
+      "psnr": 16.846316889840267,
+      "lpips": 0.7361102104187012,
+      "dists": 0.6411340236663818,
+      "content_id": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "frame_type": "I",
+      "gop_position": 0,
+      "tokens": 2048,
+      "bytes": 3470,
+      "header_bytes": 142,
+      "payload_bytes": 3328,
+      "pixels": 2073600,
+      "encode_ms": 23.37269700365141,
+      "decode_ms": 14.001883973833174,
+      "motion": 0.0,
+      "input_rgb_sha256": "e626e4c7bc75d8ac6547c5daf98afdf22512aabf3f7a28459fa8adeb74258d5e",
+      "packet_sha256": "057d8808a27c4327bc96ddd79e588987c0149af7794fa5c61b4c04b29eb2a0a9",
+      "state_chain": "057d8808a27c4327bc96ddd79e588987c0149af7794fa5c61b4c04b29eb2a0a9"
+    },
+    "left": "original",
+    "right": "actual ID decode"
+  },
+  {
+    "path": "experiments/adaptok_hr/evidence/samples/historical_DAVIS2017_parkour_0031.png",
+    "frame_metrics": {
+      "mse": 0.013457534834742546,
+      "psnr": 18.710344873423406,
+      "lpips": 0.6806718111038208,
+      "dists": 0.6877031326293945,
+      "content_id": "DAVIS2017:parkour",
+      "frame": 31,
+      "frame_type": "P",
+      "gop_position": 31,
+      "tokens": 2048,
+      "bytes": 3470,
+      "header_bytes": 142,
+      "payload_bytes": 3328,
+      "pixels": 2073600,
+      "encode_ms": 23.097987985238433,
+      "decode_ms": 14.15024301968515,
+      "motion": 0.07913827151060104,
+      "input_rgb_sha256": "25358c04dc85b0d920240146efebc94d4dcdde9452f057bcff6f3aca8ce2c624",
+      "packet_sha256": "54971417503398eb19390090ad1fdc67c1e4a576387540a03054c88cf14bd5c0",
+      "state_chain": "54971417503398eb19390090ad1fdc67c1e4a576387540a03054c88cf14bd5c0"
+    },
+    "left": "original",
+    "right": "actual ID decode"
+  },
+  {
+    "path": "experiments/adaptok_hr/evidence/samples/final_test_DAVIS2017_mbike-trick_0031.png",
+    "frame_metrics": {
+      "mse": 0.00971776433289051,
+      "psnr": 20.124336372925896,
+      "lpips": 0.5730432868003845,
+      "dists": 0.6410225629806519,
+      "content_id": "DAVIS2017:mbike-trick",
+      "frame": 31,
+      "frame_type": "P",
+      "gop_position": 31,
+      "tokens": 2048,
+      "bytes": 3470,
+      "header_bytes": 142,
+      "payload_bytes": 3328,
+      "pixels": 2073600,
+      "encode_ms": 23.46898103132844,
+      "decode_ms": 14.245457015931606,
+      "motion": 0.036453139036893845,
+      "input_rgb_sha256": "4905de3e330d80caa8b90ec4faf3f119730564abc1b04c2399eb221c39e0cfaa",
+      "packet_sha256": "7e63bca81d105b328138afab67fcebbbed289676e62f2ce068541670607dfdf9",
+      "state_chain": "7e63bca81d105b328138afab67fcebbbed289676e62f2ce068541670607dfdf9"
+    },
+    "left": "original",
+    "right": "actual ID decode"
+  }
+]

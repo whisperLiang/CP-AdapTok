@@ -1,0 +1,17 @@
+{
+  "completed_joint_steps": 300,
+  "action": "extend_to_1000",
+  "same_8_frame_validation_gain_db": {
+    "256": 3.6582617544845917,
+    "512": 3.7592007811356147,
+    "1024": 3.776512424777108,
+    "2048": 3.7898729200891523
+  },
+  "finite_gradients": true,
+  "peak_gpu_mib": 2908.056640625,
+  "full_validation_k256_to_k2048_gain_db": 0.10117256488167214,
+  "k2048_perplexity": 3.86677552549755,
+  "scorer_ready": false,
+  "reason": "Numerically stable, short and long validation reconstruction is finite; continue a bounded 1000-step check. Prefix gains remain small and VQ frequency is highly concentrated; no convergence or 5000-step approval inferred.",
+  "decision_scope": "engineering decision from validation, not a preregistered scientific hypothesis test"
+}

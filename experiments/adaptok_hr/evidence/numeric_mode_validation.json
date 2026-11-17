@@ -1,0 +1,156 @@
+{
+  "environment": {
+    "time": "2026-11-18T00:16:04.386248+08:00",
+    "timezone": "Asia/Shanghai",
+    "git": "c5b0a34120a53071318d61f74f3b0e5cd27585d6",
+    "git_dirty": true,
+    "source_sha256": "2c88b4e8a180af192cfb9bee8555087040499228a007a79793c6e5e94c70ed78",
+    "deterministic_algorithms": true,
+    "python_trace_enabled": true,
+    "branch": "experiment/adaptok-hr",
+    "python": "3.12.13",
+    "torch": "2.9.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA H100 PCIe",
+    "driver": "580.159.03"
+  },
+  "reference": "original frozen step1000 short validation before strict-GPU patch",
+  "scope": "same 3x8 native pixels and frozen weights; quality audit, not a throughput benchmark",
+  "absolute_mse_differences": {
+    "256": 7.5746405248829085e-06,
+    "512": 1.6282817038396416e-05,
+    "1024": 6.785325240343809e-06,
+    "2048": 1.1638815825189969e-06
+  },
+  "maximum_absolute_mse_difference": 1.6282817038396416e-05,
+  "budgets": {
+    "256": {
+      "frames": 24,
+      "bytes": 13392,
+      "header_bytes": 3408,
+      "payload_bytes": 9984,
+      "side_information_bytes": 0,
+      "actual_bpp": 0.0021527777777777778,
+      "theoretical_code_bpp": 0.0016049382716049382,
+      "entropy_bpp": null,
+      "real_bitstream": true,
+      "mse": 0.016894602682441473,
+      "psnr_global": 17.72252017257076,
+      "psnr_frame_mean": 17.981771784126867,
+      "sender_latency": {
+        "mean_ms": 81.22383041821497,
+        "p50_ms": 23.868007498094812,
+        "p95_ms": 28.06084307085256,
+        "fps": 12.311657734572236
+      },
+      "receiver_latency": {
+        "mean_ms": 15.041032696899492,
+        "p50_ms": 15.008605492766947,
+        "p95_ms": 15.26438195433002,
+        "fps": 66.48479663275624
+      },
+      "sender_plus_receiver_latency": {
+        "mean_ms": 96.26486311511447,
+        "p50_ms": 38.88892353279516,
+        "p95_ms": 43.28506597375962,
+        "fps": 10.388006253166228
+      }
+    },
+    "512": {
+      "frames": 24,
+      "bytes": 23376,
+      "header_bytes": 3408,
+      "payload_bytes": 19968,
+      "side_information_bytes": 0,
+      "actual_bpp": 0.003757716049382716,
+      "theoretical_code_bpp": 0.0032098765432098763,
+      "entropy_bpp": null,
+      "real_bitstream": true,
+      "mse": 0.014757054974325001,
+      "psnr_global": 18.310003048446408,
+      "psnr_frame_mean": 18.535712327273227,
+      "sender_latency": {
+        "mean_ms": 25.121941046866898,
+        "p50_ms": 24.49327800422907,
+        "p95_ms": 27.058253082213923,
+        "fps": 39.805841361319324
+      },
+      "receiver_latency": {
+        "mean_ms": 15.672012954989137,
+        "p50_ms": 15.280104998964816,
+        "p95_ms": 17.36873275367543,
+        "fps": 63.80801259366322
+      },
+      "sender_plus_receiver_latency": {
+        "mean_ms": 40.79395400185604,
+        "p50_ms": 39.76201798650436,
+        "p95_ms": 44.3748815334402,
+        "fps": 24.51343647528019
+      }
+    },
+    "1024": {
+      "frames": 24,
+      "bytes": 43344,
+      "header_bytes": 3408,
+      "payload_bytes": 39936,
+      "side_information_bytes": 0,
+      "actual_bpp": 0.006967592592592593,
+      "theoretical_code_bpp": 0.006419753086419753,
+      "entropy_bpp": null,
+      "real_bitstream": true,
+      "mse": 0.014398808144809058,
+      "psnr_global": 18.416734549571665,
+      "psnr_frame_mean": 18.646584345039805,
+      "sender_latency": {
+        "mean_ms": 26.027524669189006,
+        "p50_ms": 25.650491996202618,
+        "p95_ms": 28.459540684707463,
+        "fps": 38.4208645543533
+      },
+      "receiver_latency": {
+        "mean_ms": 16.26548558851937,
+        "p50_ms": 15.991224005119875,
+        "p95_ms": 18.31320150813553,
+        "fps": 61.47987372143552
+      },
+      "sender_plus_receiver_latency": {
+        "mean_ms": 42.293010257708374,
+        "p50_ms": 41.641492483904585,
+        "p95_ms": 46.78497635468375,
+        "fps": 23.64456901758935
+      }
+    },
+    "2048": {
+      "frames": 24,
+      "bytes": 83280,
+      "header_bytes": 3408,
+      "payload_bytes": 79872,
+      "side_information_bytes": 0,
+      "actual_bpp": 0.013387345679012346,
+      "theoretical_code_bpp": 0.012839506172839505,
+      "entropy_bpp": null,
+      "real_bitstream": true,
+      "mse": 0.014417083410080522,
+      "psnr_global": 18.411225889246708,
+      "psnr_frame_mean": 18.643664675105388,
+      "sender_latency": {
+        "mean_ms": 27.492751037546743,
+        "p50_ms": 27.18141645891592,
+        "p95_ms": 30.293170764343806,
+        "fps": 36.373224295899085
+      },
+      "receiver_latency": {
+        "mean_ms": 16.78059291104243,
+        "p50_ms": 16.754742013290524,
+        "p95_ms": 17.03073130629491,
+        "fps": 59.592649991643164
+      },
+      "sender_plus_receiver_latency": {
+        "mean_ms": 44.27334394858917,
+        "p50_ms": 43.97469694959,
+        "p95_ms": 47.029274012311355,
+        "fps": 22.5869543796198
+      }
+    }
+  }
+}

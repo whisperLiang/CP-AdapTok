@@ -1,0 +1,29 @@
+{
+  "environment": {
+    "time": "2026-11-17T23:28:36.755806+08:00",
+    "timezone": "Asia/Shanghai",
+    "git": "7edf48aee038d0aebbcad2722b293907a9fe9ff7",
+    "branch": "experiment/adaptok-hr",
+    "python": "3.12.13",
+    "torch": "2.9.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA H100 PCIe",
+    "driver": "580.159.03"
+  },
+  "before": {
+    "mse": 0.07296297326683998,
+    "edge_mse": 0.01731735421344638,
+    "output_spatial_std": 0.07660506293177605
+  },
+  "after": {
+    "mse": 0.01932103419676423,
+    "edge_mse": 0.005733247729949653,
+    "output_spatial_std": 0.09892120212316513
+  },
+  "initialization": "reconstructed from recorded seed/config; not a historical pre-training measurement",
+  "completed_steps": 300,
+  "training_frames": 1200,
+  "rgb_mse_improved": true,
+  "edge_mse_improved": true,
+  "scope": "four Train bear frames, real VQ2048 with reconstructed history; no generalization claim"
+}
