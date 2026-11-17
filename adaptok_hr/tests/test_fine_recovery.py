@@ -23,6 +23,9 @@ def test_active_vq_loss_and_gradient_are_exact_prefix(budget):
     assert values.grad[:, :budget].abs().sum() > 0
     assert values.grad[:, budget:].eq(0).all()
     assert vq.codebook.weight.grad.abs().sum() > 0
+    active = torch.zeros(8192, dtype=torch.bool)
+    active[encoded.ids[:, :budget].flatten()] = True
+    assert vq.codebook.weight.grad[~active].eq(0).all()
     torch.testing.assert_close(encoded.quantized, vq.lookup(encoded.ids), atol=0, rtol=0)
 
 
@@ -33,6 +36,18 @@ def test_legacy_scope_still_supervises_all_candidates():
     encoded = VectorQuantizer(loss_scope="all_candidates")(values)
     encoded.loss_terms(4)["vq_loss"].backward()
     assert values.grad[:, 4:].abs().sum() > 0
+
+
+def test_reconstruction_ste_reaches_only_active_tokens_and_never_codebook():
+    from adaptok_hr.models.vq import VectorQuantizer
+
+    values = torch.randn(1, 42, 16, requires_grad=True)
+    vq = VectorQuantizer(loss_scope="active_prefix")
+    encoded = vq(values)
+    encoded.quantized[:, :16].sum().backward()
+    assert values.grad is not None
+    assert values.grad[:, :16].abs().sum() > 0 and values.grad[:, 16:].eq(0).all()
+    assert all(p.grad is None or p.grad.eq(0).all() for p in vq.parameters())
 
 
 def test_per_level_lookup_uses_position_not_id_and_hashes_every_book(small_config):
@@ -78,13 +93,15 @@ def test_nested_vq_matches_reconstruction_weights_and_has_no_tail_gradient(small
     model = AdapTokHR(replace(small_config, loss_scope="active_prefix"))
     frame = torch.rand(1, 3, 128, 256)
     encoded = model.encode_features(frame)
-    encoded.quantized.retain_grad()
+    encoded.continuous.retain_grad()
     model.encode_features = lambda *args: encoded
     losses = ReconstructionLoss({"vq": 1.}, "cpu")
     loss, state, row = frame_objective(model, frame, None, None, 4, 16, losses)
     expected = .5 * (encoded.loss_terms(4)["vq_loss"] + encoded.loss_terms(16)["vq_loss"])
     torch.testing.assert_close(loss, expected)
     loss.backward()
+    assert encoded.continuous.grad[:, :16].abs().sum() > 0
+    assert encoded.continuous.grad[:, 16:].eq(0).all()
     assert row["vq_loss"] == float(expected.detach())
     assert state.frame_index == 0
 
@@ -133,3 +150,82 @@ def test_new_modes_preserve_real_prefix_bytes_and_reject_other_model(small_confi
     other = Codec(AdapTokHR(small_config).eval())
     with pytest.raises(ValueError, match="identity"):
         other.decode_frame(packet)
+
+
+def test_per_level_quantization_preserves_lookup_and_both_gradient_paths(small_config):
+    from adaptok_hr.models.vq import VectorQuantizer
+
+    counts = (2, 8, 32)
+    vq = VectorQuantizer(codebook_mode="per_level", loss_scope="active_prefix", counts=counts)
+    values = torch.randn(1, 42, 16, requires_grad=True)
+    encoded = vq(values)
+    torch.testing.assert_close(encoded.quantized, vq.lookup(encoded.ids), atol=0, rtol=0)
+    (encoded.loss_terms(32)["vq_loss"] + encoded.quantized[:, :32].square().sum()).backward()
+    assert values.grad[:, :32].abs().sum() > 0 and values.grad[:, 32:].eq(0).all()
+    assert all(book.weight.grad.abs().sum() > 0 for book in vq.books)
+
+
+@pytest.mark.parametrize("mode", ("shared", "per_level"))
+def test_training_frame_decoder_never_observes_unsent_candidates(small_config, mode):
+    from adaptok_hr.models.model import AdapTokHR
+
+    model = AdapTokHR(replace(small_config, codebook_mode=mode)).eval()
+    frame = torch.rand(1, 3, 128, 256)
+    encoded = model.encode_features(frame)
+    for budget in model.config.budgets:
+        expected, _ = model.decode_ids(encoded.ids[:, :budget])
+        changed = encoded.quantized.detach().clone()
+        changed[:, budget:] = float("nan")
+        output = model.forward_frame(frame, None, budget, replace(encoded, quantized=changed))
+        torch.testing.assert_close(output.rgb, expected, atol=0, rtol=0)
+
+
+def test_checkpoint_rejects_wrong_codebook_or_loss_configuration(small_model, tmp_path):
+    from adaptok_hr.data.dataset import ClipSampler
+    from adaptok_hr.models.model import AdapTokHR
+    from adaptok_hr.tests.test_training import settings
+    from adaptok_hr.training.checkpoint import restore_training, save_training
+    from adaptok_hr.training.train import JointTrainer
+
+    trainer = JointTrainer(small_model, settings())
+    sampler = ClipSampler([{"original_frames": 64}], 3)
+    config = {"model": small_model.config.to_dict(), "training": settings()}
+    save_training(tmp_path / "run.pt", trainer, sampler, config, "identity", 0, 0)
+    for changes in ({"codebook_mode": "per_level"}, {"loss_scope": "active_prefix"}):
+        model = AdapTokHR(replace(small_model.config, **changes))
+        config["model"] = model.config.to_dict()
+        with pytest.raises(ValueError, match="identity"):
+            restore_training(tmp_path / "run.pt", JointTrainer(model, settings()), sampler, config, "identity")
+
+
+@pytest.mark.gpu
+@pytest.mark.slow
+def test_native_per_level_active_vq_and_independent_budget_resume(tmp_path):
+    if not torch.cuda.is_available():
+        pytest.skip("CUDA required")
+    from adaptok_hr.config import ModelConfig
+    from adaptok_hr.data.dataset import ClipSampler, read_clip
+    from adaptok_hr.data.manifest import load_index
+    from adaptok_hr.models.model import AdapTokHR
+    from adaptok_hr.runtime import read_config, seed_everything
+    from adaptok_hr.training.checkpoint import restore_training, save_training
+    from adaptok_hr.training.train import JointTrainer
+
+    seed_everything(12)
+    config = read_config("experiments/adaptok_hr/fine_recovery/configs/A3.yaml")
+    config["training"]["losses"]["perceptual"] = 0
+    source = load_index(config["data"]["index"])["splits"]["train"][0]
+    clip, _ = read_clip(source, 0, 4)
+    model = AdapTokHR(ModelConfig(**config["model"])).cuda()
+    trainer = JointTrainer(model, config["training"])
+    sampler = ClipSampler([source], 30)
+    trainer.update(clip, 1)
+    save_training(tmp_path / "per_level.pt", trainer, sampler, config, "native", 1, 4)
+    expected = trainer.update(clip, 2)
+    weights = {k: v.cpu().clone() for k, v in model.state_dict().items()}
+    restored = JointTrainer(AdapTokHR(model.config).cuda(), config["training"])
+    restore_training(tmp_path / "per_level.pt", restored, sampler, config, "native")
+    actual = restored.update(clip, 2)
+    assert actual["budgets"] == expected["budgets"]
+    for name, value in weights.items():
+        torch.testing.assert_close(value, restored.model.state_dict()[name].cpu(), atol=0, rtol=0)

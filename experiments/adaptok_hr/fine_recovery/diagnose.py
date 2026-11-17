@@ -49,7 +49,8 @@ def interventions(z, discrete, second, budget, fine_offset):
     fine = q[:, fine_offset:]
     rng = torch.Generator().manual_seed(913)
     order = torch.randperm(fine.shape[1], generator=rng).to(q.device)
-    mixed = lambda f: torch.cat((q[:, :fine_offset], f), 1)
+    def mixed(f):
+        return torch.cat((q[:, :fine_offset], f), 1)
     return {"vq": q, "continuous": z, "fine_continuous": mixed(z[:, fine_offset:]),
             "fine_constant": mixed(fine[:, :1].expand_as(fine)),
             "fine_other_ids": mixed(other[:, fine_offset:]),
