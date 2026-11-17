@@ -13,6 +13,7 @@ from torch.nn import functional as F
 from cp_adaptok.metrics import MetricSuite
 from cp_adaptok.runtime import metadata, read_config, resolve, seed_everything, write_json
 from experiments.fixed2048.checkpoint import load_reconstructor, sha256
+from experiments.fixed2048.codec import PATHS, REFERENCES
 from experiments.fixed2048.data import read_clip, records
 from experiments.fixed2048.diagnostics import aggregate, content_sensitivity, distortion, token_statistics
 
@@ -77,6 +78,8 @@ def evaluate_loop(model, row, clip, paths, reference, suite, output_dir, sensiti
         # Paired evaluation uses a declared R2/original128 history for every candidate.
         if reference == 'paired':
             state = model.advance(encoded, outputs['R2'], 'original128')
+        elif reference == 'paired_full2048':
+            state = model.advance(encoded, outputs['R1'], 'full2048')
         else:
             state = model.advance(encoded, outputs[paths[0]], reference)
         if index == 0:
@@ -136,7 +139,7 @@ def run_evaluation(config, checkpoint, output, paths, references, split='validat
         for row in selected:
             clip = read_clip(row, frames)
             for reference in references:
-                loops = [paths] if reference in ('paired', 'i_only') else [[path] for path in paths]
+                loops = [paths] if reference in ('paired', 'paired_full2048', 'i_only') else [[path] for path in paths]
                 for loop_paths in loops:
                     # I-only candidates share empty state; independent loops each start empty.
                     measured, paired = evaluate_loop(model, row, clip, loop_paths, reference,
@@ -161,8 +164,9 @@ def main():
     parser.add_argument('--config', default='configs/fixed2048.yaml')
     parser.add_argument('--checkpoint')
     parser.add_argument('--output', required=True)
-    parser.add_argument('--paths', nargs='+', default=['R0', 'R0-spatial', 'R1', 'R2'])
-    parser.add_argument('--references', nargs='+', default=['i_only', 'paired', 'full2048', 'original128'])
+    parser.add_argument('--paths', nargs='+', choices=PATHS, default=['R0', 'R0-spatial', 'R1', 'R2'])
+    parser.add_argument('--references', nargs='+', choices=(*REFERENCES,'paired','paired_full2048'),
+                        default=['i_only', 'paired', 'full2048', 'original128'])
     parser.add_argument('--split', choices=['validation','test'], default='validation')
     parser.add_argument('--videos', nargs='+')
     parser.add_argument('--frames', type=int, default=8)

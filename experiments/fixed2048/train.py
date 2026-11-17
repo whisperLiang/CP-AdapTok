@@ -4,6 +4,7 @@ import argparse
 import copy
 import json
 import time
+from dataclasses import dataclass
 from pathlib import Path
 
 import torch
@@ -49,13 +50,7 @@ def training_frame(model, frame, state, index, settings):
     return loss, state, row
 
 
-def train_update(model, clip, optimizer, settings):
-    if settings['tbptt'] < 1:
-        raise ValueError('TBPTT must be positive')
-    model.train()
-    optimizer.zero_grad(set_to_none=True)
-    before = parameter_snapshot(model)
-    start = time.perf_counter()
+def backward_clip(model, clip, settings):
     state, pending, rows = model.empty_state(), [], []
     for index, frame in enumerate(clip):
         loss, state, row = training_frame(model, frame, state, index, settings)
@@ -64,6 +59,21 @@ def train_update(model, clip, optimizer, settings):
         if (index + 1) % settings['tbptt'] == 0 or index + 1 == len(clip):
             torch.stack(pending).sum().backward()
             state, pending = state.detach(), []
+    return rows
+
+
+def frozen_gradient_count(model):
+    return sum(p.grad is not None for m in (model.intra, model.ld) for p in m.parameters())
+
+
+def train_update(model, clip, optimizer, settings):
+    if settings['tbptt'] < 1:
+        raise ValueError('TBPTT must be positive')
+    model.train()
+    optimizer.zero_grad(set_to_none=True)
+    before = parameter_snapshot(model)
+    start = time.perf_counter()
+    rows = backward_clip(model, clip, settings)
     gradients = module_norms(model)
     parameters = [p for p in model.parameters() if p.requires_grad]
     norm = torch.nn.utils.clip_grad_norm_(parameters, settings['clip_grad_norm'], error_if_nonfinite=True)
@@ -71,7 +81,7 @@ def train_update(model, clip, optimizer, settings):
     if model.device.type == 'cuda':
         torch.cuda.synchronize(model.device)
     mse = sum(r['mse'] for r in rows) / len(rows)
-    frozen_grads = sum(p.grad is not None for m in (model.intra, model.ld) for p in m.parameters())
+    frozen_grads = frozen_gradient_count(model)
     if frozen_grads:
         raise RuntimeError('frozen backbone received parameter gradients')
     return {'mse': mse, 'psnr': psnr(mse), 'latent_mse': sum(r['latent_mse'] for r in rows) / len(rows),
@@ -83,22 +93,12 @@ def train_update(model, clip, optimizer, settings):
 
 @torch.no_grad()
 def validate(model, selected, length, directory=None, label='validation'):
-    model.eval()
     rows = []
     for row in selected:
         clip = read_clip(row, length)
-        state = model.empty_state()
-        for index, frame in enumerate(clip):
-            rgb = frame[None].to(model.device)
-            encoded = model.encode(rgb, state, index)
-            output = model.reconstruct(encoded, model.training_path)
-            mse = F.mse_loss(output.rgb.float(), rgb).item()
-            rows.append({'video': row['content_id'], 'frame': index, 'frame_type': encoded.context.frame_type,
-                         'mse': mse, 'psnr': psnr(mse), 'pixels': rgb.shape[-2] * rgb.shape[-1],
-                         **distortion(encoded.latent, output.latent)})
-            state = model.advance(encoded, output, 'full2048')
-            if directory and index == 0:
-                save_image(Path(directory) / f'{label}_{Path(row["path"]).name}.png', output.rgb)
+        _, measured = validate_clip(model, clip, row['content_id'], directory,
+                                    f'{label}_{Path(row["path"]).name}')
+        rows.extend(measured)
     return aggregate(rows), rows
 
 
@@ -129,16 +129,42 @@ def reconcile_log(path, completed):
     temporary.replace(path)
 
 
-def run_training(config, output, checkpoint_dir, resume=None, stop_after=None):
+@dataclass
+class TrainingRun:
+    config: dict
+    directory: Path
+    checkpoints: Path
+    model: object
+    identity: dict
+    optimizer: object
+    scheduler: object
+    generator: object
+    sources: list
+    validation: list
+    history: dict
+    step: int = 0
+
+    def save(self, filename, step):
+        save_training(self.checkpoints / filename, self.model, self.optimizer, self.scheduler,
+                      self.generator, step, self.config, self.history, self.identity)
+
+
+def require_training_config(config):
+    expected = {'mse':1.0, 'latent':0.0, 'lpips':0.0, 'dists':0.0, 'monotonic':0.0, 'estimated_rate':0.0}
+    if config['training']['reference'] != 'full2048' or config['loss'] != expected:
+        raise ValueError('this controlled experiment requires full2048 reference and RGB MSE only')
+    if min(config['training'][key] for key in ('steps','sequence_length','save_every','validate_every')) < 1:
+        raise ValueError('training counts and intervals must be positive')
+
+
+def initialize_training(config, output, checkpoint_dir, resume):
     directory, checkpoints = resolve(output), resolve(checkpoint_dir)
     if (directory / 'config.json').exists() and not resume:
         raise FileExistsError('training output exists; resume explicitly or use a fresh directory')
+    require_training_config(config)
     directory.mkdir(parents=True, exist_ok=True)
     checkpoints.mkdir(parents=True, exist_ok=True)
     settings = config['training']
-    if settings['reference'] != 'full2048' or config['loss'] != {
-        'mse': 1.0, 'latent': 0.0, 'lpips': 0.0, 'dists': 0.0, 'monotonic': 0.0, 'estimated_rate': 0.0}:
-        raise ValueError('this controlled experiment requires full2048 reference and RGB MSE only')
     model, identity = load_reconstructor(config['source_checkpoint'], config['device'],
                                          config['decoder_grid'], config['encoder_kv_grid'])
     model.configure_training(settings['path'])
@@ -148,59 +174,91 @@ def run_training(config, output, checkpoint_dir, resume=None, stop_after=None):
     generator = torch.Generator().manual_seed(config['seed'])
     sources, hashes = training_sources(config)
     validation, _ = records(config, 'validation', config['validation']['videos'])
-    step, history = 0, {'train': [], 'validation': []}
+    run = TrainingRun(config, directory, checkpoints, model, identity, optimizer, scheduler,
+                      generator, sources, validation, {'train':[], 'validation':[]})
     if resume:
-        step, history, identity = resume_training(resume, model, optimizer, scheduler, generator, config)
+        run.step, run.history, run.identity = resume_training(resume, model, optimizer, scheduler, generator, config)
     else:
-        initial, frames = validate(model, validation, config['validation']['frames'], directory / 'images', 'step0_val')
-        history['validation'].append({'step':0, 'summary':initial, 'frames':frames})
-        source = sources[0]
-        first_clip = read_clip(source, settings['sequence_length'], crop=(1080, 1920))
-        initial_train, frames = validate_clip(model, first_clip, source['content_id'], directory / 'images', 'step0_train')
-        history['step0_train'] = {'summary':initial_train, 'frames':frames}
-        save_training(checkpoints / 'step0.pt', model, optimizer, scheduler, generator, 0, config, history, identity)
+        initialize_step_zero(run)
     write_json(directory / 'config.json', config)
-    write_json(directory / 'inputs.json', {'source_identity':identity, 'manifest_hashes':hashes,
-                                         'eligible_train_videos':[r['content_id'] for r in sources], **FLAGS})
-    reconcile_log(directory / 'train.jsonl', step)
+    write_json(directory / 'inputs.json', {'source_identity':run.identity, 'manifest_hashes':hashes,
+               'eligible_train_videos':[r['content_id'] for r in sources], **FLAGS})
+    reconcile_log(directory / 'train.jsonl', run.step)
+    return run
+
+
+def initialize_step_zero(run):
+    config, directory, model = run.config, run.directory, run.model
+    initial, frames = validate(model, run.validation, config['validation']['frames'], directory / 'images', 'step0_val')
+    run.history['validation'].append({'step':0, 'summary':initial, 'frames':frames})
+    source = run.sources[0]
+    clip = read_clip(source, config['training']['sequence_length'], crop=(1080,1920))
+    initial, frames = validate_clip(model, clip, source['content_id'], directory / 'images', 'step0_train')
+    run.history['step0_train'] = {'summary':initial, 'frames':frames}
+    for filename in ('step0.pt', 'best_validation.pt', 'latest.pt'):
+        run.save(filename, 0)
+
+
+def validate_update(run, completed, clip, source):
+    result, frames = validate(run.model, run.validation, run.config['validation']['frames'],
+                              run.directory / 'images', f'step{completed}_val')
+    previous = min(v['summary']['global_mse'] for v in run.history['validation'])
+    run.history['validation'].append({'step':completed, 'summary':result, 'frames':frames})
+    measured, measured_frames = validate_clip(run.model, clip, source['content_id'],
+                                              run.directory / 'images', f'step{completed}_train')
+    run.history['last_train_eval'] = {'step':completed, 'summary':measured, 'frames':measured_frames}
+    if result['global_mse'] <= previous:
+        run.save('best_validation.pt', completed)
+
+
+def due(completed, interval, limit):
+    return completed % interval == 0 or completed == limit
+
+
+def execute_updates(run, limit, cached):
+    settings = run.config['training']
+    with (run.directory / 'train.jsonl').open('a') as log:
+        for completed in range(run.step + 1, limit + 1):
+            source, start, clip = cached or sample_clip(run.sources, settings['sequence_length'], run.generator)
+            measured = train_update(run.model, clip, run.optimizer, settings)
+            run.scheduler.step()
+            measured.update(step=completed, sample={'video':source['content_id'], 'start':start,
+                            'frames':len(clip)}, lr=run.optimizer.param_groups[0]['lr'], **FLAGS)
+            run.history['train'].append(measured)
+            log.write(json.dumps(measured, ensure_ascii=False, allow_nan=False) + '\n')
+            log.flush()
+            if due(completed, settings['validate_every'], limit):
+                validate_update(run, completed, clip, source)
+            if due(completed, settings['save_every'], limit):
+                run.save('latest.pt', completed)
+                write_json(run.directory / 'history.json', run.history)
+            if completed == 1 or completed % 10 == 0:
+                print(json.dumps({k:measured[k] for k in
+                      ('step','mse','psnr','latent_mse','step_wall_s','peak_gpu_mib')}), flush=True)
+
+
+def record_completion(run):
+    history = run.history
+    actual = history['train'][-1]['step'] if history['train'] else run.step
+    write_json(run.directory / 'completion.json', {
+               'status':'complete' if actual == run.config['training']['steps'] else 'pilot_checkpointed',
+               'actual_optimizer_steps':actual, 'declared_steps':run.config['training']['steps'],
+               'actual_training_frames':sum(len(r['frames']) for r in history['train']),
+               'optimizer_wall_s':sum(r['step_wall_s'] for r in history['train']), **FLAGS})
+
+
+def run_training(config, output, checkpoint_dir, resume=None, stop_after=None):
+    run = initialize_training(config, output, checkpoint_dir, resume)
+    settings = config['training']
     limit = min(settings['steps'], stop_after) if stop_after is not None else settings['steps']
     cached = None
     if settings.get('train_video'):
-        cached = (sources[0], 0, read_clip(sources[0], settings['sequence_length'], crop=(1080, 1920)))
-    if model.device.type == 'cuda':
-        torch.cuda.reset_peak_memory_stats(model.device)
-    with (directory / 'train.jsonl').open('a') as log:
-        for completed in range(step + 1, limit + 1):
-            source, start, clip = cached or sample_clip(sources, settings['sequence_length'], generator)
-            measured = train_update(model, clip, optimizer, settings)
-            scheduler.step()
-            measured.update(step=completed, sample={'video':source['content_id'], 'start':start,
-                            'frames':len(clip)}, lr=optimizer.param_groups[0]['lr'], **FLAGS)
-            history['train'].append(measured)
-            log.write(json.dumps(measured, ensure_ascii=False, allow_nan=False) + '\n')
-            log.flush()
-            if completed % settings['validate_every'] == 0 or completed == limit:
-                result, frames = validate(model, validation, config['validation']['frames'],
-                                          directory / 'images', f'step{completed}_val')
-                history['validation'].append({'step':completed, 'summary':result, 'frames':frames})
-                final_train, frames_train = validate_clip(model, clip, source['content_id'], directory / 'images', f'step{completed}_train')
-                history['last_train_eval'] = {'step': completed, 'summary':final_train, 'frames':frames_train}
-                previous = [v['summary']['global_mse'] for v in history['validation'][:-1]]
-                if result['global_mse'] <= min(previous):
-                    save_training(checkpoints / 'best_validation.pt', model, optimizer, scheduler, generator,
-                                  completed, config, history, identity)
-            if completed % settings['save_every'] == 0 or completed == limit:
-                save_training(checkpoints / 'latest.pt', model, optimizer, scheduler, generator,
-                              completed, config, history, identity)
-                write_json(directory / 'history.json', history)
-            if completed == 1 or completed % 10 == 0:
-                print(json.dumps({k:measured[k] for k in ('step','mse','psnr','latent_mse','step_wall_s','peak_gpu_mib')}), flush=True)
-    actual_step = history['train'][-1]['step'] if history['train'] else step
-    write_json(directory / 'completion.json', {'status':'complete' if actual_step == settings['steps'] else 'pilot_checkpointed',
-               'actual_optimizer_steps':actual_step, 'declared_steps':settings['steps'],
-               'actual_training_frames':sum(len(r['frames']) for r in history['train']),
-               'optimizer_wall_s':sum(r['step_wall_s'] for r in history['train']), **FLAGS})
-    return history
+        cached = (run.sources[0], 0, read_clip(run.sources[0], settings['sequence_length'], crop=(1080,1920)))
+    if run.model.device.type == 'cuda':
+        torch.cuda.reset_peak_memory_stats(run.model.device)
+    execute_updates(run, limit, cached)
+    record_completion(run)
+    return run.history
 
 
 @torch.no_grad()

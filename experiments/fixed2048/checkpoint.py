@@ -17,6 +17,15 @@ from experiments.fixed2048.codec import Fixed2048Reconstructor
 FORMAT = 'fixed2048_v1'
 
 
+def experiment_source_sha256():
+    directory = Path(__file__).parent
+    digest = hashlib.sha256()
+    for path in sorted(directory.rglob('*.py')):
+        digest.update(str(path.relative_to(directory)).encode())
+        digest.update(path.read_bytes())
+    return digest.hexdigest()
+
+
 def sha256(path):
     with Path(path).open('rb') as handle:
         return hashlib.file_digest(handle, 'sha256').hexdigest()
@@ -71,7 +80,9 @@ def load_reconstructor(path, device='cuda:0', decoder_grid=None, encoder_kv_grid
                 'source_model_config': asdict(source_config), 'checkpoint_step': artifact['step'],
                 'training_status': artifact['status'], 'strict_load': True, 'migration': ledger,
                 'source_metadata': artifact.get('metadata'),
-                'experiment_source': artifact.get('source_identity')}
+                'experiment_source': artifact.get('source_identity'),
+                'trained_path': artifact['config'].get('training', {}).get('path', 'historical_VQ'),
+                'experiment_source_sha256': experiment_source_sha256()}
     model.provenance = identity
     return model.to(device).eval(), identity
 
@@ -97,11 +108,13 @@ def save_training(path, model, optimizer, scheduler, generator, step, config, hi
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix('.tmp')
+    details = metadata(config, 'trained')
+    details['experiment_source_sha256'] = experiment_source_sha256()
     torch.save({'experiment_format': FORMAT, 'model_config': asdict(model.config),
                 'model': model.state_dict(), 'optimizer': optimizer.state_dict(),
                 'scheduler': scheduler.state_dict(), 'rng': rng_state(generator),
                 'step': step, 'config': config, 'history': history, 'status': 'trained',
-                'source_identity': source_identity, 'metadata': metadata(config, 'trained')}, temporary)
+                'source_identity': source_identity, 'metadata': details}, temporary)
     temporary.replace(path)
 
 
