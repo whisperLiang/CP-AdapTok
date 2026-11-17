@@ -25,3 +25,11 @@ def test_boundary_error_is_measured_on_the_native_image():
 def test_identity_has_infinite_psnr():
     x = torch.rand(1, 3, 12, 20)
     assert math.isinf(pixel_metrics(x, x, boundary_mask(12, 20, 8, 1))["psnr"])
+
+
+def test_boundary_strips_have_declared_width_and_exclude_image_edges():
+    mask = boundary_mask(300, 300, spacing=128, half_width=2)
+    assert mask[10, 126:130].all()
+    assert not mask[10, 125] and not mask[10, 130]
+    assert mask[254:258, 10].all()
+    assert not mask[0, 0] and not mask[299, 299]

@@ -145,7 +145,7 @@ def finish_video(directory, windows, source, budgets, identity):
 
 
 def summarize_experiment(output, videos, budgets):
-    all_rows = [row for video in videos for window in video["windows"] for item in window["budgets"].values() for row in item["frames"]]
+    all_rows = flatten_frame_rows(videos)
     summary = {"quality_only": True, "bpp": None, "budgets": {}, "video_count": len(videos),
                "boundary_definition": "union of [line-2,line+2) pixel strips at internal multiples of 128, same mask for both strides",
                "temporal_state": "each native window independent; repeat last real frame for tail; score only real frames",
@@ -155,8 +155,7 @@ def summarize_experiment(output, videos, budgets):
         rows = [r for r in all_rows if r["tokens_per_tile_window"] == budget]
         windows = [w["budgets"][str(budget)]["latency"] for video in videos for w in video["windows"]]
         summary["budgets"][str(budget)] = {"metrics": aggregate(rows), "latency": latency_summary(windows),
-            "peak_inference_allocated_mib": max(w["peak_inference_memory"]["allocated_mib"] for v in videos for w in v["windows"]),
-            "peak_inference_reserved_mib": max(w["peak_inference_memory"]["reserved_mib"] for v in videos for w in v["windows"])}
+                                          **peak_memory(videos)}
         for video in videos:
             video_rows.append({"content_id": video["source"]["content_id"], "tokens_per_tile_window": budget,
                                **video["budgets"][str(budget)]["metrics"]})
@@ -166,6 +165,16 @@ def summarize_experiment(output, videos, budgets):
     write_json(Path(output) / "summary.json", summary)
     write_json(Path(output) / "latency.json", {k: v["latency"] for k, v in summary["budgets"].items()})
     return summary
+
+
+def flatten_frame_rows(videos):
+    return [row for video in videos for window in video["windows"] for item in window["budgets"].values() for row in item["frames"]]
+
+
+def peak_memory(videos):
+    values = [w["peak_inference_memory"] for v in videos for w in v["windows"]]
+    return {"peak_inference_allocated_mib": max(w["allocated_mib"] for w in values),
+            "peak_inference_reserved_mib": max(w["reserved_mib"] for w in values)}
 
 
 def aggregate_video_means(rows, budget):

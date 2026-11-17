@@ -31,3 +31,11 @@ def test_timeline_and_coordinates_survive_stitching(stride):
 def test_rejects_gaps_or_invalid_stride(stride):
     with pytest.raises(ValueError):
         TileLayout(1080, 1920, 128, stride)
+
+
+def test_bottom_right_padding_reflects_original_pixels():
+    clip = torch.arange(7 * 11).reshape(1, 1, 7, 11).float()
+    batches = list(extract_batches(clip, TileLayout(7, 11, 4, 4), 4))
+    assert batches[-1][0][-1] == (4, 8)
+    last = batches[-1][1][-1]
+    assert last[0, 0, -1, -1] == clip[0, 0, -2, -2]

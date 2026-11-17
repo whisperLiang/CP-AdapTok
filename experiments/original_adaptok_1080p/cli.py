@@ -11,7 +11,7 @@ from pathlib import Path
 import torch
 import yaml
 
-from .artifacts import write_json
+from .artifacts import exclusive_writer, write_json
 from .equivalence import check_equivalence
 from .metrics import FullFrameMetrics
 from .model_adapter import DEFAULT_REVISION, ROOT, OfficialAdapter, validate_budget
@@ -118,10 +118,7 @@ def main():
     output = Path(config["output"]).resolve()
     output.mkdir(parents=True, exist_ok=True)
     # A process-level exclusive owner prevents competing writers while allowing crash recovery.
-    import fcntl
-
-    with (output / "experiment.lock").open("w") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    with exclusive_writer(output):
         run(args, config, output)
 
 
@@ -146,17 +143,21 @@ def run(args, config, output):
     equivalence = check_equivalence(adapter, sources[0])
     write_json(output / "smoke/official_equivalence.json", equivalence)
     if args.command != "verify":
-        evaluator = FullFrameMetrics(adapter.device)
-        write_json(output / "metric_manifest.json", evaluator.manifest())
-        warmup(adapter, sources[0], config)
-        if args.command == "suite":
-            summaries = run_suite(adapter, evaluator, sources, output, config)
-        else:
-            summaries = {"evaluation": execute(adapter, evaluator, sources, output / "evaluation", args.stride or adapter.input_size,
-                                                 config["budgets"], config["frames"], config["start"], config)}
-        write_json(output / "suite_summary.json", summaries)
+        run_evaluation(args, config, output, adapter, sources)
     write_json(output / "checkpoint_manifest.json", adapter.verify_unchanged())
     print(json.dumps({"output": str(output), "official_equivalence": equivalence["passed"], "weights_unchanged": True}), flush=True)
+
+
+def run_evaluation(args, config, output, adapter, sources):
+    evaluator = FullFrameMetrics(adapter.device)
+    write_json(output / "metric_manifest.json", evaluator.manifest())
+    warmup(adapter, sources[0], config)
+    if args.command == "suite":
+        summaries = run_suite(adapter, evaluator, sources, output, config)
+    else:
+        summaries = {"evaluation": execute(adapter, evaluator, sources, output / "evaluation", args.stride or adapter.input_size,
+                                             config["budgets"], config["frames"], config["start"], config)}
+    write_json(output / "suite_summary.json", summaries)
 
 
 if __name__ == "__main__":

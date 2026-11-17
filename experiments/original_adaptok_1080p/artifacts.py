@@ -3,10 +3,21 @@
 import csv
 import json
 import subprocess
+from contextlib import contextmanager
 from pathlib import Path
 
 import numpy as np
 from PIL import Image
+
+
+@contextmanager
+def exclusive_writer(directory):
+    import fcntl
+
+    Path(directory).mkdir(parents=True, exist_ok=True)
+    with (Path(directory) / "experiment.lock").open("a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        yield
 
 
 def write_json(path, value):
@@ -21,7 +32,7 @@ def write_csv(path, rows):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(handle, fieldnames=list(dict.fromkeys(key for row in rows for key in row)))
         writer.writeheader()
         writer.writerows(rows)
 
