@@ -272,7 +272,7 @@ def main():
         sections += ["## 独立性能与计算量", benchmark_table(performance), exemplar["scope"],
                      "I/首P各5预热、20重复，batch1。联合计算包含发送端本地解码与独立接收端，不能把Encoder FPS直接称端到端FPS；该表为固定状态微基准，连续视频另测。",
                      f"参数量 `{exemplar['flops']['parameters']}`；I/P GFLOPs：" +
-                     ", ".join(f"{k}={v['gflops']:.4f}" for k, v in exemplar["flops"]["frames"].items()) + ". " + exemplar["flops"]["convention"],
+                     ", ".join(f"{k}={v['gflops']:.4f}" for k, v in exemplar["flops"]["frames"].items()) + ". " + exemplar["flops"]["convention"] + "。FLOPs口径是一次Encoder+VQ+一次Decoder前向；不含接收端的额外一次Decoder，联合速度则实际计入这次解码。",
                      "Conv、window attention、token/VQ、lookup/scatter、低分辨率补全、高分辨率上采样、状态、13-bit packing/unpacking均独立保存；分量探测含同步开销，不相加冒充整机性能。", component_table(performance)]
     sections += ["## 封存Baseline", baseline_table(base["rows"]),
                  "官方K为每Tile每16帧，HR为每完整帧。无重叠K2048约17280 Token/源帧，重叠约28160；不按相同K宣称同码率公平。官方 bpp=null；HR是真实固定13-bit流，包含帧头与CRC，没有熵模型。",

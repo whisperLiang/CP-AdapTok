@@ -57,6 +57,7 @@ OMP_NUM_THREADS=4 .venv-native/bin/python -m experiments.adaptok_hr.sequence_ben
 每预算独立闭环，输出真实 `.bin`、逐帧JSONL、聚合JSON和原生样图。blackswan仅50帧、dog60帧，不补帧；car-roundabout为连续64帧。正式长序列统计应再检查独立Test中64帧源。
 质量过程含指标模型的显存与时间；部署速度以独立benchmark为准。联合速度包括发送端本地解码及接收端解码；纯Encoder FPS单独列出。
 `benchmark`测固定I/首P状态；`sequence_benchmark`预热5对I/P后，逐预算实际处理连续64帧、完整推进双方状态，单遍记录各帧同步计时，不加载感知网络。读取、H2D、落盘、指标及端点相等断言均不计入编解码延迟；该口径没有流水并行。
+FLOP计数器执行一次模型前向（Encoder+VQ+一次Decoder），只覆盖其支持的算子；发送端加独立接收端的联合速度实际包含两次Decoder，不把单前向FLOPs当作该联合路径的完整运算量。
 
 完成Validation选定冻结Checkpoint后，才能运行：
 
