@@ -123,6 +123,11 @@ def test_scorer_readiness_and_checkpoint_resume(small_model, tmp_path):
     write_json(readiness, {"scorer_ready": False})
     with pytest.raises(ValueError, match="readiness"):
         train_scorer(Namespace(readiness=readiness))
+    checkpoint = tmp_path / "other_tokenizer.pt"
+    checkpoint.write_bytes(b"unit-test checkpoint identity")
+    write_json(readiness, {"scorer_ready": True, "checkpoint_sha256": "0" * 64})
+    with pytest.raises(ValueError, match="different tokenizer checkpoint"):
+        train_scorer(Namespace(readiness=readiness, checkpoint=checkpoint))
     scorer = BudgetScorer(16, small_model.config.budgets)
     optimizer = torch.optim.AdamW(scorer.parameters())
     scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lambda _: 1.)
@@ -151,7 +156,8 @@ def test_scorer_runner_freezes_checkpoint_and_can_resume(small_model, native_rec
     index = {"splits": {"train": [native_record], "validation": [], "test": []}}
     index["identity"] = stable_hash(index)
     write_json(tmp_path / "index.json", index)
-    write_json(tmp_path / "ready.json", {"scorer_ready": True, "scope": "unit test only"})
+    write_json(tmp_path / "ready.json", {"scorer_ready": True, "scope": "unit test only",
+                                        "checkpoint_sha256": file_hash(checkpoint)})
     args = Namespace(readiness=tmp_path / "ready.json", checkpoint=checkpoint, index=tmp_path / "index.json",
                      device="cpu", output=tmp_path / "scorer", resume=None, steps=2)
     args.output.mkdir()

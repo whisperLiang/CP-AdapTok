@@ -36,6 +36,8 @@ Decoder 输入仅为传输的前 K 个 embedding、位置表、已有接收状�
 
 Checkpoint 在完成 optimizer step 后原子保存模型、optimizer、scheduler、Python/NumPy/Torch/CUDA RNG、独立采样 RNG、配置、manifest/source identity、完成步数和累计帧；恢复以 checkpoint 为唯一提交点，回滚未提交日志，拒绝配置或数据身份改变。
 
+严格GPU逐位恢复还要求 `CUBLAS_WORKSPACE_CONFIG=:4096:8` 与 `torch.use_deterministic_algorithms(True)`；该数值模式随RNG保存/恢复。早期Pilot使用cuDNN确定性标志，新增原生BF16恢复测试揭示了约1.7e-7的非确定性差异；补强后零容差逐Tensor断言通过，早期训练结果身份保留，不把它追称为严格逐位确定性运行。
+
 先实际 1080p 前后向/多帧/码流/显存探测，再 Train 单段拟合，再正式 300 步。只有 Validation 质量与数值/显存稳定才继续 1000 步；5000 由真实结果决定。Scorer 在 tokenizer 稳定后冻结全部参数，用同状态各 K 的真实 ID 重建 MSE 标签；在线仅看当前帧编码特征和过去状态。未达门槛时保留实现及未运行标记，不提前声称已训练。
 
 ## 评估与验收

@@ -40,10 +40,16 @@ def restore_scorer(path, scorer, optimizer, scheduler, sampler, identity):
     return state["completed_steps"]
 
 
-def train_scorer(args):
+def check_readiness(args):
     readiness = json.loads(Path(args.readiness).read_text())
     if not readiness.get("scorer_ready", False):
         raise ValueError("tokenizer readiness decision does not permit Phase 2")
+    if readiness.get("checkpoint_sha256") != file_hash(args.checkpoint):
+        raise ValueError("readiness decision belongs to a different tokenizer checkpoint identity")
+
+
+def train_scorer(args):
+    check_readiness(args)
     seed_everything(20261117)
     torch.set_num_threads(4)
     model, _ = load_model(args.checkpoint, args.device)

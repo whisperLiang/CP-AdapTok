@@ -16,6 +16,8 @@ OMP_NUM_THREADS=4 .venv-native/bin/python -m pytest adaptok_hr/tests -q
 
 输入来自既有 `cpat_train/validation/test.json`。索引自动保留原生至少1920×1080源，更高分辨率只裁剪。支持本地已授权外部源：
 
+`content_id` 必须标识原视频源；同源裁剪/片段沿用相同ID，不能通过为每段重新编号绕过按源划分检查。
+
 ```json
 {"license":"用户确认的许可标识", "usage_conditions":"允许本项目研究训练的使用条件", "records":[{"path":"/absolute/video", "content_id":"dataset:source", "source":"出处", "official_split":"train", "role":"train", "resolution":[1920,1080], "original_frames":100, "fps":30, "resized":false, "sha256":"真实源哈希", "frame_hashes":[]}]}
 ```
@@ -49,10 +51,12 @@ OMP_NUM_THREADS=4 .venv-native/bin/python -m adaptok_hr.training.train --output 
 OMP_NUM_THREADS=4 .venv-native/bin/python -m adaptok_hr.evaluation.evaluate --checkpoint checkpoints/adaptok_hr/joint/step_000300.pt --split validation --ids DAVIS2017:blackswan DAVIS2017:car-roundabout DAVIS2017:dog --frames 64 --output results/adaptok_hr/validation_300
 OMP_NUM_THREADS=4 .venv-native/bin/python -m adaptok_hr.evaluation.evaluate --checkpoint checkpoints/adaptok_hr/joint/step_001000.pt --split validation --ids DAVIS2017:blackswan DAVIS2017:car-roundabout DAVIS2017:dog --frames 64 --output results/adaptok_hr/validation_1000
 OMP_NUM_THREADS=4 .venv-native/bin/python -m adaptok_hr.evaluation.benchmark --checkpoint checkpoints/adaptok_hr/joint/step_001000.pt --warmup 5 --repeats 20 --output results/adaptok_hr/benchmark.json
+OMP_NUM_THREADS=4 .venv-native/bin/python -m experiments.adaptok_hr.sequence_benchmark --checkpoint checkpoints/adaptok_hr/joint/step_001000.pt --frames 64 --warmup 5 --output results/adaptok_hr/sequence_benchmark.json
 ```
 
 每预算独立闭环，输出真实 `.bin`、逐帧JSONL、聚合JSON和原生样图。blackswan仅50帧、dog60帧，不补帧；car-roundabout为连续64帧。正式长序列统计应再检查独立Test中64帧源。
 质量过程含指标模型的显存与时间；部署速度以独立benchmark为准。联合速度包括发送端本地解码及接收端解码；纯Encoder FPS单独列出。
+`benchmark`测固定I/首P状态；`sequence_benchmark`预热5对I/P后，逐预算实际处理连续64帧、完整推进双方状态，单遍记录各帧同步计时，不加载感知网络。读取、H2D、落盘、指标及端点相等断言均不计入编解码延迟；该口径没有流水并行。
 
 完成Validation选定冻结Checkpoint后，才能运行：
 
@@ -81,14 +85,16 @@ HR Test是从原CP已索引的Test源中划出的本轮未读像素集合，不�
 .venv-native/bin/python -m adaptok_hr.training.train_scorer --checkpoint checkpoints/adaptok_hr/joint/step_001000.pt --readiness results/adaptok_hr/decision.json --steps 1000 --output results/adaptok_hr/scorer
 ```
 
-该入口要求真实决策中 `scorer_ready=true`，默认不绕过。冻结Tokenizer后同一P帧状态下各预算实际ID重建MSE作标签；只更新Scorer。在线使用 `Codec.encode_adaptive_frame()`，只读当前编码与重建历史，不读未来，不包含离线ILP。
+该入口要求真实决策中 `scorer_ready=true` 且 `checkpoint_sha256` 匹配当前Tokenizer，默认不绕过。冻结Tokenizer后同一P帧状态下各预算实际ID重建MSE作标签；只更新Scorer。在线使用 `Codec.encode_adaptive_frame()`，只读当前编码与重建历史，不读未来，不包含离线ILP。
 
 ## Python流式接口
 
 ```python
 from adaptok_hr.codec.codec import Codec
 from adaptok_hr.training.checkpoint import load_model
+from adaptok_hr.runtime import seed_everything
 
+seed_everything(20261117)  # 收发端使用相同数值设置
 model, metadata = load_model("checkpoints/adaptok_hr/joint/step_001000.pt")
 codec = Codec(model.eval(), amp_bf16=True)
 packet, sender_state = codec.encode_frame(rgb_bchw, None, budget=512, stream_id="camera-1")
@@ -104,3 +110,18 @@ reconstructed, receiver_state = codec.decode_frame(packet, None)
 ```
 
 生成的报告及 `experiments/adaptok_hr/evidence` 来自实际JSON/JSONL；大Checkpoint和源数据留在本机忽略目录，以SHA256核对。
+
+## 决策和验收证据
+
+完整1000步Validation之后、最终Test之前执行 `python -m experiments.adaptok_hr.decision`，生成停止/继续决策及逐层实际码流诊断。该命令记录本轮负结果，不能替代未来新架构的就绪判据。
+
+```bash
+OMP_NUM_THREADS=4 .venv-native/bin/python -m experiments.adaptok_hr.numeric_mode_check
+OMP_NUM_THREADS=4 .venv-native/bin/python -m experiments.adaptok_hr.quality mutate --output results/adaptok_hr/mutations.json
+.venv-native/bin/python -m experiments.adaptok_hr.quality audit --output results/adaptok_hr/quality_audit.json
+OMP_NUM_THREADS=4 .venv-native/bin/python -m experiments.adaptok_hr.acceptance
+.venv-native/bin/python -m adaptok_hr.evaluation.report
+```
+
+复杂度/重复审计覆盖 `adaptok_hr` 非测试代码，依赖实际测试与命令执行合并生成的 `results/adaptok_hr/coverage.json`；不是全仓库审计。`crapper`、`dryer`、`mutator`未安装，使用radon+coverage、AST相似度及隔离实际变异，结果中保留工具身份和断言失败证据。
+GPU逐位恢复需相同软硬件、BF16设置与严格数值模式。早期Pilot完成后才补强严格CUDA确定性；现有权重保留原身份，不承诺从旧种子重新训练能逐位复现早期Pilot。

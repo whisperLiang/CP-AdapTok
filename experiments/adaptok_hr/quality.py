@@ -29,6 +29,7 @@ MUTATIONS = [
     ("aux_commit", "training/train.py", "return total, main.state, row", "return total, alternative.state, row", "test_training.py::test_auxiliary_budget_does_not_change_committed_reference"),
     ("resume_optimizer", "training/checkpoint.py", "trainer.optimizer.load_state_dict(state[\"optimizer\"])", "pass  # dropped optimizer history", "test_training.py::test_optimizer_resume_matches_uninterrupted_and_sampling"),
     ("global_psnr", "evaluation/evaluate.py", "\"psnr_global\": psnr(mse)", "\"psnr_global\": sum(r[\"psnr\"] for r in rows) / len(rows)", "test_evaluation.py::test_psnr_global_and_frame_mean_stay_distinct"),
+    ("readiness_identity", "training/train_scorer.py", "if readiness.get(\"checkpoint_sha256\") != file_hash(args.checkpoint):", "if False:", "test_lifecycle.py::test_scorer_readiness_and_checkpoint_resume"),
 ]
 
 
