@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "completed_steps": 1,
+  "training_frames": 4,
+  "config": {
+    "model": {
+      "height": 1080,
+      "width": 1920,
+      "channels": [
+        48,
+        64,
+        96,
+        128,
+        192,
+        192,
+        192
+      ],
+      "decoder_channels": [
+        192,
+        128,
+        96,
+        64,
+        32,
+        24
+      ],
+      "heads": 6,
+      "window": 4,
+      "attention_blocks": 1,
+      "temporal": true,
+      "codebook_size": 8192,
+      "embedding_dim": 16,
+      "budgets": [
+        256,
+        512,
+        1024,
+        2048
+      ],
+      "gop": 32,
+      "gradient_checkpointing": true
+    },
+    "training": {
+      "seed": 20261117,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.01,
+      "amp_bf16": true,
+      "batch_sequences": 1,
+      "gradient_clip": 1.0,
+      "tbptt": 2,
+      "sequence_schedule": [
+        [
+          0,
+          4
+        ],
+        [
+          1000,
+          16
+        ],
+        [
+          5000,
+          32
+        ]
+      ],
+      "milestones": [
+        300,
+        1000,
+        5000
+      ],
+      "checkpoint_every": 100,
+      "validation_every": 100,
+      "nested_every": 4,
+      "budget_mode": "nested",
+      "fixed_budget": 2048,
+      "losses": {
+        "l1": 1.0,
+        "mse": 1.0,
+        "perceptual": 0.1,
+        "vq": 1.0,
+        "temporal": 0.05,
+        "monotonic": 0.1
+      }
+    },
+    "data": {
+      "index": "data/adaptok_hr/index.json",
+      "cp_manifest_directory": "data/manifests",
+      "external_sources": []
+    },
+    "evaluation": {
+      "frames": 64,
+      "amp_bf16": true,
+      "validation_ids": [
+        "DAVIS2017:blackswan",
+        "DAVIS2017:car-roundabout",
+        "DAVIS2017:dog"
+      ],
+      "historical_ids": [
+        "DAVIS2017:cows",
+        "DAVIS2017:goat",
+        "DAVIS2017:parkour"
+      ]
+    },
+    "benchmark": {
+      "warmup": 5,
+      "repeats": 20,
+      "batch_size": 1
+    },
+    "run_scope": {
+      "overfit": "DAVIS2017:bear",
+      "overfit_frames": 4
+    }
+  },
+  "config_identity": "b59b90a7fde7f8d14e6bd758f219d905abea92cac6f1ca732491dd587555dd40",
+  "manifest_identity": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+  "checkpoint_sha256": "04ee09b5896423d6026e016f78cb20fe9a603b134063120b39ecd645721b27bb",
+  "model_sha256": "9c63eb2833f008a61eabb441b6011523a9a86e224a7702a0fff8b06a1b2f6428",
+  "codebook_sha256": "cf86d4b4206d31ece57c32071cafc52728e073920cdee52d5eb933512d441943",
+  "source_sha256": "c33af9428cf20807c21dc7ca54b73ed10d2ab51ffe89583a6658c46925233659",
+  "optimizer_saved": true,
+  "scheduler_saved": true,
+  "rng_saved": true,
+  "sampling_saved": true
+}
