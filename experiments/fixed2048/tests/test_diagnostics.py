@@ -31,3 +31,22 @@ def test_content_variants_change_content_preserve_shapes_and_normal():
     stats = token_statistics(features)
     assert stats["continuous_variance"] > 0
     assert len(stats["group_variance"]) == 16
+
+
+def test_anomalous_content_never_advances_or_changes_decoder_weights():
+    from experiments.fixed2048.sensitivity import diagnose_sequence
+    from experiments.fixed2048.tests.test_codec import make_model
+
+    torch.set_num_threads(2)
+    model = make_model().eval()
+    before = {name: value.clone() for name, value in model.state_dict().items()}
+    rows = diagnose_sequence(
+        model, {"content_id": "validation:tiny"}, torch.rand(3, 3, 64, 64), "R1", "full2048"
+    )
+    assert len(rows) == 1 and rows[0]["frame_type"] == "P"
+    assert rows[0]["peer_frame"] == 1 and rows[0]["frame"] == 2
+    variants = rows[0]["results"]
+    assert variants["normal"]["rgb_delta_mse"] == 0
+    assert variants["normal"]["target_mse"] is not None
+    for name, value in model.state_dict().items():
+        assert torch.equal(value, before[name])

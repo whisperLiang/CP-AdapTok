@@ -80,3 +80,28 @@ def test_sealed_test_protocol_rejects_changed_frames_or_modes(tmp_path):
         validate_test_request(config, plan, "digest", ["R1"], ["full2048"], ["cows"], 8)
     with pytest.raises(ValueError, match="protocol"):
         validate_test_request(config, plan, "digest", ["R2"], ["full2048"], ["cows", "goat", "parkour"], 64)
+
+
+def test_original_reference_reproduces_historical_i_period_32(tmp_path):
+    import torch
+
+    from experiments.fixed2048.diagnostics import psnr
+    from experiments.fixed2048.evaluate import evaluate_loop
+    from experiments.fixed2048.tests.test_codec import make_model
+
+    torch.set_num_threads(2)
+
+    def suite(original, decoded):
+        mse = torch.nn.functional.mse_loss(original, decoded).item()
+        return {"mse": mse, "psnr": psnr(mse)}
+
+    rows, _ = evaluate_loop(
+        make_model().eval(),
+        {"content_id": "validation:tiny", "path": "tiny"},
+        torch.full((33, 3, 64, 64), 0.5),
+        ["R1"],
+        "original128",
+        suite,
+        tmp_path,
+    )
+    assert [r["frame"] for r in rows if r["frame_type"] == "I"] == [0, 32]

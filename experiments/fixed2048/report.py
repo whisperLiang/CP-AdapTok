@@ -75,33 +75,38 @@ def table_b(root):
     return table(["Model", "实际 Steps", "Train PSNR", "Train Latent MSE", "末步 Validation PSNR"], rows)
 
 
-def table_c(root):
-    entries = [
-        ("R1", "17×30", "Continuous", "continuous/evaluation", "full2048/R1"),
-        ("R2-initial", "17×30", "原码本 VQ", "continuous/evaluation", "full2048/R2"),
-        ("R2-trained", "17×30", "校准+QAT VQ", "quantized/evaluation", "full2048/R2"),
-        ("R3", "34×60", "Continuous", "grid_ablation/decoder34/evaluation", "full2048/R1"),
-    ]
-    rows = [
-        [name, grid, quantization, *quality(group(root, directory, key))]
-        for name, grid, quantization, directory, key in entries
-    ]
-    return table(["Model", "Decoder Grid", "Quantization", "PSNR", "LPIPS", "DISTS"], rows)
+COMPARISONS = {
+    "C": {
+        "columns": ["Model", "Decoder Grid", "Quantization", "PSNR", "LPIPS", "DISTS"],
+        "extract": quality,
+        "entries": [
+            (["R1", "17×30", "Continuous"], "continuous/evaluation", "full2048/R1"),
+            (["R2-initial", "17×30", "原码本 VQ"], "continuous/evaluation", "full2048/R2"),
+            (["R2-trained", "17×30", "校准+QAT VQ"], "quantized/evaluation", "full2048/R2"),
+            (["R3", "34×60", "Continuous"], "grid_ablation/decoder34/evaluation", "full2048/R1"),
+        ],
+    },
+    "D": {
+        "columns": ["Model", "Reference", "I PSNR", "P PSNR", "Overall PSNR"],
+        "extract": ip_quality,
+        "entries": [
+            (["R1", "i_only"], "continuous/evaluation", "i_only/R1"),
+            (["R1", "full2048"], "continuous/evaluation", "full2048/R1"),
+            (["R1", "original128"], "continuous/evaluation", "original128/R1"),
+            (["R2-trained", "full2048"], "quantized/evaluation", "full2048/R2"),
+            (["R2-trained", "original128"], "quantized/evaluation", "original128/R2"),
+        ],
+    },
+}
 
 
-def table_d(root):
-    entries = [
-        ("R1", "i_only", "continuous/evaluation", "R1"),
-        ("R1", "full2048", "continuous/evaluation", "R1"),
-        ("R1", "original128", "continuous/evaluation", "R1"),
-        ("R2-trained", "full2048", "quantized/evaluation", "R2"),
-        ("R2-trained", "original128", "quantized/evaluation", "R2"),
-    ]
+def comparison_table(root, which):
+    config = COMPARISONS[which]
     rows = [
-        [name, reference, *ip_quality(group(root, directory, f"{reference}/{path}"))]
-        for name, reference, directory, path in entries
+        [*prefix, *config["extract"](group(root, directory, key))]
+        for prefix, directory, key in config["entries"]
     ]
-    return table(["Model", "Reference", "I PSNR", "P PSNR", "Overall PSNR"], rows)
+    return table(config["columns"], rows)
 
 
 def training_table(root):
@@ -171,7 +176,8 @@ def performance_table(root):
 def final_table(root):
     entries = [
         ("原 B0", "B0", "original128/R2"),
-        ("原 B1", "B1", "original128/R2"),
+        ("原 B1，历史GOP32", "B1", "original128/R2"),
+        ("B1，仅首帧I匹配对照", "B1", "matched128/R2"),
         ("R1", "R1", "full2048/R1"),
         ("R2-initial", "R1", "full2048/R2"),
         ("R2-trained", "R2", "full2048/R2"),
@@ -184,6 +190,71 @@ def final_table(root):
             [name, *quality(summary), number(summary["mean_frame_psnr"]), number(summary["mean_video_psnr"])]
         )
     return table(["Model", "全局MSE PSNR", "LPIPS", "DISTS", "逐帧PSNR均值", "视频均值的均值"], rows)
+
+
+def token_table(root):
+    measured = read(root / "token_statistics_summary.json")
+    rows = []
+    for name, stats in measured.items():
+        means = stats["mean_frame_statistics"]
+        rows.append(
+            [
+                name,
+                stats["tokens"],
+                stats["global_codes_used"],
+                number(stats["global_perplexity"]),
+                number(means["codebook_used"]),
+                number(means["perplexity"]),
+                number(means["token_quantization_mse"]),
+                number(means["continuous_variance"]),
+            ]
+        )
+    return table(
+        [
+            "权重",
+            "观测Token数",
+            "全局Code数",
+            "全局Perplexity",
+            "每帧Code均值",
+            "每帧Perplexity均值",
+            "16D量化MSE",
+            "Tokenizer内容方差",
+        ],
+        rows,
+    )
+
+
+def summarize_content(measured, path, frame_type):
+    selected = [r for r in measured if (r["diagnostic_path"], r["frame_type"]) == (path, frame_type)]
+    values = [
+        sum(r["results"][variant]["rgb_delta_mse"] for r in selected) / len(selected)
+        for variant in ("constant", "shuffled", "other_frame")
+    ]
+    normal = sum(r["results"]["normal"]["target_mse"] for r in selected) / len(selected)
+    signal = "信息利用不足风险信号" if values[2] < normal * 0.01 else "输出对内容有响应"
+    return [*[number(v) for v in values], number(normal), signal]
+
+
+def sensitivity_table(root):
+    rows = []
+    for name in ("R1", "R2"):
+        measured = read(root / "reference_ablation" / f"content_{name}.json")["rows"]
+        for path in ("R1", "R2"):
+            for frame_type in ("I", "P"):
+                rows.append([name, path, frame_type, *summarize_content(measured, path, frame_type)])
+    return table(
+        [
+            "权重",
+            "诊断路径",
+            "帧型",
+            "常量RGB变化MSE",
+            "打乱RGB变化MSE",
+            "异帧RGB变化MSE",
+            "正常目标MSE",
+            "异帧变化/目标MSE<1%筛查",
+        ],
+        rows,
+    )
 
 
 def build_report(root, output, figures=False):
@@ -201,7 +272,7 @@ def build_report(root, output, figures=False):
     source = read(root / "source_identity.json")
     seal = read(root / "final_test/seal.json")
     final_r1 = group(root, "final_test/R1", "full2048/R1")
-    final_b1 = group(root, "final_test/B1", "original128/R2")
+    final_b1 = group(root, "final_test/B1", "matched128/R2")
     facts = {
         "R1": r1,
         "R2": r2,
@@ -251,7 +322,7 @@ R3只将Decoder Grid改为34×60（2040个Grid Query，Token数仍为2048），G
 同状态比较先建立一个FrozenFrameContext，Encoder只运行一次，Tokenizer输出只计算一次，R0/R1/R2都完成后才commit。
 表A采用B1历史VQ128参考；训练后纯量化比较采用R1 Full2048历史，分别标记paired和paired_full2048。
 独立Full2048则每条候选自行解码并将真实Decoder Feature提交给下一P帧，允许累积误差不同。
-Original128显示完整2048重建，参考只由独立VQ128解码推进；显示结果不影响基础参考。I-only每帧空状态并强制I。
+Original128显示完整2048重建，参考只由独立VQ128解码推进；显示结果不影响基础参考。它复现正式每32帧I周期；matched128额外固定仅首帧I。I-only每帧空状态并强制I。
 所有视频独立状态；没有真实历史帧替代重建参考、未来帧参考或Teacher-forced主路径。
 
 ## 4. 数据、短程训练与恢复
@@ -289,11 +360,15 @@ MS-SSIM、I/P Relative RMSE、Latent形状和原始MSE均在frame_metrics.jsonl�
 
 ## 7. 表C：固定2048消融（相同Validation 3×8帧）
 
-{table_c(root)}
+{comparison_table(root, "C")}
 
 R2-initial与R1完全同权重，但此表是各自独立完整闭环，不能把表内差全部归于当前帧量化。
 真正同状态R1权重的纯量化全局PSNR差为 **{number(facts["pure_quantization_psnr_delta"])}dB**；逐帧、Token MSE、Latent/RGB差见paired_quantization.json和Token统计。
 R2-trained还保留该权重自己的连续路径，避免跨训练状态误判。码本使用数、perplexity和逐Code直方图保留在其原始Token记录。
+
+{token_table(root)}
+
+本表每组24帧、49152个Token，汇总与逐帧Perplexity分开定义。码本使用提升但画质未显著改善，不支持把当前全部失真归于码本塌缩。16个128-Token组的方差保留在token_statistics_summary.json。
 
 独立raw192 PSNR={number(raw["global_mse_psnr"])}dB，R1 16D={number(r1["global_mse_psnr"])}dB，差值raw−16D={number(raw["global_mse_psnr"] - r1["global_mse_psnr"])}dB。
 该对照已独立训练，仍只测匹配300更新下的控制差异，不能称为16D不可逆信息损失的精确值或收敛容量结论。
@@ -304,7 +379,7 @@ R3相对R1为{number(r3["global_mse_psnr"] - r1["global_mse_psnr"])}dB，且迁�
 
 ## 8. 表D：参考闭环
 
-{table_d(root)}
+{comparison_table(root, "D")}
 
 ![独立参考闭环逐帧PSNR](../results/fixed2048/figures/reference_frames.png)
 
@@ -313,7 +388,11 @@ I-only的每帧都为I，其P列不适用；不能拿其I/P比例与闭环Overal
 完整与128参考切换的变化应结合逐P帧、视频内轨迹看；不能因一个候选提前commit或不同历史输入造成差异就宣称纯量化损失。
 内容敏感性为独立非正常诊断：正常、同位置常量（各Token同通道均值）、固定随机排列、同帧型前一帧Token。
 Decoder位置向量和当前历史上下文保持固定，不提交这些异常输出。原始RGB/Latent输出差保留在sensitivity目录，未混入正式结果。
-正常与异帧Token并非完全等价；但Token数量增益弱与空间重建质量低仍需进一步检查表示/空间绑定，不能用内容敏感性单项证明全部根因。
+独立内容诊断逐项记录history_path、diagnostic_path和peer_frame，异常输出从不提交参考；以此独立记录为准，早期内嵌诊断仅作补充。
+
+{sensitivity_table(root)}
+
+筛查阈值只用于标记信息利用不足风险，不是统计检验。异帧来自同视频相邻已解码帧，其视觉相似度是混杂因素；即使输出近似不变，也不能据此独自证明完全忽略内容。常量/打乱控制和重建误差必须联合看，不能用单项证明全部根因。
 
 ## 9. 原生1080p推理与计算量
 
@@ -327,7 +406,7 @@ Decoder位置向量和当前历史上下文保持固定，不提交这些异常�
 
 所有模型在读取Test像素前固定SHA和协议，封存见final_test/seal.json；封存后拒绝训练与码本校准。
 沿用cpat_test.json中原始尺寸1920×1080的cows/goat/parkour，各64帧，共192帧。没有根据Test重新选择模型或参数。
-B0/B1为原S4模型以历史VQ128闭环重建显示2048，保留接收端语义，但本次比较不生成码流、bpp仍为空。
+B0/B1为原S4模型以历史VQ128闭环、每32帧I重建显示2048，保留接收端语义，但不生成码流、bpp仍为空。另为B1提供matched128（仅首帧I），与本专项I/P比例一致；下文R1−B1采用此匹配对照。
 
 {final_table(root)}
 

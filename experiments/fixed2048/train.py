@@ -10,8 +10,9 @@ from pathlib import Path
 import torch
 from torch.nn import functional as F
 
-from cp_adaptok.runtime import read_config, resolve, seed_everything, write_json
+from cp_adaptok.runtime import resolve, seed_everything, write_json
 from experiments.fixed2048.checkpoint import load_reconstructor, resume_training, save_training
+from experiments.fixed2048.cli import read_config
 from experiments.fixed2048.data import read_clip, records
 from experiments.fixed2048.diagnostics import aggregate, distortion, module_norms, psnr
 from experiments.fixed2048.evaluate import FLAGS, save_image

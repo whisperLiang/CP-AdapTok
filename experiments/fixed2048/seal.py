@@ -3,8 +3,9 @@
 import argparse
 import json
 
-from cp_adaptok.runtime import metadata, read_config, resolve, write_json
+from cp_adaptok.runtime import metadata, resolve, write_json
 from experiments.fixed2048.checkpoint import require_checkpoint, sha256
+from experiments.fixed2048.cli import read_config
 
 
 def seal_experiment(config, plan, output):

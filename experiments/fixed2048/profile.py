@@ -7,8 +7,9 @@ import torch
 from torch.utils.flop_counter import FlopCounterMode
 
 from cp_adaptok.backbones.causal_state import CausalState
-from cp_adaptok.runtime import read_config, seed_everything, write_json
+from cp_adaptok.runtime import write_json
 from experiments.fixed2048.checkpoint import load_reconstructor
+from experiments.fixed2048.cli import seeded_config
 from experiments.fixed2048.data import read_clip, records
 from experiments.fixed2048.evaluate import FLAGS, stage_times
 
@@ -16,6 +17,7 @@ from experiments.fixed2048.evaluate import FLAGS, stage_times
 @torch.no_grad()
 def profile_model(config, checkpoint, path, repeats=10):
     model, identity = load_reconstructor(checkpoint, config["device"], profile=True)
+    model.requires_grad_(False)
     sources, _ = records(config, "validation", config["validation"]["videos"][:1])
     clip = read_clip(sources[0], 2).to(model.device)
     setup = model.encode(clip[0:1], model.empty_state(), 0)
@@ -76,8 +78,7 @@ def main():
     parser.add_argument("--path", choices=["R0", "R1", "R2", "raw_192"], default="R1")
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
-    config = read_config(args.config)
-    seed_everything(config["seed"], config["device"], 0.9)
+    config = seeded_config(args.config)
     write_json(args.output, profile_model(config, args.checkpoint, args.path))
 
 

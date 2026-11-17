@@ -4,7 +4,8 @@ import argparse
 import copy
 import json
 
-from cp_adaptok.runtime import read_config, resolve, seed_everything, write_json
+from cp_adaptok.runtime import resolve, seed_everything, write_json
+from experiments.fixed2048.cli import read_config
 from experiments.fixed2048.train import run_training
 
 

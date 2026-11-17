@@ -11,8 +11,9 @@ from PIL import Image
 from torch.nn import functional as F
 
 from cp_adaptok.metrics import MetricSuite
-from cp_adaptok.runtime import metadata, read_config, resolve, seed_everything, write_json
+from cp_adaptok.runtime import metadata, resolve, seed_everything, write_json
 from experiments.fixed2048.checkpoint import load_reconstructor, sha256
+from experiments.fixed2048.cli import read_config
 from experiments.fixed2048.codec import PATHS, REFERENCES
 from experiments.fixed2048.data import read_clip, records
 from experiments.fixed2048.diagnostics import aggregate, content_sensitivity, distortion, token_statistics
@@ -100,9 +101,17 @@ def diagnostic_content(model, encoded, previous, source, index, reference, direc
 
 
 def advance_reference(model, encoded, outputs, paths, reference):
-    policy = {"paired": ("R2", "original128"), "paired_full2048": ("R1", "full2048")}
+    policy = {
+        "paired": ("R2", "original128"),
+        "paired_full2048": ("R1", "full2048"),
+        "matched128": (paths[0], "original128"),
+    }
     path, mode = policy.get(reference, (paths[0], reference))
     return model.advance(encoded, outputs[path], mode)
+
+
+def force_intra(reference, index):
+    return reference == "i_only" or (reference in ("original128", "paired") and index % 32 == 0)
 
 
 @torch.no_grad()
@@ -111,7 +120,7 @@ def evaluate_loop(model, row, clip, paths, reference, suite, output_dir, sensiti
     previous_features = {}
     for index, frame in enumerate(clip):
         rgb = frame[None].to(model.device)
-        encoded = model.encode(rgb, state, index, force_intra=reference == "i_only")
+        encoded = model.encode(rgb, state, index, force_intra=force_intra(reference, index))
         outputs = model.compare(encoded, paths)
         measured = measure_frame(
             model, encoded, outputs, rgb, suite, row, index, reference, output_dir, len(clip) - 1
@@ -238,6 +247,8 @@ def run_evaluation(
         "paths": paths,
         "references": references,
         "evaluation_precision": "float32",
+        "historical_intra_period": 32,
+        "full2048_intra_policy": "first frame only",
         "latency": "synchronized component wall time; excludes metrics, file I/O and sensitivity",
         **FLAGS,
         **metadata(config, "running"),
@@ -266,7 +277,7 @@ def main():
     parser.add_argument(
         "--references",
         nargs="+",
-        choices=(*REFERENCES, "paired", "paired_full2048"),
+        choices=(*REFERENCES, "paired", "paired_full2048", "matched128"),
         default=["i_only", "paired", "full2048", "original128"],
     )
     parser.add_argument("--split", choices=["validation", "test"], default="validation")

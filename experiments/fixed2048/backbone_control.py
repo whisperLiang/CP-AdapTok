@@ -12,8 +12,9 @@ import torch
 from torch.nn import functional as F
 
 from cp_adaptok.metrics import MetricSuite
-from cp_adaptok.runtime import read_config, resolve, seed_everything, write_json
+from cp_adaptok.runtime import resolve, write_json
 from experiments.fixed2048.checkpoint import load_reconstructor
+from experiments.fixed2048.cli import seeded_config
 from experiments.fixed2048.data import read_clip, records
 from experiments.fixed2048.diagnostics import distortion
 from experiments.fixed2048.evaluate import FLAGS, save_image
@@ -97,8 +98,7 @@ def main():
     parser.add_argument("--output", default="results/fixed2048/baseline_scale_control")
     parser.add_argument("--frames", type=int, default=8)
     args = parser.parse_args()
-    config = read_config(args.config)
-    seed_everything(config["seed"], config["device"], 0.9)
+    config = seeded_config(args.config)
     run_control(config, args.output, args.frames)
 
 

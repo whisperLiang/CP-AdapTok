@@ -55,7 +55,7 @@ def content_variants(features, other):
 
 
 @torch.no_grad()
-def content_sensitivity(model, encoded, other_features, path="R1"):
+def content_sensitivity(model, encoded, other_features, path="R1", target=None):
     """Nonstandard diagnostics only: fixed decoder positions and frozen history."""
     variants = content_variants(model.tokens(encoded), other_features)
     outputs = {}
@@ -69,6 +69,7 @@ def content_sensitivity(model, encoded, other_features, path="R1"):
         name: {
             "latent_delta_mse": F.mse_loss(out[0].float(), normal[0].float()).item(),
             "rgb_delta_mse": F.mse_loss(out[1].float(), normal[1].float()).item(),
+            "target_mse": None if target is None else F.mse_loss(out[1].float(), target.float()).item(),
         }
         for name, out in outputs.items()
     }

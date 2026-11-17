@@ -61,3 +61,16 @@ python -m experiments.fixed2048.evaluate --checkpoint checkpoints/fixed2048/cont
 主结果保留逐帧 MSE、PSNR、LPIPS-Alex、DISTS、MS-SSIM、I/P Latent MSE / Relative RMSE、Token 方差及真实码本使用。区分逐帧 PSNR 均值、视频级均值和全局 MSE 对应 PSNR。速度测量使用真实1080p，`profile.py` 的显存不含感知指标网络；evaluation 的显存包括这些网络。所有结果 `real_bitstream: false, bpp: null`。
 
 官方 I-frame prior 在原始 y 上先后保留两组潜变量尺度，Decoder 的连续输入为 `y*q_scale_y_enc*q_scale_y_dec`。本任务字面 R0 省略了这两组因子；原始R0 I质量差不能证明DCVC失效。`backbone_control.py` 单独保留连续尺度，完全不经过 rounding、prior 或任何码流；不会修改历史 Adapter 或将其冒充严格上界。
+
+内容敏感性另用独立入口，显式记录每个候选的历史和异常解码路径；异常输出不会提交参考：
+
+```bash
+python -m experiments.fixed2048.sensitivity --checkpoint checkpoints/fixed2048/continuous/main/best_validation.pt --output results/fixed2048/reference_ablation/content_R1.json
+python -m experiments.fixed2048.sensitivity --checkpoint checkpoints/fixed2048/vq/main/best_validation.pt --output results/fixed2048/reference_ablation/content_R2.json
+python -m experiments.fixed2048.report --figures
+python -m experiments.fixed2048.acceptance
+```
+
+正式历史评估的 `intra_period=32` 从原 `evaluation.py` 与配置核验。
+`original128` / `paired` 会在每32帧复现I重置；`matched128`只在首帧用I，以匹配本专项Full2048第一I后续P的I/P比例。
+短于32帧的前期诊断不受此区别影响。最终B1同时提供这两种参考条件。

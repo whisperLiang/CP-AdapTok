@@ -75,6 +75,16 @@ def valid_update(name, row):
     return all(row[field] for field in required) and row["codebook_updated"] == (name == "R2")
 
 
+def brief(result):
+    updates = result["training_runs"]
+    return {
+        "actual_optimizer_updates": sum(r["steps"] for r in updates.values()),
+        "actual_training_frames": sum(r["completed_frames"] for r in updates.values()),
+        "outputs": result["outputs"],
+        "production_diff_files": result["production_diff_files"],
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", default="results/fixed2048")
@@ -102,17 +112,7 @@ def main():
     failures = [name for name, row in updates.items() if not valid_update(name, row)]
     if failures or protected or not source_preserved or not result["outputs"]["all_native_rgb"]:
         raise RuntimeError(f"acceptance failed: {failures}; protected={protected}")
-    print(
-        json.dumps(
-            {
-                "actual_optimizer_updates": sum(r["steps"] for r in updates.values()),
-                "actual_training_frames": sum(r["completed_frames"] for r in updates.values()),
-                "outputs": result["outputs"],
-                "production_diff_files": protected,
-            },
-            indent=2,
-        )
-    )
+    print(json.dumps(brief(result), indent=2))
 
 
 if __name__ == "__main__":
