@@ -1,7 +1,6 @@
 """Uninstrumented continuous native stream timings, including both decoders."""
 
 import argparse
-import copy
 import json
 from pathlib import Path
 
@@ -17,11 +16,13 @@ from adaptok_hr.runtime import environment, file_hash, seed_everything, write_js
 from adaptok_hr.training.checkpoint import load_model
 from cp_adaptok.metrics import summarize_latency
 
+from .common import independent_codec
+
 
 @torch.inference_mode()
 def stream(model, clip, budget, warmup=5):
     sender = Codec(model.eval(), amp_bf16=True)
-    receiver = Codec(copy.deepcopy(model).eval(), amp_bf16=True)
+    receiver = independent_codec(model)
     for _ in range(warmup):
         sending, receiving = None, None
         for cpu in clip[:2]:

@@ -1,7 +1,6 @@
 """Matched Validation: actual packets, same-state prefixes and independent causal loops."""
 
 import argparse
-import copy
 import json
 from pathlib import Path
 
@@ -25,6 +24,7 @@ from adaptok_hr.training.checkpoint import load_model
 from adaptok_hr.training.train import append_row
 from cp_adaptok.metrics import MetricSuite
 
+from .common import independent_codec
 from .diagnose import LEVELS, detail_metrics, layer_slices
 
 VALIDATION_IDS = ("DAVIS2017:blackswan", "DAVIS2017:car-roundabout", "DAVIS2017:dog")
@@ -56,7 +56,7 @@ def aggregate_details(rows):
 @torch.inference_mode()
 def same_context(model, sources, frames, metrics, output):
     sender = Codec(model.eval(), amp_bf16=True)
-    receiver = Codec(copy.deepcopy(model).eval(), amp_bf16=True)
+    receiver = independent_codec(model)
     rows = {str(k): [] for k in model.config.budgets}
     histograms = {str(k): empty_histograms() for k in model.config.budgets}
     probes = []
@@ -132,9 +132,6 @@ def independent_loops(model, sources, frames, metrics, output):
 
 def run(args):
     root = Path(args.output)
-    root.mkdir(parents=True, exist_ok=True)
-    if (root / "run.json").exists():
-        raise ValueError("evaluation directory exists; use a new directory")
     seed_everything(20261118)
     torch.set_num_threads(4)
     model, checkpoint = load_model(args.checkpoint)
@@ -146,6 +143,16 @@ def run(args):
                 "frames_per_source": args.frames, "validation_ids": VALIDATION_IDS, "amp_bf16": True,
                 "selection_split": "validation", "completed_steps": checkpoint["completed_steps"],
                 "training_frames": checkpoint["training_frames"], "config": checkpoint["config"]}
+    if (root / "run.json").exists():
+        recorded = json.loads((root / "run.json").read_text())
+        if recorded["identity"] != stable_hash(protocol):
+            raise ValueError("evaluation directory belongs to a different protocol")
+        if (root / "summary.json").exists():
+            return
+        # Keep interrupted evidence and replay the deterministic measurement into a fresh directory.
+        attempt = len(list(root.parent.glob(root.name + ".interrupted-*"))) + 1
+        root.rename(root.with_name(f"{root.name}.interrupted-{attempt:03d}"))
+    root.mkdir(parents=True, exist_ok=True)
     write_json(root / "run.json", {"environment": environment(), "protocol": protocol, "identity": stable_hash(protocol)})
     metrics = MetricSuite("cuda", ("psnr", "lpips", "dists"))
     if metrics.errors:
