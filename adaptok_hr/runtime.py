@@ -53,8 +53,16 @@ def seed_everything(seed):
 def environment():
     return {"time": datetime.now(ZoneInfo("Asia/Shanghai")).isoformat(), "timezone": "Asia/Shanghai",
             "git": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
+            "git_dirty": bool(subprocess.check_output(["git", "status", "--porcelain"], text=True).strip()),
+            "source_sha256": source_identity(),
             "branch": subprocess.check_output(["git", "branch", "--show-current"], text=True).strip(),
             "python": platform.python_version(), "torch": torch.__version__, "cuda": torch.version.cuda,
             "gpu": torch.cuda.get_device_name() if torch.cuda.is_available() else None,
             "driver": subprocess.check_output(["nvidia-smi", "--query-gpu=driver_version", "--format=csv,noheader"],
                                                text=True).strip() if torch.cuda.is_available() else None}
+
+
+def source_identity():
+    root = Path(__file__).parent
+    return stable_hash({str(p.relative_to(root)): file_hash(p) for p in sorted(root.rglob("*.py"))
+                        if "tests" not in p.parts})

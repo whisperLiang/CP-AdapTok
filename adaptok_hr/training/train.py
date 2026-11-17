@@ -164,6 +164,15 @@ def run_training(args):
     trainer = JointTrainer(model, config["training"])
     sampler = ClipSampler(records, config["training"]["seed"] + 1)
     output, completed, frames = prepare_run(args, config, index, trainer, sampler)
+    if completed == 0:
+        save_training(Path(args.checkpoints) / output.name / "step_000000.pt", trainer, sampler,
+                      config, index["identity"], 0, 0)
+        if not args.overfit:
+            from ..evaluation.evaluate import validate_fast
+
+            write_json(output / "validation_000000.json", validate_fast(
+                model, index, config["evaluation"]["validation_ids"], frames=8,
+                amp_bf16=config["evaluation"]["amp_bf16"]))
     cached = read_clip(records[0], 0, args.overfit_frames, model.config.height, model.config.width) if args.overfit else None
     while completed < args.steps:
         length = sequence_length(config["training"]["sequence_schedule"], completed)

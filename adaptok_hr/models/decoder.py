@@ -37,7 +37,9 @@ class Decoder(nn.Module):
         self.rgb_head = nn.Sequential(nn.Conv2d(widths[-1], 12, 1), nn.PixelShuffle(2))
 
     def restore_tokens(self, tokens, state=None):
-        maps = self.table.scatter(tokens)
+        return self.fuse_maps(self.table.scatter(tokens), state)
+
+    def fuse_maps(self, maps, state=None):
         x = self.fusion[0](self.restore[0](maps[0]))
         for level in (1, 2):
             x = F.interpolate(x, size=maps[level].shape[-2:], mode="bilinear", align_corners=False)
@@ -49,8 +51,7 @@ class Decoder(nn.Module):
 
     def upsample_rgb(self, feature, state=None):
         x = feature
-        # S32 -> S16 -> S8 -> S4 -> S2 -> S1/2 intermediate is S1;
-        # use the first stage at S32 for cheap channel mixing, then four doublings to S2.
+        # First mix channels at S32, then use four doublings to S2 and pixel shuffle to RGB.
         for index, layer in enumerate(self.upsample):
             scale = 32 if index == 0 else 32 // (2**index)
             shape = ((self.config.padded_height + scale - 1) // scale,

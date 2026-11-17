@@ -10,7 +10,7 @@ import torch
 from ..codec.codec import tensor_digest
 from ..config import ModelConfig
 from ..models.model import AdapTokHR
-from ..runtime import file_hash, stable_hash, write_json
+from ..runtime import file_hash, source_identity, stable_hash, write_json
 
 
 def rng_state():
@@ -40,6 +40,7 @@ def save_training(path, trainer, sampler, config, manifest_identity, completed_s
                                      "config_identity", "manifest_identity")}
     metadata.update(checkpoint_sha256=file_hash(path), model_sha256=tensor_digest(state["model"]).hex(),
                     codebook_sha256=tensor_digest({"codebook": trainer.model.vq.codebook.weight}).hex(),
+                    source_sha256=source_identity(),
                     optimizer_saved=True, scheduler_saved=True, rng_saved=True, sampling_saved=True)
     write_json(path.with_suffix(".json"), metadata)
     return metadata
