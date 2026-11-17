@@ -198,6 +198,23 @@ def test_checkpoint_rejects_wrong_codebook_or_loss_configuration(small_model, tm
             restore_training(tmp_path / "run.pt", JointTrainer(model, settings()), sampler, config, "identity")
 
 
+def test_inference_loader_rejects_tampered_configuration_identity(small_model, tmp_path):
+    from adaptok_hr.data.dataset import ClipSampler
+    from adaptok_hr.tests.test_training import settings
+    from adaptok_hr.training.checkpoint import load_model, save_training
+    from adaptok_hr.training.train import JointTrainer
+
+    config = {"model": small_model.config.to_dict(), "training": settings()}
+    path = tmp_path / "run.pt"
+    save_training(path, JointTrainer(small_model, settings()), ClipSampler([{"original_frames": 64}], 3),
+                  config, "identity", 0, 0)
+    state = torch.load(path, map_location="cpu", weights_only=False)
+    state["config"]["model"]["loss_scope"] = "active_prefix"
+    torch.save(state, path)
+    with pytest.raises(ValueError, match="configuration identity"):
+        load_model(path, device="cpu")
+
+
 @pytest.mark.gpu
 @pytest.mark.slow
 def test_native_per_level_active_vq_and_independent_budget_resume(tmp_path):

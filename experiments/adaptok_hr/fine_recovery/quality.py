@@ -29,6 +29,9 @@ NEW_MUTATIONS = [
      "test_fine_recovery.py::test_training_frame_decoder_never_observes_unsent_candidates"),
     ("initialization_rng", "models/vq.py", "with torch.random.fork_rng(devices=[]):", "with torch.no_grad():",
      "test_fine_recovery.py::test_codebook_count_does_not_change_encoder_decoder_initialization"),
+    ("inference_config_identity", "training/checkpoint.py",
+     'if state["version"] != 1 or state["config_identity"] != stable_hash(state["config"]):',
+     "if False:", "test_fine_recovery.py::test_inference_loader_rejects_tampered_configuration_identity"),
 ]
 
 

@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import math
 from pathlib import Path
 
 import torch
@@ -134,23 +135,28 @@ def summarize_bypass(rows):
     for row in rows:
         groups.setdefault(f"{row['split']}/{row['variant']}", []).append(row)
     names = ("mse", "psnr", "lpips", "dists", "edge_mse", "high_frequency_l1", "output_change_mse")
-    return {key: {name: sum(r[name] for r in group) / len(group) for name in names}
-            for key, group in groups.items()}
+    result = {key: {name: sum(r[name] for r in group) / len(group) for name in names}
+              for key, group in groups.items()}
+    for value in result.values():
+        value["psnr_global"] = -10 * math.log10(max(value["mse"], 1e-20))
+        value["psnr_frame_mean"] = value.pop("psnr")
+    return result
 
 
 def write_report(output, summary):
     fine = summary["representations"]["validation/active_K2048/Fine"]
     b = summary["bypass"]
     text = ["# E0 冻结权重诊断", "", "本文件由原始 JSON 自动生成；全部旁路为 diagnostic_only，不是可传输率失真结果。", "",
-            f"验证集 K2048 Fine 使用 {fine['used_codes']} 个码字，最大占比 {fine['maximum_code_fraction']:.8f}。",
+            f"验证诊断的 {fine['observations']} 个采样帧中，K2048 实际发送 {fine['transmitted_tokens']} 个 Fine ID，"
+            f"使用 {fine['used_codes']} 个码字，最大占比 {fine['maximum_code_fraction']:.8f}。",
             f"量化前归一化空间方差 {fine['normalized_variance']:.9g}，位置余弦 {fine['mean_position_cosine']:.9g}。", "",
-            "| 同历史干预 | MSE | LPIPS | DISTS | 输出变化 MSE |", "|---|---:|---:|---:|---:|"]
+            "| 同历史干预 | MSE | 全局 PSNR | LPIPS | DISTS | 输出变化 MSE |", "|---|---:|---:|---:|---:|---:|"]
     for key, value in b.items():
         if key.startswith("validation/"):
-            text.append(f"| {key} | {value['mse']:.9g} | {value['lpips']:.7g} | {value['dists']:.7g} | {value['output_change_mse']:.9g} |")
+            text.append(f"| {key} | {value['mse']:.9g} | {value['psnr_global']:.6f} | {value['lpips']:.7g} | {value['dists']:.7g} | {value['output_change_mse']:.9g} |")
     text += ["", "确定事实：连续特征存在非零变化不等于它携带可用细节；用旁路损失、离散置换和梯度分别判断。",
              f"Fine 原始投影空间方差 {fine['raw_spatial_variance']:.9g}，所以 Encoder 输出没有变成严格常量；归一化后的方向高度趋同。",
-             "量化前 Fine 存在非零变化，且 Fine 连续旁路的实际 MSE 小于 VQ 基线；这是当前样本上的弱有效性证据，不能称为可传输质量改善。",
+             "量化前 Fine 存在非零变化，且 Fine 连续旁路的实际 MSE 小于 VQ 基线；这是当前样本上的弱有效性证据，不能称为可传输质量改善。帧间特征变化对比前一个采样诊断帧，并非全部相邻帧；真实码流历史始终逐帧推进。",
              "VQ 后 Fine 在当前观测范围发生完全离散信息塌缩，常量替换及空间置换与原结果严格相同。",
              "替换其他有效码字和移除 Fine 均改变输出，因此 Decoder 仍对 Fine 输入敏感；输出敏感性不等于细节恢复有效。",
              "连续输入和离散 Decoder 输入梯度均非零，未观察到完全断开的支路；接近零必须连同 Base/Medium 的相对范数判断，不能凭非零就排除梯度不足。",

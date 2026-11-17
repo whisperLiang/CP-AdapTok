@@ -96,6 +96,8 @@ def reconcile_log(path, completed):
 
 def load_model(path, device="cuda"):
     state = torch.load(path, map_location="cpu", weights_only=False)
+    if state["version"] != 1 or state["config_identity"] != stable_hash(state["config"]):
+        raise ValueError("checkpoint configuration identity mismatch")
     model = AdapTokHR(ModelConfig(**state["config"]["model"]))
     model.load_state_dict(state["model"], strict=True)
     return model.to(device).eval(), state

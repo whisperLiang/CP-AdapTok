@@ -11,6 +11,7 @@ export CUBLAS_WORKSPACE_CONFIG=:4096:8
 .venv-native/bin/python -m experiments.adaptok_hr.fine_recovery.run train --steps 300
 .venv-native/bin/python -m experiments.adaptok_hr.fine_recovery.run match --steps 300
 .venv-native/bin/python -m experiments.adaptok_hr.fine_recovery.run evaluate --steps 300 --frames 8
+.venv-native/bin/python -m experiments.adaptok_hr.fine_recovery.run benchmark --steps 300
 .venv-native/bin/python -m experiments.adaptok_hr.fine_recovery.report screen
 ```
 
@@ -41,8 +42,18 @@ For each measured checkpoint (replace A0/300 with the actual name/step):
 .venv-native/bin/python -m pytest adaptok_hr/tests cp_adaptok/tests/test_regression.py -q
 ```
 
+Run the original checkpoint through the same new Validation protocol without changing it:
+
+```bash
+.venv-native/bin/python -m experiments.adaptok_hr.fine_recovery.evaluate \
+  --checkpoint checkpoints/adaptok_hr/joint/step_001000.pt \
+  --output results/adaptok_hr_fine_recovery/baseline/validation_001000_64f --frames 64
+```
+
 The preregistered `protocol.json` controls selection and conditional later stages. D1/D2/D3 are not allowed until the transmitted Fine IDs demonstrably carry information. If that still fails at 1000 updates, preserve negative results and stop expansion. A positive monotonicity loss or increased code count alone is insufficient.
 
 Plotting follows the established Python workflow. Pass the installed nature-figure skill's `scripts` directory to `figures --qa-scripts ...`; run its source, PDF glyph and collision audits on the actual exported figures. Then run `report report` to generate the Markdown report and archive raw JSON/JSONL/XML plus checkpoint identities. No figure uses invented data or independent-seed error bars.
+
+`figure_qa --qa-scripts ...` runs source, final-PDF text and collision checks together; single-panel alignment is recorded as not applicable. `acceptance` checks the final XML, mutation evidence, matched sequences, every checkpoint SHA256, actual stored packet counts/bytes/identities, stored same-state prefixes and all 64-frame endpoint measurements. Engineering acceptance and the failed/passed research gates are separate fields.
 
 Frozen continuous bypasses and Fine interventions are explicitly `diagnostic_only`; they never enter standard RD curves. The fixed 300-step screen uses 3×8 Validation frames. The 1000-step verification uses the same three preselected Validation sources up to 64 frames each (174 actual frames); it is not all 21 Validation sources. The benchmark separately uses 64 contiguous car-roundabout frames, both independent endpoints, GOP32 and resets at index32. No old Final Test source participates in model selection.

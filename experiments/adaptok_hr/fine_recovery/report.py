@@ -17,7 +17,7 @@ def read(path):
 
 
 def validation_results():
-    return [(path, read(path)) for path in sorted(ROOT.glob("A*/validation_*f/summary.json"))]
+    return [(path, read(path)) for path in sorted(ROOT.glob("*/validation_*f/summary.json"))]
 
 
 def screen():
@@ -104,6 +104,20 @@ def write_report():
     if (ROOT / "selection_300.json").exists():
         selected = read(ROOT / "selection_300.json")["selected"]
         rows += ["", f"按预先固定规则续训：{', '.join(selected)}。其余两组保留 300 步结果，不拿 300 步与 1000 步跨步数作结构优劣结论。"]
+    if (ROOT / "gradient_balance_300.json").exists():
+        rows += ["", "## 冻结快照的梯度与方向集中诊断", "",
+                 "仅同一 Train bear 首帧、同一 I 帧状态、K2048，冻结 0/100/300 步快照，无优化器更新。不是 Validation 排名，也不是训练因果证明。重建目标为 MSE+L1+0.1 LPIPS；VQ 编码侧梯度包含实际 0.25 commitment 权重。", "",
+                 "| 配置 | 步 | Fine 码字 | Fine 位置余弦 | Fine 归一化空间方差 | VQ/重建梯度范数比 | Fine/Base 重建梯度比 |",
+                 "|---|---:|---:|---:|---:|---:|---:|"]
+        for value in read(ROOT / "gradient_balance_300.json")["rows"]:
+            fine, base = value["levels"]["Fine"], value["levels"]["Base"]
+            rows.append(f"| {value['name']} | {value['step']} | {fine['used_codes']} | "
+                        f"{fine['normalized']['mean_position_cosine']:.6f} | {fine['normalized']['spatial_variance']:.8g} | "
+                        f"{fine['vq_to_reconstruction_gradient_ratio']:.4f} | "
+                        f"{fine['reconstruction_gradient_norm'] / max(base['reconstruction_gradient_norm'], 1e-20):.4f} |")
+        rows += ["", "事实：初始 Fine 方向已经很集中；这一个固定帧的四条分支到 100 步均使用单码，分层码本也发生塌缩。不能把共享竞争或 all_candidates 当作本设置下塌缩的必要条件。",
+                 "推测：初始方向集中、量化吸引域和弱空间细节约束共同形成了塌缩反馈；当前证据尚不能分离三者的因果贡献。非零重建梯度不能保证可恢复空间码字，更不能用更长训练代替重新检查表示设计。",
+                 "监督分配计数见 mechanism_audit.json：全部候选的 Base/Medium/Fine 容量分别为 135/510/2040；真实 K2048 为 135/510/1403。原 all_candidates 将约 76% 的 VQ Token 权重分配给 Fine，低预算却不一定重建 Fine。active_prefix 消除了未激活位置的损失，但没有自动恢复信息。"]
     if (ROOT / "decision.json").exists():
         d = read(ROOT / "decision.json")
         rows += ["", "## 后续门槛", "", f"1000 步 Fine 信息门槛：`{json.dumps(d['fine_information_at_1000'])}`。"]
@@ -111,6 +125,15 @@ def write_report():
             rows.insert(2, "结论：预算感知 VQ 与分层码本的受控对照未恢复 Fine 有效信息；按 1000 步停止条件保留负结果，没有扩大训练或增加 Decoder。\n")
             rows += ["Fine 有效传递仍未恢复。本轮保留负结果并停止扩展训练。D1 Fine Residual、D2 Detail Loss、D3 二者组合均未执行；未新增 Decoder 参数或高频损失。未开展更大数据/16–32 帧正式训练或 30FPS 优化。D0 为四组实际使用的原 Decoder。",
                      "没有新的授权外部视频；复用原 manifest 导入接口和隔离规则，没有自动下载数据。新来源最终封存测试尚未建立、未执行。"]
+    rows += ["", "## 连续闭环的早晚期质量", "",
+             "只列累计 1000 步、相同固定 Validation 的各预算独立闭环；early 为每视频帧 0–7，late 为 48 及之后。早晚帧内容不同，此表不能单独把差异归因于参考漂移；应同时比较旧权重在相同帧的结果。", "",
+             "| 配置 | K | 早期全局 PSNR | 晚期全局 PSNR | 早期 LPIPS | 晚期 LPIPS |", "|---|---:|---:|---:|---:|---:|"]
+    for path, r in records:
+        if r["protocol"]["completed_steps"] != 1000:
+            continue
+        for k, q in r["closed_loop"].items():
+            rows.append(f"| {path.parents[1].name} | {k} | {q['early']['psnr_global']:.5f} | "
+                        f"{q['late']['psnr_global']:.5f} | {q['early']['lpips']:.6f} | {q['late']['lpips']:.6f} |")
     rows += ["", "## 连续 64 帧吞吐", "",
              "下面均为 car-roundabout 原生连续 64 帧，独立收发端模型实例；包含发送端本地解码、打包、接收端解码。无感知网络常驻；排除读盘/H2D/指标/写盘/断言，不是 Encoder 单前向吞吐。", "",
              "| Checkpoint | K | Encoder FPS | Sender FPS | Receiver FPS | 顺序联合 FPS | 联合 P50/P95 ms | 峰值 MiB | 参数 | bytes |",
@@ -122,16 +145,26 @@ def write_report():
             rows.append(f"| {path.parent.name}/{r['completed_steps']} | {k} | {t['encoder']['fps']:.2f} | {t['sender']['fps']:.2f} | {t['receiver']['fps']:.2f} | {t['joint']['fps']:.2f} | {t['joint']['p50_ms']:.3f}/{t['joint']['p95_ms']:.3f} | {b['peak_gpu_mib']:.1f} | {r['parameters']} | {b['bytes']} |")
     rows += ["", "## 测试、可复现性与交付", "",
              "原始 JSON/JSONL、Checkpoint 元数据、环境与代码身份归档到 experiments/adaptok_hr/fine_recovery/evidence；权重保存在独立 checkpoints/adaptok_hr_fine_recovery 目录。运行命令见同目录 README。",
-             "测试 XML、逐位恢复、23 类行为变异的初次结果及修复后证据均保留。没有把第一次存活变异隐藏为首次通过。性能计时与覆盖率/Profiler 分离。",
+             "测试 XML、逐位恢复、24 类行为变异的初次结果及修复后证据均保留。没有把第一次存活变异隐藏为首次通过。性能计时与覆盖率/Profiler 分离。",
              "单种子、固定小规模 Train/Validation Pilot 的结果只说明该设置下是否恢复 Fine；不能证明更大数据或充分收敛后的上限。统计无独立种子置信区间，没有伪造误差条。", "",
              "## 原始数据图", ""]
     for path in sorted((ROOT / "figures").glob("*.png")):
         rows.append(f"![{path.stem}](../experiments/adaptok_hr/fine_recovery/evidence/figures/{path.name})")
     rows += ["", "## 实际 1080p 重建示例", "",
-             "以下为同一原始 car-roundabout 第 0 帧与各预算真实 ID 解码，全部保留 1920×1080，未进行锐化或后处理。", ""]
+             "以下为同一原始 car-roundabout 第 0 帧与各预算真实 ID 解码，全部保留 1920×1080，未进行锐化或后处理。",
+             "人工检查该帧的 K2048 图：A1/A3 都仍明显模糊，A3 可见彩色周期纹理；这些纹理没有被当作细节恢复或感知改善。该观察只对应所展示帧。", ""]
     for path in sorted(ROOT.glob("A*/validation_001000_64f/samples/*car-roundabout_0000*.png")):
         relative = path.relative_to(ROOT)
-        rows.append(f"[{path.parents[2].name}: {path.name}](../experiments/adaptok_hr/fine_recovery/evidence/{relative})  ")
+        rows.append(f"- [{path.parents[2].name}: {path.name}](../experiments/adaptok_hr/fine_recovery/evidence/{relative})")
+    if (ROOT / "acceptance.json").exists():
+        accepted = read(ROOT / "acceptance.json")
+        rows += ["", "## 自动验收", "",
+                 f"工程检查：`{accepted['engineering_checks_pass']}`；实际测试 `{accepted['tests']['tests']}` 项，"
+                 f"失败/错误/跳过 `{accepted['tests']['failures']}/{accepted['tests']['errors']}/{accepted['tests']['skipped']}`；"
+                 f"行为变异 `{accepted['mutations']}` 类全部捕获 `{accepted['mutations_all_killed']}`。",
+                 "修改的生产模块 CRAP 均低于 10，重复函数相似度均低于 0.8；完整审计另外保留 22 个本轮测试未覆盖充分的旧评估/报告函数，不把这些误报为已覆盖。",
+                 "验收重新读取每个真实包并核对 13-bit ID、预算、帧号、码本哈希、字节数，检查存档同状态前缀完全一致；原始 Validation RGB 哈希与旧权重复测逐帧相等。所有检查点文件重新计算 SHA256 与侧车元数据一致。",
+                 "工程检查通过不代表 Fine 恢复、质量门槛或 30 FPS 通过；研究停止决策单独记录。"]
     Path("docs/adaptok_hr_fine_recovery_report.md").write_text("\n".join(rows) + "\n")
     archive()
     write_json(EVIDENCE / "evidence_manifest.json", {"environment": environment(), "files": {

@@ -83,6 +83,24 @@ def verify_benchmarks(selected):
     return result
 
 
+def verify_input_parity(selected):
+    directory = ROOT / "baseline/validation_001000_64f/closed_loop"
+    expected = {}
+    for path in directory.glob("k*/*/frames.jsonl"):
+        key = str(path.relative_to(directory))
+        expected[key] = [json.loads(s)["input_rgb_sha256"] for s in path.read_text().splitlines()]
+    if not expected:
+        raise ValueError("baseline input parity evidence missing")
+    for name in selected:
+        for key, hashes in expected.items():
+            path = ROOT / name / "validation_001000_64f/closed_loop" / key
+            actual = [json.loads(s)["input_rgb_sha256"] for s in path.read_text().splitlines()]
+            if actual != hashes:
+                raise ValueError("Validation input pixels/order differ from baseline")
+    return {"same_native_rgb_and_frame_order": True, "models": ["baseline", *selected],
+            "budget_source_sequences": len(expected), "frames_each_budget": sum(len(v) for k, v in expected.items() if k.startswith("k2048/"))}
+
+
 def main():
     selected = read(ROOT / "selection_300.json")["selected"]
     tests, mutations = test_evidence(), read(ROOT / "mutations.json")
@@ -95,6 +113,7 @@ def main():
               "changed_production_crap_over_10": scoped_audit["crap_over_10"],
               "duplicate_functions_over_08": scoped_audit["duplicates_over_08"],
               "matching": matching, "protected_inputs": protected, "validation_actual_packets": validation,
+              "validation_input_parity": verify_input_parity(selected),
               "independent_native_64_frame_joint_fps": benchmark, "checkpoint_sha256": verify_checkpoints(),
               "research_decision": read(ROOT / "decision.json"),
               "engineering_checks_pass": not any(tests[k] for k in ("failures", "errors", "skipped"))
