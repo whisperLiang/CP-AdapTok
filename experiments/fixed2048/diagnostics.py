@@ -1,6 +1,7 @@
 """Measured image/latent/token errors and explicit aggregation definitions."""
 
 import math
+from collections import defaultdict
 
 import torch
 from torch.nn import functional as F
@@ -30,7 +31,9 @@ def token_statistics(features, vq=None, ids=None):
         stats.update(codebook_used=int((counts > 0).sum()),
                      codebook_usage=(counts > 0).float().mean().item(),
                      perplexity=(-(probabilities * probabilities.clamp_min(1e-12).log()).sum()).exp().item(),
-                     token_quantization_mse=F.mse_loss(z, quantized).item())
+                     token_quantization_mse=F.mse_loss(z, quantized).item(),
+                     token_post_projection_quantization_mse=F.mse_loss(vq.project_out(z),vq.project_out(quantized)).item(),
+                     code_histogram={str(i):int(counts[i]) for i in counts.nonzero().flatten().tolist()})
     return stats
 
 
@@ -66,15 +69,22 @@ def _means(rows):
     return result
 
 
+def grouped(rows, key):
+    groups = defaultdict(list)
+    for row in rows:
+        groups[row[key]].append(row)
+    return groups
+
+
 def aggregate(rows):
     if not rows:
         raise ValueError('cannot aggregate empty frame measurements')
     result = _means(rows)
-    result['videos'] = {video: _means([r for r in rows if r['video'] == video])
-                        for video in sorted({r['video'] for r in rows})}
+    result['videos'] = {video:_means(values) for video,values in sorted(grouped(rows,'video').items())}
     result['mean_video_psnr'] = sum(v['mean_frame_psnr'] for v in result['videos'].values()) / len(result['videos'])
+    by_type = grouped(rows,'frame_type')
     for frame_type in ('I', 'P'):
-        selected = [r for r in rows if r['frame_type'] == frame_type]
+        selected = by_type.get(frame_type)
         result[frame_type] = _means(selected) if selected else None
     return result
 

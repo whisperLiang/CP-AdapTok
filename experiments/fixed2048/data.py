@@ -8,7 +8,7 @@ from cp_adaptok.large_scale_data import file_hash, load_manifests
 
 def records(config, split, videos=None, exact=True):
     splits, hashes = load_manifests(config['manifest_dir'])
-    selected = [row for row in splits[split] if row['resolution'] == [1920, 1080]] if exact else splits[split]
+    selected = native_records(splits[split]) if exact else splits[split]
     if videos:
         selected = [row for row in selected if row['content_id'] in videos]
         if set(videos) != {row['content_id'] for row in selected}:
@@ -16,6 +16,10 @@ def records(config, split, videos=None, exact=True):
     if not selected:
         raise ValueError('empty data selection')
     return selected, hashes
+
+
+def native_records(rows):
+    return [row for row in rows if row['resolution'] == [1920,1080]]
 
 
 def read_clip(row, length, start=0, crop=None):

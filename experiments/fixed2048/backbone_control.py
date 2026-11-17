@@ -9,16 +9,44 @@ entropy models, native compression, or any bitstream method.
 import argparse
 
 import torch
+from torch.nn import functional as F
 
 from cp_adaptok.metrics import MetricSuite
 from cp_adaptok.runtime import read_config, resolve, seed_everything, write_json
 from experiments.fixed2048.checkpoint import load_reconstructor
 from experiments.fixed2048.data import read_clip, records
-from experiments.fixed2048.diagnostics import aggregate, distortion
+from experiments.fixed2048.diagnostics import distortion
 from experiments.fixed2048.evaluate import FLAGS, save_image
 
 
+def continuous_intra_latent(adapter, latent, qp):
+    return latent * adapter.quant('q_scale_y_enc', qp) * adapter.quant('q_scale_y_dec', qp)
+
+
 @torch.no_grad()
+def control_loop(model, source, clip, reference, spatial, suite, directory):
+    state, rows = model.empty_state(), []
+    path = 'R0-spatial-scale-control' if spatial else 'R0-scale-control'
+    for index, frame in enumerate(clip):
+        rgb = frame[None].to(model.device)
+        encoded = model.encode(rgb, state, index, force_intra=reference == 'i_only')
+        latent = encoded.latent
+        if encoded.context.frame_type == 'I':
+            latent = continuous_intra_latent(model.intra, latent, model.config.qp)
+        if spatial:
+            low = F.adaptive_avg_pool2d(latent, (17,30))
+            latent = F.interpolate(low, size=latent.shape[-2:], mode='bilinear', align_corners=False)
+        rec, feature = model.decode_latent(latent, encoded.context)
+        rows.append({'video':source['content_id'], 'frame':index, 'frame_type':encoded.context.frame_type,
+                     'reference':reference, 'path':path, 'pixels':1080*1920,
+                     **suite(rgb, rec), **distortion(encoded.latent, latent), **FLAGS})
+        if index == 0:
+            save_image(directory / 'images' / f'{source["content_id"].split(":")[-1]}_{reference}_{path}.png', rec)
+        if reference == 'full2048':
+            state = encoded.context.commit(feature, f'scale-control:{index}')
+    return rows
+
+
 def run_control(config, output, frames=8):
     directory = resolve(output)
     if directory.exists():
@@ -28,29 +56,16 @@ def run_control(config, output, frames=8):
     if suite.errors:
         raise RuntimeError(f'required metrics unavailable: {suite.errors}')
     selected, hashes = records(config, 'validation', config['baseline']['videos'])
-    scales = model.intra.quant('q_scale_y_enc', model.config.qp) * model.intra.quant('q_scale_y_dec', model.config.qp)
     rows = []
     for source in selected:
         clip = read_clip(source, frames)
         for reference in ('i_only', 'full2048'):
-            state = model.empty_state()
-            for index, frame in enumerate(clip):
-                rgb = frame[None].to(model.device)
-                encoded = model.encode(rgb, state, index, force_intra=reference == 'i_only')
-                latent = encoded.latent * scales if encoded.context.frame_type == 'I' else encoded.latent
-                rec, feature = model.decode_latent(latent, encoded.context)
-                rows.append({'video':source['content_id'], 'frame':index, 'frame_type':encoded.context.frame_type,
-                             'reference':reference, 'path':'R0-scale-control', 'pixels':1080*1920,
-                             **suite(rgb, rec), **distortion(encoded.latent, latent), **FLAGS})
-                if index == 0:
-                    save_image(directory / 'images' / f'{source["content_id"].split(":")[-1]}_{reference}.png', rec)
-                if reference == 'full2048':
-                    state = encoded.context.commit(feature, f'scale-control:{index}')
+            for spatial in (False, True):
+                rows.extend(control_loop(model, source, clip, reference, spatial, suite, directory))
     write_json(directory / 'frame_metrics.json', rows)
-    write_json(directory / 'summary.json', {reference:aggregate([r for r in rows if r['reference'] == reference])
-                                           for reference in ('i_only','full2048')})
+    from experiments.fixed2048.evaluate import write_tables
+    write_tables(directory, rows)
     write_json(directory / 'run.json', {'checkpoint':identity, 'manifest_hashes':hashes, 'frames':len(rows),
-               'scales_min':scales.min().item(), 'scales_max':scales.max().item(),
                'official_source':'third_party/DCVC/src/models/common_model.py:forward_prior_4x',
                'note':'retains both I-latent scale factors, bypasses all rounding; separate from raw-y R0', **FLAGS})
 

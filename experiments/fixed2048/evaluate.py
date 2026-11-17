@@ -45,46 +45,61 @@ def stage_times(encoded, output, path):
     return times
 
 
+def paired_difference(outputs, rows, encoded, source, index, reference):
+    by_path = {row['path']:row for row in rows}
+    return {'video':source['content_id'], 'frame':index, 'frame_type':encoded.context.frame_type,
+            'reference':reference, 'rgb_delta_mse':F.mse_loss(outputs['R1'].rgb,outputs['R2'].rgb).item(),
+            'latent_delta_mse':F.mse_loss(outputs['R1'].latent,outputs['R2'].latent).item(),
+            'r2_minus_r1_psnr':by_path['R2']['psnr'] - by_path['R1']['psnr']}
+
+
+def measure_frame(model, encoded, outputs, rgb, suite, source, index, reference, directory, last):
+    rows = []
+    for path, output in outputs.items():
+        row = frame_metrics(model, encoded, output, rgb, suite)
+        row.update(video=source['content_id'], frame=index, frame_type=encoded.context.frame_type,
+                   path=path, reference=reference, timings=stage_times(encoded,output,path), **FLAGS)
+        rows.append(row)
+        if index in (0,last):
+            save_image(directory / 'images' / f'{Path(source["path"]).name}_{reference}_{path}_{index:03}.png',output.rgb)
+    return rows
+
+
+def diagnostic_content(model, encoded, previous, source, index, reference, directory):
+    tests = content_sensitivity(model, encoded, previous)
+    write_json(directory / 'sensitivity' / f'{Path(source["path"]).name}_{reference}_{index:03}.json',
+               {'video':source['content_id'], 'frame':index, 'frame_type':encoded.context.frame_type,
+                'diagnostic_only':True, 'fixed_positions_and_context':True, 'results':tests})
+
+
+def advance_reference(model, encoded, outputs, paths, reference):
+    policy = {'paired':('R2','original128'), 'paired_full2048':('R1','full2048')}
+    path, mode = policy.get(reference,(paths[0],reference))
+    return model.advance(encoded,outputs[path],mode)
+
+
 @torch.no_grad()
 def evaluate_loop(model, row, clip, paths, reference, suite, output_dir, sensitivity=False):
     state, output_rows, paired = model.empty_state(), [], []
     previous_features = {}
     for index, frame in enumerate(clip):
         rgb = frame[None].to(model.device)
-        encoded = model.encode(rgb, state, index, force_intra=reference == 'i_only')
-        outputs = model.compare(encoded, paths)
-        for path, output in outputs.items():
-            measured = frame_metrics(model, encoded, output, rgb, suite)
-            measured.update(video=row['content_id'], frame=index, frame_type=encoded.context.frame_type,
-                            path=path, reference=reference, timings=stage_times(encoded, output, path), **FLAGS)
-            output_rows.append(measured)
-            if index in (0, len(clip) - 1):
-                save_image(output_dir / 'images' / f'{Path(row["path"]).name}_{reference}_{path}_{index:03}.png', output.rgb)
+        encoded = model.encode(rgb,state,index,force_intra=reference == 'i_only')
+        outputs = model.compare(encoded,paths)
+        measured = measure_frame(model,encoded,outputs,rgb,suite,row,index,reference,output_dir,len(clip)-1)
+        output_rows.extend(measured)
         if 'R1' in outputs and 'R2' in outputs:
-            paired.append({'video': row['content_id'], 'frame': index, 'frame_type': encoded.context.frame_type,
-                           'reference': reference,
-                           'rgb_delta_mse': F.mse_loss(outputs['R1'].rgb, outputs['R2'].rgb).item(),
-                           'latent_delta_mse': F.mse_loss(outputs['R1'].latent, outputs['R2'].latent).item(),
-                           'r2_minus_r1_psnr': output_rows[-1]['psnr'] - output_rows[-2]['psnr']})
+            paired.append(paired_difference(outputs,measured,encoded,row,index,reference))
         frame_type = encoded.context.frame_type
-        if sensitivity and encoded.features is not None and frame_type in previous_features:
-            tests = content_sensitivity(model, encoded, previous_features[frame_type])
-            write_json(output_dir / 'sensitivity' / f'{Path(row["path"]).name}_{reference}_{index:03}.json',
-                       {'video': row['content_id'], 'frame': index, 'frame_type': frame_type,
-                        'diagnostic_only': True, 'fixed_positions_and_context': True, 'results': tests})
+        if sensitivity and frame_type in previous_features:
+            diagnostic_content(model,encoded,previous_features[frame_type],row,index,reference,output_dir)
             sensitivity = False
         if encoded.features is not None:
             previous_features[frame_type] = encoded.features.detach()
-        # Paired evaluation uses a declared R2/original128 history for every candidate.
-        if reference == 'paired':
-            state = model.advance(encoded, outputs['R2'], 'original128')
-        elif reference == 'paired_full2048':
-            state = model.advance(encoded, outputs['R1'], 'full2048')
-        else:
-            state = model.advance(encoded, outputs[paths[0]], reference)
+        state = advance_reference(model,encoded,outputs,paths,reference)
         if index == 0:
-            save_image(output_dir / 'images' / f'{Path(row["path"]).name}_original.png', rgb)
-    return output_rows, paired
+            save_image(output_dir / 'images' / f'{Path(row["path"]).name}_original.png',rgb)
+    return output_rows,paired
 
 
 def write_tables(directory, rows):
@@ -112,12 +127,22 @@ def check_test_seal(config, checkpoint, seal):
         raise ValueError('test configuration changed after sealing')
     if saved['test_manifest_sha256'] != sha256(resolve(config['manifest_dir']) / 'cpat_test.json'):
         raise ValueError('test manifest changed after sealing')
+    return saved
+
+
+def validate_test_request(config, seal, digest, paths, references, videos, frames):
+    expected = {'paths':paths, 'references':references}
+    if seal['protocols'].get(digest) != expected:
+        raise ValueError('test protocol differs from the frozen paths/reference modes')
+    if videos != config['final_test']['videos'] or frames != config['final_test']['frames']:
+        raise ValueError('test protocol requires the declared complete video/frame selection')
 
 
 def run_evaluation(config, checkpoint, output, paths, references, split='validation', videos=None,
                    frames=8, sensitivity=False, seal=None):
     if split == 'test':
-        check_test_seal(config, checkpoint, seal)
+        saved = check_test_seal(config, checkpoint, seal)
+        validate_test_request(config,saved,sha256(checkpoint),paths,references,videos,frames)
     directory = resolve(output)
     if (directory / 'run.json').exists():
         raise FileExistsError('evaluation output already exists; choose a new directory')
@@ -175,7 +200,7 @@ def main():
     args = parser.parse_args()
     config = read_config(args.config)
     seed_everything(config['seed'], config['device'], 0.9)
-    videos = args.videos or config['baseline']['videos']
+    videos = args.videos or config['final_test' if args.split == 'test' else 'baseline']['videos']
     run_evaluation(config, args.checkpoint or config['source_checkpoint'], args.output, args.paths,
                    args.references, args.split, videos, args.frames, args.sensitivity, args.seal)
 
