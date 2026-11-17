@@ -35,13 +35,15 @@ def save_training(path, trainer, sampler, config, manifest_identity, completed_s
              "scheduler": trainer.scheduler.state_dict(), "rng": rng_state(), "sampling": sampler.state_dict(),
              "completed_steps": completed_steps, "training_frames": training_frames, "config": config,
              "config_identity": stable_hash(config), "manifest_identity": manifest_identity}
+    if trainer.budget_rng is not None:
+        state["budget_rng"] = trainer.budget_rng.get_state()
     temporary = path.with_suffix(path.suffix + ".tmp")
     torch.save(state, temporary)
     temporary.replace(path)
     metadata = {k: state[k] for k in ("version", "completed_steps", "training_frames", "config",
                                      "config_identity", "manifest_identity")}
     metadata.update(checkpoint_sha256=file_hash(path), model_sha256=tensor_digest(state["model"]).hex(),
-                    codebook_sha256=tensor_digest({"codebook": trainer.model.vq.codebook.weight}).hex(),
+                    codebook_sha256=tensor_digest(trainer.model.vq.identity_tensors()).hex(),
                     source_sha256=source_identity(),
                     optimizer_saved=True, scheduler_saved=True, rng_saved=True, sampling_saved=True)
     write_json(path.with_suffix(".json"), metadata)
@@ -58,6 +60,8 @@ def restore_training(path, trainer, sampler, config, manifest_identity):
     trainer.optimizer.load_state_dict(state["optimizer"])
     trainer.scheduler.load_state_dict(state["scheduler"])
     sampler.load_state_dict(state["sampling"])
+    if trainer.budget_rng is not None:
+        trainer.budget_rng.set_state(state["budget_rng"].cpu())
     restore_rng(state["rng"])
     return {"completed_steps": state["completed_steps"], "training_frames": state["training_frames"]}
 

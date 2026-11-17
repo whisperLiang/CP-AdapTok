@@ -27,6 +27,7 @@ def frame_objective(model, frame, state, previous_target, budget, auxiliary, los
     encoded = model.encode_features(frame, state)
     main = model.forward_frame(frame, state, budget, encoded)
     loss, terms = losses.distortion(main.rgb, frame)
+    vq = encoded.loss_terms(budget)
     _, _, reference = frame_context(state, model.config.gop)
     temporal = losses.temporal(main.rgb, frame, reference, previous_target)
     mono = loss.new_zeros(())
@@ -34,15 +35,31 @@ def frame_objective(model, frame, state, previous_target, budget, auxiliary, los
         alternative = model.forward_frame(frame, state, auxiliary, encoded)
         extra, other = losses.distortion(alternative.rgb, frame)
         loss = (loss + extra) * .5
+        vq = {key: (value + encoded.loss_terms(auxiliary)[key]) * .5 for key, value in vq.items()}
         low, high = (terms["mse"], other["mse"]) if budget < auxiliary else (other["mse"], terms["mse"])
-        mono = F.relu(high - low) * losses.weights.get("monotonic", 0)
-    total = loss + temporal + mono + losses.weights.get("vq", 0) * encoded.loss
+        mono = F.relu(high - low + losses.weights.get("monotonic_margin", 0)) * losses.weights.get("monotonic", 0)
+    total = loss + temporal + mono + losses.weights.get("vq", 0) * vq["vq_loss"]
     row = {k: float(v.detach()) for k, v in terms.items()}
-    row.update(vq_loss=float(encoded.loss.detach()), temporal_loss=float(temporal.detach()),
+    row.update(**{key: float(value.detach()) for key, value in vq.items()}, temporal_loss=float(temporal.detach()),
                monotonic_loss=float(mono.detach()), main_budget=budget, auxiliary_budget=auxiliary,
                frame_type=main.frame_type, frame_index=main.state.frame_index,
                **code_statistics(main.ids), quantization_mse=encoded.stats["quantization_mse"])
+    row["levels"] = active_level_statistics(model, encoded, budget)
     return total, main.state, row
+
+
+def active_level_statistics(model, encoded, budget):
+    result, offset = {}, 0
+    for name, capacity in zip(("Base", "Medium", "Fine"), model.positions.counts):
+        end = min(offset + capacity, budget)
+        if end > offset:
+            values = encoded.quantized[:, offset:end].detach()
+            result[name] = {**code_statistics(encoded.ids[:, offset:end]), "tokens": end - offset,
+                            "vq_error": float(encoded.commitment_error[:, offset:end].detach().mean()),
+                            "feature_variance": float(encoded.continuous[:, offset:end].detach().var(1, unbiased=False).mean()),
+                            "quantized_variance": float(values.var(1, unbiased=False).mean())}
+        offset += capacity
+    return result
 
 
 def module_change_norms(model, before):
@@ -51,6 +68,9 @@ def module_change_norms(model, before):
         squares = [(p.detach() - before[n]).float().square().sum()
                    for n, p in model.named_parameters() if n.startswith(group + ".")]
         result[group] = float(torch.stack(squares).sum().sqrt())
+    for name, parameter in model.named_parameters():
+        if name.startswith(("vq.", "tokenizer.projections.")):
+            result[name] = float((parameter.detach() - before[name]).float().norm())
     return result
 
 
@@ -67,6 +87,8 @@ class JointTrainer:
         if settings["budget_mode"] not in ("fixed", "nested"):
             raise ValueError("budget_mode must be fixed or nested")
         self.model, self.settings = model, settings
+        self.budget_rng = (torch.Generator().manual_seed(settings["budget_seed"])
+                           if "budget_seed" in settings else None)
         self.device = next(model.parameters()).device
         self.losses = ReconstructionLoss(settings["losses"], self.device)
         self.optimizer = torch.optim.AdamW(model.parameters(), lr=settings["learning_rate"],
@@ -77,11 +99,11 @@ class JointTrainer:
         if self.settings["budget_mode"] == "fixed":
             return self.settings["fixed_budget"], None
         budgets = self.model.config.budgets
-        main = budgets[int(torch.randint(len(budgets), ()))]
+        main = budgets[int(torch.randint(len(budgets), (), generator=self.budget_rng))]
         other = None
         if step % self.settings["nested_every"] == 0:
             candidates = [b for b in budgets if b != main]
-            other = candidates[int(torch.randint(len(candidates), ()))]
+            other = candidates[int(torch.randint(len(candidates), (), generator=self.budget_rng))]
         return main, other
 
     def backward_clip(self, clip, step):
@@ -212,7 +234,10 @@ def run_training(args):
     torch.set_num_threads(4)
     index = load_index(config["data"]["index"])
     records = training_records(index, args.overfit)
-    model = AdapTokHR(ModelConfig(**config["model"])).to(args.device)
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(config["training"].get("model_seed", config["training"]["seed"]))
+        model = AdapTokHR(ModelConfig(**config["model"]))
+    model = model.to(args.device)
     trainer = JointTrainer(model, config["training"])
     sampler = ClipSampler(records, config["training"]["seed"] + 1)
     output, completed, frames = prepare_run(args, config, index, trainer, sampler)

@@ -30,7 +30,9 @@ class AdapTokHR(nn.Module):
         self.positions = PositionTable(config)
         self.encoder = Encoder(config)
         self.tokenizer = Tokenizer(config, self.positions)
-        self.vq = VectorQuantizer(config.codebook_size, config.embedding_dim)
+        self.vq = VectorQuantizer(config.codebook_size, config.embedding_dim,
+                                  codebook_mode=config.codebook_mode, loss_scope=config.loss_scope,
+                                  counts=self.positions.counts)
         self.decoder = Decoder(config, self.positions)
 
     def validate_budget(self, budget):
@@ -72,7 +74,7 @@ class AdapTokHR(nn.Module):
         next_state = TemporalState(stream_id=stream_identity("training") if state is None else state.stream_id,
                                    frame_index=index, frame_type=frame_type, gop=self.config.gop,
                                    rgb=rgb, feature=feature)
-        return FrameOutput(encoded.ids[:, :budget], rgb, feature, encoded.loss, encoded.stats,
+        return FrameOutput(encoded.ids[:, :budget], rgb, feature, encoded.loss_terms(budget)["vq_loss"], encoded.stats,
                            next_state, frame_type)
 
     def forward(self, video, budget=2048, state=None):

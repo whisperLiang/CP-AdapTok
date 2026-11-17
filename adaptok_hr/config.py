@@ -18,6 +18,8 @@ class ModelConfig:
     budgets: tuple = (256, 512, 1024, 2048)
     gop: int = 32
     gradient_checkpointing: bool = False
+    codebook_mode: str = "shared"
+    loss_scope: str = "all_candidates"
 
     def __post_init__(self):
         for name in ("channels", "decoder_channels", "budgets"):
@@ -43,6 +45,10 @@ class ModelConfig:
     def validate_vq(self):
         if self.codebook_size != 8192 or self.embedding_dim != 16:
             raise ValueError("bitstream v1 requires an 8192x16 codebook")
+        if self.codebook_mode not in ("shared", "per_level"):
+            raise ValueError("codebook_mode must be shared or per_level")
+        if self.loss_scope not in ("all_candidates", "active_prefix"):
+            raise ValueError("loss_scope must be all_candidates or active_prefix")
 
     def validate_budgets(self):
         if not self.budgets or tuple(sorted(set(self.budgets))) != self.budgets:

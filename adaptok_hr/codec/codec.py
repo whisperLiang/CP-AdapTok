@@ -26,7 +26,7 @@ class Codec:
         self.model = model
         self.device = next(model.parameters()).device
         self.amp_bf16 = amp_bf16 and self.device.type == "cuda"
-        self.codebook_identity = tensor_digest({"codebook": model.vq.codebook.weight})
+        self.codebook_identity = tensor_digest(model.vq.identity_tensors())
         identity = {"config": model.config.to_dict(), "amp_bf16": self.amp_bf16}
         self.model_identity = hashlib.sha256(tensor_digest(model.state_dict()) +
                                               json.dumps(identity, sort_keys=True).encode()).digest()
