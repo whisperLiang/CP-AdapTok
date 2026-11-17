@@ -149,6 +149,11 @@ def write_report(output, summary):
         if key.startswith("validation/"):
             text.append(f"| {key} | {value['mse']:.9g} | {value['lpips']:.7g} | {value['dists']:.7g} | {value['output_change_mse']:.9g} |")
     text += ["", "确定事实：连续特征存在非零变化不等于它携带可用细节；用旁路损失、离散置换和梯度分别判断。",
+             f"Fine 原始投影空间方差 {fine['raw_spatial_variance']:.9g}，所以 Encoder 输出没有变成严格常量；归一化后的方向高度趋同。",
+             "量化前 Fine 存在非零变化，且 Fine 连续旁路的实际 MSE 小于 VQ 基线；这是当前样本上的弱有效性证据，不能称为可传输质量改善。",
+             "VQ 后 Fine 在当前观测范围发生完全离散信息塌缩，常量替换及空间置换与原结果严格相同。",
+             "替换其他有效码字和移除 Fine 均改变输出，因此 Decoder 仍对 Fine 输入敏感；输出敏感性不等于细节恢复有效。",
+             "连续输入和离散 Decoder 输入梯度均非零，未观察到完全断开的支路；接近零必须连同 Base/Medium 的相对范数判断，不能凭非零就排除梯度不足。",
              "推测边界：上述冻结模型干预不能单独证明塌缩的训练因果；预算损失范围和共享码本竞争需要匹配的 2×2 实验验证。",
              "Decoder 输入梯度与量化前 Token 梯度（RGB MSE）见 gradients.json；非零梯度只证明局部敏感，不证明质量增益。"]
     (output / "root_cause.md").write_text("\n".join(text) + "\n")

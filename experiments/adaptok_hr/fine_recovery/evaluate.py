@@ -83,6 +83,10 @@ def same_context(model, sources, frames, metrics, output):
                 rows[str(budget)].append(row)
                 count_levels(model, parsed.ids, histograms[str(budget)])
                 append_row(output / "same_context.jsonl", row)
+                if index in (0, 31, 32, 63):
+                    directory = output / "same_context_packets" / source["content_id"].replace(":", "_")
+                    directory.mkdir(parents=True, exist_ok=True)
+                    (directory / f"frame_{index:04d}_K{budget}.bin").write_bytes(packet)
                 if index in (0, 31, 63):
                     stem = f"{source['content_id'].replace(':', '_')}_{index:04d}"
                     save_image(output / "samples" / f"{stem}_K{budget}.png", rgb)
@@ -171,6 +175,8 @@ def run(args):
                 "dists_improves_with_budget": matched["2048"]["dists"] < matched["1024"]["dists"],
                 "closed_loop_gain_db": loops["2048"]["psnr_global"] - loops["1024"]["psnr_global"]}
     write_json(root / "summary.json", {"protocol": protocol, "same_context": matched,
+                                       "same_encoding_prefix_ids_asserted_each_frame": True,
+                                       "independent_model_receiver_asserted_each_frame": True,
                                        "closed_loop": loops, "criteria": criteria})
     write_json(root / "metric_manifest.json", metric_manifest())
     print(json.dumps(criteria), flush=True)

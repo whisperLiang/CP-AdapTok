@@ -2,6 +2,8 @@
 
 import argparse
 import json
+import os
+import subprocess
 from pathlib import Path
 
 import torch
@@ -17,6 +19,13 @@ from adaptok_hr.training.checkpoint import load_model
 from cp_adaptok.metrics import summarize_latency
 
 from .common import independent_codec
+
+
+def require_idle_gpu():
+    output = subprocess.check_output(["nvidia-smi", "--query-compute-apps=pid", "--format=csv,noheader,nounits"], text=True)
+    other = [int(p) for p in output.splitlines() if p.strip() and int(p) != os.getpid()]
+    if other:
+        raise RuntimeError(f"standalone throughput requires an idle GPU; other compute PIDs: {other}")
 
 
 @torch.inference_mode()
@@ -67,6 +76,7 @@ def main():
     output = Path(args.output)
     if output.exists():
         raise ValueError("benchmark output exists")
+    require_idle_gpu()
     torch.set_num_threads(4)
     seed_everything(20261118)
     model, checkpoint = load_model(args.checkpoint)
@@ -77,7 +87,9 @@ def main():
     for budget in args.budgets:
         budgets[str(budget)] = stream(model, clip, budget)
         print(json.dumps({"budget": budget, "joint": budgets[str(budget)]["timing"]["joint"]}), flush=True)
+    require_idle_gpu()
     write_json(output, {"environment": environment(), "checkpoint_sha256": file_hash(args.checkpoint),
+                        "no_other_gpu_compute_process_before_and_after": True,
                         "completed_steps": checkpoint["completed_steps"], "manifest_identity": index["identity"],
                         "input": metadata, "parameters": sum(p.numel() for p in model.parameters()), "budgets": budgets,
                         "scope": "single H100 sequential encoder+13bit packing+sender local decode+independent receiver unpack/decode; synchronized segment wall times; excludes read,H2D,metrics,disk,assertions; no overlap or profiling"})

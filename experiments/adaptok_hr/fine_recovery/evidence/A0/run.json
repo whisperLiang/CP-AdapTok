@@ -1,0 +1,128 @@
+{
+  "environment": {
+    "time": "2026-11-18T01:51:29.487182+08:00",
+    "timezone": "Asia/Shanghai",
+    "git": "0fd33897d348f1dcaf3a272de0ff8218f82e4d83",
+    "git_dirty": false,
+    "source_sha256": "6444b23ffc127321ba8971509d6267d53ee3083b6fad5cba53449d3ed28c56f4",
+    "deterministic_algorithms": true,
+    "python_trace_enabled": false,
+    "branch": "experiment/adaptok-hr-fine-recovery",
+    "python": "3.12.13",
+    "torch": "2.9.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA H100 PCIe",
+    "driver": "580.159.03"
+  },
+  "config": {
+    "benchmark": {
+      "batch_size": 1,
+      "repeats": 20,
+      "warmup": 5
+    },
+    "data": {
+      "cp_manifest_directory": "data/manifests",
+      "external_sources": [],
+      "index": "data/adaptok_hr/index.json"
+    },
+    "evaluation": {
+      "amp_bf16": true,
+      "frames": 64,
+      "validation_ids": [
+        "DAVIS2017:blackswan",
+        "DAVIS2017:car-roundabout",
+        "DAVIS2017:dog"
+      ]
+    },
+    "model": {
+      "attention_blocks": 1,
+      "budgets": [
+        256,
+        512,
+        1024,
+        2048
+      ],
+      "channels": [
+        48,
+        64,
+        96,
+        128,
+        192,
+        192,
+        192
+      ],
+      "codebook_size": 8192,
+      "decoder_channels": [
+        192,
+        128,
+        96,
+        64,
+        32,
+        24
+      ],
+      "embedding_dim": 16,
+      "gop": 32,
+      "gradient_checkpointing": true,
+      "heads": 6,
+      "height": 1080,
+      "temporal": true,
+      "width": 1920,
+      "window": 4,
+      "codebook_mode": "shared",
+      "loss_scope": "all_candidates"
+    },
+    "training": {
+      "amp_bf16": true,
+      "batch_sequences": 1,
+      "budget_mode": "nested",
+      "checkpoint_every": 100,
+      "fixed_budget": 2048,
+      "gradient_clip": 1.0,
+      "learning_rate": 0.0001,
+      "losses": {
+        "l1": 1.0,
+        "monotonic": 0.1,
+        "mse": 1.0,
+        "perceptual": 0.1,
+        "temporal": 0.05,
+        "vq": 1.0
+      },
+      "milestones": [
+        300,
+        1000
+      ],
+      "nested_every": 4,
+      "seed": 20261118,
+      "sequence_schedule": [
+        [
+          0,
+          4
+        ]
+      ],
+      "tbptt": 2,
+      "validation_every": 100,
+      "weight_decay": 0.01,
+      "model_seed": 20261118,
+      "budget_seed": 20261120
+    },
+    "experiment": {
+      "name": "A0",
+      "family": "fine_recovery_matched_vq",
+      "initialization": "from_scratch",
+      "pilot_steps": 300,
+      "maximum_screening_steps": 1000,
+      "selection_split": "validation",
+      "data_seed": 20261119
+    },
+    "run_scope": {
+      "overfit": null,
+      "overfit_frames": 4
+    }
+  },
+  "manifest_identity": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+  "requested_steps": 300,
+  "resume_from": null,
+  "starting_completed_steps": 0,
+  "discarded_uncommitted_log_rows": 0,
+  "experiment_type": "joint_native_1080p"
+}

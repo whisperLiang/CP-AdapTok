@@ -1,0 +1,354 @@
+[
+  {
+    "split": "train",
+    "content_id": "DAVIS2017:bear",
+    "frame": 0,
+    "preceding_state_chain": null,
+    "continuous_token": {
+      "Base": 0.0004628159513231367,
+      "Medium": 0.0004093832103535533,
+      "Fine": 9.216245962306857e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0005878493539057672,
+      "Medium": 0.0005873276968486607,
+      "Fine": 0.00011971764615736902
+    }
+  },
+  {
+    "split": "train",
+    "content_id": "DAVIS2017:bear",
+    "frame": 1,
+    "preceding_state_chain": "7c548dff1911fb51c907d9dad106c21d15bf8e5d5cd63874a98d167f2dfd5231",
+    "continuous_token": {
+      "Base": 0.0003482525353319943,
+      "Medium": 0.00027984357438981533,
+      "Fine": 6.694222247460857e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0004756191046908498,
+      "Medium": 0.0003968512173742056,
+      "Fine": 8.490256732329726e-05
+    }
+  },
+  {
+    "split": "train",
+    "content_id": "DAVIS2017:bear",
+    "frame": 7,
+    "preceding_state_chain": "76b7b46080c3446af657bfe4ed0c2eebc66ae9e78c787e5b55196106d64ddc91",
+    "continuous_token": {
+      "Base": 0.0002880288811866194,
+      "Medium": 0.0002346217370359227,
+      "Fine": 5.7135377574013546e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.00039020326221361756,
+      "Medium": 0.0003325126017443836,
+      "Fine": 7.221243140520528e-05
+    }
+  },
+  {
+    "split": "train",
+    "content_id": "DAVIS2017:bear",
+    "frame": 31,
+    "preceding_state_chain": "6d8ce4302661795e539d89e8e52dac16608742cdfae194bd91c424463a0c8ff5",
+    "continuous_token": {
+      "Base": 0.00034023672924377024,
+      "Medium": 0.00024341337848454714,
+      "Fine": 5.3739007853437215e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.000414678972447291,
+      "Medium": 0.0002960832498501986,
+      "Fine": 6.397049583029002e-05
+    }
+  },
+  {
+    "split": "train",
+    "content_id": "DAVIS2017:bear",
+    "frame": 32,
+    "preceding_state_chain": "ed998ff77cbf6a36baf9070f77cfeefb13dafe488cf1d0cb7e9a4d1c4473ddc7",
+    "continuous_token": {
+      "Base": 0.0005995611427351832,
+      "Medium": 0.00044329138472676277,
+      "Fine": 8.646255446365103e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0007981330272741616,
+      "Medium": 0.0006080267485231161,
+      "Fine": 0.00011403105600038543
+    }
+  },
+  {
+    "split": "train",
+    "content_id": "DAVIS2017:bear",
+    "frame": 63,
+    "preceding_state_chain": "9cce7c2380a034fe8d5289decec43a88f89ee51e2ed7cecb01a8aea2454eb6a5",
+    "continuous_token": {
+      "Base": 0.00031653064070269465,
+      "Medium": 0.00028957100585103035,
+      "Fine": 6.01158280915115e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0004125473496969789,
+      "Medium": 0.0003541068290360272,
+      "Fine": 6.979503814363852e-05
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:blackswan",
+    "frame": 0,
+    "preceding_state_chain": null,
+    "continuous_token": {
+      "Base": 0.0004797367437276989,
+      "Medium": 0.0003126953961327672,
+      "Fine": 6.313859921647236e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0005714150029234588,
+      "Medium": 0.0003750901378225535,
+      "Fine": 7.912547880550846e-05
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:blackswan",
+    "frame": 1,
+    "preceding_state_chain": "eabc02c60b9eed8098c6c21c14678bce7d6c05d9b6833d7349a30fb3ee5411d3",
+    "continuous_token": {
+      "Base": 0.000360184523742646,
+      "Medium": 0.00021552371617872268,
+      "Fine": 4.5971715735504404e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0004662560240831226,
+      "Medium": 0.0002809184661600739,
+      "Fine": 5.7704113714862615e-05
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:blackswan",
+    "frame": 7,
+    "preceding_state_chain": "91211d9f147b9f7e6eceece0d2569f60d71f7f772237b8e237aeab5285e256b5",
+    "continuous_token": {
+      "Base": 0.00032897471101023257,
+      "Medium": 0.00019339950813446194,
+      "Fine": 4.237805478624068e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.00041220494313165545,
+      "Medium": 0.00024509200011380017,
+      "Fine": 5.074475484434515e-05
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:blackswan",
+    "frame": 31,
+    "preceding_state_chain": "fa46483df576ec787f2a61c51248e20ae4565c6b07cf48265931c4a0fb685754",
+    "continuous_token": {
+      "Base": 0.0003658656496554613,
+      "Medium": 0.00021807043231092393,
+      "Fine": 5.075832814327441e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0004077334888279438,
+      "Medium": 0.0002581746957730502,
+      "Fine": 5.811228038510308e-05
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:blackswan",
+    "frame": 32,
+    "preceding_state_chain": "0f72635f96003ccfca1aeb0383be21f386d901bd77f2d1bc6d4052bf7cb0f906",
+    "continuous_token": {
+      "Base": 0.0005331231513991952,
+      "Medium": 0.00036153531982563436,
+      "Fine": 7.886295497883111e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.000773371197283268,
+      "Medium": 0.0005337141337804496,
+      "Fine": 0.00010517899499973282
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:car-roundabout",
+    "frame": 0,
+    "preceding_state_chain": null,
+    "continuous_token": {
+      "Base": 0.0006685634725727141,
+      "Medium": 0.000585799221880734,
+      "Fine": 0.00017296732403337955
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0008221931057050824,
+      "Medium": 0.0006984034553170204,
+      "Fine": 0.00020398492051754147
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:car-roundabout",
+    "frame": 1,
+    "preceding_state_chain": "057d8808a27c4327bc96ddd79e588987c0149af7794fa5c61b4c04b29eb2a0a9",
+    "continuous_token": {
+      "Base": 0.0006577036692760885,
+      "Medium": 0.000495546031743288,
+      "Fine": 0.0001488794368924573
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0007626715814694762,
+      "Medium": 0.0005873622721992433,
+      "Fine": 0.00017408865096513182
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:car-roundabout",
+    "frame": 7,
+    "preceding_state_chain": "cf90d55a4c6253aa4e9c32b78d7cae6703eb082680f0f33166688063368c1faf",
+    "continuous_token": {
+      "Base": 0.0006034971447661519,
+      "Medium": 0.00045988793135620654,
+      "Fine": 0.00014016326167620718
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0008067339658737183,
+      "Medium": 0.0005840234225615859,
+      "Fine": 0.00016839841555338353
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:car-roundabout",
+    "frame": 31,
+    "preceding_state_chain": "a344c8340b047ccb3f47b72d62222ef9efaca6252fb4db200a574f9505a38cbf",
+    "continuous_token": {
+      "Base": 0.0006107422523200512,
+      "Medium": 0.0004959650104865432,
+      "Fine": 0.00013069045962765813
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0007397119770757854,
+      "Medium": 0.0005702593480236828,
+      "Fine": 0.00014998680853750557
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:car-roundabout",
+    "frame": 32,
+    "preceding_state_chain": "ed51ab53272b8ac0a1950134687d6ee6486738b3e1a44dfa1425569704883ef9",
+    "continuous_token": {
+      "Base": 0.0005409839795902371,
+      "Medium": 0.0005144366296008229,
+      "Fine": 0.00014776828174944967
+    },
+    "decoder_discrete_input": {
+      "Base": 0.000849719624966383,
+      "Medium": 0.000718259543646127,
+      "Fine": 0.00018523508333601058
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:car-roundabout",
+    "frame": 63,
+    "preceding_state_chain": "5ea7f1d21cd466436360427d86c2f59754b816d971ce7bfcb84852f0b0b7c64f",
+    "continuous_token": {
+      "Base": 0.000584642228204757,
+      "Medium": 0.0004814548883587122,
+      "Fine": 0.00013059498451184481
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0007561516831628978,
+      "Medium": 0.0005795324686914682,
+      "Fine": 0.0001566720602568239
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:dog",
+    "frame": 0,
+    "preceding_state_chain": null,
+    "continuous_token": {
+      "Base": 0.0005463485140353441,
+      "Medium": 0.00034548784606158733,
+      "Fine": 8.0234429333359e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0006831692880950868,
+      "Medium": 0.00043464364716783166,
+      "Fine": 0.00010334710532333702
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:dog",
+    "frame": 1,
+    "preceding_state_chain": "040d5b7af275182d86a7d19703819986fdc13386c0eb085be8e764d01d35cb31",
+    "continuous_token": {
+      "Base": 0.0005273061105981469,
+      "Medium": 0.0003231705923099071,
+      "Fine": 7.392286352114752e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0006437779520638287,
+      "Medium": 0.000394069793401286,
+      "Fine": 8.996517863124609e-05
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:dog",
+    "frame": 7,
+    "preceding_state_chain": "51e86da8bc1db6136813fe5b7eab1578e3ddf1cda1fc6553745bfff3cbdf5f7d",
+    "continuous_token": {
+      "Base": 0.0003978060558438301,
+      "Medium": 0.00021659809863194823,
+      "Fine": 5.4494415962835774e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.000423613004386425,
+      "Medium": 0.00024915009271353483,
+      "Fine": 6.457880226662382e-05
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:dog",
+    "frame": 31,
+    "preceding_state_chain": "27819a4e46716296a364ca4d87e13cd921d3c8e0299d420b62a4a01e865bed90",
+    "continuous_token": {
+      "Base": 0.0003086241486016661,
+      "Medium": 0.00021420187840703875,
+      "Fine": 5.01239082950633e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.00035977447987534106,
+      "Medium": 0.0002559479034971446,
+      "Fine": 6.139213655842468e-05
+    }
+  },
+  {
+    "split": "validation",
+    "content_id": "DAVIS2017:dog",
+    "frame": 32,
+    "preceding_state_chain": "c64d8f64af34e9886675c5471c0c53d2a0be7398bfc09475333581edaf1b7b26",
+    "continuous_token": {
+      "Base": 0.0004572882899083197,
+      "Medium": 0.0003096749715041369,
+      "Fine": 7.7093493018765e-05
+    },
+    "decoder_discrete_input": {
+      "Base": 0.0005628281505778432,
+      "Medium": 0.0003778153331950307,
+      "Fine": 9.568608948029578e-05
+    }
+  }
+]

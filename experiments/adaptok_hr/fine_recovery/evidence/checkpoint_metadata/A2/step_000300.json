@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "completed_steps": 300,
+  "training_frames": 1200,
+  "config": {
+    "benchmark": {
+      "batch_size": 1,
+      "repeats": 20,
+      "warmup": 5
+    },
+    "data": {
+      "cp_manifest_directory": "data/manifests",
+      "external_sources": [],
+      "index": "data/adaptok_hr/index.json"
+    },
+    "evaluation": {
+      "amp_bf16": true,
+      "frames": 64,
+      "validation_ids": [
+        "DAVIS2017:blackswan",
+        "DAVIS2017:car-roundabout",
+        "DAVIS2017:dog"
+      ]
+    },
+    "model": {
+      "attention_blocks": 1,
+      "budgets": [
+        256,
+        512,
+        1024,
+        2048
+      ],
+      "channels": [
+        48,
+        64,
+        96,
+        128,
+        192,
+        192,
+        192
+      ],
+      "codebook_size": 8192,
+      "decoder_channels": [
+        192,
+        128,
+        96,
+        64,
+        32,
+        24
+      ],
+      "embedding_dim": 16,
+      "gop": 32,
+      "gradient_checkpointing": true,
+      "heads": 6,
+      "height": 1080,
+      "temporal": true,
+      "width": 1920,
+      "window": 4,
+      "codebook_mode": "per_level",
+      "loss_scope": "all_candidates"
+    },
+    "training": {
+      "amp_bf16": true,
+      "batch_sequences": 1,
+      "budget_mode": "nested",
+      "checkpoint_every": 100,
+      "fixed_budget": 2048,
+      "gradient_clip": 1.0,
+      "learning_rate": 0.0001,
+      "losses": {
+        "l1": 1.0,
+        "monotonic": 0.1,
+        "mse": 1.0,
+        "perceptual": 0.1,
+        "temporal": 0.05,
+        "vq": 1.0
+      },
+      "milestones": [
+        300,
+        1000
+      ],
+      "nested_every": 4,
+      "seed": 20261118,
+      "sequence_schedule": [
+        [
+          0,
+          4
+        ]
+      ],
+      "tbptt": 2,
+      "validation_every": 100,
+      "weight_decay": 0.01,
+      "model_seed": 20261118,
+      "budget_seed": 20261120
+    },
+    "experiment": {
+      "name": "A2",
+      "family": "fine_recovery_matched_vq",
+      "initialization": "from_scratch",
+      "pilot_steps": 300,
+      "maximum_screening_steps": 1000,
+      "selection_split": "validation",
+      "data_seed": 20261119
+    },
+    "run_scope": {
+      "overfit": null,
+      "overfit_frames": 4
+    }
+  },
+  "config_identity": "ee901b3ac3eba916529f836701f88fc75448b352ae5e4908155d1c683cd8fcb2",
+  "manifest_identity": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+  "checkpoint_sha256": "6361157aadc007853f791dec3988832dc6e2ba937796fea6f3a28051c70955b5",
+  "model_sha256": "e7b2d1c1c422ada55ac490f11b1e2b59eab8a595387fa70ccc9773fbc14bcf76",
+  "codebook_sha256": "f4464d654ef1eb1737d4c685c7e6fd9306e6a794afbd712fdcf22ec71082a664",
+  "source_sha256": "6444b23ffc127321ba8971509d6267d53ee3083b6fad5cba53449d3ed28c56f4",
+  "optimizer_saved": true,
+  "scheduler_saved": true,
+  "rng_saved": true,
+  "sampling_saved": true
+}

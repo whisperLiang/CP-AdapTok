@@ -1,0 +1,353 @@
+{
+  "capacities": {
+    "Base": 135,
+    "Medium": 510,
+    "Fine": 2040
+  },
+  "all_candidate_loss_fraction": {
+    "Base": 0.05027932960893855,
+    "Medium": 0.18994413407821228,
+    "Fine": 0.7597765363128491
+  },
+  "actual_prefix_fractions": {
+    "256": {
+      "Base": 0.52734375,
+      "Medium": 0.47265625,
+      "Fine": 0.0
+    },
+    "512": {
+      "Base": 0.263671875,
+      "Medium": 0.736328125,
+      "Fine": 0.0
+    },
+    "1024": {
+      "Base": 0.1318359375,
+      "Medium": 0.498046875,
+      "Fine": 0.3701171875
+    },
+    "2048": {
+      "Base": 0.06591796875,
+      "Medium": 0.2490234375,
+      "Fine": 0.68505859375
+    }
+  },
+  "experiments": {
+    "A0": {
+      "updates": 300,
+      "frames": 1200,
+      "reconstruction_matched_loss_fraction": {
+        "Base": 0.2417266845703125,
+        "Medium": 0.485108642578125,
+        "Fine": 0.2731646728515625
+      },
+      "observed_parameter_updates": [
+        {
+          "step": 1,
+          "norms": {
+            "encoder": 0.08677294105291367,
+            "tokenizer": 0.009620082564651966,
+            "vq": 0.0032064293045550585,
+            "decoder": 0.08187936991453171,
+            "tokenizer.projections.0.weight": 0.0055381725542247295,
+            "tokenizer.projections.0.bias": 0.000399834563722834,
+            "tokenizer.projections.1.weight": 0.005539670120924711,
+            "tokenizer.projections.1.bias": 0.0003999440523330122,
+            "tokenizer.projections.2.weight": 0.005541379097849131,
+            "tokenizer.projections.2.bias": 0.00039998115971684456,
+            "vq.codebook.weight": 0.0032064293045550585
+          }
+        },
+        {
+          "step": 100,
+          "norms": {
+            "encoder": 0.036393459886312485,
+            "tokenizer": 0.0029900006484240294,
+            "vq": 0.0024202282074838877,
+            "decoder": 0.02162042446434498,
+            "tokenizer.projections.0.weight": 0.001874665729701519,
+            "tokenizer.projections.0.bias": 0.00014215927512850612,
+            "tokenizer.projections.1.weight": 0.0018585097277536988,
+            "tokenizer.projections.1.bias": 5.886865983484313e-05,
+            "tokenizer.projections.2.weight": 0.0013950474094599485,
+            "tokenizer.projections.2.bias": 4.291959339752793e-05,
+            "vq.codebook.weight": 0.0024202282074838877
+          }
+        },
+        {
+          "step": 200,
+          "norms": {
+            "encoder": 0.030359772965312004,
+            "tokenizer": 0.0026743165217339993,
+            "vq": 0.0043371934443712234,
+            "decoder": 0.026736430823802948,
+            "tokenizer.projections.0.weight": 0.001715733204036951,
+            "tokenizer.projections.0.bias": 0.00011712042760336772,
+            "tokenizer.projections.1.weight": 0.0017797795590013266,
+            "tokenizer.projections.1.bias": 7.870784611441195e-05,
+            "tokenizer.projections.2.weight": 0.0010098551865667105,
+            "tokenizer.projections.2.bias": 2.9898492357460782e-05,
+            "vq.codebook.weight": 0.0043371934443712234
+          }
+        },
+        {
+          "step": 300,
+          "norms": {
+            "encoder": 0.023462751880288124,
+            "tokenizer": 0.0028571970760822296,
+            "vq": 0.005578179378062487,
+            "decoder": 0.024291688576340675,
+            "tokenizer.projections.0.weight": 0.0011244480265304446,
+            "tokenizer.projections.0.bias": 3.8044294342398643e-05,
+            "tokenizer.projections.1.weight": 0.0024605547077953815,
+            "tokenizer.projections.1.bias": 0.00015388320025522262,
+            "tokenizer.projections.2.weight": 0.0009046265622600913,
+            "tokenizer.projections.2.bias": 3.722653127624653e-05,
+            "vq.codebook.weight": 0.005578179378062487
+          }
+        }
+      ]
+    },
+    "A1": {
+      "updates": 300,
+      "frames": 1200,
+      "reconstruction_matched_loss_fraction": {
+        "Base": 0.2417266845703125,
+        "Medium": 0.485108642578125,
+        "Fine": 0.2731646728515625
+      },
+      "observed_parameter_updates": [
+        {
+          "step": 1,
+          "norms": {
+            "encoder": 0.08658056706190109,
+            "tokenizer": 0.009620374999940395,
+            "vq": 0.0031626177951693535,
+            "decoder": 0.08187936246395111,
+            "tokenizer.projections.0.weight": 0.0055400109849870205,
+            "tokenizer.projections.0.bias": 0.0003998926258645952,
+            "tokenizer.projections.1.weight": 0.005540579091757536,
+            "tokenizer.projections.1.bias": 0.0004000166663900018,
+            "tokenizer.projections.2.weight": 0.005539133679121733,
+            "tokenizer.projections.2.bias": 0.00039993456448428333,
+            "vq.codebook.weight": 0.0031626177951693535
+          }
+        },
+        {
+          "step": 100,
+          "norms": {
+            "encoder": 0.038349900394678116,
+            "tokenizer": 0.00364606617949903,
+            "vq": 0.0019017489394173026,
+            "decoder": 0.029361488297581673,
+            "tokenizer.projections.0.weight": 0.0022976789623498917,
+            "tokenizer.projections.0.bias": 0.00018218504555989057,
+            "tokenizer.projections.1.weight": 0.0019087651744484901,
+            "tokenizer.projections.1.bias": 0.00010868748358916491,
+            "tokenizer.projections.2.weight": 0.0020781629718840122,
+            "tokenizer.projections.2.bias": 8.556098327971995e-05,
+            "vq.codebook.weight": 0.0019017490558326244
+          }
+        },
+        {
+          "step": 200,
+          "norms": {
+            "encoder": 0.02730504609644413,
+            "tokenizer": 0.002974085509777069,
+            "vq": 0.0012847381876781583,
+            "decoder": 0.024536829441785812,
+            "tokenizer.projections.0.weight": 0.001798502285964787,
+            "tokenizer.projections.0.bias": 0.00013199150271248072,
+            "tokenizer.projections.1.weight": 0.0019050545524805784,
+            "tokenizer.projections.1.bias": 8.291246922453865e-05,
+            "tokenizer.projections.2.weight": 0.0013975492911413312,
+            "tokenizer.projections.2.bias": 6.245893746381626e-05,
+            "vq.codebook.weight": 0.0012847381876781583
+          }
+        },
+        {
+          "step": 300,
+          "norms": {
+            "encoder": 0.01908233016729355,
+            "tokenizer": 0.001979309832677245,
+            "vq": 0.002098449505865574,
+            "decoder": 0.016712676733732224,
+            "tokenizer.projections.0.weight": 0.001018546405248344,
+            "tokenizer.projections.0.bias": 3.769350951188244e-05,
+            "tokenizer.projections.1.weight": 0.0012274034088477492,
+            "tokenizer.projections.1.bias": 7.21025571692735e-05,
+            "tokenizer.projections.2.weight": 0.0011679427698254585,
+            "tokenizer.projections.2.bias": 5.478270031744614e-05,
+            "vq.codebook.weight": 0.002098449505865574
+          }
+        }
+      ]
+    },
+    "A2": {
+      "updates": 300,
+      "frames": 1200,
+      "reconstruction_matched_loss_fraction": {
+        "Base": 0.2417266845703125,
+        "Medium": 0.485108642578125,
+        "Fine": 0.2731646728515625
+      },
+      "observed_parameter_updates": [
+        {
+          "step": 1,
+          "norms": {
+            "encoder": 0.08652815222740173,
+            "tokenizer": 0.00962072517722845,
+            "vq": 0.003301289165392518,
+            "decoder": 0.0819091945886612,
+            "tokenizer.projections.0.weight": 0.0055402428843081,
+            "tokenizer.projections.0.bias": 0.000399867509258911,
+            "tokenizer.projections.1.weight": 0.0055388230830430984,
+            "tokenizer.projections.1.bias": 0.00039997248677536845,
+            "tokenizer.projections.2.weight": 0.005541263148188591,
+            "tokenizer.projections.2.bias": 0.0004000418120995164,
+            "vq.codebook.weight": 0.0020225411280989647,
+            "vq.level_codebooks.0.weight": 0.00213975110091269,
+            "vq.level_codebooks.1.weight": 0.001493085059337318
+          }
+        },
+        {
+          "step": 100,
+          "norms": {
+            "encoder": 0.02480170875787735,
+            "tokenizer": 0.0027637332677841187,
+            "vq": 0.0032181066926568747,
+            "decoder": 0.019643845036625862,
+            "tokenizer.projections.0.weight": 0.0011668468359857798,
+            "tokenizer.projections.0.bias": 7.066524995025247e-05,
+            "tokenizer.projections.1.weight": 0.0019528435077518225,
+            "tokenizer.projections.1.bias": 0.00010164052218897268,
+            "tokenizer.projections.2.weight": 0.0015631290152668953,
+            "tokenizer.projections.2.bias": 6.629413837799802e-05,
+            "vq.codebook.weight": 0.003086286596953869,
+            "vq.level_codebooks.0.weight": 0.0009039224241860211,
+            "vq.level_codebooks.1.weight": 0.00011819447536254302
+          }
+        },
+        {
+          "step": 200,
+          "norms": {
+            "encoder": 0.022757183760404587,
+            "tokenizer": 0.002478505950421095,
+            "vq": 0.003469923511147499,
+            "decoder": 0.021208764985203743,
+            "tokenizer.projections.0.weight": 0.001307676313444972,
+            "tokenizer.projections.0.bias": 7.534356700489298e-05,
+            "tokenizer.projections.1.weight": 0.001581848948262632,
+            "tokenizer.projections.1.bias": 7.093341264408082e-05,
+            "tokenizer.projections.2.weight": 0.0013836100697517395,
+            "tokenizer.projections.2.bias": 7.512013689847663e-05,
+            "vq.codebook.weight": 0.0034295201767235994,
+            "vq.level_codebooks.0.weight": 0.0005006376886740327,
+            "vq.level_codebooks.1.weight": 0.0001676979154581204
+          }
+        },
+        {
+          "step": 300,
+          "norms": {
+            "encoder": 0.01780720055103302,
+            "tokenizer": 0.0021099864970892668,
+            "vq": 0.004690982401371002,
+            "decoder": 0.019390981644392014,
+            "tokenizer.projections.0.weight": 0.0008829564321786165,
+            "tokenizer.projections.0.bias": 3.2299267331836745e-05,
+            "tokenizer.projections.1.weight": 0.001619384391233325,
+            "tokenizer.projections.1.bias": 6.223126547411084e-05,
+            "tokenizer.projections.2.weight": 0.0010204112622886896,
+            "tokenizer.projections.2.bias": 6.221104558790103e-05,
+            "vq.codebook.weight": 0.004308611620217562,
+            "vq.level_codebooks.0.weight": 0.0018515782430768013,
+            "vq.level_codebooks.1.weight": 0.00011332570284139365
+          }
+        }
+      ]
+    },
+    "A3": {
+      "updates": 300,
+      "frames": 1200,
+      "reconstruction_matched_loss_fraction": {
+        "Base": 0.2417266845703125,
+        "Medium": 0.485108642578125,
+        "Fine": 0.2731646728515625
+      },
+      "observed_parameter_updates": [
+        {
+          "step": 1,
+          "norms": {
+            "encoder": 0.08651729673147202,
+            "tokenizer": 0.009620914235711098,
+            "vq": 0.003216876182705164,
+            "decoder": 0.08190049231052399,
+            "tokenizer.projections.0.weight": 0.005540515761822462,
+            "tokenizer.projections.0.bias": 0.0003998561587650329,
+            "tokenizer.projections.1.weight": 0.005541120655834675,
+            "tokenizer.projections.1.bias": 0.0004000140761490911,
+            "tokenizer.projections.2.weight": 0.005539018660783768,
+            "tokenizer.projections.2.bias": 0.0004000292101409286,
+            "vq.codebook.weight": 0.002032719785347581,
+            "vq.level_codebooks.0.weight": 0.0020343915093690157,
+            "vq.level_codebooks.1.weight": 0.001441385829821229
+          }
+        },
+        {
+          "step": 100,
+          "norms": {
+            "encoder": 0.007564771920442581,
+            "tokenizer": 0.0009947549551725388,
+            "vq": 0.00017320693586952984,
+            "decoder": 0.017007526010274887,
+            "tokenizer.projections.0.weight": 0.0007436047890223563,
+            "tokenizer.projections.0.bias": 4.282895315554924e-05,
+            "tokenizer.projections.1.weight": 0.0004234680673107505,
+            "tokenizer.projections.1.bias": 1.3479061635734979e-05,
+            "tokenizer.projections.2.weight": 0.0005049804458394647,
+            "tokenizer.projections.2.bias": 1.558188523631543e-05,
+            "vq.codebook.weight": 0.00010607500007608905,
+            "vq.level_codebooks.0.weight": 9.983422933146358e-05,
+            "vq.level_codebooks.1.weight": 9.371158375870436e-05
+          }
+        },
+        {
+          "step": 200,
+          "norms": {
+            "encoder": 0.006421545520424843,
+            "tokenizer": 0.000768331519793719,
+            "vq": 0.0001730273652356118,
+            "decoder": 0.008646118454635143,
+            "tokenizer.projections.0.weight": 0.0006148969405330718,
+            "tokenizer.projections.0.bias": 4.0173938032239676e-05,
+            "tokenizer.projections.1.weight": 0.00032350613037124276,
+            "tokenizer.projections.1.bias": 1.1930953405681066e-05,
+            "tokenizer.projections.2.weight": 0.00032515267957933247,
+            "tokenizer.projections.2.bias": 9.913557732943445e-06,
+            "vq.codebook.weight": 0.00010931894939858466,
+            "vq.level_codebooks.0.weight": 9.602175850886852e-05,
+            "vq.level_codebooks.1.weight": 9.363577555632219e-05
+          }
+        },
+        {
+          "step": 300,
+          "norms": {
+            "encoder": 0.008796380832791328,
+            "tokenizer": 0.0011439957888796926,
+            "vq": 0.00018638692563399673,
+            "decoder": 0.012395106256008148,
+            "tokenizer.projections.0.weight": 0.0008674770942889154,
+            "tokenizer.projections.0.bias": 6.143329665064812e-05,
+            "tokenizer.projections.1.weight": 0.0004649088077712804,
+            "tokenizer.projections.1.bias": 2.215225867985282e-05,
+            "tokenizer.projections.2.weight": 0.0005787714035250247,
+            "tokenizer.projections.2.bias": 2.8786920665879734e-05,
+            "vq.codebook.weight": 0.00010916560859186575,
+            "vq.level_codebooks.0.weight": 0.00010492753062862903,
+            "vq.level_codebooks.1.weight": 0.00010868840763578191
+          }
+        }
+      ]
+    }
+  },
+  "premise_to_reconsider_if_gate_fails": "Changing VQ loss coverage or codebook ownership alone is sufficient to make the existing Fine encoder/decoder carry spatial detail. This is an unproven premise, not a measured conclusion. Do not assign all responsibility to the shared codebook if both controlled fixes fail. There are three representation actors (Base/Medium/Fine), one existing shared encoder hierarchy and one existing fused decoder. Without effective Fine, remove the assignment to longer training and stop; a future redesigned representation needs its own evidence and protocol."
+}

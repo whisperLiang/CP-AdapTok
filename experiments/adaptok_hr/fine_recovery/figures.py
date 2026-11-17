@@ -78,6 +78,8 @@ def rate_distortion(output, alignment):
     source = {}
     for steps, frames in ((300, 8), (1000, 64)):
         paths = sorted(ROOT.glob(f"*/validation_{steps:06d}_{frames}f/summary.json"))
+        if not paths:
+            continue
         for metric, ylabel in (("psnr_global", "Global PSNR (dB)"), ("lpips", "LPIPS-Alex (lower is better)"),
                                ("dists", "DISTS (lower is better)")):
             fig, ax = canvas(ylabel, "Actual bitstream rate (bits / pixel)")

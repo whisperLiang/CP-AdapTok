@@ -46,6 +46,15 @@ def evaluate(name, steps, frames):
             ROOT / f"{name}_validation_{steps}_{frames}f.log")
 
 
+def benchmark(name, steps):
+    output = ROOT / name / f"benchmark_{steps:06d}.json"
+    if output.exists():
+        return
+    execute([sys.executable, "-m", "experiments.adaptok_hr.fine_recovery.benchmark", "--checkpoint",
+             str(CHECKPOINTS / name / f"step_{steps:06d}.pt"), "--output", str(output)],
+            ROOT / f"{name}_benchmark_{steps}.log")
+
+
 def verify_matching(names, steps):
     rows = {name: [json.loads(line) for line in (ROOT / name / "training.jsonl").read_text().splitlines()
                    if json.loads(line)["step"] <= steps] for name in names}
@@ -74,7 +83,7 @@ def verify_matching(names, steps):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=("train", "evaluate", "match"))
+    parser.add_argument("mode", choices=("train", "evaluate", "benchmark", "match"))
     parser.add_argument("--names", nargs="+", default=["A0", "A1", "A2", "A3"])
     parser.add_argument("--steps", type=int, default=300)
     parser.add_argument("--frames", type=int, default=8)
@@ -85,6 +94,8 @@ def main():
     for name in args.names:
         if args.mode == "train":
             train(name, args.steps)
+        elif args.mode == "benchmark":
+            benchmark(name, args.steps)
         else:
             evaluate(name, args.steps, args.frames)
 

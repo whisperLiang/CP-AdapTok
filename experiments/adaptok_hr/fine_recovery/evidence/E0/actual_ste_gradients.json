@@ -1,0 +1,455 @@
+{
+  "environment": {
+    "time": "2026-11-18T02:02:56.396602+08:00",
+    "timezone": "Asia/Shanghai",
+    "git": "4515949a6eeb62854b803861b7c84df993ad3bf2",
+    "git_dirty": true,
+    "source_sha256": "6444b23ffc127321ba8971509d6267d53ee3083b6fad5cba53449d3ed28c56f4",
+    "deterministic_algorithms": true,
+    "python_trace_enabled": false,
+    "branch": "experiment/adaptok-hr-fine-recovery",
+    "python": "3.12.13",
+    "torch": "2.9.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA H100 PCIe",
+    "driver": "580.159.03"
+  },
+  "checkpoint_sha256": "e7ba64dfbdcb9178c87654294a372fba92228f957c49dfc7561894938032c0f5",
+  "manifest_identity": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+  "diagnostic_only": true,
+  "rows": [
+    {
+      "content_id": "DAVIS2017:blackswan",
+      "frame": 0,
+      "actual_vq_ste": {
+        "rgb_mse": {
+          "Base": 0.0004823463677894324,
+          "Medium": 0.0003472232783678919,
+          "Fine": 7.828864909242839e-05,
+          "untransmitted_tail_norm": 0.0
+        },
+        "training_reconstruction": {
+          "Base": 0.0027656054589897394,
+          "Medium": 0.0018946967320516706,
+          "Fine": 0.0004109406436327845,
+          "untransmitted_tail_norm": 0.0
+        }
+      },
+      "decoder_restore_maps": {
+        "rgb_mse": {
+          "Base": {
+            "embedding_norm": 0.0005714150029234588,
+            "mask_norm": 5.047652302891947e-05
+          },
+          "Medium": {
+            "embedding_norm": 0.0003750901378225535,
+            "mask_norm": 4.036299287690781e-05
+          },
+          "Fine": {
+            "embedding_norm": 9.614390000933781e-05,
+            "mask_norm": 1.575479473103769e-05
+          }
+        },
+        "training_reconstruction": {
+          "Base": {
+            "embedding_norm": 0.003275390714406967,
+            "mask_norm": 0.00025149676366709173
+          },
+          "Medium": {
+            "embedding_norm": 0.002023746958002448,
+            "mask_norm": 0.0002538886619731784
+          },
+          "Fine": {
+            "embedding_norm": 0.0005009701708331704,
+            "mask_norm": 8.569065539631993e-05
+          }
+        }
+      }
+    },
+    {
+      "content_id": "DAVIS2017:blackswan",
+      "frame": 1,
+      "actual_vq_ste": {
+        "rgb_mse": {
+          "Base": 0.0003991063276771456,
+          "Medium": 0.0002569897915236652,
+          "Fine": 5.711650010198355e-05,
+          "untransmitted_tail_norm": 0.0
+        },
+        "training_reconstruction": {
+          "Base": 0.002329024951905012,
+          "Medium": 0.0014693003613501787,
+          "Fine": 0.0003117264714092016,
+          "untransmitted_tail_norm": 0.0
+        }
+      },
+      "decoder_restore_maps": {
+        "rgb_mse": {
+          "Base": {
+            "embedding_norm": 0.0004662560240831226,
+            "mask_norm": 5.889751628274098e-05
+          },
+          "Medium": {
+            "embedding_norm": 0.0002809184661600739,
+            "mask_norm": 3.0282111765700392e-05
+          },
+          "Fine": {
+            "embedding_norm": 7.246159657370299e-05,
+            "mask_norm": 9.702981515147258e-06
+          }
+        },
+        "training_reconstruction": {
+          "Base": {
+            "embedding_norm": 0.0026916153728961945,
+            "mask_norm": 0.0003023090248461813
+          },
+          "Medium": {
+            "embedding_norm": 0.0015875265235081315,
+            "mask_norm": 0.0001961687667062506
+          },
+          "Fine": {
+            "embedding_norm": 0.0003912273677997291,
+            "mask_norm": 5.387152123148553e-05
+          }
+        }
+      }
+    },
+    {
+      "content_id": "DAVIS2017:blackswan",
+      "frame": 7,
+      "actual_vq_ste": {
+        "rgb_mse": {
+          "Base": 0.00034511680132709444,
+          "Medium": 0.0002218561858171597,
+          "Fine": 5.025151403970085e-05,
+          "untransmitted_tail_norm": 0.0
+        },
+        "training_reconstruction": {
+          "Base": 0.0020346390083432198,
+          "Medium": 0.0012579920003190637,
+          "Fine": 0.00027355612837709486,
+          "untransmitted_tail_norm": 0.0
+        }
+      },
+      "decoder_restore_maps": {
+        "rgb_mse": {
+          "Base": {
+            "embedding_norm": 0.00041220494313165545,
+            "mask_norm": 5.224985216045752e-05
+          },
+          "Medium": {
+            "embedding_norm": 0.00024509200011380017,
+            "mask_norm": 2.6831970899365842e-05
+          },
+          "Fine": {
+            "embedding_norm": 6.404692976502702e-05,
+            "mask_norm": 8.714819159649778e-06
+          }
+        },
+        "training_reconstruction": {
+          "Base": {
+            "embedding_norm": 0.0023901378735899925,
+            "mask_norm": 0.0002582040324341506
+          },
+          "Medium": {
+            "embedding_norm": 0.0013641872210428119,
+            "mask_norm": 0.00017682695761322975
+          },
+          "Fine": {
+            "embedding_norm": 0.0003419425629545003,
+            "mask_norm": 4.857455860474147e-05
+          }
+        }
+      }
+    },
+    {
+      "content_id": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "actual_vq_ste": {
+        "rgb_mse": {
+          "Base": 0.0007328578503802419,
+          "Medium": 0.0006215038592927158,
+          "Fine": 0.00020245152700226754,
+          "untransmitted_tail_norm": 0.0
+        },
+        "training_reconstruction": {
+          "Base": 0.003588323714211583,
+          "Medium": 0.0026260039303451777,
+          "Fine": 0.0007800232851877809,
+          "untransmitted_tail_norm": 0.0
+        }
+      },
+      "decoder_restore_maps": {
+        "rgb_mse": {
+          "Base": {
+            "embedding_norm": 0.0008221931639127433,
+            "mask_norm": 8.895659993868321e-05
+          },
+          "Medium": {
+            "embedding_norm": 0.0006984033971093595,
+            "mask_norm": 7.339090370805934e-05
+          },
+          "Fine": {
+            "embedding_norm": 0.00022504686785396188,
+            "mask_norm": 2.930125810962636e-05
+          }
+        },
+        "training_reconstruction": {
+          "Base": {
+            "embedding_norm": 0.003926713950932026,
+            "mask_norm": 0.0003774473734665662
+          },
+          "Medium": {
+            "embedding_norm": 0.002930691931396723,
+            "mask_norm": 0.00036942752194590867
+          },
+          "Fine": {
+            "embedding_norm": 0.0009122879710048437,
+            "mask_norm": 0.0001272457157028839
+          }
+        }
+      }
+    },
+    {
+      "content_id": "DAVIS2017:car-roundabout",
+      "frame": 1,
+      "actual_vq_ste": {
+        "rgb_mse": {
+          "Base": 0.0006872012745589018,
+          "Medium": 0.0005191206000745296,
+          "Fine": 0.00017230691446457058,
+          "untransmitted_tail_norm": 0.0
+        },
+        "training_reconstruction": {
+          "Base": 0.0035162558779120445,
+          "Medium": 0.0022988677956163883,
+          "Fine": 0.0006588844698853791,
+          "untransmitted_tail_norm": 0.0
+        }
+      },
+      "decoder_restore_maps": {
+        "rgb_mse": {
+          "Base": {
+            "embedding_norm": 0.0007626715232618153,
+            "mask_norm": 5.751760909333825e-05
+          },
+          "Medium": {
+            "embedding_norm": 0.0005873622721992433,
+            "mask_norm": 5.8726538554765284e-05
+          },
+          "Fine": {
+            "embedding_norm": 0.00018784184067044407,
+            "mask_norm": 2.2922737116459757e-05
+          }
+        },
+        "training_reconstruction": {
+          "Base": {
+            "embedding_norm": 0.0037394401151686907,
+            "mask_norm": 0.00030038380646146834
+          },
+          "Medium": {
+            "embedding_norm": 0.0025424931664019823,
+            "mask_norm": 0.0002478858514223248
+          },
+          "Fine": {
+            "embedding_norm": 0.000757198897190392,
+            "mask_norm": 9.444581519346684e-05
+          }
+        }
+      }
+    },
+    {
+      "content_id": "DAVIS2017:car-roundabout",
+      "frame": 7,
+      "actual_vq_ste": {
+        "rgb_mse": {
+          "Base": 0.0007446844829246402,
+          "Medium": 0.0005187120987102389,
+          "Fine": 0.0001668251061346382,
+          "untransmitted_tail_norm": 0.0
+        },
+        "training_reconstruction": {
+          "Base": 0.003678553272038698,
+          "Medium": 0.002196808811277151,
+          "Fine": 0.000630263180937618,
+          "untransmitted_tail_norm": 0.0
+        }
+      },
+      "decoder_restore_maps": {
+        "rgb_mse": {
+          "Base": {
+            "embedding_norm": 0.0008067339076660573,
+            "mask_norm": 5.311162749421783e-05
+          },
+          "Medium": {
+            "embedding_norm": 0.0005840234807692468,
+            "mask_norm": 5.893627167097293e-05
+          },
+          "Fine": {
+            "embedding_norm": 0.00018198085308540612,
+            "mask_norm": 2.2597279894398525e-05
+          }
+        },
+        "training_reconstruction": {
+          "Base": {
+            "embedding_norm": 0.003863678313791752,
+            "mask_norm": 0.0002745041565503925
+          },
+          "Medium": {
+            "embedding_norm": 0.0024304287508130074,
+            "mask_norm": 0.00025350734358653426
+          },
+          "Fine": {
+            "embedding_norm": 0.0007321796147152781,
+            "mask_norm": 9.04467306099832e-05
+          }
+        }
+      }
+    },
+    {
+      "content_id": "DAVIS2017:dog",
+      "frame": 0,
+      "actual_vq_ste": {
+        "rgb_mse": {
+          "Base": 0.000605069799348712,
+          "Medium": 0.0003893254906870425,
+          "Fine": 0.00010276329703629017,
+          "untransmitted_tail_norm": 0.0
+        },
+        "training_reconstruction": {
+          "Base": 0.003196318866685033,
+          "Medium": 0.00194831402041018,
+          "Fine": 0.0005485245492309332,
+          "untransmitted_tail_norm": 0.0
+        }
+      },
+      "decoder_restore_maps": {
+        "rgb_mse": {
+          "Base": {
+            "embedding_norm": 0.0006831692880950868,
+            "mask_norm": 7.901588105596602e-05
+          },
+          "Medium": {
+            "embedding_norm": 0.00043464364716783166,
+            "mask_norm": 5.042459815740585e-05
+          },
+          "Fine": {
+            "embedding_norm": 0.0001185535584227182,
+            "mask_norm": 1.4969789845054038e-05
+          }
+        },
+        "training_reconstruction": {
+          "Base": {
+            "embedding_norm": 0.0035568433813750744,
+            "mask_norm": 0.00039313791785389185
+          },
+          "Medium": {
+            "embedding_norm": 0.0021949587389826775,
+            "mask_norm": 0.00025736779207363725
+          },
+          "Fine": {
+            "embedding_norm": 0.0006259624497033656,
+            "mask_norm": 7.943850505398586e-05
+          }
+        }
+      }
+    },
+    {
+      "content_id": "DAVIS2017:dog",
+      "frame": 1,
+      "actual_vq_ste": {
+        "rgb_mse": {
+          "Base": 0.0006079489830881357,
+          "Medium": 0.00036504396121017635,
+          "Fine": 8.926704322220758e-05,
+          "untransmitted_tail_norm": 0.0
+        },
+        "training_reconstruction": {
+          "Base": 0.0030136373825371265,
+          "Medium": 0.001802928512915969,
+          "Fine": 0.0004480983770918101,
+          "untransmitted_tail_norm": 0.0
+        }
+      },
+      "decoder_restore_maps": {
+        "rgb_mse": {
+          "Base": {
+            "embedding_norm": 0.0006437779520638287,
+            "mask_norm": 6.85141421854496e-05
+          },
+          "Medium": {
+            "embedding_norm": 0.00039406982250511646,
+            "mask_norm": 4.0994465962285176e-05
+          },
+          "Fine": {
+            "embedding_norm": 0.00010511553409742191,
+            "mask_norm": 1.3579101505456492e-05
+          }
+        },
+        "training_reconstruction": {
+          "Base": {
+            "embedding_norm": 0.003178935730829835,
+            "mask_norm": 0.00034372005029581487
+          },
+          "Medium": {
+            "embedding_norm": 0.0019289404153823853,
+            "mask_norm": 0.00019694870570674539
+          },
+          "Fine": {
+            "embedding_norm": 0.0005320344935171306,
+            "mask_norm": 7.108103454811499e-05
+          }
+        }
+      }
+    },
+    {
+      "content_id": "DAVIS2017:dog",
+      "frame": 7,
+      "actual_vq_ste": {
+        "rgb_mse": {
+          "Base": 0.00040034568519331515,
+          "Medium": 0.00023415010946337134,
+          "Fine": 6.410746573237702e-05,
+          "untransmitted_tail_norm": 0.0
+        },
+        "training_reconstruction": {
+          "Base": 0.002125309081748128,
+          "Medium": 0.0012200272176414728,
+          "Fine": 0.000354940042598173,
+          "untransmitted_tail_norm": 0.0
+        }
+      },
+      "decoder_restore_maps": {
+        "rgb_mse": {
+          "Base": {
+            "embedding_norm": 0.000423613004386425,
+            "mask_norm": 3.7596721085719764e-05
+          },
+          "Medium": {
+            "embedding_norm": 0.00024915009271353483,
+            "mask_norm": 2.797496745188255e-05
+          },
+          "Fine": {
+            "embedding_norm": 7.326598279178143e-05,
+            "mask_norm": 9.024647624755744e-06
+          }
+        },
+        "training_reconstruction": {
+          "Base": {
+            "embedding_norm": 0.002234911546111107,
+            "mask_norm": 0.0001943231327459216
+          },
+          "Medium": {
+            "embedding_norm": 0.0012953070690855384,
+            "mask_norm": 0.00015147074009291828
+          },
+          "Fine": {
+            "embedding_norm": 0.00040323316352441907,
+            "mask_norm": 5.183597750146873e-05
+          }
+        }
+      }
+    }
+  ],
+  "training_reconstruction": "MSE + L1 + 0.1 LPIPS; excludes VQ, temporal and monotonic objectives"
+}

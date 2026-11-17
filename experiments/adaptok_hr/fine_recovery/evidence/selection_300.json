@@ -1,0 +1,63 @@
+{
+  "selected": [
+    "A1",
+    "A3"
+  ],
+  "ranking": [
+    "A1",
+    "A3",
+    "A0",
+    "A2"
+  ],
+  "steps_each": 300,
+  "frames_each": 1200,
+  "validation_frames_per_source": 8,
+  "rule": [
+    "fine_multiple_ids AND positive Fine shuffle MSE contribution above 1e-8",
+    "same-context K2048 minus K1024 global PSNR gain descending",
+    "K2048 independent-loop LPIPS ascending",
+    "K2048 independent-loop global PSNR descending"
+  ],
+  "criteria": {
+    "A1": {
+      "fine_multiple_ids": false,
+      "fine_shuffle_mse_increase": 0.0,
+      "fine_measurable_contribution": false,
+      "same_context_gain_db": 0.0018681569357887895,
+      "gain_at_least_0_1db": false,
+      "lpips_improves_with_budget": false,
+      "dists_improves_with_budget": false,
+      "closed_loop_gain_db": 0.0030379584002062643
+    },
+    "A3": {
+      "fine_multiple_ids": false,
+      "fine_shuffle_mse_increase": 0.0,
+      "fine_measurable_contribution": false,
+      "same_context_gain_db": -0.00045764055352215394,
+      "gain_at_least_0_1db": false,
+      "lpips_improves_with_budget": true,
+      "dists_improves_with_budget": true,
+      "closed_loop_gain_db": -0.00032130750615522174
+    },
+    "A0": {
+      "fine_multiple_ids": false,
+      "fine_shuffle_mse_increase": 0.0,
+      "fine_measurable_contribution": false,
+      "same_context_gain_db": -0.0014578748589002544,
+      "gain_at_least_0_1db": false,
+      "lpips_improves_with_budget": false,
+      "dists_improves_with_budget": true,
+      "closed_loop_gain_db": -0.0021781749642553194
+    },
+    "A2": {
+      "fine_multiple_ids": false,
+      "fine_shuffle_mse_increase": 0.0,
+      "fine_measurable_contribution": false,
+      "same_context_gain_db": -0.0027334177459739095,
+      "gain_at_least_0_1db": false,
+      "lpips_improves_with_budget": false,
+      "dists_improves_with_budget": true,
+      "closed_loop_gain_db": -0.0050615348265612425
+    }
+  }
+}

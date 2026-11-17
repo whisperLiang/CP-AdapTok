@@ -67,7 +67,8 @@ def final_decision():
 def archive():
     EVIDENCE.mkdir(parents=True, exist_ok=True)
     for path in sorted(ROOT.rglob("*")):
-        if path.suffix in (".json", ".jsonl", ".xml", ".md"):
+        if path.suffix in (".json", ".jsonl", ".xml", ".md", ".bin") or (
+                path.suffix == ".png" and "car-roundabout_0000" in path.name):
             target = EVIDENCE / path.relative_to(ROOT)
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(path, target)
@@ -89,10 +90,11 @@ def write_report():
             "本报告由实际 JSON/JSONL 自动生成。尚未执行的阶段明确列为未执行；单种子 Pilot 不代表训练收敛。", "",
             "## 实验身份与保护", "", f"基线 `cc87bd4`；分支 `experiment/adaptok-hr-fine-recovery`。数据身份 `{e0['manifest_identity']}`。",
             f"旧 1000 步 Checkpoint SHA256：`{e0['checkpoint_sha256']}`。Train/Validation 原生 RGB 不缩放；未以旧 Test 或历史视频选择模型。", "",
-            "## E0：冻结模型的确定事实", "", (ROOT / "E0/root_cause.md").read_text().replace("# E0 冻结权重诊断", ""),
+             "## E0：冻结模型的确定事实", "", (ROOT / "E0/root_cause.md").read_text().replace("# E0 冻结权重诊断", ""),
             "", "实际 STE 与 Decoder 恢复图梯度补充见 `evidence/E0/actual_ste_gradients.json`；连续旁路与真实离散前向梯度分开记录。", "",
             "## E1/E2：实现与匹配条件", "",
             "统一球面 VQ 产生逐 Token Codebook/Commitment Loss；active_prefix 对每个重建预算分别取前缀均值，再按重建的 1/2、1/2 权重混合；all_candidates 保留全候选对照。前向仍为真实码本 Embedding，STE 只改变反向。",
+            "保持旧损失的逐元素 MSE 尺度：每 Token 16 维先取均值，再归约 Token；没有同时改变 VQ 权重或增加均衡正则。训练行的 legacy quantization_mse 字段仍表示全部候选；实际发送的逐层误差和方差只读取 levels，完整诊断按 all_candidates/active_K* 分开，绝不混用。",
             "分层模式拥有三个独立 8192×16 码本，接收端依确定性位置表查表；包仍为 ATHR v1、13-bit ID、142-byte 帧头，无逐 Token 层级字段。哈希包含全部真实码本和配置，因此错误模型或旧包会被拒绝，没有身份兼容回退。",
             "模型初始公共权重、数据计划和主/辅助预算序列逐条核对，证据为 matching_*.json。共同 seed=20261118、数据 seed=20261119、预算 seed=20261120；Batch=1、四帧展开、TBPTT2、AdamW 1e-4。除两个消融因素外训练权重一致，保留原单调性权重 0.1。", "",
             "## E3：匹配 2×2 的实测结果", "",
@@ -106,6 +108,7 @@ def write_report():
         d = read(ROOT / "decision.json")
         rows += ["", "## 后续门槛", "", f"1000 步 Fine 信息门槛：`{json.dumps(d['fine_information_at_1000'])}`。"]
         if d["negative_result_stop"]:
+            rows.insert(2, "结论：预算感知 VQ 与分层码本的受控对照未恢复 Fine 有效信息；按 1000 步停止条件保留负结果，没有扩大训练或增加 Decoder。\n")
             rows += ["Fine 有效传递仍未恢复。本轮保留负结果并停止扩展训练。D1 Fine Residual、D2 Detail Loss、D3 二者组合均未执行；未新增 Decoder 参数或高频损失。未开展更大数据/16–32 帧正式训练或 30FPS 优化。D0 为四组实际使用的原 Decoder。",
                      "没有新的授权外部视频；复用原 manifest 导入接口和隔离规则，没有自动下载数据。新来源最终封存测试尚未建立、未执行。"]
     rows += ["", "## 连续 64 帧吞吐", "",
@@ -124,6 +127,11 @@ def write_report():
              "## 原始数据图", ""]
     for path in sorted((ROOT / "figures").glob("*.png")):
         rows.append(f"![{path.stem}](../experiments/adaptok_hr/fine_recovery/evidence/figures/{path.name})")
+    rows += ["", "## 实际 1080p 重建示例", "",
+             "以下为同一原始 car-roundabout 第 0 帧与各预算真实 ID 解码，全部保留 1920×1080，未进行锐化或后处理。", ""]
+    for path in sorted(ROOT.glob("A*/validation_001000_64f/samples/*car-roundabout_0000*.png")):
+        relative = path.relative_to(ROOT)
+        rows.append(f"[{path.parents[2].name}: {path.name}](../experiments/adaptok_hr/fine_recovery/evidence/{relative})  ")
     Path("docs/adaptok_hr_fine_recovery_report.md").write_text("\n".join(rows) + "\n")
     archive()
     write_json(EVIDENCE / "evidence_manifest.json", {"environment": environment(), "files": {
