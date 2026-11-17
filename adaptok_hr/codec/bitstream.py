@@ -64,7 +64,7 @@ def serialize(packet):
     return raw + payload
 
 
-def parse(data):
+def checked_header(data):
     if not isinstance(data, bytes) or len(data) < HEADER.size:
         raise ValueError("incomplete frame header")
     fields = HEADER.unpack(data[:HEADER.size])
@@ -74,10 +74,21 @@ def parse(data):
         raise ValueError("unsupported bitstream identity/version/flags")
     if zlib.crc32(data[:HEADER.size - 4]) != header_crc:
         raise ValueError("corrupt frame header CRC")
+    return fields
+
+
+def validate_frame_fields(flags, index, gop, height, width, count):
     if gop < 1 or min(height, width, count) < 1 or count > 2685:
         raise ValueError("invalid frame dimensions, GOP or count")
     if flags != int(index % gop == 0):
         raise ValueError("frame type disagrees with GOP")
+
+
+def parse(data):
+    fields = checked_header(data)
+    _, _, flags, index, gop, height, width, count, length = fields[:9]
+    stream, codebook, model, previous, payload_crc, _ = fields[9:]
+    validate_frame_fields(flags, index, gop, height, width, count)
     if length != (count * 13 + 7) // 8 or len(data) != HEADER.size + length:
         raise ValueError("incomplete or trailing frame payload")
     payload = data[HEADER.size:]

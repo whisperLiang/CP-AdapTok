@@ -60,12 +60,7 @@ def restore_training(path, trainer, sampler, config, manifest_identity):
     return {"completed_steps": state["completed_steps"], "training_frames": state["training_frames"]}
 
 
-def reconcile_log(path, completed):
-    path = Path(path)
-    if not path.exists():
-        if completed:
-            raise ValueError("committed checkpoint has no training log")
-        return 0
+def read_log_rows(path):
     rows = []
     lines = path.read_text().splitlines()
     for index, line in enumerate(lines):
@@ -74,6 +69,16 @@ def reconcile_log(path, completed):
         except json.JSONDecodeError:
             if index != len(lines) - 1:
                 raise ValueError("corrupt training log before final partial line") from None
+    return rows
+
+
+def reconcile_log(path, completed):
+    path = Path(path)
+    if not path.exists():
+        if completed:
+            raise ValueError("committed checkpoint has no training log")
+        return 0
+    rows = read_log_rows(path)
     kept = [r for r in rows if r["step"] <= completed]
     if [r["step"] for r in kept] != list(range(1, completed + 1)):
         raise ValueError("committed optimizer sequence disagrees with log")

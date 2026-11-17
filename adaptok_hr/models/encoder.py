@@ -56,15 +56,20 @@ class Encoder(nn.Module):
             x = torch.cat((frame, previous), dim=1)
         x = self.pad_input(x)
         features = []
-        for index, stage in enumerate(self.stages):
-            if self.training and self.config.gradient_checkpointing:
-                x = checkpoint(stage, x, use_reentrant=False)
-            else:
-                x = stage(x)
-            if index == 4 and state is not None and self.history_fusion is not None:
-                x = x + .25 * self.history_fusion(torch.cat((x, state.feature), dim=1))
-            if str(index) in self.attention:
-                x = self.attention[str(index)](x)
+        for index in range(len(self.stages)):
+            x = self.forward_stage(index, x, state)
             if index >= 4:
                 features.append(x)
         return tuple(reversed(features))  # Base, Medium, Fine
+
+    def forward_stage(self, index, x, state):
+        stage = self.stages[index]
+        if self.training and self.config.gradient_checkpointing:
+            x = checkpoint(stage, x, use_reentrant=False)
+        else:
+            x = stage(x)
+        if index == 4 and state is not None and self.history_fusion is not None:
+            x = x + .25 * self.history_fusion(torch.cat((x, state.feature), dim=1))
+        if str(index) in self.attention:
+            x = self.attention[str(index)](x)
+        return x

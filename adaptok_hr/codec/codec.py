@@ -30,17 +30,26 @@ class Codec:
         identity = {"config": model.config.to_dict(), "amp_bf16": self.amp_bf16}
         self.model_identity = hashlib.sha256(tensor_digest(model.state_dict()) +
                                               json.dumps(identity, sort_keys=True).encode()).digest()
+        self.versions = [(tensor, tensor._version) for tensor in (*model.parameters(), *model.buffers())]
+
+    def check_model(self):
+        if self.model.training or any(tensor._version != version for tensor, version in self.versions):
+            raise ValueError("codec model changed after identity verification; construct a fresh eval Codec")
 
     def autocast(self):
         return torch.autocast(self.device.type, dtype=torch.bfloat16, enabled=self.amp_bf16)
 
     @torch.inference_mode()
     def encode_frame(self, frame, state=None, budget=2048, stream_id="default"):
+        self.check_model()
         if frame.shape[0] != 1:
             raise ValueError("one stream per codec state required")
         index, frame_type, _ = frame_context(state, self.model.config.gop)
         with self.autocast():
             ids = self.model.token_ids(frame, state, budget)[0].cpu().tolist()
+        return self.encode_ids(ids, state, index, frame_type, stream_id)
+
+    def encode_ids(self, ids, state, index, frame_type, stream_id):
         packet = Packet(index, frame_type == "I", self.model.config.gop,
                         self.model.config.height, self.model.config.width, tuple(ids),
                         stream_identity(stream_id) if state is None else state.stream_id,
@@ -49,6 +58,18 @@ class Codec:
         data = serialize(packet)
         _, next_state = self.decode_frame(data, state)
         return data, next_state
+
+    @torch.inference_mode()
+    def encode_adaptive_frame(self, frame, state, scorer, maximum_tokens=2048, rate_weight=0.0,
+                              stream_id="default"):
+        self.check_model()
+        if tuple(scorer.budgets) != self.model.config.budgets or frame.shape[0] != 1:
+            raise ValueError("scorer/model budgets must match; one stream per state")
+        with self.autocast():
+            encoded = self.model.encode_features(frame, state)
+            budget = scorer.select(encoded.quantized.mean(dim=1), maximum_tokens, rate_weight)
+        index, frame_type, _ = frame_context(state, self.model.config.gop)
+        return self.encode_ids(encoded.ids[0, :budget].cpu().tolist(), state, index, frame_type, stream_id)
 
     def validate_packet(self, packet, state):
         config = self.model.config
@@ -75,6 +96,7 @@ class Codec:
 
     @torch.inference_mode()
     def decode_frame(self, data, state=None):
+        self.check_model()
         packet = parse(data)
         self.validate_packet(packet, state)
         ids = torch.tensor([packet.ids], device=self.device, dtype=torch.long)

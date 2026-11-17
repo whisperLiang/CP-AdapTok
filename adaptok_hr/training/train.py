@@ -1,10 +1,12 @@
 """Joint VQ training with real reconstruction history, nested auxiliaries, and TBPTT."""
 
 import argparse
+import fcntl
 import json
 import math
 import os
 import time
+from contextlib import contextmanager
 from pathlib import Path
 
 import torch
@@ -52,6 +54,12 @@ def module_change_norms(model, before):
     return result
 
 
+def snapshot_parameters(model, step):
+    if step == 1 or step % 100 == 0:
+        return {n: p.detach().clone() for n, p in model.named_parameters()}
+    return None
+
+
 class JointTrainer:
     def __init__(self, model, settings):
         if settings["tbptt"] < 1 or settings["nested_every"] < 1:
@@ -95,7 +103,7 @@ class JointTrainer:
     def update(self, clip, step):
         self.model.train()
         self.optimizer.zero_grad(set_to_none=True)
-        before = {n: p.detach().clone() for n, p in self.model.named_parameters()} if step == 1 or step % 100 == 0 else None
+        before = snapshot_parameters(self.model, step)
         if self.device.type == "cuda":
             torch.cuda.synchronize()
             torch.cuda.reset_peak_memory_stats()
@@ -149,17 +157,61 @@ def prepare_run(args, config, index, trainer, sampler):
     return output, completed, frames
 
 
+def training_records(index, overfit):
+    records = index["splits"]["train"]
+    if overfit:
+        records = [r for r in records if r["content_id"] == overfit]
+        if not records:
+            raise ValueError("overfit must use a Train source")
+    return records
+
+
+def validation_artifact(trainer, config, index, output, completed):
+    from ..evaluation.evaluate import validate_fast
+
+    validation = validate_fast(trainer.model, index, config["evaluation"]["validation_ids"],
+                               frames=8, amp_bf16=config["evaluation"]["amp_bf16"])
+    write_json(output / f"validation_{completed:06d}.json", validation)
+
+
+def checkpoint_artifact(args, trainer, sampler, config, index, output, completed, frames):
+    path = Path(args.checkpoints) / output.name / f"step_{completed:06d}.pt"
+    metadata = save_training(path, trainer, sampler, config, index["identity"], completed, frames)
+    write_json(output / "latest_checkpoint.json", {"path": str(path.resolve()), **metadata})
+
+
+def periodic_artifacts(args, trainer, sampler, config, index, output, completed, frames):
+    if completed % config["training"]["checkpoint_every"] == 0 or completed == args.steps:
+        checkpoint_artifact(args, trainer, sampler, config, index, output, completed, frames)
+    if completed % config["training"]["validation_every"] == 0 and not args.overfit:
+        validation_artifact(trainer, config, index, output, completed)
+
+
+def print_progress(row):
+    if row["step"] == 1 or row["step"] % 25 == 0:
+        print(json.dumps({k: row[k] for k in ("step", "training_frames", "psnr_global", "gradient_norm",
+                                              "update_seconds", "peak_gpu_mib")}), flush=True)
+
+
+@contextmanager
+def exclusive_run(output):
+    root = Path(output)
+    root.mkdir(parents=True, exist_ok=True)
+    with (root / ".training.lock").open("a") as handle:
+        try:
+            fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise ValueError("another writer owns this training run") from None
+        yield
+
+
 def run_training(args):
     config = read_config(args.config)
     config["run_scope"] = {"overfit": args.overfit, "overfit_frames": args.overfit_frames}
     seed_everything(config["training"]["seed"])
     torch.set_num_threads(4)
     index = load_index(config["data"]["index"])
-    records = index["splits"]["train"]
-    if args.overfit:
-        records = [r for r in records if r["content_id"] == args.overfit]
-        if not records:
-            raise ValueError("overfit must use a Train source")
+    records = training_records(index, args.overfit)
     model = AdapTokHR(ModelConfig(**config["model"])).to(args.device)
     trainer = JointTrainer(model, config["training"])
     sampler = ClipSampler(records, config["training"]["seed"] + 1)
@@ -168,11 +220,7 @@ def run_training(args):
         save_training(Path(args.checkpoints) / output.name / "step_000000.pt", trainer, sampler,
                       config, index["identity"], 0, 0)
         if not args.overfit:
-            from ..evaluation.evaluate import validate_fast
-
-            write_json(output / "validation_000000.json", validate_fast(
-                model, index, config["evaluation"]["validation_ids"], frames=8,
-                amp_bf16=config["evaluation"]["amp_bf16"]))
+            validation_artifact(trainer, config, index, output, 0)
     cached = read_clip(records[0], 0, args.overfit_frames, model.config.height, model.config.width) if args.overfit else None
     while completed < args.steps:
         length = sequence_length(config["training"]["sequence_schedule"], completed)
@@ -181,19 +229,8 @@ def run_training(args):
         completed, frames = completed + 1, frames + len(clip)
         row.update(training_frames=frames, input=metadata)
         append_row(output / "training.jsonl", row)
-        if completed == 1 or completed % 25 == 0:
-            print(json.dumps({k: row[k] for k in ("step", "training_frames", "psnr_global", "gradient_norm",
-                                                  "update_seconds", "peak_gpu_mib")}), flush=True)
-        if completed % config["training"]["checkpoint_every"] == 0 or completed == args.steps:
-            path = Path(args.checkpoints) / Path(args.output).name / f"step_{completed:06d}.pt"
-            metadata_ckpt = save_training(path, trainer, sampler, config, index["identity"], completed, frames)
-            write_json(output / "latest_checkpoint.json", {"path": str(path.resolve()), **metadata_ckpt})
-        if completed % config["training"]["validation_every"] == 0 and not args.overfit:
-            from ..evaluation.evaluate import validate_fast
-
-            validation = validate_fast(model, index, config["evaluation"]["validation_ids"],
-                                       frames=8, amp_bf16=config["evaluation"]["amp_bf16"])
-            write_json(output / f"validation_{completed:06d}.json", validation)
+        print_progress(row)
+        periodic_artifacts(args, trainer, sampler, config, index, output, completed, frames)
     write_json(output / "completion.json", {"completed_steps": completed, "training_frames": frames,
                                            "target_steps": args.steps, "complete": completed == args.steps,
                                            "config_identity": stable_hash(config), "manifest_identity": index["identity"]})
@@ -209,7 +246,9 @@ def main():
     parser.add_argument("--checkpoints", default="checkpoints/adaptok_hr")
     parser.add_argument("--overfit", help="Train content ID; independent single-clip fit diagnostic")
     parser.add_argument("--overfit-frames", type=int, default=4)
-    run_training(parser.parse_args())
+    args = parser.parse_args()
+    with exclusive_run(args.output):
+        run_training(args)
 
 
 if __name__ == "__main__":

@@ -60,3 +60,14 @@ def test_checkpoint_identity_is_enforced(small_model):
         small_model.vq.codebook.weight[0, 0] += .1
     with pytest.raises(ValueError, match="identity|codebook|model"):
         Codec(small_model.eval()).decode_frame(packet, None)
+
+
+def test_existing_codec_rejects_mutated_weights(small_model):
+    from adaptok_hr.codec.codec import Codec
+
+    codec = Codec(small_model.eval())
+    packet, _ = codec.encode_frame(torch.rand(1, 3, 128, 256), None, 4)
+    with torch.no_grad():
+        small_model.decoder.rgb_head[0].bias.add_(1)
+    with pytest.raises(ValueError, match="changed|identity"):
+        codec.decode_frame(packet, None)
