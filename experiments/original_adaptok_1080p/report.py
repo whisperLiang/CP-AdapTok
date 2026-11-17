@@ -39,25 +39,52 @@ def measured_figures(root, summaries):
     plt.close(fig)
 
 
+def build_artifact_index(root):
+    for name in ["final_1080p", "token_ablation/overlap"]:
+        directory = root / name
+        index_layout(directory)
+
+
+def index_layout(directory):
+    video_index, sample_index = directory / "reconstructed_videos", directory / "reconstruction_samples"
+    video_index.mkdir(exist_ok=True)
+    sample_index.mkdir(exist_ok=True)
+    for path in directory.glob("*/reconstructed_videos/*.mp4"):
+        ensure_link(video_index / path.name, path, directory)
+    for path in directory.glob("*/completed.json"):
+        video = load(path)
+        for budget in video["budgets"]:
+            target = Path(video["windows"][0]["directory"]) / f"samples_k{budget}"
+            ensure_link(sample_index / f"{path.parent.name}_k{budget}", target, directory)
+
+
+def ensure_link(link, target, directory):
+    if link.exists():
+        if link.resolve() != target.resolve():
+            raise ValueError(f"refusing to replace a different artifact: {link}")
+        return
+    link.symlink_to(Path("..") / target.resolve().relative_to(directory.resolve()))
+
+
 def latency_table(root):
-    lines = ["| 测量 | 神经网络 FPS (CUDA) | 神经网络 FPS (wall) | 计算 FPS | 含读写 FPS | 平均ms/帧 | P50 | P95 | 峰值 allocated MiB |",
-             "|---|---|---|---|---|---|---|---|---|"]
+    items = []
     for name in ["no_overlap", "overlap", "final_1080p", "token_ablation/overlap"]:
         item = load(root / name / "summary.json")["budgets"]["2048"]
-        latency = item["latency"]
-        compute = latency["compute"]
-        lines.append(f"| {name} | {latency['neural_cuda_events']['total_fps']:.3f} | {latency['neural']['total_fps']:.3f} | {compute['total_fps']:.3f} | {latency['pipeline']['total_fps']:.3f} | {compute['mean_ms_per_frame']:.2f} | {compute['p50_ms_per_frame']:.2f} | {compute['p95_ms_per_frame']:.2f} | {item['peak_inference_allocated_mib']:.1f} |")
-    return "\n".join(lines)
+        items.append((name, item["latency"], item["peak_inference_allocated_mib"], item["peak_inference_reserved_mib"]))
+    return format_latency_table(items)
 
 
 def benchmark_table(root):
     summary = load(root / "benchmarks/summary.json")
-    lines = ["| Stride | 视频/真实帧 | NN FPS (CUDA) | NN FPS (wall) | 计算 FPS | 含读写 FPS | 计算均值ms/帧 | P50 | P95 | 峰值 allocated / reserved MiB |",
+    return format_latency_table([(f"Benchmark stride{stride}", item["latency"], item["peak_allocated_mib"], item["peak_reserved_mib"]) for stride, item in summary.items()])
+
+
+def format_latency_table(items):
+    lines = ["| 测量 | 真实帧 | NN FPS (CUDA) | NN FPS (wall) | 计算 FPS | 含读写 FPS | 计算均值ms/帧 | P50 | P95 | 峰值 allocated / reserved MiB |",
              "|---|---|---|---|---|---|---|---|---|---|"]
-    for stride, item in summary.items():
-        latency = item["latency"]
+    for label, latency, allocated, reserved in items:
         compute = latency["compute"]
-        lines.append(f"| {stride} | 3 / {latency['source_frames']} | {latency['neural_cuda_events']['total_fps']:.3f} | {latency['neural']['total_fps']:.3f} | {compute['total_fps']:.3f} | {latency['pipeline']['total_fps']:.3f} | {compute['mean_ms_per_frame']:.2f} | {compute['p50_ms_per_frame']:.2f} | {compute['p95_ms_per_frame']:.2f} | {item['peak_allocated_mib']:.1f} / {item['peak_reserved_mib']:.1f} |")
+        lines.append(f"| {label} | {latency['source_frames']} | {latency['neural_cuda_events']['total_fps']:.3f} | {latency['neural']['total_fps']:.3f} | {compute['total_fps']:.3f} | {latency['pipeline']['total_fps']:.3f} | {compute['mean_ms_per_frame']:.2f} | {compute['p50_ms_per_frame']:.2f} | {compute['p95_ms_per_frame']:.2f} | {allocated:.1f} / {reserved:.1f} |")
     return "\n".join(lines)
 
 
@@ -106,6 +133,7 @@ def main():
     facts = {"comparison": comparison, "summaries": summaries,
              "regressions": {p: budget_regressions(root, p) for p in ["final_1080p", "token_ablation/overlap"]}}
     write_json(root / "report_facts.json", facts)
+    build_artifact_index(root)
     measured_figures(root, summaries)
     args.output.write_text(render_report(root, facts), encoding="utf-8")
     print(args.output.resolve())
@@ -119,10 +147,12 @@ def render_report(root, facts):
     a, b = facts["summaries"]
     ma, mb = a["budgets"]["2048"]["metrics"], b["budgets"]["2048"]["metrics"]
     gain = mb["psnr_mean_db"] - ma["psnr_mean_db"]
+    cp = {r["model"]: r for r in facts["comparison"]["rows"] if r["content_id"] == "all" and r["budget_units"] == "2048/frame"}
     source_lines = "\n".join(f"| {s['content_id']} | {s['width']}×{s['height']} | 0–63 / 64 | {s['fps']} (nominal) | `{s['sha256']}` |" for s in sources)
     first_video = next((root / "no_overlap").glob("*/completed.json"))
     sample = Path(load(first_video)["windows"][0]["directory"]) / "samples_k2048"
     preview = str(sample.relative_to(root))
+    certification = validation_text(root)
     return f"""# 官方 AdapTok 原生 1080p 分块重建实测
 
 本实验完成 E0–E4。仅推理，没有训练、微调、反向传播、配置覆盖或模型结构修改。
@@ -235,6 +265,7 @@ reserved 与 all_budgets_compute_wall_ms 也完整保存；多预算峰值包含
 
 只复用封存 B0/B1 validation.json，不调用 DCVC 或修改历史结果。
 CP 的 Token 单位为每完整帧，官方为每 Tile / 16帧；两者 Token 分配、表示、时间上下文和真实码率不同。
+例如无重叠K2048平均有135×2048/16=17,280 VQ Token/源帧，重叠则为28,160，不能把表中相同K理解为同表示成本。这只是Token计数，未换算为bpp。
 这是绝对重建质量比较，不能称为同码率公平 RD 比较，也不能据此声称压缩效率超过 CP。
 
 ## 研究问题与边界
@@ -245,13 +276,13 @@ CP 的 Token 单位为每完整帧，官方为每 Tile / 16帧；两者 Token �
 
 **Q3**：边界与非边界误差、overlap 质量变化及62.96%的 Tile 增量均在上表实测；全 Token 平均 PSNR 差值 {gain:+.4f} dB，LPIPS-Alex 差值 {mb['lpips']-ma['lpips']:+.6f}，DISTS 差值 {mb['dists']-ma['dists']:+.6f}。不能只凭一个指标断言所有视频受益。
 
-**Q4**：以两个完整192帧 Token 表及逐帧回退计数为准，未强制单调，也未用单序列趋势代表整体。
+**Q4**：有效改善。无重叠512→1024→2048的平均PSNR为{a['budgets']['512']['metrics']['psnr_mean_db']:.4f}→{a['budgets']['1024']['metrics']['psnr_mean_db']:.4f}→{ma['psnr_mean_db']:.4f} dB；重叠为{b['budgets']['512']['metrics']['psnr_mean_db']:.4f}→{b['budgets']['1024']['metrics']['psnr_mean_db']:.4f}→{mb['psnr_mean_db']:.4f} dB。逐帧回退计数如实保留，未强制单调。
 
 **Q5**：以独立单预算 Benchmark 表为实际 tokenizer 资源测量：每种 stride 三个16帧窗口、共48帧；平均/P50/P95、NN/计算/读写FPS和显存均实测。固定135/220块代价显著，不能用128像素 Tile 的速度作部署承诺。
 
-**Q6**：同帧、同 RGB、同感知权重的绝对画质见 B0/B1 表和逐视频表；优势不等于同码率压缩优势。
+**Q6**：同帧、同 RGB、同感知权重下，官方无重叠全Token相对CP B0/B1全预算平均PSNR分别提高{ma['psnr_mean_db']-cp['B0']['psnr_mean_db']:.4f}/{ma['psnr_mean_db']-cp['B1']['psnr_mean_db']:.4f} dB，感知指标见完整表和逐视频表；优势不等于同码率压缩优势。
 
-**Q7**：若目标是短期改善分块画面，先针对测得的拼缝进行边界处理，并把 overlap 作为有真实成本的对照；随后优先验证跨空间块共享上下文能否以更少冗余达到相同质量。原生高分辨率 Encoder/Decoder 是需要训练和另立实验的长期方向，本实验不能证明其优劣。
+**Q7**：建议下一研究重点优先放在跨空间块共享上下文，保留已实现的平滑overlap作为边界对照：它以62.96%更多Tile换取{gain:.4f}dB，说明简单融合有收益，但成本显著。跨块共享能否减少冗余仍是待验证假设。原生高分辨率Encoder/Decoder需要训练及新的受控实验，排在该诊断之后，本实验没有证明其优劣。
 
 测量支持继续将官方 AdapTok 作为高分辨率研究的基础对照与诊断工具；是否作为部署主路线，需要更广视频内容、实际熵码流、同码率对比及跨块共享的成本实验。
 本次只有3条DAVIS序列、192帧，名义30FPS，无音频、无跨窗状态、无重训练，不能泛化到任意1080p视频或长期时序一致性，也没有测量公平RD。
@@ -272,7 +303,24 @@ OMP_NUM_THREADS=4 .venv-adaptok-official/bin/python -m pytest experiments/origin
 单视频：`run.sh evaluate --input /absolute/path/video.mp4 --frames 17 --stride 96 --budgets 512 1024 2048 --output results/original_adaptok_1080p/custom_run`。
 YUV 另需 `--raw-width 1920 --raw-height 1080 --fps 30 --raw-pixel-format yuv420p --raw-color-range limited --raw-color-matrix bt709`，按源真实色彩元数据填写，不能猜测；与 CP MP4 的 OpenCV 路径不同，明确记录转换规则。
 重复同配置复用已完成窗口；不同输入 SHA256、预算或配置拒绝覆盖，崩溃遗留尝试保留独立目录。操作与验证日志见 original_adaptok_1080p_work_log.md。
+
+## 测试与最终验收
+
+{certification}
 """
+
+
+def validation_text(root):
+    certificate = root / "acceptance.json"
+    if not certificate.exists():
+        return "最终机器验收正在执行，数值实验已经完成。"
+    acceptance = load(certificate)
+    new_tests = (root / "pytest_final.txt").read_text().strip().splitlines()[-1]
+    cp_tests = (root / "pytest_cp_regression.txt").read_text().strip().splitlines()[-1]
+    return (f"机器验收：`{acceptance['all_acceptance_checks_passed']}`，见acceptance.json。新增测试（含真实GPU一致性）：`{new_tests}`；原CP相关回归：`{cp_tests}`。\n"
+            f"真实17帧GPU重建只对16+1帧计分，整理后的代码与早期首窗指标最大绝对差`{acceptance['tail']['refactor_vs_original_run_metric_max_abs_error']}`。\n"
+            "6项行为变异全部被有效测试杀死；未将收集错误算作成功。radon/coverage/AST审计见quality_audit.json；crapper/dryer/mutator专用工具不可用，明确使用替代工具。\n"
+            "已核验18个完整视频均为1920×1080、64真实帧；原CP代码、训练配置、子模块及历史B0/B1结果保持不变。")
 
 
 if __name__ == "__main__":

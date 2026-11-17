@@ -1,5 +1,6 @@
 import hashlib
 from pathlib import Path
+from types import SimpleNamespace
 
 import cv2
 import numpy as np
@@ -7,6 +8,7 @@ import pytest
 import torch
 
 from cp_adaptok.data import VideoSpec, read_video
+from experiments.original_adaptok_1080p import cli
 from experiments.original_adaptok_1080p.artifacts import write_video
 from experiments.original_adaptok_1080p.runner import prepare_source
 from experiments.original_adaptok_1080p.video_reader import manifest_sources, read_input, source_metadata
@@ -69,3 +71,26 @@ def test_manifest_selection_is_by_content_id():
     assert [r["content_id"] for r in selected] == ["DAVIS2017:cows", "DAVIS2017:goat", "DAVIS2017:parkour"]
     with pytest.raises(ValueError, match="missing content"):
         manifest_sources(path, ["does-not-exist"])
+
+
+def test_cli_image_sequence_preserves_declared_fps_and_native_size(sequence):
+    args = SimpleNamespace(input=str(sequence), fps=24)
+    record = cli.input_records(args, {})[0]
+    assert record["fps"] == 24 and record["source_frames"] == 2
+    assert (record["width"], record["height"]) == (1920, 1080)
+    assert record["path"] == str(sequence.resolve())
+    assert record["content_id"] == f"single:{sequence.stem}"
+
+
+def test_cli_yuv_never_guesses_color_range_or_matrix(tmp_path):
+    path = tmp_path / "source.yuv"
+    path.write_bytes(bytes([16]) * (1920 * 1080) + bytes([128]) * (1920 * 1080 // 2))
+    args = SimpleNamespace(input=str(path), fps=25, raw_width=1920, raw_height=1080,
+                           raw_pixel_format="yuv420p", raw_color_range=None, raw_color_matrix=None)
+    with pytest.raises(ValueError, match="requires"):
+        cli.input_records(args, {})
+    args.raw_color_range, args.raw_color_matrix = "limited", "bt709"
+    record = cli.input_records(args, {})[0]
+    assert record["fps"] == 25
+    assert record["raw_yuv"] == {"width": 1920, "height": 1080, "pixel_format": "yuv420p",
+                                  "color_range": "limited", "color_matrix": "bt709"}

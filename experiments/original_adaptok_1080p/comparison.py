@@ -43,6 +43,15 @@ def compare(root, reference):
     keys = {frame_key(r) for r in rows}
     if len(keys) != len(rows):
         raise ValueError("duplicate official frame measurements")
+    comparisons = historical_rows(reference, keys) + ablation_rows(root, keys)
+    write_csv(root / "absolute_quality_comparison.csv", comparisons)
+    result = {"comparison": "absolute reconstruction quality only; not equal-rate RD", "parity": parity,
+              "quality_only": True, "bpp": None, "rows": comparisons}
+    write_json(root / "absolute_quality_comparison.json", result)
+    return result
+
+
+def historical_rows(reference, keys):
     comparisons = []
     for branch in ["B0", "B1"]:
         report = load(reference / branch / "validation.json")
@@ -52,17 +61,18 @@ def compare(root, reference):
         for budget in [128, 512, 1024, 2048]:
             selected = [{"content_id": r["source"]["content_id"], **next(p for p in r["prefixes"] if p["tokens"] == budget)} for r in report["records"]]
             comparisons.extend(comparison_rows(branch, f"{budget}/frame", selected))
+    return comparisons
+
+
+def ablation_rows(root, keys):
+    comparisons = []
     for name, directory in [("Official stride128", "final_1080p"), ("Official stride96", "token_ablation/overlap")]:
         for budget in [512, 1024, 2048]:
             _, selected = official_rows(root / directory, budget)
             if {frame_key(r) for r in selected} != keys:
                 raise ValueError("official ablation used different frames")
             comparisons.extend(comparison_rows(name, f"{budget}/tile/native-window", selected))
-    write_csv(root / "absolute_quality_comparison.csv", comparisons)
-    result = {"comparison": "absolute reconstruction quality only; not equal-rate RD", "parity": parity,
-              "quality_only": True, "bpp": None, "rows": comparisons}
-    write_json(root / "absolute_quality_comparison.json", result)
-    return result
+    return comparisons
 
 
 def comparison_rows(model, units, frames):

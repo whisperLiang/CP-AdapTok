@@ -70,9 +70,3 @@ def concatenate_videos(paths, destination):
     listing.write_text("".join("file '" + str(Path(p).resolve()).replace("'", "'\\''") + "'\n" for p in paths))
     subprocess.run(["ffmpeg", "-v", "error", "-n", "-f", "concat", "-safe", "0", "-i", str(listing),
                     "-c", "copy", str(destination)], check=True, capture_output=True)
-
-
-def cpu_rgb_sha256(clip):
-    import hashlib
-
-    return hashlib.sha256(clip.detach().cpu().contiguous().numpy().tobytes()).hexdigest()
