@@ -1,0 +1,393 @@
+"""Generate Chinese tables and an evidence-bounded report from actual run records."""
+
+import argparse
+import json
+from pathlib import Path
+
+from cp_adaptok.runtime import resolve, write_json
+from experiments.fixed2048.figures import build_figures
+
+
+def read(path):
+    return json.loads(Path(path).read_text())
+
+
+def number(value):
+    return "未测" if value is None else f"{value:.5f}"
+
+
+def table(columns, rows):
+    lines = ["| " + " | ".join(columns) + " |", "| " + " | ".join(["---"] * len(columns)) + " |"]
+    lines.extend("| " + " | ".join(map(str, row)) + " |" for row in rows)
+    return "\n".join(lines)
+
+
+def quality(summary):
+    return [number(summary["global_mse_psnr"]), number(summary["lpips"]), number(summary["dists"])]
+
+
+def ip_quality(summary):
+    return [
+        number(summary["I"]["global_mse_psnr"]),
+        number(summary["P"]["global_mse_psnr"]) if summary["P"] else "不适用",
+        number(summary["global_mse_psnr"]),
+    ]
+
+
+def group(root, directory, key):
+    return read(root / directory / "summary.json")["groups"][key]
+
+
+def table_a(root):
+    rows = []
+    for path in ("R0", "R0-spatial", "R1", "R2"):
+        summary = group(root, "baseline", f"paired/{path}")
+        rows.append(
+            [
+                path,
+                *ip_quality(summary),
+                number(summary["lpips"]),
+                number(summary["dists"]),
+                number(summary["latent_mse"]),
+                number(summary["mean_frame_psnr"]),
+            ]
+        )
+    return table(
+        ["Path", "I PSNR", "P PSNR", "Overall PSNR", "LPIPS", "DISTS", "Latent MSE", "逐帧PSNR均值"], rows
+    )
+
+
+def table_b(root):
+    rows = []
+    for length in (1, 4, 16):
+        history = read(root / "overfit" / f"{length}frame/history.json")
+        train = history["last_train_eval"]["summary"]
+        validation = history["validation"][-1]["summary"]
+        rows.append(
+            [
+                f"R1 {length}-frame",
+                history["train"][-1]["step"],
+                number(train["global_mse_psnr"]),
+                number(train["latent_mse"]),
+                number(validation["global_mse_psnr"]),
+            ]
+        )
+    return table(["Model", "实际 Steps", "Train PSNR", "Train Latent MSE", "末步 Validation PSNR"], rows)
+
+
+def table_c(root):
+    entries = [
+        ("R1", "17×30", "Continuous", "continuous/evaluation", "full2048/R1"),
+        ("R2-initial", "17×30", "原码本 VQ", "continuous/evaluation", "full2048/R2"),
+        ("R2-trained", "17×30", "校准+QAT VQ", "quantized/evaluation", "full2048/R2"),
+        ("R3", "34×60", "Continuous", "grid_ablation/decoder34/evaluation", "full2048/R1"),
+    ]
+    rows = [
+        [name, grid, quantization, *quality(group(root, directory, key))]
+        for name, grid, quantization, directory, key in entries
+    ]
+    return table(["Model", "Decoder Grid", "Quantization", "PSNR", "LPIPS", "DISTS"], rows)
+
+
+def table_d(root):
+    entries = [
+        ("R1", "i_only", "continuous/evaluation", "R1"),
+        ("R1", "full2048", "continuous/evaluation", "R1"),
+        ("R1", "original128", "continuous/evaluation", "R1"),
+        ("R2-trained", "full2048", "quantized/evaluation", "R2"),
+        ("R2-trained", "original128", "quantized/evaluation", "R2"),
+    ]
+    rows = [
+        [name, reference, *ip_quality(group(root, directory, f"{reference}/{path}"))]
+        for name, reference, directory, path in entries
+    ]
+    return table(["Model", "Reference", "I PSNR", "P PSNR", "Overall PSNR"], rows)
+
+
+def training_table(root):
+    entries = [
+        ("R1", "continuous"),
+        ("R2", "quantized/training"),
+        ("R3", "grid_ablation/decoder34"),
+        ("Encoder KV34", "grid_ablation/encoder34"),
+        ("raw192", "raw192"),
+    ]
+    rows = []
+    for name, directory in entries:
+        completion = read(root / directory / "completion.json")
+        history = read(root / directory / "history.json")
+        best = min(history["validation"], key=lambda row: row["summary"]["global_mse"])
+        rows.append(
+            [
+                name,
+                completion["actual_optimizer_steps"],
+                completion["actual_training_frames"],
+                number(completion["optimizer_wall_s"]),
+                number(max(r["peak_gpu_mib"] for r in history["train"])),
+                best["step"],
+                number(best["summary"]["global_mse_psnr"]),
+            ]
+        )
+    return table(
+        ["Model", "实际更新", "实际训练帧", "更新计算秒", "峰值MiB", "Validation选中Step", "选模PSNR"], rows
+    )
+
+
+def performance_table(root):
+    rows = []
+    for name in ("R1", "R2", "R3"):
+        report = read(root / "performance" / f"{name}.json")
+        for frame_type in ("I", "P"):
+            measured = [r for r in report["rows"] if r["frame_type"] == frame_type]
+            fields = [
+                "encoder_ms",
+                "tokenizer_ms",
+                "vq_ms",
+                "token_to_latent_ms",
+                "dcvc_decoder_ms",
+                "end_to_end_ms",
+                "peak_gpu_mib",
+                "flops",
+            ]
+            means = [sum(r.get(field, 0) for r in measured) / len(measured) for field in fields]
+            rows.append([name, frame_type, *[number(value) for value in means[:-1]], number(means[-1] / 1e9)])
+    return table(
+        [
+            "Model",
+            "帧型",
+            "Encoder ms",
+            "Tokenizer ms",
+            "VQ ms",
+            "Token→Latent ms",
+            "DCVC Decoder ms",
+            "全程 ms",
+            "显存 MiB",
+            "GFLOPs",
+        ],
+        rows,
+    )
+
+
+def final_table(root):
+    entries = [
+        ("原 B0", "B0", "original128/R2"),
+        ("原 B1", "B1", "original128/R2"),
+        ("R1", "R1", "full2048/R1"),
+        ("R2-initial", "R1", "full2048/R2"),
+        ("R2-trained", "R2", "full2048/R2"),
+        ("R3", "R3", "full2048/R1"),
+    ]
+    rows = []
+    for name, directory, key in entries:
+        summary = group(root, "final_test/" + directory, key)
+        rows.append(
+            [name, *quality(summary), number(summary["mean_frame_psnr"]), number(summary["mean_video_psnr"])]
+        )
+    return table(["Model", "全局MSE PSNR", "LPIPS", "DISTS", "逐帧PSNR均值", "视频均值的均值"], rows)
+
+
+def build_report(root, output, figures=False):
+    if figures:
+        build_figures(root)
+    r1 = group(root, "continuous/evaluation", "full2048/R1")
+    r2 = group(root, "quantized/evaluation", "full2048/R2")
+    r3 = group(root, "grid_ablation/decoder34/evaluation", "full2048/R1")
+    raw = group(root, "raw192/evaluation", "full2048/raw_192")
+    encoder = group(root, "grid_ablation/encoder34/evaluation", "full2048/R1")
+    paired_r1 = group(root, "continuous/evaluation", "paired_full2048/R1")
+    paired_q = group(root, "continuous/evaluation", "paired_full2048/R2")
+    scale = group(root, "baseline_scale_control", "full2048/R0-scale-control")
+    pooled = group(root, "baseline_scale_control", "full2048/R0-spatial-scale-control")
+    source = read(root / "source_identity.json")
+    seal = read(root / "final_test/seal.json")
+    final_r1 = group(root, "final_test/R1", "full2048/R1")
+    final_b1 = group(root, "final_test/B1", "original128/R2")
+    facts = {
+        "R1": r1,
+        "R2": r2,
+        "R3": r3,
+        "raw192": raw,
+        "encoder_kv34": encoder,
+        "scale_control": scale,
+        "spatial_scale_control": pooled,
+        "pure_quantization_psnr_delta": paired_q["global_mse_psnr"] - paired_r1["global_mse_psnr"],
+        "final_R1_minus_B1": final_r1["global_mse_psnr"] - final_b1["global_mse_psnr"],
+        "source_checkpoint_sha256": source["sha256"],
+        "seal": seal,
+    }
+    write_json(root / "report_facts.json", facts)
+    text = f"""# CP-AdapTok 固定2048 Token 原生1080p重建与瓶颈定位
+
+日期：2026-11-17，Asia/Shanghai。分支：`experiment/fixed2048-reconstruction`，基于 main `534696b`。
+
+本报告仅使用实际运行文件。所有本专项结果均为 `experiment_type: reconstruction_diagnostic`、`real_bitstream: false`、`bpp: null`。
+没有网络传输、实际码流或率项；没有改动生产Codec、S0–S4训练、原始B0/B1权重、Manifest或历史Final Test。
+
+## 1. 目的、版本与权重
+
+目标是分离当前帧表示损失、量化损失、空间Grid和历史参考退化，不把无量化路径称为真实压缩性能或严格数学上界。
+源B1 S4 SHA256：`{source["sha256"]}`。Checkpoint内部阶段计数4000、状态trained；历史66,000次主训练更新与本阶段计数分别记录。
+Model Config：2048 Token、192D Feature、16D归一化连续投影、8192码本、Encoder KV=17×30、Decoder=17×30、QP32、float64注意力累积、原k_ref=128。
+实际I/P Latent为[1,256,68,120]/[1,128,68,120]，padding至1088×1920，输出裁回1920×1080。
+两组Backbone逐Tensor与官方DCVC权重相同；官方文件身份见`source_identity.json`。运行环境为H100 PCIe 80GB、PyTorch2.9.1+cu130。
+上游DCVC固定commit cbdae87a5445114cdc7f48816da63ea80bdeac40。完整配置、源码哈希、GPU、Git和权重迁移ledger保留在每个run.json / inputs.json / Checkpoint metadata。
+
+## 2. R0/R1/R2/R3与重要接口发现
+
+R0原样复用Encoder y→对应Backbone Decoder；R0-spatial先17×30池化再bilinear恢复。
+R1显式调用project_features/project_out，训练和eval都不访问Codebook。R2调用原模块的确定性最近邻及原STE/VQ Loss。
+R3只将Decoder Grid改为34×60（2040个Grid Query，Token数仍为2048），Grid Query按二维bilinear插值，其余参数逐项复用并strict加载。
+另做独立Encoder KV34控制（Decoder仍17×30）和独立raw192训练控制；从未将两个Grid改动合并归因。
+
+**R0的I帧存在尺度接口差异。** 官方forward_prior_4x对原始y先乘q_scale_y_enc，重建后乘q_scale_y_dec。
+直接跳过整个prior时，两组连续尺度仍须保留。按任务字面定义的R0没有这两组因子，bear首帧为7.79492dB；单独补连续尺度为34.50216dB。
+该对照完全没有rounding、prior或码流，单列为R0-scale-control，未暗改原始R0或生产Adapter。
+验证集正确尺度闭环：全局MSE PSNR **{number(scale["global_mse_psnr"])}dB**，简单空间池化后为**{number(pooled["global_mse_psnr"])}dB**。
+这证明不能用原始R0 I帧低分判断DCVC失效；也不能把空间池化结果当学习型Tokenizer的严格容量上界。
+原始y与Decoder输入y_hat的I帧尺度不同，因此下表及训练日志中的原始Latent MSE不能直接当跨帧型容量排序；训练损失只有RGB MSE。
+
+## 3. 同状态与独立闭环
+
+同状态比较先建立一个FrozenFrameContext，Encoder只运行一次，Tokenizer输出只计算一次，R0/R1/R2都完成后才commit。
+表A采用B1历史VQ128参考；训练后纯量化比较采用R1 Full2048历史，分别标记paired和paired_full2048。
+独立Full2048则每条候选自行解码并将真实Decoder Feature提交给下一P帧，允许累积误差不同。
+Original128显示完整2048重建，参考只由独立VQ128解码推进；显示结果不影响基础参考。I-only每帧空状态并强制I。
+所有视频独立状态；没有真实历史帧替代重建参考、未来帧参考或Teacher-forced主路径。
+
+## 4. 数据、短程训练与恢复
+
+Phase0/扩展诊断采用Validation的blackswan、car-roundabout、dog，各8帧；选模固定同三视频各4帧。
+三项Pilot仅Train的bear前1/4/16帧，分别从B1独立初始化，各实际300更新。
+正式短程路线预先固定：从B1 S4在原生1080p直接微调，Train中54条尺寸至少1080×1920的视频，超出部分中心裁剪，无上采样。
+原Train共120条，其余720p源不用于冒充原生1080p微调；没有改变原Manifest。采样记录和输入逐帧SHA核验均保存。
+AdamW、LR2e-5、BF16、clip1、TBPTT2、batch1、4帧窗口、300更新；Pilot LR1e-4。
+Backbone冻结并保持eval；R1训练Tokenizer/两投影/Decoder，冻结码本。R2启用码本并保留原VQ Loss。没有感知、GAN、Rate或多预算目标。
+R1/R3/Encoder-KV/raw192使用相同初始化来源、数据种子和更新数。R2继承R1验证权重，并仅用Train的4视频×8帧=65536特征执行8192中心、20轮K-means。
+
+{training_table(root)}
+
+更新时间包含真实forward/backward/optimizer，不含数据读取、图像落盘和验证；更完整阶段状态见各completion.json。配置目标没有计作完成结果。
+R1在100更新后真实退出进程，严格恢复optimizer/scheduler/全部RNG后完成到300；记录恰为1…300，无重复计数。单元测试还验证恢复下一更新逐Tensor等于连续运行。
+各训练前保留Step0指标/重建；每100步保存验证、梯度范数、参数更新范数、输出方差、Latent MSE和PSNR；每步原始记录也保留。
+
+## 5. 表A：已有B1权重、不训练、同状态诊断
+
+所有PSNR列除特别标明外均为相应组**全局MSE对应PSNR**，不是逐帧PSNR均值。LPIPS为Alex；DISTS与MS-SSIM在原始1080p测量。
+
+{table_a(root)}
+
+384个初始逐帧重建记录包含所有I-only/同状态/独立闭环/历史128条件。由于R0的坏I帧，混合帧PSNR均值会掩盖全局MSE，二者必须同时查看。
+MS-SSIM、I/P Relative RMSE、Latent形状和原始MSE均在frame_metrics.jsonl和summary.json，未省略原始观测。
+
+## 6. 表B：单样本拟合
+
+{table_b(root)}
+
+三项MSE均显著下降、通过预先5%门槛。单I帧梯度和参数实际更新已核验；单样本泛化验证下降属于预期过拟合，未当模型最终改善。
+
+![实际训练曲线](../results/fixed2048/figures/training_curves.png)
+
+## 7. 表C：固定2048消融（相同Validation 3×8帧）
+
+{table_c(root)}
+
+R2-initial与R1完全同权重，但此表是各自独立完整闭环，不能把表内差全部归于当前帧量化。
+真正同状态R1权重的纯量化全局PSNR差为 **{number(facts["pure_quantization_psnr_delta"])}dB**；逐帧、Token MSE、Latent/RGB差见paired_quantization.json和Token统计。
+R2-trained还保留该权重自己的连续路径，避免跨训练状态误判。码本使用数、perplexity和逐Code直方图保留在其原始Token记录。
+
+独立raw192 PSNR={number(raw["global_mse_psnr"])}dB，R1 16D={number(r1["global_mse_psnr"])}dB，差值raw−16D={number(raw["global_mse_psnr"] - r1["global_mse_psnr"])}dB。
+该对照已独立训练，仍只测匹配300更新下的控制差异，不能称为16D不可逆信息损失的精确值或收敛容量结论。
+Encoder KV34、Decoder17的PSNR={number(encoder["global_mse_psnr"])}dB；与Decoder34实验分开报告。
+R3相对R1为{number(r3["global_mse_psnr"] - r1["global_mse_psnr"])}dB，且迁移Step0已经下降，不能仅据此否定更大Grid的容量。
+
+![同状态量化差](../results/fixed2048/figures/paired_quantization.png)
+
+## 8. 表D：参考闭环
+
+{table_d(root)}
+
+![独立参考闭环逐帧PSNR](../results/fixed2048/figures/reference_frames.png)
+
+I-only的每帧都为I，其P列不适用；不能拿其I/P比例与闭环Overall直接当P帧因果效应。
+原B1同状态下P帧R0明显高于R1/R2，说明相同历史下，当前帧表示链路已损失大量信息。
+完整与128参考切换的变化应结合逐P帧、视频内轨迹看；不能因一个候选提前commit或不同历史输入造成差异就宣称纯量化损失。
+内容敏感性为独立非正常诊断：正常、同位置常量（各Token同通道均值）、固定随机排列、同帧型前一帧Token。
+Decoder位置向量和当前历史上下文保持固定，不提交这些异常输出。原始RGB/Latent输出差保留在sensitivity目录，未混入正式结果。
+正常与异帧Token并非完全等价；但Token数量增益弱与空间重建质量低仍需进一步检查表示/空间绑定，不能用内容敏感性单项证明全部根因。
+
+## 9. 原生1080p推理与计算量
+
+{performance_table(root)}
+
+每个I/P条件3次预热、10次真实1080p测量，单独进程、无感知指标网络；GPU显存为torch最大allocated MiB。
+全程包含参考上下文准备，其余列未单列该开销；不含磁盘/指标/异常Token诊断。GFLOPs采用PyTorch FlopCounterMode，乘加计2，不支持的非算术操作未计，非完整硬件指令数。
+训练峰值另见训练表；evaluation.run.json显存包含LPIPS/DISTS网络，不能与无指标推理峰值混用。
+
+## 10. 封存Test与原B0/B1同样本绝对质量
+
+所有模型在读取Test像素前固定SHA和协议，封存见final_test/seal.json；封存后拒绝训练与码本校准。
+沿用cpat_test.json中原始尺寸1920×1080的cows/goat/parkour，各64帧，共192帧。没有根据Test重新选择模型或参数。
+B0/B1为原S4模型以历史VQ128闭环重建显示2048，保留接收端语义，但本次比较不生成码流、bpp仍为空。
+
+{final_table(root)}
+
+R1与原B1的全局MSE PSNR差为{number(facts["final_R1_minus_B1"])}dB。各视频均值及逐帧结果完全保留，不把单视频或单种子提升当普适收敛证据。
+历史正式测试结果只读保留，未用本次数字覆盖；本次可与同样本历史指标核对，但仍明确无实际码流。
+
+## 11. 重建图像与证据边界
+
+以下均为保存的真实1920×1080 RGB，没有局部增强或调整对比度；报告显示缩放不参与指标计算。
+
+原始Validation blackswan首帧：
+
+![原始帧](../results/fixed2048/baseline/images/blackswan_original.png)
+
+用户字面R0原始y直通（I尺度缺失对照）：
+
+![R0 原始y](../results/fixed2048/baseline/images/blackswan_paired_R0_000.png)
+
+单列官方连续尺度对照：
+
+![官方连续尺度](../results/fixed2048/baseline_scale_control/images/blackswan_full2048_R0-scale-control.png)
+
+R1选定权重的完整Token重建：
+
+![R1完整2048](../results/fixed2048/continuous/evaluation/images/blackswan_full2048_R1_000.png)
+
+每帧RGB MSE/PSNR、LPIPS、DISTS、MS-SSIM可追溯；图表均读取真实JSON而非手填。只有一个训练种子、3条诊断视频、短程训练；未声称已测收敛上限或所有根因。
+
+## 12. 最终问题与最小下一步
+
+**Q1：DCVC-UF原生Latent直接重建正常吗？** P帧原始y在同状态下可高质量重建。I帧字面R0异常来自漏掉官方连续尺度；独立尺度对照恢复到{number(scale["I"]["global_mse_psnr"])}dB。不能把裸y直通称正常、也不能据此宣称Backbone坏了。
+
+**Q2：2048连续Token能否合理重建1080p？** 能训练并改善单样本与独立验证；但R1验证{number(r1["global_mse_psnr"])}dB仍远低于尺度正确Backbone的{number(scale["global_mse_psnr"])}dB，现阶段不足以称达到合理高保真1080p质量。
+
+**Q3：16D连续投影与VQ分别损失多少？** 同权重同状态下VQ相对连续为{number(facts["pure_quantization_psnr_delta"])}dB。raw192−16D的匹配训练控制为{number(raw["global_mse_psnr"] - r1["global_mse_psnr"])}dB，不能把独立优化差异全部当16D不可逆损失；纯16D容量损失尚不能精确识别。
+
+**Q4：Decoder Grid34是否明显提高画质？** 在预先匹配的300更新/迁移方案下没有；验证差{number(r3["global_mse_psnr"] - r1["global_mse_psnr"])}dB。迁移初始分布变化和短程未收敛限制结论；Encoder KV单独结果见第7节。
+
+**Q5：P帧差来自本帧还是历史？** 同一FrozenFrameContext下，原始P Latent可重建而R1/R2严重落后，主要可观测差距已在本帧表示→Latent链路出现。历史闭环确实影响结果，但本次不能将全部误差归于128参考；独立闭环和同状态证据分开。
+
+**Q6：继续训练连续表示比原多预算更易改善绝对质量吗？** 单样本可快速拟合，原生短程验证比其自身Step0提高；封存同样本相对原B1为{number(facts["final_R1_minus_B1"])}dB。这里只有短程单种子、没有匹配新增300步的多预算训练对照，不能证明优化效率普遍优于原方案。
+
+**Q7：优先修改哪一环？** 优先研究Tokenizer与Token-to-Latent之间的空间信息保留/位置绑定，而非继续加码本或128预算功能。当前因果证据只能定位到这段链路，尚不足以单独指认某层。
+下一项最小可证实验是在独立模块给Token内容与Decoder Grid建立显式二维空间对应/局部读取，保留2048、16D、Backbone及Full2048参考，并重复相同单帧与4帧拟合、相同验证预算。先确认输出确实利用空间内容，再决定大规模训练；不建议直接再跑66,000步。
+
+工程验证和精确检查数见acceptance.json、pytest_final.txt、quality_audit.json、mutation_check.json；全部操作/原因与已知限制见docs/fixed2048_work_log.md。源码和原始数据均保留，不通过降低断言或静默fallback掩盖失败。
+"""
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(text)
+    return facts
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--root", default="results/fixed2048")
+    parser.add_argument("--output", default="docs/fixed2048_reconstruction_report.md")
+    parser.add_argument("--figures", action="store_true")
+    args = parser.parse_args()
+    build_report(resolve(args.root), resolve(args.output), args.figures)
+
+
+if __name__ == "__main__":
+    main()
