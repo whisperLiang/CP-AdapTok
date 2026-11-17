@@ -1,0 +1,2817 @@
+{
+  "environment": {
+    "time": "2026-11-18T02:46:40.630429+08:00",
+    "timezone": "Asia/Shanghai",
+    "git": "a7c3c0d4af5a98c24229694df4b242ba87bac512",
+    "git_dirty": true,
+    "source_sha256": "f6cb2ae575998877aa5699237d097449898fa8e79ee6303997f6755e8542e138",
+    "deterministic_algorithms": true,
+    "python_trace_enabled": false,
+    "branch": "experiment/adaptok-hr-fine-recovery",
+    "python": "3.12.13",
+    "torch": "2.9.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA H100 PCIe",
+    "driver": "580.159.03"
+  },
+  "checkpoint_sha256": "e7ba64dfbdcb9178c87654294a372fba92228f957c49dfc7561894938032c0f5",
+  "no_other_gpu_compute_process_before_and_after": true,
+  "completed_steps": 1000,
+  "manifest_identity": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+  "input": {
+    "content_id": "DAVIS2017:car-roundabout",
+    "source_sha256": "a385402d832c276856837830ef48709bd6b484aa3fce4bdc8c90a70385769b21",
+    "frame_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "source_resolution": [
+      1920,
+      1080
+    ],
+    "crop": [
+      0,
+      0,
+      1920,
+      1080
+    ],
+    "resized": false,
+    "engineering_crop": false,
+    "fps": 30,
+    "color_format": "RGB float32 [0,1]; OpenCV BGR->RGB"
+  },
+  "parameters": 1618137,
+  "budgets": {
+    "256": {
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "encoder_ms": 8.117538003716618,
+          "sender_ms": 21.562340029049665,
+          "receiver_ms": 13.53210600791499,
+          "joint_ms": 35.094446036964655,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "encoder_ms": 8.163330960087478,
+          "sender_ms": 21.79706795141101,
+          "receiver_ms": 13.509865035302937,
+          "joint_ms": 35.306932986713946,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 2,
+          "frame_type": "P",
+          "encoder_ms": 8.166042971424758,
+          "sender_ms": 21.74493297934532,
+          "receiver_ms": 13.828561990521848,
+          "joint_ms": 35.57349496986717,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 3,
+          "frame_type": "P",
+          "encoder_ms": 8.145248983055353,
+          "sender_ms": 21.812285005580634,
+          "receiver_ms": 13.712788990233094,
+          "joint_ms": 35.52507399581373,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 4,
+          "frame_type": "P",
+          "encoder_ms": 8.147054992150515,
+          "sender_ms": 21.8067989917472,
+          "receiver_ms": 13.532702985685319,
+          "joint_ms": 35.33950197743252,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 5,
+          "frame_type": "P",
+          "encoder_ms": 8.190841996110976,
+          "sender_ms": 21.851397992577404,
+          "receiver_ms": 13.563399959821254,
+          "joint_ms": 35.41479795239866,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 6,
+          "frame_type": "P",
+          "encoder_ms": 8.151290996465832,
+          "sender_ms": 21.781351999379694,
+          "receiver_ms": 13.608348031993955,
+          "joint_ms": 35.38970003137365,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 7,
+          "frame_type": "P",
+          "encoder_ms": 8.14895296934992,
+          "sender_ms": 21.67625300353393,
+          "receiver_ms": 13.539886975195259,
+          "joint_ms": 35.21613997872919,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 8,
+          "frame_type": "P",
+          "encoder_ms": 8.143761020619422,
+          "sender_ms": 21.75632305443287,
+          "receiver_ms": 13.56188498903066,
+          "joint_ms": 35.31820804346353,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 9,
+          "frame_type": "P",
+          "encoder_ms": 8.15131003037095,
+          "sender_ms": 21.825483068823814,
+          "receiver_ms": 13.498916989192367,
+          "joint_ms": 35.32440005801618,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 10,
+          "frame_type": "P",
+          "encoder_ms": 8.155013027135283,
+          "sender_ms": 22.034369001630694,
+          "receiver_ms": 13.588142057415098,
+          "joint_ms": 35.62251105904579,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 11,
+          "frame_type": "P",
+          "encoder_ms": 8.144708001054823,
+          "sender_ms": 21.794050000607967,
+          "receiver_ms": 13.570184994023293,
+          "joint_ms": 35.36423499463126,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 12,
+          "frame_type": "P",
+          "encoder_ms": 8.147070009727031,
+          "sender_ms": 21.76766301272437,
+          "receiver_ms": 13.504881993867457,
+          "joint_ms": 35.27254500659183,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 13,
+          "frame_type": "P",
+          "encoder_ms": 8.154686016496271,
+          "sender_ms": 21.71587198972702,
+          "receiver_ms": 13.704925018828362,
+          "joint_ms": 35.42079700855538,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 14,
+          "frame_type": "P",
+          "encoder_ms": 8.153380011208355,
+          "sender_ms": 21.777039975859225,
+          "receiver_ms": 13.62531800987199,
+          "joint_ms": 35.402357985731214,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 15,
+          "frame_type": "P",
+          "encoder_ms": 8.14739498309791,
+          "sender_ms": 21.751054970081896,
+          "receiver_ms": 13.51997401798144,
+          "joint_ms": 35.271028988063335,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 16,
+          "frame_type": "P",
+          "encoder_ms": 8.157119969837368,
+          "sender_ms": 21.79978002095595,
+          "receiver_ms": 13.624718005303293,
+          "joint_ms": 35.42449802625924,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 17,
+          "frame_type": "P",
+          "encoder_ms": 8.171004999894649,
+          "sender_ms": 21.968935034237802,
+          "receiver_ms": 13.57871200889349,
+          "joint_ms": 35.54764704313129,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 18,
+          "frame_type": "P",
+          "encoder_ms": 8.14064301084727,
+          "sender_ms": 21.759282040875405,
+          "receiver_ms": 13.71510501485318,
+          "joint_ms": 35.474387055728585,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 19,
+          "frame_type": "P",
+          "encoder_ms": 8.16646299790591,
+          "sender_ms": 21.762429969385266,
+          "receiver_ms": 13.527139963116497,
+          "joint_ms": 35.28956993250176,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 20,
+          "frame_type": "P",
+          "encoder_ms": 8.161050034686923,
+          "sender_ms": 21.812719001900405,
+          "receiver_ms": 13.56265798676759,
+          "joint_ms": 35.375376988667995,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 21,
+          "frame_type": "P",
+          "encoder_ms": 8.153808012139052,
+          "sender_ms": 21.76146802958101,
+          "receiver_ms": 13.522827997803688,
+          "joint_ms": 35.2842960273847,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 22,
+          "frame_type": "P",
+          "encoder_ms": 8.152511029038578,
+          "sender_ms": 21.720815042499453,
+          "receiver_ms": 13.533309975173324,
+          "joint_ms": 35.25412501767278,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 23,
+          "frame_type": "P",
+          "encoder_ms": 8.154664014000446,
+          "sender_ms": 21.776541019789875,
+          "receiver_ms": 13.795787002891302,
+          "joint_ms": 35.57232802268118,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 24,
+          "frame_type": "P",
+          "encoder_ms": 8.150203037075698,
+          "sender_ms": 21.784742013551295,
+          "receiver_ms": 13.556847989093512,
+          "joint_ms": 35.34159000264481,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 25,
+          "frame_type": "P",
+          "encoder_ms": 8.1683510215953,
+          "sender_ms": 21.803420037031174,
+          "receiver_ms": 13.621744001284242,
+          "joint_ms": 35.425164038315415,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 26,
+          "frame_type": "P",
+          "encoder_ms": 8.135356998536736,
+          "sender_ms": 21.740706986747682,
+          "receiver_ms": 13.492406986188143,
+          "joint_ms": 35.233113972935826,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 27,
+          "frame_type": "P",
+          "encoder_ms": 8.154249982908368,
+          "sender_ms": 21.99285803362727,
+          "receiver_ms": 13.471051002852619,
+          "joint_ms": 35.46390903647989,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 28,
+          "frame_type": "P",
+          "encoder_ms": 8.161731995642185,
+          "sender_ms": 21.806809003464878,
+          "receiver_ms": 13.529931020457298,
+          "joint_ms": 35.336740023922175,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 29,
+          "frame_type": "P",
+          "encoder_ms": 8.153385017067194,
+          "sender_ms": 21.7321400414221,
+          "receiver_ms": 13.557092985138297,
+          "joint_ms": 35.289233026560396,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 30,
+          "frame_type": "P",
+          "encoder_ms": 8.15150502603501,
+          "sender_ms": 21.794283005874604,
+          "receiver_ms": 13.702432974241674,
+          "joint_ms": 35.49671598011628,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 31,
+          "frame_type": "P",
+          "encoder_ms": 8.152772032190114,
+          "sender_ms": 21.77929104072973,
+          "receiver_ms": 13.553984987083822,
+          "joint_ms": 35.333276027813554,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 32,
+          "frame_type": "I",
+          "encoder_ms": 8.109360001981258,
+          "sender_ms": 21.570825017988682,
+          "receiver_ms": 13.491581019479781,
+          "joint_ms": 35.06240603746846,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 33,
+          "frame_type": "P",
+          "encoder_ms": 8.169776992872357,
+          "sender_ms": 21.75782195990905,
+          "receiver_ms": 13.508906005881727,
+          "joint_ms": 35.26672796579078,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 34,
+          "frame_type": "P",
+          "encoder_ms": 8.155065006576478,
+          "sender_ms": 21.734938956797123,
+          "receiver_ms": 13.50910501787439,
+          "joint_ms": 35.24404397467151,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 35,
+          "frame_type": "P",
+          "encoder_ms": 8.142939012032002,
+          "sender_ms": 22.173097997438163,
+          "receiver_ms": 13.53410497540608,
+          "joint_ms": 35.70720297284424,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 36,
+          "frame_type": "P",
+          "encoder_ms": 8.141001977492124,
+          "sender_ms": 21.835457941051573,
+          "receiver_ms": 13.697399001102895,
+          "joint_ms": 35.53285694215447,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 37,
+          "frame_type": "P",
+          "encoder_ms": 8.152014052029699,
+          "sender_ms": 21.800842019729316,
+          "receiver_ms": 13.559403014369309,
+          "joint_ms": 35.360245034098625,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 38,
+          "frame_type": "P",
+          "encoder_ms": 8.1435990286991,
+          "sender_ms": 21.736439026426524,
+          "receiver_ms": 13.98490701103583,
+          "joint_ms": 35.721346037462354,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 39,
+          "frame_type": "P",
+          "encoder_ms": 8.17379099316895,
+          "sender_ms": 21.991598012391478,
+          "receiver_ms": 13.818374020047486,
+          "joint_ms": 35.809972032438964,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 40,
+          "frame_type": "P",
+          "encoder_ms": 8.252907951828092,
+          "sender_ms": 22.23973599029705,
+          "receiver_ms": 13.846640009433031,
+          "joint_ms": 36.08637599973008,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 41,
+          "frame_type": "P",
+          "encoder_ms": 8.163388993125409,
+          "sender_ms": 21.77497500088066,
+          "receiver_ms": 13.513343001250178,
+          "joint_ms": 35.288318002130836,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 42,
+          "frame_type": "P",
+          "encoder_ms": 8.158056007232517,
+          "sender_ms": 21.854039980098605,
+          "receiver_ms": 13.53853801265359,
+          "joint_ms": 35.392577992752194,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 43,
+          "frame_type": "P",
+          "encoder_ms": 8.155235962476581,
+          "sender_ms": 21.851382975000888,
+          "receiver_ms": 13.693629996851087,
+          "joint_ms": 35.545012971851975,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 44,
+          "frame_type": "P",
+          "encoder_ms": 8.133816998451948,
+          "sender_ms": 22.180036001373082,
+          "receiver_ms": 13.579626975115389,
+          "joint_ms": 35.75966297648847,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 45,
+          "frame_type": "P",
+          "encoder_ms": 8.14633903792128,
+          "sender_ms": 21.79387805517763,
+          "receiver_ms": 13.565259985625744,
+          "joint_ms": 35.35913804080337,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 46,
+          "frame_type": "P",
+          "encoder_ms": 8.155328978318721,
+          "sender_ms": 21.7879309784621,
+          "receiver_ms": 13.574285025242716,
+          "joint_ms": 35.362216003704816,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 47,
+          "frame_type": "P",
+          "encoder_ms": 8.14385199919343,
+          "sender_ms": 21.77998499246314,
+          "receiver_ms": 13.582287996541709,
+          "joint_ms": 35.36227298900485,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 48,
+          "frame_type": "P",
+          "encoder_ms": 8.163148013409227,
+          "sender_ms": 21.81094599654898,
+          "receiver_ms": 13.51344701834023,
+          "joint_ms": 35.32439301488921,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 49,
+          "frame_type": "P",
+          "encoder_ms": 8.145366969984025,
+          "sender_ms": 21.78505394840613,
+          "receiver_ms": 13.555901998188347,
+          "joint_ms": 35.34095594659448,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 50,
+          "frame_type": "P",
+          "encoder_ms": 8.146516978740692,
+          "sender_ms": 21.890397008974105,
+          "receiver_ms": 13.566283043473959,
+          "joint_ms": 35.456680052448064,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 51,
+          "frame_type": "P",
+          "encoder_ms": 8.15849902573973,
+          "sender_ms": 21.883046021685004,
+          "receiver_ms": 13.738467998337,
+          "joint_ms": 35.621514020022005,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 52,
+          "frame_type": "P",
+          "encoder_ms": 8.133519964758307,
+          "sender_ms": 21.9622949953191,
+          "receiver_ms": 13.688453997019678,
+          "joint_ms": 35.65074899233878,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 53,
+          "frame_type": "P",
+          "encoder_ms": 8.155727991834283,
+          "sender_ms": 22.062300995457917,
+          "receiver_ms": 13.894203992094845,
+          "joint_ms": 35.95650498755276,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 54,
+          "frame_type": "P",
+          "encoder_ms": 8.161423029378057,
+          "sender_ms": 21.764969045761973,
+          "receiver_ms": 13.51903798058629,
+          "joint_ms": 35.28400702634826,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 55,
+          "frame_type": "P",
+          "encoder_ms": 8.147279033437371,
+          "sender_ms": 21.746866055764258,
+          "receiver_ms": 13.597246026620269,
+          "joint_ms": 35.34411208238453,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 56,
+          "frame_type": "P",
+          "encoder_ms": 8.140647958498448,
+          "sender_ms": 21.776837995275855,
+          "receiver_ms": 13.567844987846911,
+          "joint_ms": 35.344682983122766,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 57,
+          "frame_type": "P",
+          "encoder_ms": 8.171551977284253,
+          "sender_ms": 21.976812975481153,
+          "receiver_ms": 13.547729991842061,
+          "joint_ms": 35.524542967323214,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 58,
+          "frame_type": "P",
+          "encoder_ms": 8.134146977681667,
+          "sender_ms": 21.817554021254182,
+          "receiver_ms": 13.486296986229718,
+          "joint_ms": 35.3038510074839,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 59,
+          "frame_type": "P",
+          "encoder_ms": 8.144063991494477,
+          "sender_ms": 21.794728992972523,
+          "receiver_ms": 13.540178013499826,
+          "joint_ms": 35.33490700647235,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 60,
+          "frame_type": "P",
+          "encoder_ms": 8.14845401328057,
+          "sender_ms": 21.75903203897178,
+          "receiver_ms": 13.498142012394965,
+          "joint_ms": 35.257174051366746,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 61,
+          "frame_type": "P",
+          "encoder_ms": 8.155367977451533,
+          "sender_ms": 21.81386499432847,
+          "receiver_ms": 13.94558500032872,
+          "joint_ms": 35.75944999465719,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 62,
+          "frame_type": "P",
+          "encoder_ms": 8.144258987158537,
+          "sender_ms": 21.93969493964687,
+          "receiver_ms": 13.866752968169749,
+          "joint_ms": 35.80644790781662,
+          "bytes": 558,
+          "tokens": 256
+        },
+        {
+          "frame": 63,
+          "frame_type": "P",
+          "encoder_ms": 8.157867996487767,
+          "sender_ms": 21.78830502089113,
+          "receiver_ms": 13.722807983867824,
+          "joint_ms": 35.511113004758954,
+          "bytes": 558,
+          "tokens": 256
+        }
+      ],
+      "timing": {
+        "encoder": {
+          "mean_ms": 8.15338684424205,
+          "p50_ms": 8.152641530614346,
+          "p95_ms": 8.171469930675812,
+          "fps": 122.64841827126153
+        },
+        "sender": {
+          "mean_ms": 21.823221770318924,
+          "p50_ms": 21.793964027892798,
+          "p95_ms": 22.058111196383834,
+          "fps": 45.82274837897989
+        },
+        "receiver": {
+          "mean_ms": 13.609272015855822,
+          "p50_ms": 13.563028973294422,
+          "p95_ms": 13.863736024359241,
+          "fps": 73.47931607472648
+        },
+        "joint": {
+          "mean_ms": 35.432493786174746,
+          "p50_ms": 35.363253991818056,
+          "p95_ms": 35.7994301681174,
+          "fps": 28.222681870339756
+        }
+      },
+      "bytes": 35712,
+      "actual_bpp": 0.0021527777777777778,
+      "peak_gpu_mib": 492.0498046875,
+      "sender_receiver_bitwise_equal": true,
+      "gop33_reset_bitwise_equal": true,
+      "independent_model_instances": true,
+      "amp_bf16": true
+    },
+    "512": {
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "encoder_ms": 8.163617982063442,
+          "sender_ms": 21.770134975668043,
+          "receiver_ms": 13.47915199585259,
+          "joint_ms": 35.24928697152063,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "encoder_ms": 8.1499979714863,
+          "sender_ms": 21.948514971882105,
+          "receiver_ms": 13.647099956870079,
+          "joint_ms": 35.595614928752184,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 2,
+          "frame_type": "P",
+          "encoder_ms": 8.169554988853633,
+          "sender_ms": 21.925362991169095,
+          "receiver_ms": 13.87038396205753,
+          "joint_ms": 35.795746953226626,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 3,
+          "frame_type": "P",
+          "encoder_ms": 8.149205998051912,
+          "sender_ms": 21.949893969576806,
+          "receiver_ms": 13.616268988698721,
+          "joint_ms": 35.56616295827553,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 4,
+          "frame_type": "P",
+          "encoder_ms": 8.12405301257968,
+          "sender_ms": 21.87871397472918,
+          "receiver_ms": 13.643127982504666,
+          "joint_ms": 35.521841957233846,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 5,
+          "frame_type": "P",
+          "encoder_ms": 8.159881981555372,
+          "sender_ms": 21.929570997599512,
+          "receiver_ms": 13.668775965925306,
+          "joint_ms": 35.59834696352482,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 6,
+          "frame_type": "P",
+          "encoder_ms": 8.150072011630982,
+          "sender_ms": 22.162877023220062,
+          "receiver_ms": 13.618876982945949,
+          "joint_ms": 35.78175400616601,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 7,
+          "frame_type": "P",
+          "encoder_ms": 8.143490005750209,
+          "sender_ms": 21.87352697364986,
+          "receiver_ms": 13.644342019688338,
+          "joint_ms": 35.5178689933382,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 8,
+          "frame_type": "P",
+          "encoder_ms": 8.137700031511486,
+          "sender_ms": 21.928669011685997,
+          "receiver_ms": 13.58526200056076,
+          "joint_ms": 35.51393101224676,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 9,
+          "frame_type": "P",
+          "encoder_ms": 8.138864999637008,
+          "sender_ms": 21.80823404341936,
+          "receiver_ms": 13.641124009154737,
+          "joint_ms": 35.4493580525741,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 10,
+          "frame_type": "P",
+          "encoder_ms": 8.150694018695503,
+          "sender_ms": 21.8662180704996,
+          "receiver_ms": 13.712365995161235,
+          "joint_ms": 35.578584065660834,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 11,
+          "frame_type": "P",
+          "encoder_ms": 8.152519003488123,
+          "sender_ms": 21.87001204583794,
+          "receiver_ms": 13.642482983414084,
+          "joint_ms": 35.51249502925202,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 12,
+          "frame_type": "P",
+          "encoder_ms": 8.161945967003703,
+          "sender_ms": 21.991409943439066,
+          "receiver_ms": 13.86301900492981,
+          "joint_ms": 35.85442894836888,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 13,
+          "frame_type": "P",
+          "encoder_ms": 8.135617012158036,
+          "sender_ms": 21.878110012039542,
+          "receiver_ms": 13.648930005729198,
+          "joint_ms": 35.52704001776874,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 14,
+          "frame_type": "P",
+          "encoder_ms": 8.150223991833627,
+          "sender_ms": 21.901970962062478,
+          "receiver_ms": 13.645963976159692,
+          "joint_ms": 35.54793493822217,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 15,
+          "frame_type": "P",
+          "encoder_ms": 8.138420002069324,
+          "sender_ms": 21.933557000011206,
+          "receiver_ms": 13.640742981806397,
+          "joint_ms": 35.5742999818176,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 16,
+          "frame_type": "P",
+          "encoder_ms": 8.14605294726789,
+          "sender_ms": 22.546262945979834,
+          "receiver_ms": 13.735482993070036,
+          "joint_ms": 36.28174593904987,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 17,
+          "frame_type": "P",
+          "encoder_ms": 8.161844976712018,
+          "sender_ms": 21.923015010543168,
+          "receiver_ms": 13.707241043448448,
+          "joint_ms": 35.630256053991616,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 18,
+          "frame_type": "P",
+          "encoder_ms": 8.153229020535946,
+          "sender_ms": 21.95302303880453,
+          "receiver_ms": 13.659155985806137,
+          "joint_ms": 35.61217902461067,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 19,
+          "frame_type": "P",
+          "encoder_ms": 8.142728998791426,
+          "sender_ms": 21.87239599879831,
+          "receiver_ms": 13.85375700192526,
+          "joint_ms": 35.72615300072357,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 20,
+          "frame_type": "P",
+          "encoder_ms": 8.133897965308279,
+          "sender_ms": 21.852755977306515,
+          "receiver_ms": 13.610968017019331,
+          "joint_ms": 35.463723994325846,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 21,
+          "frame_type": "P",
+          "encoder_ms": 8.145176980178803,
+          "sender_ms": 22.002221958246082,
+          "receiver_ms": 13.662012992426753,
+          "joint_ms": 35.664234950672835,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 22,
+          "frame_type": "P",
+          "encoder_ms": 8.145292988047004,
+          "sender_ms": 21.917590987868607,
+          "receiver_ms": 13.610594964120537,
+          "joint_ms": 35.528185951989144,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 23,
+          "frame_type": "P",
+          "encoder_ms": 8.153448987286538,
+          "sender_ms": 21.913133969064802,
+          "receiver_ms": 13.673664012458175,
+          "joint_ms": 35.58679798152298,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 24,
+          "frame_type": "P",
+          "encoder_ms": 8.13669100170955,
+          "sender_ms": 21.914574957918376,
+          "receiver_ms": 13.669470034074038,
+          "joint_ms": 35.584044991992414,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 25,
+          "frame_type": "P",
+          "encoder_ms": 8.139432989992201,
+          "sender_ms": 21.919680992141366,
+          "receiver_ms": 13.679734955076128,
+          "joint_ms": 35.599415947217494,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 26,
+          "frame_type": "P",
+          "encoder_ms": 8.143739018123597,
+          "sender_ms": 22.100259026046842,
+          "receiver_ms": 13.61281197750941,
+          "joint_ms": 35.71307100355625,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 27,
+          "frame_type": "P",
+          "encoder_ms": 8.14566999906674,
+          "sender_ms": 21.884053014218807,
+          "receiver_ms": 13.680142001248896,
+          "joint_ms": 35.5641950154677,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 28,
+          "frame_type": "P",
+          "encoder_ms": 8.141872007399797,
+          "sender_ms": 21.906741021666676,
+          "receiver_ms": 13.623626960907131,
+          "joint_ms": 35.53036798257381,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 29,
+          "frame_type": "P",
+          "encoder_ms": 8.152052003424615,
+          "sender_ms": 21.886281028855592,
+          "receiver_ms": 13.914524985011667,
+          "joint_ms": 35.80080601386726,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 30,
+          "frame_type": "P",
+          "encoder_ms": 8.175318012945354,
+          "sender_ms": 21.934289019554853,
+          "receiver_ms": 13.621449994388968,
+          "joint_ms": 35.55573901394382,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 31,
+          "frame_type": "P",
+          "encoder_ms": 8.135327021591365,
+          "sender_ms": 21.907858026679605,
+          "receiver_ms": 13.666843995451927,
+          "joint_ms": 35.57470202213153,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 32,
+          "frame_type": "I",
+          "encoder_ms": 8.121756021864712,
+          "sender_ms": 21.662192011717707,
+          "receiver_ms": 13.466611038893461,
+          "joint_ms": 35.12880305061117,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 33,
+          "frame_type": "P",
+          "encoder_ms": 8.154594979714602,
+          "sender_ms": 21.934649965260178,
+          "receiver_ms": 13.670535001438111,
+          "joint_ms": 35.60518496669829,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 34,
+          "frame_type": "P",
+          "encoder_ms": 8.135912998113781,
+          "sender_ms": 21.89996396191418,
+          "receiver_ms": 13.619323959574103,
+          "joint_ms": 35.519287921488285,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 35,
+          "frame_type": "P",
+          "encoder_ms": 8.134484000038356,
+          "sender_ms": 21.908073977101594,
+          "receiver_ms": 13.628971006255597,
+          "joint_ms": 35.53704498335719,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 36,
+          "frame_type": "P",
+          "encoder_ms": 8.159398974385113,
+          "sender_ms": 21.92392200231552,
+          "receiver_ms": 13.659885036759079,
+          "joint_ms": 35.5838070390746,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 37,
+          "frame_type": "P",
+          "encoder_ms": 8.144170977175236,
+          "sender_ms": 21.956489013973624,
+          "receiver_ms": 13.632933027110994,
+          "joint_ms": 35.58942204108462,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 38,
+          "frame_type": "P",
+          "encoder_ms": 8.15041403984651,
+          "sender_ms": 21.937633049674332,
+          "receiver_ms": 13.66609102115035,
+          "joint_ms": 35.60372407082468,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 39,
+          "frame_type": "P",
+          "encoder_ms": 8.145047992002219,
+          "sender_ms": 22.1031479886733,
+          "receiver_ms": 13.63508403301239,
+          "joint_ms": 35.73823202168569,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 40,
+          "frame_type": "P",
+          "encoder_ms": 8.148881024681032,
+          "sender_ms": 21.88905602088198,
+          "receiver_ms": 13.651032990310341,
+          "joint_ms": 35.54008901119232,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 41,
+          "frame_type": "P",
+          "encoder_ms": 8.137839962728322,
+          "sender_ms": 21.957191987894475,
+          "receiver_ms": 13.62691103713587,
+          "joint_ms": 35.584103025030345,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 42,
+          "frame_type": "P",
+          "encoder_ms": 8.141589001752436,
+          "sender_ms": 21.88106602989137,
+          "receiver_ms": 13.818161969538778,
+          "joint_ms": 35.69922799943015,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 43,
+          "frame_type": "P",
+          "encoder_ms": 8.138953009620309,
+          "sender_ms": 21.89906797138974,
+          "receiver_ms": 13.660230964887887,
+          "joint_ms": 35.55929893627763,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 44,
+          "frame_type": "P",
+          "encoder_ms": 8.15856602275744,
+          "sender_ms": 21.985260013025254,
+          "receiver_ms": 13.696301961317658,
+          "joint_ms": 35.68156197434291,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 45,
+          "frame_type": "P",
+          "encoder_ms": 8.14685900695622,
+          "sender_ms": 21.964590006973594,
+          "receiver_ms": 13.610347989015281,
+          "joint_ms": 35.574937995988876,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 46,
+          "frame_type": "P",
+          "encoder_ms": 8.146765001583844,
+          "sender_ms": 22.05839700764045,
+          "receiver_ms": 13.695464993361384,
+          "joint_ms": 35.753862001001835,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 47,
+          "frame_type": "P",
+          "encoder_ms": 8.503755962010473,
+          "sender_ms": 22.589420957956463,
+          "receiver_ms": 13.70072498684749,
+          "joint_ms": 36.29014594480395,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 48,
+          "frame_type": "P",
+          "encoder_ms": 8.145881991367787,
+          "sender_ms": 21.910998970270157,
+          "receiver_ms": 13.715439010411501,
+          "joint_ms": 35.62643798068166,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 49,
+          "frame_type": "P",
+          "encoder_ms": 8.144910971168429,
+          "sender_ms": 22.000469965860248,
+          "receiver_ms": 13.683835044503212,
+          "joint_ms": 35.68430501036346,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 50,
+          "frame_type": "P",
+          "encoder_ms": 8.155373972840607,
+          "sender_ms": 21.940464968793094,
+          "receiver_ms": 13.630892965011299,
+          "joint_ms": 35.57135793380439,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 51,
+          "frame_type": "P",
+          "encoder_ms": 8.140995050780475,
+          "sender_ms": 21.9574470538646,
+          "receiver_ms": 13.692502048797905,
+          "joint_ms": 35.649949102662504,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 52,
+          "frame_type": "P",
+          "encoder_ms": 8.174296002835035,
+          "sender_ms": 21.9811070128344,
+          "receiver_ms": 13.828966009896249,
+          "joint_ms": 35.81007302273065,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 53,
+          "frame_type": "P",
+          "encoder_ms": 8.134250994771719,
+          "sender_ms": 21.886433009058237,
+          "receiver_ms": 13.679119991138577,
+          "joint_ms": 35.565553000196815,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 54,
+          "frame_type": "P",
+          "encoder_ms": 8.151408983394504,
+          "sender_ms": 21.921751962509006,
+          "receiver_ms": 13.648726977407932,
+          "joint_ms": 35.57047893991694,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 55,
+          "frame_type": "P",
+          "encoder_ms": 8.151070040185004,
+          "sender_ms": 21.894605015404522,
+          "receiver_ms": 13.68210301734507,
+          "joint_ms": 35.57670803274959,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 56,
+          "frame_type": "P",
+          "encoder_ms": 8.156543015502393,
+          "sender_ms": 22.090214071795344,
+          "receiver_ms": 13.634153991006315,
+          "joint_ms": 35.72436806280166,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 57,
+          "frame_type": "P",
+          "encoder_ms": 8.140896039549261,
+          "sender_ms": 21.930799004621804,
+          "receiver_ms": 13.62240401795134,
+          "joint_ms": 35.55320302257314,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 58,
+          "frame_type": "P",
+          "encoder_ms": 8.145133964717388,
+          "sender_ms": 21.845348994247615,
+          "receiver_ms": 13.656683033332229,
+          "joint_ms": 35.502032027579844,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 59,
+          "frame_type": "P",
+          "encoder_ms": 8.153997012414038,
+          "sender_ms": 21.981940022669733,
+          "receiver_ms": 13.845667010173202,
+          "joint_ms": 35.827607032842934,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 60,
+          "frame_type": "P",
+          "encoder_ms": 8.136541000567377,
+          "sender_ms": 21.936422970611602,
+          "receiver_ms": 13.599005993455648,
+          "joint_ms": 35.53542896406725,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 61,
+          "frame_type": "P",
+          "encoder_ms": 8.14942002762109,
+          "sender_ms": 21.95051306625828,
+          "receiver_ms": 13.636170013342053,
+          "joint_ms": 35.586683079600334,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 62,
+          "frame_type": "P",
+          "encoder_ms": 8.145043975673616,
+          "sender_ms": 21.916538011282682,
+          "receiver_ms": 13.71036801720038,
+          "joint_ms": 35.62690602848306,
+          "bytes": 974,
+          "tokens": 512
+        },
+        {
+          "frame": 63,
+          "frame_type": "P",
+          "encoder_ms": 8.142301987390965,
+          "sender_ms": 21.964034938719124,
+          "receiver_ms": 13.684160017874092,
+          "joint_ms": 35.648194956593215,
+          "bytes": 974,
+          "tokens": 512
+        }
+      ],
+      "timing": {
+        "encoder": {
+          "mean_ms": 8.152573248480621,
+          "p50_ms": 8.145775995217264,
+          "p95_ms": 8.168664437835105,
+          "fps": 122.6606581163031
+        },
+        "sender": {
+          "mean_ms": 21.948595702269813,
+          "p50_ms": 21.924642496742308,
+          "p95_ms": 22.10271464427933,
+          "fps": 45.56100142190805
+        },
+        "receiver": {
+          "mean_ms": 13.670909514075902,
+          "p50_ms": 13.657919509569183,
+          "p95_ms": 13.852543503162451,
+          "fps": 73.14802273911444
+        },
+        "joint": {
+          "mean_ms": 35.619505216345715,
+          "p50_ms": 35.58407400851138,
+          "p95_ms": 35.82497693132609,
+          "fps": 28.07450563746467
+        }
+      },
+      "bytes": 62336,
+      "actual_bpp": 0.003757716049382716,
+      "peak_gpu_mib": 492.0673828125,
+      "sender_receiver_bitwise_equal": true,
+      "gop33_reset_bitwise_equal": true,
+      "independent_model_instances": true,
+      "amp_bf16": true
+    },
+    "1024": {
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "encoder_ms": 8.167987049091607,
+          "sender_ms": 22.40022801561281,
+          "receiver_ms": 14.020506001543254,
+          "joint_ms": 36.420734017156065,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "encoder_ms": 8.175783033948392,
+          "sender_ms": 22.57391402963549,
+          "receiver_ms": 14.160955033730716,
+          "joint_ms": 36.734869063366205,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 2,
+          "frame_type": "P",
+          "encoder_ms": 8.16696195397526,
+          "sender_ms": 22.616361908148974,
+          "receiver_ms": 14.341046975459903,
+          "joint_ms": 36.95740888360888,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 3,
+          "frame_type": "P",
+          "encoder_ms": 8.149195986334234,
+          "sender_ms": 22.497481026221067,
+          "receiver_ms": 14.145141001790762,
+          "joint_ms": 36.64262202801183,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 4,
+          "frame_type": "P",
+          "encoder_ms": 8.15074099227786,
+          "sender_ms": 22.56026997929439,
+          "receiver_ms": 14.136300014797598,
+          "joint_ms": 36.69656999409199,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 5,
+          "frame_type": "P",
+          "encoder_ms": 8.147439977619797,
+          "sender_ms": 22.528624976985157,
+          "receiver_ms": 14.129301998764277,
+          "joint_ms": 36.65792697574943,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 6,
+          "frame_type": "P",
+          "encoder_ms": 8.174640010111034,
+          "sender_ms": 23.156636976636946,
+          "receiver_ms": 14.214448048733175,
+          "joint_ms": 37.37108502537012,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 7,
+          "frame_type": "P",
+          "encoder_ms": 8.140688005369157,
+          "sender_ms": 22.552904032636434,
+          "receiver_ms": 14.153380994684994,
+          "joint_ms": 36.70628502732143,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 8,
+          "frame_type": "P",
+          "encoder_ms": 8.200983982533216,
+          "sender_ms": 22.748895979020745,
+          "receiver_ms": 14.135140052530915,
+          "joint_ms": 36.88403603155166,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 9,
+          "frame_type": "P",
+          "encoder_ms": 8.147952961735427,
+          "sender_ms": 22.529202979058027,
+          "receiver_ms": 14.130915980786085,
+          "joint_ms": 36.66011895984411,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 10,
+          "frame_type": "P",
+          "encoder_ms": 8.156057971064001,
+          "sender_ms": 22.50244200695306,
+          "receiver_ms": 14.153025986161083,
+          "joint_ms": 36.655467993114144,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 11,
+          "frame_type": "P",
+          "encoder_ms": 8.1518649822101,
+          "sender_ms": 22.5497119827196,
+          "receiver_ms": 14.131163014099002,
+          "joint_ms": 36.6808749968186,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 12,
+          "frame_type": "P",
+          "encoder_ms": 8.170614019036293,
+          "sender_ms": 22.61310600442812,
+          "receiver_ms": 14.35776799917221,
+          "joint_ms": 36.97087400360033,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 13,
+          "frame_type": "P",
+          "encoder_ms": 8.147849992383271,
+          "sender_ms": 22.498367994558066,
+          "receiver_ms": 14.191080001182854,
+          "joint_ms": 36.68944799574092,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 14,
+          "frame_type": "P",
+          "encoder_ms": 8.14396800706163,
+          "sender_ms": 22.52996404422447,
+          "receiver_ms": 14.113672019448131,
+          "joint_ms": 36.6436360636726,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 15,
+          "frame_type": "P",
+          "encoder_ms": 8.152722963131964,
+          "sender_ms": 22.462869936134666,
+          "receiver_ms": 14.126231020782143,
+          "joint_ms": 36.58910095691681,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 16,
+          "frame_type": "P",
+          "encoder_ms": 8.15848697675392,
+          "sender_ms": 22.855527990031987,
+          "receiver_ms": 14.12394898943603,
+          "joint_ms": 36.97947697946802,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 17,
+          "frame_type": "P",
+          "encoder_ms": 8.154264010954648,
+          "sender_ms": 22.535550000611693,
+          "receiver_ms": 14.162164006847888,
+          "joint_ms": 36.69771400745958,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 18,
+          "frame_type": "P",
+          "encoder_ms": 8.16696899710223,
+          "sender_ms": 22.485661029350013,
+          "receiver_ms": 14.198863005731255,
+          "joint_ms": 36.68452403508127,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 19,
+          "frame_type": "P",
+          "encoder_ms": 8.214817964471877,
+          "sender_ms": 22.662905976176262,
+          "receiver_ms": 14.344709983561188,
+          "joint_ms": 37.00761595973745,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 20,
+          "frame_type": "P",
+          "encoder_ms": 8.154490031301975,
+          "sender_ms": 22.494117030873895,
+          "receiver_ms": 14.109774958342314,
+          "joint_ms": 36.60389198921621,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 21,
+          "frame_type": "P",
+          "encoder_ms": 8.15179996425286,
+          "sender_ms": 22.43532193824649,
+          "receiver_ms": 14.117526996415108,
+          "joint_ms": 36.5528489346616,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 22,
+          "frame_type": "P",
+          "encoder_ms": 8.147621992975473,
+          "sender_ms": 22.554680006578565,
+          "receiver_ms": 14.153939031530172,
+          "joint_ms": 36.708619038108736,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 23,
+          "frame_type": "P",
+          "encoder_ms": 8.48662998760119,
+          "sender_ms": 23.173882975243032,
+          "receiver_ms": 14.185208012349904,
+          "joint_ms": 37.359090987592936,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 24,
+          "frame_type": "P",
+          "encoder_ms": 8.184197009541094,
+          "sender_ms": 22.558412048965693,
+          "receiver_ms": 14.121052983682603,
+          "joint_ms": 36.679465032648295,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 25,
+          "frame_type": "P",
+          "encoder_ms": 8.143691986333579,
+          "sender_ms": 22.51871401676908,
+          "receiver_ms": 14.53480398049578,
+          "joint_ms": 37.05351799726486,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 26,
+          "frame_type": "P",
+          "encoder_ms": 8.143170969560742,
+          "sender_ms": 22.70524692721665,
+          "receiver_ms": 14.14878002833575,
+          "joint_ms": 36.8540269555524,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 27,
+          "frame_type": "P",
+          "encoder_ms": 8.157724980264902,
+          "sender_ms": 22.478305967524648,
+          "receiver_ms": 14.162437990307808,
+          "joint_ms": 36.640743957832456,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 28,
+          "frame_type": "P",
+          "encoder_ms": 8.159701013937593,
+          "sender_ms": 22.513728064950556,
+          "receiver_ms": 14.173131028655916,
+          "joint_ms": 36.68685909360647,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 29,
+          "frame_type": "P",
+          "encoder_ms": 8.149934990797192,
+          "sender_ms": 22.51311799045652,
+          "receiver_ms": 14.314611966256052,
+          "joint_ms": 36.827729956712574,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 30,
+          "frame_type": "P",
+          "encoder_ms": 8.154722978360951,
+          "sender_ms": 22.61765394359827,
+          "receiver_ms": 14.10734496312216,
+          "joint_ms": 36.72499890672043,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 31,
+          "frame_type": "P",
+          "encoder_ms": 8.14831699244678,
+          "sender_ms": 22.523180989082903,
+          "receiver_ms": 14.147276990115643,
+          "joint_ms": 36.670457979198545,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 32,
+          "frame_type": "I",
+          "encoder_ms": 8.159488963428885,
+          "sender_ms": 22.348172962665558,
+          "receiver_ms": 13.995649002026767,
+          "joint_ms": 36.343821964692324,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 33,
+          "frame_type": "P",
+          "encoder_ms": 8.173143025487661,
+          "sender_ms": 22.4760560085997,
+          "receiver_ms": 14.166965032927692,
+          "joint_ms": 36.64302104152739,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 34,
+          "frame_type": "P",
+          "encoder_ms": 8.154643001034856,
+          "sender_ms": 22.58026198251173,
+          "receiver_ms": 14.174343959894031,
+          "joint_ms": 36.75460594240576,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 35,
+          "frame_type": "P",
+          "encoder_ms": 8.155167975928634,
+          "sender_ms": 22.573839989490807,
+          "receiver_ms": 14.101685956120491,
+          "joint_ms": 36.6755259456113,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 36,
+          "frame_type": "P",
+          "encoder_ms": 8.16041202051565,
+          "sender_ms": 22.534938994795084,
+          "receiver_ms": 14.153474010527134,
+          "joint_ms": 36.68841300532222,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 37,
+          "frame_type": "P",
+          "encoder_ms": 8.189838961698115,
+          "sender_ms": 22.570565924979746,
+          "receiver_ms": 14.14527400629595,
+          "joint_ms": 36.715839931275696,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 38,
+          "frame_type": "P",
+          "encoder_ms": 8.175822964403778,
+          "sender_ms": 22.599199961405247,
+          "receiver_ms": 14.16851399699226,
+          "joint_ms": 36.76771395839751,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 39,
+          "frame_type": "P",
+          "encoder_ms": 8.16631002817303,
+          "sender_ms": 22.746079019270837,
+          "receiver_ms": 14.16371704544872,
+          "joint_ms": 36.90979606471956,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 40,
+          "frame_type": "P",
+          "encoder_ms": 8.166056009940803,
+          "sender_ms": 22.590640000998974,
+          "receiver_ms": 14.128971961326897,
+          "joint_ms": 36.71961196232587,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 41,
+          "frame_type": "P",
+          "encoder_ms": 8.16554599441588,
+          "sender_ms": 22.527877998072654,
+          "receiver_ms": 14.152768009807914,
+          "joint_ms": 36.68064600788057,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 42,
+          "frame_type": "P",
+          "encoder_ms": 8.152667956892401,
+          "sender_ms": 22.468477953225374,
+          "receiver_ms": 14.353613019920886,
+          "joint_ms": 36.82209097314626,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 43,
+          "frame_type": "P",
+          "encoder_ms": 8.160215977113694,
+          "sender_ms": 22.505783010274172,
+          "receiver_ms": 14.140199986286461,
+          "joint_ms": 36.64598299656063,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 44,
+          "frame_type": "P",
+          "encoder_ms": 8.150583948008716,
+          "sender_ms": 22.535409952979535,
+          "receiver_ms": 14.18697100598365,
+          "joint_ms": 36.722380958963186,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 45,
+          "frame_type": "P",
+          "encoder_ms": 8.152358001098037,
+          "sender_ms": 22.539668017998338,
+          "receiver_ms": 14.164687949232757,
+          "joint_ms": 36.704355967231095,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 46,
+          "frame_type": "P",
+          "encoder_ms": 8.167960972059518,
+          "sender_ms": 22.746880014892668,
+          "receiver_ms": 14.185380015987903,
+          "joint_ms": 36.93226003088057,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 47,
+          "frame_type": "P",
+          "encoder_ms": 8.151580987032503,
+          "sender_ms": 22.494678967632353,
+          "receiver_ms": 14.18675301829353,
+          "joint_ms": 36.68143198592588,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 48,
+          "frame_type": "P",
+          "encoder_ms": 8.159740013070405,
+          "sender_ms": 22.520713973790407,
+          "receiver_ms": 14.172255992889404,
+          "joint_ms": 36.69296996667981,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 49,
+          "frame_type": "P",
+          "encoder_ms": 8.169600972905755,
+          "sender_ms": 22.583074984140694,
+          "receiver_ms": 14.16500797495246,
+          "joint_ms": 36.74808295909315,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 50,
+          "frame_type": "P",
+          "encoder_ms": 8.161248988471925,
+          "sender_ms": 22.662006958853453,
+          "receiver_ms": 14.148426009342074,
+          "joint_ms": 36.81043296819553,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 51,
+          "frame_type": "P",
+          "encoder_ms": 8.145017956849188,
+          "sender_ms": 22.515598975587636,
+          "receiver_ms": 14.138404978439212,
+          "joint_ms": 36.65400395402685,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 52,
+          "frame_type": "P",
+          "encoder_ms": 8.174730988685042,
+          "sender_ms": 22.512903960887343,
+          "receiver_ms": 15.85195300867781,
+          "joint_ms": 38.36485696956515,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 53,
+          "frame_type": "P",
+          "encoder_ms": 8.210828003939241,
+          "sender_ms": 22.81771699199453,
+          "receiver_ms": 14.29381495108828,
+          "joint_ms": 37.11153194308281,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 54,
+          "frame_type": "P",
+          "encoder_ms": 8.1427349941805,
+          "sender_ms": 22.548082983121276,
+          "receiver_ms": 14.169224945362657,
+          "joint_ms": 36.71730792848393,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 55,
+          "frame_type": "P",
+          "encoder_ms": 8.165546983946115,
+          "sender_ms": 22.5847780238837,
+          "receiver_ms": 14.196004020050168,
+          "joint_ms": 36.78078204393387,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 56,
+          "frame_type": "P",
+          "encoder_ms": 8.15167697146535,
+          "sender_ms": 22.791881929151714,
+          "receiver_ms": 14.174628013279289,
+          "joint_ms": 36.966509942431,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 57,
+          "frame_type": "P",
+          "encoder_ms": 8.152964001055807,
+          "sender_ms": 22.51362201059237,
+          "receiver_ms": 14.195438008755445,
+          "joint_ms": 36.70906001934782,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 58,
+          "frame_type": "P",
+          "encoder_ms": 8.165588020347059,
+          "sender_ms": 22.50417205505073,
+          "receiver_ms": 14.17604397283867,
+          "joint_ms": 36.6802160278894,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 59,
+          "frame_type": "P",
+          "encoder_ms": 8.1612269859761,
+          "sender_ms": 22.57230196846649,
+          "receiver_ms": 14.425330038648099,
+          "joint_ms": 36.99763200711459,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 60,
+          "frame_type": "P",
+          "encoder_ms": 8.142650010995567,
+          "sender_ms": 22.47685001930222,
+          "receiver_ms": 14.211686968337744,
+          "joint_ms": 36.688536987639964,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 61,
+          "frame_type": "P",
+          "encoder_ms": 8.175617025699466,
+          "sender_ms": 22.543119033798575,
+          "receiver_ms": 14.180338010191917,
+          "joint_ms": 36.72345704399049,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 62,
+          "frame_type": "P",
+          "encoder_ms": 8.157647040206939,
+          "sender_ms": 22.598479001317173,
+          "receiver_ms": 14.21201101038605,
+          "joint_ms": 36.81049001170322,
+          "bytes": 1806,
+          "tokens": 1024
+        },
+        {
+          "frame": 63,
+          "frame_type": "P",
+          "encoder_ms": 8.163221005816013,
+          "sender_ms": 22.555233037564903,
+          "receiver_ms": 14.11016401834786,
+          "joint_ms": 36.66539705591276,
+          "bytes": 1806,
+          "tokens": 1024
+        }
+      ],
+      "timing": {
+        "encoder": {
+          "mean_ms": 8.165997335709108,
+          "p50_ms": 8.158105978509411,
+          "p95_ms": 8.199312229407951,
+          "fps": 122.45901619721302
+        },
+        "sender": {
+          "mean_ms": 22.57946961617563,
+          "p50_ms": 22.541393525898457,
+          "p95_ms": 22.813841732568108,
+          "fps": 44.288019913612736
+        },
+        "receiver": {
+          "mean_ms": 14.205239858711138,
+          "p50_ms": 14.163077517878264,
+          "p95_ms": 14.357144752284512,
+          "fps": 70.39655859008715
+        },
+        "joint": {
+          "mean_ms": 36.78470947488677,
+          "p50_ms": 36.70745203271508,
+          "p95_ms": 37.10282985121012,
+          "fps": 27.185208590072147
+        }
+      },
+      "bytes": 115584,
+      "actual_bpp": 0.006967592592592593,
+      "peak_gpu_mib": 492.1025390625,
+      "sender_receiver_bitwise_equal": true,
+      "gop33_reset_bitwise_equal": true,
+      "independent_model_instances": true,
+      "amp_bf16": true
+    },
+    "2048": {
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "encoder_ms": 8.14061495475471,
+          "sender_ms": 22.839450975880027,
+          "receiver_ms": 14.263353950809687,
+          "joint_ms": 37.102804926689714,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "encoder_ms": 8.182846009731293,
+          "sender_ms": 23.053431999869645,
+          "receiver_ms": 14.35733400285244,
+          "joint_ms": 37.410766002722085,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 2,
+          "frame_type": "P",
+          "encoder_ms": 8.20361397927627,
+          "sender_ms": 23.203914985060692,
+          "receiver_ms": 14.39178199507296,
+          "joint_ms": 37.59569698013365,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 3,
+          "frame_type": "P",
+          "encoder_ms": 8.160186000168324,
+          "sender_ms": 23.03647401276976,
+          "receiver_ms": 14.34475602582097,
+          "joint_ms": 37.38123003859073,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 4,
+          "frame_type": "P",
+          "encoder_ms": 8.164296974427998,
+          "sender_ms": 23.018694948405027,
+          "receiver_ms": 14.371835044585168,
+          "joint_ms": 37.390529992990196,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 5,
+          "frame_type": "P",
+          "encoder_ms": 8.179372001904994,
+          "sender_ms": 22.994555009063333,
+          "receiver_ms": 14.58246202673763,
+          "joint_ms": 37.577017035800964,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 6,
+          "frame_type": "P",
+          "encoder_ms": 8.183307014405727,
+          "sender_ms": 23.09092303039506,
+          "receiver_ms": 14.389907009899616,
+          "joint_ms": 37.48083004029468,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 7,
+          "frame_type": "P",
+          "encoder_ms": 8.496132970321923,
+          "sender_ms": 23.937049962114543,
+          "receiver_ms": 14.44963103858754,
+          "joint_ms": 38.38668100070208,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 8,
+          "frame_type": "P",
+          "encoder_ms": 8.167044026777148,
+          "sender_ms": 22.978434048127383,
+          "receiver_ms": 14.345920993946493,
+          "joint_ms": 37.324355042073876,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 9,
+          "frame_type": "P",
+          "encoder_ms": 8.155276998877525,
+          "sender_ms": 23.194813984446228,
+          "receiver_ms": 14.431207964662462,
+          "joint_ms": 37.62602194910869,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 10,
+          "frame_type": "P",
+          "encoder_ms": 8.164405007846653,
+          "sender_ms": 22.97074202215299,
+          "receiver_ms": 14.371149009093642,
+          "joint_ms": 37.34189103124663,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 11,
+          "frame_type": "P",
+          "encoder_ms": 8.178600983228534,
+          "sender_ms": 22.956839995458722,
+          "receiver_ms": 14.385527989361435,
+          "joint_ms": 37.34236798482016,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 12,
+          "frame_type": "P",
+          "encoder_ms": 8.170614019036293,
+          "sender_ms": 23.04401301080361,
+          "receiver_ms": 14.704973029438406,
+          "joint_ms": 37.748986040242016,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 13,
+          "frame_type": "P",
+          "encoder_ms": 8.171323977876455,
+          "sender_ms": 23.011746001429856,
+          "receiver_ms": 14.388821960892528,
+          "joint_ms": 37.400567962322384,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 14,
+          "frame_type": "P",
+          "encoder_ms": 8.164656988810748,
+          "sender_ms": 22.99133298220113,
+          "receiver_ms": 14.3307939870283,
+          "joint_ms": 37.32212696922943,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 15,
+          "frame_type": "P",
+          "encoder_ms": 8.183586993254721,
+          "sender_ms": 22.993165999650955,
+          "receiver_ms": 14.43039404693991,
+          "joint_ms": 37.423560046590865,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 16,
+          "frame_type": "P",
+          "encoder_ms": 8.277037006337196,
+          "sender_ms": 23.15689902752638,
+          "receiver_ms": 14.429670001845807,
+          "joint_ms": 37.586569029372185,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 17,
+          "frame_type": "P",
+          "encoder_ms": 8.180378994438797,
+          "sender_ms": 23.010393022559583,
+          "receiver_ms": 14.353241014759988,
+          "joint_ms": 37.36363403731957,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 18,
+          "frame_type": "P",
+          "encoder_ms": 8.182009973097593,
+          "sender_ms": 23.03722797660157,
+          "receiver_ms": 14.48078901739791,
+          "joint_ms": 37.51801699399948,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 19,
+          "frame_type": "P",
+          "encoder_ms": 8.17734596785158,
+          "sender_ms": 23.247348959557712,
+          "receiver_ms": 14.400640968233347,
+          "joint_ms": 37.64798992779106,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 20,
+          "frame_type": "P",
+          "encoder_ms": 8.155093993991613,
+          "sender_ms": 22.9787040152587,
+          "receiver_ms": 14.48418595828116,
+          "joint_ms": 37.46288997353986,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 21,
+          "frame_type": "P",
+          "encoder_ms": 8.168240019585937,
+          "sender_ms": 23.009689059108496,
+          "receiver_ms": 14.371364959515631,
+          "joint_ms": 37.38105401862413,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 22,
+          "frame_type": "P",
+          "encoder_ms": 8.171044057235122,
+          "sender_ms": 22.94989809161052,
+          "receiver_ms": 14.66181903379038,
+          "joint_ms": 37.6117171254009,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 23,
+          "frame_type": "P",
+          "encoder_ms": 8.1642409786582,
+          "sender_ms": 23.007220996078104,
+          "receiver_ms": 14.394843950867653,
+          "joint_ms": 37.40206494694576,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 24,
+          "frame_type": "P",
+          "encoder_ms": 8.169611974153668,
+          "sender_ms": 22.98556995810941,
+          "receiver_ms": 14.403501991182566,
+          "joint_ms": 37.389071949291974,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 25,
+          "frame_type": "P",
+          "encoder_ms": 8.162389975041151,
+          "sender_ms": 23.14247697358951,
+          "receiver_ms": 14.403228007722646,
+          "joint_ms": 37.545704981312156,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 26,
+          "frame_type": "P",
+          "encoder_ms": 8.176469011232257,
+          "sender_ms": 23.293277015909553,
+          "receiver_ms": 14.430659008212388,
+          "joint_ms": 37.72393602412194,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 27,
+          "frame_type": "P",
+          "encoder_ms": 8.173634007107466,
+          "sender_ms": 23.10153702273965,
+          "receiver_ms": 14.372559962794185,
+          "joint_ms": 37.47409698553383,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 28,
+          "frame_type": "P",
+          "encoder_ms": 8.171226014383137,
+          "sender_ms": 22.980365029070526,
+          "receiver_ms": 14.395942038390785,
+          "joint_ms": 37.37630706746131,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 29,
+          "frame_type": "P",
+          "encoder_ms": 8.17658903542906,
+          "sender_ms": 23.45782401971519,
+          "receiver_ms": 14.586744015105069,
+          "joint_ms": 38.04456803482026,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 30,
+          "frame_type": "P",
+          "encoder_ms": 8.190443040803075,
+          "sender_ms": 23.22081004967913,
+          "receiver_ms": 14.578023983631283,
+          "joint_ms": 37.79883403331041,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 31,
+          "frame_type": "P",
+          "encoder_ms": 8.150818990543485,
+          "sender_ms": 23.204675992019475,
+          "receiver_ms": 14.846289006527513,
+          "joint_ms": 38.05096499854699,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 32,
+          "frame_type": "I",
+          "encoder_ms": 8.144471037667245,
+          "sender_ms": 22.791552008129656,
+          "receiver_ms": 14.430805982556194,
+          "joint_ms": 37.22235799068585,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 33,
+          "frame_type": "P",
+          "encoder_ms": 8.166776038706303,
+          "sender_ms": 23.035428021103144,
+          "receiver_ms": 14.428659051191062,
+          "joint_ms": 37.464087072294205,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 34,
+          "frame_type": "P",
+          "encoder_ms": 8.191147993784398,
+          "sender_ms": 23.12749600969255,
+          "receiver_ms": 14.355002960655838,
+          "joint_ms": 37.48249897034839,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 35,
+          "frame_type": "P",
+          "encoder_ms": 8.17757099866867,
+          "sender_ms": 23.089757014531642,
+          "receiver_ms": 14.59626597352326,
+          "joint_ms": 37.6860229880549,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 36,
+          "frame_type": "P",
+          "encoder_ms": 8.191775006707758,
+          "sender_ms": 23.04890804225579,
+          "receiver_ms": 14.414014003705233,
+          "joint_ms": 37.46292204596102,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 37,
+          "frame_type": "P",
+          "encoder_ms": 8.182953053619713,
+          "sender_ms": 23.009942029602826,
+          "receiver_ms": 14.35042399680242,
+          "joint_ms": 37.360366026405245,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 38,
+          "frame_type": "P",
+          "encoder_ms": 8.169767970684916,
+          "sender_ms": 22.999425942543894,
+          "receiver_ms": 14.723985979799181,
+          "joint_ms": 37.723411922343075,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 39,
+          "frame_type": "P",
+          "encoder_ms": 8.165116014424711,
+          "sender_ms": 23.259993002284318,
+          "receiver_ms": 14.732996991369873,
+          "joint_ms": 37.99298999365419,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 40,
+          "frame_type": "P",
+          "encoder_ms": 8.185484970454127,
+          "sender_ms": 23.19380996050313,
+          "receiver_ms": 14.673425001092255,
+          "joint_ms": 37.867234961595386,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 41,
+          "frame_type": "P",
+          "encoder_ms": 8.171494002453983,
+          "sender_ms": 23.02575798239559,
+          "receiver_ms": 14.38322599278763,
+          "joint_ms": 37.40898397518322,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 42,
+          "frame_type": "P",
+          "encoder_ms": 8.161453995853662,
+          "sender_ms": 23.238794005010277,
+          "receiver_ms": 14.460148988291621,
+          "joint_ms": 37.6989429933019,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 43,
+          "frame_type": "P",
+          "encoder_ms": 8.17575998371467,
+          "sender_ms": 22.99912297166884,
+          "receiver_ms": 14.351771038491279,
+          "joint_ms": 37.35089401016012,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 44,
+          "frame_type": "P",
+          "encoder_ms": 8.177195966709405,
+          "sender_ms": 23.008285963442177,
+          "receiver_ms": 14.334975043311715,
+          "joint_ms": 37.34326100675389,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 45,
+          "frame_type": "P",
+          "encoder_ms": 10.228600993286818,
+          "sender_ms": 25.491023960057646,
+          "receiver_ms": 14.607208024244756,
+          "joint_ms": 40.0982319843024,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 46,
+          "frame_type": "P",
+          "encoder_ms": 8.229259052313864,
+          "sender_ms": 23.082458006683737,
+          "receiver_ms": 14.35197697719559,
+          "joint_ms": 37.43443498387933,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 47,
+          "frame_type": "P",
+          "encoder_ms": 8.164272992871702,
+          "sender_ms": 23.02000403869897,
+          "receiver_ms": 14.373625977896154,
+          "joint_ms": 37.393630016595125,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 48,
+          "frame_type": "P",
+          "encoder_ms": 8.159139018971473,
+          "sender_ms": 23.117123055271804,
+          "receiver_ms": 14.419138024095446,
+          "joint_ms": 37.53626107936725,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 49,
+          "frame_type": "P",
+          "encoder_ms": 8.18311597686261,
+          "sender_ms": 23.280110966879874,
+          "receiver_ms": 14.416584046557546,
+          "joint_ms": 37.69669501343742,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 50,
+          "frame_type": "P",
+          "encoder_ms": 8.176225004717708,
+          "sender_ms": 22.996095998678356,
+          "receiver_ms": 14.322187984362245,
+          "joint_ms": 37.3182839830406,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 51,
+          "frame_type": "P",
+          "encoder_ms": 8.16496304469183,
+          "sender_ms": 23.029264993965626,
+          "receiver_ms": 14.373516023624688,
+          "joint_ms": 37.402781017590314,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 52,
+          "frame_type": "P",
+          "encoder_ms": 8.185020997188985,
+          "sender_ms": 23.050027957651764,
+          "receiver_ms": 14.386203023605049,
+          "joint_ms": 37.43623098125681,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 53,
+          "frame_type": "P",
+          "encoder_ms": 8.164980972651392,
+          "sender_ms": 22.991581994574517,
+          "receiver_ms": 14.409001043532044,
+          "joint_ms": 37.40058303810656,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 54,
+          "frame_type": "P",
+          "encoder_ms": 8.167345018591732,
+          "sender_ms": 23.029053991194814,
+          "receiver_ms": 14.404753979761153,
+          "joint_ms": 37.43380797095597,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 55,
+          "frame_type": "P",
+          "encoder_ms": 8.18477402208373,
+          "sender_ms": 23.03672907873988,
+          "receiver_ms": 14.665358990896493,
+          "joint_ms": 37.702088069636375,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 56,
+          "frame_type": "P",
+          "encoder_ms": 8.173050999175757,
+          "sender_ms": 23.050083953421563,
+          "receiver_ms": 14.330887992400676,
+          "joint_ms": 37.38097194582224,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 57,
+          "frame_type": "P",
+          "encoder_ms": 8.169134962372482,
+          "sender_ms": 23.021686996798962,
+          "receiver_ms": 14.363872003741562,
+          "joint_ms": 37.385559000540525,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 58,
+          "frame_type": "P",
+          "encoder_ms": 8.1842330400832,
+          "sender_ms": 23.02026405232027,
+          "receiver_ms": 14.370116987265646,
+          "joint_ms": 37.39038103958592,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 59,
+          "frame_type": "P",
+          "encoder_ms": 8.173145994078368,
+          "sender_ms": 23.246642958838493,
+          "receiver_ms": 14.406954986043274,
+          "joint_ms": 37.65359794488177,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 60,
+          "frame_type": "P",
+          "encoder_ms": 8.160747005604208,
+          "sender_ms": 22.969120007473975,
+          "receiver_ms": 14.392729965038598,
+          "joint_ms": 37.36184997251257,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 61,
+          "frame_type": "P",
+          "encoder_ms": 8.180774981155992,
+          "sender_ms": 23.040361993480474,
+          "receiver_ms": 14.387039002031088,
+          "joint_ms": 37.42740099551156,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 62,
+          "frame_type": "P",
+          "encoder_ms": 8.161011035554111,
+          "sender_ms": 23.0465600034222,
+          "receiver_ms": 14.68165300320834,
+          "joint_ms": 37.72821300663054,
+          "bytes": 3470,
+          "tokens": 2048
+        },
+        {
+          "frame": 63,
+          "frame_type": "P",
+          "encoder_ms": 8.179797965567559,
+          "sender_ms": 23.00296095199883,
+          "receiver_ms": 14.387706003617495,
+          "joint_ms": 37.390666955616325,
+          "bytes": 3470,
+          "tokens": 2048
+        }
+      ],
+      "timing": {
+        "encoder": {
+          "mean_ms": 8.21192206331034,
+          "p50_ms": 8.173098496627063,
+          "p95_ms": 8.225412291358225,
+          "fps": 121.77417080805637
+        },
+        "sender": {
+          "mean_ms": 23.116389501410595,
+          "p50_ms": 23.03595101693645,
+          "p95_ms": 23.2913021085551,
+          "fps": 43.25935068445609
+        },
+        "receiver": {
+          "mean_ms": 14.44405575057317,
+          "p50_ms": 14.398291503312066,
+          "p95_ms": 14.701475025503896,
+          "fps": 69.23263225152796
+        },
+        "joint": {
+          "mean_ms": 37.560445251983765,
+          "p50_ms": 37.43533298256807,
+          "p95_ms": 38.03683132864535,
+          "fps": 26.623752548492078
+        }
+      },
+      "bytes": 222080,
+      "actual_bpp": 0.013387345679012346,
+      "peak_gpu_mib": 492.1728515625,
+      "sender_receiver_bitwise_equal": true,
+      "gop33_reset_bitwise_equal": true,
+      "independent_model_instances": true,
+      "amp_bf16": true
+    }
+  },
+  "scope": "single H100 sequential encoder+13bit packing+sender local decode+independent receiver unpack/decode; synchronized segment wall times; excludes read,H2D,metrics,disk,assertions; no overlap or profiling"
+}

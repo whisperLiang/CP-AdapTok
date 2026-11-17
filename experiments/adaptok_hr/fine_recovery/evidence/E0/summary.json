@@ -213700,129 +213700,143 @@
   "bypass": {
     "train/vq": {
       "mse": 0.014629604605336985,
-      "psnr": 18.369258739706673,
       "lpips": 0.8140808939933777,
       "dists": 0.647636483112971,
       "edge_mse": 0.0037851823338617883,
       "high_frequency_l1": 0.03110487914333741,
-      "output_change_mse": 0.0
+      "output_change_mse": 0.0,
+      "psnr_global": 18.347674114031108,
+      "psnr_frame_mean": 18.369258739706673
     },
     "train/continuous": {
       "mse": 0.014108747864762941,
-      "psnr": 18.52742962220248,
       "lpips": 0.8147546748320261,
       "dists": 0.6441394289334615,
       "edge_mse": 0.003767131051669518,
       "high_frequency_l1": 0.030903708810607593,
-      "output_change_mse": 0.00039662096241954714
+      "output_change_mse": 0.00039662096241954714,
+      "psnr_global": 18.50511527673997,
+      "psnr_frame_mean": 18.52742962220248
     },
     "train/fine_continuous": {
       "mse": 0.014563333553572496,
-      "psnr": 18.388835393530126,
       "lpips": 0.8142396907011668,
       "dists": 0.6466012001037598,
       "edge_mse": 0.0037795514411603412,
       "high_frequency_l1": 0.031062187006076176,
-      "output_change_mse": 4.039482594938211e-06
+      "output_change_mse": 4.039482594938211e-06,
+      "psnr_global": 18.36739203442322,
+      "psnr_frame_mean": 18.388835393530126
     },
     "train/fine_constant": {
       "mse": 0.014629604605336985,
-      "psnr": 18.369258739706673,
       "lpips": 0.8140808939933777,
       "dists": 0.647636483112971,
       "edge_mse": 0.0037851823338617883,
       "high_frequency_l1": 0.03110487914333741,
-      "output_change_mse": 0.0
+      "output_change_mse": 0.0,
+      "psnr_global": 18.347674114031108,
+      "psnr_frame_mean": 18.369258739706673
     },
     "train/fine_other_ids": {
       "mse": 0.014633194077759981,
-      "psnr": 18.36832922739927,
       "lpips": 0.8140108187993368,
       "dists": 0.6485707759857178,
       "edge_mse": 0.0037867893697693944,
       "high_frequency_l1": 0.03108630919208129,
-      "output_change_mse": 6.124542627124659e-06
+      "output_change_mse": 6.124542627124659e-06,
+      "psnr_global": 18.346608673851616,
+      "psnr_frame_mean": 18.36832922739927
     },
     "train/fine_shuffle": {
       "mse": 0.014629604605336985,
-      "psnr": 18.369258739706673,
       "lpips": 0.8140808939933777,
       "dists": 0.647636483112971,
       "edge_mse": 0.0037851823338617883,
       "high_frequency_l1": 0.03110487914333741,
-      "output_change_mse": 0.0
+      "output_change_mse": 0.0,
+      "psnr_global": 18.347674114031108,
+      "psnr_frame_mean": 18.369258739706673
     },
     "train/no_fine": {
       "mse": 0.014616048739602169,
-      "psnr": 18.373031849220524,
       "lpips": 0.8140140970547994,
       "dists": 0.6455689966678619,
       "edge_mse": 0.003778486008134981,
       "high_frequency_l1": 0.031046881961325806,
-      "output_change_mse": 1.0995341350887125e-05
+      "output_change_mse": 1.0995341350887125e-05,
+      "psnr_global": 18.351700174272086,
+      "psnr_frame_mean": 18.373031849220524
     },
     "validation/vq": {
       "mse": 0.015630433917976916,
-      "psnr": 18.230305163033805,
       "lpips": 0.7790846265852451,
       "dists": 0.6448759287595749,
       "edge_mse": 0.0026852170121856034,
       "high_frequency_l1": 0.02700415439903736,
-      "output_change_mse": 0.0
+      "output_change_mse": 0.0,
+      "psnr_global": 18.06028965322644,
+      "psnr_frame_mean": 18.230305163033805
     },
     "validation/continuous": {
       "mse": 0.015138289658352733,
-      "psnr": 18.367367775618625,
       "lpips": 0.7776209302246571,
       "dists": 0.6430605240166187,
       "edge_mse": 0.002658235578564927,
       "high_frequency_l1": 0.026815095217898488,
-      "output_change_mse": 0.00044748921391146723
+      "output_change_mse": 0.00044748921391146723,
+      "psnr_global": 18.199231891621512,
+      "psnr_frame_mean": 18.367367775618625
     },
     "validation/fine_continuous": {
       "mse": 0.015515186125412583,
-      "psnr": 18.260089463678842,
       "lpips": 0.7790468409657478,
       "dists": 0.6442671492695808,
       "edge_mse": 0.0026843242812901735,
       "high_frequency_l1": 0.026988074416294694,
-      "output_change_mse": 7.339968860264889e-06
+      "output_change_mse": 7.339968860264889e-06,
+      "psnr_global": 18.09243010105289,
+      "psnr_frame_mean": 18.260089463678842
     },
     "validation/fine_constant": {
       "mse": 0.015630433917976916,
-      "psnr": 18.230305163033805,
       "lpips": 0.7790846265852451,
       "dists": 0.6448759287595749,
       "edge_mse": 0.0026852170121856034,
       "high_frequency_l1": 0.02700415439903736,
-      "output_change_mse": 0.0
+      "output_change_mse": 0.0,
+      "psnr_global": 18.06028965322644,
+      "psnr_frame_mean": 18.230305163033805
     },
     "validation/fine_other_ids": {
       "mse": 0.015624084800947458,
-      "psnr": 18.236090976999005,
       "lpips": 0.7794575728476048,
       "dists": 0.6449606157839298,
       "edge_mse": 0.0026780405460158363,
       "high_frequency_l1": 0.026934071094729006,
-      "output_change_mse": 9.824761377785762e-06
+      "output_change_mse": 9.824761377785762e-06,
+      "psnr_global": 18.06205412546393,
+      "psnr_frame_mean": 18.236090976999005
     },
     "validation/fine_shuffle": {
       "mse": 0.015630433917976916,
-      "psnr": 18.230305163033805,
       "lpips": 0.7790846265852451,
       "dists": 0.6448759287595749,
       "edge_mse": 0.0026852170121856034,
       "high_frequency_l1": 0.02700415439903736,
-      "output_change_mse": 0.0
+      "output_change_mse": 0.0,
+      "psnr_global": 18.06028965322644,
+      "psnr_frame_mean": 18.230305163033805
     },
     "validation/no_fine": {
       "mse": 0.015593380492646247,
-      "psnr": 18.23898925408664,
       "lpips": 0.7787013910710812,
       "dists": 0.6441648043692112,
       "edge_mse": 0.002699470627703704,
       "high_frequency_l1": 0.027112721698358655,
-      "output_change_mse": 1.2189325559575082e-05
+      "output_change_mse": 1.2189325559575082e-05,
+      "psnr_global": 18.07059723800714,
+      "psnr_frame_mean": 18.23898925408664
     }
   }
 }

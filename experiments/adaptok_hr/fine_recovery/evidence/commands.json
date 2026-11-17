@@ -1,0 +1,13 @@
+{
+  "training": "experiments/adaptok_hr/fine_recovery/run.py",
+  "evaluation": "experiments/adaptok_hr/fine_recovery/evaluate.py",
+  "tests": "CUBLAS_WORKSPACE_CONFIG=:4096:8 .venv-native/bin/python -m pytest adaptok_hr/tests cp_adaptok/tests/test_regression.py -q --cov=adaptok_hr --cov-branch --cov-report=json:results/adaptok_hr_fine_recovery/coverage_final.json --junitxml=results/adaptok_hr_fine_recovery/tests_final.xml",
+  "tests_result": {
+    "tests": 70,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "mutations": "CUBLAS_WORKSPACE_CONFIG=:4096:8 .venv-native/bin/python -m experiments.adaptok_hr.fine_recovery.quality --output results/adaptok_hr_fine_recovery/mutations_final.json",
+  "report": "experiments/adaptok_hr/fine_recovery/report.py"
+}

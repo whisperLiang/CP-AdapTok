@@ -1,8 +1,8 @@
 {
-  "path": "/home/whisperliang/CP-AdapTok/checkpoints/adaptok_hr_fine_recovery/A3/step_000300.pt",
+  "path": "/home/whisperliang/CP-AdapTok/checkpoints/adaptok_hr_fine_recovery/A3/step_001000.pt",
   "version": 1,
-  "completed_steps": 300,
-  "training_frames": 1200,
+  "completed_steps": 1000,
+  "training_frames": 4000,
   "config": {
     "benchmark": {
       "batch_size": 1,
@@ -110,9 +110,9 @@
   },
   "config_identity": "a3b4956728865909a7e4ef4dbcce3780ebd87e7ec538c163190e982bc75e0119",
   "manifest_identity": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
-  "checkpoint_sha256": "3f6d0d724ae1e52be351c7cf2481654cdd40eb554419c3051f966cdda5d40046",
-  "model_sha256": "49ac2b4e93b39056fa94b136620709338bce797e942087d0529fb3b7dc19d2bc",
-  "codebook_sha256": "871fa2605bbfacd3b27fb17a4d5976b91fa529d5825f46841b44bdd0df5811a9",
+  "checkpoint_sha256": "54dace48890ff95c6f6fa5945e094b6a3ddee58a8520efa819f8e0e228b94155",
+  "model_sha256": "4b7f1d02a7dcb80ab7c20ca5fec49299543c6dfdaf48ab56dcbacebc59c6f875",
+  "codebook_sha256": "56277aa70a00eb9970fa189922d083cb1dc44e74bdcd7998e293dfe68b85b721",
   "source_sha256": "6444b23ffc127321ba8971509d6267d53ee3083b6fad5cba53449d3ed28c56f4",
   "optimizer_saved": true,
   "scheduler_saved": true,

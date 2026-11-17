@@ -1,0 +1,184 @@
+{
+  "tests": {
+    "tests": 70,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "mutations": 24,
+  "mutations_all_killed": true,
+  "changed_production_crap_over_10": [],
+  "duplicate_functions_over_08": [],
+  "matching": [
+    {
+      "names": [
+        "A0",
+        "A1",
+        "A2",
+        "A3"
+      ],
+      "completed_steps": 300,
+      "training_frames_each": 1200,
+      "data_and_budget_sequences_identical": true,
+      "encoder_decoder_tokenizer_initial_sha256": {
+        "A0": "e49989af00bd58932f1efb3e2f540f607f380003fb6acdc264d3e0422c75d6c1",
+        "A1": "e49989af00bd58932f1efb3e2f540f607f380003fb6acdc264d3e0422c75d6c1",
+        "A2": "e49989af00bd58932f1efb3e2f540f607f380003fb6acdc264d3e0422c75d6c1",
+        "A3": "e49989af00bd58932f1efb3e2f540f607f380003fb6acdc264d3e0422c75d6c1"
+      },
+      "training_source_sha256": {
+        "A0": "6444b23ffc127321ba8971509d6267d53ee3083b6fad5cba53449d3ed28c56f4",
+        "A1": "6444b23ffc127321ba8971509d6267d53ee3083b6fad5cba53449d3ed28c56f4",
+        "A2": "6444b23ffc127321ba8971509d6267d53ee3083b6fad5cba53449d3ed28c56f4",
+        "A3": "6444b23ffc127321ba8971509d6267d53ee3083b6fad5cba53449d3ed28c56f4"
+      },
+      "training_settings_identical": true
+    },
+    {
+      "names": [
+        "A1",
+        "A3"
+      ],
+      "completed_steps": 1000,
+      "training_frames_each": 4000,
+      "data_and_budget_sequences_identical": true,
+      "encoder_decoder_tokenizer_initial_sha256": {
+        "A1": "e49989af00bd58932f1efb3e2f540f607f380003fb6acdc264d3e0422c75d6c1",
+        "A3": "e49989af00bd58932f1efb3e2f540f607f380003fb6acdc264d3e0422c75d6c1"
+      },
+      "training_source_sha256": {
+        "A1": "6444b23ffc127321ba8971509d6267d53ee3083b6fad5cba53449d3ed28c56f4",
+        "A3": "6444b23ffc127321ba8971509d6267d53ee3083b6fad5cba53449d3ed28c56f4"
+      },
+      "training_settings_identical": true
+    }
+  ],
+  "protected_inputs": {
+    "old_checkpoint_sha256": "e7ba64dfbdcb9178c87654294a372fba92228f957c49dfc7561894938032c0f5",
+    "old_checkpoint_unchanged": true,
+    "protected_tracked_paths_unchanged": true,
+    "original_branch_head": "cc87bd4d6a36ec45f051d2764c3c7d40dbe37333",
+    "baseline": "cc87bd4d6a36ec45f051d2764c3c7d40dbe37333",
+    "verified_after_all_training": true
+  },
+  "validation_actual_packets": {
+    "A1": {
+      "256": {
+        "frames": 174,
+        "bytes": 97092,
+        "bpp": 0.0021527777777777778
+      },
+      "512": {
+        "frames": 174,
+        "bytes": 169476,
+        "bpp": 0.003757716049382716
+      },
+      "1024": {
+        "frames": 174,
+        "bytes": 314244,
+        "bpp": 0.006967592592592593
+      },
+      "2048": {
+        "frames": 174,
+        "bytes": 603780,
+        "bpp": 0.013387345679012346
+      }
+    },
+    "A3": {
+      "256": {
+        "frames": 174,
+        "bytes": 97092,
+        "bpp": 0.0021527777777777778
+      },
+      "512": {
+        "frames": 174,
+        "bytes": 169476,
+        "bpp": 0.003757716049382716
+      },
+      "1024": {
+        "frames": 174,
+        "bytes": 314244,
+        "bpp": 0.006967592592592593
+      },
+      "2048": {
+        "frames": 174,
+        "bytes": 603780,
+        "bpp": 0.013387345679012346
+      }
+    }
+  },
+  "validation_input_parity": {
+    "same_native_rgb_and_frame_order": true,
+    "models": [
+      "baseline",
+      "A1",
+      "A3"
+    ],
+    "budget_source_sequences": 12,
+    "frames_each_budget": 174
+  },
+  "independent_native_64_frame_joint_fps": {
+    "A1": {
+      "256": 27.65693047073302,
+      "512": 28.396816340496187,
+      "1024": 27.49196027080206,
+      "2048": 27.041492632978592
+    },
+    "A3": {
+      "256": 28.279686513957746,
+      "512": 28.058266313904923,
+      "1024": 27.07004685274513,
+      "2048": 26.552352085830606
+    }
+  },
+  "checkpoint_sha256": {
+    "checkpoints/adaptok_hr_fine_recovery/A0/step_000000.pt": "c8f9de3b6dd5d43c61b35b8a693b3d3e1b59b1cc0b8b6a7a9defb267a0b98c0c",
+    "checkpoints/adaptok_hr_fine_recovery/A0/step_000100.pt": "8464caf80fb81ab560f833069c2111bdea412477d04c5735bb7dbc5f609ff371",
+    "checkpoints/adaptok_hr_fine_recovery/A0/step_000200.pt": "e6d53362a170150421a67c6fb58d72becbf7e76a1ad81062c1142dcfae72b3d4",
+    "checkpoints/adaptok_hr_fine_recovery/A0/step_000300.pt": "d1e50623f79dfbe480592bf31c95f42725440f4165080202a70cf2fcb991515d",
+    "checkpoints/adaptok_hr_fine_recovery/A1/step_000000.pt": "3ef027896fefd5cd7491af85704cf9ad18f98dcb9e035788e5ab20d6347ef1c0",
+    "checkpoints/adaptok_hr_fine_recovery/A1/step_000100.pt": "06dd88f8e6833e6d4047943daff3b4310db05dd3b60b2e9bcc364efdb7ed2644",
+    "checkpoints/adaptok_hr_fine_recovery/A1/step_000200.pt": "e7b0b134011238d3a40cd121126d120bb32319d602bedc3c89cd86b1286e12b9",
+    "checkpoints/adaptok_hr_fine_recovery/A1/step_000300.pt": "90f4cb96b083757f2d04684b11b5c3ecfd8113865ecbef8810559198d27142c7",
+    "checkpoints/adaptok_hr_fine_recovery/A1/step_000400.pt": "2d7c42033e8fa50f8a676d2bce552912628871afed509c54e1e12b0c0949b0d4",
+    "checkpoints/adaptok_hr_fine_recovery/A1/step_000500.pt": "09e11685a2cfe3488b9dc7da831d760f5f6cc7ad240ee13adecd25386338c59c",
+    "checkpoints/adaptok_hr_fine_recovery/A1/step_000600.pt": "d3b41913f89ce986201bbe1d2ef685b2c292a2dcef1174b07ac244642a1758f9",
+    "checkpoints/adaptok_hr_fine_recovery/A1/step_000700.pt": "ff612c431d9e0b7d72eccee0050493a1452a429cd70314972df6d63e4e23b3bb",
+    "checkpoints/adaptok_hr_fine_recovery/A1/step_000800.pt": "9986a2a183c4c02ce2be3576c80eacc9d53c5f1e0d6e1279630c8c370023cf32",
+    "checkpoints/adaptok_hr_fine_recovery/A1/step_000900.pt": "22448693ac5bf7cc8a6cabfd00b89936007c00309a70abfc8cfb5d2dafae94fe",
+    "checkpoints/adaptok_hr_fine_recovery/A1/step_001000.pt": "3cbea9fef3dfeeb3f28e123e06dfc6c9b144c59aa38918eddca3ab02507de84a",
+    "checkpoints/adaptok_hr_fine_recovery/A2/step_000000.pt": "be20540c00fd422af916c01623eab65df32ea0bce5a51a2b2c44a74c7bc372c1",
+    "checkpoints/adaptok_hr_fine_recovery/A2/step_000100.pt": "08a629daecee270cf45b802669fc909038743eabe05c32b6e7fb4703bd86aebb",
+    "checkpoints/adaptok_hr_fine_recovery/A2/step_000200.pt": "553d94deaf506787b875b1d3d32d153b038156a948e6b727af79123b20a9c7e6",
+    "checkpoints/adaptok_hr_fine_recovery/A2/step_000300.pt": "6361157aadc007853f791dec3988832dc6e2ba937796fea6f3a28051c70955b5",
+    "checkpoints/adaptok_hr_fine_recovery/A3/step_000000.pt": "626f822929fe2fb0ac9ee00eaa9b2f9c3a7fdc64ca6e4224f63be1e1f699c465",
+    "checkpoints/adaptok_hr_fine_recovery/A3/step_000100.pt": "bb2d07f3d655f4a26bd330db6130ba2b239c28c9bc6af0f9a9ee6f3b80dc29b2",
+    "checkpoints/adaptok_hr_fine_recovery/A3/step_000200.pt": "df670b51908d5607a5932cc38aa972b8a395e1b331d0f7df3f2c06b4d5f80991",
+    "checkpoints/adaptok_hr_fine_recovery/A3/step_000300.pt": "3f6d0d724ae1e52be351c7cf2481654cdd40eb554419c3051f966cdda5d40046",
+    "checkpoints/adaptok_hr_fine_recovery/A3/step_000400.pt": "b361a776ef978d8b60446b9758c910bea2690d8d83a9226a15ec37eb457f1ba0",
+    "checkpoints/adaptok_hr_fine_recovery/A3/step_000500.pt": "d96cfdcbb2e468d7bcc08cb29942a32257cea82e291f99d98430b27e3817aa72",
+    "checkpoints/adaptok_hr_fine_recovery/A3/step_000600.pt": "f684ebff3d511aa934fbf4042bc51de8b7364eb706cb0cc0d39bae95f28a3b08",
+    "checkpoints/adaptok_hr_fine_recovery/A3/step_000700.pt": "0d276a1f7154bed355dbe1467031efca0713f7518f124a2379126146e3197d0e",
+    "checkpoints/adaptok_hr_fine_recovery/A3/step_000800.pt": "77e5bd4a603dd0da7c025531877afaa367ec15209fe78a0250385a1d2f40e05e",
+    "checkpoints/adaptok_hr_fine_recovery/A3/step_000900.pt": "672a72d2855f6d556539905d6d7abd84cefbfef6bc2cb417a39a2a929aeff02e",
+    "checkpoints/adaptok_hr_fine_recovery/A3/step_001000.pt": "54dace48890ff95c6f6fa5945e094b6a3ddee58a8520efa819f8e0e228b94155"
+  },
+  "research_decision": {
+    "selected_300": [
+      "A1",
+      "A3"
+    ],
+    "fine_information_at_1000": {
+      "A1": false,
+      "A3": false
+    },
+    "decoder_experiments_allowed": false,
+    "decoder_candidate_names": [],
+    "scaling_or_performance_optimization_allowed": false,
+    "reason": "Fine information is a prerequisite; all other quality, late-frame and speed gates must also pass before scaling.",
+    "negative_result_stop": true,
+    "new_final_test_run": false,
+    "historical_final_test_used_for_selection": false
+  },
+  "engineering_checks_pass": true
+}

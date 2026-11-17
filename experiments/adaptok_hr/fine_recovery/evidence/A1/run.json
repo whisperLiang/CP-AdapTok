@@ -1,8 +1,8 @@
 {
   "environment": {
-    "time": "2026-11-18T01:55:57.171448+08:00",
+    "time": "2026-11-18T02:15:40.695485+08:00",
     "timezone": "Asia/Shanghai",
-    "git": "0fd33897d348f1dcaf3a272de0ff8218f82e4d83",
+    "git": "da5c027c22457fc71c8a14fb80f05485fc76d0e1",
     "git_dirty": true,
     "source_sha256": "6444b23ffc127321ba8971509d6267d53ee3083b6fad5cba53449d3ed28c56f4",
     "deterministic_algorithms": true,
@@ -120,9 +120,9 @@
     }
   },
   "manifest_identity": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
-  "requested_steps": 300,
-  "resume_from": null,
-  "starting_completed_steps": 0,
+  "requested_steps": 1000,
+  "resume_from": "checkpoints/adaptok_hr_fine_recovery/A1/step_000300.pt",
+  "starting_completed_steps": 300,
   "discarded_uncommitted_log_rows": 0,
   "experiment_type": "joint_native_1080p"
 }

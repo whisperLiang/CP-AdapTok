@@ -1,0 +1,17 @@
+{
+  "selected_300": [
+    "A1",
+    "A3"
+  ],
+  "fine_information_at_1000": {
+    "A1": false,
+    "A3": false
+  },
+  "decoder_experiments_allowed": false,
+  "decoder_candidate_names": [],
+  "scaling_or_performance_optimization_allowed": false,
+  "reason": "Fine information is a prerequisite; all other quality, late-frame and speed gates must also pass before scaling.",
+  "negative_result_stop": true,
+  "new_final_test_run": false,
+  "historical_final_test_used_for_selection": false
+}

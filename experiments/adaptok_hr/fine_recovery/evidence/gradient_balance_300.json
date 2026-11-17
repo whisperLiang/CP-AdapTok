@@ -1,0 +1,980 @@
+{
+  "environment": {
+    "time": "2026-11-18T02:22:29.077144+08:00",
+    "timezone": "Asia/Shanghai",
+    "git": "a7c3c0d4af5a98c24229694df4b242ba87bac512",
+    "git_dirty": true,
+    "source_sha256": "6444b23ffc127321ba8971509d6267d53ee3083b6fad5cba53449d3ed28c56f4",
+    "deterministic_algorithms": true,
+    "python_trace_enabled": false,
+    "branch": "experiment/adaptok-hr-fine-recovery",
+    "python": "3.12.13",
+    "torch": "2.9.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA H100 PCIe",
+    "driver": "580.159.03"
+  },
+  "diagnostic_only": true,
+  "optimizer_updates": 0,
+  "manifest_identity": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+  "input": {
+    "content_id": "DAVIS2017:bear",
+    "source_sha256": "125c531bad3184060d3deb436ebbddacabb27e6abc02c05542d2aeb61e9ef175",
+    "frame_indices": [
+      0
+    ],
+    "source_resolution": [
+      1920,
+      1080
+    ],
+    "crop": [
+      0,
+      0,
+      1920,
+      1080
+    ],
+    "resized": false,
+    "engineering_crop": false,
+    "fps": 30,
+    "color_format": "RGB float32 [0,1]; OpenCV BGR->RGB"
+  },
+  "rows": [
+    {
+      "name": "A0",
+      "step": 0,
+      "checkpoint_sha256": "c8f9de3b6dd5d43c61b35b8a693b3d3e1b59b1cc0b8b6a7a9defb267a0b98c0c",
+      "levels": {
+        "Base": {
+          "used_codes": 8,
+          "usage": 0.0009765625,
+          "perplexity": 3.134997844696045,
+          "maximum_code_fraction": 0.6814814805984497,
+          "raw": {
+            "mean": -0.03292931988835335,
+            "std": 0.2562771439552307,
+            "spatial_variance": 0.008784129284322262,
+            "normalized_variance": 0.008655153214931488,
+            "mean_position_cosine": 0.8604840636253357
+          },
+          "normalized": {
+            "mean": -0.03405778110027313,
+            "std": 0.2476692646741867,
+            "spatial_variance": 0.008655153214931488,
+            "normalized_variance": 0.008655153214931488,
+            "mean_position_cosine": 0.8604840636253357
+          },
+          "reconstruction_gradient_norm": 0.000911515555344522,
+          "vq_encoder_gradient_norm": 7.73104329709895e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.08481526455329527
+        },
+        "Medium": {
+          "used_codes": 13,
+          "usage": 0.0015869140625,
+          "perplexity": 4.863102436065674,
+          "maximum_code_fraction": 0.3588235378265381,
+          "raw": {
+            "mean": 0.042444270104169846,
+            "std": 0.32745903730392456,
+            "spatial_variance": 0.007198947947472334,
+            "normalized_variance": 0.0038488698191940784,
+            "mean_position_cosine": 0.9382971525192261
+          },
+          "normalized": {
+            "mean": 0.03238542005419731,
+            "std": 0.24789349734783173,
+            "spatial_variance": 0.0038488698191940784,
+            "normalized_variance": 0.0038488698191940784,
+            "mean_position_cosine": 0.9382971525192261
+          },
+          "reconstruction_gradient_norm": 0.0004064977983944118,
+          "vq_encoder_gradient_norm": 0.00016720891289878637,
+          "vq_to_reconstruction_gradient_ratio": 0.4113402669318984
+        },
+        "Fine": {
+          "used_codes": 8,
+          "usage": 0.0009765625,
+          "perplexity": 2.4136271476745605,
+          "maximum_code_fraction": 0.5816108584403992,
+          "raw": {
+            "mean": 0.13135087490081787,
+            "std": 0.39707493782043457,
+            "spatial_variance": 0.0034189363941550255,
+            "normalized_variance": 0.0011037684744223952,
+            "mean_position_cosine": 0.9823270440101624
+          },
+          "normalized": {
+            "mean": 0.07890728116035461,
+            "std": 0.2372206598520279,
+            "spatial_variance": 0.0011037684744223952,
+            "normalized_variance": 0.001103768590837717,
+            "mean_position_cosine": 0.9823270440101624
+          },
+          "reconstruction_gradient_norm": 0.0001869343250291422,
+          "vq_encoder_gradient_norm": 0.0002784823882393539,
+          "vq_to_reconstruction_gradient_ratio": 1.4897338313653192
+        }
+      },
+      "reconstruction_loss": 0.3622889816761017,
+      "vq_loss": 0.035609591752290726
+    },
+    {
+      "name": "A0",
+      "step": 100,
+      "checkpoint_sha256": "8464caf80fb81ab560f833069c2111bdea412477d04c5735bb7dbc5f609ff371",
+      "levels": {
+        "Base": {
+          "used_codes": 18,
+          "usage": 0.002197265625,
+          "perplexity": 8.966631889343262,
+          "maximum_code_fraction": 0.24444444477558136,
+          "raw": {
+            "mean": 0.11045580357313156,
+            "std": 0.592913806438446,
+            "spatial_variance": 0.23848727345466614,
+            "normalized_variance": 0.03596111014485359,
+            "mean_position_cosine": 0.42032843828201294
+          },
+          "normalized": {
+            "mean": 0.05099772661924362,
+            "std": 0.2447431981563568,
+            "spatial_variance": 0.03596111014485359,
+            "normalized_variance": 0.03596111387014389,
+            "mean_position_cosine": 0.42032843828201294
+          },
+          "reconstruction_gradient_norm": 0.001580947544425726,
+          "vq_encoder_gradient_norm": 7.43503260309808e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.047028964555549696
+        },
+        "Medium": {
+          "used_codes": 2,
+          "usage": 0.000244140625,
+          "perplexity": 1.407734990119934,
+          "maximum_code_fraction": 0.8921568393707275,
+          "raw": {
+            "mean": 0.14350254833698273,
+            "std": 0.7620102763175964,
+            "spatial_variance": 0.05444365739822388,
+            "normalized_variance": 0.00540673453360796,
+            "mean_position_cosine": 0.9133223295211792
+          },
+          "normalized": {
+            "mean": 0.046255115419626236,
+            "std": 0.2456836700439453,
+            "spatial_variance": 0.00540673453360796,
+            "normalized_variance": 0.00540673453360796,
+            "mean_position_cosine": 0.9133223295211792
+          },
+          "reconstruction_gradient_norm": 0.00046867059427313507,
+          "vq_encoder_gradient_norm": 8.347989933099598e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.17812062534127113
+        },
+        "Fine": {
+          "used_codes": 1,
+          "usage": 0.0001220703125,
+          "perplexity": 1.0,
+          "maximum_code_fraction": 1.0,
+          "raw": {
+            "mean": 0.016162168234586716,
+            "std": 0.9148005843162537,
+            "spatial_variance": 0.0094817616045475,
+            "normalized_variance": 0.00047557143261656165,
+            "mean_position_cosine": 0.9923853874206543
+          },
+          "normalized": {
+            "mean": 0.004627118352800608,
+            "std": 0.24995717406272888,
+            "spatial_variance": 0.00047557143261656165,
+            "normalized_variance": 0.00047557143261656165,
+            "mean_position_cosine": 0.9923854470252991
+          },
+          "reconstruction_gradient_norm": 0.00016662257257848978,
+          "vq_encoder_gradient_norm": 4.529904617811553e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.2718662032227165
+        }
+      },
+      "reconstruction_loss": 0.30624470114707947,
+      "vq_loss": 0.003521726466715336
+    },
+    {
+      "name": "A0",
+      "step": 300,
+      "checkpoint_sha256": "d1e50623f79dfbe480592bf31c95f42725440f4165080202a70cf2fcb991515d",
+      "levels": {
+        "Base": {
+          "used_codes": 33,
+          "usage": 0.0040283203125,
+          "perplexity": 15.67567253112793,
+          "maximum_code_fraction": 0.3185185194015503,
+          "raw": {
+            "mean": 0.09881242364645004,
+            "std": 0.4866413176059723,
+            "spatial_variance": 0.12974956631660461,
+            "normalized_variance": 0.03123699314892292,
+            "mean_position_cosine": 0.49647843837738037
+          },
+          "normalized": {
+            "mean": 0.053232479840517044,
+            "std": 0.24426686763763428,
+            "spatial_variance": 0.03123699314892292,
+            "normalized_variance": 0.03123699314892292,
+            "mean_position_cosine": 0.49647843837738037
+          },
+          "reconstruction_gradient_norm": 0.002097212942317128,
+          "vq_encoder_gradient_norm": 7.239204569486901e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.034518214261488336
+        },
+        "Medium": {
+          "used_codes": 8,
+          "usage": 0.0009765625,
+          "perplexity": 3.048922538757324,
+          "maximum_code_fraction": 0.5352941155433655,
+          "raw": {
+            "mean": 0.06584058701992035,
+            "std": 0.5358845591545105,
+            "spatial_variance": 0.13358023762702942,
+            "normalized_variance": 0.023956675082445145,
+            "mean_position_cosine": 0.6159401535987854
+          },
+          "normalized": {
+            "mean": 0.027761636301875114,
+            "std": 0.24845381081104279,
+            "spatial_variance": 0.023956675082445145,
+            "normalized_variance": 0.023956675082445145,
+            "mean_position_cosine": 0.6159401535987854
+          },
+          "reconstruction_gradient_norm": 0.0010419507743790746,
+          "vq_encoder_gradient_norm": 9.955626592272893e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.09554795521127865
+        },
+        "Fine": {
+          "used_codes": 1,
+          "usage": 0.0001220703125,
+          "perplexity": 1.0,
+          "maximum_code_fraction": 1.0,
+          "raw": {
+            "mean": 0.019497524946928024,
+            "std": 0.9785715937614441,
+            "spatial_variance": 0.014509353786706924,
+            "normalized_variance": 0.0003721261746250093,
+            "mean_position_cosine": 0.9940417408943176
+          },
+          "normalized": {
+            "mean": 0.004991116933524609,
+            "std": 0.24995017051696777,
+            "spatial_variance": 0.0003721261746250093,
+            "normalized_variance": 0.0003721261746250093,
+            "mean_position_cosine": 0.9940417408943176
+          },
+          "reconstruction_gradient_norm": 0.00026925321435555816,
+          "vq_encoder_gradient_norm": 3.8595175283262506e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.14334155815238012
+        }
+      },
+      "reconstruction_loss": 0.2559109628200531,
+      "vq_loss": 0.003947023302316666
+    },
+    {
+      "name": "A1",
+      "step": 0,
+      "checkpoint_sha256": "3ef027896fefd5cd7491af85704cf9ad18f98dcb9e035788e5ab20d6347ef1c0",
+      "levels": {
+        "Base": {
+          "used_codes": 8,
+          "usage": 0.0009765625,
+          "perplexity": 3.134997844696045,
+          "maximum_code_fraction": 0.6814814805984497,
+          "raw": {
+            "mean": -0.03292931988835335,
+            "std": 0.2562771439552307,
+            "spatial_variance": 0.008784129284322262,
+            "normalized_variance": 0.008655153214931488,
+            "mean_position_cosine": 0.8604840636253357
+          },
+          "normalized": {
+            "mean": -0.03405778110027313,
+            "std": 0.2476692646741867,
+            "spatial_variance": 0.008655153214931488,
+            "normalized_variance": 0.008655153214931488,
+            "mean_position_cosine": 0.8604840636253357
+          },
+          "reconstruction_gradient_norm": 0.000911515555344522,
+          "vq_encoder_gradient_norm": 0.000101356694358401,
+          "vq_to_reconstruction_gradient_ratio": 0.11119579228693646
+        },
+        "Medium": {
+          "used_codes": 13,
+          "usage": 0.0015869140625,
+          "perplexity": 4.863102436065674,
+          "maximum_code_fraction": 0.3588235378265381,
+          "raw": {
+            "mean": 0.042444270104169846,
+            "std": 0.32745903730392456,
+            "spatial_variance": 0.007198947947472334,
+            "normalized_variance": 0.0038488698191940784,
+            "mean_position_cosine": 0.9382971525192261
+          },
+          "normalized": {
+            "mean": 0.03238542005419731,
+            "std": 0.24789349734783173,
+            "spatial_variance": 0.0038488698191940784,
+            "normalized_variance": 0.0038488698191940784,
+            "mean_position_cosine": 0.9382971525192261
+          },
+          "reconstruction_gradient_norm": 0.0004064977983944118,
+          "vq_encoder_gradient_norm": 0.00021921675943303853,
+          "vq_to_reconstruction_gradient_ratio": 0.5392815417424217
+        },
+        "Fine": {
+          "used_codes": 8,
+          "usage": 0.0009765625,
+          "perplexity": 2.4136271476745605,
+          "maximum_code_fraction": 0.5816108584403992,
+          "raw": {
+            "mean": 0.13135087490081787,
+            "std": 0.39707493782043457,
+            "spatial_variance": 0.0034189363941550255,
+            "normalized_variance": 0.0011037684744223952,
+            "mean_position_cosine": 0.9823270440101624
+          },
+          "normalized": {
+            "mean": 0.07890728116035461,
+            "std": 0.2372206598520279,
+            "spatial_variance": 0.0011037684744223952,
+            "normalized_variance": 0.001103768590837717,
+            "mean_position_cosine": 0.9823270440101624
+          },
+          "reconstruction_gradient_norm": 0.0001869343250291422,
+          "vq_encoder_gradient_norm": 0.00036510018981061876,
+          "vq_to_reconstruction_gradient_ratio": 1.953093364494195
+        }
+      },
+      "reconstruction_loss": 0.3622889816761017,
+      "vq_loss": 0.03544766828417778
+    },
+    {
+      "name": "A1",
+      "step": 100,
+      "checkpoint_sha256": "06dd88f8e6833e6d4047943daff3b4310db05dd3b60b2e9bcc364efdb7ed2644",
+      "levels": {
+        "Base": {
+          "used_codes": 7,
+          "usage": 0.0008544921875,
+          "perplexity": 4.472005844116211,
+          "maximum_code_fraction": 0.42222222685813904,
+          "raw": {
+            "mean": -0.19884151220321655,
+            "std": 0.47416210174560547,
+            "spatial_variance": 0.15189290046691895,
+            "normalized_variance": 0.030473783612251282,
+            "mean_position_cosine": 0.508780837059021
+          },
+          "normalized": {
+            "mean": -0.09450193494558334,
+            "std": 0.231450617313385,
+            "spatial_variance": 0.030473783612251282,
+            "normalized_variance": 0.030473783612251282,
+            "mean_position_cosine": 0.5087808966636658
+          },
+          "reconstruction_gradient_norm": 0.0016062393551692367,
+          "vq_encoder_gradient_norm": 8.007592259673402e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.04985304483981907
+        },
+        "Medium": {
+          "used_codes": 1,
+          "usage": 0.0001220703125,
+          "perplexity": 1.0,
+          "maximum_code_fraction": 1.0,
+          "raw": {
+            "mean": 0.18543672561645508,
+            "std": 0.8328025937080383,
+            "spatial_variance": 0.010972820222377777,
+            "normalized_variance": 0.000660464633256197,
+            "mean_position_cosine": 0.9894117712974548
+          },
+          "normalized": {
+            "mean": 0.054766424000263214,
+            "std": 0.24392753839492798,
+            "spatial_variance": 0.000660464633256197,
+            "normalized_variance": 0.0006604647496715188,
+            "mean_position_cosine": 0.9894117712974548
+          },
+          "reconstruction_gradient_norm": 0.00030687719117850065,
+          "vq_encoder_gradient_norm": 4.484612509259023e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.1461370423796165
+        },
+        "Fine": {
+          "used_codes": 1,
+          "usage": 0.0001220703125,
+          "perplexity": 1.0,
+          "maximum_code_fraction": 1.0,
+          "raw": {
+            "mean": 0.040441930294036865,
+            "std": 0.7814422845840454,
+            "spatial_variance": 0.01187918335199356,
+            "normalized_variance": 0.0009542576153762639,
+            "mean_position_cosine": 0.9847209453582764
+          },
+          "normalized": {
+            "mean": 0.013243637047708035,
+            "std": 0.24964895844459534,
+            "spatial_variance": 0.0009542576153762639,
+            "normalized_variance": 0.0009542576735839248,
+            "mean_position_cosine": 0.9847209453582764
+          },
+          "reconstruction_gradient_norm": 0.0001195825680042617,
+          "vq_encoder_gradient_norm": 7.747248309897259e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.6478576634699099
+        }
+      },
+      "reconstruction_loss": 0.30263590812683105,
+      "vq_loss": 0.0024491623044013977
+    },
+    {
+      "name": "A1",
+      "step": 300,
+      "checkpoint_sha256": "90f4cb96b083757f2d04684b11b5c3ecfd8113865ecbef8810559198d27142c7",
+      "levels": {
+        "Base": {
+          "used_codes": 9,
+          "usage": 0.0010986328125,
+          "perplexity": 4.421175479888916,
+          "maximum_code_fraction": 0.42222222685813904,
+          "raw": {
+            "mean": -0.22821514308452606,
+            "std": 0.4836733341217041,
+            "spatial_variance": 0.18089550733566284,
+            "normalized_variance": 0.03444351255893707,
+            "mean_position_cosine": 0.44479119777679443
+          },
+          "normalized": {
+            "mean": -0.11079657822847366,
+            "std": 0.22410738468170166,
+            "spatial_variance": 0.03444351255893707,
+            "normalized_variance": 0.03444351255893707,
+            "mean_position_cosine": 0.44479119777679443
+          },
+          "reconstruction_gradient_norm": 0.003314270405098796,
+          "vq_encoder_gradient_norm": 7.190771430032328e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.021696393326777984
+        },
+        "Medium": {
+          "used_codes": 2,
+          "usage": 0.000244140625,
+          "perplexity": 1.0367342233657837,
+          "maximum_code_fraction": 0.9941176176071167,
+          "raw": {
+            "mean": 0.16195207834243774,
+            "std": 0.7897908687591553,
+            "spatial_variance": 0.03794022276997566,
+            "normalized_variance": 0.003235399490222335,
+            "mean_position_cosine": 0.9481319785118103
+          },
+          "normalized": {
+            "mean": 0.05045570060610771,
+            "std": 0.24485552310943604,
+            "spatial_variance": 0.003235399490222335,
+            "normalized_variance": 0.003235399955883622,
+            "mean_position_cosine": 0.9481319785118103
+          },
+          "reconstruction_gradient_norm": 0.0007499974453821778,
+          "vq_encoder_gradient_norm": 7.957893831189722e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.10610561249491457
+        },
+        "Fine": {
+          "used_codes": 1,
+          "usage": 0.0001220703125,
+          "perplexity": 1.0,
+          "maximum_code_fraction": 1.0,
+          "raw": {
+            "mean": 0.003555099479854107,
+            "std": 0.8361153602600098,
+            "spatial_variance": 0.02315860241651535,
+            "normalized_variance": 0.0010827041696757078,
+            "mean_position_cosine": 0.9826644062995911
+          },
+          "normalized": {
+            "mean": 0.000850287324283272,
+            "std": 0.2499985545873642,
+            "spatial_variance": 0.0010827041696757078,
+            "normalized_variance": 0.0010827042860910296,
+            "mean_position_cosine": 0.9826645255088806
+          },
+          "reconstruction_gradient_norm": 0.00029888973222114146,
+          "vq_encoder_gradient_norm": 8.464186248602346e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.2831875884695796
+        }
+      },
+      "reconstruction_loss": 0.26088517904281616,
+      "vq_loss": 0.0031441580504179
+    },
+    {
+      "name": "A2",
+      "step": 0,
+      "checkpoint_sha256": "be20540c00fd422af916c01623eab65df32ea0bce5a51a2b2c44a74c7bc372c1",
+      "levels": {
+        "Base": {
+          "used_codes": 8,
+          "usage": 0.0009765625,
+          "perplexity": 3.134997844696045,
+          "maximum_code_fraction": 0.6814814805984497,
+          "raw": {
+            "mean": -0.03292931988835335,
+            "std": 0.2562771439552307,
+            "spatial_variance": 0.008784129284322262,
+            "normalized_variance": 0.008655153214931488,
+            "mean_position_cosine": 0.8604840636253357
+          },
+          "normalized": {
+            "mean": -0.03405778110027313,
+            "std": 0.2476692646741867,
+            "spatial_variance": 0.008655153214931488,
+            "normalized_variance": 0.008655153214931488,
+            "mean_position_cosine": 0.8604840636253357
+          },
+          "reconstruction_gradient_norm": 0.0009915304835885763,
+          "vq_encoder_gradient_norm": 7.73104329709895e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.07797080800903397
+        },
+        "Medium": {
+          "used_codes": 9,
+          "usage": 0.0010986328125,
+          "perplexity": 1.8318361043930054,
+          "maximum_code_fraction": 0.8686274290084839,
+          "raw": {
+            "mean": 0.042444270104169846,
+            "std": 0.32745903730392456,
+            "spatial_variance": 0.007198947947472334,
+            "normalized_variance": 0.0038488698191940784,
+            "mean_position_cosine": 0.9382971525192261
+          },
+          "normalized": {
+            "mean": 0.03238542005419731,
+            "std": 0.24789349734783173,
+            "spatial_variance": 0.0038488698191940784,
+            "normalized_variance": 0.0038488698191940784,
+            "mean_position_cosine": 0.9382971525192261
+          },
+          "reconstruction_gradient_norm": 0.00044193153735250235,
+          "vq_encoder_gradient_norm": 0.00015576167788822204,
+          "vq_to_reconstruction_gradient_ratio": 0.3524565791827169
+        },
+        "Fine": {
+          "used_codes": 9,
+          "usage": 0.0010986328125,
+          "perplexity": 3.442563772201538,
+          "maximum_code_fraction": 0.6129721999168396,
+          "raw": {
+            "mean": 0.13135087490081787,
+            "std": 0.39707493782043457,
+            "spatial_variance": 0.0034189363941550255,
+            "normalized_variance": 0.0011037684744223952,
+            "mean_position_cosine": 0.9823270440101624
+          },
+          "normalized": {
+            "mean": 0.07890728116035461,
+            "std": 0.2372206598520279,
+            "spatial_variance": 0.0011037684744223952,
+            "normalized_variance": 0.001103768590837717,
+            "mean_position_cosine": 0.9823270440101624
+          },
+          "reconstruction_gradient_norm": 0.00019233522471040487,
+          "vq_encoder_gradient_norm": 0.0002763282391242683,
+          "vq_to_reconstruction_gradient_ratio": 1.4367011531056255
+        }
+      },
+      "reconstruction_loss": 0.36292150616645813,
+      "vq_loss": 0.034079525619745255
+    },
+    {
+      "name": "A2",
+      "step": 100,
+      "checkpoint_sha256": "08a629daecee270cf45b802669fc909038743eabe05c32b6e7fb4703bd86aebb",
+      "levels": {
+        "Base": {
+          "used_codes": 24,
+          "usage": 0.0029296875,
+          "perplexity": 10.427800178527832,
+          "maximum_code_fraction": 0.28148147463798523,
+          "raw": {
+            "mean": -0.07474777102470398,
+            "std": 0.5304651856422424,
+            "spatial_variance": 0.18101492524147034,
+            "normalized_variance": 0.03552139550447464,
+            "mean_position_cosine": 0.4274163544178009
+          },
+          "normalized": {
+            "mean": -0.02536713518202305,
+            "std": 0.24870970845222473,
+            "spatial_variance": 0.03552139550447464,
+            "normalized_variance": 0.03552139550447464,
+            "mean_position_cosine": 0.4274163544178009
+          },
+          "reconstruction_gradient_norm": 0.0011745452648028731,
+          "vq_encoder_gradient_norm": 7.696979446336627e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.06553156933997287
+        },
+        "Medium": {
+          "used_codes": 2,
+          "usage": 0.000244140625,
+          "perplexity": 1.3661032915115356,
+          "maximum_code_fraction": 0.9058823585510254,
+          "raw": {
+            "mean": 0.2184538096189499,
+            "std": 0.8913753628730774,
+            "spatial_variance": 0.08042091131210327,
+            "normalized_variance": 0.005127548240125179,
+            "mean_position_cosine": 0.9177979826927185
+          },
+          "normalized": {
+            "mean": 0.06048271432518959,
+            "std": 0.24257338047027588,
+            "spatial_variance": 0.005127548240125179,
+            "normalized_variance": 0.005127548240125179,
+            "mean_position_cosine": 0.9177980422973633
+          },
+          "reconstruction_gradient_norm": 0.00041837358730845153,
+          "vq_encoder_gradient_norm": 8.422516111750156e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.20131567496732394
+        },
+        "Fine": {
+          "used_codes": 1,
+          "usage": 0.0001220703125,
+          "perplexity": 1.0,
+          "maximum_code_fraction": 1.0,
+          "raw": {
+            "mean": 0.4380074441432953,
+            "std": 0.7501205205917358,
+            "spatial_variance": 0.008108867332339287,
+            "normalized_variance": 0.0005426441202871501,
+            "mean_position_cosine": 0.9913115501403809
+          },
+          "normalized": {
+            "mean": 0.12615804374217987,
+            "std": 0.21583358943462372,
+            "spatial_variance": 0.0005426441202871501,
+            "normalized_variance": 0.0005426441202871501,
+            "mean_position_cosine": 0.9913115501403809
+          },
+          "reconstruction_gradient_norm": 0.0001390404941048473,
+          "vq_encoder_gradient_norm": 4.440948396222666e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.3193996414363895
+        }
+      },
+      "reconstruction_loss": 0.30178046226501465,
+      "vq_loss": 0.00363715086132288
+    },
+    {
+      "name": "A2",
+      "step": 300,
+      "checkpoint_sha256": "6361157aadc007853f791dec3988832dc6e2ba937796fea6f3a28051c70955b5",
+      "levels": {
+        "Base": {
+          "used_codes": 38,
+          "usage": 0.004638671875,
+          "perplexity": 16.300148010253906,
+          "maximum_code_fraction": 0.2074074000120163,
+          "raw": {
+            "mean": -0.08401748538017273,
+            "std": 0.48305562138557434,
+            "spatial_variance": 0.15857478976249695,
+            "normalized_variance": 0.03939737379550934,
+            "mean_position_cosine": 0.36493778228759766
+          },
+          "normalized": {
+            "mean": -0.03902484476566315,
+            "std": 0.24693535268306732,
+            "spatial_variance": 0.03939737379550934,
+            "normalized_variance": 0.03939737379550934,
+            "mean_position_cosine": 0.36493784189224243
+          },
+          "reconstruction_gradient_norm": 0.003197788493707776,
+          "vq_encoder_gradient_norm": 7.096101035131142e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.02219065159904727
+        },
+        "Medium": {
+          "used_codes": 6,
+          "usage": 0.000732421875,
+          "perplexity": 2.453416109085083,
+          "maximum_code_fraction": 0.4941176474094391,
+          "raw": {
+            "mean": 0.13024787604808807,
+            "std": 0.6044529676437378,
+            "spatial_variance": 0.15211214125156403,
+            "normalized_variance": 0.020106106996536255,
+            "mean_position_cosine": 0.6776703000068665
+          },
+          "normalized": {
+            "mean": 0.05698857456445694,
+            "std": 0.24341797828674316,
+            "spatial_variance": 0.020106106996536255,
+            "normalized_variance": 0.020106106996536255,
+            "mean_position_cosine": 0.6776703000068665
+          },
+          "reconstruction_gradient_norm": 0.0012950828531756997,
+          "vq_encoder_gradient_norm": 9.976522414945066e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.077033854555957
+        },
+        "Fine": {
+          "used_codes": 1,
+          "usage": 0.0001220703125,
+          "perplexity": 1.0,
+          "maximum_code_fraction": 1.0,
+          "raw": {
+            "mean": 0.4987216591835022,
+            "std": 0.8772918581962585,
+            "spatial_variance": 0.01055595651268959,
+            "normalized_variance": 0.00040968984831124544,
+            "mean_position_cosine": 0.9934402704238892
+          },
+          "normalized": {
+            "mean": 0.12372231483459473,
+            "std": 0.21723902225494385,
+            "spatial_variance": 0.00040968984831124544,
+            "normalized_variance": 0.00040968990651890635,
+            "mean_position_cosine": 0.9934403896331787
+          },
+          "reconstruction_gradient_norm": 0.0003131123085040599,
+          "vq_encoder_gradient_norm": 3.868165731546469e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.12353924219802152
+        }
+      },
+      "reconstruction_loss": 0.25840404629707336,
+      "vq_loss": 0.00393096636980772
+    },
+    {
+      "name": "A3",
+      "step": 0,
+      "checkpoint_sha256": "626f822929fe2fb0ac9ee00eaa9b2f9c3a7fdc64ca6e4224f63be1e1f699c465",
+      "levels": {
+        "Base": {
+          "used_codes": 8,
+          "usage": 0.0009765625,
+          "perplexity": 3.134997844696045,
+          "maximum_code_fraction": 0.6814814805984497,
+          "raw": {
+            "mean": -0.03292931988835335,
+            "std": 0.2562771439552307,
+            "spatial_variance": 0.008784129284322262,
+            "normalized_variance": 0.008655153214931488,
+            "mean_position_cosine": 0.8604840636253357
+          },
+          "normalized": {
+            "mean": -0.03405778110027313,
+            "std": 0.2476692646741867,
+            "spatial_variance": 0.008655153214931488,
+            "normalized_variance": 0.008655153214931488,
+            "mean_position_cosine": 0.8604840636253357
+          },
+          "reconstruction_gradient_norm": 0.0009915304835885763,
+          "vq_encoder_gradient_norm": 0.000101356694358401,
+          "vq_to_reconstruction_gradient_ratio": 0.10222246923923899
+        },
+        "Medium": {
+          "used_codes": 9,
+          "usage": 0.0010986328125,
+          "perplexity": 1.8318361043930054,
+          "maximum_code_fraction": 0.8686274290084839,
+          "raw": {
+            "mean": 0.042444270104169846,
+            "std": 0.32745903730392456,
+            "spatial_variance": 0.007198947947472334,
+            "normalized_variance": 0.0038488698191940784,
+            "mean_position_cosine": 0.9382971525192261
+          },
+          "normalized": {
+            "mean": 0.03238542005419731,
+            "std": 0.24789349734783173,
+            "spatial_variance": 0.0038488698191940784,
+            "normalized_variance": 0.0038488698191940784,
+            "mean_position_cosine": 0.9382971525192261
+          },
+          "reconstruction_gradient_norm": 0.00044193153735250235,
+          "vq_encoder_gradient_norm": 0.00020420904911588877,
+          "vq_to_reconstruction_gradient_ratio": 0.46208299669956215
+        },
+        "Fine": {
+          "used_codes": 9,
+          "usage": 0.0010986328125,
+          "perplexity": 3.442563772201538,
+          "maximum_code_fraction": 0.6129721999168396,
+          "raw": {
+            "mean": 0.13135087490081787,
+            "std": 0.39707493782043457,
+            "spatial_variance": 0.0034189363941550255,
+            "normalized_variance": 0.0011037684744223952,
+            "mean_position_cosine": 0.9823270440101624
+          },
+          "normalized": {
+            "mean": 0.07890728116035461,
+            "std": 0.2372206598520279,
+            "spatial_variance": 0.0011037684744223952,
+            "normalized_variance": 0.001103768590837717,
+            "mean_position_cosine": 0.9823270440101624
+          },
+          "reconstruction_gradient_norm": 0.00019233522471040487,
+          "vq_encoder_gradient_norm": 0.0003622760414145887,
+          "vq_to_reconstruction_gradient_ratio": 1.8835657480841597
+        }
+      },
+      "reconstruction_loss": 0.36292150616645813,
+      "vq_loss": 0.033692412078380585
+    },
+    {
+      "name": "A3",
+      "step": 100,
+      "checkpoint_sha256": "bb2d07f3d655f4a26bd330db6130ba2b239c28c9bc6af0f9a9ee6f3b80dc29b2",
+      "levels": {
+        "Base": {
+          "used_codes": 1,
+          "usage": 0.0001220703125,
+          "perplexity": 1.0,
+          "maximum_code_fraction": 1.0,
+          "raw": {
+            "mean": 0.27858224511146545,
+            "std": 0.5932047367095947,
+            "spatial_variance": 0.017868179827928543,
+            "normalized_variance": 0.0001895271270768717,
+            "mean_position_cosine": 0.9969449639320374
+          },
+          "normalized": {
+            "mean": 0.10849635303020477,
+            "std": 0.22522997856140137,
+            "spatial_variance": 0.0001895271270768717,
+            "normalized_variance": 0.00018952711252495646,
+            "mean_position_cosine": 0.9969449639320374
+          },
+          "reconstruction_gradient_norm": 0.00016232123016379774,
+          "vq_encoder_gradient_norm": 1.0617646694299765e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.06541132471449075
+        },
+        "Medium": {
+          "used_codes": 1,
+          "usage": 0.0001220703125,
+          "perplexity": 1.0,
+          "maximum_code_fraction": 1.0,
+          "raw": {
+            "mean": 0.2073955535888672,
+            "std": 0.9407733082771301,
+            "spatial_variance": 0.004011097829788923,
+            "normalized_variance": 0.00010098966595251113,
+            "mean_position_cosine": 0.9983809590339661
+          },
+          "normalized": {
+            "mean": 0.05391380935907364,
+            "std": 0.2441173940896988,
+            "spatial_variance": 0.00010098966595251113,
+            "normalized_variance": 0.00010098967322846875,
+            "mean_position_cosine": 0.9983810186386108
+          },
+          "reconstruction_gradient_norm": 8.285296644316986e-05,
+          "vq_encoder_gradient_norm": 1.549643093312625e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.18703531808671559
+        },
+        "Fine": {
+          "used_codes": 1,
+          "usage": 0.0001220703125,
+          "perplexity": 1.0,
+          "maximum_code_fraction": 1.0,
+          "raw": {
+            "mean": 0.42005354166030884,
+            "std": 0.692607045173645,
+            "spatial_variance": 0.0023770355619490147,
+            "normalized_variance": 0.00016211532056331635,
+            "mean_position_cosine": 0.9974043369293213
+          },
+          "normalized": {
+            "mean": 0.12977127730846405,
+            "std": 0.21368065476417542,
+            "spatial_variance": 0.00016211532056331635,
+            "normalized_variance": 0.00016211532056331635,
+            "mean_position_cosine": 0.9974043965339661
+          },
+          "reconstruction_gradient_norm": 3.683946852106601e-05,
+          "vq_encoder_gradient_norm": 3.203067899448797e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.8694663707260539
+        }
+      },
+      "reconstruction_loss": 0.314277708530426,
+      "vq_loss": 0.0002263019123347476
+    },
+    {
+      "name": "A3",
+      "step": 300,
+      "checkpoint_sha256": "3f6d0d724ae1e52be351c7cf2481654cdd40eb554419c3051f966cdda5d40046",
+      "levels": {
+        "Base": {
+          "used_codes": 1,
+          "usage": 0.0001220703125,
+          "perplexity": 1.0,
+          "maximum_code_fraction": 1.0,
+          "raw": {
+            "mean": 0.2759278416633606,
+            "std": 0.5951697826385498,
+            "spatial_variance": 0.017818983644247055,
+            "normalized_variance": 0.0003640184295363724,
+            "mean_position_cosine": 0.9941321015357971
+          },
+          "normalized": {
+            "mean": 0.10756087303161621,
+            "std": 0.2256782203912735,
+            "spatial_variance": 0.0003640184295363724,
+            "normalized_variance": 0.0003640184295363724,
+            "mean_position_cosine": 0.9941322207450867
+          },
+          "reconstruction_gradient_norm": 7.769459625706077e-05,
+          "vq_encoder_gradient_norm": 1.4425201698031742e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.18566544383993502
+        },
+        "Medium": {
+          "used_codes": 1,
+          "usage": 0.0001220703125,
+          "perplexity": 1.0,
+          "maximum_code_fraction": 1.0,
+          "raw": {
+            "mean": 0.22725532948970795,
+            "std": 1.0159876346588135,
+            "spatial_variance": 0.004595968872308731,
+            "normalized_variance": 8.406701817875728e-05,
+            "mean_position_cosine": 0.9986523389816284
+          },
+          "normalized": {
+            "mean": 0.05456806719303131,
+            "std": 0.24397197365760803,
+            "spatial_variance": 8.406701817875728e-05,
+            "normalized_variance": 8.40670254547149e-05,
+            "mean_position_cosine": 0.998652458190918
+          },
+          "reconstruction_gradient_norm": 4.643265492632054e-05,
+          "vq_encoder_gradient_norm": 1.3956434486317448e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.30057369126240047
+        },
+        "Fine": {
+          "used_codes": 1,
+          "usage": 0.0001220703125,
+          "perplexity": 1.0,
+          "maximum_code_fraction": 1.0,
+          "raw": {
+            "mean": 0.48993292450904846,
+            "std": 0.8238282799720764,
+            "spatial_variance": 0.0016268575564026833,
+            "normalized_variance": 5.451793549582362e-05,
+            "mean_position_cosine": 0.9991270899772644
+          },
+          "normalized": {
+            "mean": 0.12784147262573242,
+            "std": 0.21484076976776123,
+            "spatial_variance": 5.451793549582362e-05,
+            "normalized_variance": 5.4517931857844815e-05,
+            "mean_position_cosine": 0.9991270899772644
+          },
+          "reconstruction_gradient_norm": 1.8422259017825127e-05,
+          "vq_encoder_gradient_norm": 1.806926229619421e-05,
+          "vq_to_reconstruction_gradient_ratio": 0.9808385756985959
+        }
+      },
+      "reconstruction_loss": 0.29880601167678833,
+      "vq_loss": 0.00011966116289841011
+    }
+  ],
+  "scope": "single actual Train bear I-frame at K2048; frozen snapshots; loss uses recorded .25 commitment and 1.0 VQ weight, reconstruction MSE+L1+0.1LPIPS; no auxiliary, temporal or monotonic term; ratios are local, not training causal proof"
+}

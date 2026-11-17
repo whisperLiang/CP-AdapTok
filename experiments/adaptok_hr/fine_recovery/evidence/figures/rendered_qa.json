@@ -1,0 +1,312 @@
+[
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/fine_max_fraction.pdf",
+    "kind": "text",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_pdf_text.py",
+      "results/adaptok_hr_fine_recovery/figures/fine_max_fraction.pdf",
+      "--min-pt",
+      "5",
+      "--json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"pdf\": \"results/adaptok_hr_fine_recovery/figures/fine_max_fraction.pdf\",\n  \"auditable\": true,\n  \"minimum_required_pt\": 5.0,\n  \"minimum_found_pt\": 7.0,\n  \"text_run_count\": 4,\n  \"below_minimum_count\": 0,\n  \"below_minimum\": [],\n  \"warnings\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/fine_max_fraction.pdf",
+    "kind": "collisions",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_figure_collisions.py",
+      "results/adaptok_hr_fine_recovery/figures/fine_max_fraction.pdf",
+      "--json-out",
+      "results/adaptok_hr_fine_recovery/figures/fine_max_fraction.collisions.json",
+      "--overlay-pdf",
+      "results/adaptok_hr_fine_recovery/figures/fine_max_fraction.collisions-overlay.pdf"
+    ],
+    "returncode": 0,
+    "stdout": "Nature Figure Rendered Collision Audit\npdf: results/adaptok_hr_fine_recovery/figures/fine_max_fraction.pdf\npages: 1\nvisible text boxes: 20\nstroke paths: 24\n\n\nsummary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays\nverdict: PASS\nnote: contained overlays can be intentional; WARN findings need final-size visual review\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/fine_usage.pdf",
+    "kind": "text",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_pdf_text.py",
+      "results/adaptok_hr_fine_recovery/figures/fine_usage.pdf",
+      "--min-pt",
+      "5",
+      "--json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"pdf\": \"results/adaptok_hr_fine_recovery/figures/fine_usage.pdf\",\n  \"auditable\": true,\n  \"minimum_required_pt\": 5.0,\n  \"minimum_found_pt\": 7.0,\n  \"text_run_count\": 4,\n  \"below_minimum_count\": 0,\n  \"below_minimum\": [],\n  \"warnings\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/fine_usage.pdf",
+    "kind": "collisions",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_figure_collisions.py",
+      "results/adaptok_hr_fine_recovery/figures/fine_usage.pdf",
+      "--json-out",
+      "results/adaptok_hr_fine_recovery/figures/fine_usage.collisions.json",
+      "--overlay-pdf",
+      "results/adaptok_hr_fine_recovery/figures/fine_usage.collisions-overlay.pdf"
+    ],
+    "returncode": 0,
+    "stdout": "Nature Figure Rendered Collision Audit\npdf: results/adaptok_hr_fine_recovery/figures/fine_usage.pdf\npages: 1\nvisible text boxes: 17\nstroke paths: 21\n\n\nsummary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays\nverdict: PASS\nnote: contained overlays can be intentional; WARN findings need final-size visual review\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_dists.pdf",
+    "kind": "text",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_pdf_text.py",
+      "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_dists.pdf",
+      "--min-pt",
+      "5",
+      "--json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"pdf\": \"results/adaptok_hr_fine_recovery/figures/rd_1000_64f_dists.pdf\",\n  \"auditable\": true,\n  \"minimum_required_pt\": 5.0,\n  \"minimum_found_pt\": 7.0,\n  \"text_run_count\": 4,\n  \"below_minimum_count\": 0,\n  \"below_minimum\": [],\n  \"warnings\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_dists.pdf",
+    "kind": "collisions",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_figure_collisions.py",
+      "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_dists.pdf",
+      "--json-out",
+      "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_dists.collisions.json",
+      "--overlay-pdf",
+      "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_dists.collisions-overlay.pdf"
+    ],
+    "returncode": 0,
+    "stdout": "Nature Figure Rendered Collision Audit\npdf: results/adaptok_hr_fine_recovery/figures/rd_1000_64f_dists.pdf\npages: 1\nvisible text boxes: 16\nstroke paths: 34\n\n\nsummary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays\nverdict: PASS\nnote: contained overlays can be intentional; WARN findings need final-size visual review\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_lpips.pdf",
+    "kind": "text",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_pdf_text.py",
+      "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_lpips.pdf",
+      "--min-pt",
+      "5",
+      "--json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"pdf\": \"results/adaptok_hr_fine_recovery/figures/rd_1000_64f_lpips.pdf\",\n  \"auditable\": true,\n  \"minimum_required_pt\": 5.0,\n  \"minimum_found_pt\": 7.0,\n  \"text_run_count\": 4,\n  \"below_minimum_count\": 0,\n  \"below_minimum\": [],\n  \"warnings\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_lpips.pdf",
+    "kind": "collisions",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_figure_collisions.py",
+      "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_lpips.pdf",
+      "--json-out",
+      "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_lpips.collisions.json",
+      "--overlay-pdf",
+      "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_lpips.collisions-overlay.pdf"
+    ],
+    "returncode": 0,
+    "stdout": "Nature Figure Rendered Collision Audit\npdf: results/adaptok_hr_fine_recovery/figures/rd_1000_64f_lpips.pdf\npages: 1\nvisible text boxes: 19\nstroke paths: 37\n\n\nsummary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays\nverdict: PASS\nnote: contained overlays can be intentional; WARN findings need final-size visual review\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_psnr_global.pdf",
+    "kind": "text",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_pdf_text.py",
+      "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_psnr_global.pdf",
+      "--min-pt",
+      "5",
+      "--json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"pdf\": \"results/adaptok_hr_fine_recovery/figures/rd_1000_64f_psnr_global.pdf\",\n  \"auditable\": true,\n  \"minimum_required_pt\": 5.0,\n  \"minimum_found_pt\": 7.0,\n  \"text_run_count\": 4,\n  \"below_minimum_count\": 0,\n  \"below_minimum\": [],\n  \"warnings\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_psnr_global.pdf",
+    "kind": "collisions",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_figure_collisions.py",
+      "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_psnr_global.pdf",
+      "--json-out",
+      "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_psnr_global.collisions.json",
+      "--overlay-pdf",
+      "results/adaptok_hr_fine_recovery/figures/rd_1000_64f_psnr_global.collisions-overlay.pdf"
+    ],
+    "returncode": 0,
+    "stdout": "Nature Figure Rendered Collision Audit\npdf: results/adaptok_hr_fine_recovery/figures/rd_1000_64f_psnr_global.pdf\npages: 1\nvisible text boxes: 18\nstroke paths: 36\n\n\nsummary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays\nverdict: PASS\nnote: contained overlays can be intentional; WARN findings need final-size visual review\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/rd_300_8f_dists.pdf",
+    "kind": "text",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_pdf_text.py",
+      "results/adaptok_hr_fine_recovery/figures/rd_300_8f_dists.pdf",
+      "--min-pt",
+      "5",
+      "--json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"pdf\": \"results/adaptok_hr_fine_recovery/figures/rd_300_8f_dists.pdf\",\n  \"auditable\": true,\n  \"minimum_required_pt\": 5.0,\n  \"minimum_found_pt\": 7.0,\n  \"text_run_count\": 4,\n  \"below_minimum_count\": 0,\n  \"below_minimum\": [],\n  \"warnings\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/rd_300_8f_dists.pdf",
+    "kind": "collisions",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_figure_collisions.py",
+      "results/adaptok_hr_fine_recovery/figures/rd_300_8f_dists.pdf",
+      "--json-out",
+      "results/adaptok_hr_fine_recovery/figures/rd_300_8f_dists.collisions.json",
+      "--overlay-pdf",
+      "results/adaptok_hr_fine_recovery/figures/rd_300_8f_dists.collisions-overlay.pdf"
+    ],
+    "returncode": 0,
+    "stdout": "Nature Figure Rendered Collision Audit\npdf: results/adaptok_hr_fine_recovery/figures/rd_300_8f_dists.pdf\npages: 1\nvisible text boxes: 17\nstroke paths: 41\n\n\nsummary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays\nverdict: PASS\nnote: contained overlays can be intentional; WARN findings need final-size visual review\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/rd_300_8f_lpips.pdf",
+    "kind": "text",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_pdf_text.py",
+      "results/adaptok_hr_fine_recovery/figures/rd_300_8f_lpips.pdf",
+      "--min-pt",
+      "5",
+      "--json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"pdf\": \"results/adaptok_hr_fine_recovery/figures/rd_300_8f_lpips.pdf\",\n  \"auditable\": true,\n  \"minimum_required_pt\": 5.0,\n  \"minimum_found_pt\": 7.0,\n  \"text_run_count\": 4,\n  \"below_minimum_count\": 0,\n  \"below_minimum\": [],\n  \"warnings\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/rd_300_8f_lpips.pdf",
+    "kind": "collisions",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_figure_collisions.py",
+      "results/adaptok_hr_fine_recovery/figures/rd_300_8f_lpips.pdf",
+      "--json-out",
+      "results/adaptok_hr_fine_recovery/figures/rd_300_8f_lpips.collisions.json",
+      "--overlay-pdf",
+      "results/adaptok_hr_fine_recovery/figures/rd_300_8f_lpips.collisions-overlay.pdf"
+    ],
+    "returncode": 0,
+    "stdout": "Nature Figure Rendered Collision Audit\npdf: results/adaptok_hr_fine_recovery/figures/rd_300_8f_lpips.pdf\npages: 1\nvisible text boxes: 18\nstroke paths: 42\n\n\nsummary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays\nverdict: PASS\nnote: contained overlays can be intentional; WARN findings need final-size visual review\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/rd_300_8f_psnr_global.pdf",
+    "kind": "text",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_pdf_text.py",
+      "results/adaptok_hr_fine_recovery/figures/rd_300_8f_psnr_global.pdf",
+      "--min-pt",
+      "5",
+      "--json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"pdf\": \"results/adaptok_hr_fine_recovery/figures/rd_300_8f_psnr_global.pdf\",\n  \"auditable\": true,\n  \"minimum_required_pt\": 5.0,\n  \"minimum_found_pt\": 7.0,\n  \"text_run_count\": 4,\n  \"below_minimum_count\": 0,\n  \"below_minimum\": [],\n  \"warnings\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/rd_300_8f_psnr_global.pdf",
+    "kind": "collisions",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_figure_collisions.py",
+      "results/adaptok_hr_fine_recovery/figures/rd_300_8f_psnr_global.pdf",
+      "--json-out",
+      "results/adaptok_hr_fine_recovery/figures/rd_300_8f_psnr_global.collisions.json",
+      "--overlay-pdf",
+      "results/adaptok_hr_fine_recovery/figures/rd_300_8f_psnr_global.collisions-overlay.pdf"
+    ],
+    "returncode": 0,
+    "stdout": "Nature Figure Rendered Collision Audit\npdf: results/adaptok_hr_fine_recovery/figures/rd_300_8f_psnr_global.pdf\npages: 1\nvisible text boxes: 17\nstroke paths: 41\n\n\nsummary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays\nverdict: PASS\nnote: contained overlays can be intentional; WARN findings need final-size visual review\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/training_psnr.pdf",
+    "kind": "text",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_pdf_text.py",
+      "results/adaptok_hr_fine_recovery/figures/training_psnr.pdf",
+      "--min-pt",
+      "5",
+      "--json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"pdf\": \"results/adaptok_hr_fine_recovery/figures/training_psnr.pdf\",\n  \"auditable\": true,\n  \"minimum_required_pt\": 5.0,\n  \"minimum_found_pt\": 7.0,\n  \"text_run_count\": 4,\n  \"below_minimum_count\": 0,\n  \"below_minimum\": [],\n  \"warnings\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/training_psnr.pdf",
+    "kind": "collisions",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_figure_collisions.py",
+      "results/adaptok_hr_fine_recovery/figures/training_psnr.pdf",
+      "--json-out",
+      "results/adaptok_hr_fine_recovery/figures/training_psnr.collisions.json",
+      "--overlay-pdf",
+      "results/adaptok_hr_fine_recovery/figures/training_psnr.collisions-overlay.pdf"
+    ],
+    "returncode": 0,
+    "stdout": "Nature Figure Rendered Collision Audit\npdf: results/adaptok_hr_fine_recovery/figures/training_psnr.pdf\npages: 1\nvisible text boxes: 19\nstroke paths: 23\n\n\nsummary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays\nverdict: PASS\nnote: contained overlays can be intentional; WARN findings need final-size visual review\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/validation_psnr.pdf",
+    "kind": "text",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_pdf_text.py",
+      "results/adaptok_hr_fine_recovery/figures/validation_psnr.pdf",
+      "--min-pt",
+      "5",
+      "--json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"pdf\": \"results/adaptok_hr_fine_recovery/figures/validation_psnr.pdf\",\n  \"auditable\": true,\n  \"minimum_required_pt\": 5.0,\n  \"minimum_found_pt\": 7.0,\n  \"text_run_count\": 4,\n  \"below_minimum_count\": 0,\n  \"below_minimum\": [],\n  \"warnings\": []\n}\n",
+    "stderr": ""
+  },
+  {
+    "file": "results/adaptok_hr_fine_recovery/figures/validation_psnr.pdf",
+    "kind": "collisions",
+    "command": [
+      "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+      "/home/whisperliang/.codex/skills/nature-figure/scripts/audit_figure_collisions.py",
+      "results/adaptok_hr_fine_recovery/figures/validation_psnr.pdf",
+      "--json-out",
+      "results/adaptok_hr_fine_recovery/figures/validation_psnr.collisions.json",
+      "--overlay-pdf",
+      "results/adaptok_hr_fine_recovery/figures/validation_psnr.collisions-overlay.pdf"
+    ],
+    "returncode": 0,
+    "stdout": "Nature Figure Rendered Collision Audit\npdf: results/adaptok_hr_fine_recovery/figures/validation_psnr.pdf\npages: 1\nvisible text boxes: 19\nstroke paths: 57\n\n\nsummary: 0 fail, 0 warn, 0 contained fill overlays, 0 contained image overlays\nverdict: PASS\nnote: contained overlays can be intentional; WARN findings need final-size visual review\n",
+    "stderr": ""
+  }
+]

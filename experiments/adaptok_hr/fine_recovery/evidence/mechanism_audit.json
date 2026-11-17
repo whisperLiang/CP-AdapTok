@@ -108,12 +108,12 @@
       ]
     },
     "A1": {
-      "updates": 300,
-      "frames": 1200,
+      "updates": 1000,
+      "frames": 4000,
       "reconstruction_matched_loss_fraction": {
-        "Base": 0.2417266845703125,
-        "Medium": 0.485108642578125,
-        "Fine": 0.2731646728515625
+        "Base": 0.2489556884765625,
+        "Medium": 0.48950439453125,
+        "Fine": 0.2615399169921875
       },
       "observed_parameter_updates": [
         {
@@ -178,6 +178,118 @@
             "tokenizer.projections.2.weight": 0.0011679427698254585,
             "tokenizer.projections.2.bias": 5.478270031744614e-05,
             "vq.codebook.weight": 0.002098449505865574
+          }
+        },
+        {
+          "step": 400,
+          "norms": {
+            "encoder": 0.012726763263344765,
+            "tokenizer": 0.0020007393322885036,
+            "vq": 0.002622223226353526,
+            "decoder": 0.016004491597414017,
+            "tokenizer.projections.0.weight": 0.0007250342168845236,
+            "tokenizer.projections.0.bias": 3.720966924447566e-05,
+            "tokenizer.projections.1.weight": 0.0016189810121431947,
+            "tokenizer.projections.1.bias": 7.880204793764278e-05,
+            "tokenizer.projections.2.weight": 0.0009204302914440632,
+            "tokenizer.projections.2.bias": 3.738211307791062e-05,
+            "vq.codebook.weight": 0.002622223226353526
+          }
+        },
+        {
+          "step": 500,
+          "norms": {
+            "encoder": 0.02190360613167286,
+            "tokenizer": 0.0024798002559691668,
+            "vq": 0.0037649001460522413,
+            "decoder": 0.02374148741364479,
+            "tokenizer.projections.0.weight": 0.0010097103659063578,
+            "tokenizer.projections.0.bias": 5.820729347760789e-05,
+            "tokenizer.projections.1.weight": 0.0020430523436516523,
+            "tokenizer.projections.1.bias": 0.00011730909318430349,
+            "tokenizer.projections.2.weight": 0.0009675667388364673,
+            "tokenizer.projections.2.bias": 4.9961076001636684e-05,
+            "vq.codebook.weight": 0.0037649001460522413
+          }
+        },
+        {
+          "step": 600,
+          "norms": {
+            "encoder": 0.015304498374462128,
+            "tokenizer": 0.0021013112273067236,
+            "vq": 0.003521663835272193,
+            "decoder": 0.016955755650997162,
+            "tokenizer.projections.0.weight": 0.0006892099045217037,
+            "tokenizer.projections.0.bias": 3.247978747822344e-05,
+            "tokenizer.projections.1.weight": 0.0016696638194844127,
+            "tokenizer.projections.1.bias": 7.62447016313672e-05,
+            "tokenizer.projections.2.weight": 0.0010693512158468366,
+            "tokenizer.projections.2.bias": 4.8380861699115485e-05,
+            "vq.codebook.weight": 0.0035216640681028366
+          }
+        },
+        {
+          "step": 700,
+          "norms": {
+            "encoder": 0.014511080458760262,
+            "tokenizer": 0.0019469147082418203,
+            "vq": 0.004220267757773399,
+            "decoder": 0.01910284161567688,
+            "tokenizer.projections.0.weight": 0.0008439082303084433,
+            "tokenizer.projections.0.bias": 4.811552571482025e-05,
+            "tokenizer.projections.1.weight": 0.0013630272587761283,
+            "tokenizer.projections.1.bias": 9.431770740775391e-05,
+            "tokenizer.projections.2.weight": 0.0010977258207276464,
+            "tokenizer.projections.2.bias": 6.511205720016733e-05,
+            "vq.codebook.weight": 0.004220267757773399
+          }
+        },
+        {
+          "step": 800,
+          "norms": {
+            "encoder": 0.020436696708202362,
+            "tokenizer": 0.0020305453799664974,
+            "vq": 0.002503475872799754,
+            "decoder": 0.020199045538902283,
+            "tokenizer.projections.0.weight": 0.0010835484135895967,
+            "tokenizer.projections.0.bias": 7.832398114260286e-05,
+            "tokenizer.projections.1.weight": 0.0011342607904225588,
+            "tokenizer.projections.1.bias": 6.430743815144524e-05,
+            "tokenizer.projections.2.weight": 0.001282328856177628,
+            "tokenizer.projections.2.bias": 8.861203968990594e-05,
+            "vq.codebook.weight": 0.002503475872799754
+          }
+        },
+        {
+          "step": 900,
+          "norms": {
+            "encoder": 0.026607180014252663,
+            "tokenizer": 0.002476500114426017,
+            "vq": 0.005429217126220465,
+            "decoder": 0.02522834576666355,
+            "tokenizer.projections.0.weight": 0.001279052929021418,
+            "tokenizer.projections.0.bias": 9.378768299939111e-05,
+            "tokenizer.projections.1.weight": 0.0018902383744716644,
+            "tokenizer.projections.1.bias": 0.0001398938475176692,
+            "tokenizer.projections.2.weight": 0.0009451377554796636,
+            "tokenizer.projections.2.bias": 4.923062806483358e-05,
+            "vq.codebook.weight": 0.005429217126220465
+          }
+        },
+        {
+          "step": 1000,
+          "norms": {
+            "encoder": 0.015416093170642853,
+            "tokenizer": 0.0017442249227315187,
+            "vq": 0.003427450777962804,
+            "decoder": 0.016988899558782578,
+            "tokenizer.projections.0.weight": 0.0009077301365323365,
+            "tokenizer.projections.0.bias": 4.1397906898055226e-05,
+            "tokenizer.projections.1.weight": 0.0009665819234214723,
+            "tokenizer.projections.1.bias": 4.891187199973501e-05,
+            "tokenizer.projections.2.weight": 0.0011296055745333433,
+            "tokenizer.projections.2.bias": 6.285871495492756e-05,
+            "vq.codebook.weight": 0.003427450777962804
           }
         }
       ]
@@ -266,12 +378,12 @@
       ]
     },
     "A3": {
-      "updates": 300,
-      "frames": 1200,
+      "updates": 1000,
+      "frames": 4000,
       "reconstruction_matched_loss_fraction": {
-        "Base": 0.2417266845703125,
-        "Medium": 0.485108642578125,
-        "Fine": 0.2731646728515625
+        "Base": 0.2489556884765625,
+        "Medium": 0.48950439453125,
+        "Fine": 0.2615399169921875
       },
       "observed_parameter_updates": [
         {
@@ -344,6 +456,132 @@
             "vq.codebook.weight": 0.00010916560859186575,
             "vq.level_codebooks.0.weight": 0.00010492753062862903,
             "vq.level_codebooks.1.weight": 0.00010868840763578191
+          }
+        },
+        {
+          "step": 400,
+          "norms": {
+            "encoder": 0.005839748308062553,
+            "tokenizer": 0.0007591547910124063,
+            "vq": 0.0001796651049517095,
+            "decoder": 0.013642205856740475,
+            "tokenizer.projections.0.weight": 0.0006455039838328958,
+            "tokenizer.projections.0.bias": 3.832738730125129e-05,
+            "tokenizer.projections.1.weight": 0.0002378102799411863,
+            "tokenizer.projections.1.bias": 8.907384653866757e-06,
+            "tokenizer.projections.2.weight": 0.00031829989165998995,
+            "tokenizer.projections.2.bias": 1.4955777260183822e-05,
+            "vq.codebook.weight": 0.00011366202670615166,
+            "vq.level_codebooks.0.weight": 9.82435085461475e-05,
+            "vq.level_codebooks.1.weight": 9.853276424109936e-05
+          }
+        },
+        {
+          "step": 500,
+          "norms": {
+            "encoder": 0.013413527049124241,
+            "tokenizer": 0.0015586696099489927,
+            "vq": 0.0002716560265980661,
+            "decoder": 0.011739690788090229,
+            "tokenizer.projections.0.weight": 0.0011482990812510252,
+            "tokenizer.projections.0.bias": 6.980699981795624e-05,
+            "tokenizer.projections.1.weight": 0.0008599439752288163,
+            "tokenizer.projections.1.bias": 4.393105336930603e-05,
+            "tokenizer.projections.2.weight": 0.0006032672245055437,
+            "tokenizer.projections.2.bias": 2.4938319256762043e-05,
+            "vq.codebook.weight": 0.0001976230851141736,
+            "vq.level_codebooks.0.weight": 0.00014787891996093094,
+            "vq.level_codebooks.1.weight": 0.000113463363959454
+          }
+        },
+        {
+          "step": 600,
+          "norms": {
+            "encoder": 0.0170427393168211,
+            "tokenizer": 0.002140467520803213,
+            "vq": 0.0012750632595270872,
+            "decoder": 0.03208816051483154,
+            "tokenizer.projections.0.weight": 0.0018657805630937219,
+            "tokenizer.projections.0.bias": 5.377963316277601e-05,
+            "tokenizer.projections.1.weight": 0.0009321101242676377,
+            "tokenizer.projections.1.bias": 4.4486056140158325e-05,
+            "tokenizer.projections.2.weight": 0.00047593782073818147,
+            "tokenizer.projections.2.bias": 1.5711393643869087e-05,
+            "vq.codebook.weight": 0.001264494378119707,
+            "vq.level_codebooks.0.weight": 0.00013016695447731763,
+            "vq.level_codebooks.1.weight": 9.948232036549598e-05
+          }
+        },
+        {
+          "step": 700,
+          "norms": {
+            "encoder": 0.04565080627799034,
+            "tokenizer": 0.005102735478430986,
+            "vq": 0.0020320576149970293,
+            "decoder": 0.051496244966983795,
+            "tokenizer.projections.0.weight": 0.003279234981164336,
+            "tokenizer.projections.0.bias": 0.0001550339366076514,
+            "tokenizer.projections.1.weight": 0.0030398285016417503,
+            "tokenizer.projections.1.bias": 0.00014325958909466863,
+            "tokenizer.projections.2.weight": 0.0024472104851156473,
+            "tokenizer.projections.2.bias": 0.00010281446884619072,
+            "vq.codebook.weight": 0.0019952331203967333,
+            "vq.level_codebooks.0.weight": 0.00034717851667664945,
+            "vq.level_codebooks.1.weight": 0.00016664339636918157
+          }
+        },
+        {
+          "step": 800,
+          "norms": {
+            "encoder": 0.05918939411640167,
+            "tokenizer": 0.005282283294945955,
+            "vq": 0.000987633247859776,
+            "decoder": 0.04389739781618118,
+            "tokenizer.projections.0.weight": 0.00318514765240252,
+            "tokenizer.projections.0.bias": 0.00011763091606553644,
+            "tokenizer.projections.1.weight": 0.002746111713349819,
+            "tokenizer.projections.1.bias": 0.00010476938768988475,
+            "tokenizer.projections.2.weight": 0.0031875658314675093,
+            "tokenizer.projections.2.bias": 0.00017558153194840997,
+            "vq.codebook.weight": 0.0008046393049880862,
+            "vq.level_codebooks.0.weight": 0.0005290796398185194,
+            "vq.level_codebooks.1.weight": 0.00021920271683484316
+          }
+        },
+        {
+          "step": 900,
+          "norms": {
+            "encoder": 0.03876331076025963,
+            "tokenizer": 0.004648052621632814,
+            "vq": 0.007750028278678656,
+            "decoder": 0.04077064245939255,
+            "tokenizer.projections.0.weight": 0.0021298781502991915,
+            "tokenizer.projections.0.bias": 0.0001295451365876943,
+            "tokenizer.projections.1.weight": 0.0037935646250844,
+            "tokenizer.projections.1.bias": 0.00023331839474849403,
+            "tokenizer.projections.2.weight": 0.0016122701345011592,
+            "tokenizer.projections.2.bias": 7.902927609393373e-05,
+            "vq.codebook.weight": 0.00180203712079674,
+            "vq.level_codebooks.0.weight": 0.007536235265433788,
+            "vq.level_codebooks.1.weight": 0.00014407123671844602
+          }
+        },
+        {
+          "step": 1000,
+          "norms": {
+            "encoder": 0.015516841784119606,
+            "tokenizer": 0.0020167052280157804,
+            "vq": 0.0016732371877878904,
+            "decoder": 0.016035327687859535,
+            "tokenizer.projections.0.weight": 0.0007689736085012555,
+            "tokenizer.projections.0.bias": 3.797719182330184e-05,
+            "tokenizer.projections.1.weight": 0.001588378450833261,
+            "tokenizer.projections.1.bias": 0.0001081644295481965,
+            "tokenizer.projections.2.weight": 0.0009683905518613756,
+            "tokenizer.projections.2.bias": 4.372479088488035e-05,
+            "vq.codebook.weight": 0.0010730769718065858,
+            "vq.level_codebooks.0.weight": 0.0012781975092366338,
+            "vq.level_codebooks.1.weight": 0.00012016569235129282
           }
         }
       ]
