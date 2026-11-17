@@ -13,7 +13,9 @@ def read(path):
 
 
 def number(value):
-    return "未测" if value is None else f"{value:.5f}"
+    if value is None:
+        return "未测"
+    return f"{value:.3e}" if 0 < abs(value) < 1e-4 else f"{value:.5f}"
 
 
 def table(columns, rows):
@@ -257,6 +259,39 @@ def sensitivity_table(root):
     )
 
 
+def window_cells(summary):
+    early, late = summary["early_P"], summary["late_P"]
+    if late is None:
+        return ["不适用"] * 4
+    return [
+        number(early["psnr"]),
+        number(late["psnr"]),
+        number(late["direct_psnr"]),
+        number(late["feature_rms"]),
+    ]
+
+
+def long_reference_table(root):
+    rows = []
+    for name, path in [("B1", "R2"), ("R1", "R1"), ("R2", "R2")]:
+        measured = read(root / "reference_ablation/long48_posthoc" / f"{name}_summary.json")
+        for reference in ("i_only", "full2048", "matched128", "original128"):
+            summary = measured[f"{reference}/{path}"]
+            rows.append([name, reference, number(summary["global_mse_psnr"]), *window_cells(summary)])
+    return table(
+        [
+            "权重/主路径",
+            "参考",
+            "48帧PSNR",
+            "早P 1–7",
+            "晚P 40–47",
+            "同上下文晚P直接Latent",
+            "晚P Feature RMS",
+        ],
+        rows,
+    )
+
+
 def build_report(root, output, figures=False):
     if figures:
         build_figures(root)
@@ -272,6 +307,7 @@ def build_report(root, output, figures=False):
     source = read(root / "source_identity.json")
     seal = read(root / "final_test/seal.json")
     final_r1 = group(root, "final_test/R1", "full2048/R1")
+    long_r1 = read(root / "reference_ablation/long48_posthoc/R1_summary.json")
     final_b1 = group(root, "final_test/B1", "matched128/R2")
     facts = {
         "R1": r1,
@@ -285,6 +321,7 @@ def build_report(root, output, figures=False):
         "final_R1_minus_B1": final_r1["global_mse_psnr"] - final_b1["global_mse_psnr"],
         "source_checkpoint_sha256": source["sha256"],
         "seal": seal,
+        "posthoc_long_R1": long_r1,
     }
     write_json(root / "report_facts.json", facts)
     text = f"""# CP-AdapTok 固定2048 Token 原生1080p重建与瓶颈定位
@@ -293,6 +330,9 @@ def build_report(root, output, figures=False):
 
 本报告仅使用实际运行文件。所有本专项结果均为 `experiment_type: reconstruction_diagnostic`、`real_bitstream: false`、`bpp: null`。
 没有网络传输、实际码流或率项；没有改动生产Codec、S0–S4训练、原始B0/B1权重、Manifest或历史Final Test。
+
+**封存结果未达到改善绝对质量的目标。** R1全局MSE PSNR={number(final_r1["global_mse_psnr"])}dB，原B1匹配首帧I对照={number(final_b1["global_mse_psnr"])}dB，差{number(facts["final_R1_minus_B1"])}dB。短窗口验证的小幅提高没有泛化到64帧。当前证据不支持直接追加大规模训练。
+封存评估代码Git：`{seal["git_commit"]}`。封存后没有更新、校准或重新选择Checkpoint；第8节48帧诊断是明确标记的测试后解释性Validation分析。
 
 ## 1. 目的、版本与权重
 
@@ -394,11 +434,25 @@ Decoder位置向量和当前历史上下文保持固定，不提交这些异常�
 
 筛查阈值只用于标记信息利用不足风险，不是统计检验。异帧来自同视频相邻已解码帧，其视觉相似度是混杂因素；即使输出近似不变，也不能据此独自证明完全忽略内容。常量/打乱控制和重建误差必须联合看，不能用单项证明全部根因。
 
+### 48帧解释性Validation诊断（测试后追加，不参与选模）
+
+最终测试暴露了8帧诊断/4帧选模无法发现的长期退化。因此固定B1、R1选Step200、R2选Step100全部权重，在相同三条Validation视频前48帧追加纯MSE/PSNR诊断，不读取新Test、不训练、不改超参数，也不替换选中模型。
+每个模型1152条记录，共3456条，4种参考×2条解码路径×3视频×48帧。以下列各模型的主要路径，全部路径原始记录保留。
+同一FrozenFrameContext另解码尺度正确的原生Latent；这个直接路径的Feature从不提交参考。
+
+{long_reference_table(root)}
+
+R1 Full2048早P为{number(long_r1["full2048/R1"]["early_P"]["psnr"])}dB、晚P为{number(long_r1["full2048/R1"]["late_P"]["psnr"])}dB；晚P同上下文直接Latent仍为{number(long_r1["full2048/R1"]["late_P"]["direct_psnr"])}dB。
+在相同晚P帧区间，matched128为{number(long_r1["matched128/R1"]["late_P"]["psnr"])}dB，GOP32历史参考为{number(long_r1["original128/R1"]["late_P"]["psnr"])}dB。说明当前表示链路有巨大条件差距，历史预算/重置也有实质作用。
+早晚帧内容也在变化，因此不将早晚差全部当累积误差；同帧区间的参考策略比较支持闭环贡献。PSNR差不可加性分摊成根因百分比。Feature RMS没有数值爆炸，不能据单项范数断言机制。
+这项分析属于后验解释，不能冒充预注册的确认性验证，也没有用于改选模型。
+
 ## 9. 原生1080p推理与计算量
 
 {performance_table(root)}
 
 每个I/P条件3次预热、10次真实1080p测量，单独进程、无感知指标网络；GPU显存为torch最大allocated MiB。
+专用探测使用固定Validation视频的第0帧I和第1帧（I后首个P）的真实历史；重复测量不是独立视频样本，也未覆盖全部P时刻。64帧评估的逐帧组件时间另保留在frame_metrics.jsonl，不把首P探测外推为所有P的平均速度。
 全程包含参考上下文准备，其余列未单列该开销；不含磁盘/指标/异常Token诊断。GFLOPs采用PyTorch FlopCounterMode，乘加计2，不支持的非算术操作未计，非完整硬件指令数。
 训练峰值另见训练表；evaluation.run.json显存包含LPIPS/DISTS网络，不能与无指标推理峰值混用。
 
@@ -411,7 +465,8 @@ B0/B1为原S4模型以历史VQ128闭环、每32帧I重建显示2048，保留接�
 {final_table(root)}
 
 R1与原B1的全局MSE PSNR差为{number(facts["final_R1_minus_B1"])}dB。各视频均值及逐帧结果完全保留，不把单视频或单种子提升当普适收敛证据。
-历史正式测试结果只读保留，未用本次数字覆盖；本次可与同样本历史指标核对，但仍明确无实际码流。
+历史正式测试结果只读保留，未用本次数字覆盖。原归档权重与本次S4的重建参数逐Tensor相同，仅Entropy/Scorer不同；两者SHA和差异清单见historical_comparison_provenance.json。
+本次使用原VQ前向的浮点STE等价表达和dense Decoder，历史使用ID查表/Prefix Cache；不是逐位相同的数值路径。因此本次历史模式逐帧PSNR均值B0=15.55417、B1=15.63570，与归档15.54632、15.63426的微差不视为新质量收益，更没有覆盖归档结果。
 
 ## 11. 重建图像与证据边界
 
@@ -439,18 +494,19 @@ R1选定权重的完整Token重建：
 
 **Q1：DCVC-UF原生Latent直接重建正常吗？** P帧原始y在同状态下可高质量重建。I帧字面R0异常来自漏掉官方连续尺度；独立尺度对照恢复到{number(scale["I"]["global_mse_psnr"])}dB。不能把裸y直通称正常、也不能据此宣称Backbone坏了。
 
-**Q2：2048连续Token能否合理重建1080p？** 能训练并改善单样本与独立验证；但R1验证{number(r1["global_mse_psnr"])}dB仍远低于尺度正确Backbone的{number(scale["global_mse_psnr"])}dB，现阶段不足以称达到合理高保真1080p质量。
+**Q2：2048连续Token能否合理重建1080p？** 当前实现/短程训练未达到：虽然可拟合单样本并改善短窗口验证，封存64帧只有{number(final_r1["global_mse_psnr"])}dB。该失败不能作为2048连续Token理论容量不足的证明。
 
 **Q3：16D连续投影与VQ分别损失多少？** 同权重同状态下VQ相对连续为{number(facts["pure_quantization_psnr_delta"])}dB。raw192−16D的匹配训练控制为{number(raw["global_mse_psnr"] - r1["global_mse_psnr"])}dB，不能把独立优化差异全部当16D不可逆损失；纯16D容量损失尚不能精确识别。
 
-**Q4：Decoder Grid34是否明显提高画质？** 在预先匹配的300更新/迁移方案下没有；验证差{number(r3["global_mse_psnr"] - r1["global_mse_psnr"])}dB。迁移初始分布变化和短程未收敛限制结论；Encoder KV单独结果见第7节。
+**Q4：Decoder Grid34是否明显提高画质？** 在匹配300更新/迁移方案下没有；Validation差{number(r3["global_mse_psnr"] - r1["global_mse_psnr"])}dB，最终Test也未改善。迁移Step0分布变化和短程未收敛限制容量结论；Encoder KV已单独测试。
 
-**Q5：P帧差来自本帧还是历史？** 同一FrozenFrameContext下，原始P Latent可重建而R1/R2严重落后，主要可观测差距已在本帧表示→Latent链路出现。历史闭环确实影响结果，但本次不能将全部误差归于128参考；独立闭环和同状态证据分开。
+**Q5：P帧差来自本帧还是历史？** 两者均有证据。同上下文晚P直接Latent约{number(long_r1["full2048/R1"]["late_P"]["direct_psnr"])}dB，而完整Token约{number(long_r1["full2048/R1"]["late_P"]["psnr"])}dB，证明本帧表示链路仍有大损失。仅改历史预算/重置，晚P又可恢复到{number(long_r1["original128/R1"]["late_P"]["psnr"])}dB，证明长期闭环也有实质作用。不能唯一归因或给出可加性贡献百分比。
 
-**Q6：继续训练连续表示比原多预算更易改善绝对质量吗？** 单样本可快速拟合，原生短程验证比其自身Step0提高；封存同样本相对原B1为{number(facts["final_R1_minus_B1"])}dB。这里只有短程单种子、没有匹配新增300步的多预算训练对照，不能证明优化效率普遍优于原方案。
+**Q6：继续训练连续表示比原多预算更易改善绝对质量吗？** 本次没有获得这种结果。4帧选模改善，封存64帧反而比匹配原B1低{number(-facts["final_R1_minus_B1"])}dB。没有匹配新增300步的多预算训练对照，不能作普遍优化效率判断。
 
-**Q7：优先修改哪一环？** 优先研究Tokenizer与Token-to-Latent之间的空间信息保留/位置绑定，而非继续加码本或128预算功能。当前因果证据只能定位到这段链路，尚不足以单独指认某层。
-下一项最小可证实验是在独立模块给Token内容与Decoder Grid建立显式二维空间对应/局部读取，保留2048、16D、Backbone及Full2048参考，并重复相同单帧与4帧拟合、相同验证预算。先确认输出确实利用空间内容，再决定大规模训练；不建议直接再跑66,000步。
+**Q7：优先修改哪一环？** 先处理参考闭环的长期训练/验证分布缺口：训练仅4帧，实际评估64帧，Full2048未显示更稳定。下一独立实验最小改动是保持K、16D、Backbone和现有结构，使用16/32帧训练展开（TBPTT仍2），并把48帧因果Validation作为必要选模门槛；先做可恢复短Pilot，不追加本次封存权重训练。
+结构方面，当前证据只把巨大条件损失定位到Tokenizer→Token-to-Latent链路，尚不能单独指认某层。若长期稳定性门槛通过后此差距仍在，最小结构候选是给Token内容与Decoder Grid加入显式二维空间对应/局部读取，其他因素保持固定。码本使用已经充分，扩大Decoder/Encoder Grid短程均未改善，没有证据优先扩大它们。
+不建议直接再跑66,000步。先让长闭环验证和同状态空间表达诊断同时通过，再决定训练规模。
 
 工程验证和精确检查数见acceptance.json、pytest_final.txt、quality_audit.json、mutation_check.json；全部操作/原因与已知限制见docs/fixed2048_work_log.md。源码和原始数据均保留，不通过降低断言或静默fallback掩盖失败。
 """

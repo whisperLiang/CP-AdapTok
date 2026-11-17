@@ -27,8 +27,6 @@ def main():
     coverage = json.loads(Path(args.coverage).read_text())
     rows, functions = [], []
     for file in sorted(Path("experiments/fixed2048").glob("*.py")):
-        if file.name in ("quality.py", "mutation_check.py"):
-            continue
         measured, parsed = analyze_file(file.resolve(), coverage)
         rows.extend(measured)
         functions.extend(parsed)

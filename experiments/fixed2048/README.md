@@ -74,3 +74,11 @@ python -m experiments.fixed2048.acceptance
 正式历史评估的 `intra_period=32` 从原 `evaluation.py` 与配置核验。
 `original128` / `paired` 会在每32帧复现I重置；`matched128`只在首帧用I，以匹配本专项Full2048第一I后续P的I/P比例。
 短于32帧的前期诊断不受此区别影响。最终B1同时提供这两种参考条件。
+
+最终封存后追加的解释性Validation长闭环诊断：
+
+```bash
+python -m experiments.fixed2048.long_reference
+```
+
+该入口固定已有B1/R1/R2权重，三条Validation各48帧，显式标记 `posthoc_after_sealed_test: true`、`used_for_selection: false`；不训练、不改封存方案。同一FrozenFrameContext另测尺度正确的直接Latent输出，仅正常Token输出推进历史。它不提供新的确认性Test证据。
