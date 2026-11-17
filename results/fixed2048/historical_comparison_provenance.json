@@ -1,0 +1,34 @@
+{
+  "B0": {
+    "requested_S4_sha256": "9eb19bf15b5cd2c4d672433ad3cec4496c47d0d1cd882eb2904ec50130c792ce",
+    "archived_final_sha256": "df88cbec23291a41c83cefc3784e40834552ef732d98af2bda7543a42a608942",
+    "requested_step": 4000,
+    "archived_step": 1000,
+    "changed_parameter_names": [
+      "entropy_model.logits",
+      "scorer.project.weight",
+      "scorer.project.bias",
+      "scorer.head.0.weight",
+      "scorer.head.0.bias",
+      "scorer.head.2.weight",
+      "scorer.head.2.bias"
+    ],
+    "changed_reconstruction_parameter_names": []
+  },
+  "B1": {
+    "requested_S4_sha256": "b940d90b964c506e48ccf0270cfb11a8c790f2b1585a26dfc9ddebb210ed82b7",
+    "archived_final_sha256": "3d7e6785d96bcb13fae001a43614814969e715ccbc6e9ce053c4711030146822",
+    "requested_step": 4000,
+    "archived_step": 1000,
+    "changed_parameter_names": [
+      "entropy_model.logits",
+      "scorer.project.weight",
+      "scorer.project.bias",
+      "scorer.head.0.weight",
+      "scorer.head.0.bias",
+      "scorer.head.2.weight",
+      "scorer.head.2.bias"
+    ],
+    "changed_reconstruction_parameter_names": []
+  }
+}

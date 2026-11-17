@@ -1,0 +1,25 @@
+{
+  "video": "DAVIS2017:dog",
+  "frame": 2,
+  "frame_type": "P",
+  "diagnostic_only": true,
+  "fixed_positions_and_context": true,
+  "results": {
+    "normal": {
+      "latent_delta_mse": 0.0,
+      "rgb_delta_mse": 0.0
+    },
+    "constant": {
+      "latent_delta_mse": 0.6164668202400208,
+      "rgb_delta_mse": 0.0032079187221825123
+    },
+    "shuffled": {
+      "latent_delta_mse": 0.028768712654709816,
+      "rgb_delta_mse": 0.0005074022337794304
+    },
+    "other_frame": {
+      "latent_delta_mse": 0.36965563893318176,
+      "rgb_delta_mse": 0.007023733574897051
+    }
+  }
+}

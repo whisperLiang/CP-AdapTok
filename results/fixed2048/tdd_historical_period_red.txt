@@ -1,0 +1,27 @@
+....F                                                                    [100%]
+=================================== FAILURES ===================================
+__________ test_original_reference_reproduces_historical_i_period_32 ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-whisperliang/pytest-363/test_original_reference_reprod0')
+
+    def test_original_reference_reproduces_historical_i_period_32(tmp_path):
+        import torch
+        from experiments.fixed2048.evaluate import evaluate_loop
+        from experiments.fixed2048.tests.test_codec import make_model
+        from experiments.fixed2048.diagnostics import psnr
+        torch.set_num_threads(2)
+        def suite(original,decoded):
+            mse=torch.nn.functional.mse_loss(original,decoded).item()
+            return {'mse':mse,'psnr':psnr(mse)}
+        rows,_=evaluate_loop(make_model().eval(),{'content_id':'validation:tiny','path':'tiny'},
+                             torch.full((33,3,64,64),0.5),['R1'],'original128',suite,tmp_path)
+>       assert [r['frame'] for r in rows if r['frame_type']=='I'] == [0,32]
+E       assert [0] == [0, 32]
+E
+E         Right contains one more item: 32
+E         Use -v to get more diff
+
+experiments/fixed2048/tests/test_evaluate.py:96: AssertionError
+=========================== short test summary info ============================
+FAILED experiments/fixed2048/tests/test_evaluate.py::test_original_reference_reproduces_historical_i_period_32
+1 failed, 4 passed in 5.08s

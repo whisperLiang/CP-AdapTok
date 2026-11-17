@@ -1,0 +1,187 @@
+{
+  "R1": {
+    "checkpoint": "checkpoints/fixed2048/continuous/main/best_validation.pt",
+    "paths": [
+      "R1",
+      "R2"
+    ],
+    "references": [
+      "full2048"
+    ],
+    "selected_step": 200,
+    "source_status": "trained",
+    "model_config": {
+      "n_max": 2048,
+      "k_ref": 128,
+      "packet_tokens": 128,
+      "dim": 192,
+      "heads": 6,
+      "layers": 2,
+      "codebook_size": 8192,
+      "embedding_dim": 16,
+      "grid": [
+        17,
+        30
+      ],
+      "kv_grid": [
+        17,
+        30
+      ],
+      "qp": 32,
+      "attention_precision": "float64",
+      "state_fingerprint": "mixed_int64_v1",
+      "query_content_only": false,
+      "token_aggregation": "global_softmax_v1"
+    },
+    "selection": "minimum Validation global MSE, fixed 3 videos x 4 frames, 0/100/200/300",
+    "selection_global_mse": 0.024354228051379323,
+    "actual_training_updates": 300
+  },
+  "R2": {
+    "checkpoint": "checkpoints/fixed2048/vq/main/best_validation.pt",
+    "paths": [
+      "R2"
+    ],
+    "references": [
+      "full2048"
+    ],
+    "selected_step": 100,
+    "source_status": "trained",
+    "model_config": {
+      "n_max": 2048,
+      "k_ref": 128,
+      "packet_tokens": 128,
+      "dim": 192,
+      "heads": 6,
+      "layers": 2,
+      "codebook_size": 8192,
+      "embedding_dim": 16,
+      "grid": [
+        17,
+        30
+      ],
+      "kv_grid": [
+        17,
+        30
+      ],
+      "qp": 32,
+      "attention_precision": "float64",
+      "state_fingerprint": "mixed_int64_v1",
+      "query_content_only": false,
+      "token_aggregation": "global_softmax_v1"
+    },
+    "selection": "minimum Validation global MSE, fixed 3 videos x 4 frames, 0/100/200/300",
+    "selection_global_mse": 0.02432423938686649,
+    "actual_training_updates": 300
+  },
+  "R3": {
+    "checkpoint": "checkpoints/fixed2048/grid34/main/best_validation.pt",
+    "paths": [
+      "R1"
+    ],
+    "references": [
+      "full2048"
+    ],
+    "selected_step": 300,
+    "source_status": "trained",
+    "model_config": {
+      "n_max": 2048,
+      "k_ref": 128,
+      "packet_tokens": 128,
+      "dim": 192,
+      "heads": 6,
+      "layers": 2,
+      "codebook_size": 8192,
+      "embedding_dim": 16,
+      "grid": [
+        34,
+        60
+      ],
+      "kv_grid": [
+        17,
+        30
+      ],
+      "qp": 32,
+      "attention_precision": "float64",
+      "state_fingerprint": "mixed_int64_v1",
+      "query_content_only": false,
+      "token_aggregation": "global_softmax_v1"
+    },
+    "selection": "minimum Validation global MSE, fixed 3 videos x 4 frames, 0/100/200/300",
+    "selection_global_mse": 0.027004222696026165,
+    "actual_training_updates": 300
+  },
+  "B0": {
+    "checkpoint": "checkpoints/large_scale/formal_20261116/s4/B0/latest.pt",
+    "paths": [
+      "R2"
+    ],
+    "references": [
+      "original128"
+    ],
+    "selected_step": 4000,
+    "source_status": "trained",
+    "model_config": {
+      "n_max": 2048,
+      "k_ref": 128,
+      "packet_tokens": 128,
+      "dim": 192,
+      "heads": 6,
+      "layers": 2,
+      "codebook_size": 8192,
+      "embedding_dim": 16,
+      "grid": [
+        17,
+        30
+      ],
+      "kv_grid": [
+        17,
+        30
+      ],
+      "qp": 32,
+      "attention_precision": "float64",
+      "state_fingerprint": "mixed_int64_v1",
+      "query_content_only": false,
+      "token_aggregation": "global_softmax_v1"
+    },
+    "selection": "original user-declared S4 checkpoint, fixed external reference",
+    "historical_intra_period": 32
+  },
+  "B1": {
+    "checkpoint": "checkpoints/large_scale/formal_20261116/s4/B1/latest.pt",
+    "paths": [
+      "R2"
+    ],
+    "references": [
+      "original128",
+      "matched128"
+    ],
+    "selected_step": 4000,
+    "source_status": "trained",
+    "model_config": {
+      "n_max": 2048,
+      "k_ref": 128,
+      "packet_tokens": 128,
+      "dim": 192,
+      "heads": 6,
+      "layers": 2,
+      "codebook_size": 8192,
+      "embedding_dim": 16,
+      "grid": [
+        17,
+        30
+      ],
+      "kv_grid": [
+        17,
+        30
+      ],
+      "qp": 32,
+      "attention_precision": "float64",
+      "state_fingerprint": "mixed_int64_v1",
+      "query_content_only": false,
+      "token_aggregation": "global_softmax_v1"
+    },
+    "selection": "original user-declared S4 checkpoint, fixed external reference",
+    "historical_intra_period": 32
+  }
+}

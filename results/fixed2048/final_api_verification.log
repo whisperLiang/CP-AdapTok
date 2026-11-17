@@ -1,0 +1,47 @@
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+completed long48 QA_R1 384
+calibration overwrite rejected as required
+training after seal rejected as required
+usage: experiments.fixed2048.evaluate [-h] [--config CONFIG]
+                                      [--checkpoint CHECKPOINT] --output
+                                      OUTPUT
+                                      [--paths {R0,R0-spatial,R1,R2,raw_192} [{R0,R0-spatial,R1,R2,raw_192} ...]]
+                                      [--references {i_only,full2048,original128,paired,paired_full2048,matched128} [{i_only,full2048,original128,paired,paired_full2048,matched128} ...]]
+                                      [--split {validation,test}]
+                                      [--videos VIDEOS [VIDEOS ...]]
+                                      [--frames FRAMES] [--sensitivity]
+                                      [--seal SEAL]
+
+Native-1080p paired and independent-loop evaluation, with no bitstream.
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG
+  --checkpoint CHECKPOINT
+  --output OUTPUT
+  --paths {R0,R0-spatial,R1,R2,raw_192} [{R0,R0-spatial,R1,R2,raw_192} ...]
+  --references {i_only,full2048,original128,paired,paired_full2048,matched128} [{i_only,full2048,original128,paired,paired_full2048,matched128} ...]
+  --split {validation,test}
+  --videos VIDEOS [VIDEOS ...]
+  --frames FRAMES
+  --sensitivity
+  --seal SEAL
+usage: experiments.fixed2048.sensitivity [-h] [--config CONFIG] --checkpoint
+                                         CHECKPOINT --output OUTPUT
+
+Separate nonstandard token-content diagnostics with explicit history
+ownership.
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG
+  --checkpoint CHECKPOINT
+  --output OUTPUT
+API verification complete

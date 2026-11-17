@@ -82,3 +82,14 @@ python -m experiments.fixed2048.long_reference
 ```
 
 该入口固定已有B1/R1/R2权重，三条Validation各48帧，显式标记 `posthoc_after_sealed_test: true`、`used_for_selection: false`；不训练、不改封存方案。同一FrozenFrameContext另测尺度正确的直接Latent输出，仅正常Token输出推进历史。它不提供新的确认性Test证据。
+
+已归档目录不会被复现命令覆盖。复核封存Test时使用相同权重/协议及新输出目录：
+
+```bash
+python -m experiments.fixed2048.evaluate --checkpoint checkpoints/fixed2048/continuous/main/best_validation.pt --split test --frames 64 --paths R1 R2 --references full2048 --seal results/fixed2048/final_test/seal.json --output results/fixed2048_recheck/R1
+```
+
+从头复跑训练须创建独立实验配置与目录，保留当前封存记录。例如在配置副本中设置
+`test_seal: results/fixed2048_reproduction/final_test/seal.json`（该新封存文件尚不存在），
+然后向各命令传递该 `--config`，并将 `--output` / `--checkpoint-dir` 指向新的复现目录。
+Pilot可用 `train --pilot-frames 1`（再分别4和16）及新目录独立重跑。不要删除当前seal或更改原选中Checkpoint继续训练。

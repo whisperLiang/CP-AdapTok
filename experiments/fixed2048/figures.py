@@ -29,6 +29,8 @@ def export(fig, path):
     fig.savefig(f"{path}.tiff", dpi=600, pil_kwargs={"compression": "tiff_lzw"})
     fig.savefig(f"{path}.pdf")
     fig.savefig(f"{path}.svg")
+    svg = Path(f"{path}.svg")
+    svg.write_text("\n".join(line.rstrip() for line in svg.read_text().splitlines()) + "\n")
     plt.close(fig)
 
 

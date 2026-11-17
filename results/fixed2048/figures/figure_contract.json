@@ -1,0 +1,15 @@
+{
+  "backend": "python",
+  "archetype": "quantitative grid",
+  "conclusion": "Use paired measurements and independent reference loops to distinguish a small conditional quantization gap from the much larger total representation gap; native I-latent scaling is a separate interface control.",
+  "source_data": "results/fixed2048/**/frame_metrics.*, overfit/*/history.json",
+  "planned_figures": {
+    "training_curves": "Observed optimizer-step PSNR for each of three independent single-video fits; all 300 observations shown, no smoothing or subsampling.",
+    "paired_quantization": "Paired per-frame R2 minus R1 PSNR under the same frozen context; use all measured frames and label checkpoint state.",
+    "reference_frames": "Raw per-frame PSNR for R1/R2 independent Full2048 and Original128 loops; separate videos, no frame-as-independent confidence claim.",
+    "reconstructions": "Matched native RGB output previews from one predeclared Validation video/frame, uniformly downsampled for display only; no contrast adjustment."
+  },
+  "export": {"width_mm": 183, "font_min_pt": 7, "formats": ["png", "pdf", "svg"], "editable_text": true},
+  "statistics": {"seeds": 1, "independent_videos": 3, "uncertainty": "No invented confidence intervals; individual frames/videos shown. Temporal frames are correlated.", "aggregate": "Mean frame PSNR, per-video mean and global-MSE PSNR explicitly distinguished."},
+  "image_integrity": {"brightness_contrast_gamma": "unchanged", "color": "native RGB 0..1 through existing adapters", "display_resampling": "uniform bilinear preview only; metrics always native1920x1080"}
+}

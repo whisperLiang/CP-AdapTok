@@ -1,0 +1,29 @@
+{
+  "time": "2026-11-17T20:48:40.381073+08:00",
+  "timezone": "Asia/Shanghai",
+  "git_commit": "d89c25c0db172fbcb95764215067225148fc5c1a",
+  "git_dirty": true,
+  "source_sha256": "0c33c6dc770d8e187b53d46022284e0ce038f1a31c7e435b5d7480583e55e414",
+  "torch": "2.9.1+cu130",
+  "cuda": "13.0",
+  "gpu_snapshot": "NVIDIA H100 PCIe, 14 MiB, 0 %",
+  "gpu_shared": "not assumed isolated; see gpu_snapshot and serial benchmark commands",
+  "status": "complete",
+  "config": null,
+  "upstreams": [
+    {
+      "name": "AdapTok",
+      "url": "https://github.com/VisionXLab/AdapTok",
+      "commit": "a72076cf6474f930a181aa78971de70d65289b49",
+      "license": "MIT",
+      "license_file": "third_party/AdapTok/LICENSE"
+    },
+    {
+      "name": "DCVC",
+      "url": "https://github.com/microsoft/DCVC",
+      "commit": "cbdae87a5445114cdc7f48816da63ea80bdeac40",
+      "license": "MIT",
+      "license_file": "third_party/DCVC/LICENSE.txt"
+    }
+  ]
+}

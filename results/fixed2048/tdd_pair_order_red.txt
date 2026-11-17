@@ -1,0 +1,32 @@
+..F                                                                      [100%]
+=================================== FAILURES ===================================
+___________ test_pair_measurement_is_independent_of_candidate_order ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-whisperliang/pytest-345/test_pair_measurement_is_indep0')
+
+    def test_pair_measurement_is_independent_of_candidate_order(tmp_path):
+        import torch
+        from experiments.fixed2048.evaluate import evaluate_loop
+        from experiments.fixed2048.tests.test_codec import make_model
+        from experiments.fixed2048.diagnostics import psnr
+
+        torch.set_num_threads(2)
+        def suite(original, decoded):
+            mse = torch.nn.functional.mse_loss(original, decoded).item()
+            return {'mse':mse,'psnr':psnr(mse)}
+        model = make_model().eval()
+        rows, pairs = evaluate_loop(model, {'content_id':'validation:tiny','path':'tiny'},
+                                    torch.rand(2,3,64,64), ['R2','R0','R1'], 'paired', suite, tmp_path)
+        by_path = {row['path']:row for row in rows if row['frame'] == 0}
+        expected = by_path['R2']['psnr'] - by_path['R1']['psnr']
+>       assert pairs[0]['r2_minus_r1_psnr'] == pytest.approx(expected)
+E       assert 0.23005426938709128 == 0.002427426367930252 ± 2.4e-09
+E
+E         comparison failed
+E         Obtained: 0.23005426938709128
+E         Expected: 0.002427426367930252 ± 2.4e-09
+
+experiments/fixed2048/tests/test_evaluate.py:49: AssertionError
+=========================== short test summary info ============================
+FAILED experiments/fixed2048/tests/test_evaluate.py::test_pair_measurement_is_independent_of_candidate_order
+1 failed, 2 passed in 2.24s

@@ -1,0 +1,93 @@
+{
+  "seed": 20261117,
+  "device": "cuda:0",
+  "source_checkpoint": "checkpoints/large_scale/formal_20261116/s4/B1/latest.pt",
+  "experiment_type": "reconstruction_diagnostic",
+  "real_bitstream": false,
+  "bpp": null,
+  "decoder_grid": [
+    17,
+    30
+  ],
+  "encoder_kv_grid": [
+    17,
+    30
+  ],
+  "manifest_dir": "data/manifests",
+  "loss": {
+    "mse": 1.0,
+    "latent": 0.0,
+    "lpips": 0.0,
+    "dists": 0.0,
+    "monotonic": 0.0,
+    "estimated_rate": 0.0
+  },
+  "training": {
+    "route": "B1_S4_native1080_finetune",
+    "optimizer": "AdamW",
+    "lr": 0.0001,
+    "weight_decay": 0.01,
+    "amp_bf16": true,
+    "clip_grad_norm": 1.0,
+    "tbptt": 2,
+    "sequence_length": 4,
+    "steps": 300,
+    "save_every": 100,
+    "validate_every": 100,
+    "path": "R1",
+    "reference": "full2048",
+    "resolution": [
+      1080,
+      1920
+    ],
+    "train_video": "DAVIS2017:bear"
+  },
+  "validation": {
+    "videos": [
+      "DAVIS2017:blackswan",
+      "DAVIS2017:car-roundabout",
+      "DAVIS2017:dog"
+    ],
+    "frames": 4
+  },
+  "baseline": {
+    "videos": [
+      "DAVIS2017:blackswan",
+      "DAVIS2017:car-roundabout",
+      "DAVIS2017:dog"
+    ],
+    "frames": 8,
+    "paths": [
+      "R0",
+      "R0-spatial",
+      "R1",
+      "R2"
+    ],
+    "references": [
+      "i_only",
+      "full2048",
+      "original128",
+      "paired"
+    ]
+  },
+  "pilot": {
+    "train_video": "DAVIS2017:bear",
+    "lengths": [
+      1,
+      4,
+      16
+    ],
+    "steps": 300,
+    "lr": 0.0001,
+    "minimum_relative_mse_drop": 0.05,
+    "maximum_steps": 1000
+  },
+  "final_test": {
+    "videos": [
+      "DAVIS2017:cows",
+      "DAVIS2017:goat",
+      "DAVIS2017:parkour"
+    ],
+    "frames": 64
+  }
+}

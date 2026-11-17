@@ -1,0 +1,26 @@
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+{"video": "DAVIS2017:blackswan", "reference": "paired_full2048", "paths": ["R1", "R2"], "frames": 16}
+{"video": "DAVIS2017:blackswan", "reference": "i_only", "paths": ["R1", "R2"], "frames": 16}
+{"video": "DAVIS2017:blackswan", "reference": "full2048", "paths": ["R1"], "frames": 8}
+{"video": "DAVIS2017:blackswan", "reference": "full2048", "paths": ["R2"], "frames": 8}
+{"video": "DAVIS2017:blackswan", "reference": "original128", "paths": ["R1"], "frames": 8}
+{"video": "DAVIS2017:blackswan", "reference": "original128", "paths": ["R2"], "frames": 8}
+{"video": "DAVIS2017:car-roundabout", "reference": "paired_full2048", "paths": ["R1", "R2"], "frames": 16}
+{"video": "DAVIS2017:car-roundabout", "reference": "i_only", "paths": ["R1", "R2"], "frames": 16}
+{"video": "DAVIS2017:car-roundabout", "reference": "full2048", "paths": ["R1"], "frames": 8}
+{"video": "DAVIS2017:car-roundabout", "reference": "full2048", "paths": ["R2"], "frames": 8}
+{"video": "DAVIS2017:car-roundabout", "reference": "original128", "paths": ["R1"], "frames": 8}
+{"video": "DAVIS2017:car-roundabout", "reference": "original128", "paths": ["R2"], "frames": 8}
+{"video": "DAVIS2017:dog", "reference": "paired_full2048", "paths": ["R1", "R2"], "frames": 16}
+{"video": "DAVIS2017:dog", "reference": "i_only", "paths": ["R1", "R2"], "frames": 16}
+{"video": "DAVIS2017:dog", "reference": "full2048", "paths": ["R1"], "frames": 8}
+{"video": "DAVIS2017:dog", "reference": "full2048", "paths": ["R2"], "frames": 8}
+{"video": "DAVIS2017:dog", "reference": "original128", "paths": ["R1"], "frames": 8}
+{"video": "DAVIS2017:dog", "reference": "original128", "paths": ["R2"], "frames": 8}

@@ -1,0 +1,90 @@
+{
+  "overfit1": {
+    "steps": 300,
+    "strictly_contiguous_steps": true,
+    "checkpoint_step_matches": true,
+    "all_frozen_backbone_tensors_equal": true,
+    "changed_backbone_tensors": [],
+    "all_records_have_no_backbone_gradients": true,
+    "codebook_updated": false,
+    "completed_frames": 300,
+    "optimizer_wall_s": 24.38299692212604
+  },
+  "overfit4": {
+    "steps": 300,
+    "strictly_contiguous_steps": true,
+    "checkpoint_step_matches": true,
+    "all_frozen_backbone_tensors_equal": true,
+    "changed_backbone_tensors": [],
+    "all_records_have_no_backbone_gradients": true,
+    "codebook_updated": false,
+    "completed_frames": 1200,
+    "optimizer_wall_s": 57.57865621702513
+  },
+  "overfit16": {
+    "steps": 300,
+    "strictly_contiguous_steps": true,
+    "checkpoint_step_matches": true,
+    "all_frozen_backbone_tensors_equal": true,
+    "changed_backbone_tensors": [],
+    "all_records_have_no_backbone_gradients": true,
+    "codebook_updated": false,
+    "completed_frames": 4800,
+    "optimizer_wall_s": 188.2284052130417
+  },
+  "R1": {
+    "steps": 300,
+    "strictly_contiguous_steps": true,
+    "checkpoint_step_matches": true,
+    "all_frozen_backbone_tensors_equal": true,
+    "changed_backbone_tensors": [],
+    "all_records_have_no_backbone_gradients": true,
+    "codebook_updated": false,
+    "completed_frames": 1200,
+    "optimizer_wall_s": 63.31438765564235
+  },
+  "R2": {
+    "steps": 300,
+    "strictly_contiguous_steps": true,
+    "checkpoint_step_matches": true,
+    "all_frozen_backbone_tensors_equal": true,
+    "changed_backbone_tensors": [],
+    "all_records_have_no_backbone_gradients": true,
+    "codebook_updated": true,
+    "completed_frames": 1200,
+    "optimizer_wall_s": 64.79764390183846
+  },
+  "R3": {
+    "steps": 300,
+    "strictly_contiguous_steps": true,
+    "checkpoint_step_matches": true,
+    "all_frozen_backbone_tensors_equal": true,
+    "changed_backbone_tensors": [],
+    "all_records_have_no_backbone_gradients": true,
+    "codebook_updated": false,
+    "completed_frames": 1200,
+    "optimizer_wall_s": 64.7820647279732
+  },
+  "EncoderKV34": {
+    "steps": 300,
+    "strictly_contiguous_steps": true,
+    "checkpoint_step_matches": true,
+    "all_frozen_backbone_tensors_equal": true,
+    "changed_backbone_tensors": [],
+    "all_records_have_no_backbone_gradients": true,
+    "codebook_updated": false,
+    "completed_frames": 1200,
+    "optimizer_wall_s": 63.185955561639275
+  },
+  "raw192": {
+    "steps": 300,
+    "strictly_contiguous_steps": true,
+    "checkpoint_step_matches": true,
+    "all_frozen_backbone_tensors_equal": true,
+    "changed_backbone_tensors": [],
+    "all_records_have_no_backbone_gradients": true,
+    "codebook_updated": false,
+    "completed_frames": 1200,
+    "optimizer_wall_s": 62.558516915887594
+  }
+}

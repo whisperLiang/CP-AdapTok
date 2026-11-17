@@ -1,0 +1,25 @@
+{
+  "video": "DAVIS2017:car-roundabout",
+  "frame": 2,
+  "frame_type": "P",
+  "diagnostic_only": true,
+  "fixed_positions_and_context": true,
+  "results": {
+    "normal": {
+      "latent_delta_mse": 0.0,
+      "rgb_delta_mse": 0.0
+    },
+    "constant": {
+      "latent_delta_mse": 0.7389785647392273,
+      "rgb_delta_mse": 0.010196658782660961
+    },
+    "shuffled": {
+      "latent_delta_mse": 0.031039739027619362,
+      "rgb_delta_mse": 0.0005543266888707876
+    },
+    "other_frame": {
+      "latent_delta_mse": 0.2150186151266098,
+      "rgb_delta_mse": 0.004838109947741032
+    }
+  }
+}

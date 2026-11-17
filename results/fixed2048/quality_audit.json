@@ -1,0 +1,1215 @@
+{
+  "tools": "Radon + coverage + AST; named crapper/dryer unavailable",
+  "functions": [
+    {
+      "file": "experiments/fixed2048/acceptance.py",
+      "function": "read",
+      "line": 24,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/acceptance.py",
+      "function": "audit_update",
+      "line": 28,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "experiments/fixed2048/acceptance.py",
+      "function": "audit_outputs",
+      "line": 54,
+      "complexity": 7,
+      "coverage": 0.8333333333333334,
+      "crap": 7.226851851851852
+    },
+    {
+      "file": "experiments/fixed2048/acceptance.py",
+      "function": "valid_update",
+      "line": 68,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "experiments/fixed2048/acceptance.py",
+      "function": "brief",
+      "line": 78,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "experiments/fixed2048/acceptance.py",
+      "function": "main",
+      "line": 88,
+      "complexity": 8,
+      "coverage": 0.9333333333333333,
+      "crap": 8.018962962962963
+    },
+    {
+      "file": "experiments/fixed2048/backbone_control.py",
+      "function": "continuous_intra_latent",
+      "line": 23,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/backbone_control.py",
+      "function": "control_loop",
+      "line": 28,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "experiments/fixed2048/backbone_control.py",
+      "function": "run_control",
+      "line": 63,
+      "complexity": 6,
+      "coverage": 0.8947368421052632,
+      "crap": 6.041988628079895
+    },
+    {
+      "file": "experiments/fixed2048/backbone_control.py",
+      "function": "main",
+      "line": 95,
+      "complexity": 1,
+      "coverage": 0.125,
+      "crap": 1.669921875
+    },
+    {
+      "file": "experiments/fixed2048/calibrate.py",
+      "function": "collect_train_features",
+      "line": 16,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "experiments/fixed2048/calibrate.py",
+      "function": "main",
+      "line": 36,
+      "complexity": 4,
+      "coverage": 0.4,
+      "crap": 7.4559999999999995
+    },
+    {
+      "file": "experiments/fixed2048/checkpoint.py",
+      "function": "experiment_source_sha256",
+      "line": 20,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/checkpoint.py",
+      "function": "sha256",
+      "line": 29,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/checkpoint.py",
+      "function": "require_checkpoint",
+      "line": 34,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/checkpoint.py",
+      "function": "migrate_grid",
+      "line": 41,
+      "complexity": 7,
+      "coverage": 0.9375,
+      "crap": 7.011962890625
+    },
+    {
+      "file": "experiments/fixed2048/checkpoint.py",
+      "function": "load_reconstructor",
+      "line": 66,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "experiments/fixed2048/checkpoint.py",
+      "function": "rng_state",
+      "line": 106,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/checkpoint.py",
+      "function": "restore_rng",
+      "line": 117,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/checkpoint.py",
+      "function": "save_training",
+      "line": 127,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/checkpoint.py",
+      "function": "resume_training",
+      "line": 153,
+      "complexity": 4,
+      "coverage": 0.9090909090909091,
+      "crap": 4.012021036814425
+    },
+    {
+      "file": "experiments/fixed2048/checkpoint.py",
+      "function": "official_backbone_identity",
+      "line": 166,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "experiments/fixed2048/cli.py",
+      "function": "read_config",
+      "line": 9,
+      "complexity": 4,
+      "coverage": 0.9,
+      "crap": 4.016
+    },
+    {
+      "file": "experiments/fixed2048/cli.py",
+      "function": "seeded_config",
+      "line": 22,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "__init__",
+      "line": 44,
+      "complexity": 2,
+      "coverage": 0.9090909090909091,
+      "crap": 2.0030052592036065
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "device",
+      "line": 57,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "train",
+      "line": 60,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "configure_training",
+      "line": 66,
+      "complexity": 3,
+      "coverage": 0.9230769230769231,
+      "crap": 3.0040964952207556
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "empty_state",
+      "line": 80,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "_timed",
+      "line": 83,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "_sync",
+      "line": 93,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "begin_frame",
+      "line": 97,
+      "complexity": 7,
+      "coverage": 0.8,
+      "crap": 7.3919999999999995
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "encode",
+      "line": 119,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "tokens",
+      "line": 128,
+      "complexity": 3,
+      "coverage": 0.8333333333333334,
+      "crap": 3.0416666666666665
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "continuous",
+      "line": 139,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "_embeddings",
+      "line": 143,
+      "complexity": 3,
+      "coverage": 0.8571428571428571,
+      "crap": 3.0262390670553936
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "decode_latent",
+      "line": 151,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "reconstruct",
+      "line": 156,
+      "complexity": 4,
+      "coverage": 0.9333333333333333,
+      "crap": 4.004740740740741
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "compare",
+      "line": 178,
+      "complexity": 3,
+      "coverage": 0.75,
+      "crap": 3.140625
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "advance",
+      "line": 183,
+      "complexity": 5,
+      "coverage": 0.9230769230769231,
+      "crap": 5.011379153390988
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "__init__",
+      "line": 44,
+      "complexity": 2,
+      "coverage": 0.9090909090909091,
+      "crap": 2.0030052592036065
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "device",
+      "line": 57,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "train",
+      "line": 60,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "configure_training",
+      "line": 66,
+      "complexity": 3,
+      "coverage": 0.9230769230769231,
+      "crap": 3.0040964952207556
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "empty_state",
+      "line": 80,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "_timed",
+      "line": 83,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "_sync",
+      "line": 93,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "begin_frame",
+      "line": 97,
+      "complexity": 7,
+      "coverage": 0.8,
+      "crap": 7.3919999999999995
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "encode",
+      "line": 119,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "tokens",
+      "line": 128,
+      "complexity": 3,
+      "coverage": 0.8333333333333334,
+      "crap": 3.0416666666666665
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "continuous",
+      "line": 139,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "_embeddings",
+      "line": 143,
+      "complexity": 3,
+      "coverage": 0.8571428571428571,
+      "crap": 3.0262390670553936
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "decode_latent",
+      "line": 151,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "reconstruct",
+      "line": 156,
+      "complexity": 4,
+      "coverage": 0.9333333333333333,
+      "crap": 4.004740740740741
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "compare",
+      "line": 178,
+      "complexity": 3,
+      "coverage": 0.75,
+      "crap": 3.140625
+    },
+    {
+      "file": "experiments/fixed2048/codec.py",
+      "function": "advance",
+      "line": 183,
+      "complexity": 5,
+      "coverage": 0.9230769230769231,
+      "crap": 5.011379153390988
+    },
+    {
+      "file": "experiments/fixed2048/data.py",
+      "function": "records",
+      "line": 9,
+      "complexity": 8,
+      "coverage": 1.0,
+      "crap": 8.0
+    },
+    {
+      "file": "experiments/fixed2048/data.py",
+      "function": "native_records",
+      "line": 21,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "experiments/fixed2048/data.py",
+      "function": "read_clip",
+      "line": 25,
+      "complexity": 9,
+      "coverage": 0.9375,
+      "crap": 9.019775390625
+    },
+    {
+      "file": "experiments/fixed2048/diagnostics.py",
+      "function": "psnr",
+      "line": 10,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/diagnostics.py",
+      "function": "distortion",
+      "line": 14,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/diagnostics.py",
+      "function": "token_statistics",
+      "line": 20,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "experiments/fixed2048/diagnostics.py",
+      "function": "content_variants",
+      "line": 47,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/diagnostics.py",
+      "function": "content_sensitivity",
+      "line": 58,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "experiments/fixed2048/diagnostics.py",
+      "function": "_means",
+      "line": 78,
+      "complexity": 8,
+      "coverage": 1.0,
+      "crap": 8.0
+    },
+    {
+      "file": "experiments/fixed2048/diagnostics.py",
+      "function": "grouped",
+      "line": 92,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/diagnostics.py",
+      "function": "aggregate",
+      "line": 99,
+      "complexity": 6,
+      "coverage": 0.9090909090909091,
+      "crap": 6.027047332832457
+    },
+    {
+      "file": "experiments/fixed2048/diagnostics.py",
+      "function": "module_norms",
+      "line": 114,
+      "complexity": 6,
+      "coverage": 1.0,
+      "crap": 6.0
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "save_image",
+      "line": 24,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "frame_metrics",
+      "line": 31,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "stage_times",
+      "line": 44,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "paired_difference",
+      "line": 53,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "measure_frame",
+      "line": 66,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "diagnostic_content",
+      "line": 88,
+      "complexity": 1,
+      "coverage": 0.3333333333333333,
+      "crap": 1.2962962962962963
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "advance_reference",
+      "line": 103,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "force_intra",
+      "line": 113,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "evaluate_loop",
+      "line": 118,
+      "complexity": 8,
+      "coverage": 0.9047619047619048,
+      "crap": 8.055285606306015
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "write_tables",
+      "line": 145,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "check_test_seal",
+      "line": 160,
+      "complexity": 5,
+      "coverage": 0.8181818181818182,
+      "crap": 5.150262960180315
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "validate_test_request",
+      "line": 173,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "evaluate_sources",
+      "line": 181,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "run_evaluation",
+      "line": 217,
+      "complexity": 5,
+      "coverage": 0.9130434782608695,
+      "crap": 5.0164379058107995
+    },
+    {
+      "file": "experiments/fixed2048/evaluate.py",
+      "function": "main",
+      "line": 271,
+      "complexity": 4,
+      "coverage": 0.7647058823529411,
+      "crap": 4.208426623244454
+    },
+    {
+      "file": "experiments/fixed2048/figures.py",
+      "function": "read",
+      "line": 17,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/figures.py",
+      "function": "export",
+      "line": 21,
+      "complexity": 3,
+      "coverage": 0.9166666666666666,
+      "crap": 3.0052083333333335
+    },
+    {
+      "file": "experiments/fixed2048/figures.py",
+      "function": "axes",
+      "line": 37,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/figures.py",
+      "function": "training_curves",
+      "line": 43,
+      "complexity": 5,
+      "coverage": 1.0,
+      "crap": 5.0
+    },
+    {
+      "file": "experiments/fixed2048/figures.py",
+      "function": "paired_quantization",
+      "line": 65,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "experiments/fixed2048/figures.py",
+      "function": "select_reference_rows",
+      "line": 94,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "experiments/fixed2048/figures.py",
+      "function": "reference_frames",
+      "line": 101,
+      "complexity": 8,
+      "coverage": 1.0,
+      "crap": 8.0
+    },
+    {
+      "file": "experiments/fixed2048/figures.py",
+      "function": "build_figures",
+      "line": 133,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/long_reference.py",
+      "function": "rollout",
+      "line": 20,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "experiments/fixed2048/long_reference.py",
+      "function": "window_summary",
+      "line": 59,
+      "complexity": 8,
+      "coverage": 1.0,
+      "crap": 8.0
+    },
+    {
+      "file": "experiments/fixed2048/long_reference.py",
+      "function": "summarize",
+      "line": 70,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "experiments/fixed2048/long_reference.py",
+      "function": "diagnose_checkpoint",
+      "line": 80,
+      "complexity": 5,
+      "coverage": 1.0,
+      "crap": 5.0
+    },
+    {
+      "file": "experiments/fixed2048/long_reference.py",
+      "function": "require_posthoc_paths",
+      "line": 115,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "experiments/fixed2048/long_reference.py",
+      "function": "main",
+      "line": 124,
+      "complexity": 2,
+      "coverage": 0.6923076923076923,
+      "crap": 2.116522530723714
+    },
+    {
+      "file": "experiments/fixed2048/mutation_check.py",
+      "function": "run_mutation",
+      "line": 59,
+      "complexity": 2,
+      "coverage": 0.9,
+      "crap": 2.004
+    },
+    {
+      "file": "experiments/fixed2048/mutation_check.py",
+      "function": "main",
+      "line": 84,
+      "complexity": 4,
+      "coverage": 0.9333333333333333,
+      "crap": 4.004740740740741
+    },
+    {
+      "file": "experiments/fixed2048/pilot.py",
+      "function": "passed",
+      "line": 12,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/pilot.py",
+      "function": "main",
+      "line": 18,
+      "complexity": 6,
+      "coverage": 0.782608695652174,
+      "crap": 6.369852880742993
+    },
+    {
+      "file": "experiments/fixed2048/profile.py",
+      "function": "profile_model",
+      "line": 18,
+      "complexity": 6,
+      "coverage": 1.0,
+      "crap": 6.0
+    },
+    {
+      "file": "experiments/fixed2048/profile.py",
+      "function": "main",
+      "line": 74,
+      "complexity": 1,
+      "coverage": 0.1111111111111111,
+      "crap": 1.7023319615912207
+    },
+    {
+      "file": "experiments/fixed2048/quality.py",
+      "function": "duplicates",
+      "line": 12,
+      "complexity": 5,
+      "coverage": 0.875,
+      "crap": 5.048828125
+    },
+    {
+      "file": "experiments/fixed2048/quality.py",
+      "function": "main",
+      "line": 22,
+      "complexity": 6,
+      "coverage": 1.0,
+      "crap": 6.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "read",
+      "line": 11,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "number",
+      "line": 15,
+      "complexity": 3,
+      "coverage": 0.75,
+      "crap": 3.140625
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "table",
+      "line": 21,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "quality",
+      "line": 27,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "ip_quality",
+      "line": 31,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "group",
+      "line": 39,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "table_a",
+      "line": 43,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "table_b",
+      "line": 62,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "comparison_table",
+      "line": 105,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "training_table",
+      "line": 114,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "performance_table",
+      "line": 143,
+      "complexity": 8,
+      "coverage": 1.0,
+      "crap": 8.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "final_table",
+      "line": 178,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "token_table",
+      "line": 197,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "summarize_content",
+      "line": 229,
+      "complexity": 8,
+      "coverage": 1.0,
+      "crap": 8.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "sensitivity_table",
+      "line": 240,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "window_cells",
+      "line": 262,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "long_reference_table",
+      "line": 274,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "build_report",
+      "line": 295,
+      "complexity": 2,
+      "coverage": 0.9565217391304348,
+      "crap": 2.000328758116216
+    },
+    {
+      "file": "experiments/fixed2048/report.py",
+      "function": "main",
+      "line": 518,
+      "complexity": 1,
+      "coverage": 0.14285714285714285,
+      "crap": 1.6297376093294462
+    },
+    {
+      "file": "experiments/fixed2048/seal.py",
+      "function": "seal_experiment",
+      "line": 11,
+      "complexity": 5,
+      "coverage": 0.9375,
+      "crap": 5.006103515625
+    },
+    {
+      "file": "experiments/fixed2048/seal.py",
+      "function": "main",
+      "line": 37,
+      "complexity": 1,
+      "coverage": 0.14285714285714285,
+      "crap": 1.6297376093294462
+    },
+    {
+      "file": "experiments/fixed2048/sensitivity.py",
+      "function": "diagnose_sequence",
+      "line": 16,
+      "complexity": 5,
+      "coverage": 0.9411764705882353,
+      "crap": 5.005088540606554
+    },
+    {
+      "file": "experiments/fixed2048/sensitivity.py",
+      "function": "run",
+      "line": 49,
+      "complexity": 5,
+      "coverage": 0.9230769230769231,
+      "crap": 5.011379153390988
+    },
+    {
+      "file": "experiments/fixed2048/sensitivity.py",
+      "function": "main",
+      "line": 73,
+      "complexity": 1,
+      "coverage": 0.8571428571428571,
+      "crap": 1.0029154518950438
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "parameter_snapshot",
+      "line": 21,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "update_norms",
+      "line": 29,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "training_frame",
+      "line": 45,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "backward_clip",
+      "line": 70,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "frozen_gradient_count",
+      "line": 82,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "train_update",
+      "line": 86,
+      "complexity": 9,
+      "coverage": 0.8421052631578947,
+      "crap": 9.318851144481703
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "validate",
+      "line": 121,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "training_sources",
+      "line": 132,
+      "complexity": 8,
+      "coverage": 0.7777777777777778,
+      "crap": 8.70233196159122
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "sample_clip",
+      "line": 143,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "reconcile_log",
+      "line": 149,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "require_training_config",
+      "line": 188,
+      "complexity": 6,
+      "coverage": 0.75,
+      "crap": 6.5625
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "initialize_training",
+      "line": 208,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "initialize_step_zero",
+      "line": 262,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "validate_update",
+      "line": 276,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "due",
+      "line": 294,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "execute_updates",
+      "line": 298,
+      "complexity": 8,
+      "coverage": 1.0,
+      "crap": 8.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "record_completion",
+      "line": 333,
+      "complexity": 5,
+      "coverage": 1.0,
+      "crap": 5.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "run_training",
+      "line": 349,
+      "complexity": 4,
+      "coverage": 0.8333333333333334,
+      "crap": 4.074074074074074
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "validate_clip",
+      "line": 368,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "main",
+      "line": 393,
+      "complexity": 6,
+      "coverage": 0.88,
+      "crap": 6.062208
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "save",
+      "line": 174,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "experiments/fixed2048/train.py",
+      "function": "save",
+      "line": 174,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    }
+  ],
+  "crap_at_least_10": [],
+  "duplicates_at_least_08": []
+}

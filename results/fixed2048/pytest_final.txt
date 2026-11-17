@@ -1,0 +1,22 @@
+Production regression: python -m pytest cp_adaptok/tests -q -rs
+........................................................................ [ 41%]
+........................................................................ [ 83%]
+............................                                             [100%]
+172 passed in 70.24s (0:01:10)
+
+Experiment: pytest.main(["experiments/fixed2048/tests","-q"]) within measured Coverage API
+post-hoc overwrite rejected as required
+{
+  "actual_optimizer_updates": 2400,
+  "actual_training_frames": 12300,
+  "outputs": {
+    "native_frame_records": 2280,
+    "wrong_shapes": [],
+    "all_native_rgb": true
+  },
+  "production_diff_files": []
+}
+..............................                                           [100%]
+30 passed in 4.49s
+
+Combined: 202 passed, 0 failed, 0 skipped.

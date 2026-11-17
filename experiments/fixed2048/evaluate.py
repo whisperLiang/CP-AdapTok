@@ -146,7 +146,7 @@ def write_tables(directory, rows):
     flat = [{key: value for key, value in row.items() if not isinstance(value, (dict, list))} for row in rows]
     keys = sorted(set().union(*(row.keys() for row in flat)))
     with (directory / "frame_metrics.csv").open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=keys)
+        writer = csv.DictWriter(handle, fieldnames=keys, lineterminator="\n")
         writer.writeheader()
         writer.writerows(flat)
     groups = defaultdict(list)

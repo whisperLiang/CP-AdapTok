@@ -1,0 +1,14 @@
+...F                                                                     [100%]
+=================================== FAILURES ===================================
+__________ test_sealed_test_protocol_rejects_changed_frames_or_modes ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-whisperliang/pytest-348/test_sealed_test_protocol_reje0')
+
+    def test_sealed_test_protocol_rejects_changed_frames_or_modes(tmp_path):
+>       from experiments.fixed2048.evaluate import validate_test_request
+E       ImportError: cannot import name 'validate_test_request' from 'experiments.fixed2048.evaluate' (/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/experiments/fixed2048/evaluate.py)
+
+experiments/fixed2048/tests/test_evaluate.py:53: ImportError
+=========================== short test summary info ============================
+FAILED experiments/fixed2048/tests/test_evaluate.py::test_sealed_test_protocol_rejects_changed_frames_or_modes
+1 failed, 3 passed in 2.19s

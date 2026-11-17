@@ -1,0 +1,145 @@
+{
+  "groups": {
+    "original128/R2": {
+      "frames": 192,
+      "global_mse": 0.0277327153889928,
+      "global_mse_psnr": 15.570076053330414,
+      "mean_frame_psnr": 15.635698830061328,
+      "lpips": 0.5279947955471774,
+      "dists": 0.6233629897857705,
+      "ms-ssim": 0.26590623760906357,
+      "latent_mse": 3.779236068328222,
+      "latent_relative_rmse": 1.3248254598569036,
+      "videos": {
+        "DAVIS2017:cows": {
+          "frames": 64,
+          "global_mse": 0.031696431164164096,
+          "global_mse_psnr": 14.989896340902433,
+          "mean_frame_psnr": 15.017677119696817,
+          "lpips": 0.530891521833837,
+          "dists": 0.6342076053842902,
+          "ms-ssim": 0.20784713770262897,
+          "latent_mse": 3.607373980805278,
+          "latent_relative_rmse": 1.3347274357701713
+        },
+        "DAVIS2017:goat": {
+          "frames": 64,
+          "global_mse": 0.02758596237981692,
+          "global_mse_psnr": 15.59311860393812,
+          "mean_frame_psnr": 15.631558125933962,
+          "lpips": 0.550815093331039,
+          "dists": 0.6204106556251645,
+          "ms-ssim": 0.18867404153570533,
+          "latent_mse": 3.5666159950196743,
+          "latent_relative_rmse": 1.327749316452345
+        },
+        "DAVIS2017:parkour": {
+          "frames": 64,
+          "global_mse": 0.023915752622997388,
+          "global_mse_psnr": 16.213159474338084,
+          "mean_frame_psnr": 16.2578612445532,
+          "lpips": 0.5022777714766562,
+          "dists": 0.615470708347857,
+          "ms-ssim": 0.40119753358885646,
+          "latent_mse": 4.163718229159713,
+          "latent_relative_rmse": 1.3119996273481946
+        }
+      },
+      "mean_video_psnr": 15.635698830061328,
+      "I": {
+        "frames": 6,
+        "global_mse": 0.028300744481384754,
+        "global_mse_psnr": 15.482021397441004,
+        "mean_frame_psnr": 15.500571119749926,
+        "lpips": 0.5110410253206888,
+        "dists": 0.6297986507415771,
+        "ms-ssim": 0.29484786838293076,
+        "latent_mse": 65.1159496307373,
+        "latent_relative_rmse": 0.9870474039066593
+      },
+      "P": {
+        "frames": 186,
+        "global_mse": 0.027714391869883382,
+        "global_mse_psnr": 15.57294646584474,
+        "mean_frame_psnr": 15.640057788458469,
+        "lpips": 0.5285416913609351,
+        "dists": 0.6231553878194542,
+        "ms-ssim": 0.26497263661635817,
+        "latent_mse": 1.800632405024703,
+        "latent_relative_rmse": 1.3357215261778794
+      }
+    },
+    "matched128/R2": {
+      "frames": 192,
+      "global_mse": 0.032794386361880846,
+      "global_mse_psnr": 14.842004910660274,
+      "mean_frame_psnr": 14.967553660893493,
+      "lpips": 0.5470142114597062,
+      "dists": 0.6209673344468077,
+      "ms-ssim": 0.26162200172742206,
+      "latent_mse": 2.9325792050609985,
+      "latent_relative_rmse": 1.2890750356141611,
+      "videos": {
+        "DAVIS2017:cows": {
+          "frames": 64,
+          "global_mse": 0.036016420053783804,
+          "global_mse_psnr": 14.434994572064886,
+          "mean_frame_psnr": 14.487886923398596,
+          "lpips": 0.5477591715753078,
+          "dists": 0.634382433257997,
+          "ms-ssim": 0.20550677902065217,
+          "latent_mse": 2.8860065173357725,
+          "latent_relative_rmse": 1.3097583226707674
+        },
+        "DAVIS2017:goat": {
+          "frames": 64,
+          "global_mse": 0.03455938200931996,
+          "global_mse_psnr": 14.614340321752586,
+          "mean_frame_psnr": 14.719152766875702,
+          "lpips": 0.5737084113061428,
+          "dists": 0.6184653211385012,
+          "ms-ssim": 0.18477570614777505,
+          "latent_mse": 2.926390837877989,
+          "latent_relative_rmse": 1.2809959847347359
+        },
+        "DAVIS2017:parkour": {
+          "frames": 64,
+          "global_mse": 0.02780735702253878,
+          "global_mse_psnr": 15.558402871183581,
+          "mean_frame_psnr": 15.695621292406186,
+          "lpips": 0.519575051497668,
+          "dists": 0.6100542489439249,
+          "ms-ssim": 0.394583520013839,
+          "latent_mse": 2.9853402599692345,
+          "latent_relative_rmse": 1.2764707994369802
+        }
+      },
+      "mean_video_psnr": 14.967553660893495,
+      "I": {
+        "frames": 3,
+        "global_mse": 0.029467327520251274,
+        "global_mse_psnr": 15.306592498249094,
+        "mean_frame_psnr": 15.311445686201175,
+        "lpips": 0.5109202365080515,
+        "dists": 0.6390000581741333,
+        "ms-ssim": 0.2948055217663447,
+        "latent_mse": 66.28007253011067,
+        "latent_relative_rmse": 0.9870785818621389
+      },
+      "P": {
+        "frames": 189,
+        "global_mse": 0.032847196819684496,
+        "global_mse_psnr": 14.835016872210357,
+        "mean_frame_psnr": 14.962095057317182,
+        "lpips": 0.5475871316970341,
+        "dists": 0.6206811007368501,
+        "ms-ssim": 0.2610952791871217,
+        "latent_mse": 1.927063437996718,
+        "latent_relative_rmse": 1.2938686301181614
+      }
+    }
+  },
+  "real_bitstream": false,
+  "bpp": null,
+  "experiment_type": "reconstruction_diagnostic"
+}

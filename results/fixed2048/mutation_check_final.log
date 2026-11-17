@@ -1,0 +1,28 @@
+7/7 mutations killed
+{
+  "tools": "Radon + coverage + AST; named crapper/dryer unavailable",
+  "crap_at_least_10": [
+    {
+      "file": "experiments/fixed2048/quality.py",
+      "function": "duplicates",
+      "line": 12,
+      "complexity": 5,
+      "coverage": 0.125,
+      "crap": 21.748046875
+    },
+    {
+      "file": "experiments/fixed2048/quality.py",
+      "function": "main",
+      "line": 22,
+      "complexity": 6,
+      "coverage": 0.07142857142857142,
+      "crap": 34.82361516034986
+    }
+  ],
+  "duplicates_at_least_08": []
+}
+{
+  "tools": "Radon + coverage + AST; named crapper/dryer unavailable",
+  "crap_at_least_10": [],
+  "duplicates_at_least_08": []
+}

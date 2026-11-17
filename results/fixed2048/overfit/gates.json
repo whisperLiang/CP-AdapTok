@@ -1,0 +1,23 @@
+[
+  {
+    "frames": 1,
+    "passed": true,
+    "actual_steps": 300,
+    "initial_mse": 0.0341615192592144,
+    "final_mse": 0.012968290597200394
+  },
+  {
+    "frames": 4,
+    "passed": true,
+    "actual_steps": 300,
+    "initial_mse": 0.03093347931280732,
+    "final_mse": 0.012755833566188812
+  },
+  {
+    "frames": 16,
+    "passed": true,
+    "actual_steps": 300,
+    "initial_mse": 0.03150579612702131,
+    "final_mse": 0.012921169982291758
+  }
+]

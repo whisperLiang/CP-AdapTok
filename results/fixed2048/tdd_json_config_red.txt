@@ -1,0 +1,23 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+_______ test_saved_json_configuration_preserves_scientific_float_values ________
+
+tmp_path = PosixPath('/tmp/pytest-of-whisperliang/pytest-367/test_saved_json_configuration_0')
+
+    def test_saved_json_configuration_preserves_scientific_float_values(tmp_path):
+        config=read_config('configs/fixed2048.yaml')
+        path=tmp_path/'config.json'
+        path.write_text(json.dumps(config))
+        restored=read_config(path)
+>       assert restored==config
+E       AssertionError: assert {'seed': 2026...gnostic', ...} == {'seed': 2026...gnostic', ...}
+E
+E         Omitting 14 identical items, use -vv to show
+E         Differing items:
+E         {'training': {'route': 'B1_S4_native1080_finetune', 'optimizer': 'AdamW', 'lr': '2e-05', 'weight_decay': 0.01, ...}} != {'training': {'route': 'B1_S4_native1080_finetune', 'optimizer': 'AdamW', 'lr': 2e-05, 'weight_decay': 0.01, ...}}
+E         Use -v to get more diff
+
+experiments/fixed2048/tests/test_config.py:13: AssertionError
+=========================== short test summary info ============================
+FAILED experiments/fixed2048/tests/test_config.py::test_saved_json_configuration_preserves_scientific_float_values
+1 failed, 1 passed in 1.63s

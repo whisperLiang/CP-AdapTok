@@ -1,0 +1,516 @@
+{
+  "training_runs": {
+    "overfit1": {
+      "steps": 300,
+      "strictly_contiguous_steps": true,
+      "checkpoint_step_matches": true,
+      "all_frozen_backbone_tensors_equal": true,
+      "changed_backbone_tensors": [],
+      "all_records_have_no_backbone_gradients": true,
+      "codebook_updated": false,
+      "completed_frames": 300,
+      "optimizer_wall_s": 24.38299692212604
+    },
+    "overfit4": {
+      "steps": 300,
+      "strictly_contiguous_steps": true,
+      "checkpoint_step_matches": true,
+      "all_frozen_backbone_tensors_equal": true,
+      "changed_backbone_tensors": [],
+      "all_records_have_no_backbone_gradients": true,
+      "codebook_updated": false,
+      "completed_frames": 1200,
+      "optimizer_wall_s": 57.57865621702513
+    },
+    "overfit16": {
+      "steps": 300,
+      "strictly_contiguous_steps": true,
+      "checkpoint_step_matches": true,
+      "all_frozen_backbone_tensors_equal": true,
+      "changed_backbone_tensors": [],
+      "all_records_have_no_backbone_gradients": true,
+      "codebook_updated": false,
+      "completed_frames": 4800,
+      "optimizer_wall_s": 188.2284052130417
+    },
+    "R1": {
+      "steps": 300,
+      "strictly_contiguous_steps": true,
+      "checkpoint_step_matches": true,
+      "all_frozen_backbone_tensors_equal": true,
+      "changed_backbone_tensors": [],
+      "all_records_have_no_backbone_gradients": true,
+      "codebook_updated": false,
+      "completed_frames": 1200,
+      "optimizer_wall_s": 63.31438765564235
+    },
+    "R2": {
+      "steps": 300,
+      "strictly_contiguous_steps": true,
+      "checkpoint_step_matches": true,
+      "all_frozen_backbone_tensors_equal": true,
+      "changed_backbone_tensors": [],
+      "all_records_have_no_backbone_gradients": true,
+      "codebook_updated": true,
+      "completed_frames": 1200,
+      "optimizer_wall_s": 64.79764390183846
+    },
+    "R3": {
+      "steps": 300,
+      "strictly_contiguous_steps": true,
+      "checkpoint_step_matches": true,
+      "all_frozen_backbone_tensors_equal": true,
+      "changed_backbone_tensors": [],
+      "all_records_have_no_backbone_gradients": true,
+      "codebook_updated": false,
+      "completed_frames": 1200,
+      "optimizer_wall_s": 64.7820647279732
+    },
+    "EncoderKV34": {
+      "steps": 300,
+      "strictly_contiguous_steps": true,
+      "checkpoint_step_matches": true,
+      "all_frozen_backbone_tensors_equal": true,
+      "changed_backbone_tensors": [],
+      "all_records_have_no_backbone_gradients": true,
+      "codebook_updated": false,
+      "completed_frames": 1200,
+      "optimizer_wall_s": 63.185955561639275
+    },
+    "raw192": {
+      "steps": 300,
+      "strictly_contiguous_steps": true,
+      "checkpoint_step_matches": true,
+      "all_frozen_backbone_tensors_equal": true,
+      "changed_backbone_tensors": [],
+      "all_records_have_no_backbone_gradients": true,
+      "codebook_updated": false,
+      "completed_frames": 1200,
+      "optimizer_wall_s": 62.558516915887594
+    }
+  },
+  "outputs": {
+    "native_frame_records": 2280,
+    "wrong_shapes": [],
+    "all_native_rgb": true
+  },
+  "production_diff_files": [],
+  "source_B1_checkpoint_preserved": true,
+  "final_test_seal": {
+    "checkpoint_sha256s": [
+      "0ba69922227383526d812cc8293f35de4adcab3f6dabc351161801d489405292",
+      "9d9a7f09aff251d5161cbf29a34f2a73e6fd63e8641d30c51ad662d1a6376cb9",
+      "9eb19bf15b5cd2c4d672433ad3cec4496c47d0d1cd882eb2904ec50130c792ce",
+      "b1c02bec3139fb697b939e369746bced9fcb6850a2717dbe28867b67fd87c4a1",
+      "b940d90b964c506e48ccf0270cfb11a8c790f2b1585a26dfc9ddebb210ed82b7"
+    ],
+    "protocols": {
+      "b1c02bec3139fb697b939e369746bced9fcb6850a2717dbe28867b67fd87c4a1": {
+        "paths": [
+          "R1",
+          "R2"
+        ],
+        "references": [
+          "full2048"
+        ]
+      },
+      "0ba69922227383526d812cc8293f35de4adcab3f6dabc351161801d489405292": {
+        "paths": [
+          "R2"
+        ],
+        "references": [
+          "full2048"
+        ]
+      },
+      "9d9a7f09aff251d5161cbf29a34f2a73e6fd63e8641d30c51ad662d1a6376cb9": {
+        "paths": [
+          "R1"
+        ],
+        "references": [
+          "full2048"
+        ]
+      },
+      "9eb19bf15b5cd2c4d672433ad3cec4496c47d0d1cd882eb2904ec50130c792ce": {
+        "paths": [
+          "R2"
+        ],
+        "references": [
+          "original128"
+        ]
+      },
+      "b940d90b964c506e48ccf0270cfb11a8c790f2b1585a26dfc9ddebb210ed82b7": {
+        "paths": [
+          "R2"
+        ],
+        "references": [
+          "original128",
+          "matched128"
+        ]
+      }
+    },
+    "models": {
+      "R1": {
+        "checkpoint": "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/checkpoints/fixed2048/continuous/main/best_validation.pt",
+        "paths": [
+          "R1",
+          "R2"
+        ],
+        "references": [
+          "full2048"
+        ],
+        "selected_step": 200,
+        "source_status": "trained",
+        "model_config": {
+          "n_max": 2048,
+          "k_ref": 128,
+          "packet_tokens": 128,
+          "dim": 192,
+          "heads": 6,
+          "layers": 2,
+          "codebook_size": 8192,
+          "embedding_dim": 16,
+          "grid": [
+            17,
+            30
+          ],
+          "kv_grid": [
+            17,
+            30
+          ],
+          "qp": 32,
+          "attention_precision": "float64",
+          "state_fingerprint": "mixed_int64_v1",
+          "query_content_only": false,
+          "token_aggregation": "global_softmax_v1"
+        },
+        "selection": "minimum Validation global MSE, fixed 3 videos x 4 frames, 0/100/200/300",
+        "selection_global_mse": 0.024354228051379323,
+        "actual_training_updates": 300,
+        "sha256": "b1c02bec3139fb697b939e369746bced9fcb6850a2717dbe28867b67fd87c4a1"
+      },
+      "R2": {
+        "checkpoint": "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/checkpoints/fixed2048/vq/main/best_validation.pt",
+        "paths": [
+          "R2"
+        ],
+        "references": [
+          "full2048"
+        ],
+        "selected_step": 100,
+        "source_status": "trained",
+        "model_config": {
+          "n_max": 2048,
+          "k_ref": 128,
+          "packet_tokens": 128,
+          "dim": 192,
+          "heads": 6,
+          "layers": 2,
+          "codebook_size": 8192,
+          "embedding_dim": 16,
+          "grid": [
+            17,
+            30
+          ],
+          "kv_grid": [
+            17,
+            30
+          ],
+          "qp": 32,
+          "attention_precision": "float64",
+          "state_fingerprint": "mixed_int64_v1",
+          "query_content_only": false,
+          "token_aggregation": "global_softmax_v1"
+        },
+        "selection": "minimum Validation global MSE, fixed 3 videos x 4 frames, 0/100/200/300",
+        "selection_global_mse": 0.02432423938686649,
+        "actual_training_updates": 300,
+        "sha256": "0ba69922227383526d812cc8293f35de4adcab3f6dabc351161801d489405292"
+      },
+      "R3": {
+        "checkpoint": "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/checkpoints/fixed2048/grid34/main/best_validation.pt",
+        "paths": [
+          "R1"
+        ],
+        "references": [
+          "full2048"
+        ],
+        "selected_step": 300,
+        "source_status": "trained",
+        "model_config": {
+          "n_max": 2048,
+          "k_ref": 128,
+          "packet_tokens": 128,
+          "dim": 192,
+          "heads": 6,
+          "layers": 2,
+          "codebook_size": 8192,
+          "embedding_dim": 16,
+          "grid": [
+            34,
+            60
+          ],
+          "kv_grid": [
+            17,
+            30
+          ],
+          "qp": 32,
+          "attention_precision": "float64",
+          "state_fingerprint": "mixed_int64_v1",
+          "query_content_only": false,
+          "token_aggregation": "global_softmax_v1"
+        },
+        "selection": "minimum Validation global MSE, fixed 3 videos x 4 frames, 0/100/200/300",
+        "selection_global_mse": 0.027004222696026165,
+        "actual_training_updates": 300,
+        "sha256": "9d9a7f09aff251d5161cbf29a34f2a73e6fd63e8641d30c51ad662d1a6376cb9"
+      },
+      "B0": {
+        "checkpoint": "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/checkpoints/large_scale/formal_20261116/s4/B0/latest.pt",
+        "paths": [
+          "R2"
+        ],
+        "references": [
+          "original128"
+        ],
+        "selected_step": 4000,
+        "source_status": "trained",
+        "model_config": {
+          "n_max": 2048,
+          "k_ref": 128,
+          "packet_tokens": 128,
+          "dim": 192,
+          "heads": 6,
+          "layers": 2,
+          "codebook_size": 8192,
+          "embedding_dim": 16,
+          "grid": [
+            17,
+            30
+          ],
+          "kv_grid": [
+            17,
+            30
+          ],
+          "qp": 32,
+          "attention_precision": "float64",
+          "state_fingerprint": "mixed_int64_v1",
+          "query_content_only": false,
+          "token_aggregation": "global_softmax_v1"
+        },
+        "selection": "original user-declared S4 checkpoint, fixed external reference",
+        "historical_intra_period": 32,
+        "sha256": "9eb19bf15b5cd2c4d672433ad3cec4496c47d0d1cd882eb2904ec50130c792ce"
+      },
+      "B1": {
+        "checkpoint": "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/checkpoints/large_scale/formal_20261116/s4/B1/latest.pt",
+        "paths": [
+          "R2"
+        ],
+        "references": [
+          "original128",
+          "matched128"
+        ],
+        "selected_step": 4000,
+        "source_status": "trained",
+        "model_config": {
+          "n_max": 2048,
+          "k_ref": 128,
+          "packet_tokens": 128,
+          "dim": 192,
+          "heads": 6,
+          "layers": 2,
+          "codebook_size": 8192,
+          "embedding_dim": 16,
+          "grid": [
+            17,
+            30
+          ],
+          "kv_grid": [
+            17,
+            30
+          ],
+          "qp": 32,
+          "attention_precision": "float64",
+          "state_fingerprint": "mixed_int64_v1",
+          "query_content_only": false,
+          "token_aggregation": "global_softmax_v1"
+        },
+        "selection": "original user-declared S4 checkpoint, fixed external reference",
+        "historical_intra_period": 32,
+        "sha256": "b940d90b964c506e48ccf0270cfb11a8c790f2b1585a26dfc9ddebb210ed82b7"
+      }
+    },
+    "test_config": {
+      "videos": [
+        "DAVIS2017:cows",
+        "DAVIS2017:goat",
+        "DAVIS2017:parkour"
+      ],
+      "frames": 64
+    },
+    "test_manifest_sha256": "09738a77219eb1d78269a0788c109b268de29b54dec3aab68a365599e08bed5e",
+    "no_training_or_selection_after_seal": true,
+    "time": "2026-11-17T20:01:30.174539+08:00",
+    "timezone": "Asia/Shanghai",
+    "git_commit": "d89c25c0db172fbcb95764215067225148fc5c1a",
+    "git_dirty": true,
+    "source_sha256": "0c33c6dc770d8e187b53d46022284e0ce038f1a31c7e435b5d7480583e55e414",
+    "torch": "2.9.1+cu130",
+    "cuda": "13.0",
+    "gpu_snapshot": "NVIDIA H100 PCIe, 14 MiB, 0 %",
+    "gpu_shared": "not assumed isolated; see gpu_snapshot and serial benchmark commands",
+    "status": "sealed_before_test",
+    "config": {
+      "seed": 20261117,
+      "device": "cuda:0",
+      "source_checkpoint": "checkpoints/large_scale/formal_20261116/s4/B1/latest.pt",
+      "experiment_type": "reconstruction_diagnostic",
+      "real_bitstream": false,
+      "bpp": null,
+      "decoder_grid": [
+        17,
+        30
+      ],
+      "encoder_kv_grid": [
+        17,
+        30
+      ],
+      "manifest_dir": "data/manifests",
+      "loss": {
+        "mse": 1.0,
+        "latent": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0,
+        "monotonic": 0.0,
+        "estimated_rate": 0.0
+      },
+      "training": {
+        "route": "B1_S4_native1080_finetune",
+        "optimizer": "AdamW",
+        "lr": 2e-05,
+        "weight_decay": 0.01,
+        "amp_bf16": true,
+        "clip_grad_norm": 1.0,
+        "tbptt": 2,
+        "sequence_length": 4,
+        "steps": 300,
+        "save_every": 100,
+        "validate_every": 100,
+        "path": "R1",
+        "reference": "full2048",
+        "resolution": [
+          1080,
+          1920
+        ]
+      },
+      "validation": {
+        "videos": [
+          "DAVIS2017:blackswan",
+          "DAVIS2017:car-roundabout",
+          "DAVIS2017:dog"
+        ],
+        "frames": 4
+      },
+      "baseline": {
+        "videos": [
+          "DAVIS2017:blackswan",
+          "DAVIS2017:car-roundabout",
+          "DAVIS2017:dog"
+        ],
+        "frames": 8,
+        "paths": [
+          "R0",
+          "R0-spatial",
+          "R1",
+          "R2"
+        ],
+        "references": [
+          "i_only",
+          "full2048",
+          "original128",
+          "paired"
+        ]
+      },
+      "pilot": {
+        "train_video": "DAVIS2017:bear",
+        "lengths": [
+          1,
+          4,
+          16
+        ],
+        "steps": 300,
+        "lr": 0.0001,
+        "minimum_relative_mse_drop": 0.05,
+        "maximum_steps": 1000
+      },
+      "final_test": {
+        "videos": [
+          "DAVIS2017:cows",
+          "DAVIS2017:goat",
+          "DAVIS2017:parkour"
+        ],
+        "frames": 64
+      }
+    },
+    "upstreams": [
+      {
+        "name": "AdapTok",
+        "url": "https://github.com/VisionXLab/AdapTok",
+        "commit": "a72076cf6474f930a181aa78971de70d65289b49",
+        "license": "MIT",
+        "license_file": "third_party/AdapTok/LICENSE"
+      },
+      {
+        "name": "DCVC",
+        "url": "https://github.com/microsoft/DCVC",
+        "commit": "cbdae87a5445114cdc7f48816da63ea80bdeac40",
+        "license": "MIT",
+        "license_file": "third_party/DCVC/LICENSE.txt"
+      }
+    ]
+  },
+  "mutation_results": [
+    {
+      "mutation": "continuous_uses_codebook",
+      "killed": true,
+      "exit_code": 1,
+      "output": "FF...                                                                    [100%]\n=================================== FAILURES ===================================\n_________________ test_pair_is_same_input_and_does_not_commit __________________\n\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x76c47c50d9a0>\n\n    def test_pair_is_same_input_and_does_not_commit(monkeypatch):\n        model = make_model().eval()\n        encoded = model.encode(input_frame(), model.empty_state(), 0)\n        outputs = model.compare(encoded, (\"R0\", \"R0-spatial\", \"R1\", \"R2\"))\n        assert model.tokenizer.calls == 1\n        assert not encoded.context.committed\n        assert torch.equal(outputs[\"R0\"].latent, encoded.latent)\n        features = encoded.features\n        z = model.vq.project_features(features)\n>       assert torch.allclose(outputs[\"R1\"].embeddings, model.vq.project_out(z))\nE       assert False\nE        +  where False = <built-in method allclose of type object at 0x76c5c3bd6c20>(tensor([[[-0.2074, -0.3208,  0.2860,  ..., -0.0298,  0.0763, -0.3662],\\n         [-0.2074, -0.3208,  0.2860,  ..., -0.0...604, -0.1169],\\n         [-0.1313, -0.3144,  0.4061,  ..., -0.2196, -0.0263, -0.1410]]],\\n       grad_fn=<ViewBackward0>), tensor([[[-0.3099, -0.1809,  0.3313,  ..., -0.1124, -0.0137, -0.1995],\\n         [-0.2802, -0.2027,  0.3484,  ..., -0.1...269, -0.1990],\\n         [-0.2701, -0.2208,  0.3657,  ..., -0.1356,  0.0011, -0.1635]]],\\n       grad_fn=<ViewBackward0>))\nE        +    where <built-in method allclose of type object at 0x76c5c3bd6c20> = torch.allclose\nE        +    and   tensor([[[-0.2074, -0.3208,  0.2860,  ..., -0.0298,  0.0763, -0.3662],\\n         [-0.2074, -0.3208,  0.2860,  ..., -0.0...604, -0.1169],\\n         [-0.1313, -0.3144,  0.4061,  ..., -0.2196, -0.0263, -0.1410]]],\\n       grad_fn=<ViewBackward0>) = Reconstruction(rgb=tensor([[[[0.4971, 0.4971, 0.4971,  ..., 0.4971, 0.4971, 0.4971],\\n          [0.4971, 0.4971, 0.4971... 0.4061,  ..., -0.2196, -0.0263, -0.1410]]],\\n       grad_fn=<ViewBackward0>), ids=None, vq_loss=tensor(0.), timings={}).embeddings\nE        +    and   tensor([[[-0.3099, -0.1809,  0.3313,  ..., -0.1124, -0.0137, -0.1995],\\n         [-0.2802, -0.2027,  0.3484,  ..., -0.1...269, -0.1990],\\n         [-0.2701, -0.2208,  0.3657,  ..., -0.1356,  0.0011, -0.1635]]],\\n       grad_fn=<ViewBackward0>) = Linear(in_features=16, out_features=192, bias=True)(tensor([[[-0.3662, -0.1278, -0.3815,  ...,  0.2817, -0.1407,  0.2720],\\n         [-0.4387, -0.0940, -0.3831,  ...,  0.2...0207,  0.2920],\\n         [-0.4861, -0.0375, -0.3265,  ...,  0.2196, -0.0685,  0.2388]]],\\n       grad_fn=<DivBackward0>))\nE        +      where Linear(in_features=16, out_features=192, bias=True) = AdapTokVQBottleneck(\\n  (project_in): Linear(in_features=192, out_features=16, bias=True)\\n  (project_out): Linear(in_features=16, out_features=192, bias=True)\\n  (codebook): Embedding(8192, 16)\\n).project_out\nE        +        where AdapTokVQBottleneck(\\n  (project_in): Linear(in_features=192, out_features=16, bias=True)\\n  (project_out): Linear(in_features=16, out_features=192, bias=True)\\n  (codebook): Embedding(8192, 16)\\n) = Fixed2048Reconstructor(\\n  (intra): Intra()\\n  (ld): Inter()\\n  (tokenizer): Tokens()\\n  (vq): AdapTokVQBottleneck(\\n    (p...): Linear(in_features=16, out_features=192, bias=True)\\n    (codebook): Embedding(8192, 16)\\n  )\\n  (decoder): Decoder()\\n).vq\n\nexperiments/fixed2048/tests/test_codec.py:84: AssertionError\n_____________________ test_continuous_never_reads_codebook _____________________\n\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x76c5d1f32c90>\n\n    def test_continuous_never_reads_codebook(monkeypatch):\n        model = make_model().eval()\n    \n        def forbidden(*args, **kwargs):\n            raise AssertionError(\"codebook was used\")\n    \n        monkeypatch.setattr(model.vq, \"forward\", forbidden)\n        monkeypatch.setattr(model.vq, \"codebook_vectors\", forbidden)\n>       result = model.reconstruct(model.encode(input_frame(), model.empty_state(), 0), \"R1\")\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nexperiments/fixed2048/tests/test_codec.py:99: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nexperiments/fixed2048/codec.py:167: in reconstruct\n    embeddings, ids, loss = self._timed(\"vq_ms\", lambda: self._embeddings(features, path), timings)\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nexperiments/fixed2048/codec.py:85: in _timed\n    return operation()\n           ^^^^^^^^^^^\nexperiments/fixed2048/codec.py:167: in <lambda>\n    embeddings, ids, loss = self._timed(\"vq_ms\", lambda: self._embeddings(features, path), timings)\n                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nexperiments/fixed2048/codec.py:145: in _embeddings\n    return self.continuous(features), None, features.new_zeros(())\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\nexperiments/fixed2048/codec.py:141: in continuous\n    return self.vq(features).embeddings\n           ^^^^^^^^^^^^^^^^^\n/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py:1775: in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py:1786: in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nargs = (tensor([[[ 0.0013,  0.0279,  0.0175,  ...,  0.0083,  0.0083, -0.0004],\n         [ 0.0135,  0.0150,  0.0182,  ..., -0....80, -0.0102],\n         [-0.0014,  0.0142, -0.0010,  ...,  0.0125,  0.0051,  0.0104]]],\n       grad_fn=<AddBackward0>),)\nkwargs = {}\n\n    def forbidden(*args, **kwargs):\n>       raise AssertionError(\"codebook was used\")\nE       AssertionError: codebook was used\n\nexperiments/fixed2048/tests/test_codec.py:95: AssertionError\n=========================== short test summary info ============================\nFAILED experiments/fixed2048/tests/test_codec.py::test_pair_is_same_input_and_does_not_commit\nFAILED experiments/fixed2048/tests/test_codec.py::test_continuous_never_reads_codebook\n2 failed, 3 passed in 1.80s\n"
+    },
+    {
+      "mutation": "full_reference_zeroed",
+      "killed": true,
+      "exit_code": 1,
+      "output": "...F.                                                                    [100%]\n=================================== FAILURES ===================================\n________________ test_full_reference_and_independent_sequences _________________\n\n    def test_full_reference_and_independent_sequences():\n        model = make_model().eval()\n        encoded = model.encode(input_frame(), model.empty_state(), 0)\n        output = model.reconstruct(encoded, \"R1\")\n        state = model.advance(encoded, output, \"full2048\")\n>       assert state.feature is output.feature\nE       AssertionError: assert tensor([[[[0., 0., 0.,  ..., 0., 0., 0.],\\n          [0., 0., 0.,  ..., 0., 0., 0.],\\n          [0., 0., 0.,  ..., 0., 0... [0., 0., 0.,  ..., 0., 0., 0.],\\n          [0., 0., 0.,  ..., 0., 0., 0.],\\n          [0., 0., 0.,  ..., 0., 0., 0.]]]]) is tensor([[[[-0.0015, -0.0015, -0.0015,  ..., -0.0015, -0.0015, -0.0015],\\n          [-0.0015, -0.0015, -0.0015,  ..., -0...5, -0.0015],\\n          [-0.0015, -0.0015, -0.0015,  ..., -0.0015, -0.0015, -0.0015]]]],\\n       grad_fn=<MeanBackward1>)\nE        +  where tensor([[[[0., 0., 0.,  ..., 0., 0., 0.],\\n          [0., 0., 0.,  ..., 0., 0., 0.],\\n          [0., 0., 0.,  ..., 0., 0... [0., 0., 0.,  ..., 0., 0., 0.],\\n          [0., 0., 0.,  ..., 0., 0., 0.],\\n          [0., 0., 0.,  ..., 0., 0., 0.]]]]) = CausalState(model_id='test', frame_id=0, feature=tensor([[[[0., 0., 0.,  ..., 0., 0., 0.],\\n          [0., 0., 0.,  ......   [0., 0., 0.,  ..., 0., 0., 0.],\\n          [0., 0., 0.,  ..., 0., 0., 0.]]]]), memory=None, base_digest='full2048:0').feature\nE        +  and   tensor([[[[-0.0015, -0.0015, -0.0015,  ..., -0.0015, -0.0015, -0.0015],\\n          [-0.0015, -0.0015, -0.0015,  ..., -0...5, -0.0015],\\n          [-0.0015, -0.0015, -0.0015,  ..., -0.0015, -0.0015, -0.0015]]]],\\n       grad_fn=<MeanBackward1>) = Reconstruction(rgb=tensor([[[[0.4960, 0.4960, 0.4960,  ..., 0.4960, 0.4960, 0.4960],\\n          [0.4960, 0.4960, 0.4960...-0.2916,  ...,  0.4479,  0.0814, -0.1990]]],\\n       grad_fn=<ViewBackward0>), ids=None, vq_loss=tensor(0.), timings={}).feature\n\nexperiments/fixed2048/tests/test_codec.py:126: AssertionError\n=========================== short test summary info ============================\nFAILED experiments/fixed2048/tests/test_codec.py::test_full_reference_and_independent_sequences\n1 failed, 4 passed in 1.56s\n"
+    },
+    {
+      "mutation": "backbone_train_mode",
+      "killed": true,
+      "exit_code": 1,
+      "output": "..F..                                                                    [100%]\n=================================== FAILURES ===================================\n________________ test_freezing_gradients_and_vq_training_policy ________________\n\n    def test_freezing_gradients_and_vq_training_policy():\n        model = make_model().configure_training(\"R1\").train()\n>       assert not model.intra.training and not model.ld.training\nE       assert (not True)\nE        +  where True = Intra().training\nE        +    where Intra() = Fixed2048Reconstructor(\\n  (intra): Intra()\\n  (ld): Inter()\\n  (tokenizer): Tokens()\\n  (vq): AdapTokVQBottleneck(\\n    (p...): Linear(in_features=16, out_features=192, bias=True)\\n    (codebook): Embedding(8192, 16)\\n  )\\n  (decoder): Decoder()\\n).intra\n\nexperiments/fixed2048/tests/test_codec.py:106: AssertionError\n=========================== short test summary info ============================\nFAILED experiments/fixed2048/tests/test_codec.py::test_freezing_gradients_and_vq_training_policy\n1 failed, 4 passed in 1.59s\n"
+    },
+    {
+      "mutation": "historical_reference_2048",
+      "killed": true,
+      "exit_code": 1,
+      "output": "....F                                                                    [100%]\n=================================== FAILURES ===================================\n_______ test_historical_reference_is_vq128_and_display_does_not_advance ________\n\n    def test_historical_reference_is_vq128_and_display_does_not_advance():\n        model = make_model().eval()\n        encoded = model.encode(input_frame(), model.empty_state(), 0)\n        output = model.reconstruct(encoded, \"R1\")\n        state = model.advance(encoded, output, \"original128\")\n>       assert model.decoder.lengths == [2048, 128]\nE       assert [2048, 2048] == [2048, 128]\nE         \nE         At index 1 diff: 2048 != 128\nE         Use -v to get more diff\n\nexperiments/fixed2048/tests/test_codec.py:143: AssertionError\n=========================== short test summary info ============================\nFAILED experiments/fixed2048/tests/test_codec.py::test_historical_reference_is_vq128_and_display_does_not_advance\n1 failed, 4 passed in 1.60s\n"
+    },
+    {
+      "mutation": "resume_duplicates_step",
+      "killed": true,
+      "exit_code": 1,
+      "output": "FF                                                                       [100%]\n=================================== FAILURES ===================================\n_____________ test_optimizer_resume_continues_next_update_exactly ______________\n\ntmp_path = PosixPath('/tmp/pytest-of-whisperliang/pytest-361/test_optimizer_resume_continue0')\n\n    def test_optimizer_resume_continues_next_update_exactly(tmp_path):\n        torch.set_num_threads(2)\n        torch.manual_seed(12)\n        model = make_model().configure_training(\"R1\").train()\n        optimizer = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=1e-4)\n        scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lambda _: 1.0)\n        generator = torch.Generator().manual_seed(9)\n        first = update(model, optimizer)\n        scheduler.step()\n        checkpoint = tmp_path / \"resume.pt\"\n        save_training(checkpoint, model, optimizer, scheduler, generator, 1, {\"steps\": 2}, {\"train\": [first]}, {})\n        expected_row = update(model, optimizer)\n        scheduler.step()\n        expected = copy.deepcopy(model.state_dict())\n        completed, history, _ = resume_training(checkpoint, model, optimizer, scheduler, generator, {\"steps\": 2})\n>       assert completed == 1 and len(history[\"train\"]) == 1\nE       assert (2 == 1)\n\nexperiments/fixed2048/tests/test_train.py:31: AssertionError\n______ test_training_writer_saves_step0_and_reconciles_uncommitted_steps _______\n\ntmp_path = PosixPath('/tmp/pytest-of-whisperliang/pytest-361/test_training_writer_saves_ste0')\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x75b653b53560>\n\n    def test_training_writer_saves_step0_and_reconciles_uncommitted_steps(tmp_path, monkeypatch):\n        import json\n    \n        import experiments.fixed2048.train as training\n        from cp_adaptok.runtime import read_config\n    \n        torch.set_num_threads(2)\n        config = read_config(\"configs/fixed2048.yaml\")\n        config[\"device\"] = \"cpu\"\n        config[\"test_seal\"] = str(tmp_path / \"unsealed.json\")\n        config[\"training\"].update(steps=2, save_every=1, validate_every=1, sequence_length=2)\n        row = {\"content_id\": \"train:tiny\", \"path\": \"tiny\", \"resolution\": [1920, 1080], \"original_frames\": 4}\n        monkeypatch.setattr(training, \"load_reconstructor\", lambda *a, **k: (make_model(), {}))\n        monkeypatch.setattr(training, \"records\", lambda *a, **k: ([row], {\"train\": \"frozen\"}))\n        monkeypatch.setattr(training, \"read_clip\", lambda *a, **k: torch.full((2, 3, 64, 64), 0.5))\n        monkeypatch.setattr(training, \"save_image\", lambda *a, **k: None)\n        results, checkpoints = tmp_path / \"results\", tmp_path / \"checkpoints\"\n        training.run_training(config, results, checkpoints, stop_after=1)\n        assert (checkpoints / \"step0.pt\").exists()\n        assert (checkpoints / \"best_validation.pt\").exists()\n        with (results / \"train.jsonl\").open(\"a\") as log:\n            log.write(json.dumps({\"step\": 999, \"mse\": 0}) + \"\\n\")\n        history = training.run_training(config, results, checkpoints, resume=checkpoints / \"latest.pt\")\n>       assert [row[\"step\"] for row in history[\"train\"]] == [1, 2]\nE       assert [1] == [1, 2]\nE         \nE         Right contains one more item: 2\nE         Use -v to get more diff\n\nexperiments/fixed2048/tests/test_train.py:67: AssertionError\n----------------------------- Captured stdout call -----------------------------\n{\"step\": 1, \"mse\": 1.3984806173539255e-05, \"psnr\": 48.54343548480561, \"latent_mse\": 1.4400462324259955e-06, \"step_wall_s\": 0.01736906304722652, \"peak_gpu_mib\": 0}\n=========================== short test summary info ============================\nFAILED experiments/fixed2048/tests/test_train.py::test_optimizer_resume_continues_next_update_exactly\nFAILED experiments/fixed2048/tests/test_train.py::test_training_writer_saves_step0_and_reconciles_uncommitted_steps\n2 failed in 2.91s\n"
+    },
+    {
+      "mutation": "grid_wrong_axis",
+      "killed": true,
+      "exit_code": 1,
+      "output": "F..                                                                      [100%]\n=================================== FAILURES ===================================\n________________ test_grid_migration_is_spatial_and_exhaustive _________________\n\n    def test_grid_migration_is_spatial_and_exhaustive():\n        config = CodecConfig()\n        state = {\n            \"decoder.projector.query\": torch.arange(510 * 192).float().reshape(1, 510, 192),\n            \"other\": torch.tensor([7.0]),\n        }\n        target = replace(config, grid=(34, 60))\n        migrated, ledger = migrate_grid(state, config, target)\n        expected = (\n            torch.nn.functional.interpolate(\n                state[\"decoder.projector.query\"].transpose(1, 2).reshape(1, 192, 17, 30),\n                size=(34, 60),\n                mode=\"bilinear\",\n                align_corners=False,\n            )\n            .flatten(2)\n            .transpose(1, 2)\n        )\n>       assert torch.equal(migrated[\"decoder.projector.query\"], expected)\nE       assert False\nE        +  where False = <built-in method equal of type object at 0x7b7026bd6c20>(tensor([[[0.0000e+00, 1.0000e+00, 2.0000e+00,  ..., 1.8900e+02,\\n          1.9000e+02, 1.9100e+02],\\n         [1.5812e+0...e+04, 9.7761e+04],\\n         [9.7728e+04, 9.7729e+04, 9.7730e+04,  ..., 9.7917e+04,\\n          9.7918e+04, 9.7919e+04]]]), tensor([[[0.0000e+00, 1.0000e+00, 2.0000e+00,  ..., 1.8900e+02,\\n          1.9000e+02, 1.9100e+02],\\n         [4.8000e+0...e+04, 9.7871e+04],\\n         [9.7728e+04, 9.7729e+04, 9.7730e+04,  ..., 9.7917e+04,\\n          9.7918e+04, 9.7919e+04]]]))\nE        +    where <built-in method equal of type object at 0x7b7026bd6c20> = torch.equal\n\nexperiments/fixed2048/tests/test_checkpoint.py:28: AssertionError\n=========================== short test summary info ============================\nFAILED experiments/fixed2048/tests/test_checkpoint.py::test_grid_migration_is_spatial_and_exhaustive\n1 failed, 2 passed in 1.52s\n"
+    },
+    {
+      "mutation": "raw_latent_scaled_in_r0",
+      "killed": true,
+      "exit_code": 1,
+      "output": "F....                                                                    [100%]\n=================================== FAILURES ===================================\n_________________ test_pair_is_same_input_and_does_not_commit __________________\n\nmonkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fea56b11280>\n\n    def test_pair_is_same_input_and_does_not_commit(monkeypatch):\n        model = make_model().eval()\n        encoded = model.encode(input_frame(), model.empty_state(), 0)\n        outputs = model.compare(encoded, (\"R0\", \"R0-spatial\", \"R1\", \"R2\"))\n        assert model.tokenizer.calls == 1\n        assert not encoded.context.committed\n>       assert torch.equal(outputs[\"R0\"].latent, encoded.latent)\nE       AssertionError: assert False\nE        +  where False = <built-in method equal of type object at 0x7feb9d7d6c20>(tensor([[[[ 0.1140,  0.1035,  0.0566, -0.1156],\\n          [-0.0074, -0.0721,  0.0570, -0.0313],\\n          [-0.0716, -0...,  0.0570, -0.0313],\\n          [-0.0716, -0.0087, -0.1027, -0.0970],\\n          [ 0.0829, -0.0487, -0.0070,  0.0682]]]]), tensor([[[[ 0.0570,  0.0517,  0.0283, -0.0578],\\n          [-0.0037, -0.0361,  0.0285, -0.0157],\\n          [-0.0358, -0...,  0.0285, -0.0157],\\n          [-0.0358, -0.0043, -0.0514, -0.0485],\\n          [ 0.0414, -0.0243, -0.0035,  0.0341]]]]))\nE        +    where <built-in method equal of type object at 0x7feb9d7d6c20> = torch.equal\nE        +    and   tensor([[[[ 0.1140,  0.1035,  0.0566, -0.1156],\\n          [-0.0074, -0.0721,  0.0570, -0.0313],\\n          [-0.0716, -0...,  0.0570, -0.0313],\\n          [-0.0716, -0.0087, -0.1027, -0.0970],\\n          [ 0.0829, -0.0487, -0.0070,  0.0682]]]]) = Reconstruction(rgb=tensor([[[[0.7936, 0.7936, 0.7936,  ..., 0.2023, 0.2023, 0.2023],\\n          [0.7936, 0.7936, 0.7936...0.0970],\\n          [ 0.0829, -0.0487, -0.0070,  0.0682]]]]), embeddings=None, ids=None, vq_loss=tensor(0.), timings={}).latent\nE        +    and   tensor([[[[ 0.0570,  0.0517,  0.0283, -0.0578],\\n          [-0.0037, -0.0361,  0.0285, -0.0157],\\n          [-0.0358, -0...,  0.0285, -0.0157],\\n          [-0.0358, -0.0043, -0.0514, -0.0485],\\n          [ 0.0414, -0.0243, -0.0035,  0.0341]]]]) = FrameEncoding(context=FrozenFrameContext(model_id='test', frame_id=0, frame_type='I', height=64, width=64, qp=32, refe...],\\n         [-0.0064, -0.0187,  0.0100,  ..., -0.0101,  0.0029,  0.0055]]],\\n       grad_fn=<AddBackward0>), timings={}).latent\n\nexperiments/fixed2048/tests/test_codec.py:81: AssertionError\n=========================== short test summary info ============================\nFAILED experiments/fixed2048/tests/test_codec.py::test_pair_is_same_input_and_does_not_commit\n1 failed, 4 passed in 1.65s\n"
+    }
+  ]
+}

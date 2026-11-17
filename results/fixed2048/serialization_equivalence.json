@@ -1,0 +1,65 @@
+{
+  "csv_files": [
+    {
+      "file": "results/fixed2048/qa_evaluation/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/qa_scale/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/baseline_scale_control/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/baseline/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/qa_api_scale/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/quantized/evaluation/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/grid_ablation/encoder34/evaluation/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/grid_ablation/decoder34/evaluation/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/final_test/B1/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/final_test/B0/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/final_test/R3/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/final_test/R2/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/final_test/R1/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/raw192/evaluation/frame_metrics.csv",
+      "parsed_rows_identical": true
+    },
+    {
+      "file": "results/fixed2048/continuous/evaluation/frame_metrics.csv",
+      "parsed_rows_identical": true
+    }
+  ],
+  "svg_geometry_attributes_unchanged": true
+}

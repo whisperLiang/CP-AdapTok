@@ -1,0 +1,373 @@
+{
+  "checkpoint_sha256s": [
+    "0ba69922227383526d812cc8293f35de4adcab3f6dabc351161801d489405292",
+    "9d9a7f09aff251d5161cbf29a34f2a73e6fd63e8641d30c51ad662d1a6376cb9",
+    "9eb19bf15b5cd2c4d672433ad3cec4496c47d0d1cd882eb2904ec50130c792ce",
+    "b1c02bec3139fb697b939e369746bced9fcb6850a2717dbe28867b67fd87c4a1",
+    "b940d90b964c506e48ccf0270cfb11a8c790f2b1585a26dfc9ddebb210ed82b7"
+  ],
+  "protocols": {
+    "b1c02bec3139fb697b939e369746bced9fcb6850a2717dbe28867b67fd87c4a1": {
+      "paths": [
+        "R1",
+        "R2"
+      ],
+      "references": [
+        "full2048"
+      ]
+    },
+    "0ba69922227383526d812cc8293f35de4adcab3f6dabc351161801d489405292": {
+      "paths": [
+        "R2"
+      ],
+      "references": [
+        "full2048"
+      ]
+    },
+    "9d9a7f09aff251d5161cbf29a34f2a73e6fd63e8641d30c51ad662d1a6376cb9": {
+      "paths": [
+        "R1"
+      ],
+      "references": [
+        "full2048"
+      ]
+    },
+    "9eb19bf15b5cd2c4d672433ad3cec4496c47d0d1cd882eb2904ec50130c792ce": {
+      "paths": [
+        "R2"
+      ],
+      "references": [
+        "original128"
+      ]
+    },
+    "b940d90b964c506e48ccf0270cfb11a8c790f2b1585a26dfc9ddebb210ed82b7": {
+      "paths": [
+        "R2"
+      ],
+      "references": [
+        "original128",
+        "matched128"
+      ]
+    }
+  },
+  "models": {
+    "R1": {
+      "checkpoint": "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/checkpoints/fixed2048/continuous/main/best_validation.pt",
+      "paths": [
+        "R1",
+        "R2"
+      ],
+      "references": [
+        "full2048"
+      ],
+      "selected_step": 200,
+      "source_status": "trained",
+      "model_config": {
+        "n_max": 2048,
+        "k_ref": 128,
+        "packet_tokens": 128,
+        "dim": 192,
+        "heads": 6,
+        "layers": 2,
+        "codebook_size": 8192,
+        "embedding_dim": 16,
+        "grid": [
+          17,
+          30
+        ],
+        "kv_grid": [
+          17,
+          30
+        ],
+        "qp": 32,
+        "attention_precision": "float64",
+        "state_fingerprint": "mixed_int64_v1",
+        "query_content_only": false,
+        "token_aggregation": "global_softmax_v1"
+      },
+      "selection": "minimum Validation global MSE, fixed 3 videos x 4 frames, 0/100/200/300",
+      "selection_global_mse": 0.024354228051379323,
+      "actual_training_updates": 300,
+      "sha256": "b1c02bec3139fb697b939e369746bced9fcb6850a2717dbe28867b67fd87c4a1"
+    },
+    "R2": {
+      "checkpoint": "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/checkpoints/fixed2048/vq/main/best_validation.pt",
+      "paths": [
+        "R2"
+      ],
+      "references": [
+        "full2048"
+      ],
+      "selected_step": 100,
+      "source_status": "trained",
+      "model_config": {
+        "n_max": 2048,
+        "k_ref": 128,
+        "packet_tokens": 128,
+        "dim": 192,
+        "heads": 6,
+        "layers": 2,
+        "codebook_size": 8192,
+        "embedding_dim": 16,
+        "grid": [
+          17,
+          30
+        ],
+        "kv_grid": [
+          17,
+          30
+        ],
+        "qp": 32,
+        "attention_precision": "float64",
+        "state_fingerprint": "mixed_int64_v1",
+        "query_content_only": false,
+        "token_aggregation": "global_softmax_v1"
+      },
+      "selection": "minimum Validation global MSE, fixed 3 videos x 4 frames, 0/100/200/300",
+      "selection_global_mse": 0.02432423938686649,
+      "actual_training_updates": 300,
+      "sha256": "0ba69922227383526d812cc8293f35de4adcab3f6dabc351161801d489405292"
+    },
+    "R3": {
+      "checkpoint": "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/checkpoints/fixed2048/grid34/main/best_validation.pt",
+      "paths": [
+        "R1"
+      ],
+      "references": [
+        "full2048"
+      ],
+      "selected_step": 300,
+      "source_status": "trained",
+      "model_config": {
+        "n_max": 2048,
+        "k_ref": 128,
+        "packet_tokens": 128,
+        "dim": 192,
+        "heads": 6,
+        "layers": 2,
+        "codebook_size": 8192,
+        "embedding_dim": 16,
+        "grid": [
+          34,
+          60
+        ],
+        "kv_grid": [
+          17,
+          30
+        ],
+        "qp": 32,
+        "attention_precision": "float64",
+        "state_fingerprint": "mixed_int64_v1",
+        "query_content_only": false,
+        "token_aggregation": "global_softmax_v1"
+      },
+      "selection": "minimum Validation global MSE, fixed 3 videos x 4 frames, 0/100/200/300",
+      "selection_global_mse": 0.027004222696026165,
+      "actual_training_updates": 300,
+      "sha256": "9d9a7f09aff251d5161cbf29a34f2a73e6fd63e8641d30c51ad662d1a6376cb9"
+    },
+    "B0": {
+      "checkpoint": "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/checkpoints/large_scale/formal_20261116/s4/B0/latest.pt",
+      "paths": [
+        "R2"
+      ],
+      "references": [
+        "original128"
+      ],
+      "selected_step": 4000,
+      "source_status": "trained",
+      "model_config": {
+        "n_max": 2048,
+        "k_ref": 128,
+        "packet_tokens": 128,
+        "dim": 192,
+        "heads": 6,
+        "layers": 2,
+        "codebook_size": 8192,
+        "embedding_dim": 16,
+        "grid": [
+          17,
+          30
+        ],
+        "kv_grid": [
+          17,
+          30
+        ],
+        "qp": 32,
+        "attention_precision": "float64",
+        "state_fingerprint": "mixed_int64_v1",
+        "query_content_only": false,
+        "token_aggregation": "global_softmax_v1"
+      },
+      "selection": "original user-declared S4 checkpoint, fixed external reference",
+      "historical_intra_period": 32,
+      "sha256": "9eb19bf15b5cd2c4d672433ad3cec4496c47d0d1cd882eb2904ec50130c792ce"
+    },
+    "B1": {
+      "checkpoint": "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/checkpoints/large_scale/formal_20261116/s4/B1/latest.pt",
+      "paths": [
+        "R2"
+      ],
+      "references": [
+        "original128",
+        "matched128"
+      ],
+      "selected_step": 4000,
+      "source_status": "trained",
+      "model_config": {
+        "n_max": 2048,
+        "k_ref": 128,
+        "packet_tokens": 128,
+        "dim": 192,
+        "heads": 6,
+        "layers": 2,
+        "codebook_size": 8192,
+        "embedding_dim": 16,
+        "grid": [
+          17,
+          30
+        ],
+        "kv_grid": [
+          17,
+          30
+        ],
+        "qp": 32,
+        "attention_precision": "float64",
+        "state_fingerprint": "mixed_int64_v1",
+        "query_content_only": false,
+        "token_aggregation": "global_softmax_v1"
+      },
+      "selection": "original user-declared S4 checkpoint, fixed external reference",
+      "historical_intra_period": 32,
+      "sha256": "b940d90b964c506e48ccf0270cfb11a8c790f2b1585a26dfc9ddebb210ed82b7"
+    }
+  },
+  "test_config": {
+    "videos": [
+      "DAVIS2017:cows",
+      "DAVIS2017:goat",
+      "DAVIS2017:parkour"
+    ],
+    "frames": 64
+  },
+  "test_manifest_sha256": "09738a77219eb1d78269a0788c109b268de29b54dec3aab68a365599e08bed5e",
+  "no_training_or_selection_after_seal": true,
+  "time": "2026-11-17T20:01:30.174539+08:00",
+  "timezone": "Asia/Shanghai",
+  "git_commit": "d89c25c0db172fbcb95764215067225148fc5c1a",
+  "git_dirty": true,
+  "source_sha256": "0c33c6dc770d8e187b53d46022284e0ce038f1a31c7e435b5d7480583e55e414",
+  "torch": "2.9.1+cu130",
+  "cuda": "13.0",
+  "gpu_snapshot": "NVIDIA H100 PCIe, 14 MiB, 0 %",
+  "gpu_shared": "not assumed isolated; see gpu_snapshot and serial benchmark commands",
+  "status": "sealed_before_test",
+  "config": {
+    "seed": 20261117,
+    "device": "cuda:0",
+    "source_checkpoint": "checkpoints/large_scale/formal_20261116/s4/B1/latest.pt",
+    "experiment_type": "reconstruction_diagnostic",
+    "real_bitstream": false,
+    "bpp": null,
+    "decoder_grid": [
+      17,
+      30
+    ],
+    "encoder_kv_grid": [
+      17,
+      30
+    ],
+    "manifest_dir": "data/manifests",
+    "loss": {
+      "mse": 1.0,
+      "latent": 0.0,
+      "lpips": 0.0,
+      "dists": 0.0,
+      "monotonic": 0.0,
+      "estimated_rate": 0.0
+    },
+    "training": {
+      "route": "B1_S4_native1080_finetune",
+      "optimizer": "AdamW",
+      "lr": 2e-05,
+      "weight_decay": 0.01,
+      "amp_bf16": true,
+      "clip_grad_norm": 1.0,
+      "tbptt": 2,
+      "sequence_length": 4,
+      "steps": 300,
+      "save_every": 100,
+      "validate_every": 100,
+      "path": "R1",
+      "reference": "full2048",
+      "resolution": [
+        1080,
+        1920
+      ]
+    },
+    "validation": {
+      "videos": [
+        "DAVIS2017:blackswan",
+        "DAVIS2017:car-roundabout",
+        "DAVIS2017:dog"
+      ],
+      "frames": 4
+    },
+    "baseline": {
+      "videos": [
+        "DAVIS2017:blackswan",
+        "DAVIS2017:car-roundabout",
+        "DAVIS2017:dog"
+      ],
+      "frames": 8,
+      "paths": [
+        "R0",
+        "R0-spatial",
+        "R1",
+        "R2"
+      ],
+      "references": [
+        "i_only",
+        "full2048",
+        "original128",
+        "paired"
+      ]
+    },
+    "pilot": {
+      "train_video": "DAVIS2017:bear",
+      "lengths": [
+        1,
+        4,
+        16
+      ],
+      "steps": 300,
+      "lr": 0.0001,
+      "minimum_relative_mse_drop": 0.05,
+      "maximum_steps": 1000
+    },
+    "final_test": {
+      "videos": [
+        "DAVIS2017:cows",
+        "DAVIS2017:goat",
+        "DAVIS2017:parkour"
+      ],
+      "frames": 64
+    }
+  },
+  "upstreams": [
+    {
+      "name": "AdapTok",
+      "url": "https://github.com/VisionXLab/AdapTok",
+      "commit": "a72076cf6474f930a181aa78971de70d65289b49",
+      "license": "MIT",
+      "license_file": "third_party/AdapTok/LICENSE"
+    },
+    {
+      "name": "DCVC",
+      "url": "https://github.com/microsoft/DCVC",
+      "commit": "cbdae87a5445114cdc7f48816da63ea80bdeac40",
+      "license": "MIT",
+      "license_file": "third_party/DCVC/LICENSE.txt"
+    }
+  ]
+}

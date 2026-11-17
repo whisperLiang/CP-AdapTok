@@ -1,0 +1,16 @@
+starting qa_evaluation
+completed qa_evaluation
+starting qa_scale
+completed qa_scale
+starting qa_profile
+completed qa_profile
+starting content_R1
+completed content_R1
+starting content_R2
+completed content_R2
+starting resume_noop
+Traceback (most recent call last):
+  File "<stdin>", line 15, in <module>
+  File "/home/whisperliang/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/home/whisperliang/CP-AdapTok/.venv-native/bin/python', '-m', 'coverage', 'run', '-p', '--source=experiments.fixed2048', '-m', 'experiments.fixed2048.train', '--config', 'results/fixed2048/continuous/config.json', '--output', 'results/fixed2048/continuous', '--checkpoint-dir', 'checkpoints/fixed2048/continuous/main', '--resume', 'checkpoints/fixed2048/continuous/main/latest.pt']' returned non-zero exit status 1.

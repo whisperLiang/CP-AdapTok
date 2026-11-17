@@ -1,0 +1,33 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________________ test_long_i_only_has_no_p_window_statistics __________________
+
+    def test_long_i_only_has_no_p_window_statistics():
+        rows=[{'video':'validation:a','frame':i,'frame_type':'I','reference':'i_only','path':'R1',
+               'group':'i_only/R1','mse':0.01,'psnr':20,'pixels':1} for i in range(48)]
+>       summary=summarize(rows)['i_only/R1']
+                ^^^^^^^^^^^^^^^
+
+experiments/fixed2048/tests/test_long_reference.py:7:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+rows = [{'video': 'validation:a', 'frame': 0, 'frame_type': 'I', 'reference': 'i_only', ...}, {'video': 'validation:a', 'fram...'reference': 'i_only', ...}, {'video': 'validation:a', 'frame': 5, 'frame_type': 'I', 'reference': 'i_only', ...}, ...]
+
+    def summarize(rows):
+        result = {}
+        for key, selected in grouped(rows, "group").items():
+            summary = aggregate(selected)
+            for label, start, end in [("early_P", 1, 8), ("late_P", 40, 48)]:
+                window = [r for r in selected if start <= r["frame"] < end and r["frame_type"] == "P"]
+                summary[label] = {
+>                   "psnr": psnr(sum(r["mse"] for r in window) / len(window)),
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    "direct_psnr": psnr(sum(r["direct_mse"] for r in window) / len(window)),
+                    "feature_rms": sum(r["feature_rms"] for r in window) / len(window),
+                }
+E               ZeroDivisionError: division by zero
+
+experiments/fixed2048/long_reference.py:66: ZeroDivisionError
+=========================== short test summary info ============================
+FAILED experiments/fixed2048/tests/test_long_reference.py::test_long_i_only_has_no_p_window_statistics
+1 failed in 1.48s

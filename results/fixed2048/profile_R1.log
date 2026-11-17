@@ -1,0 +1,56 @@
+Traceback (most recent call last):
+  File "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/experiments/fixed2048/profile.py", line 85, in <module>
+    main()
+  File "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/experiments/fixed2048/profile.py", line 81, in main
+    write_json(args.output, profile_model(config, args.checkpoint, args.path))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/experiments/fixed2048/profile.py", line 52, in profile_model
+    model.reconstruct(encoded, path)
+  File "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/experiments/fixed2048/codec.py", line 166, in reconstruct
+    features = self.tokens(encoded)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/experiments/fixed2048/codec.py", line 130, in tokens
+    encoded.features = self._timed(
+                       ^^^^^^^^^^^^
+  File "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/experiments/fixed2048/codec.py", line 85, in _timed
+    return operation()
+           ^^^^^^^^^^^
+  File "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/experiments/fixed2048/codec.py", line 132, in <lambda>
+    lambda: self.tokenizer(encoded.latent, encoded.context.context, encoded.context.frame_type),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1881, in _call_impl
+    return inner()
+           ^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1829, in inner
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/cp_adaptok/tokenizer/learned_queries.py", line 63, in forward
+    return self.read_queries(y, keys)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/cp_adaptok/tokenizer/learned_queries.py", line 69, in read_queries
+    query = block(
+            ^^^^^^
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1881, in _call_impl
+    return inner()
+           ^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1818, in inner
+    args_result = hook(self, args)
+                  ^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/utils/module_tracker.py", line 136, in _fw_pre_hook
+    register_multi_grad_hook(tensors, self._get_pop_fn(name, True))
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/autograd/graph.py", line 517, in register_multi_grad_hook
+    grad_fns = list(map(_get_grad_fn_or_grad_acc, tensors))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/autograd/graph.py", line 184, in _get_grad_fn_or_grad_acc
+    assert node is not None
+           ^^^^^^^^^^^^^^^^
+AssertionError

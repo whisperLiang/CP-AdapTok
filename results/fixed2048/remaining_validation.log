@@ -1,0 +1,12 @@
+starting encoder34_evaluate
+completed encoder34_evaluate
+starting raw192_evaluate
+completed raw192_evaluate
+starting backbone_control
+completed backbone_control
+starting profile_R1
+Traceback (most recent call last):
+  File "<stdin>", line 13, in <module>
+  File "/home/whisperliang/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/home/whisperliang/CP-AdapTok/.venv-native/bin/python', '-m', 'coverage', 'run', '-p', '--source=experiments.fixed2048', '-m', 'experiments.fixed2048.profile', '--checkpoint', 'checkpoints/fixed2048/continuous/main/best_validation.pt', '--path', 'R1', '--output', 'results/fixed2048/performance/R1.json']' returned non-zero exit status 1.

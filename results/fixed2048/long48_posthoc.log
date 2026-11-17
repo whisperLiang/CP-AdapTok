@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "<stdin>", line 6, in <module>
+  File "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/experiments/fixed2048/long_reference.py", line 103, in main
+    write_json(directory / f"{name}_summary.json", summarize(rows))
+                                                   ^^^^^^^^^^^^^^^
+  File "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok/experiments/fixed2048/long_reference.py", line 66, in summarize
+    "psnr": psnr(sum(r["mse"] for r in window) / len(window)),
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+ZeroDivisionError: division by zero

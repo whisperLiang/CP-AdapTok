@@ -1,0 +1,25 @@
+{
+  "video": "DAVIS2017:blackswan",
+  "frame": 1,
+  "frame_type": "I",
+  "diagnostic_only": true,
+  "fixed_positions_and_context": true,
+  "results": {
+    "normal": {
+      "latent_delta_mse": 0.0,
+      "rgb_delta_mse": 0.0
+    },
+    "constant": {
+      "latent_delta_mse": 0.06407178193330765,
+      "rgb_delta_mse": 0.032599519938230515
+    },
+    "shuffled": {
+      "latent_delta_mse": 0.0020749846007674932,
+      "rgb_delta_mse": 0.001394478720612824
+    },
+    "other_frame": {
+      "latent_delta_mse": 7.22050535841845e-05,
+      "rgb_delta_mse": 5.5833930673543364e-05
+    }
+  }
+}
