@@ -82,6 +82,8 @@ def report():
         lines.extend(["", (ROOT / "decoder_report.md").read_text()])
     elif not decision["decoder_stage_allowed"]:
         lines.extend(["", "信息验收触发停止条件，Decoder 支路、扩训和 30 FPS 优化止于该条件。"])
+    if (ROOT / "visual_review.md").is_file():
+        lines.extend(["", (ROOT / "visual_review.md").read_text()])
     if (ROOT / "performance_report.md").is_file():
         lines.extend(["", (ROOT / "performance_report.md").read_text()])
     acceptance = read(ROOT / "acceptance.json")

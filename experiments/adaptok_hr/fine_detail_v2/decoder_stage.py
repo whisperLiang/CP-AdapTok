@@ -116,6 +116,12 @@ def main():
             failed = ", ".join(k for k, passing in value["quality"]["checks"].items() if not passing)
             lines.append(f"| {seed} | {arm} | {value['psnr']:.5f} | {value['lpips']:.6f} | {value['dists']:.6f} | "
                          f"{value['information']} | {value['quality']['pass']} | {failed or '全部通过'} |")
+    lines.extend(["", f"下表给出 {best} 相对同种子同步数 C0 的逐档差值。晚期 K2048 只比较第 48 帧起的相同画面。",
+                  "", "| 种子 | 预算 / 帧段 | ΔPSNR (dB) | ΔLPIPS | ΔDISTS |", "|---|---|---:|---:|---:|"])
+    for seed, outcomes in decision["seeds"].items():
+        for scope, delta in outcomes[best]["quality"]["protected_delta"].items():
+            lines.append(f"| {seed} | {scope} | {delta['psnr_global']:+.5f} | {delta['lpips']:+.6f} | "
+                         f"{delta['dists']:+.6f} |")
     if not selected:
         lines.extend(["", "双种子的整体画质门槛未同时满足。此处结束模型扩展，后面的吞吐数字为所测模型原路径。"])
     (ROOT / "decoder_report.md").write_text("\n".join(lines) + "\n")
