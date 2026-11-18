@@ -19,6 +19,24 @@ class Upsample(nn.Module):
         return self.refine(F.interpolate(self.project(x), size=shape, mode="bilinear", align_corners=False))
 
 
+class FineResidual(nn.Module):
+    """S32 correction from the upsampled coarse map and the received Fine grid."""
+
+    def __init__(self, channels, dim):
+        super().__init__()
+        self.project = nn.Conv2d(channels + dim + 1, dim, 1)
+        self.depthwise = nn.Conv2d(dim, dim, 3, padding=1, groups=dim)
+        self.mix = nn.Conv2d(dim, dim, 1)
+        self.output = nn.Conv2d(dim, channels, 1)
+        nn.init.zeros_(self.output.weight)
+        nn.init.zeros_(self.output.bias)
+
+    def forward(self, coarse, fine_map):
+        x = F.silu(self.project(torch.cat((coarse, fine_map), dim=1)))
+        x = x + self.mix(F.silu(self.depthwise(x)))
+        return self.output(x) * fine_map[:, -1:]
+
+
 class Decoder(nn.Module):
     def __init__(self, config, table):
         super().__init__()
@@ -35,6 +53,7 @@ class Decoder(nn.Module):
         widths = config.decoder_channels
         self.upsample = nn.ModuleList(Upsample(a, b) for a, b in zip(widths, widths[1:]))
         self.rgb_head = nn.Sequential(nn.Conv2d(widths[-1], 12, 1), nn.PixelShuffle(2))
+        self.fine_detail = FineResidual(low, config.embedding_dim) if config.fine_decoder else None
 
     def restore_tokens(self, tokens, state=None):
         return self.fuse_maps(self.table.scatter(tokens), state)
@@ -42,8 +61,10 @@ class Decoder(nn.Module):
     def fuse_maps(self, maps, state=None):
         x = self.fusion[0](self.restore[0](maps[0]))
         for level in (1, 2):
-            x = F.interpolate(x, size=maps[level].shape[-2:], mode="bilinear", align_corners=False)
-            x = self.fusion[level](x + self.restore[level](maps[level]))
+            coarse = F.interpolate(x, size=maps[level].shape[-2:], mode="bilinear", align_corners=False)
+            x = self.fusion[level](coarse + self.restore[level](maps[level]))
+            if level == 2 and self.fine_detail is not None:
+                x = x + self.fine_detail(coarse, maps[level])
             x = self.attention[level - 1](x)
         if state is not None and self.temporal_fusion is not None:
             x = x + .25 * self.temporal_fusion(torch.cat((x, state.feature), dim=1))

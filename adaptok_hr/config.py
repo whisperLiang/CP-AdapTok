@@ -21,6 +21,7 @@ class ModelConfig:
     codebook_mode: str = "shared"
     loss_scope: str = "all_candidates"
     fine_input: str = "direct"
+    fine_decoder: bool = False
 
     def __post_init__(self):
         for name in ("channels", "decoder_channels", "budgets"):
@@ -30,6 +31,8 @@ class ModelConfig:
         self.validate_vq()
         if self.fine_input not in ("direct", "local_residual"):
             raise ValueError("fine_input must be direct or local_residual")
+        if type(self.fine_decoder) is not bool:
+            raise ValueError("fine_decoder must be a boolean")
         self.validate_budgets()
 
     def validate_dimensions(self):
@@ -73,4 +76,6 @@ class ModelConfig:
         # Preserve the v1 fingerprint of deployed direct-projection models.
         if self.fine_input == "direct":
             del values["fine_input"]
+        if not self.fine_decoder:
+            del values["fine_decoder"]
         return values

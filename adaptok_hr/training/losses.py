@@ -5,6 +5,15 @@ from torch import nn
 from torch.nn import functional as F
 
 
+def high_frequency_l1(rgb, target):
+    # The high-pass is linear. Filter the difference once in FP32. Slice-based
+    # reflection also supports a deterministic backward on native CUDA frames.
+    delta = rgb.float() - target.float()
+    wide = torch.cat((delta[..., 1:2], delta, delta[..., -2:-1]), dim=3)
+    padded = torch.cat((wide[:, :, 1:2], wide, wide[:, :, -2:-1]), dim=2)
+    return (delta - F.avg_pool2d(padded, 3, 1)).abs().mean()
+
+
 class ReconstructionLoss(nn.Module):
     def __init__(self, weights, device):
         super().__init__()
@@ -24,7 +33,11 @@ class ReconstructionLoss(nn.Module):
                 perception = self.perceptual(rgb * 2 - 1, target * 2 - 1).mean()
         loss = self.weights.get("mse", 0) * mse + self.weights.get("l1", 0) * l1
         loss = loss + self.weights.get("perceptual", 0) * perception
-        return loss, {"mse": mse, "l1": l1, "perceptual": perception}
+        terms = {"mse": mse, "l1": l1, "perceptual": perception}
+        if self.weights.get("detail", 0):
+            terms["detail"] = high_frequency_l1(rgb, target)
+            loss = loss + self.weights["detail"] * terms["detail"]
+        return loss, terms
 
     def temporal(self, rgb, target, state, previous_target):
         if state is None or previous_target is None:
