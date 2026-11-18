@@ -4,6 +4,7 @@ from collections import Counter
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 from xml.etree import ElementTree
 
 from adaptok_hr.codec.bitstream import parse
@@ -12,7 +13,7 @@ from adaptok_hr.runtime import file_hash, write_json
 
 from .decisions import information
 from .evaluate import folder
-from .run import CHECKPOINTS, PACKAGE, PROTOCOL, ROOT
+from .run import CHECKPOINTS, PROTOCOL, ROOT
 from .study import read
 
 
@@ -24,6 +25,27 @@ def old_inputs():
     path = Path(PROTOCOL["historical_validation"]).parent / "closed_loop/k2048"
     return {(r["content_id"], r["frame"]): r["input_rgb_sha256"]
             for p in path.glob("*/frames.jsonl") for r in jsonlines(p)}
+
+
+def protected_inputs():
+    base = PROTOCOL["base_commit"]
+    paths = ("cp_adaptok", "third_party", "configs/adaptok_hr", "experiments/adaptok_hr/fine_recovery",
+             "docs/adaptok_hr_fine_recovery_report.md", "docs/adaptok_hr_fine_recovery_work_log.md")
+    identities = {}
+    for name in paths:
+        old = subprocess.check_output(["git", "rev-parse", f"{base}:{name}"], text=True).strip()
+        current = subprocess.check_output(["git", "rev-parse", f"HEAD:{name}"], text=True).strip()
+        if old != current:
+            raise ValueError(f"protected Git object changed: {name}")
+        identities[name] = current
+    for path in (Path("checkpoints/adaptok_hr/joint/step_001000.pt"),
+                 Path("checkpoints/adaptok_hr_fine_recovery/A1/step_001000.pt"),
+                 Path("checkpoints/adaptok_hr_fine_recovery/A3/step_001000.pt")):
+        digest = file_hash(path)
+        if digest != read(path.with_suffix(".json"))["checkpoint_sha256"]:
+            raise ValueError(f"protected weights changed: {path}")
+        identities[str(path)] = digest
+    return identities
 
 
 def verify_validation(path, originals):
@@ -90,6 +112,7 @@ def run():
               "mutations": len(mutations["results"]) >= 31 and mutations["all_killed"],
               "changed_production_complexity": not flagged, "duplicates": not audit["duplicates_over_08"]}
     record = {"engineering_checks_pass": all(checks.values()), "checks": checks, "validations": validations,
+              "protected_git_and_checkpoints": protected_inputs(),
               "checkpoints": weights, "tests": tests, "mutations_killed": sum(r["killed"] for r in mutations["results"]),
               "flagged_production": flagged, "legacy_high_crap_count": len(audit["crap_over_10"]),
               "quality_and_scientific_gates": read(ROOT / "decision.json")}

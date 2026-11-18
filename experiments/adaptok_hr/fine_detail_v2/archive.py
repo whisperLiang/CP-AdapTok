@@ -1,6 +1,8 @@
 """Package raw observations and actual packets with a reproducible member-level digest."""
 
+import argparse
 import gzip
+import hashlib
 import json
 from pathlib import Path
 import shutil
@@ -9,7 +11,6 @@ import tarfile
 from adaptok_hr.runtime import file_hash, write_json
 
 from .run import CHECKPOINTS, PACKAGE, ROOT
-from .study import read
 
 DEST = PACKAGE / "evidence"
 
@@ -68,5 +69,28 @@ def run():
                       "files": len(files), "largest_bytes": max((DEST / k).stat().st_size for k in files)}))
 
 
+def verify_archives():
+    files = json.loads((DEST / "manifest.json").read_text())
+    for name, expected in files.items():
+        if file_hash(DEST / name) != expected:
+            raise ValueError(f"archive file checksum mismatch: {name}")
+    archives = json.loads((DEST / "archives.json").read_text())
+    members = 0
+    for spec in archives.values():
+        observed = {}
+        with tarfile.open(DEST / spec["archive"], mode="r|gz") as archive:
+            for member in archive:
+                with archive.extractfile(member) as source:
+                    observed[member.name] = hashlib.file_digest(source, "sha256").hexdigest()
+        if observed != spec["members"]:
+            raise ValueError(f"archive member mismatch: {spec['archive']}")
+        members += len(observed)
+    print(json.dumps({"files_verified": len(files), "members_verified_from_archives": members}))
+
+
 if __name__ == "__main__":
-    run()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--verify-only", action="store_true")
+    if not parser.parse_args().verify_only:
+        run()
+    verify_archives()
