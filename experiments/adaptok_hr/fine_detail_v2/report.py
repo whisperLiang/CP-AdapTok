@@ -30,6 +30,17 @@ def report():
              "| 配置 | 步数 | 验证帧 | 后缀码数 / perplexity / 最大占比 | 置乱 ΔMSE | 跨视频 ΔMSE | 同向来源 | 同状态 ΔdB | 闭环 ΔdB |",
              "|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
     entries = sorted(summaries(), key=lambda pair: (pair[1]["steps"], pair[0]))
+    confirmed = [r for name, r in entries if name.endswith("_" + winner) and r["steps"] == 1000]
+    if confirmed:
+        same = " / ".join(f"{r['same_state_gain_db']:+.3f}" for r in confirmed)
+        loop = " / ".join(f"{r['closed_loop_gain_db']:+.3f}" for r in confirmed)
+        lines[3:3] = [f"1000 步时 K2048 相对 K1024 的同状态增益依种子顺序为 **{same} dB**，"
+                      f"独立闭环为 **{loop} dB**。每个 K2048 码流包均为 3470 字节。", ""]
+    if (ROOT / "decoder_decision.json").exists():
+        d = read(ROOT / "decoder_decision.json")
+        adoption = "通过双种子画质验收" if d["adoption_ready"] else "未同时通过双种子画质验收"
+        lines[5:5] = [f"Decoder 阶段选择 **{d['decoder_winner']}**，该配置{adoption}。"
+                      "逐种子、逐档质量差值以及独立吞吐见后文。", ""]
     for name, row in entries:
         s, info = row["suffix"], row["information"]
         p = info["pooled"]

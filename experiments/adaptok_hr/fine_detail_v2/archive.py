@@ -35,6 +35,7 @@ def run():
     manifest = {}
     base = [(str(p.relative_to(ROOT)), p) for p in ROOT.glob("*.json")
             if p.name not in ("coverage.json", "quality_audit.json")]
+    base.extend((p.name, p) for p in ROOT.glob("*.md"))
     base += [(str(p.relative_to(ROOT)), p) for d in ("configs", "logs") for p in (ROOT / d).glob("*") if p.is_file()]
     base += [(p.name, p) for p in (ROOT / "tests.xml", ROOT / "quality_audit.json", ROOT / "coverage.json")]
     for directory in sorted(ROOT.glob("S[12]_*")):
