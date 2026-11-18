@@ -1,0 +1,172 @@
+{
+  "winner": "R11",
+  "seeds": {
+    "1": {
+      "information": {
+        "pass": true,
+        "agreeing_sources": 3,
+        "pooled": {
+          "shuffle": 0.0016042977496553425,
+          "cross": 0.00176615413899223,
+          "multicode_frames": 174,
+          "frames": 174,
+          "donor_frames": 150
+        },
+        "sources": {
+          "DAVIS2017:blackswan": {
+            "shuffle": 0.0007741709984838963,
+            "cross": 0.0010432485304772855,
+            "multicode_frames": 50,
+            "frames": 50,
+            "donor_frames": 50
+          },
+          "DAVIS2017:car-roundabout": {
+            "shuffle": 0.002804365969495848,
+            "cross": 0.003275923207402229,
+            "multicode_frames": 64,
+            "frames": 64,
+            "donor_frames": 50
+          },
+          "DAVIS2017:dog": {
+            "shuffle": 0.0010159972744683424,
+            "cross": 0.0009792906790971757,
+            "multicode_frames": 60,
+            "frames": 60,
+            "donor_frames": 50
+          }
+        }
+      },
+      "quality": {
+        "pass": false,
+        "checks": {
+          "same_state_gain": true,
+          "closed_loop_gain": true,
+          "perception_with_budget": false,
+          "absolute_quality": false,
+          "protected": false,
+          "rate": true
+        },
+        "absolute_delta": {
+          "control": {
+            "psnr_global": 0.6034989402209909,
+            "lpips": 0.016221939147203823,
+            "dists": -0.018271036531733342
+          },
+          "old": {
+            "psnr_global": 0.48208888262928085,
+            "lpips": 0.02893956399512021,
+            "dists": -0.018779381253253513
+          }
+        },
+        "protected_delta": {
+          "256": {
+            "psnr_global": -0.07787741958594552,
+            "lpips": 0.0037975071490495838,
+            "dists": -0.0026981395551528564
+          },
+          "512": {
+            "psnr_global": -0.09426864836432713,
+            "lpips": 0.0041229008943184375,
+            "dists": -0.0019994196535527697
+          },
+          "1024": {
+            "psnr_global": 0.14911692763836726,
+            "lpips": 0.008136161099905226,
+            "dists": -0.005170375108718872
+          },
+          "late_2048": {
+            "psnr_global": 0.5434749041677165,
+            "lpips": 0.02199388345082598,
+            "dists": -0.012019679943720551
+          }
+        }
+      }
+    },
+    "2": {
+      "information": {
+        "pass": true,
+        "agreeing_sources": 3,
+        "pooled": {
+          "shuffle": 0.0014815174027121272,
+          "cross": 0.001691606907794873,
+          "multicode_frames": 174,
+          "frames": 174,
+          "donor_frames": 150
+        },
+        "sources": {
+          "DAVIS2017:blackswan": {
+            "shuffle": 0.0007556232996284961,
+            "cross": 0.001023539174348116,
+            "multicode_frames": 50,
+            "frames": 50,
+            "donor_frames": 50
+          },
+          "DAVIS2017:car-roundabout": {
+            "shuffle": 0.002552686433773488,
+            "cross": 0.003012665957212448,
+            "multicode_frames": 64,
+            "frames": 64,
+            "donor_frames": 50
+          },
+          "DAVIS2017:dog": {
+            "shuffle": 0.0009438488554830353,
+            "cross": 0.0010386155918240547,
+            "multicode_frames": 60,
+            "frames": 60,
+            "donor_frames": 50
+          }
+        }
+      },
+      "quality": {
+        "pass": false,
+        "checks": {
+          "same_state_gain": true,
+          "closed_loop_gain": true,
+          "perception_with_budget": false,
+          "absolute_quality": false,
+          "protected": false,
+          "rate": true
+        },
+        "absolute_delta": {
+          "control": {
+            "psnr_global": 0.2684103902933259,
+            "lpips": 0.009213042327727461,
+            "dists": 0.00394417157118343
+          },
+          "old": {
+            "psnr_global": 0.3710899534943337,
+            "lpips": 0.0037216766812335766,
+            "dists": -0.01222755203301884
+          }
+        },
+        "protected_delta": {
+          "256": {
+            "psnr_global": 0.016598647525174925,
+            "lpips": -0.003989121009563501,
+            "dists": 0.014869415554507048
+          },
+          "512": {
+            "psnr_global": -0.05538476893275046,
+            "lpips": -0.001816379612889718,
+            "dists": 0.017263702962590277
+          },
+          "1024": {
+            "psnr_global": 0.0547243809742497,
+            "lpips": 0.0006886915913942859,
+            "dists": 0.015180908742992272
+          },
+          "late_2048": {
+            "psnr_global": 0.23812501967567812,
+            "lpips": 0.005479210615158103,
+            "dists": 0.013350409269332841
+          }
+        }
+      }
+    }
+  },
+  "information_both_seeds": true,
+  "decoder_stage_allowed": true,
+  "quality_before_decoder_pass": false,
+  "negative_information_stop": false,
+  "new_test_used": false
+}

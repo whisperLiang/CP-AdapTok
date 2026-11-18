@@ -1,0 +1,34 @@
+{
+  "seed": 2,
+  "steps": 1000,
+  "training_frames": {
+    "S2_R11": 4000,
+    "S2_R00": 4000
+  },
+  "schedule_sha256": {
+    "S2_R11": "ef76469f90de44d38cb3a3b063a23cdb9dc2a24d870337219185d813edad6efc",
+    "S2_R00": "ef76469f90de44d38cb3a3b063a23cdb9dc2a24d870337219185d813edad6efc"
+  },
+  "common_initial_full_weights": {
+    "S2_R11": "1c48b871e694cc4ab559e27e06ef9df6c577310d47c7d93dedae36b5874bf30b",
+    "S2_R00": "1c48b871e694cc4ab559e27e06ef9df6c577310d47c7d93dedae36b5874bf30b"
+  },
+  "common_settings": {
+    "S2_R11": "88f007a53ca641eacabc6da9dc2aedb37195913e7ed4712f7ac164449c480934",
+    "S2_R00": "88f007a53ca641eacabc6da9dc2aedb37195913e7ed4712f7ac164449c480934"
+  },
+  "production_source": {
+    "S2_R11": [
+      "a373c4eb50d76abdddcf5061349ab39e1fc2e5308c95b15489f9d2b7fe39a4f6"
+    ],
+    "S2_R00": [
+      "a373c4eb50d76abdddcf5061349ab39e1fc2e5308c95b15489f9d2b7fe39a4f6"
+    ]
+  },
+  "manifest": {
+    "S2_R11": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+    "S2_R00": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82"
+  },
+  "historical_A1_each_step_mse_and_plan_match": null,
+  "historical_A1_all_final_model_tensors_match": null
+}

@@ -36,6 +36,17 @@ def report():
         loop = " / ".join(f"{r['closed_loop_gain_db']:+.3f}" for r in confirmed)
         lines[3:3] = [f"1000 步时 K2048 相对 K1024 的同状态增益依种子顺序为 **{same} dB**，"
                       f"独立闭环为 **{loop} dB**。每个 K2048 码流包均为 3470 字节。", ""]
+    controls = [r for name, r in entries if name.endswith("_R00") and r["steps"] == 1000]
+    if len(controls) == 2:
+        first, second = controls
+        if not first["information"]["pass"] and second["information"]["pass"]:
+            net = " / ".join(f"{r['same_state_gain_db'] - c['same_state_gain_db']:+.3f}"
+                             for r, c in zip(confirmed, controls))
+            lines[5:5] = [f"原结构对照的第一个种子使用 {first['suffix']['used_codes']} 个后缀码字。"
+                          f"第二个种子使用 {second['suffix']['used_codes']} 个，也通过两类内容干预，"
+                          f"同状态增益为 {second['same_state_gain_db']:.3f} dB。"
+                          f"{winner} 相对各自对照额外提高同状态预算增益 {net} dB。"
+                          "初始模型、数据与预算种子一起变化，本实验无法进一步区分三者的贡献。", ""]
     if (ROOT / "decoder_decision.json").exists():
         d = read(ROOT / "decoder_decision.json")
         adoption = "通过双种子画质验收" if d["adoption_ready"] else "未同时通过双种子画质验收"
