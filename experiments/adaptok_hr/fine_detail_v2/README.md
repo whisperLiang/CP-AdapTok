@@ -26,3 +26,14 @@ CUBLAS_WORKSPACE_CONFIG=:4096:8 .venv-native/bin/python -m coverage run --branch
 ```
 
 Detailed measurements are in `results/adaptok_hr_fine_detail_v2/`; local optimizer checkpoints are in `checkpoints/adaptok_hr_fine_detail_v2/`. The tracked evidence directory contains compressed raw records, packets, selected native images, and per-file hashes. GPU timings for training or quality evaluation do not serve as speed benchmarks.
+
+The actual 300-step selection and schedules are readable in [selection.json](evidence/selection.json) and [match_S1_300.json](evidence/match_S1_300.json). The historical A1 control reproduces every training-step MSE and every final model tensor. Recreate the portable evidence and Markdown after completing the applicable gate and benchmarks.
+
+```bash
+.venv-native/bin/python -m experiments.adaptok_hr.fine_detail_v2.benchmark --runs S1_R00/1000 S1_R11/1000
+.venv-native/bin/python -m experiments.adaptok_hr.fine_detail_v2.archive
+.venv-native/bin/python -m experiments.adaptok_hr.fine_detail_v2.report
+.venv-native/bin/python -m experiments.adaptok_hr.fine_detail_v2.archive --verify-only
+```
+
+The compressed evidence uses repository-relative member names beneath the literal run name. Checkpoint metadata contains the full config and digests. The weight files themselves are local. The archive verification command streams every member and checks its SHA256 without extracting anything.
