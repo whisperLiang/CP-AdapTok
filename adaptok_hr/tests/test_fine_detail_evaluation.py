@@ -99,3 +99,31 @@ def test_benchmark_verifier_recomputes_rate_and_both_endpoint_timings():
     wrong["timing"]["joint"]["fps"] *= 2
     with pytest.raises(ValueError, match="aggregate"):
         verify_timing(wrong, 2048)
+
+
+def test_quality_replay_rejects_changed_metric_and_same_source_donor():
+    import json
+    import tarfile
+    from pathlib import Path
+
+    import pytest
+
+    from experiments.adaptok_hr.fine_detail_v2.verify import verify_aggregates, verify_donors
+
+    directory = "S1_R00/validation_300_8"
+    path = Path("experiments/adaptok_hr/fine_detail_v2/evidence/S1_R00_validation_300_8.tar.gz")
+    with tarfile.open(path) as archive:
+        result = json.load(archive.extractfile(f"{directory}/summary.json"))
+        frames = [json.loads(s) for s in archive.extractfile(f"{directory}/closed_loop.jsonl")]
+        interventions = [json.loads(s) for s in archive.extractfile(f"{directory}/suffix_interventions.jsonl")]
+    highest = [r for r in frames if r["tokens"] == 2048]
+    high_mse = {(r["content_id"], r["frame"]): r["mse"] for r in highest}
+    saved = result["closed_loop"]["2048"]
+    verify_aggregates(highest, saved)
+    verify_donors(interventions, high_mse)
+    saved["sources"][highest[0]["content_id"]]["lpips"] += .01
+    with pytest.raises(ValueError, match="quality"):
+        verify_aggregates(highest, saved)
+    interventions[0]["donor"] = interventions[0]["content_id"]
+    with pytest.raises(ValueError, match="donor"):
+        verify_donors(interventions, high_mse)

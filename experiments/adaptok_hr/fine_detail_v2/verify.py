@@ -13,6 +13,7 @@ from adaptok_hr.config import ModelConfig
 from adaptok_hr.models.temporal_state import stream_identity
 from adaptok_hr.runtime import file_hash, write_json
 from cp_adaptok.metrics import summarize_latency
+from experiments.adaptok_hr.fine_recovery.evaluate import aggregate_details
 
 from .decisions import information, quality, result, select
 from .evaluate import folder
@@ -51,11 +52,42 @@ def protected_inputs():
     return identities
 
 
+def verify_aggregates(frames, saved):
+    def check(rows, reported):
+        if any(reported.get(k) != value for k, value in aggregate_details(rows).items()):
+            raise ValueError("reported quality or rate differs from the raw frames")
+
+    check(frames, saved)
+    check([r for r in frames if r["frame"] < 8], saved["early"])
+    check([r for r in frames if r["frame"] >= PROTOCOL["quality"]["late_start"]], saved["late"])
+    for source in PROTOCOL["sources"]:
+        check([r for r in frames if r["content_id"] == source], saved["sources"][source])
+
+
+def verify_donors(rows, high_mse):
+    sources = PROTOCOL["sources"]
+    shared = set.intersection(*({f for s, f in high_mse if s == source} for source in sources))
+    if len(rows) != len(high_mse) or {(r["content_id"], r["frame"]) for r in rows} != set(high_mse):
+        raise ValueError("incomplete intervention coverage")
+    for r in rows:
+        source, frame = r["content_id"], r["frame"]
+        donor = sources[(sources.index(source) + PROTOCOL["information"]["donor_rotation"]) % len(sources)]
+        baseline = high_mse[source, frame]
+        if r["donor"] != (donor if frame in shared else None) or not r["diagnostic_only"]:
+            raise ValueError("intervention donor or scope differs from registration")
+        if (r["actual_mse"] != baseline or r["shuffle_mse_increase"] != r["shuffle_mse"] - baseline
+                or (r["cross_mse"] is None) != (frame not in shared)
+                or r["cross_mse_increase"] != (r["cross_mse"] - baseline if frame in shared else None)):
+            raise ValueError("intervention difference does not match the actual frame MSE")
+
+
 def verify_validation(path, originals):
     result = read(path / "summary.json")
     name = path.parent.name
     count = 0
     suffix_counts, frame_diversity = Counter(), {}
+    high_mse = {}
+    expected_frames = {sf for sf in originals if sf[1] < result["identity"]["frames_per_source"]}
     metadata = read(CHECKPOINTS / name / f"step_{result['steps']:06d}.json")
     identity = {"config": ModelConfig(**metadata["config"]["model"]).to_dict(), "amp_bf16": True}
     wire_model = hashlib.sha256(bytes.fromhex(metadata["model_sha256"]) + json.dumps(identity, sort_keys=True).encode()).digest()
@@ -87,13 +119,24 @@ def verify_validation(path, originals):
                     suffix = packet.ids[low:high]
                     suffix_counts.update(suffix)
                     frame_diversity[source, frame] = len(set(suffix))
+            elif k == 2048:
+                high_mse[source, frame] = row["mse"]
             previous[source, k] = digest
             count += 1
             budgets[k] += 1
-        expected_frames = sum(frame < result["identity"]["frames_per_source"] for _, frame in originals)
-        if set(budgets.values()) != {expected_frames} or set(budgets) != {256, 512, 1024, 2048}:
+        if set(budgets.values()) != {len(expected_frames)} or set(budgets) != {256, 512, 1024, 2048}:
             raise ValueError("missing Validation frames or budgets")
+        for k in budgets:
+            selected = [row for row in rows if row["tokens"] == k]
+            if {(r["content_id"], r["frame"]) for r in selected} != expected_frames:
+                raise ValueError("validation input frame missing or repeated")
+            verify_aggregates(selected, result[scope][str(k)])
+    for scope, field in (("same_context", "same_state_gain_db"), ("closed_loop", "closed_loop_gain_db")):
+        gain = result[scope]["2048"]["psnr_global"] - result[scope]["1024"]["psnr_global"]
+        if result[field] != gain:
+            raise ValueError("reported budget gain differs from the raw frames")
     interventions = jsonlines(path / "suffix_interventions.jsonl")
+    verify_donors(interventions, high_mse)
     histogram = {i: n for i, n in enumerate(result["suffix"]["histogram"]) if n}
     if suffix_counts != histogram or any(frame_diversity[r["content_id"], r["frame"]] != r["within_frame_used"]
                                          for r in interventions):
@@ -249,7 +292,7 @@ def run():
     checks = {"native_idle_gpu_timings": bool(timings) and baseline_timings.issubset(timings),
               "selected_timing_repeats": primary_repeats.issubset(timings),
               "packets_and_histories": bool(validations), "checkpoint_files_rehashed": bool(weights),
-              "tests": int(tests["tests"]) >= (91 if stages["decoder"] else 82)
+              "tests": int(tests["tests"]) >= (92 if stages["decoder"] else 82)
                        and all(tests[k] == "0" for k in ("failures", "errors", "skipped")),
               "mutations": len(mutations["results"]) >= (35 if stages["decoder"] else 31) and mutations["all_killed"],
               "changed_production_complexity": not flagged, "duplicates": not audit["duplicates_over_08"]}
