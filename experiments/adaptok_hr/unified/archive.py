@@ -59,6 +59,9 @@ def copy_artifacts():
     shutil.copytree(ROOT / "configs", PACKAGE / "configs", dirs_exist_ok=True)
     if (ROOT / "figures").exists():
         shutil.copytree(ROOT / "figures", EVIDENCE / "figures", dirs_exist_ok=True)
+        # Resolved definitions are audit evidence, not an executable module.
+        resolved = EVIDENCE / "figures/plotting_source_for_audit.py"
+        resolved.replace(resolved.with_suffix(".txt"))
     selected_native_images()
 
 
