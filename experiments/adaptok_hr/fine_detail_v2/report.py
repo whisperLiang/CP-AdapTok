@@ -14,6 +14,11 @@ def percent(value):
     return f"{100 * value:.2f}%"
 
 
+def benchmark_verdict(names):
+    data = read(ROOT / "benchmark_summary.json")
+    return "，".join(f"{name.split('/')[0]} 为 {data[name]['median_joint_fps']:.2f} FPS" for name in names)
+
+
 def decoder_contrasts(decision):
     winner = decision["decoder_winner"]
     lines = ["", f"### 选中方案 {winner} 的 K2048 绝对画质差值", "",
@@ -92,9 +97,15 @@ def report():
                           "初始模型、数据与预算种子一起变化，本实验无法进一步区分三者的贡献。", ""]
     if (ROOT / "decoder_decision.json").exists():
         d = read(ROOT / "decoder_decision.json")
-        adoption = "通过双种子画质验收" if d["adoption_ready"] else "未同时通过双种子画质验收"
-        lines[5:5] = [f"Decoder 阶段选择 **{d['decoder_winner']}**，该配置{adoption}。"
-                      "逐种子、逐档质量差值以及独立吞吐见后文。", ""]
+        arm = d["decoder_winner"]
+        final_qualities = [v[arm]["quality"]["absolute_delta"]["control"] for v in d["seeds"].values()]
+        quality_delta = " / ".join(f"{r['psnr_global']:+.3f}" for r in final_qualities)
+        lpips_delta = " / ".join(f"{r['lpips']:+.4f}" for r in final_qualities)
+        adoption = "通过双种子画质验收" if d["adoption_ready"] else "未通过双种子综合画质门槛"
+        speed = benchmark_verdict([f"S{s}_{arm}/1300" for s in d["seeds"]])
+        lines[5:5] = [f"Decoder 阶段按预登记排序复验 **{arm}**。相对各自同步数对照 C0，K2048 的 PSNR 提高 "
+                      f"{quality_delta} dB，LPIPS 变化 {lpips_delta}，最终{adoption}。"
+                      f"64 帧 K2048 原路径的三次收发联合吞吐中位数分别为 {speed}。", ""]
     for name, row in entries:
         s, info = row["suffix"], row["information"]
         p = info["pooled"]

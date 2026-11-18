@@ -1,0 +1,318 @@
+{
+  "decoder_winner": "D3",
+  "seeds": {
+    "1": {
+      "D0": {
+        "quality": {
+          "pass": false,
+          "checks": {
+            "same_state_gain": true,
+            "closed_loop_gain": true,
+            "perception_with_budget": false,
+            "absolute_quality": false,
+            "protected": false,
+            "rate": true
+          },
+          "absolute_delta": {
+            "control": {
+              "psnr_global": 0.7958306369715729,
+              "lpips": 0.022642494960762982,
+              "dists": -0.025187030605886118
+            },
+            "old": {
+              "psnr_global": 0.9320861481146423,
+              "lpips": 0.028332036459582932,
+              "dists": -0.03536003691026535
+            }
+          },
+          "protected_delta": {
+            "256": {
+              "psnr_global": 0.09437855745317947,
+              "lpips": 0.013748691684898229,
+              "dists": -0.003764405332762566
+            },
+            "512": {
+              "psnr_global": 0.16342235721594633,
+              "lpips": 0.010932993272255165,
+              "dists": -0.004068044410354799
+            },
+            "1024": {
+              "psnr_global": 0.39848906863188915,
+              "lpips": 0.013681619331754491,
+              "dists": -0.010218972104719226
+            },
+            "late_2048": {
+              "psnr_global": 0.829670625906747,
+              "lpips": 0.03520377079645787,
+              "dists": -0.028922669092814046
+            }
+          }
+        },
+        "information": true,
+        "psnr": 18.972888691250724,
+        "lpips": 0.7979711986136162,
+        "dists": 0.6059370561577808
+      },
+      "D1": {
+        "quality": {
+          "pass": false,
+          "checks": {
+            "same_state_gain": true,
+            "closed_loop_gain": true,
+            "perception_with_budget": false,
+            "absolute_quality": false,
+            "protected": false,
+            "rate": true
+          },
+          "absolute_delta": {
+            "control": {
+              "psnr_global": 0.7686162971013246,
+              "lpips": 0.02474957567521896,
+              "dists": -0.02469054994911979
+            },
+            "old": {
+              "psnr_global": 0.9048718082443941,
+              "lpips": 0.03043911717403891,
+              "dists": -0.03486355625349902
+            }
+          },
+          "protected_delta": {
+            "256": {
+              "psnr_global": 0.11027346366536506,
+              "lpips": 0.014316455728706212,
+              "dists": -0.0038741320029072046
+            },
+            "512": {
+              "psnr_global": 0.1673363617990944,
+              "lpips": 0.011388538897722511,
+              "dists": -0.004273992160270912
+            },
+            "1024": {
+              "psnr_global": 0.3885028362164036,
+              "lpips": 0.014848641280470143,
+              "dists": -0.010144814677622072
+            },
+            "late_2048": {
+              "psnr_global": 0.7845930622782227,
+              "lpips": 0.034972916046778324,
+              "dists": -0.031657447417577034
+            }
+          }
+        },
+        "information": true,
+        "psnr": 18.945674351380475,
+        "lpips": 0.8000782793280722,
+        "dists": 0.6064335368145471
+      },
+      "D2": {
+        "quality": {
+          "pass": false,
+          "checks": {
+            "same_state_gain": true,
+            "closed_loop_gain": true,
+            "perception_with_budget": false,
+            "absolute_quality": false,
+            "protected": false,
+            "rate": true
+          },
+          "absolute_delta": {
+            "control": {
+              "psnr_global": 0.6280506993466872,
+              "lpips": 0.03206161212647096,
+              "dists": -0.03034308175931033
+            },
+            "old": {
+              "psnr_global": 0.7643062104897567,
+              "lpips": 0.03775115362529091,
+              "dists": -0.04051608806368956
+            }
+          },
+          "protected_delta": {
+            "256": {
+              "psnr_global": -0.023565532497570985,
+              "lpips": 0.026636432299668722,
+              "dists": -0.008003638736132856
+            },
+            "512": {
+              "psnr_global": 0.05102697722551852,
+              "lpips": 0.02175633694933743,
+              "dists": -0.009639302204395128
+            },
+            "1024": {
+              "psnr_global": 0.27221054804446254,
+              "lpips": 0.024201269807486714,
+              "dists": -0.015607663612256073
+            },
+            "late_2048": {
+              "psnr_global": 0.6073243802145605,
+              "lpips": 0.04304848114649451,
+              "dists": -0.034004811445871974
+            }
+          }
+        },
+        "information": true,
+        "psnr": 18.805108753625838,
+        "lpips": 0.8073903157793242,
+        "dists": 0.6007810050043566
+      },
+      "D3": {
+        "quality": {
+          "pass": false,
+          "checks": {
+            "same_state_gain": true,
+            "closed_loop_gain": true,
+            "perception_with_budget": false,
+            "absolute_quality": false,
+            "protected": false,
+            "rate": true
+          },
+          "absolute_delta": {
+            "control": {
+              "psnr_global": 0.8288326040970802,
+              "lpips": 0.027792117376437164,
+              "dists": -0.031488413440770135
+            },
+            "old": {
+              "psnr_global": 0.9650881152401496,
+              "lpips": 0.033481658875257114,
+              "dists": -0.041661419745149364
+            }
+          },
+          "protected_delta": {
+            "256": {
+              "psnr_global": 0.17928390404648908,
+              "lpips": 0.022458141220026984,
+              "dists": -0.00913276583298872
+            },
+            "512": {
+              "psnr_global": 0.21939507446006346,
+              "lpips": 0.01833825549860102,
+              "dists": -0.010140936607601958
+            },
+            "1024": {
+              "psnr_global": 0.4430321132775994,
+              "lpips": 0.020464835153228944,
+              "dists": -0.016285244418286715
+            },
+            "late_2048": {
+              "psnr_global": 0.8684541963394281,
+              "lpips": 0.039772641658782915,
+              "dists": -0.030836369593938207
+            }
+          }
+        },
+        "information": true,
+        "psnr": 19.00589065837623,
+        "lpips": 0.8031208210292904,
+        "dists": 0.5996356733228968
+      }
+    },
+    "2": {
+      "D0": {
+        "quality": {
+          "pass": false,
+          "checks": {
+            "same_state_gain": true,
+            "closed_loop_gain": true,
+            "perception_with_budget": false,
+            "absolute_quality": false,
+            "protected": false,
+            "rate": true
+          },
+          "absolute_delta": {
+            "control": {
+              "psnr_global": -0.06374968467862985,
+              "lpips": 0.006007148274060015,
+              "dists": -0.005767570829939617
+            },
+            "old": {
+              "psnr_global": 0.27495190016362514,
+              "lpips": -0.0005270585246469617,
+              "dists": -0.041541322209369236
+            }
+          },
+          "protected_delta": {
+            "256": {
+              "psnr_global": -0.17343577135477517,
+              "lpips": 0.0015560857866001587,
+              "dists": 0.0005459871100282898
+            },
+            "512": {
+              "psnr_global": -0.19495795022120532,
+              "lpips": 0.0014055350731159155,
+              "dists": 0.0007691167551895361
+            },
+            "1024": {
+              "psnr_global": -0.13408663780928975,
+              "lpips": 0.0010109516395919727,
+              "dists": -0.0006059671955547241
+            },
+            "late_2048": {
+              "psnr_global": -0.3036707038521129,
+              "lpips": 0.004987001419067383,
+              "dists": -0.009027435382207294
+            }
+          }
+        },
+        "information": true,
+        "psnr": 18.315754443299706,
+        "lpips": 0.7691121036293863,
+        "dists": 0.5997557708586769
+      },
+      "D3": {
+        "quality": {
+          "pass": false,
+          "checks": {
+            "same_state_gain": true,
+            "closed_loop_gain": true,
+            "perception_with_budget": false,
+            "absolute_quality": false,
+            "protected": false,
+            "rate": true
+          },
+          "absolute_delta": {
+            "control": {
+              "psnr_global": 0.24568344773335937,
+              "lpips": 0.010323545713534332,
+              "dists": -0.016950660395896322
+            },
+            "old": {
+              "psnr_global": 0.5843850325756144,
+              "lpips": 0.003789338914827356,
+              "dists": -0.05272441177532594
+            }
+          },
+          "protected_delta": {
+            "256": {
+              "psnr_global": 0.3136448673707619,
+              "lpips": 0.0037160529487434424,
+              "dists": -0.009637151298851787
+            },
+            "512": {
+              "psnr_global": 0.15443326153051373,
+              "lpips": 0.004231148067561974,
+              "dists": -0.009509799124180596
+            },
+            "1024": {
+              "psnr_global": 0.19160922923108714,
+              "lpips": 0.004154286850457822,
+              "dists": -0.011669317196155382
+            },
+            "late_2048": {
+              "psnr_global": 0.19920063909772523,
+              "lpips": 0.0059605697790782175,
+              "dists": -0.01667924920717878
+            }
+          }
+        },
+        "information": true,
+        "psnr": 18.625187575711696,
+        "lpips": 0.7734285010688606,
+        "dists": 0.5885726812927202
+      }
+    }
+  },
+  "adoption_ready": false,
+  "performance_candidate": null,
+  "performance_optimization_allowed": false
+}

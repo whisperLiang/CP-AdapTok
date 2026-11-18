@@ -1,0 +1,41 @@
+{
+  "S2_D0": {
+    "packets_reparsed": 1392,
+    "interventions": 174,
+    "common_donor_frames": 150,
+    "checkpoint_sha256": "484ab4bab35602e51dcb2e9db00a197854a9899325cefa1f4a65ce1ee69de77e",
+    "input_hashes_match_legacy": true,
+    "native_zero_start": {
+      "parent": "S2_R11",
+      "native_frame_budget_pairs": 8,
+      "evidence_sha256": "c211a0218836d99b08c8a2544631cc4850b2546b4196d72d6ca4e19ea21b9922"
+    },
+    "archive_sha256": "aaee0adcd4b9cf983530c452fce8cd909710d39b4e38d519228e87c09cb9370d"
+  },
+  "S2_D3": {
+    "packets_reparsed": 1392,
+    "interventions": 174,
+    "common_donor_frames": 150,
+    "checkpoint_sha256": "1e5d5d8766c28c18639b546a51a235fc14a31b4e46e2724ce044d7b76ed1b1de",
+    "input_hashes_match_legacy": true,
+    "native_zero_start": {
+      "parent": "S2_R11",
+      "native_frame_budget_pairs": 8,
+      "evidence_sha256": "fd88d2eecf6929c165402f2b119686916af21a3d717ee9ff046f47a5c671bb68"
+    },
+    "archive_sha256": "3e932a3949939550193c95422349ef5c9b9cadb3814f62f511d91e54e203217f"
+  },
+  "S2_C0": {
+    "packets_reparsed": 1392,
+    "interventions": 174,
+    "common_donor_frames": 150,
+    "checkpoint_sha256": "73dc29545730939621b40ac824111dbf50ce83426244174f2b105ea071d434e8",
+    "input_hashes_match_legacy": true,
+    "native_zero_start": {
+      "parent": "S2_R00",
+      "native_frame_budget_pairs": 8,
+      "evidence_sha256": "57ac040128da4a5a0dd9b6f2fc24ce80a804923bc0dd9f9b0d794d9245058b47"
+    },
+    "archive_sha256": "a4dc1535eb80be791809948126dc80fb73519127eb148e30a26b547388cc5976"
+  }
+}
