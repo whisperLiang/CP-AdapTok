@@ -42,6 +42,35 @@ def native_plots():
     return groups
 
 
+def learning_curves(seed, stage, directories):
+    training, validation, probes = {}, {}, {}
+    for directory in directories:
+        arm = directory.name.split("_", 1)[1]
+        path = directory / "training.jsonl"
+        if not path.is_file():
+            continue
+        start = 1000 if stage else 0
+        with path.open() as file:
+            mse = np.array([r["mse"] for line in file if (r := json.loads(line))["step"] > start])
+        if len(mse) >= 25:
+            pooled = np.convolve(mse, np.ones(25) / 25, "valid")
+            training[arm] = (list(range(start + 25, start + len(mse) + 1)), (-10 * np.log10(pooled)).tolist())
+        fast = sorted(directory.glob("validation_*.json"))
+        if stage:
+            parent = read(directory / "fork.json")["lineage"]["parent"]
+            fast.insert(0, ROOT / parent / "validation_001000.json")
+        validation[arm] = ([int(p.stem.split("_")[1]) for p in fast],
+                           [read(p)["budgets"]["2048"]["psnr_global"] for p in fast])
+        paths = sorted((directory / "probes").glob("*.json"))
+        if paths:
+            probes[arm] = ([int(p.stem) for p in paths],
+                           [read(p)["levels"]["incremental_suffix"]["used_codes"] for p in paths])
+    return {f"{seed}_{stage}{key}": ("Optimizer updates", label, lines) for key, label, lines in (
+                ("training", "Training PSNR, 25-update mean MSE (dB)", training),
+                ("validation", "K2048 short Validation global PSNR (dB)", validation),
+                ("suffix_usage", "Used suffix IDs on the fixed Train I frame", probes)) if lines}
+
+
 def series_data():
     data = {}
     for (seed, steps), results in native_plots().items():
@@ -54,34 +83,18 @@ def series_data():
                 budgets = [row["closed_loop"][k] for k in BUDGETS]
                 lines[arm] = ([s["actual_bpp"] for s in budgets], [s[key] for s in budgets])
             data[f"{seed}_{steps}_rd_{key}"] = ("Actual rate (bits / pixel)", label, lines)
+        used = {arm: ([r["closed_loop"][k]["actual_bpp"] for k in BUDGETS],
+                      [r["closed_loop"][k]["levels"]["Fine"]["used_codes"] for k in BUDGETS])
+                for arm, r in results.items() if arm != "Historical"}
+        data[f"{seed}_{steps}_sent_fine"] = ("Actual rate (bits / pixel)", "Distinct transmitted Fine IDs", used)
         for key, label in (("shuffle", "MSE increase after within-frame shuffle"),
                            ("cross", "MSE increase after same-position video swap")):
             lines = {arm: (list(range(3)), [r["information"]["sources"][s][key] for s in PROTOCOL["sources"]])
                      for arm, r in results.items() if arm != "Historical"}
             data[f"{seed}_{steps}_{key}"] = ("Validation source", label, lines)
     for seed in ("S1", "S2"):
-        training, short_validation, probes = {}, {}, {}
-        for directory in sorted(ROOT.glob(seed + "_R*")):
-            arm = directory.name.split("_", 1)[1]
-            path = directory / "training.jsonl"
-            if not path.is_file():
-                continue
-            with path.open() as file:
-                mse = np.array([json.loads(s)["mse"] for s in file])
-            pooled = np.convolve(mse, np.ones(25) / 25, "valid")
-            training[arm] = (list(range(25, len(mse) + 1)), (-10 * np.log10(pooled)).tolist())
-            fast = sorted(directory.glob("validation_*.json"))
-            short_validation[arm] = ([int(p.stem.split("_")[1]) for p in fast],
-                                     [read(p)["budgets"]["2048"]["psnr_global"] for p in fast])
-            paths = sorted((directory / "probes").glob("*.json"))
-            if paths:
-                probes[arm] = ([int(p.stem) for p in paths],
-                               [read(p)["levels"]["incremental_suffix"]["used_codes"] for p in paths])
-        for key, label, lines in (("training", "Training PSNR, 25-update mean MSE (dB)", training),
-                                  ("validation", "K2048 short Validation global PSNR (dB)", short_validation),
-                                  ("suffix_usage", "Used suffix IDs on the fixed Train I frame", probes)):
-            if lines:
-                data[f"{seed}_{key}"] = ("Optimizer updates", label, lines)
+        data.update(learning_curves(seed, "", sorted(ROOT.glob(seed + "_R*"))))
+        data.update(learning_curves(seed, "decoder_", sorted(ROOT.glob(seed + "_[CD]*"))))
     return data
 
 

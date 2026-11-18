@@ -54,6 +54,13 @@ def run():
                 sample_dest = DEST / "samples" / key
                 shutil.copytree(folder / "samples", sample_dest, dirs_exist_ok=True)
     manifest["training"] = archive_members("training", base)
+    failed = "superseded_bf16_reference"
+    if (ROOT / failed).is_dir():
+        members = [(str(p.relative_to(ROOT)), p) for p in (ROOT / failed).rglob("*")
+                   if p.is_file() and p.suffix != ".lock"]
+        members.extend(("checkpoint_metadata/" + str(p.relative_to(CHECKPOINTS)), p)
+                       for p in (CHECKPOINTS / failed).glob("*/*.json"))
+        manifest[failed] = archive_members(failed, members)
     for name in ("selection.json", "decision.json", "acceptance.json", "decoder_decision.json", "performance_decision.json"):
         if (ROOT / name).exists():
             shutil.copy2(ROOT / name, DEST / name)

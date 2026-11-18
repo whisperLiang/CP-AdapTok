@@ -14,6 +14,30 @@ def percent(value):
     return f"{100 * value:.2f}%"
 
 
+def decoder_contrasts(decision):
+    lines = ["", "### 同种子各项 Decoder 改动相对 D0 的代价和收益", "",
+             "每行比较同一 1300 步、K2048、同一验证帧。延迟差取两组独立 64 帧实测的平均每帧差值。"
+             "正的延迟差表示增加耗时。", "",
+             "| 种子 | 改动 | ΔPSNR (dB) | ΔLPIPS | ΔDISTS | Δ边缘 MSE | Δ高频 L1 | Δ接收 ms | Δ联合 ms | Δ参数量 |",
+             "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
+    for seed, arms in decision["seeds"].items():
+        root = ROOT / f"S{seed}_D0"
+        base = read(root / "validation_1300_64/summary.json")["closed_loop"]["2048"]
+        timing = read(root / "benchmark_1300_1.json")
+        for arm in arms:
+            if arm == "D0":
+                continue
+            root = ROOT / f"S{seed}_{arm}"
+            current = read(root / "validation_1300_64/summary.json")["closed_loop"]["2048"]
+            bench = read(root / "benchmark_1300_1.json")
+            quality = [current[k] - base[k] for k in ("psnr_global", "lpips", "dists", "edge_mse", "high_frequency_l1")]
+            latency = [bench["budgets"]["2048"]["timing"][k]["mean_ms"] - timing["budgets"]["2048"]["timing"][k]["mean_ms"]
+                       for k in ("receiver", "joint")]
+            lines.append("| " + " | ".join([seed, arm, *(f"{v:+.6f}" for v in quality),
+                         *(f"{v:+.3f}" for v in latency), f"{bench['parameters'] - timing['parameters']:+d}"]) + " |")
+    return lines
+
+
 def report():
     decision = read(ROOT / "decision.json")
     winner = decision["winner"]
@@ -67,6 +91,11 @@ def report():
         qa, qb = ra["closed_loop"]["2048"], rb["closed_loop"]["2048"]
         lines.append(f"| {a} − {b} | {ra['same_state_gain_db'] - rb['same_state_gain_db']:+.5f} | "
                      f"{qa['psnr_global'] - qb['psnr_global']:+.5f} | {qa['lpips'] - qb['lpips']:+.6f} | {qa['dists'] - qb['dists']:+.6f} |")
+    lines.extend(["", "在本轮同步数的四组筛选中，保留原投影的 R00、R01 后缀均为单码。"
+                  "扣除 S32 投影的局部均值后，R10 和 R11 的真实后缀均通过了内容干预。"
+                  "因此局部空间分量在这个种子和训练长度下足以打破单码状态，尚不能把它推广为所有种子的唯一成因。"
+                  "前一轮已有冻结权重、连续旁路及预算感知和分层码本的独立对照。"
+                  " [第一轮表征诊断与负结果](../../../docs/adaptok_hr_fine_recovery_report.md)"])
     lines.extend(["", "## 多预算独立闭环画质", "",
                   "| 配置 | 步数 | K | 全局 PSNR (dB) | LPIPS | DISTS | 边缘 MSE | 高频 L1 | 实际 bpp |",
                   "|---|---:|---:|---:|---:|---:|---:|---:|---:|"])
@@ -102,6 +131,13 @@ def report():
                      f"{v['reconstruction_gradient_norm']:.7g} | {v['weighted_suffix_gradient_norm']:.7g} |")
     if (ROOT / "decoder_report.md").is_file():
         lines.extend(["", (ROOT / "decoder_report.md").read_text()])
+        lines.extend(decoder_contrasts(read(ROOT / "decoder_decision.json")))
+        lines.extend(["", "### Decoder 起点的原生 BF16 复核", "",
+                      "第一版残差掩码将参考特征提升为 FP32，零初始化时第二帧已出现像素差异。"
+                      "保留了该轮的两个完整训练和一个中断训练，其结果排除在选模和所有表格之外。"
+                      "修正后从相同的第 1000 步父检查点重跑全部续训。每个分叉在首个新增更新前"
+                      "均以真实包在四档预算验证连续 I/P 帧，传输 ID、RGB 和 BF16 参考特征逐位一致。"
+                      " [首次失败原始记录](evidence/superseded_bf16_reference.json)"])
     elif not decision["decoder_stage_allowed"]:
         lines.extend(["", "信息验收触发停止条件，Decoder 支路、扩训和 30 FPS 优化止于该条件。"])
     if (ROOT / "visual_review.md").is_file():
@@ -117,8 +153,11 @@ def report():
                   "全部验证限预先固定的三个 DAVIS 来源。", "",
                   "[运行命令](README.md) · [工作日志](work_log.md) · [验收明细](evidence/acceptance.json) · [原始证据索引](evidence/archives.json)", "",
                   "## 实测曲线与原生重建", ""])
-    for p in sorted((ROOT / "figures").glob("*.png")):
+    featured = {"S1_1000_rd_psnr_global", "S2_1000_rd_lpips", "S1_1300_rd_psnr_global", "S2_1300_rd_lpips"}
+    plots = sorted((ROOT / "figures").glob("*.png"))
+    for p in (p for p in plots if p.stem in featured):
         lines.extend([f"![{p.stem}](evidence/figures/{p.name})", ""])
+    lines.extend(["[全部曲线与单图 PDF、SVG](evidence/figures) · [对应的实测坐标](evidence/figures/plotted_values.json)", ""])
     for p in sorted((PACKAGE / "evidence/samples").glob("*/car-roundabout_0000_K2048.png")):
         lines.append(f"- [{p.parent.name} 原生 1080p 四预算图]({p.parent.relative_to(PACKAGE)})")
     (PACKAGE / "report.md").write_text("\n".join(lines) + "\n")
