@@ -64,28 +64,45 @@ def resources_table(lines):
                   "分阶段恢复时窗口只对应最后一次恢复；新增 timing_*.json 另存每次完整训练进程耗时，包含初始化。所有逐步原始耗时和显存均保留。"])
 
 
-def benchmark_table(lines):
+def timing_cells(timing):
+    return (f"{timing['encoder']['fps']:.2f}/{timing['sender']['fps']:.2f}/{timing['receiver']['fps']:.2f} | "
+            f"{timing['joint']['fps']:.2f} | {timing['joint']['p50_ms']:.3f}/{timing['joint']['p95_ms']:.3f}")
+
+
+def overall_benchmarks(lines, values):
     lines.extend(["", "| 模型/步 | K | Encoder/Sender/Receiver FPS | 联合 FPS | 联合 P50/P95 ms | GPU MiB | 参数量 |",
                   "|---|---:|---:|---:|---:|---:|---:|"])
-    for path in sorted(ROOT.glob("S*/benchmark_*.json")):
-        result = read(path)
+    for name, result in values:
         for k, row in result["budgets"].items():
-            t = row["timing"]
-            lines.append(f"| {path.parent.name}/{result['completed_steps']} | {k} | {t['encoder']['fps']:.2f}/{t['sender']['fps']:.2f}/{t['receiver']['fps']:.2f} | "
-                         f"{t['joint']['fps']:.2f} | {t['joint']['p50_ms']:.3f}/{t['joint']['p95_ms']:.3f} | {row['peak_gpu_mib']:.1f} | {result['parameters']} |")
-        lines.extend(["", "| K | 帧段 | 帧数 | Encoder/Sender/Receiver FPS | 联合 FPS | 联合 P50/P95 ms | bpp |",
-                      "|---:|---|---:|---:|---:|---:|---:|"])
+            lines.append(f"| {name}/{result['completed_steps']} | {k} | {timing_cells(row['timing'])} | "
+                         f"{row['peak_gpu_mib']:.1f} | {result['parameters']} |")
+
+
+def segmented_benchmarks(lines, values):
+    lines.extend(["", "| 模型/步 | K | 帧段 | 帧数 | Encoder/Sender/Receiver FPS | 联合 FPS | 联合 P50/P95 ms | bpp |",
+                  "|---|---:|---|---:|---:|---:|---:|---:|"])
+    for name, result in values:
         for k, row in result["budgets"].items():
             for group, segment in row["groups"].items():
-                t = segment["timing"]
-                lines.append(f"| {k} | {group} | {segment['frames']} | {t['encoder']['fps']:.2f}/{t['sender']['fps']:.2f}/{t['receiver']['fps']:.2f} | "
-                             f"{t['joint']['fps']:.2f} | {t['joint']['p50_ms']:.3f}/{t['joint']['p95_ms']:.3f} | {segment['actual_bpp']:.8f} |")
+                lines.append(f"| {name}/{result['completed_steps']} | {k} | {group} | {segment['frames']} | "
+                             f"{timing_cells(segment['timing'])} | {segment['actual_bpp']:.8f} |")
+
+
+def fusion_costs(lines, values):
+    for name, result in values:
         fusion = result["fusion"]
         if fusion["enabled"]:
-            lines.extend(["", f"{path.parent.name} 的 Cross-Scale Fusion 单独实测：{fusion['parameters']} 参数，"
+            lines.extend(["", f"{name}/{result['completed_steps']} 的 Cross-Scale Fusion 单独实测：{fusion['parameters']} 参数，"
                           f"{fusion['conv_macs']/1e6:.3f} M conv MACs，P50/P95 {fusion['latency']['p50_ms']:.4f}/{fusion['latency']['p95_ms']:.4f} ms。"
                           "卷积 FLOPs 计数不含上采样、归一化、激活及加法；模块计时包含全部操作。", ""])
-    lines.extend(["", "吞吐在无其他 GPU 计算进程时测量，使用同一连续 64 帧和独立模型收发端；Sender 包含本地解码。Encoder 时间包含特征提取、Token 投影、VQ 与真实 IDs 转移。联合吞吐是顺序 Encoder + 打包/本地解码 + Receiver；"
+
+
+def benchmark_table(lines):
+    values = [(path.parent.name, read(path)) for path in sorted(ROOT.glob("S*/benchmark_*.json"))]
+    overall_benchmarks(lines, values)
+    segmented_benchmarks(lines, values)
+    fusion_costs(lines, values)
+    lines.extend(["", "吞吐在无其他 GPU 计算进程时测量，使用同一连续 64 帧和独立模型收发端；Sender 包含本地解码。联合吞吐是顺序 Encoder + 打包/本地解码 + Receiver；"
                   "排除磁盘读取、H2D、指标和校验。每帧耗时及 I/P 类型保存在 benchmark JSON，可重算分段 P50/P95。"])
 
 

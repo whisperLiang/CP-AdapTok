@@ -1,0 +1,15 @@
+{
+  "lineage": {
+    "parent_checkpoint_sha256": "1e5d5d8766c28c18639b546a51a235fc14a31b4e46e2724ce044d7b76ed1b1de",
+    "child_config_identity": "ba1a6b63dd8c804bc0d014ec48146cee3a597f31f07066bc3dd43b6837ab150a",
+    "step": 1300,
+    "seed": 2,
+    "arm": "U2"
+  },
+  "checkpoint_sha256": "77062636974ab8d57a8688041b4353c57e1904456609e4e69811e076d04f7e89",
+  "parent_model_tensors": "603538772c1e96c03cb6f795fc5cb2e7c04befde68d9050548542be6a12cbd6b",
+  "child_inherited_model_tensors": "603538772c1e96c03cb6f795fc5cb2e7c04befde68d9050548542be6a12cbd6b",
+  "parent_optimizer_tensors": "18d4d169459f9c93fd30bbd9955b695798c52e8d6e6ff54ebeb4742ca7381910",
+  "child_inherited_optimizer_tensors": "18d4d169459f9c93fd30bbd9955b695798c52e8d6e6ff54ebeb4742ca7381910",
+  "additional_parameters": []
+}

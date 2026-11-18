@@ -1,0 +1,806 @@
+{
+  "scope": "Completed two-seed 300-update A Pilot only; B is ongoing",
+  "native_image_scope": "Actual K2048 packets on each model real K2048 history, P31; PNG 8-bit display; formal metrics float32",
+  "files": {
+    "decision_A.json": {
+      "source": "results/adaptok_hr_unified/decision_A.json",
+      "sha256": "21a49821c5b0e557f3f19d9d47bcab7f5261180270554f473e00a73a141ba04a",
+      "bytes": 4965
+    },
+    "calibration.json": {
+      "source": "results/adaptok_hr_unified/calibration.json",
+      "sha256": "4bafb181a1d80c3f1986dbe573fe4b73c5cf62bcb5359cb6ea39486e2cab264f",
+      "bytes": 17645
+    },
+    "match_A_1600.json": {
+      "source": "results/adaptok_hr_unified/match_A_1600.json",
+      "sha256": "7e51c36b2c4c4e2914137c22f70773e5eecd44ae9085eb8c745cde98f5ddbbcc",
+      "bytes": 2091
+    },
+    "training_perceptual_weights.json": {
+      "source": "results/adaptok_hr_unified/training_perceptual_weights.json",
+      "sha256": "700af6a2cdd917b98add3f5f3515b8327f7b278acc3a573443349e0921549853",
+      "bytes": 575
+    },
+    "protocol_A_snapshot.json": {
+      "source": "experiments/adaptok_hr/unified/protocol_A_snapshot.json",
+      "sha256": "ab1119d7943f306c0b001bc964b7ac70d6c33c8eda1da53a9f5bd3f53359bad3",
+      "bytes": 3028
+    },
+    "S1_U0/summary.json": {
+      "source": "results/adaptok_hr_unified/S1_U0/validation_1600_64/summary.json",
+      "sha256": "9b467d02def481f0357dc706f5720fa7767503f6798779549365b04dbc8af558",
+      "bytes": 140883
+    },
+    "S1_U0/run.json": {
+      "source": "results/adaptok_hr_unified/S1_U0/validation_1600_64/run.json",
+      "sha256": "791d41daeb521f77c515eee60db6155365804eb67272bd6279e99e4be7edb8c1",
+      "bytes": 2496
+    },
+    "S1_U0/closed_loop.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U0/validation_1600_64/closed_loop.jsonl",
+      "sha256": "1af64c70d42062d1fd9c360961124f316679c35131e9bf2a0e99aa6f8e09d53c",
+      "bytes": 613514
+    },
+    "S1_U0/same_context.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U0/validation_1600_64/same_context.jsonl",
+      "sha256": "4299af09954d57032bf9a8749d32c6cd8320aee3252dddb81ce32cb5ac886c93",
+      "bytes": 613566
+    },
+    "S1_U0/fine_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U0/validation_1600_64/fine_interventions.jsonl",
+      "sha256": "8a9bcfbcb01a735c3dde04dfc443383a1f4430796bf2d216a3b96bbe5de1e397",
+      "bytes": 198311
+    },
+    "S1_U0/suffix_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U0/validation_1600_64/suffix_interventions.jsonl",
+      "sha256": "d795327697801b0db08914e58031b00dec1958bf8d278adefba7a0994bb21a9c",
+      "bytes": 56599
+    },
+    "S1_U0/fork.json": {
+      "source": "results/adaptok_hr_unified/S1_U0/fork.json",
+      "sha256": "c8a4cd504da58388b85439f462a1ddb51b1f896dbf6b7c349ba69fb0237e76da",
+      "bytes": 793
+    },
+    "S1_U0/completion.json": {
+      "source": "results/adaptok_hr_unified/S1_U0/completion.json",
+      "sha256": "64cf936a17053ca7252cb89255f8ca9a52302f28e818fa1ef7626e52d201aeac",
+      "bytes": 281
+    },
+    "S1_U0/benchmark_1600.json": {
+      "source": "results/adaptok_hr_unified/S1_U0/benchmark_1600.json",
+      "sha256": "c5e85feae332195aa3ddb600a57f7331941dd4e24f83ca268c023a3b4c5b3d12",
+      "bytes": 93524
+    },
+    "S1_U0/config.yaml": {
+      "source": "results/adaptok_hr_unified/configs/S1_U0.yaml",
+      "sha256": "a2fd8535ee78dfb0f9742661318412394c33e83a712437a999b6fc685cbd39b2",
+      "bytes": 1779
+    },
+    "S1_U0/checkpoint_1600.json": {
+      "source": "checkpoints/adaptok_hr_unified/S1_U0/step_001600.json",
+      "sha256": "14b3f2ab02e1f94124248d7d2675ef5402d00b88162e1aca3f08ccd0a43bb090",
+      "bytes": 3351
+    },
+    "S1_U1/summary.json": {
+      "source": "results/adaptok_hr_unified/S1_U1/validation_1600_64/summary.json",
+      "sha256": "98aa3ef4d95db065ce1ccff2e80c847306ba0f7c19f87158e4f518503458bfc2",
+      "bytes": 140668
+    },
+    "S1_U1/run.json": {
+      "source": "results/adaptok_hr_unified/S1_U1/validation_1600_64/run.json",
+      "sha256": "aee2ae87800682e3364a2118e494b0f83ffd9ce47a748c2d86b517893a8b885b",
+      "bytes": 2497
+    },
+    "S1_U1/closed_loop.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U1/validation_1600_64/closed_loop.jsonl",
+      "sha256": "0d736d5f412aaff7f4830499fa21bf3cb1cfccb641cad9b3093ab6e1d60cf2d1",
+      "bytes": 613024
+    },
+    "S1_U1/same_context.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U1/validation_1600_64/same_context.jsonl",
+      "sha256": "b8084a7180ea1880c67693df1befe7d745505f7e8d732bd13de9fbf5805e0c4b",
+      "bytes": 613067
+    },
+    "S1_U1/fine_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U1/validation_1600_64/fine_interventions.jsonl",
+      "sha256": "cfef1e38c8b7d4dad82f5545033275dc907802cbe043819170e4e8bb321ba088",
+      "bytes": 198007
+    },
+    "S1_U1/suffix_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U1/validation_1600_64/suffix_interventions.jsonl",
+      "sha256": "5ed446e97a6cc579297cc4f86eb1ab58910506b1f3ca69bce61922d193f94878",
+      "bytes": 56601
+    },
+    "S1_U1/fork.json": {
+      "source": "results/adaptok_hr_unified/S1_U1/fork.json",
+      "sha256": "c24da8a55248b67c8f1b517f4319c15519f2456050aa7f8ab451e95ad5724b40",
+      "bytes": 793
+    },
+    "S1_U1/completion.json": {
+      "source": "results/adaptok_hr_unified/S1_U1/completion.json",
+      "sha256": "88ee8c0b662509174d6083b4b0d2c940513313edaf28071602f0de5954fdae67",
+      "bytes": 281
+    },
+    "S1_U1/benchmark_1600.json": {
+      "source": "results/adaptok_hr_unified/S1_U1/benchmark_1600.json",
+      "sha256": "7484826855219db7b2b1608fe34d199f8ef6df689b31dc24ef68793d3da5f61c",
+      "bytes": 93519
+    },
+    "S1_U1/config.yaml": {
+      "source": "results/adaptok_hr_unified/configs/S1_U1.yaml",
+      "sha256": "f8b081e5b5b6a3ab8fc14a4345be045a9abbdec879ec5880ce399642a8085079",
+      "bytes": 1689
+    },
+    "S1_U1/checkpoint_1600.json": {
+      "source": "checkpoints/adaptok_hr_unified/S1_U1/step_001600.json",
+      "sha256": "a149370f69f9f600acbf26f29090cf7fc41c596a3e7b2fb02690faaff72b5e3d",
+      "bytes": 3226
+    },
+    "S1_U2/summary.json": {
+      "source": "results/adaptok_hr_unified/S1_U2/validation_1600_64/summary.json",
+      "sha256": "86f86f35e435b662784ea316094b0a5286a01da76d9917d09caeaa55f527ac6c",
+      "bytes": 140831
+    },
+    "S1_U2/run.json": {
+      "source": "results/adaptok_hr_unified/S1_U2/validation_1600_64/run.json",
+      "sha256": "7c20fd1636f230bad5d553203ab52c71347df545950eec15ab809f0686a6268d",
+      "bytes": 2497
+    },
+    "S1_U2/closed_loop.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U2/validation_1600_64/closed_loop.jsonl",
+      "sha256": "30460547b4abc77dab99fb4093fe8e4f0de98b01b225f201daf62c7fac827f5b",
+      "bytes": 613470
+    },
+    "S1_U2/same_context.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U2/validation_1600_64/same_context.jsonl",
+      "sha256": "94ae7fec852a0b72eff00510b9ce9a8d6a063745fd9703a1f6f56fa510957131",
+      "bytes": 613547
+    },
+    "S1_U2/fine_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U2/validation_1600_64/fine_interventions.jsonl",
+      "sha256": "656d3612ddee321f844a09cc02e5c8d58a635b2287c06fd3e3d453b437155d6c",
+      "bytes": 198088
+    },
+    "S1_U2/suffix_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U2/validation_1600_64/suffix_interventions.jsonl",
+      "sha256": "a14df1bd264c5ff6990a0041b9ab278f13ba4337e77323bc90d7f144676ff39e",
+      "bytes": 56551
+    },
+    "S1_U2/fork.json": {
+      "source": "results/adaptok_hr_unified/S1_U2/fork.json",
+      "sha256": "cfc154c0ac62ed6e9d28b0096c69143ad3d912737ae42a4b250e0ea82767a3e9",
+      "bytes": 793
+    },
+    "S1_U2/completion.json": {
+      "source": "results/adaptok_hr_unified/S1_U2/completion.json",
+      "sha256": "adb297798327806429377a5ceccb0b5b846115c24d83c23579758917f0f3dfdc",
+      "bytes": 281
+    },
+    "S1_U2/benchmark_1600.json": {
+      "source": "results/adaptok_hr_unified/S1_U2/benchmark_1600.json",
+      "sha256": "4c24e3360ca860c136306d7b556589bc1cac2ae6df61e846fb19c9b5d101f964",
+      "bytes": 93503
+    },
+    "S1_U2/config.yaml": {
+      "source": "results/adaptok_hr_unified/configs/S1_U2.yaml",
+      "sha256": "945609879f9a8edf4b04437b32b41cb2d05438d512112198bba93c191cca0019",
+      "bytes": 1695
+    },
+    "S1_U2/checkpoint_1600.json": {
+      "source": "checkpoints/adaptok_hr_unified/S1_U2/step_001600.json",
+      "sha256": "9acb1e7b1023cb8c65d00e17f3264f426080eed38c36d2fba3230f453aff4675",
+      "bytes": 3232
+    },
+    "S1_U3/summary.json": {
+      "source": "results/adaptok_hr_unified/S1_U3/validation_1600_64/summary.json",
+      "sha256": "f9bcb9bd41fcccd909752770b45594ca6e5a407f219b445eeaef105e73e7c4c4",
+      "bytes": 140818
+    },
+    "S1_U3/run.json": {
+      "source": "results/adaptok_hr_unified/S1_U3/validation_1600_64/run.json",
+      "sha256": "1a880a0f0239a0da1df9d082ff938915209087d2b965d9c2b71c0146a4fcf2ad",
+      "bytes": 2497
+    },
+    "S1_U3/closed_loop.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U3/validation_1600_64/closed_loop.jsonl",
+      "sha256": "7423405e8c14d18c6ddf452b45f9201e15fe905ac98b5e564f7de4bb603cfa43",
+      "bytes": 613494
+    },
+    "S1_U3/same_context.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U3/validation_1600_64/same_context.jsonl",
+      "sha256": "e37e949d8781097d308c35e4a899a72af50d521451c8a37615291f8771085855",
+      "bytes": 613372
+    },
+    "S1_U3/fine_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U3/validation_1600_64/fine_interventions.jsonl",
+      "sha256": "4296e838ace2a79a8a0ea27f653eeba8380f447a73b107d939fddb4f976775ce",
+      "bytes": 198083
+    },
+    "S1_U3/suffix_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S1_U3/validation_1600_64/suffix_interventions.jsonl",
+      "sha256": "0cd6cbb1535ced9b3954aa3cd950258d08949979bd2805ea1a60930851e1f3d8",
+      "bytes": 56587
+    },
+    "S1_U3/fork.json": {
+      "source": "results/adaptok_hr_unified/S1_U3/fork.json",
+      "sha256": "270971c1ea6d9c8e0c04a28adb9387e0634b0ea8b7c890ead483247576a923c6",
+      "bytes": 793
+    },
+    "S1_U3/completion.json": {
+      "source": "results/adaptok_hr_unified/S1_U3/completion.json",
+      "sha256": "68b7d5d2cfc2ebc3d1afffbc7c5793d4964db05a913c3a5d39db48f87787a154",
+      "bytes": 281
+    },
+    "S1_U3/benchmark_1600.json": {
+      "source": "results/adaptok_hr_unified/S1_U3/benchmark_1600.json",
+      "sha256": "44f3d3ddce5798a875bac1a97eb0e0cb405182d07c2064a117e447bb724e2490",
+      "bytes": 93533
+    },
+    "S1_U3/config.yaml": {
+      "source": "results/adaptok_hr_unified/configs/S1_U3.yaml",
+      "sha256": "ab4c5db4e1a257cb291e1b7ce1d0cbc0a42394f11549ab5b196a69e510ca23e0",
+      "bytes": 1696
+    },
+    "S1_U3/checkpoint_1600.json": {
+      "source": "checkpoints/adaptok_hr_unified/S1_U3/step_001600.json",
+      "sha256": "fc814f4970892f49871c496af37711c6999ff34c717cd2a5fa455398a078264a",
+      "bytes": 3233
+    },
+    "S2_U0/summary.json": {
+      "source": "results/adaptok_hr_unified/S2_U0/validation_1600_64/summary.json",
+      "sha256": "875bf71da5156ebb3bf7281d05b29d457f91c35d716f707b65894b5bf4338d16",
+      "bytes": 140905
+    },
+    "S2_U0/run.json": {
+      "source": "results/adaptok_hr_unified/S2_U0/validation_1600_64/run.json",
+      "sha256": "79ee88a30f62c99209d65de2b03d2716c709e052dbd0ff48167de998c61929d2",
+      "bytes": 2497
+    },
+    "S2_U0/closed_loop.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U0/validation_1600_64/closed_loop.jsonl",
+      "sha256": "c0827a67d0a6edba76f13611c1a3db8cae4611f21211c2ded4c2dda4cf24bff1",
+      "bytes": 613715
+    },
+    "S2_U0/same_context.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U0/validation_1600_64/same_context.jsonl",
+      "sha256": "d8d3bdc5aec66c13d7a2fd967a72bfef169db3e7e3fcba7658cd4c3ebad87d74",
+      "bytes": 613682
+    },
+    "S2_U0/fine_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U0/validation_1600_64/fine_interventions.jsonl",
+      "sha256": "82817d2ae9ad1a3d2ebed2c59743468400284bb0baba50806831742cead3002f",
+      "bytes": 198363
+    },
+    "S2_U0/suffix_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U0/validation_1600_64/suffix_interventions.jsonl",
+      "sha256": "aca79b2e2e6941df10e3caa6cde7ecc2399c1b3c13bbe3415b0e56926724df19",
+      "bytes": 56606
+    },
+    "S2_U0/fork.json": {
+      "source": "results/adaptok_hr_unified/S2_U0/fork.json",
+      "sha256": "8eb34ca61e4ab527cef6d412ecda37319a0efc9f37d16818ab13c3fcd389bfda",
+      "bytes": 793
+    },
+    "S2_U0/completion.json": {
+      "source": "results/adaptok_hr_unified/S2_U0/completion.json",
+      "sha256": "75ae70737463210adc1e57be3d7fad23fb0083683ef92380fc669279b7661413",
+      "bytes": 281
+    },
+    "S2_U0/benchmark_1600.json": {
+      "source": "results/adaptok_hr_unified/S2_U0/benchmark_1600.json",
+      "sha256": "7a92fa64d4dc43ff9ae79a302ced97b1a1ae4458f4c21825719fe2825dda628b",
+      "bytes": 93542
+    },
+    "S2_U0/config.yaml": {
+      "source": "results/adaptok_hr_unified/configs/S2_U0.yaml",
+      "sha256": "e5ac68a5bcb5b27a0adad08fd4c9b5bca1ef840bb2a084e103ed64b7bb622a3a",
+      "bytes": 1779
+    },
+    "S2_U0/checkpoint_1600.json": {
+      "source": "checkpoints/adaptok_hr_unified/S2_U0/step_001600.json",
+      "sha256": "b40cca9ef53738ceb639b337643113402d24e7b841681482d07d28d00c3cba95",
+      "bytes": 3351
+    },
+    "S2_U1/summary.json": {
+      "source": "results/adaptok_hr_unified/S2_U1/validation_1600_64/summary.json",
+      "sha256": "13e8911dbc2bf32426167e4b7d7a23ae54016369a816d7e1784ca94cfee9341f",
+      "bytes": 140582
+    },
+    "S2_U1/run.json": {
+      "source": "results/adaptok_hr_unified/S2_U1/validation_1600_64/run.json",
+      "sha256": "bac711b1dd3239bf0006497df58b5e8fda75bf25172c972fc7ef1b22870160c4",
+      "bytes": 2497
+    },
+    "S2_U1/closed_loop.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U1/validation_1600_64/closed_loop.jsonl",
+      "sha256": "20e45f3dd432ca75ea6ba68d83523fdb65a733a17371ad5df71209baa382b361",
+      "bytes": 613375
+    },
+    "S2_U1/same_context.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U1/validation_1600_64/same_context.jsonl",
+      "sha256": "fa54ff9213b1748da91392f1c2b292fbb1146f941d6d3953fa7ce428ce97aae2",
+      "bytes": 613370
+    },
+    "S2_U1/fine_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U1/validation_1600_64/fine_interventions.jsonl",
+      "sha256": "e3f4766761e1b444cc0bb8527d3817ffd33f293904d7c158457a26a730c8d17e",
+      "bytes": 198118
+    },
+    "S2_U1/suffix_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U1/validation_1600_64/suffix_interventions.jsonl",
+      "sha256": "7e188cd5d0bec2cb13bb1f048fddc465b274d393f47092a8edb521c99b80326c",
+      "bytes": 56565
+    },
+    "S2_U1/fork.json": {
+      "source": "results/adaptok_hr_unified/S2_U1/fork.json",
+      "sha256": "5274942388811c9ab34ce779d591b5479e0026a6cec65598a859798f07980f6f",
+      "bytes": 793
+    },
+    "S2_U1/completion.json": {
+      "source": "results/adaptok_hr_unified/S2_U1/completion.json",
+      "sha256": "1d37d8bc59a9b2f138f8b7c6350f635eb64222fd0ff426b00f09ffbf8f8493e5",
+      "bytes": 281
+    },
+    "S2_U1/benchmark_1600.json": {
+      "source": "results/adaptok_hr_unified/S2_U1/benchmark_1600.json",
+      "sha256": "897aa19395e2e0cf2bd6e752ea6ab43c5666e598453a91bfc0db1ac3f60b2259",
+      "bytes": 93526
+    },
+    "S2_U1/config.yaml": {
+      "source": "results/adaptok_hr_unified/configs/S2_U1.yaml",
+      "sha256": "e5c2a19845095afd236b2e11624e5d0a79975edf1a17cc3d940cd508910c19c2",
+      "bytes": 1689
+    },
+    "S2_U1/checkpoint_1600.json": {
+      "source": "checkpoints/adaptok_hr_unified/S2_U1/step_001600.json",
+      "sha256": "5932728dbeac10e959cfec85ab9163bdaeb56e0ce745ed75671fdd761f2db4c4",
+      "bytes": 3226
+    },
+    "S2_U2/summary.json": {
+      "source": "results/adaptok_hr_unified/S2_U2/validation_1600_64/summary.json",
+      "sha256": "c9b6df47746f9799cb9775c70a9b570470eca5c8f3a8a90c74be2f095b08a702",
+      "bytes": 140758
+    },
+    "S2_U2/run.json": {
+      "source": "results/adaptok_hr_unified/S2_U2/validation_1600_64/run.json",
+      "sha256": "7739f751c91bf96400c5c74bc1c9c3f6f4736f25f222ec71389cc34d34719d92",
+      "bytes": 2496
+    },
+    "S2_U2/closed_loop.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U2/validation_1600_64/closed_loop.jsonl",
+      "sha256": "c7a9b8c37a505fd1e6005e91c104529c9e3315c0e3fbdc05da04d2020efbb3d7",
+      "bytes": 613702
+    },
+    "S2_U2/same_context.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U2/validation_1600_64/same_context.jsonl",
+      "sha256": "3a162a38c3ee753ed23b485237ca1526d4333d9298231b47da41b703821413db",
+      "bytes": 613747
+    },
+    "S2_U2/fine_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U2/validation_1600_64/fine_interventions.jsonl",
+      "sha256": "36a6c7abd4eac825ce70cc5c48b85e56ba4d77221833b7c76da5f27b1410cf54",
+      "bytes": 198184
+    },
+    "S2_U2/suffix_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U2/validation_1600_64/suffix_interventions.jsonl",
+      "sha256": "f8418b96f7422c222f4af88a67d1f6ca1ff18af8d3a90d4b0807d4def0d5d9da",
+      "bytes": 56541
+    },
+    "S2_U2/fork.json": {
+      "source": "results/adaptok_hr_unified/S2_U2/fork.json",
+      "sha256": "4bea5ada9a263a64c297f834007937c9d4fb86a07692cdb9e3159800c1963a09",
+      "bytes": 793
+    },
+    "S2_U2/completion.json": {
+      "source": "results/adaptok_hr_unified/S2_U2/completion.json",
+      "sha256": "3205cd84dc1a62b68ea8bc5f83b28915e35ae5d853a1504c50972775fcdff513",
+      "bytes": 281
+    },
+    "S2_U2/benchmark_1600.json": {
+      "source": "results/adaptok_hr_unified/S2_U2/benchmark_1600.json",
+      "sha256": "b74daad6f2b32c4e5d98958436e5fb2b62ab12531fad923963c6c4e46ebbfae1",
+      "bytes": 93518
+    },
+    "S2_U2/config.yaml": {
+      "source": "results/adaptok_hr_unified/configs/S2_U2.yaml",
+      "sha256": "789fe0f24c59d472a8acd199baaf6c74c795080c4ce897b819e7614b358a4793",
+      "bytes": 1695
+    },
+    "S2_U2/checkpoint_1600.json": {
+      "source": "checkpoints/adaptok_hr_unified/S2_U2/step_001600.json",
+      "sha256": "851fadfa8d75cf66b74e0538db68b254036671cad93fb23835e1f334f95e0452",
+      "bytes": 3232
+    },
+    "S2_U3/summary.json": {
+      "source": "results/adaptok_hr_unified/S2_U3/validation_1600_64/summary.json",
+      "sha256": "970a608ec01c44465d4839b65b2c6369e0f3c0ffc5ec83c3c9a9f8f60e71e469",
+      "bytes": 140753
+    },
+    "S2_U3/run.json": {
+      "source": "results/adaptok_hr_unified/S2_U3/validation_1600_64/run.json",
+      "sha256": "5b72b9a06a7c82809a3a7e2d81cc49bedadf1dd19844454db01d84980a23920f",
+      "bytes": 2496
+    },
+    "S2_U3/closed_loop.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U3/validation_1600_64/closed_loop.jsonl",
+      "sha256": "cd22e7ae2c8b483eb8c8dcf15c9a992421089e4e41b0a694975fa0af94f15ecd",
+      "bytes": 613732
+    },
+    "S2_U3/same_context.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U3/validation_1600_64/same_context.jsonl",
+      "sha256": "65e5a0f5788d824f318f9dc73c6c35eda4c5693b3c97ecf5361d06b5217da851",
+      "bytes": 613631
+    },
+    "S2_U3/fine_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U3/validation_1600_64/fine_interventions.jsonl",
+      "sha256": "3cc1690f79eadef141bd8d56e4d8309caae0e124a767581f06b3b0905e2bdf86",
+      "bytes": 198259
+    },
+    "S2_U3/suffix_interventions.jsonl": {
+      "source": "results/adaptok_hr_unified/S2_U3/validation_1600_64/suffix_interventions.jsonl",
+      "sha256": "f89d3a5bdb111be4ac957eaccaa558e05cde09bb681f4de62da70b1fc8c7727a",
+      "bytes": 56602
+    },
+    "S2_U3/fork.json": {
+      "source": "results/adaptok_hr_unified/S2_U3/fork.json",
+      "sha256": "49899e108c231d4b341df2b26fa9b41626947f703a3b207211bb97751cc9dc24",
+      "bytes": 793
+    },
+    "S2_U3/completion.json": {
+      "source": "results/adaptok_hr_unified/S2_U3/completion.json",
+      "sha256": "0cb3a96134c6add37bc1f41aa9b6b056edf86cc6b5bd6902bc791360dc7885bd",
+      "bytes": 281
+    },
+    "S2_U3/benchmark_1600.json": {
+      "source": "results/adaptok_hr_unified/S2_U3/benchmark_1600.json",
+      "sha256": "2c2eac83005c9ad1e71093795bfefe7c0ae8914e4399c9d69408148c9fb2cb64",
+      "bytes": 93544
+    },
+    "S2_U3/config.yaml": {
+      "source": "results/adaptok_hr_unified/configs/S2_U3.yaml",
+      "sha256": "fbb5490120e546cc74f8324a6139e03f58e9dc6d24df400137926473dc70ea71",
+      "bytes": 1696
+    },
+    "S2_U3/checkpoint_1600.json": {
+      "source": "checkpoints/adaptok_hr_unified/S2_U3/step_001600.json",
+      "sha256": "52c83374b80500282c3007ed677b6bc0344fc581d6e593179f2ffffe65529037",
+      "bytes": 3233
+    },
+    "native/S1_U0_car-roundabout_0031_K2048.png": {
+      "source": "results/adaptok_hr_unified/S1_U0/validation_1600_64/samples/car-roundabout_0031_K2048.png",
+      "sha256": "fdac6ab5d4235da900c4a9c463ca1f67d247e6911c587889c1a925c0a68275e7",
+      "bytes": 2637738
+    },
+    "native/S1_U1_car-roundabout_0031_K2048.png": {
+      "source": "results/adaptok_hr_unified/S1_U1/validation_1600_64/samples/car-roundabout_0031_K2048.png",
+      "sha256": "1134fb10b2637a5156132a4613bc300e2df61f195e8fc3578d649344d818b698",
+      "bytes": 3188784
+    },
+    "native/S2_U0_car-roundabout_0031_K2048.png": {
+      "source": "results/adaptok_hr_unified/S2_U0/validation_1600_64/samples/car-roundabout_0031_K2048.png",
+      "sha256": "0e831e26e7ae59c3d3a87e8e5e4d223f01624ee2b54cdb9a74d6a7d0179b3652",
+      "bytes": 2246700
+    },
+    "native/S2_U1_car-roundabout_0031_K2048.png": {
+      "source": "results/adaptok_hr_unified/S2_U1/validation_1600_64/samples/car-roundabout_0031_K2048.png",
+      "sha256": "80223aa889b3329c12380e6f45ca3d07a17ad439554adb4c4c9763faf3f85cbf",
+      "bytes": 2642592
+    },
+    "native/car-roundabout_0031_original.png": {
+      "source": "results/adaptok_hr_unified/S1_U0/validation_1600_64/samples/car-roundabout_0031_original.png",
+      "sha256": "11b05f7397dde3ecb00e54b954895e0e0bc559e10cff2091782e9903b2d4b35d",
+      "bytes": 1959718
+    },
+    "figures/S1_U_1600_rd_psnr_global.pdf": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_psnr_global.pdf",
+      "sha256": "58bc9ed2ffe11f6e8e1ba2c42d6fb1fc0b7347c4ee84af38d254b27c9db3c3aa",
+      "bytes": 14296
+    },
+    "figures/S1_U_1600_rd_dists.svg": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_dists.svg",
+      "sha256": "387d3acb61b4954e7faa1152975a587a59b596eb8b085afdc005104a0a70e11f",
+      "bytes": 14756
+    },
+    "figures/S1_U_1600_rd_lpips.pdf": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_lpips.pdf",
+      "sha256": "07c17c5489062442bed24f26dcfa1b6a3f6cbab9be267e3bbfdda66687cc9c65",
+      "bytes": 14704
+    },
+    "figures/S1_U_1600_rd_cr_mae.svg": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_cr_mae.svg",
+      "sha256": "8a1bbe5b4cdde795834463be294ba62d2061272409289e8a2be5184de1458103",
+      "bytes": 15559
+    },
+    "figures/S1_U_1600_rd_cb_mae.png": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_cb_mae.png",
+      "sha256": "cb287a2da967bed0bc6d9f1fc7d4afa510dbbc140eded2d9da2bdb5244037928",
+      "bytes": 246749
+    },
+    "figures/S2_U_1600_rd_cb_mae.alignment.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_cb_mae.alignment.json",
+      "sha256": "2012b029524b9d06110f81b94a9f0f658233299e55e347f9992dc5284af99b3f",
+      "bytes": 909
+    },
+    "figures/S1_U_1600_rd_psnr_global.alignment.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_psnr_global.alignment.json",
+      "sha256": "2012b029524b9d06110f81b94a9f0f658233299e55e347f9992dc5284af99b3f",
+      "bytes": 909
+    },
+    "figures/S1_U_1600_rd_cr_mae.png": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_cr_mae.png",
+      "sha256": "ebd0e2194e1481e21edd3458d8a0ea03c1b8b17600c7717d065edd1dd19bde77",
+      "bytes": 273907
+    },
+    "figures/S2_U_1600_rd_psnr_global.collision.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_psnr_global.collision.json",
+      "sha256": "c4a912a81e8592eba49ac7297a563bb7c5968a7345465ab0ac20c9c663be03b3",
+      "bytes": 532
+    },
+    "figures/S1_U_1600_rd_dists.collision.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_dists.collision.json",
+      "sha256": "1bb0e4cfde337fbf21d6f2fc88e9e8a8a84c37348f65c77653483651dd952a36",
+      "bytes": 526
+    },
+    "figures/S1_U_1600_rd_lpips.alignment.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_lpips.alignment.json",
+      "sha256": "2012b029524b9d06110f81b94a9f0f658233299e55e347f9992dc5284af99b3f",
+      "bytes": 909
+    },
+    "figures/S1_U_1600_rd_color_difference_variance_retention.pdf": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_color_difference_variance_retention.pdf",
+      "sha256": "121181375c92f3fab487df7201095fca4293c53a59a52ff68c13597ab98f078f",
+      "bytes": 13531
+    },
+    "figures/S1_U_1600_rd_color_difference_variance_retention.collision.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_color_difference_variance_retention.collision.json",
+      "sha256": "82ceb02d76cb9e2c816d646ce203fa1025f8b921628e6cd0fffa621d7d096e16",
+      "bytes": 556
+    },
+    "figures/S1_U_1600_rd_color_difference_variance_retention.alignment.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_color_difference_variance_retention.alignment.json",
+      "sha256": "2012b029524b9d06110f81b94a9f0f658233299e55e347f9992dc5284af99b3f",
+      "bytes": 909
+    },
+    "figures/S2_U_1600_rd_cb_mae.svg": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_cb_mae.svg",
+      "sha256": "e451cca2631cb571937abf0d61e82bb623a1783f1bc016adb41e23adad0d1086",
+      "bytes": 15546
+    },
+    "figures/S2_U_1600_rd_color_difference_variance_retention.alignment.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_color_difference_variance_retention.alignment.json",
+      "sha256": "2012b029524b9d06110f81b94a9f0f658233299e55e347f9992dc5284af99b3f",
+      "bytes": 909
+    },
+    "figures/S2_U_1600_rd_cb_mae.pdf": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_cb_mae.pdf",
+      "sha256": "4800cd563c0d88efb55159e5f82a35eee9b8a39a731b81167ebafd7626ed730f",
+      "bytes": 14789
+    },
+    "figures/S1_U_1600_rd_lpips.png": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_lpips.png",
+      "sha256": "a2ede9e597c9abc61f17f6e26c7ecc71864f42acbd2ad15b226e96b73625ef7a",
+      "bytes": 247179
+    },
+    "figures/S2_U_1600_rd_cr_mae.png": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_cr_mae.png",
+      "sha256": "369b3e48af2b733912f5b9c9f376e21d30041317857a310a61b0a4a23d59be88",
+      "bytes": 214748
+    },
+    "figures/S1_U_1600_rd_cr_mae.collision.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_cr_mae.collision.json",
+      "sha256": "2e59b13c65fbeeac97e4188b98acbef37559e8a5432d667ddaec6c46d1225627",
+      "bytes": 527
+    },
+    "figures/source_data.json": {
+      "source": "results/adaptok_hr_unified/figures_A/source_data.json",
+      "sha256": "7c537355314009d4211cdfa3d9bd7f8a95d51411aaac9008cb9f5c61e2a8fb45",
+      "bytes": 22090
+    },
+    "figures/S2_U_1600_rd_psnr_global.svg": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_psnr_global.svg",
+      "sha256": "54e586560f559a531b4324fc8e4ff65a39200288803468700f3fcebac2cde648",
+      "bytes": 15126
+    },
+    "figures/S2_U_1600_rd_dists.collision.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_dists.collision.json",
+      "sha256": "ebb524f3446a45e2c7917f8380fdc63b028361eb9233943802ee7c21f349a200",
+      "bytes": 526
+    },
+    "figures/S2_U_1600_rd_cr_mae.alignment.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_cr_mae.alignment.json",
+      "sha256": "2012b029524b9d06110f81b94a9f0f658233299e55e347f9992dc5284af99b3f",
+      "bytes": 909
+    },
+    "figures/S2_U_1600_rd_psnr_global.png": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_psnr_global.png",
+      "sha256": "1d8eb53c21651aeb415297c128f98561568983a58af0a4142cedc8e688e0296a",
+      "bytes": 283489
+    },
+    "figures/S2_U_1600_rd_dists.pdf": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_dists.pdf",
+      "sha256": "dc20d0332ee78d74b23d6795e2b66996cc41b3876980fa8624ab3c72262280ed",
+      "bytes": 14585
+    },
+    "figures/S1_U_1600_rd_cr_mae.pdf": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_cr_mae.pdf",
+      "sha256": "3ea730af4f2fe22f494a5b42608188b17e694afd5809efabede5b5baba0d728b",
+      "bytes": 14911
+    },
+    "figures/S2_U_1600_rd_color_difference_variance_retention.png": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_color_difference_variance_retention.png",
+      "sha256": "651eb869c3cc54c92722b6ab665bdf6e8a5a5a8ef79ff3bdee06738a107786bb",
+      "bytes": 213036
+    },
+    "figures/S1_U_1600_rd_color_difference_variance_retention.svg": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_color_difference_variance_retention.svg",
+      "sha256": "78163d379a061776d6d305022323165e329ac4a3bc0826278f38baacf3a9e718",
+      "bytes": 14362
+    },
+    "figures/S2_U_1600_rd_color_difference_variance_retention.svg": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_color_difference_variance_retention.svg",
+      "sha256": "4ae7a3f96e1e6a0ce83ca4f4e25ce8a233ce58753b86d48c62690f7cd4ac00f2",
+      "bytes": 14760
+    },
+    "figures/S2_U_1600_rd_dists.alignment.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_dists.alignment.json",
+      "sha256": "2012b029524b9d06110f81b94a9f0f658233299e55e347f9992dc5284af99b3f",
+      "bytes": 909
+    },
+    "figures/S1_U_1600_rd_dists.alignment.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_dists.alignment.json",
+      "sha256": "2012b029524b9d06110f81b94a9f0f658233299e55e347f9992dc5284af99b3f",
+      "bytes": 909
+    },
+    "figures/S1_U_1600_rd_psnr_global.svg": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_psnr_global.svg",
+      "sha256": "3ad354811b257f538d461658ba944c74d7a60bf2298a9bfca96fea4b9afc928e",
+      "bytes": 15136
+    },
+    "figures/S1_U_1600_rd_color_difference_variance_retention.png": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_color_difference_variance_retention.png",
+      "sha256": "5132de6aa8ae6bff21244ceb1b9cd682240946032bcdf32a5649ba2ea407c6ab",
+      "bytes": 255741
+    },
+    "figures/S1_U_1600_rd_lpips.collision.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_lpips.collision.json",
+      "sha256": "a51955fda313bf04435bfffc805345fd5ea19fa3b53ca07c404e8c3cab4141c7",
+      "bytes": 526
+    },
+    "figures/S2_U_1600_rd_lpips.pdf": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_lpips.pdf",
+      "sha256": "417f62641bf9246f041eddeee2bebb8edb6b7a9f195a683e3c16b79d43d2db5d",
+      "bytes": 14556
+    },
+    "figures/S2_U_1600_rd_dists.png": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_dists.png",
+      "sha256": "91547d293ba10d0666ec79e9b098e48cb6f977067a6640ba3dc1e439d3ae2443",
+      "bytes": 311520
+    },
+    "figures/S2_U_1600_rd_lpips.collision.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_lpips.collision.json",
+      "sha256": "ebf438ef683537e25d079207e40a7d02cd927fc38063b55dd4802becb3dffe1a",
+      "bytes": 526
+    },
+    "figures/S2_U_1600_rd_psnr_global.pdf": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_psnr_global.pdf",
+      "sha256": "8563e3c35bbb17b84d6d034f1c1c33bc26f58bccc9eabb1ed8c97e8a89132e91",
+      "bytes": 14297
+    },
+    "figures/S2_U_1600_rd_lpips.svg": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_lpips.svg",
+      "sha256": "8693c265e0b1661effb680a8b4beb76e0e02048589bf92e2ce8bf998c7e7ef04",
+      "bytes": 14760
+    },
+    "figures/S2_U_1600_rd_lpips.png": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_lpips.png",
+      "sha256": "936e012861ac25aa9a139427b486c3b08380d7c4fe4b7e8c64c5b0ace40c874b",
+      "bytes": 253104
+    },
+    "figures/S1_U_1600_rd_dists.png": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_dists.png",
+      "sha256": "bdefe7cfedbacd783bf0551dba7f59007bb584eb014fe016dbbb076cf24b1e3f",
+      "bytes": 312167
+    },
+    "figures/S1_U_1600_rd_cb_mae.collision.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_cb_mae.collision.json",
+      "sha256": "a01e81781fe5ca64618bd3ab5c2ea09564145081b072121c43fbb60aa9decb67",
+      "bytes": 527
+    },
+    "figures/S1_U_1600_rd_dists.pdf": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_dists.pdf",
+      "sha256": "27e2ae1749e733f82819a39e41c610e56360b9d27f3743d1a82e3e0945da06b1",
+      "bytes": 14571
+    },
+    "figures/S2_U_1600_rd_cb_mae.collision.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_cb_mae.collision.json",
+      "sha256": "2dd793f2ea6278f04ff8acb328e71bcbdcd81e0fd01064575f73c2dee90b1274",
+      "bytes": 527
+    },
+    "figures/S2_U_1600_rd_color_difference_variance_retention.collision.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_color_difference_variance_retention.collision.json",
+      "sha256": "187c18c212a767c24737671e2f2fdfa0b310b6978e51a76e3a1ee4a3950b5579",
+      "bytes": 556
+    },
+    "figures/S1_U_1600_rd_cb_mae.svg": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_cb_mae.svg",
+      "sha256": "2eb16775f613d021155a450379176cbf6006fd98994c81791aad0d9222bb5f88",
+      "bytes": 13969
+    },
+    "figures/S2_U_1600_rd_dists.svg": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_dists.svg",
+      "sha256": "5a92befe950e33928edc2d8b41926d729cfa4e19e2fe6a4801c7d85e90f1e2bb",
+      "bytes": 15148
+    },
+    "figures/qa.json": {
+      "source": "results/adaptok_hr_unified/figures_A/qa.json",
+      "sha256": "9b4a2566dc1393a78438c439d4b42df3652daa2791edb65b4aabb1b0cd8373ca",
+      "bytes": 24463
+    },
+    "figures/S1_U_1600_rd_lpips.svg": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_lpips.svg",
+      "sha256": "325dd5ec0f16cbe621b44180f84c2b6beffc09f3df359340acfc6b241d77e421",
+      "bytes": 15151
+    },
+    "figures/S1_U_1600_rd_psnr_global.collision.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_psnr_global.collision.json",
+      "sha256": "07f313d6cfdabf38a951b6b15069bc389835fcb91342a51201a85bf3142a53bd",
+      "bytes": 532
+    },
+    "figures/S2_U_1600_rd_cb_mae.png": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_cb_mae.png",
+      "sha256": "fe9e64912336df6ba5b74f85e35c6e9072475641ede06c249916e1b914843fa4",
+      "bytes": 244606
+    },
+    "figures/S2_U_1600_rd_cr_mae.pdf": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_cr_mae.pdf",
+      "sha256": "91b012f079a898a749abe9f62aece47120eaeea5e71a01706de83669a7c12b59",
+      "bytes": 14870
+    },
+    "figures/S2_U_1600_rd_lpips.alignment.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_lpips.alignment.json",
+      "sha256": "2012b029524b9d06110f81b94a9f0f658233299e55e347f9992dc5284af99b3f",
+      "bytes": 909
+    },
+    "figures/S1_U_1600_rd_cr_mae.alignment.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_cr_mae.alignment.json",
+      "sha256": "2012b029524b9d06110f81b94a9f0f658233299e55e347f9992dc5284af99b3f",
+      "bytes": 909
+    },
+    "figures/S2_U_1600_rd_psnr_global.alignment.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_psnr_global.alignment.json",
+      "sha256": "2012b029524b9d06110f81b94a9f0f658233299e55e347f9992dc5284af99b3f",
+      "bytes": 909
+    },
+    "figures/S2_U_1600_rd_cr_mae.collision.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_cr_mae.collision.json",
+      "sha256": "577aeed6a8265e8ebff284daef9650e933ab194975a2beca00cb337d131e87be",
+      "bytes": 527
+    },
+    "figures/S2_U_1600_rd_cr_mae.svg": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_cr_mae.svg",
+      "sha256": "838cbfd41bf1c2784b146dc2229a0925b3d1b07a497be75d1bd7d7854fcc5995",
+      "bytes": 15154
+    },
+    "figures/S1_U_1600_rd_psnr_global.png": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_psnr_global.png",
+      "sha256": "9ba9456e23866305f540ee28990320e21af1e0cadb19929b93d32c5aabfb98e8",
+      "bytes": 294261
+    },
+    "figures/S2_U_1600_rd_color_difference_variance_retention.pdf": {
+      "source": "results/adaptok_hr_unified/figures_A/S2_U_1600_rd_color_difference_variance_retention.pdf",
+      "sha256": "38bb246fc24a769ef5734b3fd22a7b588b936bffbaecafc5d446b3d151765bbf",
+      "bytes": 13432
+    },
+    "figures/S1_U_1600_rd_cb_mae.pdf": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_cb_mae.pdf",
+      "sha256": "884d4e685013848010e32aaf37160275eae27b6809e2dbbecfc2ef3e66fd699b",
+      "bytes": 14783
+    },
+    "figures/S1_U_1600_rd_cb_mae.alignment.json": {
+      "source": "results/adaptok_hr_unified/figures_A/S1_U_1600_rd_cb_mae.alignment.json",
+      "sha256": "2012b029524b9d06110f81b94a9f0f658233299e55e347f9992dc5284af99b3f",
+      "bytes": 909
+    }
+  }
+}

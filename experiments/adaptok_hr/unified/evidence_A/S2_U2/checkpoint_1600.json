@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "completed_steps": 1600,
+  "training_frames": 6400,
+  "config": {
+    "benchmark": {
+      "batch_size": 1,
+      "repeats": 20,
+      "warmup": 5
+    },
+    "data": {
+      "cp_manifest_directory": "data/manifests",
+      "external_sources": [],
+      "index": "data/adaptok_hr/index.json"
+    },
+    "evaluation": {
+      "amp_bf16": true,
+      "frames": 64,
+      "validation_ids": [
+        "DAVIS2017:blackswan",
+        "DAVIS2017:car-roundabout",
+        "DAVIS2017:dog"
+      ]
+    },
+    "model": {
+      "attention_blocks": 1,
+      "budgets": [
+        256,
+        512,
+        1024,
+        2048
+      ],
+      "channels": [
+        48,
+        64,
+        96,
+        128,
+        192,
+        192,
+        192
+      ],
+      "codebook_size": 8192,
+      "decoder_channels": [
+        192,
+        128,
+        96,
+        64,
+        32,
+        24
+      ],
+      "embedding_dim": 16,
+      "gop": 32,
+      "gradient_checkpointing": true,
+      "heads": 6,
+      "height": 1080,
+      "temporal": true,
+      "width": 1920,
+      "window": 4,
+      "codebook_mode": "shared",
+      "loss_scope": "active_prefix",
+      "fine_input": "local_residual",
+      "fine_decoder": "masked_s32_v1"
+    },
+    "training": {
+      "amp_bf16": true,
+      "batch_sequences": 1,
+      "budget_mode": "paired",
+      "checkpoint_every": 100,
+      "fixed_budget": 2048,
+      "gradient_clip": 1.0,
+      "learning_rate": 0.0001,
+      "losses": {
+        "l1": 1.0,
+        "perceptual": 0.23709576,
+        "vq": 1.0
+      },
+      "milestones": [
+        1600
+      ],
+      "nested_every": 4,
+      "seed": 20261128,
+      "sequence_schedule": [
+        [
+          0,
+          4
+        ]
+      ],
+      "tbptt": 2,
+      "validation_every": 100,
+      "weight_decay": 0.01,
+      "model_seed": 20261128,
+      "budget_seed": 20261130,
+      "extra_checkpoints": [],
+      "paired_probability": 0.5,
+      "reconstruction": {
+        "mode": "unified",
+        "network": "vgg",
+        "global_size": [
+          270,
+          480
+        ],
+        "crop_size": 256,
+        "crop_seed": 20261211
+      }
+    },
+    "experiment": {
+      "family": "unified",
+      "stage": "A",
+      "seed": 2,
+      "arm": "U2",
+      "name": "S2_U2",
+      "initialization": "D3_step_1300_fork",
+      "parent_checkpoint_sha256": "1e5d5d8766c28c18639b546a51a235fc14a31b4e46e2724ce044d7b76ed1b1de",
+      "calibration_sha256": "4bafb181a1d80c3f1986dbe573fe4b73c5cf62bcb5359cb6ea39486e2cab264f"
+    },
+    "run_scope": {
+      "overfit": null,
+      "overfit_frames": 4
+    }
+  },
+  "config_identity": "ba1a6b63dd8c804bc0d014ec48146cee3a597f31f07066bc3dd43b6837ab150a",
+  "manifest_identity": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+  "checkpoint_sha256": "6d0e036e41613100f6eb040f37f009936059efdcb4cebd0a969935e2fd368c10",
+  "model_sha256": "08638cb1d096b7e89284261b91d5736006bbd10229301b892ab3dce9f74f95ac",
+  "codebook_sha256": "60c7403efac0789b5c4707174a6ba72776ccef3bcc0bbb9a3e608bd04f4355e0",
+  "source_sha256": "7f83eb205b843deb2e01432424ee4622ec06b395ede164f46bf3f7014d8eae70",
+  "optimizer_saved": true,
+  "scheduler_saved": true,
+  "rng_saved": true,
+  "sampling_saved": true
+}

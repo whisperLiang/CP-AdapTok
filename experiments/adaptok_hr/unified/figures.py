@@ -108,6 +108,13 @@ def qa(output, scripts):
         raise ValueError("figure source/text/collision QA did not pass")
 
 
+def configure_style():
+    matplotlib.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["DejaVu Sans"],
+                               "font.size": 8, "axes.labelsize": 8,
+                               "xtick.labelsize": 7, "ytick.labelsize": 7, "legend.fontsize": 8,
+                               "svg.fonttype": "none", "pdf.fonttype": 42})
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--qa-scripts", type=Path, required=True)
@@ -115,10 +122,7 @@ if __name__ == "__main__":
     sys.path.insert(0, str(args.qa_scripts))
     from audit_panel_alignment import require_matplotlib_panel_alignment
 
-    matplotlib.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["DejaVu Sans"],
-                               "font.size": 8, "axes.labelsize": 8,
-                               "xtick.labelsize": 7, "ytick.labelsize": 7, "legend.fontsize": 8,
-                               "svg.fonttype": "none", "pdf.fonttype": 42})
+    configure_style()
     output = ROOT / "figures"
     output.mkdir(parents=True, exist_ok=True)
     source = {**rate_distortion(output, require_matplotlib_panel_alignment),
