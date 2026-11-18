@@ -52,6 +52,7 @@ def verify_validation(path, originals):
     result = read(path / "summary.json")
     name = path.parent.name
     count = 0
+    suffix_counts, frame_diversity = Counter(), {}
     metadata = read(CHECKPOINTS / name / f"step_{result['steps']:06d}.json")
     if result["identity"]["checkpoint_sha256"] != metadata["checkpoint_sha256"]:
         raise ValueError(f"unmatched validation checkpoint {path}")
@@ -76,6 +77,11 @@ def verify_validation(path, originals):
                 full = (folder(path, "closed_loop", 2048, source) / f"{frame:04d}.bin").read_bytes()
                 if packet.ids != parse(full).ids[:k]:
                     raise ValueError("stored packet is not the exact canonical prefix")
+                low, high = PROTOCOL["information"]["suffix"]
+                if k == high:
+                    suffix = packet.ids[low:high]
+                    suffix_counts.update(suffix)
+                    frame_diversity[source, frame] = len(set(suffix))
             previous[source, k] = digest
             count += 1
             budgets[k] += 1
@@ -83,6 +89,10 @@ def verify_validation(path, originals):
         if set(budgets.values()) != {expected_frames} or set(budgets) != {256, 512, 1024, 2048}:
             raise ValueError("missing Validation frames or budgets")
     interventions = jsonlines(path / "suffix_interventions.jsonl")
+    histogram = {i: n for i, n in enumerate(result["suffix"]["histogram"]) if n}
+    if suffix_counts != histogram or any(frame_diversity[r["content_id"], r["frame"]] != r["within_frame_used"]
+                                         for r in interventions):
+        raise ValueError("reported suffix usage differs from actual transmitted IDs")
     if information(interventions) != result["information"]:
         raise ValueError("recorded decision disagrees with the raw interventions")
     return {"packets_reparsed": count, "interventions": len(interventions),
