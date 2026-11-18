@@ -14,7 +14,7 @@ from adaptok_hr.models.temporal_state import stream_identity
 from adaptok_hr.runtime import file_hash, write_json
 from cp_adaptok.metrics import summarize_latency
 
-from .decisions import information
+from .decisions import information, quality, result, select
 from .evaluate import folder
 from .run import CHECKPOINTS, PROTOCOL, ROOT
 from .study import read
@@ -145,6 +145,44 @@ def benchmarks():
     return records
 
 
+def verify_gates():
+    first = read(ROOT / "decision.json")
+    historical = read(PROTOCOL["historical_validation"])
+    if first["winner"] != select() or first["new_test_used"]:
+        raise ValueError("recorded screen or data selection disagrees with protocol")
+    for seed, saved in first["seeds"].items():
+        measured = result(f"S{seed}_{first['winner']}", 1000)
+        control = result(f"S{seed}_R00", 1000)
+        if saved != {"information": measured["information"], "quality": quality(measured, control, historical)}:
+            raise ValueError("recorded confirmation fails replay")
+    both = len(first["seeds"]) == 2 and all(r["information"]["pass"] for r in first["seeds"].values())
+    if first["decoder_stage_allowed"] != both or first["negative_information_stop"] == both:
+        raise ValueError("conditional decoder eligibility disagrees with measured results")
+    if not both:
+        return {"representation": first, "decoder": None, "speed": None}
+    from .decoder_stage import STOP, rank
+
+    second = read(ROOT / "decoder_decision.json")
+    best = min(second["seeds"]["1"], key=lambda arm: rank(arm, second["seeds"]["1"]))
+    if second["decoder_winner"] != best:
+        raise ValueError("decoder selection fails preregistered ranking")
+    for seed, rows in second["seeds"].items():
+        required = {"D0", "D1", "D2", "D3"} if seed == "1" else {"D0", best}
+        if set(rows) != required:
+            raise ValueError("required matched decoder arms missing")
+        control = result(f"S{seed}_C0", STOP)
+        for arm, saved in rows.items():
+            measured = result(f"S{seed}_{arm}", STOP)
+            if saved["quality"] != quality(measured, control, historical) or saved["information"] != measured["information"]["pass"]:
+                raise ValueError("recorded decoder evidence fails replay")
+    ready = all(rows[best]["quality"]["pass"] and rows[best]["information"] for rows in second["seeds"].values())
+    parent = all(r["quality"]["pass"] for r in first["seeds"].values())
+    if second["adoption_ready"] != ready or second["performance_optimization_allowed"] != (ready or parent):
+        raise ValueError("speed-optimization eligibility disagrees with replicated quality")
+    speed = read(ROOT / "performance_decision.json") if second["performance_optimization_allowed"] else None
+    return {"representation": first, "decoder": second, "speed": speed}
+
+
 def run():
     originals = old_inputs()
     validations = {str(p.parent.relative_to(ROOT)): verify_validation(p.parent, originals)
@@ -157,6 +195,7 @@ def run():
             raise ValueError(f"wrong checkpoint hash: {path}")
         weights[str(path)] = observed
     tests = ElementTree.parse(ROOT / "tests.xml").find(".//testsuite").attrib
+    stages = verify_gates()
     mutations = read(ROOT / "mutations.json")
     audit = read(ROOT / "quality_audit.json")
     production = {"adaptok_hr/config.py", "adaptok_hr/models/tokenizer.py", "adaptok_hr/training/fine_detail.py",
@@ -174,7 +213,7 @@ def run():
               "protected_git_and_checkpoints": protected_inputs(), "benchmark_runs": timings,
               "checkpoints": weights, "tests": tests, "mutations_killed": sum(r["killed"] for r in mutations["results"]),
               "flagged_production": flagged, "legacy_high_crap_count": len(audit["crap_over_10"]),
-              "quality_and_scientific_gates": read(ROOT / "decision.json")}
+              "quality_and_scientific_gates": stages}
     write_json(ROOT / "acceptance.json", record)
     if not record["engineering_checks_pass"]:
         raise ValueError(checks)
