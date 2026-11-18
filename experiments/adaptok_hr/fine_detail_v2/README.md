@@ -47,3 +47,5 @@ The actual 300-step selection and schedules are readable in [selection.json](evi
 ```
 
 The compressed evidence uses repository-relative member names beneath the literal run name. Checkpoint metadata contains the full config and digests. The weight files themselves are local. The archive verification command streams every member and checks its SHA256 without extracting anything.
+
+Before the first additional optimizer update the decoder driver checks every fork against its parent on the same two consecutive native Validation frames. All four budgets must reproduce the transmitted IDs, RGB, and BF16 reference feature exactly through the I/P transition. The masked residual uses the model identity `masked_s32_v1`. The initial FP32-mask prototype is archived separately as a failed initialization experiment.

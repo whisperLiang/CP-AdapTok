@@ -1,0 +1,140 @@
+{
+  "reason": "Zero-init BF16 residual output multiplied by an FP32 validity mask promoted the reference feature on the first frame and changed P-frame RGB. These decoder runs are excluded from matched comparisons.",
+  "runs": {
+    "S1_D0": {
+      "latest_log_update": 1300,
+      "committed_steps": [
+        1000,
+        1100,
+        1200,
+        1300
+      ],
+      "stored_validation_packets": 1392
+    },
+    "S1_D1": {
+      "latest_log_update": 1300,
+      "committed_steps": [
+        1000,
+        1100,
+        1200,
+        1300
+      ],
+      "stored_validation_packets": 592
+    },
+    "S1_D2": {
+      "latest_log_update": 1173,
+      "committed_steps": [
+        1000,
+        1100
+      ],
+      "stored_validation_packets": 0
+    }
+  },
+  "local_weight_dir": "checkpoints/adaptok_hr_fine_detail_v2/superseded_bf16_reference",
+  "reference_check": {
+    "input": {
+      "content_id": "DAVIS2017:car-roundabout",
+      "source_sha256": "a385402d832c276856837830ef48709bd6b484aa3fce4bdc8c90a70385769b21",
+      "frame_indices": [
+        0,
+        1
+      ],
+      "source_resolution": [
+        1920,
+        1080
+      ],
+      "crop": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "resized": false,
+      "engineering_crop": false,
+      "fps": 30,
+      "color_format": "RGB float32 [0,1]; OpenCV BGR->RGB"
+    },
+    "rows": [
+      {
+        "k": 256,
+        "frame": 0,
+        "id_equal": true,
+        "rgb_equal": true,
+        "feature_equal": false,
+        "feature_a": "torch.bfloat16",
+        "feature_b": "torch.float32",
+        "mse": 0.0
+      },
+      {
+        "k": 256,
+        "frame": 1,
+        "id_equal": true,
+        "rgb_equal": false,
+        "feature_equal": false,
+        "feature_a": "torch.bfloat16",
+        "feature_b": "torch.float32",
+        "mse": 1.831043391575804e-06
+      },
+      {
+        "k": 512,
+        "frame": 0,
+        "id_equal": true,
+        "rgb_equal": true,
+        "feature_equal": false,
+        "feature_a": "torch.bfloat16",
+        "feature_b": "torch.float32",
+        "mse": 0.0
+      },
+      {
+        "k": 512,
+        "frame": 1,
+        "id_equal": true,
+        "rgb_equal": false,
+        "feature_equal": false,
+        "feature_a": "torch.bfloat16",
+        "feature_b": "torch.float32",
+        "mse": 1.755622292876069e-06
+      },
+      {
+        "k": 1024,
+        "frame": 0,
+        "id_equal": true,
+        "rgb_equal": true,
+        "feature_equal": false,
+        "feature_a": "torch.bfloat16",
+        "feature_b": "torch.float32",
+        "mse": 0.0
+      },
+      {
+        "k": 1024,
+        "frame": 1,
+        "id_equal": true,
+        "rgb_equal": false,
+        "feature_equal": false,
+        "feature_a": "torch.bfloat16",
+        "feature_b": "torch.float32",
+        "mse": 1.737573484206223e-06
+      },
+      {
+        "k": 2048,
+        "frame": 0,
+        "id_equal": true,
+        "rgb_equal": true,
+        "feature_equal": false,
+        "feature_a": "torch.bfloat16",
+        "feature_b": "torch.float32",
+        "mse": 0.0
+      },
+      {
+        "k": 2048,
+        "frame": 1,
+        "id_equal": true,
+        "rgb_equal": false,
+        "feature_equal": false,
+        "feature_a": "torch.bfloat16",
+        "feature_b": "torch.float32",
+        "mse": 1.7168981685244944e-06
+      }
+    ]
+  }
+}

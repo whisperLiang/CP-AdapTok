@@ -13,11 +13,11 @@ def test_residual_decoder_start_and_training_preserve_absent_fine(small_model):
     from adaptok_hr.models.model import AdapTokHR
 
     parent = small_model.eval()
-    child = AdapTokHR(replace(parent.config, fine_decoder=True)).eval()
+    child = AdapTokHR(replace(parent.config, fine_decoder="masked_s32_v1")).eval()
     missing = child.load_state_dict(parent.state_dict(), strict=False)
     assert missing.missing_keys and all(k.startswith("decoder.fine_detail.") for k in missing.missing_keys)
     assert "fine_decoder" not in parent.config.to_dict()
-    assert child.config.to_dict()["fine_decoder"] is True
+    assert child.config.to_dict()["fine_decoder"] == "masked_s32_v1"
     with pytest.raises(ValueError, match="fine_decoder"):
         replace(parent.config, fine_decoder="on")
     frame = torch.rand(1, 3, 128, 256)
@@ -100,7 +100,7 @@ def test_native_decoder_detail_training_updates_and_decodes_real_packet():
 
     seed_everything(17)
     config = read_config("experiments/adaptok_hr/fine_recovery/configs/A1.yaml")
-    config["model"].update(fine_decoder=True, fine_input="local_residual")
+    config["model"].update(fine_decoder="masked_s32_v1", fine_input="local_residual")
     config["training"].update(budget_mode="fixed", fixed_budget=2048)
     config["training"]["losses"].update(perceptual=0., detail=.1, suffix_detail=.25)
     model = AdapTokHR(ModelConfig(**config["model"])).cuda()
@@ -118,3 +118,53 @@ def test_native_decoder_detail_training_updates_and_decodes_real_packet():
         assert len(data) == 3470
         _, receiving = receiver.decode_frame(data, receiving)
         assert torch.equal(sending.rgb, receiving.rgb) and torch.equal(sending.feature, receiving.feature)
+
+
+@pytest.mark.gpu
+def test_zero_residual_keeps_bf16_reference_and_p_frame_bitwise(small_model):
+    if not torch.cuda.is_available():
+        pytest.skip("native CUDA autocast required")
+    from adaptok_hr.codec.bitstream import parse
+    from adaptok_hr.codec.codec import Codec
+    from adaptok_hr.models.model import AdapTokHR
+
+    parent = small_model.cuda().eval()
+    child = AdapTokHR(replace(parent.config, fine_decoder="masked_s32_v1")).cuda().eval()
+    child.load_state_dict(parent.state_dict(), strict=False)
+    original, enhanced = Codec(parent, True), Codec(child, True)
+    clip = torch.rand(2, 3, 128, 256, device="cuda")
+    for budget in parent.config.budgets:
+        old_state = new_state = None
+        for frame in clip:
+            old_packet, old_state = original.encode_frame(frame[None], old_state, budget)
+            new_packet, new_state = enhanced.encode_frame(frame[None], new_state, budget)
+            assert parse(old_packet).ids == parse(new_packet).ids
+            assert old_state.feature.dtype == new_state.feature.dtype == torch.bfloat16
+            torch.testing.assert_close(old_state.feature, new_state.feature, rtol=0, atol=0)
+            torch.testing.assert_close(old_state.rgb, new_state.rgb, rtol=0, atol=0)
+
+
+def test_superseded_fp32_mask_checkpoint_and_wire_identity_are_rejected(small_model, tmp_path):
+    import hashlib
+    import json
+
+    from adaptok_hr.codec.bitstream import parse, serialize
+    from adaptok_hr.codec.codec import Codec, tensor_digest
+    from adaptok_hr.models.model import AdapTokHR
+    from adaptok_hr.runtime import stable_hash
+    from adaptok_hr.training.checkpoint import load_model
+
+    model = AdapTokHR(replace(small_model.config, fine_decoder="masked_s32_v1")).eval()
+    codec = Codec(model)
+    packet, _ = codec.encode_frame(torch.rand(1, 3, 128, 256), budget=32)
+    obsolete = {**model.config.to_dict(), "fine_decoder": True}
+    old_identity = json.dumps({"config": obsolete, "amp_bf16": False}, sort_keys=True).encode()
+    old_wire = hashlib.sha256(tensor_digest(model.state_dict()) + old_identity).digest()
+    with pytest.raises(ValueError, match="identity"):
+        codec.decode_frame(serialize(replace(parse(packet), model=old_wire)))
+    config = {"model": obsolete}
+    path = tmp_path / "old.pt"
+    torch.save({"version": 1, "config": config, "config_identity": stable_hash(config),
+                "model": model.state_dict()}, path)
+    with pytest.raises(ValueError, match="fine_decoder"):
+        load_model(path, "cpu")

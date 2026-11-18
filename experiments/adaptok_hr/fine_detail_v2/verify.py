@@ -145,6 +145,27 @@ def benchmarks():
     return records
 
 
+def verify_initial_reference(name, parent, originals):
+    proof = read(ROOT / name / "initial_reference.json")
+    metas = [read(CHECKPOINTS / item / "step_001000.json") for item in (parent, name)]
+    rows, inputs = proof["rows"], proof["input"]
+    if (proof["parent"] != parent or proof["child"] != name or proof["step"] != 1000 or not proof["pass"]
+            or proof["source_sha256"] != metas[1]["source_sha256"] or proof["manifest"] != metas[0]["manifest_identity"]
+            or proof["checkpoint_sha256"] != [m["checkpoint_sha256"] for m in metas]
+            or inputs["rgb_sha256"] != [originals["DAVIS2017:car-roundabout", frame] for frame in (0, 1)]):
+        raise ValueError(f"invalid native reference proof identity: {name}")
+    expected = [(k, n, t) for k in (256, 512, 1024, 2048) for n, t in enumerate(("I", "P"))]
+    if [(r["budget"], r["frame"], r["type"]) for r in rows] != expected:
+        raise ValueError(f"missing native I/P comparisons: {name}")
+    for row in rows:
+        length = HEADER.size + (13 * row["budget"] + 7) // 8
+        if (not all(row[key] for key in ("id_equal", "rgb_equal", "feature_equal"))
+                or row["feature_dtypes"] != ["torch.bfloat16"] * 2 or row["bytes"] != [length] * 2
+                or row["max_abs_rgb_difference"] != 0 or row["max_abs_feature_difference"] != 0):
+            raise ValueError(f"fork changes the initial native I/P reference: {name}")
+    return {"parent": parent, "native_frame_budget_pairs": len(rows), "evidence_sha256": file_hash(ROOT / name / "initial_reference.json")}
+
+
 def verify_gates():
     first = read(ROOT / "decision.json")
     historical = read(PROTOCOL["historical_validation"])
@@ -205,6 +226,13 @@ def run():
         weights[str(path)] = observed
     tests = ElementTree.parse(ROOT / "tests.xml").find(".//testsuite").attrib
     stages = verify_gates()
+    starts = {}
+    if stages["decoder"]:
+        for seed, arms in stages["decoder"]["seeds"].items():
+            for arm in [*arms, "C0"]:
+                name = f"S{seed}_{arm}"
+                parent = "R00" if arm == "C0" else stages["representation"]["winner"]
+                starts[name] = verify_initial_reference(name, f"S{seed}_{parent}", originals)
     mutations = read(ROOT / "mutations.json")
     audit = read(ROOT / "quality_audit.json")
     production = {"adaptok_hr/config.py", "adaptok_hr/models/tokenizer.py", "adaptok_hr/training/fine_detail.py",
@@ -213,13 +241,20 @@ def run():
     timings = benchmarks()
     baseline_timings = {f"{p.parents[1].name}/benchmark_{p.parent.name.split('_')[1]}_1.json"
                         for p in ROOT.glob("S*/validation_*_*/summary.json")}
+    repeated = [(stages["representation"]["winner"], 1000)]
+    if stages["decoder"]:
+        repeated.append((stages["decoder"]["decoder_winner"], 1300))
+    primary_repeats = {f"S{seed}_{arm}/benchmark_{step}_{n}.json" for arm, step in repeated
+                       for seed in stages["representation"]["seeds"] for n in (2, 3)}
     checks = {"native_idle_gpu_timings": bool(timings) and baseline_timings.issubset(timings),
+              "selected_timing_repeats": primary_repeats.issubset(timings),
               "packets_and_histories": bool(validations), "checkpoint_files_rehashed": bool(weights),
-              "tests": int(tests["tests"]) >= (89 if stages["decoder"] else 82)
+              "tests": int(tests["tests"]) >= (91 if stages["decoder"] else 82)
                        and all(tests[k] == "0" for k in ("failures", "errors", "skipped")),
-              "mutations": len(mutations["results"]) >= (34 if stages["decoder"] else 31) and mutations["all_killed"],
+              "mutations": len(mutations["results"]) >= (35 if stages["decoder"] else 31) and mutations["all_killed"],
               "changed_production_complexity": not flagged, "duplicates": not audit["duplicates_over_08"]}
     record = {"engineering_checks_pass": all(checks.values()), "checks": checks, "validations": validations,
+              "native_initial_references": starts,
               "protected_git_and_checkpoints": protected_inputs(), "benchmark_runs": timings,
               "checkpoints": weights, "tests": tests, "mutations_killed": sum(r["killed"] for r in mutations["results"]),
               "flagged_production": flagged, "legacy_high_crap_count": len(audit["crap_over_10"]),

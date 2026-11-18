@@ -17,14 +17,14 @@ SPEC = read(PACKAGE / "decoder_protocol.json")
 STOP = 1000 + PROTOCOL["decoder"]["matched_additional_updates"]
 
 
-def train_child(seed, arm, winner):
+def prepare_child(seed, arm, winner):
     parent = run_name(seed, "R00" if arm == "C0" else winner)
     name = run_name(seed, arm)
     config = read_config(ROOT / "configs" / f"{parent}.yaml")
     config["run_scope"] = {"overfit": None, "overfit_frames": 4}
     residual, detail_weight = SPEC["variants"].get(arm, [False, 0.0])
     if residual:
-        config["model"]["fine_decoder"] = True
+        config["model"]["fine_decoder"] = "masked_s32_v1"
     if detail_weight:
         config["training"]["losses"]["detail"] = detail_weight
     config["experiment"] = {**config["experiment"], "name": name, "arm": arm, "parent": parent,
@@ -34,6 +34,13 @@ def train_child(seed, arm, winner):
         raise ValueError("existing continuation configuration differs")
     config_path.write_text(yaml.safe_dump(config, sort_keys=False))
     fork_at(parent, name, config)
+    execute(["experiments.adaptok_hr.fine_detail_v2.zero_reference", parent, name],
+            ROOT / "logs" / f"{name}_initial_reference.log")
+    return name, config_path
+
+
+def train_child(seed, arm, winner):
+    name, config_path = prepare_child(seed, arm, winner)
     end = ROOT / name / "completion.json"
     if end.exists() and read(end)["completed_steps"] == STOP and checkpoint(name, STOP).is_file():
         return

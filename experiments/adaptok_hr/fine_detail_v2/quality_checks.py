@@ -27,7 +27,9 @@ CASES = [
 ]
 
 DECODER_CASES = [
-    ("fine_residual_missing_mask", "models/decoder.py", "self.output(x) * fine_map[:, -1:]", "self.output(x)",
+    ("fine_mask_promotes_bf16_reference", "models/decoder.py", "fine_map[:, -1:].to(x.dtype)", "fine_map[:, -1:]",
+     "test_fine_detail_decoder.py::test_zero_residual_keeps_bf16_reference_and_p_frame_bitwise"),
+    ("fine_residual_missing_mask", "models/decoder.py", "self.output(x) * mask", "self.output(x)",
      "test_fine_detail_decoder.py::test_residual_decoder_start_and_training_preserve_absent_fine"),
     ("fine_residual_nonzero_start", "models/decoder.py", "nn.init.zeros_(self.output.weight)",
      "nn.init.ones_(self.output.weight)",

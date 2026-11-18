@@ -34,7 +34,8 @@ class FineResidual(nn.Module):
     def forward(self, coarse, fine_map):
         x = F.silu(self.project(torch.cat((coarse, fine_map), dim=1)))
         x = x + self.mix(F.silu(self.depthwise(x)))
-        return self.output(x) * fine_map[:, -1:]
+        mask = fine_map[:, -1:].to(x.dtype)
+        return self.output(x) * mask
 
 
 class Decoder(nn.Module):
@@ -53,7 +54,7 @@ class Decoder(nn.Module):
         widths = config.decoder_channels
         self.upsample = nn.ModuleList(Upsample(a, b) for a, b in zip(widths, widths[1:]))
         self.rgb_head = nn.Sequential(nn.Conv2d(widths[-1], 12, 1), nn.PixelShuffle(2))
-        self.fine_detail = FineResidual(low, config.embedding_dim) if config.fine_decoder else None
+        self.fine_detail = FineResidual(low, config.embedding_dim) if config.fine_decoder == "masked_s32_v1" else None
 
     def restore_tokens(self, tokens, state=None):
         return self.fuse_maps(self.table.scatter(tokens), state)
