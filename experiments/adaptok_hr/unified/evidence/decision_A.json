@@ -1,0 +1,198 @@
+{
+  "winner": "U1",
+  "outcomes": {
+    "U1": {
+      "seeds": {
+        "1": {
+          "mean_lpips": 0.801292318379742,
+          "mean_lpips_delta": 0.015551065833404154,
+          "improves": false,
+          "protected": {
+            "256": {
+              "psnr": false,
+              "lpips": false,
+              "dists": true
+            },
+            "512": {
+              "psnr": false,
+              "lpips": false,
+              "dists": true
+            },
+            "1024": {
+              "psnr": false,
+              "lpips": false,
+              "dists": true
+            },
+            "2048": {
+              "psnr": false,
+              "lpips": false,
+              "dists": true
+            }
+          },
+          "protected_pass": false
+        },
+        "2": {
+          "mean_lpips": 0.7926206983540249,
+          "mean_lpips_delta": 0.024245579352323965,
+          "improves": false,
+          "protected": {
+            "256": {
+              "psnr": false,
+              "lpips": false,
+              "dists": true
+            },
+            "512": {
+              "psnr": false,
+              "lpips": false,
+              "dists": true
+            },
+            "1024": {
+              "psnr": false,
+              "lpips": false,
+              "dists": true
+            },
+            "2048": {
+              "psnr": false,
+              "lpips": false,
+              "dists": true
+            }
+          },
+          "protected_pass": false
+        }
+      },
+      "mean_lpips": 0.7969565083668835,
+      "both_improve": false,
+      "protected_pass": false
+    },
+    "U2": {
+      "seeds": {
+        "1": {
+          "mean_lpips": 0.8332003265961834,
+          "mean_lpips_delta": 0.04745907404984551,
+          "improves": false,
+          "protected": {
+            "256": {
+              "psnr": false,
+              "lpips": false,
+              "dists": true
+            },
+            "512": {
+              "psnr": false,
+              "lpips": false,
+              "dists": true
+            },
+            "1024": {
+              "psnr": true,
+              "lpips": false,
+              "dists": true
+            },
+            "2048": {
+              "psnr": false,
+              "lpips": false,
+              "dists": true
+            }
+          },
+          "protected_pass": false
+        },
+        "2": {
+          "mean_lpips": 0.8175978404523312,
+          "mean_lpips_delta": 0.049222721450630225,
+          "improves": false,
+          "protected": {
+            "256": {
+              "psnr": false,
+              "lpips": false,
+              "dists": true
+            },
+            "512": {
+              "psnr": true,
+              "lpips": false,
+              "dists": true
+            },
+            "1024": {
+              "psnr": true,
+              "lpips": false,
+              "dists": true
+            },
+            "2048": {
+              "psnr": true,
+              "lpips": false,
+              "dists": true
+            }
+          },
+          "protected_pass": false
+        }
+      },
+      "mean_lpips": 0.8253990835242573,
+      "both_improve": false,
+      "protected_pass": false
+    },
+    "U3": {
+      "seeds": {
+        "1": {
+          "mean_lpips": 0.8423662419463026,
+          "mean_lpips_delta": 0.05662498939996474,
+          "improves": false,
+          "protected": {
+            "256": {
+              "psnr": false,
+              "lpips": false,
+              "dists": true
+            },
+            "512": {
+              "psnr": true,
+              "lpips": false,
+              "dists": true
+            },
+            "1024": {
+              "psnr": true,
+              "lpips": false,
+              "dists": true
+            },
+            "2048": {
+              "psnr": true,
+              "lpips": false,
+              "dists": true
+            }
+          },
+          "protected_pass": false
+        },
+        "2": {
+          "mean_lpips": 0.8084818252373016,
+          "mean_lpips_delta": 0.04010670623560064,
+          "improves": false,
+          "protected": {
+            "256": {
+              "psnr": false,
+              "lpips": false,
+              "dists": false
+            },
+            "512": {
+              "psnr": true,
+              "lpips": false,
+              "dists": false
+            },
+            "1024": {
+              "psnr": true,
+              "lpips": false,
+              "dists": false
+            },
+            "2048": {
+              "psnr": true,
+              "lpips": false,
+              "dists": false
+            }
+          },
+          "protected_pass": false
+        }
+      },
+      "mean_lpips": 0.8254240335918022,
+      "both_improve": false,
+      "protected_pass": false
+    }
+  },
+  "unified_improves_both_seeds": false,
+  "preferred_training_gate_pass": false,
+  "preferred_action": "analyze_cross_scale",
+  "scope": "300-update D3 fine-tuning only; no claim about training from scratch"
+}

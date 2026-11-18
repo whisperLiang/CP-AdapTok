@@ -1,0 +1,1792 @@
+{
+  "tools": "radon+coverage CRAP, AST SequenceMatcher; named crapper/dryer unavailable",
+  "functions": [
+    {
+      "file": "adaptok_hr/codec/bitstream.py",
+      "function": "pack_codes",
+      "line": 12,
+      "complexity": 6,
+      "coverage": 1.0,
+      "crap": 6.0
+    },
+    {
+      "file": "adaptok_hr/codec/bitstream.py",
+      "function": "unpack_codes",
+      "line": 28,
+      "complexity": 8,
+      "coverage": 0.9230769230769231,
+      "crap": 8.029130632680928
+    },
+    {
+      "file": "adaptok_hr/codec/bitstream.py",
+      "function": "serialize",
+      "line": 57,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/codec/bitstream.py",
+      "function": "checked_header",
+      "line": 67,
+      "complexity": 7,
+      "coverage": 0.9090909090909091,
+      "crap": 7.036814425244177
+    },
+    {
+      "file": "adaptok_hr/codec/bitstream.py",
+      "function": "validate_frame_fields",
+      "line": 80,
+      "complexity": 5,
+      "coverage": 0.6,
+      "crap": 6.6000000000000005
+    },
+    {
+      "file": "adaptok_hr/codec/bitstream.py",
+      "function": "parse",
+      "line": 87,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/codec/bitstream.py",
+      "function": "truncate_packet",
+      "line": 101,
+      "complexity": 3,
+      "coverage": 0.8,
+      "crap": 3.072
+    },
+    {
+      "file": "adaptok_hr/codec/codec.py",
+      "function": "tensor_digest",
+      "line": 12,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/codec/codec.py",
+      "function": "__init__",
+      "line": 23,
+      "complexity": 4,
+      "coverage": 0.9,
+      "crap": 4.016
+    },
+    {
+      "file": "adaptok_hr/codec/codec.py",
+      "function": "check_model",
+      "line": 35,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/codec/codec.py",
+      "function": "autocast",
+      "line": 39,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/codec/codec.py",
+      "function": "encode_frame",
+      "line": 43,
+      "complexity": 2,
+      "coverage": 0.875,
+      "crap": 2.0078125
+    },
+    {
+      "file": "adaptok_hr/codec/codec.py",
+      "function": "encode_ids",
+      "line": 52,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/codec/codec.py",
+      "function": "encode_adaptive_frame",
+      "line": 63,
+      "complexity": 3,
+      "coverage": 0.8888888888888888,
+      "crap": 3.0123456790123457
+    },
+    {
+      "file": "adaptok_hr/codec/codec.py",
+      "function": "validate_packet",
+      "line": 74,
+      "complexity": 8,
+      "coverage": 0.8461538461538461,
+      "crap": 8.233045061447429
+    },
+    {
+      "file": "adaptok_hr/codec/codec.py",
+      "function": "validate_state",
+      "line": 89,
+      "complexity": 9,
+      "coverage": 1.0,
+      "crap": 9.0
+    },
+    {
+      "file": "adaptok_hr/codec/codec.py",
+      "function": "decode_frame",
+      "line": 98,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/config.py",
+      "function": "__post_init__",
+      "line": 27,
+      "complexity": 5,
+      "coverage": 0.9230769230769231,
+      "crap": 5.011379153390988
+    },
+    {
+      "file": "adaptok_hr/config.py",
+      "function": "validate_dimensions",
+      "line": 41,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/config.py",
+      "function": "validate_channels",
+      "line": 44,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "adaptok_hr/config.py",
+      "function": "validate_vq",
+      "line": 54,
+      "complexity": 5,
+      "coverage": 0.7142857142857143,
+      "crap": 5.5830903790087465
+    },
+    {
+      "file": "adaptok_hr/config.py",
+      "function": "validate_budgets",
+      "line": 62,
+      "complexity": 6,
+      "coverage": 1.0,
+      "crap": 6.0
+    },
+    {
+      "file": "adaptok_hr/config.py",
+      "function": "padded_height",
+      "line": 69,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/config.py",
+      "function": "grid_shapes",
+      "line": 73,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/config.py",
+      "function": "to_dict",
+      "line": 77,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/data/dataset.py",
+      "function": "verify_selected_frames",
+      "line": 12,
+      "complexity": 7,
+      "coverage": 0.7777777777777778,
+      "crap": 7.537722908093278
+    },
+    {
+      "file": "adaptok_hr/data/dataset.py",
+      "function": "read_clip",
+      "line": 23,
+      "complexity": 7,
+      "coverage": 0.9090909090909091,
+      "crap": 7.036814425244177
+    },
+    {
+      "file": "adaptok_hr/data/dataset.py",
+      "function": "crop_offset",
+      "line": 40,
+      "complexity": 4,
+      "coverage": 0.8571428571428571,
+      "crap": 4.0466472303206995
+    },
+    {
+      "file": "adaptok_hr/data/dataset.py",
+      "function": "__init__",
+      "line": 50,
+      "complexity": 2,
+      "coverage": 0.8333333333333334,
+      "crap": 2.0185185185185186
+    },
+    {
+      "file": "adaptok_hr/data/dataset.py",
+      "function": "plan",
+      "line": 57,
+      "complexity": 4,
+      "coverage": 0.9,
+      "crap": 4.016
+    },
+    {
+      "file": "adaptok_hr/data/dataset.py",
+      "function": "sample",
+      "line": 68,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/data/dataset.py",
+      "function": "state_dict",
+      "line": 74,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/data/dataset.py",
+      "function": "load_state_dict",
+      "line": 77,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/data/manifest.py",
+      "function": "is_native",
+      "line": 14,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/data/manifest.py",
+      "function": "load_external",
+      "line": 19,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/data/manifest.py",
+      "function": "validate_row",
+      "line": 30,
+      "complexity": 9,
+      "coverage": 1.0,
+      "crap": 9.0
+    },
+    {
+      "file": "adaptok_hr/data/manifest.py",
+      "function": "validate_index",
+      "line": 41,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/data/manifest.py",
+      "function": "partition_holdout",
+      "line": 49,
+      "complexity": 5,
+      "coverage": 1.0,
+      "crap": 5.0
+    },
+    {
+      "file": "adaptok_hr/data/manifest.py",
+      "function": "append_external",
+      "line": 55,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/data/manifest.py",
+      "function": "summarize_splits",
+      "line": 61,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/data/manifest.py",
+      "function": "build_index",
+      "line": 66,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "adaptok_hr/data/manifest.py",
+      "function": "load_index",
+      "line": 82,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/data/manifest.py",
+      "function": "main",
+      "line": 92,
+      "complexity": 3,
+      "coverage": 0.1,
+      "crap": 9.561
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "component_sample",
+      "line": 52,
+      "complexity": 2,
+      "coverage": 0,
+      "crap": 6
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "flop_analysis",
+      "line": 89,
+      "complexity": 4,
+      "coverage": 0,
+      "crap": 20
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "condition_summary",
+      "line": 103,
+      "complexity": 7,
+      "coverage": 0,
+      "crap": 56
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "benchmark_condition",
+      "line": 114,
+      "complexity": 3,
+      "coverage": 0,
+      "crap": 12
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "benchmark",
+      "line": 132,
+      "complexity": 5,
+      "coverage": 0,
+      "crap": 30
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "main",
+      "line": 149,
+      "complexity": 6,
+      "coverage": 0,
+      "crap": 42
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "__init__",
+      "line": 22,
+      "complexity": 3,
+      "coverage": 0,
+      "crap": 12
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "start",
+      "line": 30,
+      "complexity": 1,
+      "coverage": 0,
+      "crap": 2
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "stop",
+      "line": 37,
+      "complexity": 1,
+      "coverage": 0,
+      "crap": 2
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "finish",
+      "line": 44,
+      "complexity": 4,
+      "coverage": 0,
+      "crap": 20
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "psnr",
+      "line": 25,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "aggregate",
+      "line": 29,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "quality_summary",
+      "line": 38,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "rate_summary",
+      "line": 48,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "latency_summary",
+      "line": 58,
+      "complexity": 6,
+      "coverage": 1.0,
+      "crap": 6.0
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "group_rows",
+      "line": 67,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "histogram_summary",
+      "line": 77,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "metric_manifest",
+      "line": 85,
+      "complexity": 4,
+      "coverage": 0.16666666666666666,
+      "crap": 13.259259259259261
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "save_image",
+      "line": 99,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "timed",
+      "line": 106,
+      "complexity": 3,
+      "coverage": 0.75,
+      "crap": 3.140625
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "measured_quality",
+      "line": 116,
+      "complexity": 3,
+      "coverage": 0.8571428571428571,
+      "crap": 3.0262390670553936
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "save_frame",
+      "line": 125,
+      "complexity": 3,
+      "coverage": 0.8888888888888888,
+      "crap": 3.0123456790123457
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "verify_endpoints",
+      "line": 136,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "evaluate_source",
+      "line": 142,
+      "complexity": 7,
+      "coverage": 0.9642857142857143,
+      "crap": 7.002232142857143
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "validate_fast",
+      "line": 182,
+      "complexity": 6,
+      "coverage": 0.08333333333333333,
+      "crap": 33.729166666666664
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "seal_final_run",
+      "line": 196,
+      "complexity": 3,
+      "coverage": 0.2,
+      "crap": 7.608000000000001
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "select_sources",
+      "line": 203,
+      "complexity": 7,
+      "coverage": 0.2,
+      "crap": 32.08800000000001
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "prepare_evaluation",
+      "line": 210,
+      "complexity": 7,
+      "coverage": 0.06666666666666667,
+      "crap": 46.83881481481482
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "evaluate_budget",
+      "line": 232,
+      "complexity": 4,
+      "coverage": 0.07692307692307693,
+      "crap": 16.584433318161132
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "main",
+      "line": 249,
+      "complexity": 3,
+      "coverage": 0.037037037037037035,
+      "crap": 11.036579789666211
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "load",
+      "line": 15,
+      "complexity": 2,
+      "coverage": 0.5,
+      "crap": 2.5
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "baseline_table",
+      "line": 19,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "quality_table",
+      "line": 28,
+      "complexity": 2,
+      "coverage": 0.16666666666666666,
+      "crap": 4.314814814814815
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "training_table",
+      "line": 38,
+      "complexity": 7,
+      "coverage": 0.1111111111111111,
+      "crap": 41.41426611796982
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "benchmark_table",
+      "line": 51,
+      "complexity": 3,
+      "coverage": 0.16666666666666666,
+      "crap": 8.208333333333336
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "throughput_row",
+      "line": 61,
+      "complexity": 1,
+      "coverage": 0.5,
+      "crap": 1.125
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "token_layer_table",
+      "line": 66,
+      "complexity": 2,
+      "coverage": 0.2,
+      "crap": 4.048
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "stream_table",
+      "line": 74,
+      "complexity": 2,
+      "coverage": 0.16666666666666666,
+      "crap": 4.314814814814815
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "component_table",
+      "line": 85,
+      "complexity": 2,
+      "coverage": 0.14285714285714285,
+      "crap": 4.518950437317785
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "rate_distortion_data",
+      "line": 94,
+      "complexity": 5,
+      "coverage": 0.1,
+      "crap": 23.225
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "draw_rd",
+      "line": 110,
+      "complexity": 6,
+      "coverage": 0.07142857142857142,
+      "crap": 34.82361516034986
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "sample_artifacts",
+      "line": 127,
+      "complexity": 4,
+      "coverage": 0.05,
+      "crap": 17.717999999999996
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "deliverable_sections",
+      "line": 150,
+      "complexity": 5,
+      "coverage": 0.0625,
+      "crap": 25.599365234375
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "export_evidence",
+      "line": 172,
+      "complexity": 9,
+      "coverage": 0.05,
+      "crap": 78.447375
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "copy_evidence",
+      "line": 194,
+      "complexity": 1,
+      "coverage": 0.2,
+      "crap": 1.512
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "media_evidence",
+      "line": 201,
+      "complexity": 4,
+      "coverage": 0.16666666666666666,
+      "crap": 13.259259259259261
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "draw_curves",
+      "line": 210,
+      "complexity": 9,
+      "coverage": 0.05,
+      "crap": 78.447375
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "main",
+      "line": 234,
+      "complexity": 9,
+      "coverage": 0.02631578947368421,
+      "crap": 83.77206954366527
+    },
+    {
+      "file": "adaptok_hr/models/decoder.py",
+      "function": "__init__",
+      "line": 13,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/decoder.py",
+      "function": "forward",
+      "line": 18,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/decoder.py",
+      "function": "__init__",
+      "line": 25,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/decoder.py",
+      "function": "forward",
+      "line": 34,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/decoder.py",
+      "function": "__init__",
+      "line": 42,
+      "complexity": 9,
+      "coverage": 1.0,
+      "crap": 9.0
+    },
+    {
+      "file": "adaptok_hr/models/decoder.py",
+      "function": "restore_tokens",
+      "line": 59,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/decoder.py",
+      "function": "fuse_maps",
+      "line": 62,
+      "complexity": 6,
+      "coverage": 1.0,
+      "crap": 6.0
+    },
+    {
+      "file": "adaptok_hr/models/decoder.py",
+      "function": "upsample_rgb",
+      "line": 74,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "adaptok_hr/models/decoder.py",
+      "function": "forward",
+      "line": 91,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/encoder.py",
+      "function": "channel_norm",
+      "line": 11,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/models/encoder.py",
+      "function": "__init__",
+      "line": 17,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/encoder.py",
+      "function": "__init__",
+      "line": 23,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/encoder.py",
+      "function": "forward",
+      "line": 27,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/encoder.py",
+      "function": "__init__",
+      "line": 34,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/models/encoder.py",
+      "function": "forward",
+      "line": 40,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/models/encoder.py",
+      "function": "__init__",
+      "line": 52,
+      "complexity": 8,
+      "coverage": 1.0,
+      "crap": 8.0
+    },
+    {
+      "file": "adaptok_hr/models/encoder.py",
+      "function": "pad_input",
+      "line": 73,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/encoder.py",
+      "function": "forward",
+      "line": 76,
+      "complexity": 6,
+      "coverage": 1.0,
+      "crap": 6.0
+    },
+    {
+      "file": "adaptok_hr/models/encoder.py",
+      "function": "forward_stage",
+      "line": 90,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "adaptok_hr/models/model.py",
+      "function": "__init__",
+      "line": 27,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/model.py",
+      "function": "validate_budget",
+      "line": 38,
+      "complexity": 3,
+      "coverage": 0.6666666666666666,
+      "crap": 3.3333333333333335
+    },
+    {
+      "file": "adaptok_hr/models/model.py",
+      "function": "validate_frame",
+      "line": 42,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "adaptok_hr/models/model.py",
+      "function": "encode_features",
+      "line": 50,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/model.py",
+      "function": "token_ids",
+      "line": 56,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/model.py",
+      "function": "decode_ids",
+      "line": 60,
+      "complexity": 5,
+      "coverage": 0.75,
+      "crap": 5.390625
+    },
+    {
+      "file": "adaptok_hr/models/model.py",
+      "function": "forward_frame",
+      "line": 69,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/models/model.py",
+      "function": "forward",
+      "line": 80,
+      "complexity": 5,
+      "coverage": 0.8888888888888888,
+      "crap": 5.034293552812072
+    },
+    {
+      "file": "adaptok_hr/models/scorer.py",
+      "function": "same_state_labels",
+      "line": 29,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/models/scorer.py",
+      "function": "scorer_update",
+      "line": 39,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/scorer.py",
+      "function": "__init__",
+      "line": 9,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/scorer.py",
+      "function": "forward",
+      "line": 14,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/scorer.py",
+      "function": "select",
+      "line": 18,
+      "complexity": 2,
+      "coverage": 0.875,
+      "crap": 2.0078125
+    },
+    {
+      "file": "adaptok_hr/models/temporal_state.py",
+      "function": "stream_identity",
+      "line": 9,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/temporal_state.py",
+      "function": "frame_context",
+      "line": 36,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/models/temporal_state.py",
+      "function": "next_index",
+      "line": 25,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/temporal_state.py",
+      "function": "gop_position",
+      "line": 29,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/temporal_state.py",
+      "function": "detach",
+      "line": 32,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/tokenizer.py",
+      "function": "distributed_order",
+      "line": 9,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/models/tokenizer.py",
+      "function": "local_spatial_residual",
+      "line": 54,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/tokenizer.py",
+      "function": "__init__",
+      "line": 25,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/models/tokenizer.py",
+      "function": "order",
+      "line": 36,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/tokenizer.py",
+      "function": "scatter",
+      "line": 39,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/models/tokenizer.py",
+      "function": "__init__",
+      "line": 66,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/models/tokenizer.py",
+      "function": "forward",
+      "line": 74,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/models/vq.py",
+      "function": "code_statistics",
+      "line": 10,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/vq.py",
+      "function": "loss_terms",
+      "line": 29,
+      "complexity": 4,
+      "coverage": 0.8571428571428571,
+      "crap": 4.0466472303206995
+    },
+    {
+      "file": "adaptok_hr/models/vq.py",
+      "function": "loss",
+      "line": 39,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/vq.py",
+      "function": "__init__",
+      "line": 45,
+      "complexity": 9,
+      "coverage": 0.8,
+      "crap": 9.648
+    },
+    {
+      "file": "adaptok_hr/models/vq.py",
+      "function": "new_book",
+      "line": 60,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/vq.py",
+      "function": "books",
+      "line": 68,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/vq.py",
+      "function": "identity_tensors",
+      "line": 71,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/models/vq.py",
+      "function": "segments",
+      "line": 76,
+      "complexity": 5,
+      "coverage": 0.9166666666666666,
+      "crap": 5.014467592592593
+    },
+    {
+      "file": "adaptok_hr/models/vq.py",
+      "function": "lookup",
+      "line": 89,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/models/vq.py",
+      "function": "nearest",
+      "line": 93,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/models/vq.py",
+      "function": "forward",
+      "line": 103,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/window_attention.py",
+      "function": "__init__",
+      "line": 9,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/models/window_attention.py",
+      "function": "forward",
+      "line": 16,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/runtime.py",
+      "function": "stable_hash",
+      "line": 18,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/runtime.py",
+      "function": "file_hash",
+      "line": 22,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/runtime.py",
+      "function": "write_json",
+      "line": 30,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/runtime.py",
+      "function": "read_config",
+      "line": 38,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/runtime.py",
+      "function": "seed_everything",
+      "line": 42,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/runtime.py",
+      "function": "environment",
+      "line": 55,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/runtime.py",
+      "function": "source_identity",
+      "line": 69,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/training/checkpoint.py",
+      "function": "rng_state",
+      "line": 16,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/training/checkpoint.py",
+      "function": "restore_rng",
+      "line": 22,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/training/checkpoint.py",
+      "function": "save_training",
+      "line": 31,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/training/checkpoint.py",
+      "function": "restore_training",
+      "line": 55,
+      "complexity": 6,
+      "coverage": 1.0,
+      "crap": 6.0
+    },
+    {
+      "file": "adaptok_hr/training/checkpoint.py",
+      "function": "read_log_rows",
+      "line": 73,
+      "complexity": 4,
+      "coverage": 0.9,
+      "crap": 4.016
+    },
+    {
+      "file": "adaptok_hr/training/checkpoint.py",
+      "function": "reconcile_log",
+      "line": 85,
+      "complexity": 8,
+      "coverage": 0.9285714285714286,
+      "crap": 8.02332361516035
+    },
+    {
+      "file": "adaptok_hr/training/checkpoint.py",
+      "function": "load_model",
+      "line": 101,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/training/fine_detail.py",
+      "function": "ordered_bins",
+      "line": 7,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/training/fine_detail.py",
+      "function": "detail_targets",
+      "line": 16,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/training/fine_detail.py",
+      "function": "suffix_angular_loss",
+      "line": 26,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/training/fine_detail.py",
+      "function": "suffix_supervision",
+      "line": 33,
+      "complexity": 5,
+      "coverage": 0.9230769230769231,
+      "crap": 5.011379153390988
+    },
+    {
+      "file": "adaptok_hr/training/losses.py",
+      "function": "high_frequency_l1",
+      "line": 8,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/training/losses.py",
+      "function": "__init__",
+      "line": 18,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/training/losses.py",
+      "function": "validate_objective",
+      "line": 33,
+      "complexity": 7,
+      "coverage": 0.75,
+      "crap": 7.765625
+    },
+    {
+      "file": "adaptok_hr/training/losses.py",
+      "function": "unified_weights_valid",
+      "line": 42,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/training/losses.py",
+      "function": "sample_views",
+      "line": 46,
+      "complexity": 3,
+      "coverage": 0.9,
+      "crap": 3.009
+    },
+    {
+      "file": "adaptok_hr/training/losses.py",
+      "function": "perception",
+      "line": 57,
+      "complexity": 6,
+      "coverage": 0.8571428571428571,
+      "crap": 6.104956268221574
+    },
+    {
+      "file": "adaptok_hr/training/losses.py",
+      "function": "distortion",
+      "line": 74,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/training/losses.py",
+      "function": "temporal",
+      "line": 86,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "frame_objective",
+      "line": 27,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "active_level_statistics",
+      "line": 63,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "module_change_norms",
+      "line": 77,
+      "complexity": 6,
+      "coverage": 1.0,
+      "crap": 6.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "snapshot_parameters",
+      "line": 89,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "sequence_length",
+      "line": 177,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "append_row",
+      "line": 181,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "prepare_run",
+      "line": 188,
+      "complexity": 5,
+      "coverage": 1.0,
+      "crap": 5.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "training_records",
+      "line": 208,
+      "complexity": 5,
+      "coverage": 0.8571428571428571,
+      "crap": 5.072886297376093
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "validation_artifact",
+      "line": 217,
+      "complexity": 1,
+      "coverage": 0.25,
+      "crap": 1.421875
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "checkpoint_artifact",
+      "line": 225,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "periodic_artifacts",
+      "line": 231,
+      "complexity": 6,
+      "coverage": 0.8,
+      "crap": 6.288
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "print_progress",
+      "line": 239,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "exclusive_run",
+      "line": 246,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "run_training",
+      "line": 257,
+      "complexity": 6,
+      "coverage": 0.9655172413793104,
+      "crap": 6.0014760752798395
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "main",
+      "line": 291,
+      "complexity": 1,
+      "coverage": 0.125,
+      "crap": 1.669921875
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "training_parser",
+      "line": 301,
+      "complexity": 1,
+      "coverage": 0.16666666666666666,
+      "crap": 1.5787037037037037
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "execute_training",
+      "line": 309,
+      "complexity": 1,
+      "coverage": 0.3333333333333333,
+      "crap": 1.2962962962962963
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "__init__",
+      "line": 96,
+      "complexity": 8,
+      "coverage": 0.7692307692307693,
+      "crap": 8.78652708238507
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "budgets",
+      "line": 113,
+      "complexity": 6,
+      "coverage": 1.0,
+      "crap": 6.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "paired_budgets",
+      "line": 126,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "backward_clip",
+      "line": 135,
+      "complexity": 5,
+      "coverage": 1.0,
+      "crap": 5.0
+    },
+    {
+      "file": "adaptok_hr/training/train.py",
+      "function": "update",
+      "line": 151,
+      "complexity": 7,
+      "coverage": 1.0,
+      "crap": 7.0
+    },
+    {
+      "file": "adaptok_hr/training/train_scorer.py",
+      "function": "save_scorer",
+      "line": 17,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "adaptok_hr/training/train_scorer.py",
+      "function": "restore_scorer",
+      "line": 31,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/training/train_scorer.py",
+      "function": "check_readiness",
+      "line": 43,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "adaptok_hr/training/train_scorer.py",
+      "function": "train_scorer",
+      "line": 51,
+      "complexity": 8,
+      "coverage": 0.9375,
+      "crap": 8.015625
+    },
+    {
+      "file": "adaptok_hr/training/train_scorer.py",
+      "function": "main",
+      "line": 86,
+      "complexity": 1,
+      "coverage": 0.14285714285714285,
+      "crap": 1.6297376093294462
+    }
+  ],
+  "crap_over_10": [
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "flop_analysis",
+      "line": 89,
+      "complexity": 4,
+      "coverage": 0,
+      "crap": 20
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "condition_summary",
+      "line": 103,
+      "complexity": 7,
+      "coverage": 0,
+      "crap": 56
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "benchmark_condition",
+      "line": 114,
+      "complexity": 3,
+      "coverage": 0,
+      "crap": 12
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "benchmark",
+      "line": 132,
+      "complexity": 5,
+      "coverage": 0,
+      "crap": 30
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "main",
+      "line": 149,
+      "complexity": 6,
+      "coverage": 0,
+      "crap": 42
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "__init__",
+      "line": 22,
+      "complexity": 3,
+      "coverage": 0,
+      "crap": 12
+    },
+    {
+      "file": "adaptok_hr/evaluation/benchmark.py",
+      "function": "finish",
+      "line": 44,
+      "complexity": 4,
+      "coverage": 0,
+      "crap": 20
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "metric_manifest",
+      "line": 85,
+      "complexity": 4,
+      "coverage": 0.16666666666666666,
+      "crap": 13.259259259259261
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "validate_fast",
+      "line": 182,
+      "complexity": 6,
+      "coverage": 0.08333333333333333,
+      "crap": 33.729166666666664
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "select_sources",
+      "line": 203,
+      "complexity": 7,
+      "coverage": 0.2,
+      "crap": 32.08800000000001
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "prepare_evaluation",
+      "line": 210,
+      "complexity": 7,
+      "coverage": 0.06666666666666667,
+      "crap": 46.83881481481482
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "evaluate_budget",
+      "line": 232,
+      "complexity": 4,
+      "coverage": 0.07692307692307693,
+      "crap": 16.584433318161132
+    },
+    {
+      "file": "adaptok_hr/evaluation/evaluate.py",
+      "function": "main",
+      "line": 249,
+      "complexity": 3,
+      "coverage": 0.037037037037037035,
+      "crap": 11.036579789666211
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "training_table",
+      "line": 38,
+      "complexity": 7,
+      "coverage": 0.1111111111111111,
+      "crap": 41.41426611796982
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "rate_distortion_data",
+      "line": 94,
+      "complexity": 5,
+      "coverage": 0.1,
+      "crap": 23.225
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "draw_rd",
+      "line": 110,
+      "complexity": 6,
+      "coverage": 0.07142857142857142,
+      "crap": 34.82361516034986
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "sample_artifacts",
+      "line": 127,
+      "complexity": 4,
+      "coverage": 0.05,
+      "crap": 17.717999999999996
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "deliverable_sections",
+      "line": 150,
+      "complexity": 5,
+      "coverage": 0.0625,
+      "crap": 25.599365234375
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "export_evidence",
+      "line": 172,
+      "complexity": 9,
+      "coverage": 0.05,
+      "crap": 78.447375
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "media_evidence",
+      "line": 201,
+      "complexity": 4,
+      "coverage": 0.16666666666666666,
+      "crap": 13.259259259259261
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "draw_curves",
+      "line": 210,
+      "complexity": 9,
+      "coverage": 0.05,
+      "crap": 78.447375
+    },
+    {
+      "file": "adaptok_hr/evaluation/report.py",
+      "function": "main",
+      "line": 234,
+      "complexity": 9,
+      "coverage": 0.02631578947368421,
+      "crap": 83.77206954366527
+    }
+  ],
+  "duplicates_over_08": []
+}

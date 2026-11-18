@@ -1,0 +1,96 @@
+benchmark:
+  batch_size: 1
+  repeats: 20
+  warmup: 5
+data:
+  cp_manifest_directory: data/manifests
+  external_sources: []
+  index: data/adaptok_hr/index.json
+evaluation:
+  amp_bf16: true
+  frames: 64
+  validation_ids:
+  - DAVIS2017:blackswan
+  - DAVIS2017:car-roundabout
+  - DAVIS2017:dog
+model:
+  attention_blocks: 1
+  budgets:
+  - 256
+  - 512
+  - 1024
+  - 2048
+  channels:
+  - 48
+  - 64
+  - 96
+  - 128
+  - 192
+  - 192
+  - 192
+  codebook_size: 8192
+  decoder_channels:
+  - 192
+  - 128
+  - 96
+  - 64
+  - 32
+  - 24
+  embedding_dim: 16
+  gop: 32
+  gradient_checkpointing: true
+  heads: 6
+  height: 1080
+  temporal: true
+  width: 1920
+  window: 4
+  codebook_mode: shared
+  loss_scope: active_prefix
+  fine_input: local_residual
+  fine_decoder: masked_s32_v1
+training:
+  amp_bf16: true
+  batch_sequences: 1
+  budget_mode: paired
+  checkpoint_every: 100
+  fixed_budget: 2048
+  gradient_clip: 1.0
+  learning_rate: 0.0001
+  losses:
+    l1: 1.0
+    perceptual: 0.23709576
+    vq: 1.0
+  milestones:
+  - 1600
+  nested_every: 4
+  seed: 20261118
+  sequence_schedule:
+  - - 0
+    - 4
+  tbptt: 2
+  validation_every: 100
+  weight_decay: 0.01
+  model_seed: 20261118
+  budget_seed: 20261120
+  extra_checkpoints: []
+  paired_probability: 0.5
+  reconstruction:
+    mode: unified
+    network: vgg
+    global_size:
+    - 270
+    - 480
+    crop_size: 256
+    crop_seed: 20261201
+experiment:
+  family: unified
+  stage: A
+  seed: 1
+  arm: U2
+  name: S1_U2
+  initialization: D3_step_1300_fork
+  parent_checkpoint_sha256: 7084f54c4e54494cba3979d83c92851527e834f7f6bdcfe4102bdf46e99dfa19
+  calibration_sha256: 4bafb181a1d80c3f1986dbe573fe4b73c5cf62bcb5359cb6ea39486e2cab264f
+run_scope:
+  overfit: null
+  overfit_frames: 4

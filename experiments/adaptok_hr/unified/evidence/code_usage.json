@@ -1,0 +1,645 @@
+{
+  "scope": "Post-hoc transmitted-code diagnostics; these statistics do not select gates.\n\nEmpirical ID entropy describes code frequencies, not semantic information bits.\nUse complete native evaluations only, on each model's real K2048 history.\n",
+  "results": {
+    "S1_N0/1000": {
+      "summary_sha256": "8e3fdfc152a6c37ea333b8c87743261a2f7102f640e2ee811de5009ec9661603",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 353,
+          "maximum_fraction": 0.09216687952320136,
+          "empirical_id_entropy_bits": 5.209741155709761,
+          "frames": 174,
+          "mean_frame_unique_ids": 35.833333333333336,
+          "mean_frame_maximum_fraction": 0.1998297147722435
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 55,
+          "maximum_fraction": 0.37503944106378184,
+          "empirical_id_entropy_bits": 2.2906388141665324,
+          "frames": 174,
+          "mean_frame_unique_ids": 9.637931034482758,
+          "mean_frame_maximum_fraction": 0.4266396213657877
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 3386,
+          "maximum_fraction": 0.4268808218841399,
+          "empirical_id_entropy_bits": 3.045746914724935,
+          "frames": 174,
+          "mean_frame_unique_ids": 109.40229885057471,
+          "mean_frame_maximum_fraction": 0.42742153513407233
+        }
+      }
+    },
+    "S1_N0/300": {
+      "summary_sha256": "409416393bfef49a9c0f1a4e11cd7c8ef6c70f1949028751876f416041b4bcc8",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 127,
+          "maximum_fraction": 0.5161345253299277,
+          "empirical_id_entropy_bits": 2.7312086881568525,
+          "frames": 174,
+          "mean_frame_unique_ids": 14.666666666666666,
+          "mean_frame_maximum_fraction": 0.5328224776500639
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 3,
+          "maximum_fraction": 0.9404327248140636,
+          "empirical_id_entropy_bits": 0.33142298003394394,
+          "frames": 174,
+          "mean_frame_unique_ids": 2.1724137931034484,
+          "mean_frame_maximum_fraction": 0.9404327248140635
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 4541,
+          "maximum_fraction": 0.38321822695209773,
+          "empirical_id_entropy_bits": 3.5735530565068623,
+          "frames": 174,
+          "mean_frame_unique_ids": 182.1206896551724,
+          "mean_frame_maximum_fraction": 0.39259468626342564
+        }
+      }
+    },
+    "S1_N1/1000": {
+      "summary_sha256": "ed715d4abdee281fb894954f950f21aa7558148e7fa28aa681606f724cd59fc7",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 113,
+          "maximum_fraction": 0.16573009791400595,
+          "empirical_id_entropy_bits": 3.711066066324377,
+          "frames": 174,
+          "mean_frame_unique_ids": 19.21264367816092,
+          "mean_frame_maximum_fraction": 0.2707109408258833
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 89,
+          "maximum_fraction": 0.39808429118773947,
+          "empirical_id_entropy_bits": 2.888167592206307,
+          "frames": 174,
+          "mean_frame_unique_ids": 18.17241379310345,
+          "mean_frame_maximum_fraction": 0.39890691908947484
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 1642,
+          "maximum_fraction": 0.10669255536166343,
+          "empirical_id_entropy_bits": 4.160848626808001,
+          "frames": 174,
+          "mean_frame_unique_ids": 66.91954022988506,
+          "mean_frame_maximum_fraction": 0.11660153529792482
+        }
+      }
+    },
+    "S1_N1/300": {
+      "summary_sha256": "5608cbf50478c107dea3410c1006045eb8ecf6fea2641e373b1bea2b2f9c9074",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 22,
+          "maximum_fraction": 0.46773094934014475,
+          "empirical_id_entropy_bits": 1.969976074794003,
+          "frames": 174,
+          "mean_frame_unique_ids": 6.5344827586206895,
+          "mean_frame_maximum_fraction": 0.5556406981694338
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 1,
+          "maximum_fraction": 1.0,
+          "empirical_id_entropy_bits": -0.0,
+          "frames": 174,
+          "mean_frame_unique_ids": 1.0,
+          "mean_frame_maximum_fraction": 1.0
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 2758,
+          "maximum_fraction": 0.2273944994715757,
+          "empirical_id_entropy_bits": 4.691633829677593,
+          "frames": 174,
+          "mean_frame_unique_ids": 135.31034482758622,
+          "mean_frame_maximum_fraction": 0.22765256715904345
+        }
+      }
+    },
+    "S1_N2/1000": {
+      "summary_sha256": "272bc6321cb388db7954b0d894cee7e26c8f6324ac51612999de4c03906b3e9b",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 114,
+          "maximum_fraction": 0.2310770540655598,
+          "empirical_id_entropy_bits": 3.6129434701908,
+          "frames": 174,
+          "mean_frame_unique_ids": 18.896551724137932,
+          "mean_frame_maximum_fraction": 0.3167730949340145
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 62,
+          "maximum_fraction": 0.38734505296371424,
+          "empirical_id_entropy_bits": 2.536303797509303,
+          "frames": 174,
+          "mean_frame_unique_ids": 14.82183908045977,
+          "mean_frame_maximum_fraction": 0.3873450529637142
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 2,
+          "maximum_fraction": 0.9999959036875005,
+          "empirical_id_entropy_bits": 7.922241696981567e-05,
+          "frames": 174,
+          "mean_frame_unique_ids": 1.0057471264367817,
+          "mean_frame_maximum_fraction": 0.9999959036875006
+        }
+      }
+    },
+    "S1_N2/300": {
+      "summary_sha256": "9ea795c01638bad2b6069903b0628cf7edb3e6755c98c22adde6210cdf521da1",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 30,
+          "maximum_fraction": 0.5104299702000852,
+          "empirical_id_entropy_bits": 1.8943311058626755,
+          "frames": 174,
+          "mean_frame_unique_ids": 5.632183908045977,
+          "mean_frame_maximum_fraction": 0.5681992337164751
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 1,
+          "maximum_fraction": 1.0,
+          "empirical_id_entropy_bits": -0.0,
+          "frames": 174,
+          "mean_frame_unique_ids": 1.0,
+          "mean_frame_maximum_fraction": 1.0
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 1,
+          "maximum_fraction": 1.0,
+          "empirical_id_entropy_bits": -0.0,
+          "frames": 174,
+          "mean_frame_unique_ids": 1.0,
+          "mean_frame_maximum_fraction": 1.0
+        }
+      }
+    },
+    "S1_U0/1600": {
+      "summary_sha256": "9b467d02def481f0357dc706f5720fa7767503f6798779549365b04dbc8af558",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 313,
+          "maximum_fraction": 0.16202639421030227,
+          "empirical_id_entropy_bits": 4.927609768081865,
+          "frames": 174,
+          "mean_frame_unique_ids": 33.89655172413793,
+          "mean_frame_maximum_fraction": 0.22392507449978713
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 315,
+          "maximum_fraction": 0.18347982871309443,
+          "empirical_id_entropy_bits": 4.803356145942026,
+          "frames": 174,
+          "mean_frame_unique_ids": 55.63793103448276,
+          "mean_frame_maximum_fraction": 0.21917962587333786
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 2497,
+          "maximum_fraction": 0.0605312098049336,
+          "empirical_id_entropy_bits": 7.046504718501238,
+          "frames": 174,
+          "mean_frame_unique_ids": 223.2471264367816,
+          "mean_frame_maximum_fraction": 0.061325894429834264
+        }
+      }
+    },
+    "S1_U1/1600": {
+      "summary_sha256": "98aa3ef4d95db065ce1ccff2e80c847306ba0f7c19f87158e4f518503458bfc2",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 415,
+          "maximum_fraction": 0.13303533418475946,
+          "empirical_id_entropy_bits": 5.375505128113897,
+          "frames": 174,
+          "mean_frame_unique_ids": 41.724137931034484,
+          "mean_frame_maximum_fraction": 0.22337164750957855
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 327,
+          "maximum_fraction": 0.13796484110885734,
+          "empirical_id_entropy_bits": 4.9724753816186436,
+          "frames": 174,
+          "mean_frame_unique_ids": 60.85057471264368,
+          "mean_frame_maximum_fraction": 0.1793666892044174
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 2002,
+          "maximum_fraction": 0.07544588361556927,
+          "empirical_id_entropy_bits": 6.61562224402698,
+          "frames": 174,
+          "mean_frame_unique_ids": 179.01149425287358,
+          "mean_frame_maximum_fraction": 0.07576539599052932
+        }
+      }
+    },
+    "S1_U2/1600": {
+      "summary_sha256": "86f86f35e435b662784ea316094b0a5286a01da76d9917d09caeaa55f527ac6c",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 384,
+          "maximum_fraction": 0.14985100042571306,
+          "empirical_id_entropy_bits": 5.257673960527928,
+          "frames": 174,
+          "mean_frame_unique_ids": 38.91954022988506,
+          "mean_frame_maximum_fraction": 0.2081736909323116
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 395,
+          "maximum_fraction": 0.1251746675681767,
+          "empirical_id_entropy_bits": 5.301969638534781,
+          "frames": 174,
+          "mean_frame_unique_ids": 65.36206896551724,
+          "mean_frame_maximum_fraction": 0.14614604462474645
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 2254,
+          "maximum_fraction": 0.051404625556074425,
+          "empirical_id_entropy_bits": 7.0219672769328,
+          "frames": 174,
+          "mean_frame_unique_ids": 210.83908045977012,
+          "mean_frame_maximum_fraction": 0.05231400693096075
+        }
+      }
+    },
+    "S1_U3/1600": {
+      "summary_sha256": "f9bcb9bd41fcccd909752770b45594ca6e5a407f219b445eeaef105e73e7c4c4",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 298,
+          "maximum_fraction": 0.2190719455087271,
+          "empirical_id_entropy_bits": 4.8480386786630945,
+          "frames": 174,
+          "mean_frame_unique_ids": 34.5919540229885,
+          "mean_frame_maximum_fraction": 0.2635589612601107
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 339,
+          "maximum_fraction": 0.13217263917061078,
+          "empirical_id_entropy_bits": 5.009818249155406,
+          "frames": 174,
+          "mean_frame_unique_ids": 59.81609195402299,
+          "mean_frame_maximum_fraction": 0.15350462023890016
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 2154,
+          "maximum_fraction": 0.04934418036883198,
+          "empirical_id_entropy_bits": 7.027452535843976,
+          "frames": 174,
+          "mean_frame_unique_ids": 209.20114942528735,
+          "mean_frame_maximum_fraction": 0.05016344286872958
+        }
+      }
+    },
+    "S2_N0/1000": {
+      "summary_sha256": "795e2c6c96fb0ac80284039819f9540c08d085e53733d3b1cfaef4cce3d597c2",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 197,
+          "maximum_fraction": 0.17266922094508302,
+          "empirical_id_entropy_bits": 4.078600908029677,
+          "frames": 174,
+          "mean_frame_unique_ids": 25.591954022988507,
+          "mean_frame_maximum_fraction": 0.2912728820774798
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 92,
+          "maximum_fraction": 0.3716587784539103,
+          "empirical_id_entropy_bits": 2.3743884953977124,
+          "frames": 174,
+          "mean_frame_unique_ids": 14.028735632183908,
+          "mean_frame_maximum_fraction": 0.47416046878521523
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 3132,
+          "maximum_fraction": 0.4956701976880412,
+          "empirical_id_entropy_bits": 1.7466441145797,
+          "frames": 174,
+          "mean_frame_unique_ids": 64.69540229885058,
+          "mean_frame_maximum_fraction": 0.4976364276877955
+        }
+      }
+    },
+    "S2_N0/300": {
+      "summary_sha256": "b4629ae9511637a628e0f208cc26cc9440e78cbfef498c46c7cd47e5903cbc52",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 12,
+          "maximum_fraction": 0.30715197956577267,
+          "empirical_id_entropy_bits": 1.9197357362891019,
+          "frames": 174,
+          "mean_frame_unique_ids": 4.304597701149425,
+          "mean_frame_maximum_fraction": 0.4484035759897829
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 4,
+          "maximum_fraction": 0.9998647734956051,
+          "empirical_id_entropy_bits": 0.0020938003784605626,
+          "frames": 174,
+          "mean_frame_unique_ids": 1.0689655172413792,
+          "mean_frame_maximum_fraction": 0.9998647734956051
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 3492,
+          "maximum_fraction": 0.4807186570649102,
+          "empirical_id_entropy_bits": 2.0105702412340922,
+          "frames": 174,
+          "mean_frame_unique_ids": 83.13218390804597,
+          "mean_frame_maximum_fraction": 0.4862486789392189
+        }
+      }
+    },
+    "S2_N1/1000": {
+      "summary_sha256": "ea9ba06c98ab5fa6b18ed1085d2973af423077cbbfbef40315dea98745a86bbc",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 169,
+          "maximum_fraction": 0.2472967220093657,
+          "empirical_id_entropy_bits": 3.822123060727752,
+          "frames": 174,
+          "mean_frame_unique_ids": 23.057471264367816,
+          "mean_frame_maximum_fraction": 0.3208599404001703
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 12,
+          "maximum_fraction": 0.3478025693035835,
+          "empirical_id_entropy_bits": 1.9534387167795153,
+          "frames": 174,
+          "mean_frame_unique_ids": 5.4655172413793105,
+          "mean_frame_maximum_fraction": 0.3596348884381339
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 2007,
+          "maximum_fraction": 0.4845896723769263,
+          "empirical_id_entropy_bits": 1.5244822082797542,
+          "frames": 174,
+          "mean_frame_unique_ids": 44.86206896551724,
+          "mean_frame_maximum_fraction": 0.49517454387560317
+        }
+      }
+    },
+    "S2_N1/300": {
+      "summary_sha256": "cd0e0630e50f5e35fe29bd86f233cb979996b945066578319e136542be124c41",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 7,
+          "maximum_fraction": 0.34925500212856536,
+          "empirical_id_entropy_bits": 1.9265309629692606,
+          "frames": 174,
+          "mean_frame_unique_ids": 4.132183908045977,
+          "mean_frame_maximum_fraction": 0.42950191570881224
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 1,
+          "maximum_fraction": 1.0,
+          "empirical_id_entropy_bits": -0.0,
+          "frames": 174,
+          "mean_frame_unique_ids": 1.0,
+          "mean_frame_maximum_fraction": 1.0
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 2208,
+          "maximum_fraction": 0.42347268988456593,
+          "empirical_id_entropy_bits": 2.617296585105641,
+          "frames": 174,
+          "mean_frame_unique_ids": 76.56896551724138,
+          "mean_frame_maximum_fraction": 0.42411171463448605
+        }
+      }
+    },
+    "S2_N2/1000": {
+      "summary_sha256": "c1c37a85fbc12e6c1a23be0f56607eb21f0d68c5881e1a65150d63d40d9b6245",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 173,
+          "maximum_fraction": 0.2439761600681141,
+          "empirical_id_entropy_bits": 3.8261174087538383,
+          "frames": 174,
+          "mean_frame_unique_ids": 23.850574712643677,
+          "mean_frame_maximum_fraction": 0.32047679863771816
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 29,
+          "maximum_fraction": 0.36322965967996396,
+          "empirical_id_entropy_bits": 2.017619827387688,
+          "frames": 174,
+          "mean_frame_unique_ids": 7.241379310344827,
+          "mean_frame_maximum_fraction": 0.37233491097588456
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 1,
+          "maximum_fraction": 1.0,
+          "empirical_id_entropy_bits": -0.0,
+          "frames": 174,
+          "mean_frame_unique_ids": 1.0,
+          "mean_frame_maximum_fraction": 1.0
+        }
+      }
+    },
+    "S2_N2/300": {
+      "summary_sha256": "7486f7ff0a0195278d57de53d28991c7ec48c90bcd9f810ac3acd33610087e0d",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 25,
+          "maximum_fraction": 0.4792677735206471,
+          "empirical_id_entropy_bits": 1.828563910932444,
+          "frames": 174,
+          "mean_frame_unique_ids": 4.218390804597701,
+          "mean_frame_maximum_fraction": 0.5373350361856108
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 1,
+          "maximum_fraction": 1.0,
+          "empirical_id_entropy_bits": -0.0,
+          "frames": 174,
+          "mean_frame_unique_ids": 1.0,
+          "mean_frame_maximum_fraction": 1.0
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 1,
+          "maximum_fraction": 1.0,
+          "empirical_id_entropy_bits": -0.0,
+          "frames": 174,
+          "mean_frame_unique_ids": 1.0,
+          "mean_frame_maximum_fraction": 1.0
+        }
+      }
+    },
+    "S2_U0/1600": {
+      "summary_sha256": "875bf71da5156ebb3bf7281d05b29d457f91c35d716f707b65894b5bf4338d16",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 181,
+          "maximum_fraction": 0.19604086845466157,
+          "empirical_id_entropy_bits": 4.1682029020455325,
+          "frames": 174,
+          "mean_frame_unique_ids": 24.70689655172414,
+          "mean_frame_maximum_fraction": 0.2911451681566624
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 213,
+          "maximum_fraction": 0.2288708586883029,
+          "empirical_id_entropy_bits": 4.521222672153455,
+          "frames": 174,
+          "mean_frame_unique_ids": 49.07471264367816,
+          "mean_frame_maximum_fraction": 0.23113590263691683
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 2351,
+          "maximum_fraction": 0.06516413924185448,
+          "empirical_id_entropy_bits": 6.644743230192067,
+          "frames": 174,
+          "mean_frame_unique_ids": 204.6206896551724,
+          "mean_frame_maximum_fraction": 0.06599569067925054
+        }
+      }
+    },
+    "S2_U1/1600": {
+      "summary_sha256": "13e8911dbc2bf32426167e4b7d7a23ae54016369a816d7e1784ca94cfee9341f",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 232,
+          "maximum_fraction": 0.1621115368241805,
+          "empirical_id_entropy_bits": 4.490035648190087,
+          "frames": 174,
+          "mean_frame_unique_ids": 27.632183908045977,
+          "mean_frame_maximum_fraction": 0.24848871860366112
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 265,
+          "maximum_fraction": 0.1844940274960559,
+          "empirical_id_entropy_bits": 4.67322999403874,
+          "frames": 174,
+          "mean_frame_unique_ids": 52.206896551724135,
+          "mean_frame_maximum_fraction": 0.18931710615280592
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 1622,
+          "maximum_fraction": 0.06169865886728767,
+          "empirical_id_entropy_bits": 6.175728624732512,
+          "frames": 174,
+          "mean_frame_unique_ids": 135.83908045977012,
+          "mean_frame_maximum_fraction": 0.062153349554730834
+        }
+      }
+    },
+    "S2_U2/1600": {
+      "summary_sha256": "c9b6df47746f9799cb9775c70a9b570470eca5c8f3a8a90c74be2f095b08a702",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 181,
+          "maximum_fraction": 0.19987228607918264,
+          "empirical_id_entropy_bits": 4.224453230363153,
+          "frames": 174,
+          "mean_frame_unique_ids": 24.92528735632184,
+          "mean_frame_maximum_fraction": 0.28846317581949765
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 249,
+          "maximum_fraction": 0.20371872887085868,
+          "empirical_id_entropy_bits": 4.698630726987066,
+          "frames": 174,
+          "mean_frame_unique_ids": 52.3448275862069,
+          "mean_frame_maximum_fraction": 0.20429344151453685
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 2082,
+          "maximum_fraction": 0.05115065418110617,
+          "empirical_id_entropy_bits": 6.456543095312983,
+          "frames": 174,
+          "mean_frame_unique_ids": 162.51149425287358,
+          "mean_frame_maximum_fraction": 0.054099999180737504
+        }
+      }
+    },
+    "S2_U3/1600": {
+      "summary_sha256": "970a608ec01c44465d4839b65b2c6369e0f3c0ffc5ec83c3c9a9f8f60e71e469",
+      "levels": {
+        "base": {
+          "transmitted_ids": 23490,
+          "unique_ids": 200,
+          "maximum_fraction": 0.1828011919965943,
+          "empirical_id_entropy_bits": 4.325690579719631,
+          "frames": 174,
+          "mean_frame_unique_ids": 25.79310344827586,
+          "mean_frame_maximum_fraction": 0.2734355044699872
+        },
+        "medium": {
+          "transmitted_ids": 88740,
+          "unique_ids": 240,
+          "maximum_fraction": 0.20982645931935992,
+          "empirical_id_entropy_bits": 4.609020518064283,
+          "frames": 174,
+          "mean_frame_unique_ids": 51.02298850574713,
+          "mean_frame_maximum_fraction": 0.21013071895424837
+        },
+        "fine": {
+          "transmitted_ids": 244122,
+          "unique_ids": 2092,
+          "maximum_fraction": 0.05126125461859234,
+          "empirical_id_entropy_bits": 6.486643192249507,
+          "frames": 174,
+          "mean_frame_unique_ids": 164.06896551724137,
+          "mean_frame_maximum_fraction": 0.053927954055759
+        }
+      }
+    }
+  }
+}

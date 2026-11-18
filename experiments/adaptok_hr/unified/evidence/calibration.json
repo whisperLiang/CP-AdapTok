@@ -1,0 +1,601 @@
+{
+  "environment": {
+    "time": "2026-11-18T14:56:20.207136+08:00",
+    "timezone": "Asia/Shanghai",
+    "git": "1851ecf9fea2837781f099e34c1d5da68322ba2e",
+    "git_dirty": true,
+    "source_sha256": "6ff5db6ffe5606adb3e5486fa053086c5a2080f93034da3275ea9fa894d8322b",
+    "deterministic_algorithms": true,
+    "python_trace_enabled": false,
+    "branch": "experiment/adaptok-hr-unified",
+    "python": "3.12.13",
+    "torch": "2.9.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA H100 PCIe",
+    "driver": "580.159.03"
+  },
+  "input": {
+    "content_id": "DAVIS2017:bear",
+    "source_sha256": "125c531bad3184060d3deb436ebbddacabb27e6abc02c05542d2aeb61e9ef175",
+    "frame_indices": [
+      0,
+      1
+    ],
+    "source_resolution": [
+      1920,
+      1080
+    ],
+    "crop": [
+      0,
+      0,
+      1920,
+      1080
+    ],
+    "resized": false,
+    "engineering_crop": false,
+    "fps": 30,
+    "color_format": "RGB float32 [0,1]; OpenCV BGR->RGB"
+  },
+  "split": "train",
+  "method": "VGG lambda = Alex lambda * median(Alex/VGG RGB perceptual-gradient L2), equal-view mean; not an assertion of network-scale equivalence",
+  "chosen_weights": {
+    "alex": 0.1,
+    "vgg": 0.23709576
+  },
+  "gradient_ratios": [
+    2.3705967769328784,
+    1.826853899353881,
+    1.8133870403449666,
+    1.9170251793279545,
+    2.8355239851741176,
+    2.950110172480412,
+    2.874731470467279,
+    2.8214937113247838,
+    1.5690470895613688,
+    1.334422419290551,
+    1.3110409034747361,
+    1.3066530232057747,
+    2.5871607257107065,
+    2.4731284045299966,
+    2.4414752359662097,
+    2.3713183349281923
+  ],
+  "rows": [
+    {
+      "seed": 1,
+      "frame": 0,
+      "budget": 256,
+      "parent_checkpoint_sha256": "7084f54c4e54494cba3979d83c92851527e834f7f6bdcfe4102bdf46e99dfa19",
+      "crops": [
+        [
+          62,
+          283,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.018272995948791504,
+          "l1": 0.09857769310474396,
+          "perceptual": 0.8784934282302856,
+          "perceptual_global": 1.0296872854232788,
+          "perceptual_native_crop": 0.7272995710372925,
+          "rgb_perceptual_gradient_l2": 0.17554327845573425
+        },
+        "vgg": {
+          "mse": 0.018272995948791504,
+          "l1": 0.09857769310474396,
+          "perceptual": 0.7895593047142029,
+          "perceptual_global": 0.8830760717391968,
+          "perceptual_native_crop": 0.696042537689209,
+          "rgb_perceptual_gradient_l2": 0.07405024766921997
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "frame": 0,
+      "budget": 512,
+      "parent_checkpoint_sha256": "7084f54c4e54494cba3979d83c92851527e834f7f6bdcfe4102bdf46e99dfa19",
+      "crops": [
+        [
+          62,
+          283,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.016979942098259926,
+          "l1": 0.09528792649507523,
+          "perceptual": 0.8735573291778564,
+          "perceptual_global": 1.0194957256317139,
+          "perceptual_native_crop": 0.7276188731193542,
+          "rgb_perceptual_gradient_l2": 0.16848771274089813
+        },
+        "vgg": {
+          "mse": 0.016979942098259926,
+          "l1": 0.09528792649507523,
+          "perceptual": 0.7830504179000854,
+          "perceptual_global": 0.8643233776092529,
+          "perceptual_native_crop": 0.701777458190918,
+          "rgb_perceptual_gradient_l2": 0.09222834557294846
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "frame": 0,
+      "budget": 1024,
+      "parent_checkpoint_sha256": "7084f54c4e54494cba3979d83c92851527e834f7f6bdcfe4102bdf46e99dfa19",
+      "crops": [
+        [
+          62,
+          283,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.015684116631746292,
+          "l1": 0.0913839042186737,
+          "perceptual": 0.8667783737182617,
+          "perceptual_global": 1.0015321969985962,
+          "perceptual_native_crop": 0.7320245504379272,
+          "rgb_perceptual_gradient_l2": 0.17246602475643158
+        },
+        "vgg": {
+          "mse": 0.015684116631746292,
+          "l1": 0.0913839042186737,
+          "perceptual": 0.7635164260864258,
+          "perceptual_global": 0.8256112933158875,
+          "perceptual_native_crop": 0.7014215588569641,
+          "rgb_perceptual_gradient_l2": 0.09510712325572968
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "frame": 0,
+      "budget": 2048,
+      "parent_checkpoint_sha256": "7084f54c4e54494cba3979d83c92851527e834f7f6bdcfe4102bdf46e99dfa19",
+      "crops": [
+        [
+          62,
+          283,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.014650477096438408,
+          "l1": 0.08812084794044495,
+          "perceptual": 0.8666596412658691,
+          "perceptual_global": 0.9758074879646301,
+          "perceptual_native_crop": 0.7575117349624634,
+          "rgb_perceptual_gradient_l2": 0.1994164139032364
+        },
+        "vgg": {
+          "mse": 0.014650477096438408,
+          "l1": 0.08812084794044495,
+          "perceptual": 0.735103189945221,
+          "perceptual_global": 0.7778803706169128,
+          "perceptual_native_crop": 0.692326009273529,
+          "rgb_perceptual_gradient_l2": 0.10402388870716095
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "frame": 1,
+      "budget": 256,
+      "parent_checkpoint_sha256": "7084f54c4e54494cba3979d83c92851527e834f7f6bdcfe4102bdf46e99dfa19",
+      "crops": [
+        [
+          764,
+          440,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.015467586927115917,
+          "l1": 0.08941181004047394,
+          "perceptual": 0.9398711323738098,
+          "perceptual_global": 1.0055121183395386,
+          "perceptual_native_crop": 0.874230146408081,
+          "rgb_perceptual_gradient_l2": 0.18737663328647614
+        },
+        "vgg": {
+          "mse": 0.015467586927115917,
+          "l1": 0.08941181004047394,
+          "perceptual": 0.8036125898361206,
+          "perceptual_global": 0.8361619114875793,
+          "perceptual_native_crop": 0.7710632085800171,
+          "rgb_perceptual_gradient_l2": 0.06608183681964874
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "frame": 1,
+      "budget": 512,
+      "parent_checkpoint_sha256": "7084f54c4e54494cba3979d83c92851527e834f7f6bdcfe4102bdf46e99dfa19",
+      "crops": [
+        [
+          764,
+          440,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.015076898038387299,
+          "l1": 0.0886429101228714,
+          "perceptual": 0.9380899667739868,
+          "perceptual_global": 1.0040746927261353,
+          "perceptual_native_crop": 0.8721051812171936,
+          "rgb_perceptual_gradient_l2": 0.186527818441391
+        },
+        "vgg": {
+          "mse": 0.015076898038387299,
+          "l1": 0.0886429101228714,
+          "perceptual": 0.8026541471481323,
+          "perceptual_global": 0.8372987508773804,
+          "perceptual_native_crop": 0.7680095434188843,
+          "rgb_perceptual_gradient_l2": 0.06322740763425827
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "frame": 1,
+      "budget": 1024,
+      "parent_checkpoint_sha256": "7084f54c4e54494cba3979d83c92851527e834f7f6bdcfe4102bdf46e99dfa19",
+      "crops": [
+        [
+          764,
+          440,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.014345607720315456,
+          "l1": 0.08631957322359085,
+          "perceptual": 0.9387762546539307,
+          "perceptual_global": 0.9975985884666443,
+          "perceptual_native_crop": 0.8799539804458618,
+          "rgb_perceptual_gradient_l2": 0.1937415897846222
+        },
+        "vgg": {
+          "mse": 0.014345607720315456,
+          "l1": 0.08631957322359085,
+          "perceptual": 0.7885791659355164,
+          "perceptual_global": 0.8106164932250977,
+          "perceptual_native_crop": 0.7665418386459351,
+          "rgb_perceptual_gradient_l2": 0.0673946738243103
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "frame": 1,
+      "budget": 2048,
+      "parent_checkpoint_sha256": "7084f54c4e54494cba3979d83c92851527e834f7f6bdcfe4102bdf46e99dfa19",
+      "crops": [
+        [
+          764,
+          440,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.013660605996847153,
+          "l1": 0.08393346518278122,
+          "perceptual": 0.9365392327308655,
+          "perceptual_global": 0.9815154671669006,
+          "perceptual_native_crop": 0.8915629982948303,
+          "rgb_perceptual_gradient_l2": 0.19686903059482574
+        },
+        "vgg": {
+          "mse": 0.013660605996847153,
+          "l1": 0.08393346518278122,
+          "perceptual": 0.7705951929092407,
+          "perceptual_global": 0.7795307636260986,
+          "perceptual_native_crop": 0.761659562587738,
+          "rgb_perceptual_gradient_l2": 0.06977475434541702
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "frame": 0,
+      "budget": 256,
+      "parent_checkpoint_sha256": "1e5d5d8766c28c18639b546a51a235fc14a31b4e46e2724ce044d7b76ed1b1de",
+      "crops": [
+        [
+          1572,
+          808,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.020581502467393875,
+          "l1": 0.10529150813817978,
+          "perceptual": 0.9266029000282288,
+          "perceptual_global": 1.0263657569885254,
+          "perceptual_native_crop": 0.8268400430679321,
+          "rgb_perceptual_gradient_l2": 0.12737245857715607
+        },
+        "vgg": {
+          "mse": 0.020581502467393875,
+          "l1": 0.10529150813817978,
+          "perceptual": 0.8052175641059875,
+          "perceptual_global": 0.8811305165290833,
+          "perceptual_native_crop": 0.7293046116828918,
+          "rgb_perceptual_gradient_l2": 0.0811782255768776
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "frame": 0,
+      "budget": 512,
+      "parent_checkpoint_sha256": "1e5d5d8766c28c18639b546a51a235fc14a31b4e46e2724ce044d7b76ed1b1de",
+      "crops": [
+        [
+          1572,
+          808,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.018972575664520264,
+          "l1": 0.10122890770435333,
+          "perceptual": 0.9196971654891968,
+          "perceptual_global": 1.0150703191757202,
+          "perceptual_native_crop": 0.8243240118026733,
+          "rgb_perceptual_gradient_l2": 0.13005724549293518
+        },
+        "vgg": {
+          "mse": 0.018972575664520264,
+          "l1": 0.10122890770435333,
+          "perceptual": 0.7952357530593872,
+          "perceptual_global": 0.8599729537963867,
+          "perceptual_native_crop": 0.7304986119270325,
+          "rgb_perceptual_gradient_l2": 0.09746332466602325
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "frame": 0,
+      "budget": 1024,
+      "parent_checkpoint_sha256": "1e5d5d8766c28c18639b546a51a235fc14a31b4e46e2724ce044d7b76ed1b1de",
+      "crops": [
+        [
+          1572,
+          808,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.017577866092324257,
+          "l1": 0.09743760526180267,
+          "perceptual": 0.9100034236907959,
+          "perceptual_global": 1.0003259181976318,
+          "perceptual_native_crop": 0.8196809887886047,
+          "rgb_perceptual_gradient_l2": 0.12257078289985657
+        },
+        "vgg": {
+          "mse": 0.017577866092324257,
+          "l1": 0.09743760526180267,
+          "perceptual": 0.7728301286697388,
+          "perceptual_global": 0.8245759606361389,
+          "perceptual_native_crop": 0.7210843563079834,
+          "rgb_perceptual_gradient_l2": 0.09349119663238525
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "frame": 0,
+      "budget": 2048,
+      "parent_checkpoint_sha256": "1e5d5d8766c28c18639b546a51a235fc14a31b4e46e2724ce044d7b76ed1b1de",
+      "crops": [
+        [
+          1572,
+          808,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.016253545880317688,
+          "l1": 0.09367434680461884,
+          "perceptual": 0.9041646718978882,
+          "perceptual_global": 0.9801572561264038,
+          "perceptual_native_crop": 0.8281720280647278,
+          "rgb_perceptual_gradient_l2": 0.12089479714632034
+        },
+        "vgg": {
+          "mse": 0.016253545880317688,
+          "l1": 0.09367434680461884,
+          "perceptual": 0.7494146823883057,
+          "perceptual_global": 0.7799761891365051,
+          "perceptual_native_crop": 0.718853235244751,
+          "rgb_perceptual_gradient_l2": 0.09252249449491501
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "frame": 1,
+      "budget": 256,
+      "parent_checkpoint_sha256": "1e5d5d8766c28c18639b546a51a235fc14a31b4e46e2724ce044d7b76ed1b1de",
+      "crops": [
+        [
+          755,
+          381,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.015671880915760994,
+          "l1": 0.09079467505216599,
+          "perceptual": 0.9371029138565063,
+          "perceptual_global": 1.0193452835083008,
+          "perceptual_native_crop": 0.8548605442047119,
+          "rgb_perceptual_gradient_l2": 0.18365998566150665
+        },
+        "vgg": {
+          "mse": 0.015671880915760994,
+          "l1": 0.09079467505216599,
+          "perceptual": 0.7817870378494263,
+          "perceptual_global": 0.8231469392776489,
+          "perceptual_native_crop": 0.7404270768165588,
+          "rgb_perceptual_gradient_l2": 0.07098901271820068
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "frame": 1,
+      "budget": 512,
+      "parent_checkpoint_sha256": "1e5d5d8766c28c18639b546a51a235fc14a31b4e46e2724ce044d7b76ed1b1de",
+      "crops": [
+        [
+          755,
+          381,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.015200832858681679,
+          "l1": 0.08914962410926819,
+          "perceptual": 0.9392231106758118,
+          "perceptual_global": 1.0194872617721558,
+          "perceptual_native_crop": 0.8589589595794678,
+          "rgb_perceptual_gradient_l2": 0.1832798272371292
+        },
+        "vgg": {
+          "mse": 0.015200832858681679,
+          "l1": 0.08914962410926819,
+          "perceptual": 0.7797853946685791,
+          "perceptual_global": 0.820952832698822,
+          "perceptual_native_crop": 0.7386179566383362,
+          "rgb_perceptual_gradient_l2": 0.07410849630832672
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "frame": 1,
+      "budget": 1024,
+      "parent_checkpoint_sha256": "1e5d5d8766c28c18639b546a51a235fc14a31b4e46e2724ce044d7b76ed1b1de",
+      "crops": [
+        [
+          755,
+          381,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.014600306749343872,
+          "l1": 0.08725648373365402,
+          "perceptual": 0.9346829056739807,
+          "perceptual_global": 1.0123307704925537,
+          "perceptual_native_crop": 0.8570350408554077,
+          "rgb_perceptual_gradient_l2": 0.18529891967773438
+        },
+        "vgg": {
+          "mse": 0.014600306749343872,
+          "l1": 0.08725648373365402,
+          "perceptual": 0.7664581537246704,
+          "perceptual_global": 0.7939227223396301,
+          "perceptual_native_crop": 0.7389935255050659,
+          "rgb_perceptual_gradient_l2": 0.07589629292488098
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "frame": 1,
+      "budget": 2048,
+      "parent_checkpoint_sha256": "1e5d5d8766c28c18639b546a51a235fc14a31b4e46e2724ce044d7b76ed1b1de",
+      "crops": [
+        [
+          755,
+          381,
+          256,
+          256
+        ]
+      ],
+      "networks": {
+        "alex": {
+          "mse": 0.013960043899714947,
+          "l1": 0.08522506803274155,
+          "perceptual": 0.9291243553161621,
+          "perceptual_global": 0.9958163499832153,
+          "perceptual_native_crop": 0.8624324202537537,
+          "rgb_perceptual_gradient_l2": 0.1898568570613861
+        },
+        "vgg": {
+          "mse": 0.013960043899714947,
+          "l1": 0.08522506803274155,
+          "perceptual": 0.7530206441879272,
+          "perceptual_global": 0.7677861452102661,
+          "perceptual_native_crop": 0.7382552027702332,
+          "rgb_perceptual_gradient_l2": 0.0800638422369957
+        }
+      }
+    }
+  ],
+  "metrics": {
+    "versions": {
+      "lpips": "0.1.4",
+      "DISTS-pytorch": "0.1"
+    },
+    "weights": {
+      "/home/whisperliang/.codex/worktrees/adaptok-hr-unified/CP-AdapTok/.venv-native/lib/python3.12/site-packages/DISTS_pytorch/weights.pt": "f5e65c96230b7f6ca995691647d482237e4cab8a50c5c4a5784f219ef0748218",
+      "/home/whisperliang/.codex/worktrees/adaptok-hr-unified/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+      "/home/whisperliang/.cache/torch/hub/checkpoints/alexnet-owt-7be5be79.pth": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02",
+      "/home/whisperliang/.cache/torch/hub/checkpoints/vgg16-397923af.pth": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0"
+    },
+    "rgb_range": [
+      0,
+      1
+    ],
+    "lpips": "Alex v0.1, input RGB*2-1",
+    "dists": "CP MetricSuite distributed alpha/beta; RGB [0,1]",
+    "resolution": [
+      1080,
+      1920
+    ],
+    "metric_dtype": "float32",
+    "metric_batch_size": 1
+  }
+}

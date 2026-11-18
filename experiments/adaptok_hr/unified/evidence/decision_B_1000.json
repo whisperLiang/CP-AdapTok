@@ -1,0 +1,183 @@
+{
+  "advance": false,
+  "outcomes": {
+    "N1": {
+      "pass": false,
+      "seeds": {
+        "1": {
+          "protected": {
+            "256": {
+              "psnr": true,
+              "lpips": false,
+              "dists": true
+            },
+            "512": {
+              "psnr": true,
+              "lpips": false,
+              "dists": true
+            },
+            "1024": {
+              "psnr": true,
+              "lpips": false,
+              "dists": true
+            },
+            "2048": {
+              "psnr": true,
+              "lpips": true,
+              "dists": true
+            }
+          },
+          "protected_pass": false,
+          "mean_lpips_improves": false,
+          "same_state_psnr_positive": true,
+          "same_state_lpips_positive": true,
+          "fine_shuffle_positive": true,
+          "fine_cross_positive": true
+        },
+        "2": {
+          "protected": {
+            "256": {
+              "psnr": true,
+              "lpips": true,
+              "dists": true
+            },
+            "512": {
+              "psnr": true,
+              "lpips": true,
+              "dists": true
+            },
+            "1024": {
+              "psnr": true,
+              "lpips": true,
+              "dists": true
+            },
+            "2048": {
+              "psnr": true,
+              "lpips": true,
+              "dists": true
+            }
+          },
+          "protected_pass": true,
+          "mean_lpips_improves": true,
+          "same_state_psnr_positive": true,
+          "same_state_lpips_positive": true,
+          "fine_shuffle_positive": true,
+          "fine_cross_positive": true
+        }
+      },
+      "stability_pass": true
+    },
+    "N2": {
+      "pass": false,
+      "seeds": {
+        "1": {
+          "protected": {
+            "256": {
+              "psnr": true,
+              "lpips": false,
+              "dists": true
+            },
+            "512": {
+              "psnr": true,
+              "lpips": false,
+              "dists": true
+            },
+            "1024": {
+              "psnr": true,
+              "lpips": false,
+              "dists": false
+            },
+            "2048": {
+              "psnr": true,
+              "lpips": false,
+              "dists": false
+            }
+          },
+          "protected_pass": false,
+          "mean_lpips_improves": false,
+          "same_state_psnr_positive": true,
+          "same_state_lpips_positive": false,
+          "fine_shuffle_positive": true,
+          "fine_cross_positive": true
+        },
+        "2": {
+          "protected": {
+            "256": {
+              "psnr": true,
+              "lpips": true,
+              "dists": true
+            },
+            "512": {
+              "psnr": true,
+              "lpips": true,
+              "dists": true
+            },
+            "1024": {
+              "psnr": true,
+              "lpips": true,
+              "dists": true
+            },
+            "2048": {
+              "psnr": true,
+              "lpips": true,
+              "dists": true
+            }
+          },
+          "protected_pass": true,
+          "mean_lpips_improves": true,
+          "same_state_psnr_positive": true,
+          "same_state_lpips_positive": false,
+          "fine_shuffle_positive": false,
+          "fine_cross_positive": false
+        }
+      },
+      "stability_pass": true
+    }
+  },
+  "action": "archive_negative_and_stop",
+  "stability": {
+    "S1_N0": {
+      "updates": 1000,
+      "finite_gradients": true,
+      "final_no_collapse": true,
+      "positive_vq": true,
+      "positive_level_variance": true
+    },
+    "S1_N1": {
+      "updates": 1000,
+      "finite_gradients": true,
+      "final_no_collapse": true,
+      "positive_vq": true,
+      "positive_level_variance": true
+    },
+    "S1_N2": {
+      "updates": 1000,
+      "finite_gradients": true,
+      "final_no_collapse": true,
+      "positive_vq": true,
+      "positive_level_variance": true
+    },
+    "S2_N0": {
+      "updates": 1000,
+      "finite_gradients": true,
+      "final_no_collapse": true,
+      "positive_vq": true,
+      "positive_level_variance": true
+    },
+    "S2_N1": {
+      "updates": 1000,
+      "finite_gradients": true,
+      "final_no_collapse": true,
+      "positive_vq": true,
+      "positive_level_variance": true
+    },
+    "S2_N2": {
+      "updates": 1000,
+      "finite_gradients": true,
+      "final_no_collapse": true,
+      "positive_vq": true,
+      "positive_level_variance": true
+    }
+  },
+  "continuation_arms": []
+}
