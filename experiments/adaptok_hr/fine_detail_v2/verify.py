@@ -33,7 +33,8 @@ def old_inputs():
 
 def protected_inputs():
     base = PROTOCOL["base_commit"]
-    paths = ("cp_adaptok", "third_party", "configs/adaptok_hr", "experiments/adaptok_hr/fine_recovery",
+    paths = ("cp_adaptok", "third_party", "configs/adaptok_hr", "data/manifests", "experiments/adaptok_hr/evidence",
+             "results/original_adaptok_1080p", "experiments/adaptok_hr/fine_recovery",
              "docs/adaptok_hr_fine_recovery_report.md", "docs/adaptok_hr_fine_recovery_work_log.md")
     identities = {}
     for name in paths:
@@ -49,6 +50,18 @@ def protected_inputs():
         if digest != read(path.with_suffix(".json"))["checkpoint_sha256"]:
             raise ValueError(f"protected weights changed: {path}")
         identities[str(path)] = digest
+    cp = read("results/large_scale/formal_20261116/final_selection.json")["selected"]
+    official = read("results/original_adaptok_1080p/checkpoint_manifest.json")
+    directory = Path("checkpoints/original_adaptok_official") / official["revision"]
+    files = {directory / "config.json": official["config_sha256"],
+             directory / "model.safetensors": official["model_safetensors_sha256"]}
+    for arm in ("B0", "B1"):
+        path = Path("results/large_scale/formal_20261116/stage3") / arm / "development_calibrated/calibrated.pt"
+        files[path] = cp[arm]["sha256"]
+    for path, expected in files.items():
+        if file_hash(path) != expected:
+            raise ValueError(f"protected CP or official artifact changed: {path}")
+        identities[str(path)] = expected
     return identities
 
 
