@@ -1,0 +1,67 @@
+{
+  "S1_D0": {
+    "packets_reparsed": 1392,
+    "interventions": 174,
+    "common_donor_frames": 150,
+    "checkpoint_sha256": "d8584fc8f9e30d19633f428574f79d37be6c538f65f7e904d8004ad0c2b55349",
+    "input_hashes_match_legacy": true,
+    "native_zero_start": {
+      "parent": "S1_R11",
+      "native_frame_budget_pairs": 8,
+      "evidence_sha256": "a9162b52ec6b32021204a6871feea34661474fb8ba7e70ad4da7483344c8664d"
+    },
+    "archive_sha256": "dc047de361027c6a2c2c84c0da48596f04d41e8c9f7c216e51cccadc0fa11176"
+  },
+  "S1_D1": {
+    "packets_reparsed": 1392,
+    "interventions": 174,
+    "common_donor_frames": 150,
+    "checkpoint_sha256": "758f4616ef04ad9f816e63029b19eb029d0ceb5792a2d0656642f1e6677523e0",
+    "input_hashes_match_legacy": true,
+    "native_zero_start": {
+      "parent": "S1_R11",
+      "native_frame_budget_pairs": 8,
+      "evidence_sha256": "8351ad4ad74ef9a79a7061488c70374979f908408b51144fb379e8507ec4633e"
+    },
+    "archive_sha256": "c3ec45ae73f9ae33906a5779468d5e204eda99b98293ed20a5b94b8b34f2d7d4"
+  },
+  "S1_D2": {
+    "packets_reparsed": 1392,
+    "interventions": 174,
+    "common_donor_frames": 150,
+    "checkpoint_sha256": "bfdbb24f8d65dac706de9126e47b6c5bcaef6478a468fa83c548202ced0eb234",
+    "input_hashes_match_legacy": true,
+    "native_zero_start": {
+      "parent": "S1_R11",
+      "native_frame_budget_pairs": 8,
+      "evidence_sha256": "e9f013c9ebd077de736e3dded0d7139ab28d5421f4ccd804f93f3450deeb86cd"
+    },
+    "archive_sha256": "c2706d92c8a1b68e031613041b150ba615b5ee281ce17e335ccd592616d43b62"
+  },
+  "S1_D3": {
+    "packets_reparsed": 1392,
+    "interventions": 174,
+    "common_donor_frames": 150,
+    "checkpoint_sha256": "7084f54c4e54494cba3979d83c92851527e834f7f6bdcfe4102bdf46e99dfa19",
+    "input_hashes_match_legacy": true,
+    "native_zero_start": {
+      "parent": "S1_R11",
+      "native_frame_budget_pairs": 8,
+      "evidence_sha256": "69ad0d7d7a4db80afe306dad13cba151e1742fa2a2d4fa763146eab5919e1fd7"
+    },
+    "archive_sha256": "0d5e2a43cef171a0411e5eed7ea2378ee8f01109cd55a9d82ea2a6f2c985a2a0"
+  },
+  "S1_C0": {
+    "packets_reparsed": 1392,
+    "interventions": 174,
+    "common_donor_frames": 150,
+    "checkpoint_sha256": "4aab17ae0d39e63e09f18ef63aef3658b42595d3adc7ac21c28e16914b4d66f8",
+    "input_hashes_match_legacy": true,
+    "native_zero_start": {
+      "parent": "S1_R00",
+      "native_frame_budget_pairs": 8,
+      "evidence_sha256": "e8d3dfc362051d2c4fc39738fc4d287a77bc324b7abb650b8323ff60f56a45fa"
+    },
+    "archive_sha256": "a6d9ba304f6662576a07747cb4adcba4071387a7f270b06fabf114ceed51ba41"
+  }
+}

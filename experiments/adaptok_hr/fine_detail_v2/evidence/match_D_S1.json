@@ -1,0 +1,117 @@
+{
+  "schedules": {
+    "D0": "959713d1df5c9dbc01e79de91a23b9c26b476ebdb1a6c96e7d9e13bb8213a558",
+    "D1": "959713d1df5c9dbc01e79de91a23b9c26b476ebdb1a6c96e7d9e13bb8213a558",
+    "D2": "959713d1df5c9dbc01e79de91a23b9c26b476ebdb1a6c96e7d9e13bb8213a558",
+    "D3": "959713d1df5c9dbc01e79de91a23b9c26b476ebdb1a6c96e7d9e13bb8213a558",
+    "C0": "959713d1df5c9dbc01e79de91a23b9c26b476ebdb1a6c96e7d9e13bb8213a558"
+  },
+  "parents": {
+    "D0": {
+      "lineage": {
+        "parent": "S1_R11",
+        "parent_checkpoint_sha256": "1edcd95d0f6ce98fd31d4529f1b34a0f01504bf9e17703a43fe9b1d2e418aab4",
+        "child": "S1_D0",
+        "child_config_sha256": "0692f866c41099f5b375f8e05ccc159926f0e031efd95e705f6ceaba6a2588d9",
+        "step": 1000
+      },
+      "child_checkpoint_sha256": "80d45d9010ab71a686774f031472dae063e3a5ef98b46744df24bc813e97cb8f",
+      "inherited_log_rows": 1000,
+      "parent_model_tensors": "a2b35997887c6104a485c9d69bc16272faa0a9e87fe53cfab928fc8719522e27",
+      "child_inherited_model_tensors": "a2b35997887c6104a485c9d69bc16272faa0a9e87fe53cfab928fc8719522e27",
+      "parent_optimizer_tensors": "6d1ac28150d477a0b3668b5a71f6e17cc7bb46eddff543f944d7158d8d3709d2",
+      "child_inherited_optimizer_tensors": "6d1ac28150d477a0b3668b5a71f6e17cc7bb46eddff543f944d7158d8d3709d2",
+      "additional_parameters": []
+    },
+    "D1": {
+      "lineage": {
+        "parent": "S1_R11",
+        "parent_checkpoint_sha256": "1edcd95d0f6ce98fd31d4529f1b34a0f01504bf9e17703a43fe9b1d2e418aab4",
+        "child": "S1_D1",
+        "child_config_sha256": "0a0c9b7525bcbe24279e6944413c4bbdeee24290c94f34c5f267690f832406c3",
+        "step": 1000
+      },
+      "child_checkpoint_sha256": "172e8682a67025d4a826e7b40d7110380ab5d83acf634c52849a207419f6f60e",
+      "inherited_log_rows": 1000,
+      "parent_model_tensors": "a2b35997887c6104a485c9d69bc16272faa0a9e87fe53cfab928fc8719522e27",
+      "child_inherited_model_tensors": "a2b35997887c6104a485c9d69bc16272faa0a9e87fe53cfab928fc8719522e27",
+      "parent_optimizer_tensors": "6d1ac28150d477a0b3668b5a71f6e17cc7bb46eddff543f944d7158d8d3709d2",
+      "child_inherited_optimizer_tensors": "6d1ac28150d477a0b3668b5a71f6e17cc7bb46eddff543f944d7158d8d3709d2",
+      "additional_parameters": [
+        "decoder.fine_detail.depthwise.bias",
+        "decoder.fine_detail.depthwise.weight",
+        "decoder.fine_detail.mix.bias",
+        "decoder.fine_detail.mix.weight",
+        "decoder.fine_detail.output.bias",
+        "decoder.fine_detail.output.weight",
+        "decoder.fine_detail.project.bias",
+        "decoder.fine_detail.project.weight"
+      ]
+    },
+    "D2": {
+      "lineage": {
+        "parent": "S1_R11",
+        "parent_checkpoint_sha256": "1edcd95d0f6ce98fd31d4529f1b34a0f01504bf9e17703a43fe9b1d2e418aab4",
+        "child": "S1_D2",
+        "child_config_sha256": "ed56b81448dd792a38ba08e2c81e1fbf4d7859ac3e0c82d0f4645b8db2d48cbd",
+        "step": 1000
+      },
+      "child_checkpoint_sha256": "48d228e849c365d58854c89bba016e28e2caa4eec423083af542c07f8b1191e7",
+      "inherited_log_rows": 1000,
+      "parent_model_tensors": "a2b35997887c6104a485c9d69bc16272faa0a9e87fe53cfab928fc8719522e27",
+      "child_inherited_model_tensors": "a2b35997887c6104a485c9d69bc16272faa0a9e87fe53cfab928fc8719522e27",
+      "parent_optimizer_tensors": "6d1ac28150d477a0b3668b5a71f6e17cc7bb46eddff543f944d7158d8d3709d2",
+      "child_inherited_optimizer_tensors": "6d1ac28150d477a0b3668b5a71f6e17cc7bb46eddff543f944d7158d8d3709d2",
+      "additional_parameters": []
+    },
+    "D3": {
+      "lineage": {
+        "parent": "S1_R11",
+        "parent_checkpoint_sha256": "1edcd95d0f6ce98fd31d4529f1b34a0f01504bf9e17703a43fe9b1d2e418aab4",
+        "child": "S1_D3",
+        "child_config_sha256": "94f00095ccdcd7b3b34a5570fb02cc3b833a9e5e30535386b7fc1057685ecf78",
+        "step": 1000
+      },
+      "child_checkpoint_sha256": "6783c4a7d0dac6f3386f0143d5184e14029b908975817a8f6eaad540d0538596",
+      "inherited_log_rows": 1000,
+      "parent_model_tensors": "a2b35997887c6104a485c9d69bc16272faa0a9e87fe53cfab928fc8719522e27",
+      "child_inherited_model_tensors": "a2b35997887c6104a485c9d69bc16272faa0a9e87fe53cfab928fc8719522e27",
+      "parent_optimizer_tensors": "6d1ac28150d477a0b3668b5a71f6e17cc7bb46eddff543f944d7158d8d3709d2",
+      "child_inherited_optimizer_tensors": "6d1ac28150d477a0b3668b5a71f6e17cc7bb46eddff543f944d7158d8d3709d2",
+      "additional_parameters": [
+        "decoder.fine_detail.depthwise.bias",
+        "decoder.fine_detail.depthwise.weight",
+        "decoder.fine_detail.mix.bias",
+        "decoder.fine_detail.mix.weight",
+        "decoder.fine_detail.output.bias",
+        "decoder.fine_detail.output.weight",
+        "decoder.fine_detail.project.bias",
+        "decoder.fine_detail.project.weight"
+      ]
+    },
+    "C0": {
+      "lineage": {
+        "parent": "S1_R00",
+        "parent_checkpoint_sha256": "e2577f82f520221ea74a51f86467935a827243396783dde2685cf9d30c6a8d21",
+        "child": "S1_C0",
+        "child_config_sha256": "43b16b6bf0d764342985669a56fba39385ff6bc34d6988aae0d4716be90a2805",
+        "step": 1000
+      },
+      "child_checkpoint_sha256": "9e708f4eda2b779b160496e07a00ec0f97d08580b7fbb0d8746ae55121416cd8",
+      "inherited_log_rows": 1000,
+      "parent_model_tensors": "a13482e2579206fadd00c46817f280cc7bae28ee181ebfb87d6609ef04240727",
+      "child_inherited_model_tensors": "a13482e2579206fadd00c46817f280cc7bae28ee181ebfb87d6609ef04240727",
+      "parent_optimizer_tensors": "7293058fd79d8e0868fa1c765aaf96266e94a263c1c3825b0ccd48e9217356c8",
+      "child_inherited_optimizer_tensors": "7293058fd79d8e0868fa1c765aaf96266e94a263c1c3825b0ccd48e9217356c8",
+      "additional_parameters": []
+    }
+  },
+  "production_source": {
+    "D0": "29dc1f70767041c4e35f1b91cf3bd7465437611c9066c78f9ba4d10bed149f77",
+    "D1": "29dc1f70767041c4e35f1b91cf3bd7465437611c9066c78f9ba4d10bed149f77",
+    "D2": "29dc1f70767041c4e35f1b91cf3bd7465437611c9066c78f9ba4d10bed149f77",
+    "D3": "29dc1f70767041c4e35f1b91cf3bd7465437611c9066c78f9ba4d10bed149f77",
+    "C0": "29dc1f70767041c4e35f1b91cf3bd7465437611c9066c78f9ba4d10bed149f77"
+  },
+  "additional_updates": 300
+}
