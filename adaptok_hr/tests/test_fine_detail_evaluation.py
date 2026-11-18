@@ -127,3 +127,20 @@ def test_quality_replay_rejects_changed_metric_and_same_source_donor():
     interventions[0]["donor"] = interventions[0]["content_id"]
     with pytest.raises(ValueError, match="donor"):
         verify_donors(interventions, high_mse)
+
+
+def test_flat_region_diagnostic_distinguishes_false_texture_from_original_edges():
+    import torch
+
+    from experiments.adaptok_hr.fine_detail_v2.texture import flat_error
+
+    original = torch.zeros(1, 3, 5, 6)
+    original[..., 3:] = 1
+    measured = flat_error(original, original)
+    assert measured == {"flat_pixels": 20, "pixels": 30, "large_error_pixels": 0, "abs_error_sum": 0}
+    assert flat_error(original, original + .25) == measured
+    original.zero_()
+    checker = (torch.arange(5)[:, None] + torch.arange(6)[None, :]) % 2
+    textured = flat_error(original, original + checker / 2)
+    assert textured["flat_pixels"] == textured["large_error_pixels"] == 30
+    assert textured["abs_error_sum"] > 0

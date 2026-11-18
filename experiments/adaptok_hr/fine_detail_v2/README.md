@@ -38,6 +38,7 @@ CUBLAS_WORKSPACE_CONFIG=:4096:8 .venv-native/bin/python -m coverage run --branch
 .venv-native/bin/python -m experiments.adaptok_hr.quality audit --coverage results/adaptok_hr_fine_detail_v2/coverage.json --output results/adaptok_hr_fine_detail_v2/quality_audit.json
 .venv-native/bin/python -m experiments.adaptok_hr.fine_detail_v2.quality_checks
 .venv-native/bin/python -m experiments.adaptok_hr.fine_detail_v2.benchmark --all-validated
+.venv-native/bin/python -m experiments.adaptok_hr.fine_detail_v2.texture
 .venv-native/bin/python -m experiments.adaptok_hr.fine_detail_v2.verify
 .venv-native/bin/python -m experiments.adaptok_hr.fine_detail_v2.figures --qa-scripts /home/whisperliang/.codex/skills/nature-figure/scripts
 ```

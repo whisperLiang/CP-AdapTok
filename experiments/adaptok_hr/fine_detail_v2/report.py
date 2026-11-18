@@ -35,6 +35,18 @@ def decoder_contrasts(decision):
                        for k in ("receiver", "joint")]
             lines.append("| " + " | ".join([seed, arm, *(f"{v:+.6f}" for v in quality),
                          *(f"{v:+.3f}" for v in latency), f"{bench['parameters'] - timing['parameters']:+d}"]) + " |")
+    lines.extend(["", "### 原图平坦区域的额外高频误差", "",
+                  "在完整 174 帧的 K2048 独立闭环包上重新解码，逐帧重建 MSE 与已封存值一致。"
+                  "原图 3×3 邻域各 RGB 通道的极差均不超过 2 个 8-bit 灰阶时，记为平坦像素。"
+                  "以反射边界 3×3 均值滤波测量重建误差的高频分量，并统计任一通道误差超过 4 个灰阶的比例。"
+                  "这项描述性指标用于检查平坦区域的噪声和伪纹理，选模沿用预登记规则。", "",
+                  "| 种子 | 配置 | 原图平坦像素占比 | 平坦区高频 MAE (RGB 0–1) | 超过 4 灰阶的平坦像素 |",
+                  "|---|---|---:|---:|---:|"])
+    for seed, arms in decision["seeds"].items():
+        for arm in ["C0", *arms]:
+            pooled = read(ROOT / f"S{seed}_{arm}" / "flat_regions_1300.json")["pooled"]
+            lines.append(f"| {seed} | {arm} | {percent(pooled['flat_fraction'])} | {pooled['flat_hp_mae']:.7f} | "
+                         f"{100 * pooled['over_4_levels_fraction']:.3f}% |")
     return lines
 
 

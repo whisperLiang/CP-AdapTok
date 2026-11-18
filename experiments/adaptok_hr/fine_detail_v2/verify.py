@@ -209,6 +209,22 @@ def verify_initial_reference(name, parent, originals):
     return {"parent": parent, "native_frame_budget_pairs": len(rows), "evidence_sha256": file_hash(ROOT / name / "initial_reference.json")}
 
 
+def verify_flat_replay(name):
+    from .texture import aggregate
+
+    path = ROOT / name
+    file = path / "validation_1300_64/closed_loop.jsonl"
+    record = read(path / "flat_regions_1300.json")
+    reference = {(r["content_id"], r["frame"]): r["packet_sha256"] for r in jsonlines(file) if r["tokens"] == 2048}
+    rows = record["rows"]
+    hashes = {(r["content_id"], r["frame"]): r["packet_sha256"] for r in rows}
+    if (record["scope"] != "descriptive_only" or len(rows) != len(reference) or hashes != reference
+            or record["identity"]["packet_metrics_sha256"] != file_hash(file) or record["pooled"] != aggregate(rows)
+            or record["sources"] != {s: aggregate([r for r in rows if r["content_id"] == s]) for s in PROTOCOL["sources"]}):
+        raise ValueError(f"flat-region evidence fails replay: {name}")
+    return record["pooled"]
+
+
 def verify_gates():
     first = read(ROOT / "decision.json")
     historical = read(PROTOCOL["historical_validation"])
@@ -269,13 +285,14 @@ def run():
         weights[str(path)] = observed
     tests = ElementTree.parse(ROOT / "tests.xml").find(".//testsuite").attrib
     stages = verify_gates()
-    starts = {}
+    starts, flat = {}, {}
     if stages["decoder"]:
         for seed, arms in stages["decoder"]["seeds"].items():
             for arm in [*arms, "C0"]:
                 name = f"S{seed}_{arm}"
                 parent = "R00" if arm == "C0" else stages["representation"]["winner"]
                 starts[name] = verify_initial_reference(name, f"S{seed}_{parent}", originals)
+                flat[name] = verify_flat_replay(name)
     mutations = read(ROOT / "mutations.json")
     audit = read(ROOT / "quality_audit.json")
     production = {"adaptok_hr/config.py", "adaptok_hr/models/tokenizer.py", "adaptok_hr/training/fine_detail.py",
@@ -292,12 +309,12 @@ def run():
     checks = {"native_idle_gpu_timings": bool(timings) and baseline_timings.issubset(timings),
               "selected_timing_repeats": primary_repeats.issubset(timings),
               "packets_and_histories": bool(validations), "checkpoint_files_rehashed": bool(weights),
-              "tests": int(tests["tests"]) >= (92 if stages["decoder"] else 82)
+              "tests": int(tests["tests"]) >= (93 if stages["decoder"] else 82)
                        and all(tests[k] == "0" for k in ("failures", "errors", "skipped")),
               "mutations": len(mutations["results"]) >= (35 if stages["decoder"] else 31) and mutations["all_killed"],
               "changed_production_complexity": not flagged, "duplicates": not audit["duplicates_over_08"]}
     record = {"engineering_checks_pass": all(checks.values()), "checks": checks, "validations": validations,
-              "native_initial_references": starts,
+              "native_initial_references": starts, "flat_region_replays": flat,
               "protected_git_and_checkpoints": protected_inputs(), "benchmark_runs": timings,
               "checkpoints": weights, "tests": tests, "mutations_killed": sum(r["killed"] for r in mutations["results"]),
               "flagged_production": flagged, "legacy_high_crap_count": len(audit["crap_over_10"]),
