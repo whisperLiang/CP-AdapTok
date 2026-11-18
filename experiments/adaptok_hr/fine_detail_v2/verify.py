@@ -151,11 +151,20 @@ def verify_gates():
     if first["winner"] != select() or first["new_test_used"]:
         raise ValueError("recorded screen or data selection disagrees with protocol")
     for seed, saved in first["seeds"].items():
+        config = read(CHECKPOINTS / f"S{seed}_R00" / "step_000000.json")["config"]
+        seeds = [config["training"]["model_seed"], config["experiment"]["data_seed"], config["training"]["budget_seed"]]
+        if seeds != PROTOCOL["seeds"][int(seed) - 1]:
+            raise ValueError("confirmation uses the wrong independently registered seeds")
         measured = result(f"S{seed}_{first['winner']}", 1000)
         control = result(f"S{seed}_R00", 1000)
         if saved != {"information": measured["information"], "quality": quality(measured, control, historical)}:
             raise ValueError("recorded confirmation fails replay")
     both = len(first["seeds"]) == 2 and all(r["information"]["pass"] for r in first["seeds"].values())
+    if len(first["seeds"]) == 2:
+        matches = [read(ROOT / f"match_S{s}_1000.json") for s in (1, 2)]
+        for field in ("common_initial_full_weights", "schedule_sha256"):
+            if set(matches[0][field].values()) & set(matches[1][field].values()):
+                raise ValueError(f"seed replications share {field}")
     if first["decoder_stage_allowed"] != both or first["negative_information_stop"] == both:
         raise ValueError("conditional decoder eligibility disagrees with measured results")
     if not both:
@@ -206,8 +215,9 @@ def run():
                         for p in ROOT.glob("S*/validation_*_*/summary.json")}
     checks = {"native_idle_gpu_timings": bool(timings) and baseline_timings.issubset(timings),
               "packets_and_histories": bool(validations), "checkpoint_files_rehashed": bool(weights),
-              "tests": int(tests["tests"]) >= 82 and all(tests[k] == "0" for k in ("failures", "errors", "skipped")),
-              "mutations": len(mutations["results"]) >= 31 and mutations["all_killed"],
+              "tests": int(tests["tests"]) >= (89 if stages["decoder"] else 82)
+                       and all(tests[k] == "0" for k in ("failures", "errors", "skipped")),
+              "mutations": len(mutations["results"]) >= (34 if stages["decoder"] else 31) and mutations["all_killed"],
               "changed_production_complexity": not flagged, "duplicates": not audit["duplicates_over_08"]}
     record = {"engineering_checks_pass": all(checks.values()), "checks": checks, "validations": validations,
               "protected_git_and_checkpoints": protected_inputs(), "benchmark_runs": timings,
