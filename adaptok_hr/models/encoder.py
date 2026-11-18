@@ -28,6 +28,26 @@ class ResidualBlock(nn.Module):
         return x + self.layers(x) * .5
 
 
+class CrossScaleFusion(nn.Module):
+    """Top-down S128 -> S64 -> S32 fusion before the 16D projections."""
+
+    def __init__(self, channels):
+        super().__init__()
+        self.projections = nn.ModuleList(nn.Conv2d(c, c, 1) for c in channels)
+        self.bridges = nn.ModuleList(nn.Conv2d(a, b, 1) for a, b in zip(channels, channels[1:]))
+        self.refine = nn.ModuleList(ResidualBlock(c) for c in channels)
+
+    def forward(self, features):
+        outputs = []
+        for level, (feature, project, refine) in enumerate(zip(features, self.projections, self.refine)):
+            value = project(feature)
+            if level:
+                coarse = self.bridges[level - 1](outputs[-1])
+                value = value + F.interpolate(coarse, size=value.shape[-2:], mode="bilinear", align_corners=False)
+            outputs.append(refine(value))
+        return tuple(outputs)
+
+
 class Encoder(nn.Module):
     def __init__(self, config):
         super().__init__()
@@ -45,6 +65,10 @@ class Encoder(nn.Module):
             for _ in range(config.attention_blocks)]) for i in (4, 5)})
         self.history_fusion = nn.Conv2d(config.channels[4] + config.decoder_channels[0],
                                        config.channels[4], 1) if config.temporal else None
+        # Keep common model tensors identically initialized across N0/N1/N2.
+        with torch.random.fork_rng(devices=[]):
+            self.cross_scale = (CrossScaleFusion(tuple(reversed(config.channels[4:])))
+                                if config.encoder_fusion == "cross_scale_v1" else None)
 
     def pad_input(self, x):
         return F.pad(x, (0, 0, 0, self.config.padded_height - self.config.height), mode="reflect")
@@ -60,7 +84,8 @@ class Encoder(nn.Module):
             x = self.forward_stage(index, x, state)
             if index >= 4:
                 features.append(x)
-        return tuple(reversed(features))  # Base, Medium, Fine
+        features = tuple(reversed(features))  # Base, Medium, Fine
+        return self.cross_scale(features) if self.cross_scale is not None else features
 
     def forward_stage(self, index, x, state):
         stage = self.stages[index]

@@ -22,6 +22,7 @@ class ModelConfig:
     loss_scope: str = "all_candidates"
     fine_input: str = "direct"
     fine_decoder: str = "original"
+    encoder_fusion: str = "none"
 
     def __post_init__(self):
         for name in ("channels", "decoder_channels", "budgets"):
@@ -33,6 +34,8 @@ class ModelConfig:
             raise ValueError("fine_input must be direct or local_residual")
         if self.fine_decoder not in ("original", "masked_s32_v1"):
             raise ValueError("fine_decoder must be original or masked_s32_v1")
+        if self.encoder_fusion not in ("none", "cross_scale_v1"):
+            raise ValueError("encoder_fusion must be none or cross_scale_v1")
         self.validate_budgets()
 
     def validate_dimensions(self):
@@ -78,4 +81,6 @@ class ModelConfig:
             del values["fine_input"]
         if self.fine_decoder == "original":
             del values["fine_decoder"]
+        if self.encoder_fusion == "none":
+            del values["encoder_fusion"]
         return values

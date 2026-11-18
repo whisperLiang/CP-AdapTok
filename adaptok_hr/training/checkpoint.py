@@ -37,6 +37,8 @@ def save_training(path, trainer, sampler, config, manifest_identity, completed_s
              "config_identity": stable_hash(config), "manifest_identity": manifest_identity}
     if trainer.budget_rng is not None:
         state["budget_rng"] = trainer.budget_rng.get_state()
+    if trainer.losses.crop_rng is not None:
+        state["crop_rng"] = trainer.losses.crop_rng.get_state()
     temporary = path.with_suffix(path.suffix + ".tmp")
     torch.save(state, temporary)
     temporary.replace(path)
@@ -62,6 +64,8 @@ def restore_training(path, trainer, sampler, config, manifest_identity):
     sampler.load_state_dict(state["sampling"])
     if trainer.budget_rng is not None:
         trainer.budget_rng.set_state(state["budget_rng"].cpu())
+    if trainer.losses.crop_rng is not None:
+        trainer.losses.crop_rng.set_state(state["crop_rng"].cpu())
     restore_rng(state["rng"])
     return {"completed_steps": state["completed_steps"], "training_frames": state["training_frames"]}
 

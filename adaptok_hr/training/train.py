@@ -25,9 +25,11 @@ from .losses import ReconstructionLoss
 
 
 def frame_objective(model, frame, state, previous_target, budget, auxiliary, losses):
+    views = losses.sample_views(frame)
     encoded = model.encode_features(frame, state)
     main = model.forward_frame(frame, state, budget, encoded)
-    loss, terms = losses.distortion(main.rgb, frame)
+    loss, terms = losses.distortion(main.rgb, frame, views)
+    budget_losses = {str(budget): float(loss.detach())}
     vq = encoded.loss_terms(budget)
     _, _, reference = frame_context(state, model.config.gop)
     temporal = losses.temporal(main.rgb, frame, reference, previous_target)
@@ -36,13 +38,16 @@ def frame_objective(model, frame, state, previous_target, budget, auxiliary, los
     if auxiliary is not None:
         alternative = model.forward_frame(frame, state, auxiliary, encoded)
         outputs[auxiliary] = alternative
-        extra, other = losses.distortion(alternative.rgb, frame)
+        extra, other = losses.distortion(alternative.rgb, frame, views)
+        budget_losses[str(auxiliary)] = float(extra.detach())
         loss = (loss + extra) * .5
         vq = {key: (value + encoded.loss_terms(auxiliary)[key]) * .5 for key, value in vq.items()}
         low, high = (terms["mse"], other["mse"]) if budget < auxiliary else (other["mse"], terms["mse"])
         mono = F.relu(high - low + losses.weights.get("monotonic_margin", 0)) * losses.weights.get("monotonic", 0)
     total = loss + temporal + mono + losses.weights.get("vq", 0) * vq["vq_loss"]
     row = {k: float(v.detach()) for k, v in terms.items()}
+    row.update(reconstruction_loss=float(loss.detach()), budget_losses=budget_losses,
+               perceptual_crops=views)
     if "suffix_detail" in losses.weights:
         suffix = suffix_supervision(model, frame, state, encoded, outputs, losses.weights["suffix_detail"])
         total = total + suffix
@@ -91,13 +96,16 @@ class JointTrainer:
     def __init__(self, model, settings):
         if settings["tbptt"] < 1 or settings["nested_every"] < 1:
             raise ValueError("positive TBPTT and nested interval required")
-        if settings["budget_mode"] not in ("fixed", "nested"):
-            raise ValueError("budget_mode must be fixed or nested")
+        if settings["budget_mode"] not in ("fixed", "nested", "paired"):
+            raise ValueError("budget_mode must be fixed, nested or paired")
+        if settings["budget_mode"] == "paired" and ("budget_seed" not in settings or
+                not 0 <= settings.get("paired_probability", .5) <= 1):
+            raise ValueError("paired budgets require budget_seed and a probability in [0,1]")
         self.model, self.settings = model, settings
         self.budget_rng = (torch.Generator().manual_seed(settings["budget_seed"])
                            if "budget_seed" in settings else None)
         self.device = next(model.parameters()).device
-        self.losses = ReconstructionLoss(settings["losses"], self.device)
+        self.losses = ReconstructionLoss(settings["losses"], self.device, settings.get("reconstruction"))
         self.optimizer = torch.optim.AdamW(model.parameters(), lr=settings["learning_rate"],
                                           weight_decay=settings["weight_decay"])
         self.scheduler = torch.optim.lr_scheduler.LambdaLR(self.optimizer, lambda _: 1.0)
@@ -106,12 +114,23 @@ class JointTrainer:
         if self.settings["budget_mode"] == "fixed":
             return self.settings["fixed_budget"], None
         budgets = self.model.config.budgets
+        if self.settings["budget_mode"] == "paired":
+            return self.paired_budgets(budgets)
         main = budgets[int(torch.randint(len(budgets), (), generator=self.budget_rng))]
         other = None
         if step % self.settings["nested_every"] == 0:
             candidates = [b for b in budgets if b != main]
             other = candidates[int(torch.randint(len(candidates), (), generator=self.budget_rng))]
         return main, other
+
+    def paired_budgets(self, budgets):
+        # Always consume the same three draws. U3 changes only auxiliary exposure;
+        # its main-budget history remains identical to U0/U1/U2.
+        paired = float(torch.rand((), generator=self.budget_rng))
+        edge = int(torch.randint(len(budgets) - 1, (), generator=self.budget_rng))
+        orientation = int(torch.randint(2, (), generator=self.budget_rng))
+        main, other = budgets[edge + orientation], budgets[edge + 1 - orientation]
+        return main, other if paired < self.settings.get("paired_probability", .5) else None
 
     def backward_clip(self, clip, step):
         state, previous, pending, rows = None, None, [], []
