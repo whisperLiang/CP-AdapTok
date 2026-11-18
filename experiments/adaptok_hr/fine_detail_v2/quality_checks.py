@@ -26,10 +26,20 @@ CASES = [
      TEST + "test_spatial_residual_uses_neighbors_and_does_not_change_coarse_tokens"),
 ]
 
+DECODER_CASES = [
+    ("fine_residual_missing_mask", "models/decoder.py", "self.output(x) * fine_map[:, -1:]", "self.output(x)",
+     "test_fine_detail_decoder.py::test_residual_decoder_start_and_training_preserve_absent_fine"),
+    ("fine_residual_nonzero_start", "models/decoder.py", "nn.init.zeros_(self.output.weight)",
+     "nn.init.ones_(self.output.weight)",
+     "test_fine_detail_decoder.py::test_residual_decoder_start_and_training_preserve_absent_fine"),
+    ("high_frequency_weight", "training/losses.py", 'loss + self.weights["detail"] * terms["detail"]',
+     'loss + terms["detail"]', "test_fine_detail_decoder.py::test_highpass_loss_matches_reflected_rgb_and_nested_weights"),
+]
+
 
 def main():
     results = []
-    for case in (*MUTATIONS, *NEW_MUTATIONS, *CASES):
+    for case in (*MUTATIONS, *NEW_MUTATIONS, *CASES, *DECODER_CASES):
         result = run_mutation(case)
         results.append(result)
         write_json(ROOT / "mutations.json", {"all_killed": all(r["killed"] for r in results), "results": results})

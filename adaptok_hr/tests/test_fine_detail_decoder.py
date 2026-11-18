@@ -17,6 +17,9 @@ def test_residual_decoder_start_and_training_preserve_absent_fine(small_model):
     missing = child.load_state_dict(parent.state_dict(), strict=False)
     assert missing.missing_keys and all(k.startswith("decoder.fine_detail.") for k in missing.missing_keys)
     assert "fine_decoder" not in parent.config.to_dict()
+    assert child.config.to_dict()["fine_decoder"] is True
+    with pytest.raises(ValueError, match="fine_decoder"):
+        replace(parent.config, fine_decoder="on")
     frame = torch.rand(1, 3, 128, 256)
     with torch.no_grad():
         encoded = parent.encode_features(frame)

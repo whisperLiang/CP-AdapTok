@@ -3,6 +3,7 @@
 import json
 from concurrent.futures import ThreadPoolExecutor
 
+import torch
 import yaml
 
 from adaptok_hr.runtime import read_config, stable_hash, write_json
@@ -91,6 +92,7 @@ def rank(arm, outcomes):
 
 
 def main():
+    torch.set_num_threads(4)
     prior = read(ROOT / "decision.json")
     if not prior["decoder_stage_allowed"]:
         raise ValueError("decoder stage requires both real suffix information confirmations")
