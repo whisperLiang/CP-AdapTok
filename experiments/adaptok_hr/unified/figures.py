@@ -3,7 +3,9 @@
 Contract: quantify whether objective or architecture changes improve all four
 transmitted budgets. Each seed is one trained replicate; correlated video frames
 are not independent replicates, so no invented error bars are drawn. All points
-and source hashes are exported. Single quantitative panels reuse only the
+and source hashes are exported. Training curves use a trailing 25-update mean
+of main-budget MSE, then convert to PSNR; they are not native Validation curves.
+Single quantitative panels reuse only the
 repository's Python typography/canvas/export conventions, not scientific data.
 """
 
@@ -78,7 +80,7 @@ def learning_curves(output, alignment):
             paths = sorted(ROOT.glob(f"{seed}_{stage}*/training.jsonl"))
             if not paths:
                 continue
-            figure, axis = canvas("Training global PSNR (25-update pooled MSE, dB)")
+            figure, axis = canvas("Training global PSNR (dB)")
             for path in paths:
                 arm = path.parent.name.split("_", 1)[1]
                 x, yy = training_curve(path, stage)
