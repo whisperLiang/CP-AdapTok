@@ -60,3 +60,25 @@ def test_scratch_gate_stops_growth_for_one_bad_budget_or_one_seed():
     for arm in ("N1", "N2"):
         data["2"][arm]["closed_loop"]["256"]["lpips"] = .51
     assert not scratch_quality_gate(data)["advance"]
+
+
+def test_scratch_audit_rejects_optimizer_history(small_model, tmp_path, monkeypatch):
+    from adaptok_hr.data.dataset import ClipSampler
+    from adaptok_hr.tests.test_unified import unified_settings
+    from adaptok_hr.training.checkpoint import save_training
+    from adaptok_hr.training.train import JointTrainer
+    from experiments.adaptok_hr.unified import run, verify
+
+    monkeypatch.setattr(run, "CHECKPOINTS", tmp_path / "checkpoints")
+    config = {"model": small_model.config.to_dict(), "training": {**unified_settings(), "model_seed": 7}}
+    trainer = JointTrainer(small_model, config["training"])
+    sampler = ClipSampler([{"original_frames": 8}], 1)
+    path = run.checkpoint("S1_N0", 0)
+    save_training(path, trainer, sampler, config, "native-test", 0, 0)
+    state = {"config": config}
+    assert verify.scratch_initialization("S1_N0", state)
+    trainer.update(torch.rand(2, 3, 128, 256), 1)
+    # A checkpoint relabeled as step zero must not pass the scratch audit.
+    save_training(path, trainer, sampler, config, "native-test", 0, 0)
+    with pytest.raises(ValueError, match="history"):
+        verify.scratch_initialization("S1_N0", state)

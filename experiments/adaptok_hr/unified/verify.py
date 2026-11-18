@@ -54,16 +54,31 @@ def verified_training_rows(name, start, step):
     return rows
 
 
+
+def scratch_initialization(name, state):
+    initial, meta = verified_checkpoint(checkpoint(name, 0))
+    if initial["completed_steps"] != 0 or initial["optimizer"]["state"]:
+        raise ValueError("scratch initialization contains optimizer training history")
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(state["config"]["training"]["model_seed"])
+        model = AdapTokHR(ModelConfig(**state["config"]["model"]))
+    expected = tensor_digest(model.state_dict()).hex()
+    if meta["model_sha256"] != expected:
+        raise ValueError("scratch checkpoint does not match its declared independent initialization")
+    return expected
+
+
 def checkpoint_proof(name, step):
     state, meta = verified_checkpoint(checkpoint(name, step))
     start = 1300 if name.split("_", 1)[1].startswith("U") else 0
+    initial = scratch_initialization(name, state) if start == 0 else None
     actual = verified_optimizer_counts(name, state, start, step)
     rows = verified_training_rows(name, start, step)
     frames = [frame for row in rows for frame in row["frame_metrics"]]
     pairs = Counter(tuple(sorted((r["main_budget"], r["auxiliary_budget"]))) for r in frames if r["auxiliary_budget"] is not None)
     return {"checkpoint_sha256": meta["checkpoint_sha256"], "model_sha256": meta["model_sha256"],
             "optimizer_parameter_counters": actual, "source_sha256": meta["source_sha256"],
-            "new_optimizer_updates": len(rows), "new_frames": len(frames),
+            "new_optimizer_updates": len(rows), "new_frames": len(frames), "scratch_initial_model_sha256": initial,
             "paired_fraction": sum(pairs.values())/len(frames), "pairs": {str(k): v for k, v in pairs.items()},
             "crop_rng_checkpointed": "crop_rng" in state, "budget_rng_checkpointed": "budget_rng" in state}
 
@@ -112,6 +127,8 @@ def verify():
         proof = {"checkpoint": checkpoint_proof(name, step), "packets": packet_proof(summary.parent)}
         results[f"{name}/{step}"] = proof
         schedules.setdefault((name[1], name.split("_")[1][0], step), []).append(proof["packets"]["input_schedule_sha256"])
+    if len(results) < 8 or not (ROOT / "decision_A.json").exists():
+        raise ValueError("the two-seed Pilot is not completely evaluated")
     if any(len(set(values)) != 1 for values in schedules.values()):
         raise ValueError("Validation inputs differ across matched arms")
     write_json(ROOT / "acceptance.json", {"executed_runs": results, "matching_validation_inputs": True})
