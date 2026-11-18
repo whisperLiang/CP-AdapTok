@@ -127,3 +127,25 @@ def test_runner_reuses_earlier_completed_checkpoint_without_downgrading_marker(t
     run.train("S1_N0", {"training": {}}, 300)
     assert not calls
     assert json.loads(completion.read_text()) == saved
+
+
+def test_native_archive_uses_only_architectures_measured_at_latest_gate(tmp_path, monkeypatch):
+    from adaptok_hr.runtime import write_json
+    from experiments.adaptok_hr.unified import archive
+
+    root, evidence = tmp_path / "results", tmp_path / "evidence"
+    monkeypatch.setattr(archive, "ROOT", root)
+    monkeypatch.setattr(archive, "EVIDENCE", evidence)
+    write_json(root / "decision_A.json", {"winner": "U1"})
+    write_json(root / "decision_B_3000.json", {"advance": False})
+    for seed in (1, 2):
+        for arm, step, lpips in (("U1", 1600, .5), ("N0", 3000, .4),
+                                 ("N1", 3000, .3), ("N2", 1000, .1)):
+            directory = root / f"S{seed}_{arm}" / f"validation_{step}_64"
+            write_json(directory / "summary.json", {"closed_loop": {"2048": {"lpips": lpips}}})
+            samples = directory / "samples"
+            samples.mkdir()
+            (samples / "car-roundabout_0031_K2048.png").write_bytes(f"{seed}/{arm}/{step}".encode())
+    archive.selected_native_images()
+    assert {p.name for p in (evidence / "native_samples").iterdir()} == {"S1_U1", "S2_U1", "S1_N1", "S2_N1"}
+    assert (evidence / "native_samples/S2_N1/car-roundabout_0031_K2048.png").read_bytes() == b"2/N1/3000"

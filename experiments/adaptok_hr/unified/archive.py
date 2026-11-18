@@ -23,9 +23,9 @@ def selected_native_images():
         step = milestones[-1]
         for seed in (1, 2):
             candidates = []
-            for arm in ("N0", "N1", "N2"):
-                name = f"S{seed}_{arm}"
-                summary = json.loads((ROOT / name / f"validation_{step}_64/summary.json").read_text())
+            for source in sorted(ROOT.glob(f"S{seed}_N*/validation_{step}_64/summary.json")):
+                name = source.parents[1].name
+                summary = json.loads(source.read_text())
                 candidates.append((summary["closed_loop"]["2048"]["lpips"], name))
             names.append((min(candidates)[1], step))
     for name, step in names:
