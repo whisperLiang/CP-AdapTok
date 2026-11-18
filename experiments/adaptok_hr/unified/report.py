@@ -1,12 +1,14 @@
 """Render the final report directly from real matched study evidence."""
 
 import json
+import xml.etree.ElementTree as ET
 from datetime import datetime
 
 import numpy as np
 
+from .decision import mean_lpips
 from .evaluate import read_rows
-from .run import PACKAGE, ROOT
+from .run import PACKAGE, ROOT, SCRATCH_STEPS
 
 
 def read(path):
@@ -15,6 +17,27 @@ def read(path):
 
 def measurements():
     return [(p.parents[1].name, p.parent, read(p)) for p in sorted(ROOT.glob("S*/validation_*_64/summary.json"))]
+
+
+def scratch_gates():
+    paths = sorted(ROOT.glob("decision_B_*.json"), key=lambda p: int(p.stem.rsplit("_", 1)[1]))
+    return [(path, read(path)) for path in paths]
+
+
+def stage_overview(lines, gates, values):
+    if not gates:
+        return
+    path, result = gates[-1]
+    step = int(path.stem.rsplit("_", 1)[1])
+    lines.extend(["", f"实验 B 已完成至 **{step} 步**的两种子原生验证；继续下一阶段：**{result['advance']}**。"])
+    measured = {(name, row["completed_steps"]): row for name, _, row in values}
+    for arm in result["outcomes"]:
+        deltas = [mean_lpips(measured[f"S{s}_{arm}", step]) - mean_lpips(measured[f"S{s}_N0", step]) for s in (1, 2)]
+        lines.append(f"{arm} 相对 N0 的四预算平均原生 LPIPS 变化：S1 **{deltas[0]:+.6f}**，S2 **{deltas[1]:+.6f}**（负值更好）。")
+    if not result["advance"]:
+        unrun = [v for v in SCRATCH_STEPS if v > step]
+        lines.append(f"按预设质量/稳定性门槛停止，未执行的后续阶段为 {unrun}；保留全部正向权衡与负结果。")
+    lines.append("")
 
 
 def pilot_outcomes(lines, decision):
@@ -142,13 +165,29 @@ def benchmark_table(lines):
                   "排除磁盘读取、H2D、指标和校验。每帧耗时及 I/P 类型保存在 benchmark JSON，可重算分段 P50/P95。"])
 
 
+def engineering_checks(lines):
+    suite = ET.parse(ROOT / "tests_full.xml").getroot().find("testsuite").attrib
+    mutations = read(ROOT / "mutations.json")
+    quality = read(ROOT / "quality_audit.json")
+    lines.extend(["", "## 工程验证", "",
+                  f"完整保留/新增回归：{suite['tests']} 项，失败 {suite['failures']}、错误 {suite['errors']}、跳过 {suite['skipped']}；"
+                  "包含原生 BF16 Alex/VGG I/P、真实离散码流、历史 checkpoint 和 65 帧因果闭环。",
+                  f"实际行为变异 {len(mutations['results'])} 项，全部被捕获：{mutations['all_killed']}。"
+                  f"重复度 ≥0.8 的项数为 {len(quality['duplicates_over_08'])}。",
+                  f"覆盖审计仍标记 {len(quality['crap_over_10'])} 个旧评估/报告函数的 CRAP≥10；这些文件未在本次生产改动中修改。"
+                  "新增生产函数均低于 CRAP10；新增实验函数的静态复杂度均低于10。详见 tests_full.xml、coverage.json、quality_audit.json、mutations.json。"])
+
+
 def report():
     decision = read(ROOT / "decision_A.json")
     calibration = read(ROOT / "calibration.json")
     values = measurements()
+    gates = scratch_gates()
+    overview = []
+    stage_overview(overview, gates, values)
     lines = ["# AdapTok-HR Unified RGB–Perceptual 实验报告", "",
              f"实验 A 的后续对照候选为 **{decision['winner']}**。双种子平均原生 LPIPS 均改善：**{decision['unified_improves_both_seeds']}**；逐预算质量保护门槛通过：**{decision['preferred_training_gate_pass']}**。",
-             "实验 A 仅证明 D3 父模型上的 300 次统一目标微调结果，不能外推为从头训练结论。所有数字来自本分支实际执行。", "",
+             "实验 A 仅证明 D3 父模型上的 300 次统一目标微调结果，不能外推为从头训练结论。所有数字来自本分支实际执行。", "", *overview,
              "## 架构与目标", "",
              "原生 1920×1080 整帧输入，底部反射填充至 1088，输出裁回 1080。保留轻量卷积、S32/S64 局部窗口注意力、共享 8192×16 VQ、"
              "Base 135 + Medium 510 + Fine 2040 候选位置顺序、K=256/512/1024/2048、GOP32 和 13-bit 固定结构码流。模型只从离散 ID 对应的码向量重建；STE 仅用于反向传播。", "",
@@ -186,13 +225,13 @@ def report():
     resources_table(lines)
     lines.extend(["", "## 独立吞吐与融合开销"])
     benchmark_table(lines)
-    for path in sorted(ROOT.glob("decision_B_*.json")):
-        result = read(path)
+    for path, result in gates:
         lines.extend(["", f"## 从头训练 {path.stem.rsplit('_',1)[1]} 步门槛", "",
                       f"继续下一阶段：**{result['advance']}**。完整逐预算及稳定性检查见 `{path.name}`。"])
         gate_outcomes(lines, result)
         if not result["advance"]:
             lines.append("保留当前负结果，停止下一阶段扩展；不以更长训练替代结构诊断。")
+    engineering_checks(lines)
     lines.extend(["", "## 图、原生重建与可复现性", "",
                   "`figures/` 的 PDF/SVG/PNG 和 source_data.json 使用实际 bpp 与完整原生验证指标；两种子单独绘制，不将相关视频帧当成独立重复。"
                   "每个验证目录 `samples/` 保存未经增强的原生 1920×1080 PNG，包含 I 帧及 P 帧（1、31、63）。这些图使用同一真实 K2048 历史，显示各离散 ID 前缀在相同状态下的重建；低预算 P 图不代表其独立预算闭环。正式率失真表使用独立预算闭环。PNG 为 8-bit 显示，指标使用原始 float32 重建。",

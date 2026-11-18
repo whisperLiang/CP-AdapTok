@@ -59,3 +59,5 @@ Before any B update, the milestone rule was corrected to complete both requested
 After the 1000/3000 gates, only candidates that pass quality and stability in both seeds continue, together with N0. Rejected comparators retain their last measured checkpoints; they neither block a passing stable candidate nor receive longer training. Replaying an earlier completed milestone reuses that saved checkpoint and preserves a later completion record.
 
 `diagnose` reads the actual completed K2048 packets on each model's real history and reports per-level transmitted ID distributions. This is post-hoc diagnosis, not a gate revision. Fine-level code collapse can coexist with a passing whole-stream maximum-code-frequency screen. Empirical ID entropy describes observed frequencies, not semantic information bits.
+
+实际执行结果：A 的 U0–U3 × 两种子均完成 D3/1300→1600 的 300 次追加更新；B 的 N0–N2 × 两种子均从头完成 300、1000 步验证。1000 步质量门槛拒绝继续，未执行 3000/5000。N1 提高两种子的 PSNR，但原生 LPIPS 在两个种子的变化方向相反；N2 两种子的 Fine 层接近/完全单码塌缩。完整数字、模型差异、时间/显存、图像范围和局限见 [report.md](report.md)。最终回归 111 项通过，19 个实际行为变异全部被捕获，20 个正式评估通过码流/检查点审计，40 张图通过 81 项图检。
