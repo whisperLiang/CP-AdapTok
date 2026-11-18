@@ -34,11 +34,14 @@ class ReconstructionLoss(nn.Module):
         if self.mode not in ("legacy", "unified") or self.network not in ("alex", "vgg"):
             raise ValueError("unknown reconstruction mode or LPIPS network")
         if self.mode == "unified":
-            if self.weights.get("l1") != 1 or any(value for key, value in self.weights.items()
-                                                 if key not in ("l1", "perceptual", "vq")):
+            if not self.unified_weights_valid():
                 raise ValueError("unified requires RGB L1 + LPIPS + VQ only")
             if self.weights.get("perceptual", 0) and "crop_seed" not in self.settings:
                 raise ValueError("unified LPIPS requires an independent crop_seed")
+
+    def unified_weights_valid(self):
+        unsupported = [value for key, value in self.weights.items() if key not in ("l1", "perceptual", "vq")]
+        return self.weights.get("l1") == 1 and not any(unsupported)
 
     def sample_views(self, target):
         if self.crop_rng is None:
