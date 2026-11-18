@@ -116,6 +116,8 @@ def draw(name, data, alignment):
     alignment(fig, json_out=str(FIGS / f"{name}.alignment.json"), strict=True)
     for ext in (".svg", ".pdf", ".png"):
         fig.savefig(FIGS / (name + ext), dpi=600)
+    svg = FIGS / f"{name}.svg"
+    svg.write_text("\n".join(line.rstrip() for line in svg.read_text().splitlines()) + "\n")
     plt.close(fig)
 
 

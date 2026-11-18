@@ -14,11 +14,6 @@ def percent(value):
     return f"{100 * value:.2f}%"
 
 
-def benchmark_verdict(names):
-    data = read(ROOT / "benchmark_summary.json")
-    return "，".join(f"{name.split('/')[0]} 为 {data[name]['median_joint_fps']:.2f} FPS" for name in names)
-
-
 def decoder_contrasts(decision):
     winner = decision["decoder_winner"]
     lines = ["", f"### 选中方案 {winner} 的 K2048 绝对画质差值", "",
@@ -66,35 +61,14 @@ def report():
     decision = read(ROOT / "decision.json")
     winner = decision["winner"]
     verdict = "两种子均确认后缀携带画面内容。" if decision["information_both_seeds"] else "已触发预登记的 1000 步信息停止条件。"
-    lines = ["# AdapTok-HR 新增 Fine 后缀实验报告", "",
-             f"300 步筛选选中了 **{winner}**。{verdict}", "",
-             "R00 为 A1 对照，R10 加入局部空间残差，R01 加入训练期后缀监督，R11 同时启用两项。"
-             "主实验基于 ab0b85b，固定共享球面码本、逐预算 VQ、四帧展开和 TBPTT2。"
-             "K1024 已有 379 个 Fine 位置，干预仅作用于随后新增的 1024 个位置。", "",
-             "## 实际码流与内容干预", "",
-             "每个预算有独立的收发模型与闭环。另用同一 K2048 历史重放四档真实前缀。"
-             "打乱后缀测位置贡献，同位置跨视频替换测内容相关性，所有干预沿用原参考。"
-             "跨来源仅比较三源共有帧号。短验证为 24 帧，长验证为 174 帧，其中同位置跨视频替换使用 150 帧。", "",
-             "| 配置 | 步数 | 验证帧 | 后缀码数 / perplexity / 最大占比 | 置乱 ΔMSE | 跨视频 ΔMSE | 同向来源 | 同状态 ΔdB | 闭环 ΔdB |",
-             "|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
+    lines = ["# AdapTok-HR 新增 Fine 后缀实验报告", "", f"300 步筛选选中了 **{winner}**。{verdict}"]
     entries = sorted(summaries(), key=lambda pair: (pair[1]["steps"], pair[0]))
     confirmed = [r for name, r in entries if name.endswith("_" + winner) and r["steps"] == 1000]
     if confirmed:
         same = " / ".join(f"{r['same_state_gain_db']:+.3f}" for r in confirmed)
         loop = " / ".join(f"{r['closed_loop_gain_db']:+.3f}" for r in confirmed)
-        lines[3:3] = [f"1000 步时 K2048 相对 K1024 的同状态增益依种子顺序为 **{same} dB**，"
-                      f"独立闭环为 **{loop} dB**。每个 K2048 码流包均为 3470 字节。", ""]
-    controls = [r for name, r in entries if name.endswith("_R00") and r["steps"] == 1000]
-    if len(controls) == 2:
-        first, second = controls
-        if not first["information"]["pass"] and second["information"]["pass"]:
-            net = " / ".join(f"{r['same_state_gain_db'] - c['same_state_gain_db']:+.3f}"
-                             for r, c in zip(confirmed, controls))
-            lines[5:5] = [f"原结构对照的第一个种子使用 {first['suffix']['used_codes']} 个后缀码字。"
-                          f"第二个种子使用 {second['suffix']['used_codes']} 个，也通过两类内容干预，"
-                          f"同状态增益为 {second['same_state_gain_db']:.3f} dB。"
-                          f"{winner} 相对各自对照额外提高同状态预算增益 {net} dB。"
-                          "初始模型、数据与预算种子一起变化，本实验无法进一步区分三者的贡献。", ""]
+        lines[-1] += (f"1000 步时 K2048 相对 K1024 的同状态增益依种子顺序为 **{same} dB**，"
+                      f"独立闭环为 **{loop} dB**。每个 K2048 码流包均为 3470 字节。")
     if (ROOT / "decoder_decision.json").exists():
         d = read(ROOT / "decoder_decision.json")
         arm = d["decoder_winner"]
@@ -102,10 +76,31 @@ def report():
         quality_delta = " / ".join(f"{r['psnr_global']:+.3f}" for r in final_qualities)
         lpips_delta = " / ".join(f"{r['lpips']:+.4f}" for r in final_qualities)
         adoption = "通过双种子画质验收" if d["adoption_ready"] else "未通过双种子综合画质门槛"
-        speed = benchmark_verdict([f"S{s}_{arm}/1300" for s in d["seeds"]])
-        lines[5:5] = [f"Decoder 阶段按预登记排序复验 **{arm}**。相对各自同步数对照 C0，K2048 的 PSNR 提高 "
+        timings = read(ROOT / "benchmark_summary.json")
+        speed = " / ".join(f"{timings[f'S{s}_{arm}/1300']['median_joint_fps']:.2f}" for s in d["seeds"])
+        lines.extend(["", f"Decoder 阶段按预登记排序复验 **{arm}**。相对各自同步数对照 C0，K2048 的 PSNR 提高 "
                       f"{quality_delta} dB，LPIPS 变化 {lpips_delta}，最终{adoption}。"
-                      f"64 帧 K2048 原路径的三次收发联合吞吐中位数分别为 {speed}。", ""]
+                      f"两种子 64 帧 K2048 原路径的三次收发联合吞吐中位数分别为 {speed} FPS。"])
+    controls = [r for name, r in entries if name.endswith("_R00") and r["steps"] == 1000]
+    if len(controls) == 2:
+        first, second = controls
+        if not first["information"]["pass"] and second["information"]["pass"]:
+            net = " / ".join(f"{r['same_state_gain_db'] - c['same_state_gain_db']:+.3f}"
+                             for r, c in zip(confirmed, controls))
+            lines.extend(["", f"原结构对照的第一个种子使用 {first['suffix']['used_codes']} 个后缀码字。"
+                          f"第二个种子使用 {second['suffix']['used_codes']} 个，也通过两类内容干预，"
+                          f"同状态增益为 {second['same_state_gain_db']:.3f} dB。"
+                          f"{winner} 相对各自对照额外提高同状态预算增益 {net} dB。"
+                          "初始模型、数据与预算种子一起变化，本实验无法进一步区分三者的贡献。"])
+    lines.extend(["", "R00 为 A1 对照，R10 加入局部空间残差，R01 加入训练期后缀监督，R11 同时启用两项。"
+                  "主实验基于 ab0b85b，固定共享球面码本、逐预算 VQ、四帧展开和 TBPTT2。"
+                  "K1024 已有 379 个 Fine 位置，干预仅作用于随后新增的 1024 个位置。", "",
+                  "## 实际码流与内容干预", "",
+                  "每个预算有独立的收发模型与闭环。另用同一 K2048 历史重放四档真实前缀。"
+                  "打乱后缀测位置贡献，同位置跨视频替换测内容相关性，所有干预沿用原参考。"
+                  "跨来源仅比较三源共有帧号。短验证为 24 帧，长验证为 174 帧，其中同位置跨视频替换使用 150 帧。", "",
+                  "| 配置 | 步数 | 验证帧 | 后缀码数 / perplexity / 最大占比 | 置乱 ΔMSE | 跨视频 ΔMSE | 同向来源 | 同状态 ΔdB | 闭环 ΔdB |",
+                  "|---|---:|---:|---:|---:|---:|---:|---:|---:|"])
     for name, row in entries:
         s, info = row["suffix"], row["information"]
         p = info["pooled"]
