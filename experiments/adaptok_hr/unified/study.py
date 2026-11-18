@@ -22,7 +22,8 @@ def invoke(module, arguments, name):
 
 
 def evaluate_and_time(names, step, label):
-    invoke("evaluate", ["--names", *names, "--steps", step, "--frames", 64], f"{label}_evaluate")
+    evaluator = "evaluate_pilot" if step == 1600 else "evaluate"
+    invoke(evaluator, ["--names", *names, "--steps", step, "--frames", 64], f"{label}_evaluate")
     invoke("benchmark", ["--names", *names, "--steps", step], f"{label}_benchmark")
 
 

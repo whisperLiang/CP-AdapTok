@@ -14,7 +14,7 @@ Use the original repository as the read-only source of each seed's D3 1300 check
 export CUBLAS_WORKSPACE_CONFIG=:4096:8
 .venv-native/bin/python -m experiments.adaptok_hr.unified.calibrate --parent-root /home/whisperliang/CP-AdapTok
 .venv-native/bin/python -m experiments.adaptok_hr.unified.run pilot --parent-root /home/whisperliang/CP-AdapTok --seeds 1 2
-.venv-native/bin/python -m experiments.adaptok_hr.unified.evaluate --names S1_U0 S1_U1 S1_U2 S1_U3 S2_U0 S2_U1 S2_U2 S2_U3 --steps 1600 --frames 64
+.venv-native/bin/python -m experiments.adaptok_hr.unified.evaluate_pilot --names S1_U0 S1_U1 S1_U2 S1_U3 S2_U0 S2_U1 S2_U2 S2_U3 --steps 1600 --frames 64
 .venv-native/bin/python -m experiments.adaptok_hr.unified.benchmark --names S1_U0 S1_U1 S1_U2 S1_U3 S2_U0 S2_U1 S2_U2 S2_U3 --steps 1600
 .venv-native/bin/python -m experiments.adaptok_hr.unified.decision A --steps 1600 --frames 64
 ```
@@ -52,3 +52,5 @@ Native evaluation requests 64 contiguous frames per source. The fixed sources ac
 All new run output is under `results/adaptok_hr_unified`; all new complete model/optimizer checkpoints are under `checkpoints/adaptok_hr_unified`. The tracked `evidence` package supplies actual raw records, checkpoint metadata, hashes, native samples and figures. Full weight files remain in the independent local checkpoint root. Each native validation directory saves 1920×1080 original and decoded PNGs, including I and P frames. These images compare actual ID prefixes on the common real K2048 history; low-budget P images are not independent-loop examples. Rate-distortion tables use independent loops. PNG is an 8-bit display export; metrics use float32 reconstructions. Charts export exact point data and editable PDF/SVG. Source validation, PDF text and collision audits accompany the figures.
 
 Before any B update, the milestone rule was corrected to complete both requested early validation milestones. `protocol_A_snapshot.json` preserves the exact protocol hash used by the already-running A evaluation; only B continuation policy changed, not A selection or native metric definitions. Existing A evidence can be reproduced with its recorded source revision and frozen protocol. Start fresh result roots when changing a protocol; cached evaluations reject identity mismatches.
+
+`evaluate_pilot` only selects the immutable A protocol and delegates to the same native evaluator. It preserves strict reuse of the completed A measurements after the B-only milestone amendment; it contains no second metric implementation or compatibility fallback. B uses `evaluate` with the current B protocol.

@@ -133,6 +133,7 @@ def native_image_proof(directory):
 
 
 def verify():
+    torch.set_num_threads(4)
     results = {}
     schedules = {}
     for summary in sorted(ROOT.glob("S*/validation_*_64/summary.json")):
