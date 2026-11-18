@@ -15,6 +15,8 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.font_manager import findfont
+from PIL import Image, ImageDraw, ImageFont
 
 from adaptok_hr.runtime import write_json
 from experiments.adaptok_hr.fine_recovery.figure_qa import audit
@@ -117,6 +119,28 @@ def draw(name, data, alignment):
     plt.close(fig)
 
 
+def reconstruction_sheet(name):
+    labels = ["Original", *(f"K{k}" for k in BUDGETS)]
+    width, height = 384, 216
+    crop = (600, 645, 984, 805)
+    font = ImageFont.truetype(findfont("DejaVu Sans"), 17)
+    path = ROOT / name / "validation_1300_64/samples"
+    sheet = Image.new("RGB", (5 * width, height + 160 + 66), "white")
+    draw = ImageDraw.Draw(sheet)
+    for i, label in enumerate(labels):
+        file = path / f"car-roundabout_0000_{'original' if i == 0 else label}.png"
+        with Image.open(file) as frame:
+            if frame.size != (1920, 1080):
+                raise ValueError("reconstruction sheet requires native pixels")
+            x = i * width
+            draw.text((x + 5, 3), label, font=font, fill="black")
+            sheet.paste(frame.resize((width, height), Image.Resampling.LANCZOS), (x, 27))
+            sheet.paste(frame.crop(crop), (x, height + 66))
+    draw.text((5, height + 34), f"{name}  |  car-roundabout, frame 0  |  native crop at (600, 645), 384 x 160 px",
+              font=font, fill="black")
+    sheet.save(FIGS / f"{name}_1300_reconstruction.png")
+
+
 def qa(scripts):
     source = audit([sys.executable, str(scripts / "validate_figure.py"), __file__, "--json"])
     checks = [source]
@@ -147,6 +171,10 @@ def main():
     write_json(FIGS / "plotted_values.json", source)
     for name, data in source.items():
         draw(name, data, require_matplotlib_panel_alignment)
+    if (decision := ROOT / "decoder_decision.json").exists():
+        selected = read(decision)
+        for seed in selected["seeds"]:
+            reconstruction_sheet(f"S{seed}_{selected['decoder_winner']}")
     qa(args.qa_scripts)
 
 

@@ -15,11 +15,18 @@ def percent(value):
 
 
 def decoder_contrasts(decision):
-    lines = ["", "### 同种子各项 Decoder 改动相对 D0 的代价和收益", "",
+    winner = decision["decoder_winner"]
+    lines = ["", f"### 选中方案 {winner} 的 K2048 绝对画质差值", "",
+             "| 种子 | 对照 | ΔPSNR (dB) | ΔLPIPS | ΔDISTS |", "|---|---|---:|---:|---:|"]
+    for seed, arms in decision["seeds"].items():
+        for key, label in (("control", "同步数 C0"), ("old", "历史 HR")):
+            delta = arms[winner]["quality"]["absolute_delta"][key]
+            lines.append(f"| {seed} | {label} | {delta['psnr_global']:+.5f} | {delta['lpips']:+.6f} | {delta['dists']:+.6f} |")
+    lines.extend(["", "### 同种子各项 Decoder 改动相对 D0 的代价和收益", "",
              "每行比较同一 1300 步、K2048、同一验证帧。延迟差取两组独立 64 帧实测的平均每帧差值。"
              "正的延迟差表示增加耗时。", "",
              "| 种子 | 改动 | ΔPSNR (dB) | ΔLPIPS | ΔDISTS | Δ边缘 MSE | Δ高频 L1 | Δ接收 ms | Δ联合 ms | Δ参数量 |",
-             "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
+             "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|"])
     for seed, arms in decision["seeds"].items():
         root = ROOT / f"S{seed}_D0"
         base = read(root / "validation_1300_64/summary.json")["closed_loop"]["2048"]
@@ -157,12 +164,16 @@ def report():
     if (ROOT / "performance_report.md").is_file():
         lines.extend(["", (ROOT / "performance_report.md").read_text()])
     acceptance = read(ROOT / "acceptance.json")
+    data = read(ROOT / "S1_R00/run.json")
     lines.extend(["", "## 复现与工程验收", "",
                   f"实机测试 {acceptance['tests']['tests']} 项，通过断言捕获 {acceptance['mutations_killed']} 个变异。"
                   f"复算 {len(acceptance['checkpoints'])} 个优化器检查点 SHA256，重读 "
                   f"{sum(v['packets_reparsed'] for v in acceptance['validations'].values())} 个验证包并核对前缀、输入身份和因果链。",
                   "图表按种子和步数分别绘制。相邻视频帧有关联，报告给出原始逐帧值，统计单位保留到来源。"
-                  "全部验证限预先固定的三个 DAVIS 来源。", "",
+                  "全部验证限预先固定的三个 DAVIS 来源。封存 Test 未参与本轮选型。", "",
+                  f"训练数据清单身份为 `{entries[0][1]['identity']['manifest']}`。"
+                  f"从头实验的生产代码 SHA256 为 `{data['environment']['source_sha256']}`。"
+                  "每个实际检查点的权重、模型和码本指纹随证据归档。", "",
                   "[运行命令](README.md) · [工作日志](work_log.md) · [验收明细](evidence/acceptance.json) · [原始证据索引](evidence/archives.json)", "",
                   "## 实测曲线与原生重建", ""])
     featured = {"S1_1000_rd_psnr_global", "S2_1000_rd_lpips", "S1_1300_rd_psnr_global", "S2_1300_rd_lpips"}
@@ -170,6 +181,8 @@ def report():
     for p in (p for p in plots if p.stem in featured):
         lines.extend([f"![{p.stem}](evidence/figures/{p.name})", ""])
     lines.extend(["[全部曲线与单图 PDF、SVG](evidence/figures) · [对应的实测坐标](evidence/figures/plotted_values.json)", ""])
+    for p in (p for p in plots if p.stem.endswith("_reconstruction")):
+        lines.extend([f"![{p.stem}，上排全帧缩略图，下排相同位置原始像素裁剪](evidence/figures/{p.name})", ""])
     for p in sorted((PACKAGE / "evidence/samples").glob("*/car-roundabout_0000_K2048.png")):
         lines.append(f"- [{p.parent.name} 原生 1080p 四预算图]({p.parent.relative_to(PACKAGE)})")
     (PACKAGE / "report.md").write_text("\n".join(lines) + "\n")
