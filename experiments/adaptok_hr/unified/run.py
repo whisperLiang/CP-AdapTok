@@ -3,6 +3,7 @@
 import argparse
 import copy
 import json
+import time
 from pathlib import Path
 
 import torch
@@ -114,7 +115,13 @@ def train(name, config, steps):
     committed = sorted(p for p in final.parent.glob("step_*.pt") if p.with_suffix(".json").exists())
     if committed:
         command += ["--resume", committed[-1]]
-    execute(command, ROOT / "logs" / f"{name}_train_{steps}.log")
+    started = time.perf_counter()
+    try:
+        execute(command, ROOT / "logs" / f"{name}_train_{steps}.log")
+    finally:
+        write_json(ROOT / name / f"timing_{steps}.json", {
+            "trainer_process_wall_seconds": time.perf_counter() - started,
+            "target_step": steps, "scope": "trainer process including initialization, I/O, validation, checkpoints; experiment fork excluded"})
 
 
 def scratch_configuration(parent_root, seed, arm, loss_arm):

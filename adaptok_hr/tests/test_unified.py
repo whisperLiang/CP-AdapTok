@@ -211,3 +211,32 @@ def test_native_fused_65_frame_independent_causal_loops(record_property):
                     for prefix in (256, 512, 1024):
                         assert parse(truncate_packet(packet, prefix)).ids == parse(packet).ids[:prefix]
     record_property("native_long_loop_frames_per_budget", 65)
+
+
+def test_perceptual_budget_order_equivalence_and_no_original_history(monkeypatch, small_model):
+    import lpips
+
+    targets = []
+    class PixelMetric(nn.Module):
+        def forward(self, rgb, target):
+            targets.append(target.detach().clone())
+            return (rgb - target).square().mean()[None]
+    monkeypatch.setattr(lpips, "LPIPS", lambda net: PixelMetric())
+    config = unified_settings()
+    config["losses"]["perceptual"] = .2
+    losses = ReconstructionLoss(config["losses"], "cpu", config["reconstruction"])
+    frame = torch.rand(1, 3, 128, 256)
+    incoming = small_model.forward_frame(torch.rand_like(frame), None, 8).state
+    incoming_copy = incoming.rgb.detach().clone()
+    rng = losses.crop_rng.get_state()
+    left, main, a = frame_objective(small_model, frame, incoming, torch.zeros_like(frame), 4, 8, losses)
+    assert len(targets) == 4
+    assert torch.equal(targets[0], targets[2]) and torch.equal(targets[1], targets[3])
+    losses.crop_rng.set_state(rng)
+    right, alternative, b = frame_objective(small_model, frame, incoming, torch.ones_like(frame), 8, 4, losses)
+    torch.testing.assert_close(left, right, atol=1e-7, rtol=1e-6)
+    assert a["budget_losses"] == b["budget_losses"]
+    assert a["perceptual_crops"] == b["perceptual_crops"]
+    assert torch.equal(incoming.rgb, incoming_copy)
+    assert main.frame_index == alternative.frame_index == 1
+    assert torch.equal(main.rgb, small_model.forward_frame(frame, incoming, 4).rgb)
