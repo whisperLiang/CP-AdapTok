@@ -1,0 +1,50 @@
+{
+  "seed": 1,
+  "steps": 300,
+  "training_frames": {
+    "S1_R00": 1200,
+    "S1_R10": 1200,
+    "S1_R01": 1200,
+    "S1_R11": 1200
+  },
+  "schedule_sha256": {
+    "S1_R00": "36505130e76d9d8da199c37c82d40eaab5785bd85f395b6173697072bdd90051",
+    "S1_R10": "36505130e76d9d8da199c37c82d40eaab5785bd85f395b6173697072bdd90051",
+    "S1_R01": "36505130e76d9d8da199c37c82d40eaab5785bd85f395b6173697072bdd90051",
+    "S1_R11": "36505130e76d9d8da199c37c82d40eaab5785bd85f395b6173697072bdd90051"
+  },
+  "common_initial_full_weights": {
+    "S1_R00": "38677c379aa35025cbe7eb743eb272906a4fd693776aefb0734d6a1e84a8c0b5",
+    "S1_R10": "38677c379aa35025cbe7eb743eb272906a4fd693776aefb0734d6a1e84a8c0b5",
+    "S1_R01": "38677c379aa35025cbe7eb743eb272906a4fd693776aefb0734d6a1e84a8c0b5",
+    "S1_R11": "38677c379aa35025cbe7eb743eb272906a4fd693776aefb0734d6a1e84a8c0b5"
+  },
+  "common_settings": {
+    "S1_R00": "cb6c243e3e7003fe6b90828cad983db716e63130e3b5a08bc0c418363c26fecd",
+    "S1_R10": "cb6c243e3e7003fe6b90828cad983db716e63130e3b5a08bc0c418363c26fecd",
+    "S1_R01": "cb6c243e3e7003fe6b90828cad983db716e63130e3b5a08bc0c418363c26fecd",
+    "S1_R11": "cb6c243e3e7003fe6b90828cad983db716e63130e3b5a08bc0c418363c26fecd"
+  },
+  "production_source": {
+    "S1_R00": [
+      "a373c4eb50d76abdddcf5061349ab39e1fc2e5308c95b15489f9d2b7fe39a4f6"
+    ],
+    "S1_R10": [
+      "a373c4eb50d76abdddcf5061349ab39e1fc2e5308c95b15489f9d2b7fe39a4f6"
+    ],
+    "S1_R01": [
+      "a373c4eb50d76abdddcf5061349ab39e1fc2e5308c95b15489f9d2b7fe39a4f6"
+    ],
+    "S1_R11": [
+      "a373c4eb50d76abdddcf5061349ab39e1fc2e5308c95b15489f9d2b7fe39a4f6"
+    ]
+  },
+  "manifest": {
+    "S1_R00": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+    "S1_R10": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+    "S1_R01": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+    "S1_R11": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82"
+  },
+  "historical_A1_each_step_mse_and_plan_match": true,
+  "historical_A1_all_final_model_tensors_match": true
+}

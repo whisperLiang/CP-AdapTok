@@ -1,0 +1,12 @@
+{
+  "requires": "preregistered suffix information gate in both seeds at 1000",
+  "parent": "each seed's selected R arm and its optimizer, sampler and budget RNG at 1000",
+  "control": "C0 independently continues the same seed R00 with the same 300 data and budget updates",
+  "variants": {"D0": [false, 0.0], "D1": [true, 0.0], "D2": [false, 0.1], "D3": [true, 0.1]},
+  "residual": "16-wide S32 depthwise branch with zero-initialized output, using the received Fine embedding, valid mask and upsampled S64 coarse feature",
+  "detail": "L1 on RGB minus a reflected 3x3 box mean, with the same reconstruction-budget weights",
+  "ranking_on_seed1": ["passes_information_and_all_quality_requirements", "passes_information", "higher_closed_loop_K2048_PSNR", "lower_closed_loop_K2048_LPIPS", "lower_closed_loop_K2048_DISTS", "name"],
+  "second_seed": "repeat winner, D0 and independently continued R00/C0 at the same 1300 cumulative updates",
+  "performance": "eligible only after information and all quality requirements pass in both seeds; unchanged genuine packet bytes, RGB and feature states under a shared execution identity",
+  "benchmark_reference": "measure selected unoptimized paths even if quality gate stops speed optimization"
+}

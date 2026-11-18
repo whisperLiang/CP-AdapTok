@@ -1,0 +1,158 @@
+{
+  "winner": "R11",
+  "protocol": "3c4b643f99d2bebf8dd6153a1025e6e7b11bca26c1c3a084c7a9ad0043a03865",
+  "screen": {
+    "R00": {
+      "information": {
+        "pass": false,
+        "agreeing_sources": 0,
+        "pooled": {
+          "shuffle": 0.0,
+          "cross": 0.0,
+          "multicode_frames": 0,
+          "frames": 24,
+          "donor_frames": 24
+        },
+        "sources": {
+          "DAVIS2017:blackswan": {
+            "shuffle": 0.0,
+            "cross": 0.0,
+            "multicode_frames": 0,
+            "frames": 8,
+            "donor_frames": 8
+          },
+          "DAVIS2017:car-roundabout": {
+            "shuffle": 0.0,
+            "cross": 0.0,
+            "multicode_frames": 0,
+            "frames": 8,
+            "donor_frames": 8
+          },
+          "DAVIS2017:dog": {
+            "shuffle": 0.0,
+            "cross": 0.0,
+            "multicode_frames": 0,
+            "frames": 8,
+            "donor_frames": 8
+          }
+        }
+      },
+      "gain": 0.0018681569357887895,
+      "lpips": 0.7726384550333023
+    },
+    "R10": {
+      "information": {
+        "pass": true,
+        "agreeing_sources": 3,
+        "pooled": {
+          "shuffle": 0.0010764328762888908,
+          "cross": 0.0011484675730268161,
+          "multicode_frames": 24,
+          "frames": 24,
+          "donor_frames": 24
+        },
+        "sources": {
+          "DAVIS2017:blackswan": {
+            "shuffle": 0.0006415881216526031,
+            "cross": 0.0007687676697969437,
+            "multicode_frames": 8,
+            "frames": 8,
+            "donor_frames": 8
+          },
+          "DAVIS2017:car-roundabout": {
+            "shuffle": 0.0018705809488892555,
+            "cross": 0.0018076589331030846,
+            "multicode_frames": 8,
+            "frames": 8,
+            "donor_frames": 8
+          },
+          "DAVIS2017:dog": {
+            "shuffle": 0.0007171295583248138,
+            "cross": 0.0008689761161804199,
+            "multicode_frames": 8,
+            "frames": 8,
+            "donor_frames": 8
+          }
+        }
+      },
+      "gain": 0.13034159866462502,
+      "lpips": 0.7704372828205427
+    },
+    "R01": {
+      "information": {
+        "pass": false,
+        "agreeing_sources": 0,
+        "pooled": {
+          "shuffle": 0.0,
+          "cross": 0.0,
+          "multicode_frames": 0,
+          "frames": 24,
+          "donor_frames": 24
+        },
+        "sources": {
+          "DAVIS2017:blackswan": {
+            "shuffle": 0.0,
+            "cross": 0.0,
+            "multicode_frames": 0,
+            "frames": 8,
+            "donor_frames": 8
+          },
+          "DAVIS2017:car-roundabout": {
+            "shuffle": 0.0,
+            "cross": 0.0,
+            "multicode_frames": 0,
+            "frames": 8,
+            "donor_frames": 8
+          },
+          "DAVIS2017:dog": {
+            "shuffle": 0.0,
+            "cross": 0.0,
+            "multicode_frames": 0,
+            "frames": 8,
+            "donor_frames": 8
+          }
+        }
+      },
+      "gain": -0.0016494782282361342,
+      "lpips": 0.7693292746941248
+    },
+    "R11": {
+      "information": {
+        "pass": true,
+        "agreeing_sources": 3,
+        "pooled": {
+          "shuffle": 0.0012055915625145037,
+          "cross": 0.0013105552643537521,
+          "multicode_frames": 24,
+          "frames": 24,
+          "donor_frames": 24
+        },
+        "sources": {
+          "DAVIS2017:blackswan": {
+            "shuffle": 0.0008032186888158321,
+            "cross": 0.000971255823969841,
+            "multicode_frames": 8,
+            "frames": 8,
+            "donor_frames": 8
+          },
+          "DAVIS2017:car-roundabout": {
+            "shuffle": 0.0020243884064257145,
+            "cross": 0.00222763791680336,
+            "multicode_frames": 8,
+            "frames": 8,
+            "donor_frames": 8
+          },
+          "DAVIS2017:dog": {
+            "shuffle": 0.0007891675923019648,
+            "cross": 0.0007327720522880554,
+            "multicode_frames": 8,
+            "frames": 8,
+            "donor_frames": 8
+          }
+        }
+      },
+      "gain": 0.1506366100571075,
+      "lpips": 0.7884660263856252
+    }
+  }
+}
