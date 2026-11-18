@@ -24,9 +24,9 @@ from .run import PROTOCOL, ROOT
 from .study import read
 
 COLORS = {"R00": "#55585C", "R10": "#007C83", "R01": "#9463A7", "R11": "#C36C2C",
-          "Historical": "#243547", "D0": "#55585C", "D1": "#007C83", "D2": "#9463A7", "D3": "#C36C2C"}
+          "Historical": "#243547", "C0": "#3364A0", "D0": "#55585C", "D1": "#007C83", "D2": "#9463A7", "D3": "#C36C2C"}
 STYLES = {"R00": "--", "R10": "-", "R01": "-.", "R11": ":", "Historical": "-.",
-          "D0": "--", "D1": "-", "D2": "-.", "D3": ":"}
+          "C0": ":", "D0": "--", "D1": "-", "D2": "-.", "D3": ":"}
 BUDGETS = ("256", "512", "1024", "2048")
 FIGS = ROOT / "figures"
 
@@ -95,7 +95,7 @@ def draw(name, data, alignment):
         ax.set_xticks(range(3), ["Blackswan", "Car-roundabout", "Dog"])
         ax.axhline(0, linewidth=.5, color="#999999", zorder=0)
     ax.ticklabel_format(axis="y", useOffset=False)
-    ax.legend(loc="upper center", bbox_to_anchor=(.5, 1.21), ncol=5, frameon=False)
+    ax.legend(loc="upper center", bbox_to_anchor=(.5, 1.21), ncol=min(6, len(lines)), frameon=False)
     fig.subplots_adjust(left=.15, right=.97, bottom=.19, top=.81)
     fig.canvas.draw()
     alignment(fig, json_out=str(FIGS / f"{name}.alignment.json"), strict=True)
