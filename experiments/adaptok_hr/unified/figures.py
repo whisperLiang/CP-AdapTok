@@ -8,6 +8,7 @@ repository's Python typography/canvas/export conventions, not scientific data.
 """
 
 import argparse
+import inspect
 import json
 import sys
 from pathlib import Path
@@ -91,7 +92,9 @@ def learning_curves(output, alignment):
 
 
 def qa(output, scripts):
-    records = [audit([sys.executable, str(scripts / "validate_figure.py"), __file__, "--json"])]
+    resolved = output / "plotting_source_for_audit.py"
+    resolved.write_text(Path(__file__).read_text() + "\n" + inspect.getsource(canvas) + "\n" + inspect.getsource(export))
+    records = [audit([sys.executable, str(scripts / "validate_figure.py"), str(resolved), "--json"])]
     for pdf in sorted(output.glob("*.pdf")):
         if "overlay" in pdf.name:
             continue
@@ -110,7 +113,8 @@ if __name__ == "__main__":
     sys.path.insert(0, str(args.qa_scripts))
     from audit_panel_alignment import require_matplotlib_panel_alignment
 
-    matplotlib.rcParams.update({"font.family": "DejaVu Sans", "font.size": 8, "axes.labelsize": 8,
+    matplotlib.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["DejaVu Sans"],
+                               "font.size": 8, "axes.labelsize": 8,
                                "xtick.labelsize": 7, "ytick.labelsize": 7, "legend.fontsize": 8,
                                "svg.fonttype": "none", "pdf.fonttype": 42})
     output = ROOT / "figures"
