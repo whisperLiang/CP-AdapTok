@@ -63,11 +63,26 @@ def fusion_latency(fusion, features, repeats):
             rows.append(start.elapsed_time(stop))
     return rows, (torch.cuda.max_memory_allocated() - baseline) / 2**20
 
+
+def segmented_timings(rows):
+    selectors = {"I": lambda r: r["frame_type"] == "I", "P": lambda r: r["frame_type"] == "P",
+                 "late_GOP": lambda r: r["frame"] % 32 >= 24}
+    result = {}
+    for group, predicate in selectors.items():
+        selected = list(filter(predicate, rows))
+        result[group] = {"frames": len(selected), "bytes": sum(r["bytes"] for r in selected),
+                         "actual_bpp": sum(r["bytes"] for r in selected)*8/(len(selected)*1080*1920),
+                         "timing": {key: summarize_latency([r[key + "_ms"] for r in selected])
+                                    for key in ("encoder", "sender", "receiver", "joint")}}
+    return result
+
+
 def measure(name, step):
     path = checkpoint(name, step)
     output = ROOT / name / f"benchmark_{step}.json"
     if output.exists():
-        if json.loads(output.read_text())["checkpoint_sha256"] != file_hash(path):
+        if (json.loads(output.read_text())["checkpoint_sha256"] != file_hash(path)
+                or json.loads(output.read_text())["implementation_sha256"] != file_hash(__file__)):
             raise ValueError("benchmark checkpoint identity mismatch")
         return
     require_idle_gpu()
@@ -78,9 +93,12 @@ def measure(name, step):
     source = next(r for r in index["splits"]["validation"] if r["content_id"] == "DAVIS2017:car-roundabout")
     clip, metadata = read_clip(source, 0, 64)
     budgets = {str(k): stream(model, clip, k) for k in model.config.budgets}
+    for row in budgets.values():
+        row["groups"] = segmented_timings(row["frames"])
     fusion = fusion_overhead(model, clip[0:1].cuda())
     require_idle_gpu()
     write_json(output, {"environment": environment(), "checkpoint_sha256": file_hash(path),
+               "implementation_sha256": file_hash(__file__),
                "completed_steps": saved["completed_steps"], "input": metadata, "budgets": budgets,
                "parameters": sum(p.numel() for p in model.parameters()), "fusion": fusion,
                "scope": "sequential native encoder+13-bit packing+sender local decode+independent receiver; synchronized wall; excludes input I/O,H2D,quality metrics and assertions",

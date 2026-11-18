@@ -28,13 +28,13 @@ def quality_table(lines, values):
 
 
 def groups_table(lines, values):
-    lines.extend(["", "| 模型/步 | K | 帧段 | 帧数 | PSNR-global | PSNR-frame-mean | LPIPS | DISTS | Cb MAE | Cr MAE | 色差方差保留率 |",
-                  "|---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|"])
+    lines.extend(["", "| 模型/步 | K | 帧段 | 帧数 | bytes/帧 | bpp | PSNR-global | PSNR-frame-mean | LPIPS | DISTS | Cb MAE | Cr MAE | 色差方差保留率 |",
+                  "|---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"])
     for name, _, result in values:
         for k, summary in result["closed_loop"].items():
             for group in ("I", "P", "late_GOP"):
                 row = summary[group]
-                lines.append(f"| {name}/{result['completed_steps']} | {k} | {group} | {row['frames']} | {row['psnr_global']:.4f} | "
+                lines.append(f"| {name}/{result['completed_steps']} | {k} | {group} | {row['frames']} | {row['bytes']/row['frames']:.0f} | {row['actual_bpp']:.8f} | {row['psnr_global']:.4f} | "
                              f"{row['psnr_frame_mean']:.4f} | {row['lpips']:.6f} | {row['dists']:.6f} | "
                              f"{row['cb_mae']:.6f} | {row['cr_mae']:.6f} | {row['color_difference_variance_retention']:.4f} |")
 
@@ -73,6 +73,13 @@ def benchmark_table(lines):
             t = row["timing"]
             lines.append(f"| {path.parent.name}/{result['completed_steps']} | {k} | {t['encoder']['fps']:.2f}/{t['sender']['fps']:.2f}/{t['receiver']['fps']:.2f} | "
                          f"{t['joint']['fps']:.2f} | {t['joint']['p50_ms']:.3f}/{t['joint']['p95_ms']:.3f} | {row['peak_gpu_mib']:.1f} | {result['parameters']} |")
+        lines.extend(["", "| K | 帧段 | 帧数 | Encoder/Sender/Receiver FPS | 联合 FPS | 联合 P50/P95 ms | bpp |",
+                      "|---:|---|---:|---:|---:|---:|---:|"])
+        for k, row in result["budgets"].items():
+            for group, segment in row["groups"].items():
+                t = segment["timing"]
+                lines.append(f"| {k} | {group} | {segment['frames']} | {t['encoder']['fps']:.2f}/{t['sender']['fps']:.2f}/{t['receiver']['fps']:.2f} | "
+                             f"{t['joint']['fps']:.2f} | {t['joint']['p50_ms']:.3f}/{t['joint']['p95_ms']:.3f} | {segment['actual_bpp']:.8f} |")
         fusion = result["fusion"]
         if fusion["enabled"]:
             lines.extend(["", f"{path.parent.name} 的 Cross-Scale Fusion 单独实测：{fusion['parameters']} 参数，"
@@ -105,6 +112,7 @@ def report():
              "默认关闭且不写入旧模型配置序列化，因此旧模型指纹不变。新模块初始化不消费公共权重的 RNG，N0/N1/N2 的公共初始张量逐项匹配。", "",
              "所有组使用 AdamW，lr=1e-4、weight decay=0.01、gradient clip=1、BF16、TBPTT=2、batch_sequences=1；"
              "A 从各自 1300 步父检查点继承全部优化器状态。B 从头初始化，两独立种子；300/1000 步前四帧 clip，后续获准阶段采用 16/32 帧。", "",
+             "种子计划：S1 模型/数据/预算/裁剪 = 20261118/20261119/20261120/20261201；S2 = 20261128/20261129/20261130/20261211。全部实际配置与继承检查点哈希逐组保存。", "",
              "## 正式验证协议", "",
              "全部质量指标来自完整 1080p float32 的 LPIPS-Alex v0.1 / DISTS 和真实离散码流。固定 Validation：blackswan 50 帧、car-roundabout 64 帧、dog 60 帧，共 174 帧。"
              "每个预算有独立 64 帧 car-roundabout 闭环，短源只使用其实际长度；没有重复帧补足。Cb/Cr 使用 BT.709 full-range centered 色差分量；方差保留率为逐帧空间色差方差总和之比。"
@@ -126,7 +134,7 @@ def report():
         lines.extend(["", f"## 从头训练 {path.stem.rsplit('_',1)[1]} 步门槛", "",
                       f"继续下一阶段：**{result['advance']}**。完整逐预算及稳定性检查见 `{path.name}`。"])
         if not result["advance"]:
-            lines.append("保留当前负结果，停止后续 3000/5000 步扩展；不以更长训练替代结构诊断。")
+            lines.append("保留当前负结果，停止下一阶段扩展；不以更长训练替代结构诊断。")
     lines.extend(["", "## 图、原生重建与可复现性", "",
                   "`figures/` 的 PDF/SVG/PNG 和 source_data.json 使用实际 bpp 与完整原生验证指标；两种子单独绘制，不将相关视频帧当成独立重复。"
                   "每个验证目录 `samples/` 保存未经增强的原生 1920×1080 PNG，包含 I 帧及 P 帧（1、31、63），各预算和原始图像可直接查看。",
