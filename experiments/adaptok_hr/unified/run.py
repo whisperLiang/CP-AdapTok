@@ -121,7 +121,8 @@ def scratch_configuration(parent_root, seed, arm, loss_arm):
     config = configuration(parent_root, seed, loss_arm)
     config["model"].update(fine_input="direct" if arm == "N2" else "local_residual",
                            encoder_fusion="none" if arm == "N0" else "cross_scale_v1")
-    config["training"].update(milestones=[300, 1000, 3000, 5000])
+    config["training"].update(milestones=[300, 1000, 3000, 5000],
+                              sequence_schedule=[[0, 4], [1000, 16], [3000, 32]])
     config["experiment"].update(stage="B", arm=arm, name=f"S{seed}_{arm}", initialization="from_scratch",
                                 loss_arm=loss_arm)
     del config["experiment"]["parent_checkpoint_sha256"]

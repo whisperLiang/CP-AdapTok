@@ -157,6 +157,7 @@ def test_native_unified_bf16_ip_uses_discrete_packets(network, record_property):
     model = AdapTokHR(ModelConfig(gradient_checkpointing=True, fine_input="local_residual",
                                  fine_decoder="masked_s32_v1", encoder_fusion="cross_scale_v1")).cuda()
     trainer = JointTrainer(model, config)
+    assert trainer.losses.perceptual.pnet_type == network
     row = trainer.update(torch.rand(2, 3, 1080, 1920), 1)
     assert [r["frame_type"] for r in row["frame_metrics"]] == ["I", "P"]
     assert all(r["monotonic_loss"] == r["temporal_loss"] == 0 for r in row["frame_metrics"])
