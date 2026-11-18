@@ -2,14 +2,17 @@
 
 import hashlib
 import json
+import math
 import subprocess
 from collections import Counter
 from pathlib import Path
 from xml.etree import ElementTree
 
-from adaptok_hr.codec.bitstream import parse
+from adaptok_hr.codec.bitstream import HEADER, parse
+from adaptok_hr.config import ModelConfig
 from adaptok_hr.models.temporal_state import stream_identity
 from adaptok_hr.runtime import file_hash, write_json
+from cp_adaptok.metrics import summarize_latency
 
 from .decisions import information
 from .evaluate import folder
@@ -54,6 +57,8 @@ def verify_validation(path, originals):
     count = 0
     suffix_counts, frame_diversity = Counter(), {}
     metadata = read(CHECKPOINTS / name / f"step_{result['steps']:06d}.json")
+    identity = {"config": ModelConfig(**metadata["config"]["model"]).to_dict(), "amp_bf16": True}
+    wire_model = hashlib.sha256(bytes.fromhex(metadata["model_sha256"]) + json.dumps(identity, sort_keys=True).encode()).digest()
     if result["identity"]["checkpoint_sha256"] != metadata["checkpoint_sha256"]:
         raise ValueError(f"unmatched validation checkpoint {path}")
     for scope in ("closed_loop", "same_context"):
@@ -67,7 +72,7 @@ def verify_validation(path, originals):
             digest = hashlib.sha256(data).digest()
             expected = (bytes(32) if frame % 32 == 0 else previous[source, k] if scope == "closed_loop"
                         else previous[source, 2048])
-            if (packet.previous != expected or packet.codebook.hex() != metadata["codebook_sha256"]
+            if (packet.model != wire_model or packet.previous != expected or packet.codebook.hex() != metadata["codebook_sha256"]
                     or packet.stream_id != stream_identity(source) or packet.frame_index != frame
                     or len(packet.ids) != k or (packet.width, packet.height, packet.gop) != (1920, 1080, 32)
                     or row["bytes"] != len(data) or row["packet_sha256"] != digest.hex()
@@ -85,7 +90,7 @@ def verify_validation(path, originals):
             previous[source, k] = digest
             count += 1
             budgets[k] += 1
-        expected_frames = sum(min(result["identity"]["frames_per_source"], n) for n in (50, 64, 60))
+        expected_frames = sum(frame < result["identity"]["frames_per_source"] for _, frame in originals)
         if set(budgets.values()) != {expected_frames} or set(budgets) != {256, 512, 1024, 2048}:
             raise ValueError("missing Validation frames or budgets")
     interventions = jsonlines(path / "suffix_interventions.jsonl")
@@ -98,6 +103,43 @@ def verify_validation(path, originals):
     return {"packets_reparsed": count, "interventions": len(interventions),
             "common_donor_frames": sum(r["donor"] is not None for r in interventions),
             "checkpoint_sha256": result["identity"]["checkpoint_sha256"], "input_hashes_match_legacy": True}
+
+
+def verify_timing(row, budget):
+    frames = row["frames"]
+    total = len(frames)
+    length = HEADER.size + (budget * 13 + 7) // 8
+    flags = ("sender_receiver_bitwise_equal", "gop33_reset_bitwise_equal", "independent_model_instances", "amp_bf16")
+    if total != 64 or not all(row[name] for name in flags):
+        raise ValueError("incomplete native 64-frame independent endpoint measurement")
+    for index, frame in enumerate(frames):
+        if frame["frame"] != index or frame["frame_type"] != ("I" if index % 32 == 0 else "P"):
+            raise ValueError("invalid causal GOP history in benchmark")
+        if frame["tokens"] != budget or frame["bytes"] != length:
+            raise ValueError("benchmark token/packet count mismatch")
+        if not (0 < frame["encoder_ms"] < frame["sender_ms"] and frame["receiver_ms"] > 0 and
+                math.isclose(frame["joint_ms"], frame["sender_ms"] + frame["receiver_ms"])):
+            raise ValueError("joint latency omits part of the encoder or one decoder")
+    if row["bytes"] != total * length or not math.isclose(row["actual_bpp"], length * 8 / (1080 * 1920)):
+        raise ValueError("aggregate rate mismatch")
+    for component, timing in row["timing"].items():
+        actual = summarize_latency([r[component + "_ms"] for r in frames])
+        if any(not math.isclose(actual[k], timing[k], rel_tol=1e-10) for k in actual):
+            raise ValueError("mismatched aggregate endpoint throughput or latency")
+    return {"frames": total, "bytes": row["bytes"], "joint_fps": row["timing"]["joint"]["fps"]}
+
+
+def benchmarks():
+    records = {}
+    for path in sorted(ROOT.glob("S*/benchmark_*_*.json")):
+        data = read(path)
+        step = int(path.stem.split("_")[1])
+        metadata = read(CHECKPOINTS / path.parent.name / f"step_{step:06d}.json")
+        if (not data["no_other_gpu_compute_process_before_and_after"] or data["completed_steps"] != step
+                or data["checkpoint_sha256"] != metadata["checkpoint_sha256"] or data["input"]["frame_indices"] != list(range(64))):
+            raise ValueError(f"idle GPU or matched checkpoint/frames not verified: {path}")
+        records[str(path.relative_to(ROOT))] = {k: verify_timing(v, int(k)) for k, v in data["budgets"].items()}
+    return records
 
 
 def run():
@@ -117,12 +159,13 @@ def run():
     production = {"adaptok_hr/config.py", "adaptok_hr/models/tokenizer.py", "adaptok_hr/training/fine_detail.py",
                   "adaptok_hr/training/train.py", "adaptok_hr/models/decoder.py", "adaptok_hr/training/losses.py"}
     flagged = [x for x in audit["crap_over_10"] if x["file"] in production]
-    checks = {"packets_and_histories": bool(validations), "checkpoint_files_rehashed": bool(weights),
+    timings = benchmarks()
+    checks = {"native_idle_gpu_timings": bool(timings), "packets_and_histories": bool(validations), "checkpoint_files_rehashed": bool(weights),
               "tests": int(tests["tests"]) >= 82 and all(tests[k] == "0" for k in ("failures", "errors", "skipped")),
               "mutations": len(mutations["results"]) >= 31 and mutations["all_killed"],
               "changed_production_complexity": not flagged, "duplicates": not audit["duplicates_over_08"]}
     record = {"engineering_checks_pass": all(checks.values()), "checks": checks, "validations": validations,
-              "protected_git_and_checkpoints": protected_inputs(),
+              "protected_git_and_checkpoints": protected_inputs(), "benchmark_runs": timings,
               "checkpoints": weights, "tests": tests, "mutations_killed": sum(r["killed"] for r in mutations["results"]),
               "flagged_production": flagged, "legacy_high_crap_count": len(audit["crap_over_10"]),
               "quality_and_scientific_gates": read(ROOT / "decision.json")}

@@ -73,3 +73,29 @@ def test_runner_recovers_if_final_checkpoint_precedes_completion(tmp_path, monke
     (output / "completion.json").write_text(json.dumps({"complete": True, "completed_steps": 300}))
     run.train(1, "R00", 300)
     assert len(calls) == 1
+
+
+def test_benchmark_verifier_recomputes_rate_and_both_endpoint_timings():
+    import copy
+    import json
+    from pathlib import Path
+
+    import pytest
+
+    from experiments.adaptok_hr.fine_detail_v2.verify import verify_timing
+
+    saved = json.loads(Path("experiments/adaptok_hr/fine_recovery/evidence/A1/benchmark_001000.json").read_text())
+    measured = saved["budgets"]["2048"]
+    assert verify_timing(measured, 2048)["frames"] == 64
+    wrong = copy.deepcopy(measured)
+    wrong["frames"][8]["joint_ms"] = wrong["frames"][8]["sender_ms"]
+    with pytest.raises(ValueError, match="latency"):
+        verify_timing(wrong, 2048)
+    wrong = copy.deepcopy(measured)
+    wrong["frames"][32]["frame_type"] = "P"
+    with pytest.raises(ValueError, match="GOP"):
+        verify_timing(wrong, 2048)
+    wrong = copy.deepcopy(measured)
+    wrong["timing"]["joint"]["fps"] *= 2
+    with pytest.raises(ValueError, match="aggregate"):
+        verify_timing(wrong, 2048)
