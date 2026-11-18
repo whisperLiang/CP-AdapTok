@@ -120,6 +120,8 @@ def report():
              "同状态比较重放真实 K2048 历史后截断实际 ID 前缀。整个 Fine [645:2048] 的置乱和跨视频替换保留 Base/Medium，"
              "增量后缀 [1024:2048] 另存原有控制。跨视频只在三个源共同存在的前 50 帧比较，全部干预不推进参考。", "",
              "## 两种子与各预算实测"]
+    if not decision["unified_improves_both_seeds"]:
+        lines.insert(3, "该候选仅用于后续受控对照，不表示优于 U0 或达到采用条件。本次结果须按 DISTS、LPIPS、RGB 与色差分别解释。")
     quality_table(lines, values)
     lines.extend(["", "## 状态一致性与 Fine 信息"])
     fine_table(lines, values)
