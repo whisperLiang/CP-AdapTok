@@ -25,6 +25,7 @@ CHECKPOINTS = Path("checkpoints/adaptok_hr_unified")
 DEFAULT_PARENTS = Path("/home/whisperliang/CP-AdapTok")
 ARMS = ("U0", "U1", "U2", "U3")
 ARCHITECTURES = ("N0", "N1", "N2")
+SCRATCH_STEPS = (300, 1000, 3000, 5000)
 
 
 def checkpoint(name, step):
@@ -113,7 +114,7 @@ def train(name, config, steps):
     path = write_config(name, config)
     final = checkpoint(name, steps)
     completion = ROOT / name / "completion.json"
-    if completion.exists() and json.loads(completion.read_text())["completed_steps"] == steps and final.exists():
+    if completion.exists() and json.loads(completion.read_text())["completed_steps"] >= steps and final.exists():
         return
     command = ["adaptok_hr.training.train", "--config", path, "--output", ROOT / name,
                "--checkpoints", CHECKPOINTS, "--steps", steps]
@@ -133,12 +134,20 @@ def scratch_configuration(parent_root, seed, arm, loss_arm):
     config = configuration(parent_root, seed, loss_arm)
     config["model"].update(fine_input="direct" if arm == "N2" else "local_residual",
                            encoder_fusion="none" if arm == "N0" else "cross_scale_v1")
-    config["training"].update(milestones=[300, 1000, 3000, 5000],
+    config["training"].update(milestones=list(SCRATCH_STEPS),
                               sequence_schedule=[[0, 4], [1000, 16], [3000, 32]])
     config["experiment"].update(stage="B", arm=arm, name=f"S{seed}_{arm}", initialization="from_scratch",
                                 loss_arm=loss_arm)
     del config["experiment"]["parent_checkpoint_sha256"]
     return config
+
+
+
+def previous_milestone(step):
+    index = SCRATCH_STEPS.index(step)
+    if index == 0:
+        raise ValueError("the first scratch milestone has no predecessor")
+    return SCRATCH_STEPS[index - 1]
 
 
 def main():
@@ -171,15 +180,15 @@ def run_arm(args, seed, arm):
 
 
 def check_scratch_request(args, arm):
-    if arm not in ARCHITECTURES or args.steps not in (300, 1000, 3000, 5000) or args.loss_arm is None:
+    if arm not in ARCHITECTURES or args.steps not in SCRATCH_STEPS or args.loss_arm is None:
         raise ValueError("scratch requires architecture, declared loss, and milestone")
     decision = json.loads((ROOT / "decision_A.json").read_text())
     if decision["winner"] != args.loss_arm:
         raise ValueError("scratch loss must be selected by the two-seed Pilot")
     if args.steps > 300:
-        gate = json.loads((ROOT / f"decision_B_{300 if args.steps == 1000 else 1000}.json").read_text())
-        if not gate["advance"]:
-            raise ValueError("scratch quality/stability gate failed")
+        gate = json.loads((ROOT / f"decision_B_{previous_milestone(args.steps)}.json").read_text())
+        if not gate["advance"] or arm not in gate["continuation_arms"]:
+            raise ValueError("scratch quality/stability gate failed for this architecture")
 
 
 if __name__ == "__main__":

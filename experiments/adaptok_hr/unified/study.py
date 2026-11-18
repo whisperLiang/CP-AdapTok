@@ -5,7 +5,7 @@ import json
 import time
 from pathlib import Path
 
-from .run import ARCHITECTURES, ARMS, ROOT, execute
+from .run import ARCHITECTURES, ARMS, ROOT, SCRATCH_STEPS, execute
 
 
 def wait_process(pid):
@@ -27,17 +27,17 @@ def evaluate_and_time(names, step, label):
     invoke("benchmark", ["--names", *names, "--steps", step], f"{label}_benchmark")
 
 
-def scratch(step, loss):
+def scratch(step, loss, arms):
     # Start with the unchanged-width N0 architecture and optimize its unified
     # training before allocating runtime to the fusion comparisons.
-    for arm in ARCHITECTURES:
+    for arm in arms:
         for seed in (1, 2):
             invoke("run", ["scratch", "--seeds", seed, "--arms", arm, "--steps", step,
                            "--loss-arm", loss], f"S{seed}_{arm}_driver_{step}")
-    names = [f"S{s}_{a}" for s in (1, 2) for a in ARCHITECTURES]
+    names = [f"S{s}_{a}" for s in (1, 2) for a in arms]
     evaluate_and_time(names, step, f"B_{step}")
     invoke("decision", ["B", "--steps", step, "--frames", 64], f"B_{step}_decision")
-    return json.loads((ROOT / f"decision_B_{step}.json").read_text())["advance"]
+    return json.loads((ROOT / f"decision_B_{step}.json").read_text())
 
 
 def study(wait_pid):
@@ -48,9 +48,12 @@ def study(wait_pid):
     evaluate_and_time(names, 1600, "A_1600")
     invoke("decision", ["A", "--steps", 1600, "--frames", 64], "A_decision")
     decision = json.loads((ROOT / "decision_A.json").read_text())
-    for step in (300, 1000, 3000, 5000):
-        if not scratch(step, decision["winner"]):
+    arms = ARCHITECTURES
+    for step in SCRATCH_STEPS:
+        gate = scratch(step, decision["winner"], arms)
+        if not gate["advance"]:
             break
+        arms = gate["continuation_arms"]
 
 
 if __name__ == "__main__":

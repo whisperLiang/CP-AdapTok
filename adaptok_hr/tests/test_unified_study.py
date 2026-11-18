@@ -1,4 +1,5 @@
 import copy
+import json
 
 import pytest
 import torch
@@ -89,8 +90,40 @@ def test_300_screen_records_quality_but_1000_controls_long_training(monkeypatch)
 
     data = {str(s): {arm: fixture_quality(.5 if arm == "N0" else .7, 20. if arm == "N0" else 19.)
                     for arm in ("N0", "N1", "N2")} for s in (1, 2)}
-    monkeypatch.setattr(decision, "stability_screen", lambda step: ({"run": {"finite_gradients": True}}, True))
+    monkeypatch.setattr(decision, "stability_screen", lambda step, arms=None: ({f"S{s}_{a}": {"finite_gradients": True} for s in (1, 2) for a in ("N0", "N1", "N2")}, True))
     assert decision.scratch_decision(data, 300)["advance"]
     assert not decision.scratch_decision(data, 1000)["advance"]
-    monkeypatch.setattr(decision, "stability_screen", lambda step: ({"run": {"finite_gradients": False}}, False))
+    monkeypatch.setattr(decision, "stability_screen", lambda step, arms=None: ({f"S{s}_{a}": {"finite_gradients": False} for s in (1, 2) for a in ("N0", "N1", "N2")}, False))
     assert not decision.scratch_decision(data, 300)["advance"]
+
+
+def test_stable_passing_architecture_is_not_blocked_by_rejected_comparator(monkeypatch):
+    from experiments.adaptok_hr.unified import decision
+
+    data = {str(s): {arm: fixture_quality({"N0": .5, "N1": .48, "N2": .7}[arm])
+                    for arm in ("N0", "N1", "N2")} for s in (1, 2)}
+    stable = {f"S{s}_{arm}": {"finite_gradients": True, "final_no_collapse": arm != "N2"}
+              for s in (1, 2) for arm in ("N0", "N1", "N2")}
+    monkeypatch.setattr(decision, "stability_screen", lambda step, arms=None: (stable, False))
+    result = decision.scratch_decision(data, 1000)
+    assert result["advance"]
+    assert result["continuation_arms"] == ["N0", "N1"]
+
+
+def test_runner_reuses_earlier_completed_checkpoint_without_downgrading_marker(tmp_path, monkeypatch):
+    from adaptok_hr.runtime import write_json
+    from experiments.adaptok_hr.unified import run
+
+    monkeypatch.setattr(run, "ROOT", tmp_path / "results")
+    monkeypatch.setattr(run, "CHECKPOINTS", tmp_path / "checkpoints")
+    target = run.checkpoint("S1_N0", 300)
+    target.parent.mkdir(parents=True)
+    target.touch()  # Completed-stage reuse must not invoke the trainer or load this sentinel.
+    completion = run.ROOT / "S1_N0/completion.json"
+    saved = {"completed_steps": 1000, "complete": True}
+    write_json(completion, saved)
+    calls = []
+    monkeypatch.setattr(run, "execute", lambda *args: calls.append(args))
+    run.train("S1_N0", {"training": {}}, 300)
+    assert not calls
+    assert json.loads(completion.read_text()) == saved

@@ -7,7 +7,7 @@ import math
 from adaptok_hr.runtime import stable_hash, write_json
 
 from .evaluate import read_rows
-from .run import ARCHITECTURES, ARMS, ROOT, checkpoint
+from .run import ARCHITECTURES, ARMS, ROOT, checkpoint, previous_milestone
 
 BUDGETS = ("256", "512", "1024", "2048")
 
@@ -56,9 +56,9 @@ def pilot_decision(measurements):
             "scope": "300-update D3 fine-tuning only; no claim about training from scratch"}
 
 
-def scratch_quality_gate(measurements):
+def scratch_quality_gate(measurements, candidates=("N1", "N2")):
     outcomes = {}
-    for arm in ("N1", "N2"):
+    for arm in candidates:
         checks = {}
         for seed, runs in measurements.items():
             candidate, control = runs[arm], runs["N0"]
@@ -132,8 +132,9 @@ def match_seed(stage, seed, arms, begin, step):
             "frames": sum(r["frames"] for r in logs[arms[0]])}
 
 
-def match_training(stage, step):
-    arms, begin = (ARMS, 1300) if stage == "A" else (ARCHITECTURES, 0)
+def match_training(stage, step, arms=None):
+    begin = 1300 if stage == "A" else 0
+    arms = (ARMS if stage == "A" else ARCHITECTURES) if arms is None else arms
     proof = {str(seed): match_seed(stage, seed, arms, begin, step) for seed in (1, 2)}
     write_json(ROOT / f"match_{stage}_{step}.json", proof)
     return proof
@@ -144,8 +145,8 @@ def read_measurements(arms, step, frames):
                         for arm in arms} for seed in (1, 2)}
 
 
-def stability_screen(step):
-    rows = {f"S{s}_{a}": training_stability(f"S{s}_{a}", step) for s in (1, 2) for a in ARCHITECTURES}
+def stability_screen(step, arms=ARCHITECTURES):
+    rows = {f"S{s}_{a}": training_stability(f"S{s}_{a}", step) for s in (1, 2) for a in arms}
     passed = all(all(v for k, v in row.items() if k != "updates") for row in rows.values())
     return rows, passed
 
@@ -156,22 +157,50 @@ def relative_screen(measurements):
     return rows, all(all_protected(r) for r in rows.values())
 
 
-def scratch_decision(measurements, step):
-    result = scratch_quality_gate(measurements)
-    result["stability"], stable = stability_screen(step)
+def architecture_stable(stability, arm):
+    return all(all(value for key, value in stability[f"S{s}_{arm}"].items() if key != "updates") for s in (1, 2))
+
+
+def continuation_policy(result, arms, step):
+    if step == 300:
+        result["advance"] = all(row["finite_gradients"] for row in result["stability"].values())
+        result["continuation_arms"] = list(arms) if result["advance"] else []
+        return
+    baseline = architecture_stable(result["stability"], "N0")
+    eligible = []
+    for arm, outcome in result["outcomes"].items():
+        outcome["stability_pass"] = baseline and architecture_stable(result["stability"], arm)
+        if outcome["pass"] and outcome["stability_pass"]:
+            eligible.append(arm)
+    result["advance"] = bool(eligible)
+    result["continuation_arms"] = ["N0", *eligible] if eligible else []
+
+
+def scratch_decision(measurements, step, arms=ARCHITECTURES):
+    result = scratch_quality_gate(measurements, [a for a in arms if a != "N0"])
+    result["stability"], _ = stability_screen(step, arms)
     if step == 300:
         result["screen"], result["relative_screen_pass"] = relative_screen(measurements)
-        result["advance"] = all(row["finite_gradients"] for row in result["stability"].values())
-    else:
-        result["advance"] = result["advance"] and stable
+    continuation_policy(result, arms, step)
     result["action"] = "continue_predeclared_milestones" if result["advance"] else "archive_negative_and_stop"
     return result
 
 
+def declared_arms(step):
+    if step <= 1000:
+        return ARCHITECTURES
+    gate = json.loads((ROOT / f"decision_B_{previous_milestone(step)}.json").read_text())
+    arms = gate["continuation_arms"]
+    if not gate["advance"] or "N0" not in arms or not set(arms) <= set(ARCHITECTURES):
+        raise ValueError("no valid continuation architecture set")
+    return arms
+
+
 def decide(stage, step, frames):
-    match_training(stage, step)
-    measurements = read_measurements(ARMS if stage == "A" else ARCHITECTURES, step, frames)
-    result = pilot_decision(measurements) if stage == "A" else scratch_decision(measurements, step)
+    arms = ARMS if stage == "A" else declared_arms(step)
+    match_training(stage, step, arms)
+    measurements = read_measurements(arms, step, frames)
+    result = pilot_decision(measurements) if stage == "A" else scratch_decision(measurements, step, arms)
     name = "decision_A.json" if stage == "A" else f"decision_B_{step}.json"
     output = ROOT / name
     write_json(output, result)

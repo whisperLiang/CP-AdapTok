@@ -44,7 +44,8 @@
   "selection_B": {
     "300_to_1000": "300 is a numerical-stability screen; record relative quality/collapse/variance diagnostics but complete the requested 1000-step early milestone when gradients remain finite. Numerical instability stops training. Quality and full stability control 3000/5000 only.",
     "1000_to_3000_5000": "both seeds pass non-regression versus N0 at every budget (PSNR -0.05 dB, LPIPS/DISTS +0.005) with strict mean LPIPS improvement; positive K2048 over K1024 same-state PSNR and LPIPS gains; Fine permutation and cross-video replacement raise MSE",
-    "failure": "archive negative result, stop extra updates and architecture growth"
+    "failure": "archive negative result, stop extra updates and architecture growth",
+    "continuation": "At long-training gates, assess quality and stability per candidate in both seeds together with a stable N0 control. Continue only passing candidates plus N0; retain rejected comparators at their last measured milestone. A rejected N2 cannot block a passing stable N1, and it is not trained longer."
   },
   "no_continuous_bypass": true,
   "network_growth_during_pilot": false,
