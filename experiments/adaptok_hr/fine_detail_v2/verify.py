@@ -134,9 +134,12 @@ def benchmarks():
     for path in sorted(ROOT.glob("S*/benchmark_*_*.json")):
         data = read(path)
         step = int(path.stem.split("_")[1])
+        repeat = int(path.stem.split("_")[2])
+        required_budgets = {"256", "512", "1024", "2048"} if repeat == 1 else {"2048"}
         metadata = read(CHECKPOINTS / path.parent.name / f"step_{step:06d}.json")
         if (not data["no_other_gpu_compute_process_before_and_after"] or data["completed_steps"] != step
-                or data["checkpoint_sha256"] != metadata["checkpoint_sha256"] or data["input"]["frame_indices"] != list(range(64))):
+                or set(data["budgets"]) != required_budgets or data["checkpoint_sha256"] != metadata["checkpoint_sha256"]
+                or data["input"]["frame_indices"] != list(range(64))):
             raise ValueError(f"idle GPU or matched checkpoint/frames not verified: {path}")
         records[str(path.relative_to(ROOT))] = {k: verify_timing(v, int(k)) for k, v in data["budgets"].items()}
     return records
@@ -160,7 +163,10 @@ def run():
                   "adaptok_hr/training/train.py", "adaptok_hr/models/decoder.py", "adaptok_hr/training/losses.py"}
     flagged = [x for x in audit["crap_over_10"] if x["file"] in production]
     timings = benchmarks()
-    checks = {"native_idle_gpu_timings": bool(timings), "packets_and_histories": bool(validations), "checkpoint_files_rehashed": bool(weights),
+    baseline_timings = {f"{p.parents[1].name}/benchmark_{p.parent.name.split('_')[1]}_1.json"
+                        for p in ROOT.glob("S*/validation_*_*/summary.json")}
+    checks = {"native_idle_gpu_timings": bool(timings) and baseline_timings.issubset(timings),
+              "packets_and_histories": bool(validations), "checkpoint_files_rehashed": bool(weights),
               "tests": int(tests["tests"]) >= 82 and all(tests[k] == "0" for k in ("failures", "errors", "skipped")),
               "mutations": len(mutations["results"]) >= 31 and mutations["all_killed"],
               "changed_production_complexity": not flagged, "duplicates": not audit["duplicates_over_08"]}
