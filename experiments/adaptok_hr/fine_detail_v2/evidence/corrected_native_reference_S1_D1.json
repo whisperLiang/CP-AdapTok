@@ -1,0 +1,216 @@
+{
+  "parent": "S1_R11",
+  "child": "S1_D1",
+  "step": 1000,
+  "pass": true,
+  "source_sha256": "29dc1f70767041c4e35f1b91cf3bd7465437611c9066c78f9ba4d10bed149f77",
+  "checkpoint_sha256": [
+    "1edcd95d0f6ce98fd31d4529f1b34a0f01504bf9e17703a43fe9b1d2e418aab4",
+    "172e8682a67025d4a826e7b40d7110380ab5d83acf634c52849a207419f6f60e"
+  ],
+  "manifest": "267d520759c0b7b07e7075921fbe2c9ad5978906275d0eb47641ccdf7ce3ec82",
+  "input": {
+    "content_id": "DAVIS2017:car-roundabout",
+    "source_sha256": "a385402d832c276856837830ef48709bd6b484aa3fce4bdc8c90a70385769b21",
+    "frame_indices": [
+      0,
+      1
+    ],
+    "source_resolution": [
+      1920,
+      1080
+    ],
+    "crop": [
+      0,
+      0,
+      1920,
+      1080
+    ],
+    "resized": false,
+    "engineering_crop": false,
+    "fps": 30,
+    "color_format": "RGB float32 [0,1]; OpenCV BGR->RGB",
+    "rgb_sha256": [
+      "e626e4c7bc75d8ac6547c5daf98afdf22512aabf3f7a28459fa8adeb74258d5e",
+      "8cfe84c120694c69b991ae3ed3767aca7718308c88bf48e6d29471122a47e201"
+    ]
+  },
+  "rows": [
+    {
+      "budget": 256,
+      "frame": 0,
+      "type": "I",
+      "bytes": [
+        558,
+        558
+      ],
+      "id_equal": true,
+      "rgb_equal": true,
+      "feature_equal": true,
+      "feature_dtypes": [
+        "torch.bfloat16",
+        "torch.bfloat16"
+      ],
+      "packet_sha256": [
+        "d16233ad1076de58ec4a14bc0b717419a3243f5575170408d46359a5ac9603a9",
+        "9c3bf2f673a8206a27b7b0ed3bfdb9f3a9032b8e85ebce73800b90cd8031cb01"
+      ],
+      "max_abs_rgb_difference": 0.0,
+      "max_abs_feature_difference": 0.0
+    },
+    {
+      "budget": 256,
+      "frame": 1,
+      "type": "P",
+      "bytes": [
+        558,
+        558
+      ],
+      "id_equal": true,
+      "rgb_equal": true,
+      "feature_equal": true,
+      "feature_dtypes": [
+        "torch.bfloat16",
+        "torch.bfloat16"
+      ],
+      "packet_sha256": [
+        "1afc753715f6a1579d224ddd6d6e2b75341f2f28dd834530837f1fc7aa82ea66",
+        "b797457cea8460c32ec7fd9ac910be19a97d11a6dfe12c0631ca44af124a6ae8"
+      ],
+      "max_abs_rgb_difference": 0.0,
+      "max_abs_feature_difference": 0.0
+    },
+    {
+      "budget": 512,
+      "frame": 0,
+      "type": "I",
+      "bytes": [
+        974,
+        974
+      ],
+      "id_equal": true,
+      "rgb_equal": true,
+      "feature_equal": true,
+      "feature_dtypes": [
+        "torch.bfloat16",
+        "torch.bfloat16"
+      ],
+      "packet_sha256": [
+        "a20c3e9bd0868bda312747c07a8130be4b04a0a6f6eb502bf48fae3b63346837",
+        "7fced0413883b2b760cc84190d784bbf079a44287447e6110af3e279e0e4bdce"
+      ],
+      "max_abs_rgb_difference": 0.0,
+      "max_abs_feature_difference": 0.0
+    },
+    {
+      "budget": 512,
+      "frame": 1,
+      "type": "P",
+      "bytes": [
+        974,
+        974
+      ],
+      "id_equal": true,
+      "rgb_equal": true,
+      "feature_equal": true,
+      "feature_dtypes": [
+        "torch.bfloat16",
+        "torch.bfloat16"
+      ],
+      "packet_sha256": [
+        "408b18adb551708d3b115fe0491d68d1632c8a5066dd5bd2ebf334345063b919",
+        "7d47f0f5dd79d4f835a8fedc52fd35dcf033acf78defd31dc004ac149efb0b57"
+      ],
+      "max_abs_rgb_difference": 0.0,
+      "max_abs_feature_difference": 0.0
+    },
+    {
+      "budget": 1024,
+      "frame": 0,
+      "type": "I",
+      "bytes": [
+        1806,
+        1806
+      ],
+      "id_equal": true,
+      "rgb_equal": true,
+      "feature_equal": true,
+      "feature_dtypes": [
+        "torch.bfloat16",
+        "torch.bfloat16"
+      ],
+      "packet_sha256": [
+        "f5f21afcccffda3b4d144017e2336e050c2c64c56a25ee4a9e268a7daca52bc3",
+        "58e5d580cab17d4d280aeaa0b3f4c8af9cd714fb9c7966ff8baaa9fb8401b978"
+      ],
+      "max_abs_rgb_difference": 0.0,
+      "max_abs_feature_difference": 0.0
+    },
+    {
+      "budget": 1024,
+      "frame": 1,
+      "type": "P",
+      "bytes": [
+        1806,
+        1806
+      ],
+      "id_equal": true,
+      "rgb_equal": true,
+      "feature_equal": true,
+      "feature_dtypes": [
+        "torch.bfloat16",
+        "torch.bfloat16"
+      ],
+      "packet_sha256": [
+        "8e2437debd61f75773ba2e0cb4bd8a51415fc4d30d7b1577c17188af88ba6322",
+        "9f406914692ce4c509cc1554af871e2f0beeb1d72e645de6d78d69c696019957"
+      ],
+      "max_abs_rgb_difference": 0.0,
+      "max_abs_feature_difference": 0.0
+    },
+    {
+      "budget": 2048,
+      "frame": 0,
+      "type": "I",
+      "bytes": [
+        3470,
+        3470
+      ],
+      "id_equal": true,
+      "rgb_equal": true,
+      "feature_equal": true,
+      "feature_dtypes": [
+        "torch.bfloat16",
+        "torch.bfloat16"
+      ],
+      "packet_sha256": [
+        "edbff8bdcf7d9bc52d7eb6a25ae8a2fb25f723152542c761fb74d2487da0daa5",
+        "3233c94d42471b1684f1873d1318998318ec5ac425342a0954f25c73f688354f"
+      ],
+      "max_abs_rgb_difference": 0.0,
+      "max_abs_feature_difference": 0.0
+    },
+    {
+      "budget": 2048,
+      "frame": 1,
+      "type": "P",
+      "bytes": [
+        3470,
+        3470
+      ],
+      "id_equal": true,
+      "rgb_equal": true,
+      "feature_equal": true,
+      "feature_dtypes": [
+        "torch.bfloat16",
+        "torch.bfloat16"
+      ],
+      "packet_sha256": [
+        "bcd59662f92b006c0a9ff9efe6740d879677723018b208fcb3468f4126405470",
+        "7fe94ed2a974c1d43fb5b1beb40101f52a0242046845cc6663007571e38bd635"
+      ],
+      "max_abs_rgb_difference": 0.0,
+      "max_abs_feature_difference": 0.0
+    }
+  ]
+}
