@@ -49,17 +49,22 @@ def match(seed, arms, steps):
     if set(counts.values()) != {4 * steps} or len({s for values in sources.values() for s in values}) != 1:
         raise ValueError("training frames or production code differ")
     historical_equal = None
+    historical_weights = None
     if seed == 1:
         old = Path("results/adaptok_hr_fine_recovery/A1/training.jsonl")
         rows = [json.loads(line) for line in old.read_text().splitlines()][:steps]
         control = training_rows("S1_R00", steps)
         historical_equal = (stable_hash([schedule(r) for r in rows]) == schedules["S1_R00"]
                             and all(a["mse"] == b["mse"] for a, b in zip(rows, control)))
-        if not historical_equal:
+        original_meta = read(Path("checkpoints/adaptok_hr_fine_recovery/A1") / f"step_{steps:06d}.json")
+        historical_weights = (original_meta["model_sha256"] ==
+                              read(checkpoint("S1_R00", steps).with_suffix(".json"))["model_sha256"])
+        if not historical_equal or not historical_weights:
             raise ValueError("new control does not reproduce original A1 training")
     evidence = {"seed": seed, "steps": steps, "training_frames": counts, "schedule_sha256": schedules,
                 "common_initial_full_weights": initials, "common_settings": settings, "production_source": sources,
-                "manifest": manifests, "historical_A1_each_step_mse_and_plan_match": historical_equal}
+                "manifest": manifests, "historical_A1_each_step_mse_and_plan_match": historical_equal,
+                "historical_A1_all_final_model_tensors_match": historical_weights}
     write_json(ROOT / f"match_S{seed}_{steps}.json", evidence)
     return evidence
 

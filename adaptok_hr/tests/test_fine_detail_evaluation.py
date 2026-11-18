@@ -25,3 +25,29 @@ def test_information_needs_both_content_controls_and_within_frame_variation():
     assert not information(rows([(1e-5, 1e-5)] * 3, False))["pass"]
     assert not information(rows([(1e-5, 1e-5), (0, 0), (0, 0)]))["pass"]
     assert not information(rows([(1e-9, 1e-9)] * 3))["pass"]
+
+
+def test_quality_checks_absolute_controls_low_budget_and_late_frames():
+    import copy
+    from experiments.adaptok_hr.fine_detail_v2.decisions import quality
+
+    base = dict(psnr_global=18., lpips=.77, dists=.64)
+    loops = {str(k): {**base, "bytes": 3470 * 174, "frames": 174, "late": dict(base)}
+             for k in (256, 512, 1024, 2048)}
+    ref = {"closed_loop": loops}
+    candidate = copy.deepcopy(ref)
+    high = candidate["closed_loop"]["2048"]
+    high.update(psnr_global=18.12, lpips=.76, dists=.63)
+    candidate["same_state_gain_db"] = .11
+    assert quality(candidate, ref, ref)["pass"]
+    candidate["closed_loop"]["256"]["lpips"] += .006
+    assert not quality(candidate, ref, ref)["checks"]["protected"]
+    candidate["closed_loop"]["256"]["lpips"] -= .006
+    high["late"]["psnr_global"] -= .06
+    assert not quality(candidate, ref, ref)["checks"]["protected"]
+    high["late"]["psnr_global"] += .06
+    best = copy.deepcopy(ref)
+    best["closed_loop"]["2048"]["dists"] = .62
+    assert not quality(candidate, ref, best)["checks"]["absolute_quality"]
+    high["bytes"] -= 1
+    assert not quality(candidate, ref, ref)["checks"]["rate"]
