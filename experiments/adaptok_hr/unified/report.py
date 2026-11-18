@@ -17,6 +17,29 @@ def measurements():
     return [(p.parents[1].name, p.parent, read(p)) for p in sorted(ROOT.glob("S*/validation_*_64/summary.json"))]
 
 
+def pilot_outcomes(lines, decision):
+    lines.extend(["", "| A 组 | 种子 | 四预算平均 LPIPS 变化（相对 U0，负值更好） | 逐预算保护通过 |",
+                  "|---|---:|---:|---|"])
+    for arm, outcome in decision["outcomes"].items():
+        for seed, row in outcome["seeds"].items():
+            lines.append(f"| {arm} | {seed} | {row['mean_lpips_delta']:+.6f} | {row['protected_pass']} |")
+
+
+def gate_outcomes(lines, result):
+    lines.extend(["", "| B 候选 | 种子 | 未通过的质量条件（空为全部通过） |",
+                  "|---|---:|---|"])
+    for arm, outcome in result["outcomes"].items():
+        for seed, row in outcome["seeds"].items():
+            failed = [key for key, value in row.items() if key != "protected" and not value]
+            lines.append(f"| {arm} | {seed} | {', '.join(failed) or '全部通过'} |")
+    lines.extend(["", "| 模型 | 梯度有限 | 无单码占比 >95% | VQ 有限且为正 | 各层特征方差为正 |",
+                  "|---|---|---|---|---|"])
+    for name, row in result["stability"].items():
+        lines.append(f"| {name} | {row['finite_gradients']} | {row['final_no_collapse']} | "
+                     f"{row['positive_vq']} | {row['positive_level_variance']} |")
+    lines.append("\n质量条件包括逐预算 PSNR/LPIPS/DISTS 保护、两种子分别平均 LPIPS 改善、同状态 K2048 的 PSNR/LPIPS 收益、Fine 两种干预的正 ΔMSE；完整条件和阈值见 protocol.json。")
+
+
 def quality_table(lines, values):
     lines.extend(["", "| 模型 | 步 | K | bytes/帧 | bpp | PSNR-global | PSNR-frame-mean | LPIPS-Alex | DISTS | Cb MAE | Cr MAE | 色差方差保留率 |",
                   "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"])
@@ -111,7 +134,7 @@ def report():
     calibration = read(ROOT / "calibration.json")
     values = measurements()
     lines = ["# AdapTok-HR Unified RGB–Perceptual 实验报告", "",
-             f"实验 A 选中 **{decision['winner']}**。双种子平均原生 LPIPS 均改善：**{decision['unified_improves_both_seeds']}**；逐预算质量保护门槛通过：**{decision['preferred_training_gate_pass']}**。",
+             f"实验 A 的后续对照候选为 **{decision['winner']}**。双种子平均原生 LPIPS 均改善：**{decision['unified_improves_both_seeds']}**；逐预算质量保护门槛通过：**{decision['preferred_training_gate_pass']}**。",
              "实验 A 仅证明 D3 父模型上的 300 次统一目标微调结果，不能外推为从头训练结论。所有数字来自本分支实际执行。", "",
              "## 架构与目标", "",
              "原生 1920×1080 整帧输入，底部反射填充至 1088，输出裁回 1080。保留轻量卷积、S32/S64 局部窗口注意力、共享 8192×16 VQ、"
@@ -139,6 +162,7 @@ def report():
              "## 两种子与各预算实测"]
     if not decision["unified_improves_both_seeds"]:
         lines.insert(3, "该候选仅用于后续受控对照，不表示优于 U0 或达到采用条件。本次结果须按 DISTS、LPIPS、RGB 与色差分别解释。")
+    pilot_outcomes(lines, decision)
     quality_table(lines, values)
     lines.extend(["", "## 状态一致性与 Fine 信息"])
     fine_table(lines, values)
@@ -152,6 +176,7 @@ def report():
         result = read(path)
         lines.extend(["", f"## 从头训练 {path.stem.rsplit('_',1)[1]} 步门槛", "",
                       f"继续下一阶段：**{result['advance']}**。完整逐预算及稳定性检查见 `{path.name}`。"])
+        gate_outcomes(lines, result)
         if not result["advance"]:
             lines.append("保留当前负结果，停止下一阶段扩展；不以更长训练替代结构诊断。")
     lines.extend(["", "## 图、原生重建与可复现性", "",
