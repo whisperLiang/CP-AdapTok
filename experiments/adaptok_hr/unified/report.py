@@ -137,7 +137,7 @@ def report():
             lines.append("保留当前负结果，停止下一阶段扩展；不以更长训练替代结构诊断。")
     lines.extend(["", "## 图、原生重建与可复现性", "",
                   "`figures/` 的 PDF/SVG/PNG 和 source_data.json 使用实际 bpp 与完整原生验证指标；两种子单独绘制，不将相关视频帧当成独立重复。"
-                  "每个验证目录 `samples/` 保存未经增强的原生 1920×1080 PNG，包含 I 帧及 P 帧（1、31、63），各预算和原始图像可直接查看。",
+                  "每个验证目录 `samples/` 保存未经增强的原生 1920×1080 PNG，包含 I 帧及 P 帧（1、31、63）。这些图使用同一真实 K2048 历史，显示各离散 ID 前缀在相同状态下的重建；低预算 P 图不代表其独立预算闭环。正式率失真表使用独立预算闭环。PNG 为 8-bit 显示，指标使用原始 float32 重建。",
                   "", "全部配置、命令和门槛见 README.md、protocol.json；raw_records.tar.gz 保留逐帧指标、实际 packets、训练日志、测试、checkpoint 元数据及 SHA256。"
                   "完整权重和优化器状态保存在独立 checkpoints/adaptok_hr_unified。旧 Fine Detail v2 与 Perceptual Recovery 检出目录没有修改。"])
     (ROOT / "report.md").write_text("\n".join(lines) + "\n")

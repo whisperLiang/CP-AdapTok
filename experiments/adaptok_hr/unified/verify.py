@@ -5,6 +5,7 @@ import json
 from collections import Counter
 
 import torch
+from PIL import Image
 
 from adaptok_hr.codec.bitstream import HEADER, parse
 from adaptok_hr.codec.codec import tensor_digest
@@ -113,9 +114,22 @@ def packet_proof(directory):
     verify_packet_rows(directory, "closed_loop", closed)
     verify_packet_rows(directory, "same_context", same)
     verify_nested_rows(directory, same)
-    return {"closed_loop_packets": len(closed), "same_state_packets": len(same),
+    images = native_image_proof(directory / "samples")
+    return {"native_images": images, "closed_loop_packets": len(closed), "same_state_packets": len(same),
             "all_packet_hashes_and_13bit_sizes_verified": True, "all_nested_prefixes_and_histories_verified": True,
             "input_schedule_sha256": stable_hash([(r["content_id"], r["frame"], r["tokens"], r["input_rgb_sha256"]) for r in closed])}
+
+
+
+def native_image_proof(directory):
+    result = {}
+    for path in sorted(directory.glob("*.png")):
+        with Image.open(path) as frame:
+            if frame.size != (1920, 1080):
+                raise ValueError("native sample image shape mismatch")
+        result[path.name] = file_hash(path)
+    return {"scope": "actual ID prefixes on common real K2048 history; I frames reset context; 8-bit display exports",
+            "resolution": [1920, 1080], "files_sha256": result}
 
 
 def verify():
