@@ -20,6 +20,7 @@ class ModelConfig:
     gradient_checkpointing: bool = False
     codebook_mode: str = "shared"
     loss_scope: str = "all_candidates"
+    fine_input: str = "direct"
 
     def __post_init__(self):
         for name in ("channels", "decoder_channels", "budgets"):
@@ -27,6 +28,8 @@ class ModelConfig:
         self.validate_dimensions()
         self.validate_channels()
         self.validate_vq()
+        if self.fine_input not in ("direct", "local_residual"):
+            raise ValueError("fine_input must be direct or local_residual")
         self.validate_budgets()
 
     def validate_dimensions(self):
@@ -66,4 +69,8 @@ class ModelConfig:
                      for s in (128, 64, 32))
 
     def to_dict(self):
-        return asdict(self)
+        values = asdict(self)
+        # Preserve the v1 fingerprint of deployed direct-projection models.
+        if self.fine_input == "direct":
+            del values["fine_input"]
+        return values

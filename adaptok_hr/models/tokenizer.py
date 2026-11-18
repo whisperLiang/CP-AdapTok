@@ -51,17 +51,32 @@ class PositionTable(nn.Module):
         return tuple(maps)
 
 
+def local_spatial_residual(values):
+    values = values.float()
+    # Slice concatenation has a deterministic CUDA backward at replicated edges.
+    wide = torch.cat((values[..., :1], values, values[..., -1:]), dim=3)
+    padded = torch.cat((wide[:, :, :1], wide, wide[:, :, -1:]), dim=2)
+    residual = values - F.avg_pool2d(padded, 3, 1)
+    unit = torch.zeros_like(residual[:, :, :1, :1])
+    unit[:, 0] = 1
+    return torch.where(residual.norm(dim=1, keepdim=True) < 1e-6, unit, residual)
+
+
 class Tokenizer(nn.Module):
     def __init__(self, config, table):
         super().__init__()
         # The model owns the only table. Submodules reference it without registering a duplicate.
         object.__setattr__(self, "table", table)
+        self.fine_input = config.fine_input
         self.projections = nn.ModuleList(nn.Conv2d(c, config.embedding_dim, 1)
                                          for c in reversed(config.channels[4:]))
 
     def forward(self, features):
         outputs = []
         for level, (feature, projection) in enumerate(zip(features, self.projections)):
-            values = projection(feature).flatten(2).transpose(1, 2)
+            values = projection(feature)
+            if level == 2 and self.fine_input == "local_residual":
+                values = local_spatial_residual(values)
+            values = values.flatten(2).transpose(1, 2)
             outputs.append(values[:, self.table.order(level)])
         return F.normalize(torch.cat(outputs, dim=1).float(), dim=-1)

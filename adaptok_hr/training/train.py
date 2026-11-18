@@ -20,6 +20,7 @@ from ..models.temporal_state import frame_context
 from ..models.vq import code_statistics
 from ..runtime import environment, read_config, seed_everything, stable_hash, write_json
 from .checkpoint import reconcile_log, restore_training, save_training
+from .fine_detail import suffix_supervision
 from .losses import ReconstructionLoss
 
 
@@ -31,8 +32,10 @@ def frame_objective(model, frame, state, previous_target, budget, auxiliary, los
     _, _, reference = frame_context(state, model.config.gop)
     temporal = losses.temporal(main.rgb, frame, reference, previous_target)
     mono = loss.new_zeros(())
+    outputs = {budget: main}
     if auxiliary is not None:
         alternative = model.forward_frame(frame, state, auxiliary, encoded)
+        outputs[auxiliary] = alternative
         extra, other = losses.distortion(alternative.rgb, frame)
         loss = (loss + extra) * .5
         vq = {key: (value + encoded.loss_terms(auxiliary)[key]) * .5 for key, value in vq.items()}
@@ -40,6 +43,10 @@ def frame_objective(model, frame, state, previous_target, budget, auxiliary, los
         mono = F.relu(high - low + losses.weights.get("monotonic_margin", 0)) * losses.weights.get("monotonic", 0)
     total = loss + temporal + mono + losses.weights.get("vq", 0) * vq["vq_loss"]
     row = {k: float(v.detach()) for k, v in terms.items()}
+    if "suffix_detail" in losses.weights:
+        suffix = suffix_supervision(model, frame, state, encoded, outputs, losses.weights["suffix_detail"])
+        total = total + suffix
+        row["suffix_detail_loss"] = float(suffix.detach())
     row.update(**{key: float(value.detach()) for key, value in vq.items()}, temporal_loss=float(temporal.detach()),
                monotonic_loss=float(mono.detach()), main_budget=budget, auxiliary_budget=auxiliary,
                frame_type=main.frame_type, frame_index=main.state.frame_index,
@@ -203,7 +210,8 @@ def checkpoint_artifact(args, trainer, sampler, config, index, output, completed
 
 
 def periodic_artifacts(args, trainer, sampler, config, index, output, completed, frames):
-    if completed % config["training"]["checkpoint_every"] == 0 or completed == args.steps:
+    if (completed % config["training"]["checkpoint_every"] == 0 or completed == args.steps
+            or completed in config["training"].get("extra_checkpoints", ())):
         checkpoint_artifact(args, trainer, sampler, config, index, output, completed, frames)
     if completed % config["training"]["validation_every"] == 0 and not args.overfit:
         validation_artifact(trainer, config, index, output, completed)
