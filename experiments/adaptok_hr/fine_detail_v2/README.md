@@ -2,6 +2,12 @@
 
 The four arms change two factors in the shared-codebook, active-prefix A1 model. R00 is the control, R10 removes the local S32 projection mean, R01 supervises the transmitted suffix against the coarse reconstruction residual, and R11 combines both. The native setup uses one H100 and the existing Train and Validation manifests. Run from the repository root.
 
+With the licensed local source videos in the locations recorded by the CP manifests, rebuild the exact HR data index if needed. The native data reader verifies selected inputs against their original hashes.
+
+```bash
+.venv-native/bin/python -m adaptok_hr.data.manifest --cp-manifests data/manifests --output data/adaptok_hr/index.json
+```
+
 ```bash
 export CUBLAS_WORKSPACE_CONFIG=:4096:8
 .venv-native/bin/python -m experiments.adaptok_hr.fine_detail_v2.run --seed 1 --steps 300
