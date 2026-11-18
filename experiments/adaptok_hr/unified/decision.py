@@ -30,20 +30,22 @@ def all_protected(checks):
     return all(all(row.values()) for row in checks.values())
 
 
+def pilot_arm_outcome(arm, measurements):
+    per_seed = {}
+    for seed, runs in measurements.items():
+        control, candidate = runs["U0"], runs[arm]
+        delta = mean_lpips(candidate) - mean_lpips(control)
+        protected = protected_budgets(candidate, control)
+        per_seed[seed] = {"mean_lpips": mean_lpips(candidate), "mean_lpips_delta": delta,
+                          "improves": delta < 0, "protected": protected,
+                          "protected_pass": all_protected(protected)}
+    return {"seeds": per_seed, "mean_lpips": sum(r["mean_lpips"] for r in per_seed.values()) / 2,
+            "both_improve": all(r["improves"] for r in per_seed.values()),
+            "protected_pass": all(r["protected_pass"] for r in per_seed.values())}
+
+
 def pilot_decision(measurements):
-    outcomes = {}
-    for arm in ("U1", "U2", "U3"):
-        per_seed = {}
-        for seed, runs in measurements.items():
-            control, candidate = runs["U0"], runs[arm]
-            delta = mean_lpips(candidate) - mean_lpips(control)
-            protected = protected_budgets(candidate, control)
-            per_seed[seed] = {"mean_lpips": mean_lpips(candidate), "mean_lpips_delta": delta,
-                              "improves": delta < 0, "protected": protected,
-                              "protected_pass": all_protected(protected)}
-        outcomes[arm] = {"seeds": per_seed, "mean_lpips": sum(r["mean_lpips"] for r in per_seed.values()) / 2,
-                         "both_improve": all(r["improves"] for r in per_seed.values()),
-                         "protected_pass": all(r["protected_pass"] for r in per_seed.values())}
+    outcomes = {arm: pilot_arm_outcome(arm, measurements) for arm in ("U1", "U2", "U3")}
     eligible = [arm for arm, row in outcomes.items() if row["both_improve"]] or list(outcomes)
     winner = min(eligible, key=lambda arm: (outcomes[arm]["mean_lpips"], arm))
     chosen = outcomes[winner]
@@ -89,34 +91,50 @@ def common_schedule(row):
             "crops": [r["perceptual_crops"] for r in row["frame_metrics"]]}
 
 
+def matched_logs(seed, arms, begin, step):
+    logs = {arm: [r for r in read_rows(ROOT / f"S{seed}_{arm}/training.jsonl") if begin < r["step"] <= step]
+            for arm in arms}
+    for rows in logs.values():
+        if [r["step"] for r in rows] != list(range(begin + 1, step + 1)):
+            raise ValueError("unmatched optimizer update count")
+    return logs
+
+
+def check_frequent_pairs(logs):
+    for normal, frequent in zip(logs["U2"], logs["U3"], strict=True):
+        for a, b in zip(normal["frame_metrics"], frequent["frame_metrics"], strict=True):
+            if a["auxiliary_budget"] is not None and a["auxiliary_budget"] != b["auxiliary_budget"]:
+                raise ValueError("frequent pairing changed an existing pair")
+
+
+def auxiliary_schedules(logs, arms, stage):
+    comparisons = list(arms[:3]) if stage == "A" else list(arms)
+    schedules = {arm: stable_hash([[r["auxiliary_budget"] for r in row["frame_metrics"]] for row in logs[arm]])
+                 for arm in comparisons}
+    if len(set(schedules.values())) != 1:
+        raise ValueError("control auxiliary schedules differ")
+    if stage == "A":
+        check_frequent_pairs(logs)
+    return schedules
+
+
+def match_seed(stage, seed, arms, begin, step):
+    logs = matched_logs(seed, arms, begin, step)
+    schedules = {arm: stable_hash([common_schedule(r) for r in rows]) for arm, rows in logs.items()}
+    if len(set(schedules.values())) != 1:
+        raise ValueError("data/main-budget/crop schedules differ")
+    auxiliaries = auxiliary_schedules(logs, arms, stage)
+    source = {arm: json.loads(checkpoint(f"S{seed}_{arm}", step).with_suffix(".json").read_text())["source_sha256"] for arm in arms}
+    if len(set(source.values())) != 1:
+        raise ValueError("production code differs across arms")
+    return {"common_schedules": schedules, "auxiliary_schedules": auxiliaries,
+            "source_identities": source, "additional_updates": step - begin,
+            "frames": sum(r["frames"] for r in logs[arms[0]])}
+
+
 def match_training(stage, step):
     arms, begin = (ARMS, 1300) if stage == "A" else (ARCHITECTURES, 0)
-    proof = {}
-    for seed in (1, 2):
-        logs = {arm: [r for r in read_rows(ROOT / f"S{seed}_{arm}/training.jsonl") if begin < r["step"] <= step]
-                for arm in arms}
-        for rows in logs.values():
-            if [r["step"] for r in rows] != list(range(begin + 1, step + 1)):
-                raise ValueError("unmatched optimizer update count")
-        schedules = {arm: stable_hash([common_schedule(r) for r in rows]) for arm, rows in logs.items()}
-        if len(set(schedules.values())) != 1:
-            raise ValueError("data/main-budget/crop schedules differ")
-        comparisons = list(arms[:3]) if stage == "A" else list(arms)
-        auxiliaries = {arm: stable_hash([[r["auxiliary_budget"] for r in row["frame_metrics"]] for row in logs[arm]])
-                       for arm in comparisons}
-        if len(set(auxiliaries.values())) != 1:
-            raise ValueError("control auxiliary schedules differ")
-        if stage == "A":
-            for normal, frequent in zip(logs["U2"], logs["U3"], strict=True):
-                for a, b in zip(normal["frame_metrics"], frequent["frame_metrics"], strict=True):
-                    if a["auxiliary_budget"] is not None and a["auxiliary_budget"] != b["auxiliary_budget"]:
-                        raise ValueError("frequent pairing changed an existing pair")
-        source = {arm: json.loads(checkpoint(f"S{seed}_{arm}", step).with_suffix(".json").read_text())["source_sha256"] for arm in arms}
-        if len(set(source.values())) != 1:
-            raise ValueError("production code differs across arms")
-        proof[str(seed)] = {"common_schedules": schedules, "auxiliary_schedules": auxiliaries,
-                            "source_identities": source, "additional_updates": step - begin,
-                            "frames": sum(r["frames"] for r in logs[arms[0]])}
+    proof = {str(seed): match_seed(stage, seed, arms, begin, step) for seed in (1, 2)}
     write_json(ROOT / f"match_{stage}_{step}.json", proof)
     return proof
 
@@ -126,25 +144,34 @@ def read_measurements(arms, step, frames):
                         for arm in arms} for seed in (1, 2)}
 
 
+def stability_screen(step):
+    rows = {f"S{s}_{a}": training_stability(f"S{s}_{a}", step) for s in (1, 2) for a in ARCHITECTURES}
+    passed = all(all(v for k, v in row.items() if k != "updates") for row in rows.values())
+    return rows, passed
+
+
+def relative_screen(measurements):
+    rows = {f"S{s}_{a}": protected_budgets(runs[a], runs["N0"], .5, .03)
+            for s, runs in measurements.items() for a in ("N1", "N2")}
+    return rows, all(all_protected(r) for r in rows.values())
+
+
+def scratch_decision(measurements, step):
+    result = scratch_quality_gate(measurements)
+    result["stability"], stable = stability_screen(step)
+    if step == 300:
+        result["screen"], result["advance"] = relative_screen(measurements)
+    result["advance"] = result["advance"] and stable
+    result["action"] = "continue_predeclared_milestones" if result["advance"] else "archive_negative_and_stop"
+    return result
+
+
 def decide(stage, step, frames):
     match_training(stage, step)
     measurements = read_measurements(ARMS if stage == "A" else ARCHITECTURES, step, frames)
-    if stage == "A":
-        result = pilot_decision(measurements)
-        output = ROOT / "decision_A.json"
-    else:
-        result = scratch_quality_gate(measurements)
-        stability = {f"S{s}_{a}": training_stability(f"S{s}_{a}", step) for s in (1, 2) for a in ARCHITECTURES}
-        result["stability"] = stability
-        stable = all(all(v for k, v in row.items() if k != "updates") for row in stability.values())
-        if step == 300:
-            screens = {f"S{s}_{a}": protected_budgets(runs[a], runs["N0"], .5, .03)
-                       for s, runs in measurements.items() for a in ("N1", "N2")}
-            result["screen"] = screens
-            result["advance"] = stable and all(all_protected(r) for r in screens.values())
-        else:
-            result["advance"] = result["advance"] and stable
-        output = ROOT / f"decision_B_{step}.json"
+    result = pilot_decision(measurements) if stage == "A" else scratch_decision(measurements, step)
+    name = "decision_A.json" if stage == "A" else f"decision_B_{step}.json"
+    output = ROOT / name
     write_json(output, result)
     print(json.dumps({"output": str(output), **{k: v for k, v in result.items() if k in ("winner", "advance", "preferred_action")}}))
 

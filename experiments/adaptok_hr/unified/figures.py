@@ -60,6 +60,16 @@ def rate_distortion(output, alignment):
     return source
 
 
+
+def training_curve(path, stage):
+    rows = [r for r in read_rows(path) if r["step"] > (1300 if stage == "U" else 0)]
+    if len(rows) < 25:
+        return [], []
+    x = [r["step"] for r in rows][24:]
+    mean = np.convolve([r["mse"] for r in rows], np.ones(25)/25, "valid")
+    return x, (-10*np.log10(mean)).tolist()
+
+
 def learning_curves(output, alignment):
     source = {}
     for seed in ("S1", "S2"):
@@ -70,12 +80,9 @@ def learning_curves(output, alignment):
             figure, axis = canvas("Training global PSNR (25-update pooled MSE, dB)")
             for path in paths:
                 arm = path.parent.name.split("_", 1)[1]
-                rows = [r for r in read_rows(path) if r["step"] > (1300 if stage == "U" else 0)]
-                if len(rows) < 25:
+                x, yy = training_curve(path, stage)
+                if not x:
                     continue
-                x = [r["step"] for r in rows][24:]
-                mean = np.convolve([r["mse"] for r in rows], np.ones(25)/25, "valid")
-                yy = (-10*np.log10(mean)).tolist()
                 axis.plot(x, yy, label=arm, color=COLORS[arm], linestyle=STYLES[arm], linewidth=1.1)
                 source[f"{seed}_{stage}_learning/{arm}"] = {"x": x, "y": yy, "source": str(path),
                                                                     "source_sha256": file_hash(path)}

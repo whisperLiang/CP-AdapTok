@@ -29,8 +29,8 @@ def evaluate_and_time(names, step, label):
 def scratch(step, loss):
     # Start with the unchanged-width N0 architecture and optimize its unified
     # training before allocating runtime to the fusion comparisons.
-    for seed in (1, 2):
-        for arm in ARCHITECTURES:
+    for arm in ARCHITECTURES:
+        for seed in (1, 2):
             invoke("run", ["scratch", "--seeds", seed, "--arms", arm, "--steps", step,
                            "--loss-arm", loss], f"S{seed}_{arm}_driver_{step}")
     names = [f"S{s}_{a}" for s in (1, 2) for a in ARCHITECTURES]

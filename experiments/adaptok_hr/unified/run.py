@@ -77,18 +77,7 @@ def fork(parent_root, seed, arm, config):
             if proof["lineage"] != lineage or proof["checkpoint_sha256"] != file_hash(target):
                 raise ValueError("existing fork identity differs")
             return
-        saved = torch.load(source, map_location="cpu", weights_only=False)
-        parent_meta = json.loads(source.with_suffix(".json").read_text())
-        if (saved["completed_steps"] != 1300 or parent_meta["checkpoint_sha256"] != file_hash(source)
-                or saved["config_identity"] != stable_hash(saved["config"])):
-            raise ValueError("invalid D3 parent checkpoint")
-        index = load_index(config["data"]["index"])
-        if saved["manifest_identity"] != index["identity"]:
-            raise ValueError("fork changed data identity")
-        log = parent_root / "results/adaptok_hr_fine_detail_v2" / f"S{seed}_D3/training.jsonl"
-        lines = [s for s in log.read_text().splitlines() if json.loads(s)["step"] <= 1300]
-        if [json.loads(s)["step"] for s in lines] != list(range(1, 1301)):
-            raise ValueError("parent optimizer log is incomplete")
+        saved, index, lines = validated_parent(source, parent_root, seed, config)
         outer = rng_state()
         try:
             trainer = JointTrainer(AdapTokHR(ModelConfig(**config["model"])), config["training"])
@@ -103,6 +92,22 @@ def fork(parent_root, seed, arm, config):
         (output / "training.jsonl").write_text("\n".join(lines) + "\n")
         write_json(marker, {"lineage": lineage, "checkpoint_sha256": metadata["checkpoint_sha256"], **proof})
 
+
+
+def validated_parent(source, parent_root, seed, config):
+    saved = torch.load(source, map_location="cpu", weights_only=False)
+    parent_meta = json.loads(source.with_suffix(".json").read_text())
+    if (saved["completed_steps"] != 1300 or parent_meta["checkpoint_sha256"] != file_hash(source)
+            or saved["config_identity"] != stable_hash(saved["config"])):
+        raise ValueError("invalid D3 parent checkpoint")
+    index = load_index(config["data"]["index"])
+    if saved["manifest_identity"] != index["identity"]:
+        raise ValueError("fork changed data identity")
+    log = parent_root / "results/adaptok_hr_fine_detail_v2" / f"S{seed}_D3/training.jsonl"
+    lines = [s for s in log.read_text().splitlines() if json.loads(s)["step"] <= 1300]
+    if [json.loads(s)["step"] for s in lines] != list(range(1, 1301)):
+        raise ValueError("parent optimizer log is incomplete")
+    return saved, index, lines
 
 def train(name, config, steps):
     path = write_config(name, config)
@@ -148,25 +153,33 @@ def main():
     torch.set_num_threads(4)
     for seed in args.seeds:
         for arm in args.arms or (ARMS if args.stage == "pilot" else ARCHITECTURES):
-            if args.stage == "pilot":
-                if arm not in ARMS:
-                    raise ValueError("unknown pilot arm")
-                config = configuration(args.parent_root, seed, arm)
-                write_config(f"S{seed}_{arm}", config)
-                fork(args.parent_root, seed, arm, config)
-                train(f"S{seed}_{arm}", config, 1600)
-            else:
-                if arm not in ARCHITECTURES or args.steps not in (300, 1000, 3000, 5000) or args.loss_arm is None:
-                    raise ValueError("scratch requires architecture, declared loss, and milestone")
-                decision = json.loads((ROOT / "decision_A.json").read_text())
-                if decision["winner"] != args.loss_arm:
-                    raise ValueError("scratch loss must be selected by the two-seed Pilot")
-                if args.steps > 300:
-                    gate = json.loads((ROOT / f"decision_B_{300 if args.steps == 1000 else 1000}.json").read_text())
-                    if not gate["advance"]:
-                        raise ValueError("scratch quality/stability gate failed")
-                config = scratch_configuration(args.parent_root, seed, arm, args.loss_arm)
-                train(f"S{seed}_{arm}", config, args.steps)
+            run_arm(args, seed, arm)
+
+
+def run_arm(args, seed, arm):
+    if args.stage == "pilot":
+        if arm not in ARMS:
+            raise ValueError("unknown pilot arm")
+        config = configuration(args.parent_root, seed, arm)
+        write_config(f"S{seed}_{arm}", config)
+        fork(args.parent_root, seed, arm, config)
+        train(f"S{seed}_{arm}", config, 1600)
+    else:
+        check_scratch_request(args, arm)
+        config = scratch_configuration(args.parent_root, seed, arm, args.loss_arm)
+        train(f"S{seed}_{arm}", config, args.steps)
+
+
+def check_scratch_request(args, arm):
+    if arm not in ARCHITECTURES or args.steps not in (300, 1000, 3000, 5000) or args.loss_arm is None:
+        raise ValueError("scratch requires architecture, declared loss, and milestone")
+    decision = json.loads((ROOT / "decision_A.json").read_text())
+    if decision["winner"] != args.loss_arm:
+        raise ValueError("scratch loss must be selected by the two-seed Pilot")
+    if args.steps > 300:
+        gate = json.loads((ROOT / f"decision_B_{300 if args.steps == 1000 else 1000}.json").read_text())
+        if not gate["advance"]:
+            raise ValueError("scratch quality/stability gate failed")
 
 
 if __name__ == "__main__":

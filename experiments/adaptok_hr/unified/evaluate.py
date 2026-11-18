@@ -62,12 +62,14 @@ def summarize(rows):
 
 
 def grouped_summary(rows):
-    return {**summarize(rows), "I": summarize([r for r in rows if r["frame_type"] == "I"]),
-            "P": summarize([r for r in rows if r["frame_type"] == "P"]),
-            "late_GOP": summarize([r for r in rows if r["frame"] % 32 >= 24]),
-            "late_sequence": summarize([r for r in rows if r["frame"] >= 48]),
-            "sources": {name: summarize([r for r in rows if r["content_id"] == name])
-                        for name in sorted({r["content_id"] for r in rows})}}
+    selectors = {"I": lambda r: r["frame_type"] == "I", "P": lambda r: r["frame_type"] == "P",
+                 "late_GOP": lambda r: r["frame"] % 32 >= 24,
+                 "late_sequence": lambda r: r["frame"] >= 48}
+    result = {**summarize(rows), **{name: summarize(list(filter(predicate, rows)))
+                                   for name, predicate in selectors.items()}}
+    result["sources"] = {name: summarize([r for r in rows if r["content_id"] == name])
+                         for name in sorted({r["content_id"] for r in rows})}
+    return result
 
 
 def read_rows(path):
@@ -77,6 +79,53 @@ def read_rows(path):
 def upgraded_summaries(path):
     rows = read_rows(path)
     return {str(k): grouped_summary([r for r in rows if r["tokens"] == k]) for k in (256, 512, 1024, 2048)}
+
+
+def native_p_samples(receiver, data, state, frame, output, index):
+    sample = output / "samples" / f"car-roundabout_{index:04d}"
+    save_image(sample.with_name(sample.name + "_original.png"), frame)
+    for k in (256, 512, 1024, 2048):
+        decoded, _ = receiver.decode_frame(truncate_packet(data, k), state)
+        save_image(sample.with_name(sample.name + f"_K{k}.png"), decoded)
+
+
+def fine_variant(receiver, packet, ids, state, frame, actual, metadata, output, metrics):
+    low, variant = metadata["fine_start"], metadata["variant"]
+    if ids[:low] != packet.ids[:low]:
+        raise RuntimeError("Fine intervention changed the Base/Medium IDs")
+    changed = serialize(replace(packet, ids=ids))
+    decoded, _ = receiver.decode_frame(changed, state)
+    quality = metrics(frame, decoded.float())
+    row = {**metadata, "actual_mse": actual["mse"], "mse_increase": quality["mse"] - actual["mse"],
+           "lpips_increase": quality["lpips"] - actual["lpips"],
+           "dists_increase": quality["dists"] - actual["dists"], **quality}
+    append_row(output / "fine_interventions.jsonl", row)
+    directory = output / "full_fine" / variant / metadata["content_id"].replace(":", "_")
+    directory.mkdir(parents=True, exist_ok=True)
+    (directory / f"{metadata['frame']:04d}.bin").write_bytes(changed)
+    return row
+
+
+def fine_frame(receiver, data, donor, state, frame, actual, metadata, output, metrics):
+    packet = parse(data)
+    shuffle, cross = suffix_variants(packet.ids, donor, metadata["fine_start"], 913 + metadata["frame"])
+    _, following = receiver.decode_frame(data, state)
+    rows = []
+    for variant, ids in (("shuffle", shuffle), ("cross", cross)):
+        if ids is not None:
+            info = {**metadata, "variant": variant, "donor": metadata["donor"] if variant == "cross" else None}
+            rows.append(fine_variant(receiver, packet, ids, state, frame, actual, info, output, metrics))
+    return following, rows
+
+
+def intervention_summary(rows):
+    result = {}
+    for variant in ("shuffle", "cross"):
+        selected = [r for r in rows if r["variant"] == variant]
+        if selected:
+            result[variant] = {"frames": len(selected), **{key: sum(r[key] for r in selected) / len(selected)
+                        for key in ("mse_increase", "lpips_increase", "dists_increase")}}
+    return result
 
 
 def full_fine_controls(model, sources, frames, output, metrics, packets, canonical):
@@ -89,43 +138,32 @@ def full_fine_controls(model, sources, frames, output, metrics, packets, canonic
         state = None
         donor_name = names[(names.index(content) + 1) % len(names)]
         for index, cpu in enumerate(clip):
-            frame = cpu[None].cuda()
-            data = packets[content, index]
-            packet = parse(data)
+            frame, data = cpu[None].cuda(), packets[content, index]
             donor = parse(packets[donor_name, index]).ids if index < common else None
-            shuffle, cross = suffix_variants(packet.ids, donor, low, 913 + index)
-            actual = canonical[content, index]
-            rgb, following = receiver.decode_frame(data, state)
             if content == names[1] and index in (1, 31, 63):
-                sample = output / "samples" / f"car-roundabout_{index:04d}"
-                save_image(sample.with_name(sample.name + "_original.png"), frame)
-                for k in model.config.budgets:
-                    decoded, _ = receiver.decode_frame(truncate_packet(data, k), state)
-                    save_image(sample.with_name(sample.name + f"_K{k}.png"), decoded)
-            for variant, ids in (("shuffle", shuffle), ("cross", cross)):
-                if ids is None:
-                    continue
-                if ids[:low] != packet.ids[:low]:
-                    raise RuntimeError("Fine intervention changed the Base/Medium IDs")
-                changed = serialize(replace(packet, ids=ids))
-                decoded, _ = receiver.decode_frame(changed, state)
-                quality = metrics(frame, decoded.float())
-                row = {"content_id": content, "frame": index, "variant": variant, "fine_start": low,
-                       "donor": donor_name if variant == "cross" else None,
-                       "actual_mse": actual["mse"], "mse_increase": quality["mse"] - actual["mse"],
-                       "lpips_increase": quality["lpips"] - actual["lpips"],
-                       "dists_increase": quality["dists"] - actual["dists"], **quality}
-                rows.append(row)
-                append_row(output / "fine_interventions.jsonl", row)
-                directory = output / "full_fine" / variant / content.replace(":", "_")
-                directory.mkdir(parents=True, exist_ok=True)
-                (directory / f"{index:04d}.bin").write_bytes(changed)
-            # Only the unmodified real packet commits history.
-            state = following
-    return {variant: {"frames": len(selected),
-                        **{key: sum(r[key] for r in selected) / len(selected)
-                           for key in ("mse_increase", "lpips_increase", "dists_increase")}}
-            for variant in ("shuffle", "cross") if (selected := [r for r in rows if r["variant"] == variant])}
+                native_p_samples(receiver, data, state, frame, output, index)
+            info = {"content_id": content, "frame": index, "fine_start": low, "donor": donor_name}
+            state, measured = fine_frame(receiver, data, donor, state, frame, canonical[content, index], info, output, metrics)
+            rows.extend(measured)
+    return intervention_summary(rows)
+
+
+def prepare_location(output, identity, sources, frames):
+    if (output / "summary.json").exists():
+        if json.loads((output / "summary.json").read_text())["identity"] != identity:
+            raise ValueError("evaluation identity mismatch")
+        return False
+    if output.exists():
+        attempt = len(list(output.parent.glob(output.name + ".interrupted-*"))) + 1
+        output.rename(output.with_name(output.name + f".interrupted-{attempt}"))
+    output.mkdir(parents=True)
+    manifest = metric_manifest()
+    manifest["chroma"] = "BT.709 full-range centered Cb/Cr; per-frame spatial variance; retention is sum decoded variances / sum source variances; denominator floor 1e-12"
+    write_json(output / "run.json", {"identity": identity, "environment": environment(), "metrics": manifest,
+             "requested_frames_per_source": frames,
+             "actual_frames_per_source": {r["content_id"]: min(frames, r["original_frames"]) for r in sources},
+             "64_frame_sources": [r["content_id"] for r in sources if r["original_frames"] >= 64]})
+    return True
 
 
 def evaluate(path, output, frames):
@@ -138,20 +176,8 @@ def evaluate(path, output, frames):
     identity = {"checkpoint_sha256": file_hash(path), "manifest_identity": index["identity"],
                 "protocol": stable_hash(PROTOCOL), "implementation": file_hash(__file__),
                 "base_evaluator": file_hash(PACKAGE.parent / "fine_detail_v2/evaluate.py"), "frames": frames}
-    if (output / "summary.json").exists():
-        if json.loads((output / "summary.json").read_text())["identity"] != identity:
-            raise ValueError("evaluation identity mismatch")
+    if not prepare_location(output, identity, sources, frames):
         return
-    if output.exists():
-        attempt = len(list(output.parent.glob(output.name + ".interrupted-*"))) + 1
-        output.rename(output.with_name(output.name + f".interrupted-{attempt}"))
-    output.mkdir(parents=True)
-    manifest = metric_manifest()
-    manifest["chroma"] = "BT.709 full-range centered Cb/Cr; per-frame spatial variance; retention is sum decoded variances / sum source variances; denominator floor 1e-12"
-    write_json(output / "run.json", {"identity": identity, "environment": environment(), "metrics": manifest,
-             "requested_frames_per_source": frames,
-             "actual_frames_per_source": {r["content_id"]: min(frames, r["original_frames"]) for r in sources},
-             "64_frame_sources": [r["content_id"] for r in sources if r["original_frames"] >= 64]})
     metrics = NativeMetrics("cuda", ("psnr", "lpips", "dists"))
     if metrics.errors:
         raise RuntimeError(metrics.errors)

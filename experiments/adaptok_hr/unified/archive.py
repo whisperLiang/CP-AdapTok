@@ -47,6 +47,11 @@ def archive():
             handle.add(source, arcname=str(source), recursive=False)
     path.with_suffix(".tmp").replace(path)
     write_json(EVIDENCE / "manifest.json", {"archive": path.name, "archive_sha256": file_hash(path), "members": manifest})
+    copy_artifacts()
+    verify()
+
+
+def copy_artifacts():
     for name in ("decision_A.json", "calibration.json", "acceptance.json", "mutations.json", "quality_audit.json"):
         shutil.copy2(ROOT / name, EVIDENCE / name)
     for source in ROOT.glob("decision_B_*.json"):
@@ -55,7 +60,7 @@ def archive():
     if (ROOT / "figures").exists():
         shutil.copytree(ROOT / "figures", EVIDENCE / "figures", dirs_exist_ok=True)
     selected_native_images()
-    verify()
+
 
 
 def verify():

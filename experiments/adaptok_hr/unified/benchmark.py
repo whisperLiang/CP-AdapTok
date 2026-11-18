@@ -36,6 +36,17 @@ def fusion_overhead(model, frame, repeats=100):
         fusion(features)
     for handle in handles:
         handle.remove()
+    rows, memory = fusion_latency(fusion, features, repeats)
+    return {"enabled": True, "parameters": sum(p.numel() for p in fusion.parameters()),
+            "input_shapes": [list(v.shape) for v in features], "conv_macs": sum(macs), "conv_flops": 2*sum(macs),
+            "flops_scope": "convolutions only; bilinear, normalization, nonlinearities and additions excluded; latency includes all operations",
+            "latency": summarize_latency(rows), "raw_latency_ms": rows, "repeats": repeats,
+            "peak_incremental_gpu_mib": memory,
+            "timing_scope": "isolated BF16 fusion on actual native encoder feature maps, CUDA events, 20 warmups, idle GPU"}
+
+
+
+def fusion_latency(fusion, features, repeats):
     rows = []
     with torch.autocast("cuda", dtype=torch.bfloat16):
         for _ in range(20):
@@ -50,13 +61,7 @@ def fusion_overhead(model, frame, repeats=100):
             stop.record()
             stop.synchronize()
             rows.append(start.elapsed_time(stop))
-    return {"enabled": True, "parameters": sum(p.numel() for p in fusion.parameters()),
-            "input_shapes": [list(v.shape) for v in features], "conv_macs": sum(macs), "conv_flops": 2*sum(macs),
-            "flops_scope": "convolutions only; bilinear, normalization, nonlinearities and additions excluded; latency includes all operations",
-            "latency": summarize_latency(rows), "raw_latency_ms": rows, "repeats": repeats,
-            "peak_incremental_gpu_mib": (torch.cuda.max_memory_allocated() - baseline) / 2**20,
-            "timing_scope": "isolated BF16 fusion on actual native encoder feature maps, CUDA events, 20 warmups, idle GPU"}
-
+    return rows, (torch.cuda.max_memory_allocated() - baseline) / 2**20
 
 def measure(name, step):
     path = checkpoint(name, step)
