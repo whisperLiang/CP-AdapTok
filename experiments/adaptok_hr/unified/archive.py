@@ -52,7 +52,7 @@ def archive():
 
 
 def copy_artifacts():
-    for name in ("decision_A.json", "calibration.json", "acceptance.json", "mutations.json", "quality_audit.json"):
+    for name in ("decision_A.json", "calibration.json", "acceptance.json", "mutations.json", "quality_audit.json", "code_usage.json"):
         shutil.copy2(ROOT / name, EVIDENCE / name)
     for source in ROOT.glob("decision_B_*.json"):
         shutil.copy2(source, EVIDENCE / source.name)

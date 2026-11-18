@@ -43,6 +43,7 @@ Native evaluation requests 64 contiguous frames per source. The fixed sources ac
 .venv-native/bin/python -m experiments.adaptok_hr.quality audit --coverage results/adaptok_hr_unified/coverage.json --output results/adaptok_hr_unified/quality_audit.json
 .venv-native/bin/python -m experiments.adaptok_hr.unified.mutations
 .venv-native/bin/python -m experiments.adaptok_hr.unified.verify
+.venv-native/bin/python -m experiments.adaptok_hr.unified.diagnose
 .venv-native/bin/python -m experiments.adaptok_hr.unified.figures --qa-scripts /home/whisperliang/.codex/skills/nature-figure/scripts
 .venv-native/bin/python -m experiments.adaptok_hr.unified.report
 .venv-native/bin/python -m experiments.adaptok_hr.unified.archive
@@ -56,3 +57,5 @@ Before any B update, the milestone rule was corrected to complete both requested
 `evaluate_pilot` only selects the immutable A protocol and delegates to the same native evaluator. It preserves strict reuse of the completed A measurements after the B-only milestone amendment; it contains no second metric implementation or compatibility fallback. B uses `evaluate` with the current B protocol.
 
 After the 1000/3000 gates, only candidates that pass quality and stability in both seeds continue, together with N0. Rejected comparators retain their last measured checkpoints; they neither block a passing stable candidate nor receive longer training. Replaying an earlier completed milestone reuses that saved checkpoint and preserves a later completion record.
+
+`diagnose` reads the actual completed K2048 packets on each model's real history and reports per-level transmitted ID distributions. This is post-hoc diagnosis, not a gate revision. Fine-level code collapse can coexist with a passing whole-stream maximum-code-frequency screen. Empirical ID entropy describes observed frequencies, not semantic information bits.

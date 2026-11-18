@@ -71,6 +71,19 @@ def fine_table(lines, values):
                      f"{result['same_state_lpips_gain']:+.6f} | {fine['shuffle']['mse_increase']:+.8f} | {fine['cross']['mse_increase']:+.8f} |")
 
 
+def code_usage_table(lines):
+    lines.extend(["", "事后只读统计各模型真实 K2048 历史的已传输 ID；不改变门槛。整体码分布稳定不代表每层均稳定。经验 ID 熵仅描述频率，不是语义信息量。",
+                  "", "| B 模型/步 | Base 不同 ID | Medium 不同 ID | Fine 不同 ID | Fine 最大码占比 | Fine 经验 ID 熵 bit |",
+                  "|---|---:|---:|---:|---:|---:|"])
+    for name, result in read(ROOT / "code_usage.json")["results"].items():
+        if "_N" not in name:
+            continue
+        levels = result["levels"]
+        fine = levels["fine"]
+        lines.append(f"| {name} | {levels['base']['unique_ids']} | {levels['medium']['unique_ids']} | "
+                     f"{fine['unique_ids']} | {fine['maximum_fraction']:.8%} | {fine['empirical_id_entropy_bits']:.8f} |")
+
+
 def resources_table(lines):
     lines.extend(["", "| 模型 | 新增更新 | 新增训练帧 | 更新总秒数 | 平均/P95 秒/步 | 训练窗口秒数 | 峰值 MiB |",
                   "|---|---:|---:|---:|---:|---:|---:|"])
@@ -166,6 +179,7 @@ def report():
     quality_table(lines, values)
     lines.extend(["", "## 状态一致性与 Fine 信息"])
     fine_table(lines, values)
+    code_usage_table(lines)
     lines.extend(["", "## I / P / GOP 晚期"])
     groups_table(lines, values)
     lines.extend(["", "## 训练时间与显存"])
