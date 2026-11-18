@@ -1,14 +1,14 @@
 """Run the preregistered decision tree and prove each within-seed comparison is matched."""
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor
 import json
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from adaptok_hr.runtime import stable_hash, write_json
 
 from .decisions import quality, result, select
-from .run import CHECKPOINTS, PROTOCOL, ROOT, checkpoint, execute, run_name, train
+from .run import PROTOCOL, ROOT, checkpoint, execute, run_name, train
 
 
 def read(path):

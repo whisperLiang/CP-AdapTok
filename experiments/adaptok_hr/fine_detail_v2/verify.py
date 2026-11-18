@@ -1,10 +1,10 @@
 """Re-read measured packets, source hashes, intervention rows and checkpoint files."""
 
-from collections import Counter
 import hashlib
 import json
-from pathlib import Path
 import subprocess
+from collections import Counter
+from pathlib import Path
 from xml.etree import ElementTree
 
 from adaptok_hr.codec.bitstream import parse

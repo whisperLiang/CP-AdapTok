@@ -1,6 +1,5 @@
 """Generate the delivery report from the measured artifacts and their preregistered gates."""
 
-from pathlib import Path
 
 from .run import PACKAGE, PROTOCOL, ROOT
 from .study import read

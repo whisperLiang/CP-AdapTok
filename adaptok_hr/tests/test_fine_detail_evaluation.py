@@ -1,4 +1,3 @@
-import pytest
 
 
 def test_interventions_preserve_real_prefix_and_only_change_incremental_codes():
@@ -29,6 +28,7 @@ def test_information_needs_both_content_controls_and_within_frame_variation():
 
 def test_quality_checks_absolute_controls_low_budget_and_late_frames():
     import copy
+
     from experiments.adaptok_hr.fine_detail_v2.decisions import quality
 
     base = dict(psnr_global=18., lpips=.77, dists=.64)
@@ -55,6 +55,7 @@ def test_quality_checks_absolute_controls_low_budget_and_late_frames():
 
 def test_runner_recovers_if_final_checkpoint_precedes_completion(tmp_path, monkeypatch):
     import json
+
     from experiments.adaptok_hr.fine_detail_v2 import run
 
     monkeypatch.setattr(run, "ROOT", tmp_path / "results")

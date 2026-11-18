@@ -4,7 +4,6 @@ import argparse
 import gzip
 import hashlib
 import json
-from pathlib import Path
 import shutil
 import tarfile
 
@@ -81,7 +80,10 @@ def verify_archives():
         with tarfile.open(DEST / spec["archive"], mode="r|gz") as archive:
             for member in archive:
                 with archive.extractfile(member) as source:
-                    observed[member.name] = hashlib.file_digest(source, "sha256").hexdigest()
+                    digest = hashlib.sha256()
+                    for chunk in iter(lambda: source.read(1 << 20), b""):
+                        digest.update(chunk)
+                    observed[member.name] = digest.hexdigest()
         if observed != spec["members"]:
             raise ValueError(f"archive member mismatch: {spec['archive']}")
         members += len(observed)
