@@ -51,3 +51,24 @@ def test_quality_checks_absolute_controls_low_budget_and_late_frames():
     assert not quality(candidate, ref, best)["checks"]["absolute_quality"]
     high["bytes"] -= 1
     assert not quality(candidate, ref, ref)["checks"]["rate"]
+
+
+def test_runner_recovers_if_final_checkpoint_precedes_completion(tmp_path, monkeypatch):
+    import json
+    from experiments.adaptok_hr.fine_detail_v2 import run
+
+    monkeypatch.setattr(run, "ROOT", tmp_path / "results")
+    monkeypatch.setattr(run, "CHECKPOINTS", tmp_path / "checkpoints")
+    target = run.checkpoint("S1_R00", 300)
+    target.parent.mkdir(parents=True)
+    target.touch()
+    target.with_suffix(".json").write_text("{}")
+    calls = []
+    monkeypatch.setattr(run, "execute", lambda command, log: calls.append(command))
+    run.train(1, "R00", 300)
+    assert len(calls) == 1 and calls[0][-2:] == ["--resume", target]
+    output = run.ROOT / "S1_R00"
+    output.mkdir(exist_ok=True)
+    (output / "completion.json").write_text(json.dumps({"complete": True, "completed_steps": 300}))
+    run.train(1, "R00", 300)
+    assert len(calls) == 1

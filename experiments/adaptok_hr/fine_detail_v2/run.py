@@ -57,12 +57,17 @@ def train(seed, arm, steps):
         raise ValueError(f"existing configuration differs for {name}")
     config.write_text(content)
     path = checkpoint(name, steps)
-    if path.is_file() and path.with_suffix(".json").is_file():
-        return
+    completion = ROOT / name / "completion.json"
+    if path.is_file() and path.with_suffix(".json").is_file() and completion.is_file():
+        saved = json.loads(completion.read_text())
+        if saved["complete"] and saved["completed_steps"] >= steps:
+            return
     command = ["adaptok_hr.training.train", "--config", config, "--steps", steps,
                "--checkpoints", CHECKPOINTS, "--output", ROOT / name]
     committed = sorted(p for p in path.parent.glob("step_*.pt") if p.with_suffix(".json").exists())
     if committed:
+        if int(committed[-1].stem.split("_")[1]) > steps:
+            raise ValueError(f"requested earlier checkpoint is missing for {name}")
         command.extend(["--resume", committed[-1]])
     execute(command, ROOT / "logs" / f"{name}_train_{steps}.log")
 
