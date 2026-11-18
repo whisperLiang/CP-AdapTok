@@ -1,0 +1,15 @@
+{
+  "base_commit": "ab0b85b",
+  "historical_validation": "experiments/adaptok_hr/fine_recovery/evidence/baseline/validation_001000_64f/summary.json",
+  "seeds": [[20261118, 20261119, 20261120], [20261128, 20261129, 20261130]],
+  "arms": {"R00": ["direct", 0.0], "R10": ["local_residual", 0.0], "R01": ["direct", 0.25], "R11": ["local_residual", 0.25]},
+  "checkpoints": [0, 10, 25, 100, 300, 1000],
+  "sources": ["DAVIS2017:blackswan", "DAVIS2017:car-roundabout", "DAVIS2017:dog"],
+  "screen": {"steps": 300, "frames_per_source": 8, "ranking": ["information_pass", "same_state_gain_db", "lower_closed_loop_lpips", "arm_name"]},
+  "confirmation": {"steps": 1000, "frames_per_source": 64, "advance": "information_pass; reproduce independently with seed 2 and same-seed control"},
+  "information": {"suffix": [1024, 2048], "minimum_mean_mse_increase_exclusive": 1e-8, "minimum_sources_both_positive": 2, "within_frame_multicode": true, "scramble_seed": 913, "donor_rotation": 1, "cross_uses_common_frames": true},
+  "quality": {"minimum_same_state_gain_db": 0.10, "minimum_closed_loop_gain_exclusive": 0.0, "lower_lpips_and_dists_with_budget": true, "absolute_k2048_at_least_control_and_historical": true, "protected_max_psnr_drop": 0.05, "protected_max_lpips_dists_increase": 0.005, "late_start": 48, "packet_bytes": 3470},
+  "decoder": {"requires_information_both_seeds": true, "matched_additional_updates": 300, "detail_weight": 0.1, "replicate_winner_and_D0": true},
+  "performance": {"requires_quality_both_seeds": true, "frames": 64, "repetitions": 3, "target_median_joint_fps": 30},
+  "negative_stop": "If the selected new arm fails information at 1000 in either seed, archive the negative result and stop expansion."
+}
