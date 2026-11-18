@@ -21,7 +21,7 @@ export CUBLAS_WORKSPACE_CONFIG=:4096:8
 
 Each A arm makes exactly 300 additional Adam updates. U0 retains the original loss and full-resolution Alex perception but shares the new budget schedule. Therefore it isolates the loss change, not the budget scheduler change. D3 fine-tuning says nothing about from-scratch convergence.
 
-The study command serializes training, native evaluation and idle-GPU benchmarks, then executes only permitted B milestones. It first uses the unchanged-width N0 architecture and subsequently compares the two fusion configurations. All three groups use two independent seeds, identical data/crop/main/auxiliary schedules and optimizers. A B screen at 300 must pass before 1000, and the all-budget rate-distortion/Fine-information gate at 1000 controls 3000/5000. A failed gate archives the negative result and stops longer training.
+The study command serializes training, native evaluation and idle-GPU benchmarks, then executes only permitted B milestones. It first uses the unchanged-width N0 architecture and subsequently compares the two fusion configurations. All three groups use two independent seeds, identical data/crop/main/auxiliary schedules and optimizers. B validates both 300 and 1000 as requested. At 300, relative quality and collapse are diagnostics; nonfinite gradients stop early. The all-budget rate-distortion/Fine-information and stability gate at 1000 controls 3000/5000. A failed gate archives the negative result and stops longer training.
 
 ```bash
 .venv-native/bin/python -m experiments.adaptok_hr.unified.study
@@ -50,3 +50,5 @@ Native evaluation requests 64 contiguous frames per source. The fixed sources ac
 ```
 
 All new run output is under `results/adaptok_hr_unified`; all new complete model/optimizer checkpoints are under `checkpoints/adaptok_hr_unified`. The tracked `evidence` package supplies actual raw records, checkpoint metadata, hashes, native samples and figures. Full weight files remain in the independent local checkpoint root. Each native validation directory saves 1920×1080 original and decoded PNGs, including I and P frames. These images compare actual ID prefixes on the common real K2048 history; low-budget P images are not independent-loop examples. Rate-distortion tables use independent loops. PNG is an 8-bit display export; metrics use float32 reconstructions. Charts export exact point data and editable PDF/SVG. Source validation, PDF text and collision audits accompany the figures.
+
+Before any B update, the milestone rule was corrected to complete both requested early validation milestones. `protocol_A_snapshot.json` preserves the exact protocol hash used by the already-running A evaluation; only B continuation policy changed, not A selection or native metric definitions. Existing A evidence can be reproduced with its recorded source revision and frozen protocol. Start fresh result roots when changing a protocol; cached evaluations reject identity mismatches.

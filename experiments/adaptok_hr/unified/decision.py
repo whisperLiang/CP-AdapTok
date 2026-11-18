@@ -160,8 +160,10 @@ def scratch_decision(measurements, step):
     result = scratch_quality_gate(measurements)
     result["stability"], stable = stability_screen(step)
     if step == 300:
-        result["screen"], result["advance"] = relative_screen(measurements)
-    result["advance"] = result["advance"] and stable
+        result["screen"], result["relative_screen_pass"] = relative_screen(measurements)
+        result["advance"] = all(row["finite_gradients"] for row in result["stability"].values())
+    else:
+        result["advance"] = result["advance"] and stable
     result["action"] = "continue_predeclared_milestones" if result["advance"] else "archive_negative_and_stop"
     return result
 

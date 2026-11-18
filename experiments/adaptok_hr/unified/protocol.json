@@ -42,11 +42,12 @@
     "if_not_pass": "retain best unified objective as an explicitly negative fine-tune candidate, then diagnose N0/N1/N2 from scratch"
   },
   "selection_B": {
-    "300_to_1000": "all six runs have finite updates, <=0.95 maximum code fraction at final step, positive finite per-level variance and VQ loss; no arm >0.5 dB below N0 or LPIPS >0.03 above N0 at any budget",
+    "300_to_1000": "300 is a numerical-stability screen; record relative quality/collapse/variance diagnostics but complete the requested 1000-step early milestone when gradients remain finite. Numerical instability stops training. Quality and full stability control 3000/5000 only.",
     "1000_to_3000_5000": "both seeds pass non-regression versus N0 at every budget (PSNR -0.05 dB, LPIPS/DISTS +0.005) with strict mean LPIPS improvement; positive K2048 over K1024 same-state PSNR and LPIPS gains; Fine permutation and cross-video replacement raise MSE",
     "failure": "archive negative result, stop extra updates and architecture growth"
   },
   "no_continuous_bypass": true,
   "network_growth_during_pilot": false,
-  "evaluation_protocol": "Full 1080p float32 LPIPS-Alex v0.1 and DISTS; independent sender and receiver, GOP32, discrete 13-bit packets; each budget owns its history; prefix comparisons/interventions share real K2048 history and never commit alternatives"
+  "evaluation_protocol": "Full 1080p float32 LPIPS-Alex v0.1 and DISTS; independent sender and receiver, GOP32, discrete 13-bit packets; each budget owns its history; prefix comparisons/interventions share real K2048 history and never commit alternatives",
+  "milestone_amendment": "Before any B initialization/update, align the early milestones with the user request: validate both 300 and 1000; use quality/stability gates for 3000 and 5000. Frozen A evaluation protocol is preserved verbatim in protocol_A_snapshot.json; A selection and all native metric definitions are unchanged."
 }

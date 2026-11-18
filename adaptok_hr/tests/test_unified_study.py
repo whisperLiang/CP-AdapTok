@@ -82,3 +82,15 @@ def test_scratch_audit_rejects_optimizer_history(small_model, tmp_path, monkeypa
     save_training(path, trainer, sampler, config, "native-test", 0, 0)
     with pytest.raises(ValueError, match="history"):
         verify.scratch_initialization("S1_N0", state)
+
+
+def test_300_screen_records_quality_but_1000_controls_long_training(monkeypatch):
+    from experiments.adaptok_hr.unified import decision
+
+    data = {str(s): {arm: fixture_quality(.5 if arm == "N0" else .7, 20. if arm == "N0" else 19.)
+                    for arm in ("N0", "N1", "N2")} for s in (1, 2)}
+    monkeypatch.setattr(decision, "stability_screen", lambda step: ({"run": {"finite_gradients": True}}, True))
+    assert decision.scratch_decision(data, 300)["advance"]
+    assert not decision.scratch_decision(data, 1000)["advance"]
+    monkeypatch.setattr(decision, "stability_screen", lambda step: ({"run": {"finite_gradients": False}}, False))
+    assert not decision.scratch_decision(data, 300)["advance"]
