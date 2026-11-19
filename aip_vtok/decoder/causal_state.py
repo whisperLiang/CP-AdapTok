@@ -27,7 +27,8 @@ class ReferenceState:
         for tensor in (self.feature, self.memory, self.latent):
             if tensor is not None:
                 digest.update(str(tuple(tensor.shape)).encode())
-                digest.update(tensor.detach().cpu().contiguous().numpy().tobytes())
+                digest.update(str(tensor.dtype).encode())
+                digest.update(tensor.detach().contiguous().view(torch.uint8).cpu().numpy().tobytes())
         return digest.hexdigest()
 
 
@@ -42,6 +43,11 @@ class FrameContext:
     def commit_reference_once(self, feature, latent=None):
         if self.committed:
             raise RuntimeError("reference already committed for this frame")
+        channels = 192 if self.intra else 256
+        if feature.ndim != 4 or feature.shape[:2] != (1, channels):
+            raise ValueError("reference feature has incompatible native frame-type channels")
+        if not self.intra and self.memory is None:
+            raise ValueError("P reference requires synchronized memory")
         self.committed = True
         return ReferenceState(
             self.frame_id,

@@ -42,7 +42,16 @@ def aggregate_budgets(rows):
             **distortion_summary(selected),
             **{
                 name: sum(r[name] for r in selected) / len(selected)
-                for name in ("lpips", "dists", "ms-ssim", "chroma_retention")
+                for name in (
+                    "lpips",
+                    "dists",
+                    "ms-ssim",
+                    "chroma_retention",
+                    "chroma_mse",
+                    "chroma_mean_abs_bias",
+                    "source_chroma_variance",
+                )
+                if name in selected[0]
             },
         }
     return result

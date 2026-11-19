@@ -49,6 +49,16 @@ def test_gate1_rejects_chroma_collapse_or_noncausal_reference_drift():
     one, two = valid_seed(1), valid_seed(2)
     two["summary"]["independent"]["8192"]["chroma_retention"] = 0.5
     assert not assess_gate1([one, two], LIMITS)["passed"]
+
+
+def test_missing_modality_or_health_evidence_cannot_pass_via_empty_all():
+    for field in ("health_summary", "intervention_summary"):
+        one, two = valid_seed(1), valid_seed(2)
+        two[field] = {}
+        assert not assess_gate1([one, two], LIMITS)["passed"]
+    one, two = valid_seed(1), valid_seed(2)
+    two["summary"].pop("independent")
+    assert not assess_gate1([one, two], LIMITS)["passed"]
     one, two = valid_seed(1), valid_seed(2)
     one["health_summary"]["2"]["minimum_dimension_entropy_bits"] = 0
     assert not assess_gate1([one, two], LIMITS)["passed"]

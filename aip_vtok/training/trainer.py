@@ -8,7 +8,9 @@ from torch.nn import functional as F
 from aip_vtok.backbones.latent_to_ref import LatentToRef
 from aip_vtok.decoder.causal_state import ReferenceState
 from aip_vtok.runtime import resolve, save_checkpoint, write_json
+from aip_vtok.training.checkpoint import require_identity, restore_training_state
 from aip_vtok.training.data import prefetched_windows, sources, training_plans
+from aip_vtok.training.determinism import configure_determinism
 
 
 class RNGStreams:
@@ -69,7 +71,22 @@ def training_artifact(step, projector, optimizer, rng, plans, history, config, h
     }
 
 
+def restore_projector(checkpoint, projector, optimizer, rng, config, hashes):
+    artifact = torch.load(checkpoint, map_location="cpu", weights_only=False)
+    require_identity(artifact, config, hashes, hash_key="manifest_hashes")
+    projector.load_state_dict(artifact["projector"])
+    restore_training_state(artifact, optimizer, rng, stream_key="rng")
+    return artifact["step"], artifact["plans"], artifact["history"]
+
+
+def require_finite_projector_loss(loss, directory, step, diagnostics):
+    if not torch.isfinite(loss):
+        write_json(directory / "nonfinite_failure.json", {"step": step, "diagnostics": diagnostics})
+        raise FloatingPointError("nonfinite projector loss")
+
+
 def fit_projector(config, backbone, width, resume=False):
+    configure_determinism()
     rows, hashes = sources(config, "train")
     cfg = config["projector_training"]
     directory = resolve(config["output"]) / f"projector_w{width}"
@@ -83,23 +100,13 @@ def fit_projector(config, backbone, width, resume=False):
     plans = training_plans(rows, cfg["steps"], cfg["sequence_length"], rng)
     start, history = 0, []
     if resume:
-        artifact = torch.load(checkpoint, map_location="cpu", weights_only=False)
-        if artifact["manifest_hashes"] != hashes or artifact["config"] != config:
-            raise ValueError("resume configuration or data identity changed")
-        projector.load_state_dict(artifact["projector"])
-        optimizer.load_state_dict(artifact["optimizer"])
-        rng.load_state_dict(artifact["rng"])
-        torch.set_rng_state(artifact["torch_rng"])
-        torch.cuda.set_rng_state_all(artifact["cuda_rng"])
-        start, plans, history = artifact["step"], artifact["plans"], artifact["history"]
+        start, plans, history = restore_projector(checkpoint, projector, optimizer, rng, config, hashes)
     backbone.requires_grad_(False)
     started = time.perf_counter()
     for step, clip in enumerate(prefetched_windows(rows, plans[start:]), start + 1):
         optimizer.zero_grad(set_to_none=True)
         loss, diagnostics = projector_sequence(backbone, projector, clip, plans[step - 1]["flip"])
-        if not torch.isfinite(loss):
-            write_json(directory / "nonfinite_failure.json", {"step": step, "diagnostics": diagnostics})
-            raise FloatingPointError("nonfinite projector loss")
+        require_finite_projector_loss(loss, directory, step, diagnostics)
         loss.backward()
         grad_norm = torch.nn.utils.clip_grad_norm_(projector.parameters(), 5.0, error_if_nonfinite=True)
         optimizer.step()

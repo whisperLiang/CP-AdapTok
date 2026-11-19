@@ -1,9 +1,14 @@
 """Reuse CP manifests, RGB decoding, split checks and original frame hashes."""
 
+import hashlib
 from concurrent.futures import ThreadPoolExecutor
 
-from aip_vtok.runtime import file_hash, resolve
-from cp_adaptok.data import VideoSpec, read_video_frames
+import cv2
+import numpy as np
+import torch
+
+from aip_vtok.runtime import resolve
+from cp_adaptok.data import rgb_tensor
 from cp_adaptok.large_scale_data import load_manifests
 
 
@@ -19,14 +24,28 @@ def source_by_id(rows, content_id):
     return next(row for row in rows if row["content_id"] == content_id)
 
 
+def verified_rgb(directory, item):
+    root = resolve(directory).resolve()
+    path = (root / item["file"]).resolve()
+    if not path.is_relative_to(root):
+        raise ValueError("manifest frame escapes its declared source")
+    payload = path.read_bytes()
+    if hashlib.sha256(payload).hexdigest() != item["sha256"]:
+        raise ValueError("source frame differs from audited manifest")
+    return rgb_tensor(cv2.imdecode(np.frombuffer(payload, dtype=np.uint8), cv2.IMREAD_COLOR))
+
+
 def read_window(row, start, length):
     if start < 0 or start + length > row["original_frames"]:
         raise ValueError("window exceeds manifest span; repeating tail frames is forbidden")
     frames = row["frame_hashes"][start : start + length]
-    for item in frames:
-        if file_hash(resolve(row["path"]) / item["file"]) != item["sha256"]:
-            raise ValueError("source frame differs from audited manifest")
-    return read_video_frames(VideoSpec(row["path"], frames=length, start=start))
+    if len(frames) != length:
+        raise ValueError("manifest is missing frame hashes")
+    clip = torch.stack([verified_rgb(row["path"], item) for item in frames])
+    width, height = row["resolution"]
+    if clip.shape[-2:] != (height, width):
+        raise ValueError("decoded resolution differs from manifest")
+    return clip
 
 
 def training_plans(rows, steps, length, rng):

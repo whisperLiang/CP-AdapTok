@@ -20,7 +20,29 @@ def monotonic(metrics, limits):
     return all(comparisons)
 
 
+def valid_schema(seed):
+    health = set(seed["health_summary"]) == {"0", "1", "2"}
+    interventions = {f"pass{p}_{kind}" for p in (1, 2) for kind in ("shuffle", "cross_video")}
+    modes = set(seed["summary"]) == {"paired", "independent"}
+    return health and set(seed["intervention_summary"]) == interventions and modes
+
+
+def mode_checks(metrics, limits):
+    return {
+        "174_frames": all(metrics[str(k)]["frames"] == 174 for k in BUDGETS),
+        "monotonic_core_gains": monotonic(metrics, limits),
+        "absolute_quality": all(
+            metrics[str(k)]["psnr_global_mse"] >= limits["minimum_high_budget_psnr_db"] for k in (4096, 8192)
+        ),
+        "chroma": all(
+            metrics[str(k)]["chroma_retention"] >= limits["minimum_chroma_retention"] for k in (4096, 8192)
+        ),
+    }
+
+
 def seed_checks(seed, limits):
+    if not valid_schema(seed):
+        return {"valid_evidence_schema": False}
     checks = {
         "training_complete": seed["training_steps"] >= 1000,
         "exact_independent_loops": seed["maximum_independent_rgb_error"] == 0
@@ -33,19 +55,12 @@ def seed_checks(seed, limits):
         "content_interventions": all(p["ci95_low"] > 0 for p in seed["intervention_summary"].values()),
     }
     for mode, metrics in seed["summary"].items():
-        checks[f"{mode}_174_frames"] = all(metrics[str(k)]["frames"] == 174 for k in BUDGETS)
-        checks[f"{mode}_monotonic_core_gains"] = monotonic(metrics, limits)
-        checks[f"{mode}_absolute_quality"] = all(
-            metrics[str(k)]["psnr_global_mse"] >= limits["minimum_high_budget_psnr_db"] for k in (4096, 8192)
-        )
-        checks[f"{mode}_chroma"] = all(
-            metrics[str(k)]["chroma_retention"] >= limits["minimum_chroma_retention"] for k in (4096, 8192)
-        )
+        checks.update({f"{mode}_{name}": value for name, value in mode_checks(metrics, limits).items()})
     return checks
 
 
 def assess_gate1(seeds, limits):
-    complete = {seed["seed"] for seed in seeds} == {1, 2}
+    complete = len(seeds) == 2 and {seed["seed"] for seed in seeds} == {1, 2}
     checks = {str(seed["seed"]): seed_checks(seed, limits) for seed in seeds}
     passed = complete and all(all(values.values()) for values in checks.values())
     return {

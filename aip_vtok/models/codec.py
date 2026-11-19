@@ -36,7 +36,7 @@ class DecodeSession:
         self.reference_budget = min(
             codec.reference_i if self.context.intra else codec.reference_p, len(plan.positions)
         )
-        self.reference_latent = None
+        self.reference_latent = prediction.detach().clone()
         self.rgb_decoder_calls = 0
 
     def append(self, values, offset, codes=False):
@@ -48,12 +48,11 @@ class DecodeSession:
         if 0 < split < count:
             pieces = [(values[:, :split], offset), (values[:, split:], offset + split)]
         for part, position in pieces:
+            reference = self.reference_latent if position < self.reference_budget else None
             if codes:
-                self.canvas.append_codes(part, position)
+                self.canvas.append_codes(part, position, reference)
             else:
-                self.canvas.append_ids(part, position)
-            if self.canvas.count == self.reference_budget:
-                self.reference_latent = self.canvas.latent().clone()
+                self.canvas.append_ids(part, position, reference)
 
     def render_frame(self, checkpointed=False):
         latent = self.codec.fusion(self.canvas.latent(), self.canvas.masks)
@@ -62,7 +61,7 @@ class DecodeSession:
         return rgb
 
     def commit_reference_once(self):
-        if self.reference_latent is None:
+        if self.canvas.count < self.reference_budget:
             raise RuntimeError("fixed reference prefix has not arrived")
         with torch.no_grad():
             feature = self.codec.projector(self.reference_latent, self.context.intra)

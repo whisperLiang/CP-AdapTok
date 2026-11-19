@@ -75,6 +75,7 @@ def test_real_1080p_encode_once_reference_budget_invariance_and_exact_append(bac
     assert encoded.tokens.ids.shape == (1, 8192)
     session = codec.prefix_session(encoded, initial, 2048)
     reference = session.commit_reference_once()
+    assert torch.equal(reference.latent, session.canvas.latent())
     assert session.rgb_decoder_calls == 0
     assert reference.latent.shape == (1, 128, 68, 120)
     encoded = codec.encode_frame(source, reference, 1)

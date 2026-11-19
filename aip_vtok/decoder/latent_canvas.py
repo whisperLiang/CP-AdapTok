@@ -20,10 +20,11 @@ class LatentCanvas:
         ]
         self.count, self.projected_tokens = 0, 0
 
-    def append_ids(self, ids, offset):
-        self.append_codes(self.tokenizer.fsq.ids_to_codes(ids), offset)
+    @torch.no_grad()
+    def append_ids(self, ids, offset, reference=None):
+        self.append_codes(self.tokenizer.fsq.ids_to_codes(ids), offset, reference)
 
-    def append_codes(self, codes, offset):
+    def append_codes(self, codes, offset, reference=None):
         count = codes.shape[1]
         if offset != self.count or not 0 < count <= 128 or offset + count > len(self.plan.positions):
             raise ValueError("nonconsecutive, duplicate, missing, or oversized token block")
@@ -38,6 +39,11 @@ class LatentCanvas:
             )
             buffer = self.buffers[pass_id].flatten(2)
             indices = spatial[None, None].expand_as(values)
+            if reference is not None:
+                # Reuse the lifted new values, including when a packet crosses K_ref.
+                # No old token is projected again and no full canvas is read here.
+                with torch.no_grad():
+                    reference.flatten(2).scatter_add_(2, indices, values.detach())
             if torch.is_grad_enabled():
                 self.buffers[pass_id] = buffer.scatter_add(2, indices, values).reshape_as(self.prediction)
             else:

@@ -39,3 +39,14 @@ def test_canvas_training_gradient_reaches_each_residual_projection():
     canvas.latent().square().mean().backward()
     for layer in (tokenizer.anchor, tokenizer.innovation, tokenizer.detail):
         assert any(p.grad is not None and p.grad.abs().sum() > 0 for p in layer.parameters())
+
+
+def test_integer_append_remains_in_place_when_caller_has_gradients_enabled():
+    tokenizer = ResidualTokenizer()
+    prediction = torch.zeros(1, 128, 8, 16)
+    tokens = tokenizer.encode(torch.randn_like(prediction), prediction)
+    canvas = LatentCanvas(tokenizer, tokens.plan, prediction)
+    pointer = canvas.buffers[0].data_ptr()
+    canvas.append_ids(torch.zeros(1, 7, dtype=torch.long), 0)
+    assert canvas.buffers[0].data_ptr() == pointer
+    assert canvas.count == canvas.projected_tokens == 7

@@ -3,26 +3,10 @@
 import torch
 
 from aip_vtok.decoder.causal_state import ReferenceState
+from aip_vtok.training.budgets import sample_budgets
+from aip_vtok.training.diagnostics import loss_record
 from aip_vtok.training.losses import crop_plan
 from aip_vtok.training.prefix import commit_training_reference, receiver_context, render_training
-from aip_vtok.training.smoke import sample_budgets
-
-
-def loss_record(objective, rgb, rec, crops, frame_id, budget, inspect):
-    loss, components = objective(rgb, rec, crops)
-    record = {
-        "frame": frame_id,
-        "budget": budget,
-        "components": {name: float(value.detach()) for name, value in components.items()},
-    }
-    if inspect:
-        record["weighted_loss_gradient_norm_at_rgb"] = {
-            name: float(
-                torch.autograd.grad(objective.weights[name] * value, rec, retain_graph=True)[0].norm()
-            )
-            for name, value in components.items()
-        }
-    return loss, record
 
 
 def paired_step(codec, clip, objective, rng, inspect_gradients=False):

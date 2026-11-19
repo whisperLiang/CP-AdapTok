@@ -13,9 +13,10 @@ from aip_vtok.decoder.causal_state import ReferenceState
 from aip_vtok.evaluation.smoke import BUDGETS, aggregate_budgets, code_health
 from aip_vtok.models.codec import create_codec
 from aip_vtok.runtime import file_hash, resolve, write_json
+from aip_vtok.training.checkpoint import load_trainable
 from aip_vtok.training.data import read_window, source_by_id, sources
 from aip_vtok.training.formal import settings
-from aip_vtok.training.losses import chroma_retention
+from aip_vtok.training.losses import chroma_diagnostics
 from aip_vtok.training.prefix import prefix_canvas
 from cp_adaptok.data import save_rgb
 from cp_adaptok.metrics import MetricSuite
@@ -66,8 +67,53 @@ def commit_after_render(session, encoded):
 def images(directory, video, budget, original, rec):
     label = video.split(":")[-1]
     save_rgb(directory / "images" / f"{label}_original.png", original)
+    save_rgb(directory / "images" / f"{label}_original_crop.png", original[..., 400:656, 800:1056])
     save_rgb(directory / "images" / f"{label}_k{budget}.png", rec)
     save_rgb(directory / "images" / f"{label}_k{budget}_crop.png", rec[..., 400:656, 800:1056])
+
+
+def evaluate_budget(
+    config, codec, suite, video, frame_id, rgb, encoded, paired, independent_state, budget, directory
+):
+    rows, exact_errors = [], []
+    append_until(paired, encoded.tokens.ids, budget)
+    rec = paired.render_frame()
+    metrics = {**suite(rgb, rec), **chroma_diagnostics(rgb, rec)}
+    independent_encoded = codec.encode_frame(rgb, independent_state, frame_id)
+    independent = codec.prefix_session(independent_encoded, independent_state, budget)
+    other = independent.render_frame()
+    error = (rec - other).abs().max().item()
+    equal_ids = torch.equal(encoded.tokens.ids, independent_encoded.tokens.ids)
+    exact_errors.append(
+        {
+            "video": video,
+            "frame": frame_id,
+            "budget": budget,
+            "max_rgb_error": error,
+            "equal_ids": equal_ids,
+        }
+    )
+    independent_metrics = metrics if error == 0 else {**suite(rgb, other), **chroma_diagnostics(rgb, other)}
+    for mode, values in (("paired", metrics), ("independent", independent_metrics)):
+        rows.append(
+            {
+                "seed": config["seed"],
+                "mode": mode,
+                "video": video,
+                "frame": frame_id,
+                "frame_type": "I" if paired.context.intra else "P",
+                "budget": budget,
+                "required_reference_tokens": paired.reference_budget,
+                **values,
+                "bpp": None,
+                "real_bitstream": False,
+                "split": "validation",
+            }
+        )
+    independent_state = commit_after_render(independent, independent_encoded)
+    if frame_id == 0:
+        images(directory, video, budget, rgb, rec)
+    return rows, independent_state, exact_errors[0], metrics["mse"]
 
 
 @torch.no_grad()
@@ -84,50 +130,24 @@ def evaluate_video(config, codec, suite, video, clip, donor, directory):
         )
         paired = codec.begin_frame(frame_id, encoded.tokens.tiers, paired_state)
         for budget in BUDGETS:
-            append_until(paired, encoded.tokens.ids, budget)
-            rec = paired.render_frame()
-            metrics = {**suite(rgb, rec), "chroma_retention": chroma_retention(rgb, rec)}
-            independent_encoded = codec.encode_frame(rgb, independent_states[budget], frame_id)
-            independent = codec.prefix_session(independent_encoded, independent_states[budget], budget)
-            other = independent.render_frame()
-            error = (rec - other).abs().max().item()
-            equal_ids = torch.equal(encoded.tokens.ids, independent_encoded.tokens.ids)
-            exact_errors.append(
-                {
-                    "video": video,
-                    "frame": frame_id,
-                    "budget": budget,
-                    "max_rgb_error": error,
-                    "equal_ids": equal_ids,
-                }
+            measured, independent_states[budget], exact, baseline_mse = evaluate_budget(
+                config,
+                codec,
+                suite,
+                video,
+                frame_id,
+                rgb,
+                encoded,
+                paired,
+                independent_states[budget],
+                budget,
+                directory,
             )
-            independent_metrics = (
-                metrics
-                if error == 0
-                else {**suite(rgb, other), "chroma_retention": chroma_retention(rgb, other)}
-            )
-            for mode, values in (("paired", metrics), ("independent", independent_metrics)):
-                rows.append(
-                    {
-                        "seed": config["seed"],
-                        "mode": mode,
-                        "video": video,
-                        "frame": frame_id,
-                        "frame_type": "I" if paired.context.intra else "P",
-                        "budget": budget,
-                        "required_reference_tokens": paired.reference_budget,
-                        **values,
-                        "bpp": None,
-                        "real_bitstream": False,
-                        "split": "validation",
-                    }
-                )
-            independent_states[budget] = commit_after_render(independent, independent_encoded)
-            if frame_id == 0:
-                images(directory, video, budget, rgb, rec)
+            rows.extend(measured)
+            exact_errors.append(exact)
         interventions.extend(
             {"video": video, "frame": frame_id, **row}
-            for row in intervention_rows(codec, encoded, paired, donor, rgb, metrics["mse"], rng)
+            for row in intervention_rows(codec, encoded, paired, donor, rgb, baseline_mse, rng)
         )
         paired_state = paired.commit_reference_once()
         if (frame_id + 1) % 16 == 0:
@@ -135,22 +155,27 @@ def evaluate_video(config, codec, suite, video, clip, donor, directory):
     return rows, health, interventions, exact_errors
 
 
+def intervention_video_means(rows, pass_id, kind):
+    selected = [r for r in rows if r["pass"] == pass_id and r["intervention"] == kind]
+    videos = sorted({r["video"] for r in selected})
+    means = np.array(
+        [np.mean([r["mse_increase"] for r in selected if r["video"] == video]) for video in videos]
+    )
+    return means, len(selected)
+
+
 def summarize_interventions(rows):
     rng, result = np.random.default_rng(19), {}
     for pass_id in (1, 2):
         for kind in ("shuffle", "cross_video"):
-            selected = [r for r in rows if r["pass"] == pass_id and r["intervention"] == kind]
-            videos = sorted({r["video"] for r in selected})
-            means = np.array(
-                [np.mean([r["mse_increase"] for r in selected if r["video"] == video]) for video in videos]
-            )
+            means, count = intervention_video_means(rows, pass_id, kind)
             bootstrap = means[rng.integers(len(means), size=(2000, len(means)))].mean(1)
             result[f"pass{pass_id}_{kind}"] = {
                 "mean_mse_increase": float(means.mean()),
                 "ci95_low": float(np.quantile(bootstrap, 0.025)),
                 "ci95_high": float(np.quantile(bootstrap, 0.975)),
-                "independent_videos": len(videos),
-                "frames": len(selected),
+                "independent_videos": len(means),
+                "frames": count,
             }
     return result
 
@@ -167,14 +192,14 @@ def health_summary(rows):
     return result
 
 
-def evaluate(config):
+def evaluation_assets(config):
     directory = resolve(config["output"]) / f"gate1_seed{config['seed']}"
     checkpoint = resolve(config["checkpoints"]) / f"gate1_seed{config['seed']}/latest.pt"
     artifact = torch.load(checkpoint, map_location="cpu", weights_only=False)
     if artifact["step"] != config["stage1"]["steps"] or artifact["config"] != config:
         raise ValueError("formal evaluation requires the declared completed checkpoint")
     codec = create_codec(config).eval()
-    codec.load_state_dict(artifact["model"], strict=False)
+    load_trainable(codec, artifact["model"])
     suite = MetricSuite("cuda:0")
     if suite.errors:
         raise RuntimeError(f"required metrics unavailable: {suite.errors}")
@@ -186,6 +211,11 @@ def evaluate(config):
     ]
     if sum(len(clip) for clip in clips) != protocol["total_frames"]:
         raise ValueError("validation protocol is not exactly 174 original frames")
+    return directory, checkpoint, codec, suite, selected, clips, hashes
+
+
+def evaluate(config):
+    directory, checkpoint, codec, suite, selected, clips, hashes = evaluation_assets(config)
     donors = []
     with torch.no_grad():
         for clip in clips:
@@ -199,6 +229,10 @@ def evaluate(config):
         health.extend(measured[1])
         interventions.extend(measured[2])
         exact.extend(measured[3])
+    return store_evaluation(config, directory, checkpoint, hashes, rows, health, interventions, exact)
+
+
+def store_evaluation(config, directory, checkpoint, hashes, rows, health, interventions, exact):
     summary = {
         mode: aggregate_budgets([r for r in rows if r["mode"] == mode]) for mode in ("paired", "independent")
     }
@@ -218,14 +252,15 @@ def evaluate(config):
         "metric_reuse": "independent metrics reused only after exact full-RGB equality is checked",
         "reference_policy": "I2048/P510; I renders below 2048 still receive reference prefix before commit",
     }
-    write_json(directory / "evaluation.json", artifact)
     write_json(directory / "health.json", health)
     write_json(directory / "interventions.json", interventions)
     write_json(directory / "independent_exactness.json", exact)
-    with (directory / "frame_metrics.csv").open("w", newline="") as handle:
+    with (directory / "frame_metrics.csv.tmp").open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
+    (directory / "frame_metrics.csv.tmp").replace(directory / "frame_metrics.csv")
+    write_json(directory / "evaluation.json", artifact)
     return artifact
 
 

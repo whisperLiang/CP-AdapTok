@@ -30,6 +30,20 @@ def crop_plan(height, width, generator):
     return result
 
 
+def native_global_view(rgb):
+    if rgb.shape[-2:] != (1080, 1920):
+        raise ValueError("native global perceptual view requires 1920x1080 RGB")
+    # Exact align_corners=False bilinear centers for a factor-four downsample.
+    # Disjoint slices avoid CUDA's nondeterministic interpolation backward.
+    dtype = rgb.dtype
+    rgb = rgb.float()
+    return (
+        (rgb[..., 1::4, 1::4] + rgb[..., 1::4, 2::4] + rgb[..., 2::4, 1::4] + rgb[..., 2::4, 2::4])
+        .mul(0.25)
+        .to(dtype)
+    )
+
+
 class ReconstructionLoss(nn.Module):
     def __init__(self, weights):
         super().__init__()
@@ -42,8 +56,8 @@ class ReconstructionLoss(nn.Module):
         def distance(x, y):
             return self.perceptual(x * 2 - 1, y * 2 - 1).mean()
 
-        global_x = F.interpolate(original, size=(270, 480), mode="bilinear", align_corners=False)
-        global_y = F.interpolate(reconstructed, size=(270, 480), mode="bilinear", align_corners=False)
+        global_x = native_global_view(original)
+        global_y = native_global_view(reconstructed)
         local_x = torch.cat([original[..., y : y + 256, x : x + 256] for y, x in crops])
         local_y = torch.cat([reconstructed[..., y : y + 256, x : x + 256] for y, x in crops])
         return (
@@ -67,3 +81,16 @@ def chroma_retention(original, reconstructed):
     source = bt709_chroma(original).var((0, 2, 3), correction=0)
     target = bt709_chroma(reconstructed).var((0, 2, 3), correction=0)
     return (target / source.clamp_min(1e-10)).mean().item()
+
+
+@torch.no_grad()
+def chroma_diagnostics(original, reconstructed):
+    source, target = bt709_chroma(original), bt709_chroma(reconstructed)
+    source_variance = source.var((0, 2, 3), correction=0)
+    target_variance = target.var((0, 2, 3), correction=0)
+    return {
+        "chroma_retention": (target_variance / source_variance.clamp_min(1e-10)).mean().item(),
+        "chroma_mse": F.mse_loss(source, target).item(),
+        "chroma_mean_abs_bias": (source.mean((0, 2, 3)) - target.mean((0, 2, 3))).abs().mean().item(),
+        "source_chroma_variance": source_variance.mean().item(),
+    }
