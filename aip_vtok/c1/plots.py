@@ -75,7 +75,7 @@ def budget_plot(summary, name):
 
 def dense_plot(gains, threshold):
     fig, axis = axes()
-    for mode, label, color, marker in (("same_context_b0_fsq_history", "B0 history", BLUE, "o"),
+    for mode, label, color, marker in (("same_context_b0_fsq_history", "B0-FSQ history", BLUE, "o"),
                                        ("independent_closed", "Independent loops", ORANGE, "^")):
         rows = sorted((r for r in gains if r["history"] == mode), key=lambda r: r["seed"])
         offset = -0.08 if marker == "o" else 0.08
@@ -83,5 +83,5 @@ def dense_plot(gains, threshold):
                      color=color, marker=marker, s=32, label=label, zorder=4)
     axis.axhline(threshold, color=GRAY, linestyle="--", linewidth=1, label="PSNR gate")
     axis.set(xlabel="Training seed", ylabel="B1 − B0 global PSNR (dB)", xticks=(1, 2), xlim=(0.55, 2.45))
-    axis.legend(loc="best")
+    axis.legend(loc="upper center", bbox_to_anchor=(0.5, 0.88), ncols=3)
     export(fig, "dense_gain")

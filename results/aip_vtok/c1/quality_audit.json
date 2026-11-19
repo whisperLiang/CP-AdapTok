@@ -1,0 +1,152 @@
+{
+  "tools": "Radon, measured coverage, isolatable AST comparison, and targeted mutations",
+  "trace_scope": [
+    "final regression",
+    "Train fit replay",
+    "current dense replay",
+    "current report",
+    "Diag-0.5 measured run",
+    "C1-A measured validation"
+  ],
+  "coverage_percent": 82.79009126466754,
+  "max_cyclomatic_complexity": 10,
+  "crap_at_least_10": [
+    {
+      "file": "aip_vtok/c1/artifacts.py",
+      "function": "protected_digest",
+      "line": 73,
+      "complexity": 6,
+      "coverage": 0.1,
+      "crap": 32.244
+    },
+    {
+      "file": "aip_vtok/c1/calibrate.py",
+      "function": "fit_all",
+      "line": 89,
+      "complexity": 10,
+      "coverage": 0.9285714285714286,
+      "crap": 10.036443148688047
+    },
+    {
+      "file": "aip_vtok/c1/calibrate.py",
+      "function": "calibrate",
+      "line": 197,
+      "complexity": 4,
+      "coverage": 0.058823529411764705,
+      "crap": 17.339303887645023
+    },
+    {
+      "file": "aip_vtok/c1/pilot.py",
+      "function": "require_audited",
+      "line": 30,
+      "complexity": 4,
+      "coverage": 0.16666666666666666,
+      "crap": 13.259259259259261
+    },
+    {
+      "file": "aip_vtok/c1/pilot.py",
+      "function": "phase1_record",
+      "line": 38,
+      "complexity": 6,
+      "coverage": 0.125,
+      "crap": 30.1171875
+    },
+    {
+      "file": "aip_vtok/c1/pilot.py",
+      "function": "run_a",
+      "line": 66,
+      "complexity": 7,
+      "coverage": 0.047619047619047616,
+      "crap": 49.32804232804232
+    },
+    {
+      "file": "aip_vtok/c1/pilot.py",
+      "function": "sparse_length",
+      "line": 107,
+      "complexity": 6,
+      "coverage": 0.07142857142857142,
+      "crap": 34.82361516034986
+    },
+    {
+      "file": "aip_vtok/c1/pilot.py",
+      "function": "run_b",
+      "line": 124,
+      "complexity": 5,
+      "coverage": 0.045454545454545456,
+      "crap": 26.743519909842227
+    },
+    {
+      "file": "aip_vtok/c1/report.py",
+      "function": "sparse_training_section",
+      "line": 260,
+      "complexity": 7,
+      "coverage": 0.1111111111111111,
+      "crap": 41.41426611796982
+    },
+    {
+      "file": "aip_vtok/c1/report.py",
+      "function": "audit_log",
+      "line": 320,
+      "complexity": 10,
+      "coverage": 0.8947368421052632,
+      "crap": 10.116635077999709
+    },
+    {
+      "file": "aip_vtok/c1/report.py",
+      "function": "generate",
+      "line": 358,
+      "complexity": 10,
+      "coverage": 0.9090909090909091,
+      "crap": 10.075131480090159
+    },
+    {
+      "file": "aip_vtok/c1/sparse_eval.py",
+      "function": "paired_sparse",
+      "line": 39,
+      "complexity": 4,
+      "coverage": 0.0,
+      "crap": 20.0
+    },
+    {
+      "file": "aip_vtok/c1/sparse_eval.py",
+      "function": "paired_fix",
+      "line": 55,
+      "complexity": 3,
+      "coverage": 0.0,
+      "crap": 12.0
+    },
+    {
+      "file": "aip_vtok/c1/sparse_eval.py",
+      "function": "matched_video",
+      "line": 67,
+      "complexity": 5,
+      "coverage": 0.0,
+      "crap": 30.0
+    },
+    {
+      "file": "aip_vtok/c1/sparse_eval.py",
+      "function": "comparisons",
+      "line": 87,
+      "complexity": 5,
+      "coverage": 0.0,
+      "crap": 30.0
+    },
+    {
+      "file": "aip_vtok/c1/sparse_eval.py",
+      "function": "sealed_baselines",
+      "line": 110,
+      "complexity": 4,
+      "coverage": 0.0,
+      "crap": 20.0
+    },
+    {
+      "file": "aip_vtok/c1/sparse_eval.py",
+      "function": "evaluate_sparse",
+      "line": 120,
+      "complexity": 4,
+      "coverage": 0.0,
+      "crap": 20.0
+    }
+  ],
+  "duplicates_at_least_0_8": []
+}

@@ -1,0 +1,55 @@
+{
+  "passed": 268,
+  "original_passed": 251,
+  "c1_passed": 17,
+  "mutations_killed": 7,
+  "mutations_total": 7,
+  "fit_replay_equal_tensors": 12,
+  "fit_replay_calibration_rows": 1280,
+  "dense_exact_smoke_replay_updates": 20,
+  "figures": {
+    "rank_p": {
+      "pdf_sha256": "30131844f17f426b21c39d24b5df9592926ca3786328171eea23a0e5b2288fa0",
+      "minimum_glyph_pt": 8.0,
+      "collision_verdict": "PASS",
+      "layout": "single panel"
+    },
+    "diag05_closed": {
+      "pdf_sha256": "c9bb04c674d2c9b20d4d7b901e9f379ca3c69f888bcfab7e0ce56a0b92c267ab",
+      "minimum_glyph_pt": 8.0,
+      "collision_verdict": "PASS",
+      "layout": "single panel"
+    },
+    "dense_gain": {
+      "pdf_sha256": "c3fc03c5b3562bfdfbd1a31765ba4e26d818368cd0583ebe592ea8137d0066e9",
+      "minimum_glyph_pt": 8.0,
+      "collision_verdict": "PASS",
+      "layout": "single panel"
+    }
+  },
+  "paired_csv_json_mse_rows": {
+    "diag05/calibration": 6400,
+    "diag05/rank": 2868,
+    "diag05/dense": 120,
+    "diag05/matched_sparse": 1200,
+    "diag05/closed": 640,
+    "c1a/validation": 1566
+  },
+  "projector": {
+    "path": "checkpoints/aip_vtok/projector_w128/latest.pt",
+    "sha256": "3b1bd715427bd177393e9552a99576e614ab7dd1ed307155129cf62896d5eb94"
+  },
+  "protected_artifacts": {
+    "sha256": "fb1a1036533641b1b727c96e0911b65e64e3a4b445c30bb07e1f138115b28ebc",
+    "files": 751
+  },
+  "test_images_read": 0,
+  "training_steps": {
+    "c1a_seed1": 1000,
+    "c1a_seed2": 1000,
+    "c1b_seed1": 0,
+    "c1b_seed2": 0
+  },
+  "last_completed_phase": "C1-A",
+  "c1b_status": "blocked_by_c1a_psnr_gate"
+}

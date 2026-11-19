@@ -1,0 +1,45 @@
+{
+  "completed": true,
+  "passes_for_c1b": false,
+  "gains": [
+    {
+      "seed": 1,
+      "history": "same_context_b0_fsq_history",
+      "psnr_gain_db": -0.0006217996266215664,
+      "lpips_gain": 0.07361305624931708,
+      "dists_gain": 0.03230901713343873,
+      "passed": false
+    },
+    {
+      "seed": 2,
+      "history": "same_context_b0_fsq_history",
+      "psnr_gain_db": -0.051235017612007994,
+      "lpips_gain": 0.0701137711775714,
+      "dists_gain": 0.032961646544522244,
+      "passed": false
+    },
+    {
+      "seed": 1,
+      "history": "independent_closed",
+      "psnr_gain_db": 0.2093396270561847,
+      "lpips_gain": 0.05677245154805566,
+      "dists_gain": 0.02533667046448279,
+      "passed": false
+    },
+    {
+      "seed": 2,
+      "history": "independent_closed",
+      "psnr_gain_db": 0.12648888015000637,
+      "lpips_gain": 0.061909560670797836,
+      "dists_gain": 0.028558833289077906,
+      "passed": false
+    }
+  ],
+  "locked_sha256": "671331a8ca05e537d2f35e9409f714b0d7d8c3ec15408a5f5e1efb0d3ae11814",
+  "steps_completed": {
+    "1": 1000,
+    "2": 1000
+  },
+  "cohort_frames": 174,
+  "finished": "2026-11-19T17:58:23+08:00"
+}

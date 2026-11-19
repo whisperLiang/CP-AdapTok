@@ -1,0 +1,15 @@
+{
+  "locked_sha256": "671331a8ca05e537d2f35e9409f714b0d7d8c3ec15408a5f5e1efb0d3ae11814",
+  "minimum_global_psnr_gain_db": 0.5,
+  "histories": [
+    "same_context_b0_fsq_history",
+    "independent_closed"
+  ],
+  "requires_lpips_improvement": true,
+  "required_seeds": [
+    1,
+    2
+  ],
+  "steps_per_seed": 1000,
+  "recorded_before_training": "2026-11-19T17:39:25+08:00"
+}

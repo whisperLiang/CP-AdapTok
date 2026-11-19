@@ -1,0 +1,281 @@
+{
+  "run": {
+    "phase": "c1a",
+    "seed": 7302,
+    "steps": 10,
+    "length": 2,
+    "late_gop": false
+  },
+  "rollout": "rollout_2f_detached_ref",
+  "start_phase": 0,
+  "step_0_identity": true,
+  "scan_lock_sha256": "671331a8ca05e537d2f35e9409f714b0d7d8c3ec15408a5f5e1efb0d3ae11814",
+  "initial_loss": 0.1058182567358017,
+  "final_loss": 0.10474512726068497,
+  "steps": [
+    {
+      "step": 1,
+      "elapsed_s": 1.93754998606164,
+      "loss": 0.1058182567358017,
+      "gradient_norm": 0.0012407585745677352,
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "elapsed_s": 0.3380080199567601,
+      "loss": 0.10573485493659973,
+      "gradient_norm": 0.0012546487851068377,
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "elapsed_s": 0.3382241389481351,
+      "loss": 0.10570147633552551,
+      "gradient_norm": 0.0013293789234012365,
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "elapsed_s": 0.3370540920877829,
+      "loss": 0.10557717084884644,
+      "gradient_norm": 0.0014279542956501245,
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "elapsed_s": 0.336754780029878,
+      "loss": 0.1055164709687233,
+      "gradient_norm": 0.0015382192796096206,
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "elapsed_s": 0.3365621760021895,
+      "loss": 0.10543370246887207,
+      "gradient_norm": 0.0016744385939091444,
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "elapsed_s": 0.336933744023554,
+      "loss": 0.10529016703367233,
+      "gradient_norm": 0.0018254092428833246,
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        }
+      ]
+    },
+    {
+      "step": 8,
+      "elapsed_s": 0.33689750090707093,
+      "loss": 0.10513439774513245,
+      "gradient_norm": 0.0019601976964622736,
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        }
+      ]
+    },
+    {
+      "step": 9,
+      "elapsed_s": 0.3368155580246821,
+      "loss": 0.10498695075511932,
+      "gradient_norm": 0.0021283922251313925,
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        }
+      ]
+    },
+    {
+      "step": 10,
+      "elapsed_s": 0.33701975701842457,
+      "loss": 0.1048872321844101,
+      "gradient_norm": 0.0023117915261536837,
+      "frames": [
+        {
+          "frame": 0,
+          "frame_type": "I",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        },
+        {
+          "frame": 1,
+          "frame_type": "P",
+          "budgets": [
+            32640
+          ],
+          "reference_budget": 32640,
+          "state_sync": true
+        }
+      ]
+    }
+  ],
+  "passed": true,
+  "seconds": 7.226581749040633,
+  "peak_allocated_mib": 5371.18,
+  "median_seconds_per_update": 0.3369767505209893
+}

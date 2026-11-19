@@ -1,0 +1,23 @@
+{
+  "equal_tensors": {
+    "I_aligned.mean": true,
+    "I_aligned.std": true,
+    "I_aligned.energy": true,
+    "I_aligned.scales": true,
+    "P_aligned.mean": true,
+    "P_aligned.std": true,
+    "P_aligned.energy": true,
+    "P_aligned.scales": true,
+    "P_p_native.mean": true,
+    "P_p_native.std": true,
+    "P_p_native.energy": true,
+    "P_p_native.scales": true
+  },
+  "fit_sha256": "0bcb3a3885b437714bcbbb5150bba0b0290012643455faf18c083e9154b9cc21",
+  "lock_sha256": "671331a8ca05e537d2f35e9409f714b0d7d8c3ec15408a5f5e1efb0d3ae11814",
+  "schedule_matches": true,
+  "ranking_matches": true,
+  "spot_calibration_rows": 1280,
+  "spot_calibration_video": "DAVIS2017:miami-surf",
+  "max_rgb_mse_error": 0.0
+}

@@ -57,7 +57,7 @@ def gate_table(diag, dense, sparse):
         ("Diag-0.5", gate(diag, "完成，达到 C1-B 的前置门槛", "完成，未达到 C1-B 的前置门槛")),
         ("C1-A", gate(dense, "双种子通过", "双种子证据未达门槛")),
         ("C1-B", "双种子训练与评估完成" if sparse else (
-            "门控停止" if (diag and not diag["passes_for_c1b"]) or (dense and not dense["passes_for_c1b"])
+            "门控停止，训练 0 步" if (diag and not diag["passes_for_c1b"]) or (dense and not dense["passes_for_c1b"])
             else "待完成")),
     ])
 
@@ -221,6 +221,10 @@ def dense_section(dense, data):
         "P 帧的条件输入取自接收端已有的冻结因果上下文。",
         "训练使用 RGB L1/MSE、BT.709 多尺度 Cb/Cr、四个局部裁剪加全局 LPIPS-Alex、"
         "同历史敏感度加权潜在锚定和同历史原生特征监督。参考在每帧提交时截断梯度。",
+        "原生特征目标由同一接收历史下的完整潜在解码而来，I 帧使用 256D，P 帧使用标准化前的 128D。"
+        "参考损失经冻结 W128 投影器回传至恢复网络，下一帧读取独立保存的 detached clone。",
+        "损失权重为 RGB L1 1.0、RGB MSE 1.0、Cb/Cr 0.2、LPIPS 0.15、潜在锚定 0.05、参考 0.15。"
+        "冻结 Decoder 的梯度路径使用 BF16 autocast 与非重入检查点，参考生成和验证使用 FP32。",
         "", *training_table("c1a"),
         f"晋级依据为两个种子在相同 B0-FSQ 历史和各自独立闭环上均改善至少 {THRESHOLD_DB:.1f} dB，"
         "且 LPIPS 均下降。B1-cont-diag 使用连续输入做额外诊断。",
@@ -235,6 +239,24 @@ def dense_section(dense, data):
         "",
         f"{link('c1a/validation.json', '174 帧逐帧验证')} · {link('c1a/validation.csv', '验证 CSV')}",
         ""]
+
+
+def stop_section(data, diag):
+    same = select(data["summary"], history="same_context_b0_fsq_history", seed=0)
+    scores = {r["method"]: r[PSNR] for r in same}
+    loss = scores["B0-cont"] - scores["B0-fsq"]
+    return [
+        "### 门控停靠点", "",
+        f"同历史下，稠密 B0 的 FSQ 输入比连续输入低 **{loss:.3f} dB**。"
+        "恢复网络保留实收 FSQ 值，两个种子改善了 LPIPS 与 DISTS，"
+        "像素误差的改善幅度低于预定门槛。",
+        f"稀疏端的独立闭环显示，高斯插值在 P510 比零填充高 **{diag['closed_p510_gain_db']:.3f} dB**。"
+        "这项证据来自固定插值基线，属于空间采样和重建诊断。",
+        "实验停在 C1-A。C1-B 训练步数为 0。",
+        "",
+        f"{link('c1a/decision.json', '双种子门控原始记录')} · {link('c1b_gate.log', 'C1-B 入口拒绝记录')}",
+        "",
+    ]
 
 
 def sparse_training_section():
@@ -319,11 +341,28 @@ def audit_log():
         steps.append(f"- 联合回归 {verification['passed']} 项通过，原有 251 项。"
                      f"变异测试 {verification['mutations_killed']}/{verification['mutations_total']}。"
                      "命名工具未安装，检查采用覆盖率、Radon、AST 相似度和隔离变异。")
+        steps.append(f"- {verification['fit_replay_equal_tensors']} 个 Train 拟合张量逐位复现。"
+                     f"另逐条复现校准记录 {verification['fit_replay_calibration_rows']:,} 条，"
+                     f"复核 C1-A 冒烟更新 {verification['dense_exact_smoke_replay_updates']} 步和原子续跑。"
+                     "三张图的 PDF 字号和碰撞检查通过，图像经目视检查。")
+        steps.append(f"- 代码检查保留各函数的 CRAP 明细，含门控停止的 C1-B 路径。"
+                     f"{link('quality_audit.json', '复杂度与重复检查')} · {link('verification.json', '验收记录')}")
+    if load("c1a/decision") and (OUTPUT / "c1b_gate.log").is_file():
+        steps.append("- C1-B 入口在加载 H100 或创建训练权重前按 C1-A 门槛返回，确认训练步数为 0。")
     return steps
 
 
+def render_dense(dense, diag):
+    from .plots import dense_plot
+
+    validation = load("c1a/validation")
+    lines = dense_section(dense, validation)
+    dense_plot(dense["gains"], THRESHOLD_DB)
+    return lines if dense["passes_for_c1b"] else lines + stop_section(validation, diag)
+
+
 def generate():
-    from .plots import budget_plot, dense_plot, rank_plot
+    from .plots import budget_plot, rank_plot
 
     lock = json_at(LOCKED) if LOCKED.is_file() else {}
     diag, dense, sparse = (load(f"{phase}/decision") for phase in ("diag05", "c1a", "c1b"))
@@ -338,8 +377,7 @@ def generate():
         lines += sparse_section(closed, diag)
         budget_plot(group_summary(closed["rows"], ("method", "budget")), "diag05_closed")
     if dense:
-        lines += dense_section(dense, load("c1a/validation"))
-        dense_plot(dense["gains"], THRESHOLD_DB)
+        lines += render_dense(dense, diag)
     if sparse:
         lines += sparse_training_section()
         budget_plot(load("c1b/closed")["summary"], "c1b_closed")

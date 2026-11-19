@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/run_c1b.py", line 18, in <module>
+    run_b(parser.parse_args().stage)
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/c1/pilot.py", line 128, in run_b
+    require_sparse_release(diag, dense, file_hash(LOCKED))
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/c1/pilot.py", line 55, in require_sparse_release
+    raise RuntimeError("C1-B requires a passing completed dual-seed Phase 2 on the same lock")
+RuntimeError: C1-B requires a passing completed dual-seed Phase 2 on the same lock

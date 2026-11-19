@@ -10,8 +10,8 @@ B0/B1 使用 K=32,640 做稠密通道诊断。B2/B3 使用 K=510、1024、2048�
 | 阶段 | 结论 |
 | --- | --- |
 | Diag-0.5 | 完成，达到 C1-B 的前置门槛 |
-| C1-A | 待完成 |
-| C1-B | 待完成 |
+| C1-A | 双种子证据未达门槛 |
+| C1-B | 门控停止，训练 0 步 |
 
 ## Phase 1 · Train 校准和扫描表
 
@@ -146,6 +146,53 @@ P 帧相邻显示档的 PSNR 回退如下。严格的整数 FSQ 前缀一致性�
 原始字段分别列出显示与实际接收的未压缩 bpp，以及逐帧 ID 经验熵估算加包头的 bpp。
 
 [同历史连续与 FSQ](../results/aip_vtok/c1/diag05/matched_sparse.json) · [同历史 CSV](../results/aip_vtok/c1/diag05/matched_sparse.csv) · [闭环与包头账本](../results/aip_vtok/c1/diag05/closed.json) · [闭环 CSV](../results/aip_vtok/c1/diag05/closed.csv)
+
+## Phase 2 · C1-A 稠密通道补全
+
+两种种子均从零输出头开始，输入为量化后的稠密 Top-24，网络只写入缺失通道。P 帧的条件输入取自接收端已有的冻结因果上下文。
+训练使用 RGB L1/MSE、BT.709 多尺度 Cb/Cr、四个局部裁剪加全局 LPIPS-Alex、同历史敏感度加权潜在锚定和同历史原生特征监督。参考在每帧提交时截断梯度。
+原生特征目标由同一接收历史下的完整潜在解码而来，I 帧使用 256D，P 帧使用标准化前的 128D。参考损失经冻结 W128 投影器回传至恢复网络，下一帧读取独立保存的 detached clone。
+损失权重为 RGB L1 1.0、RGB MSE 1.0、Cb/Cr 0.2、LPIPS 0.15、潜在锚定 0.05、参考 0.15。冻结 Decoder 的梯度路径使用 BF16 autocast 与非重入检查点，参考生成和验证使用 FP32。
+
+| 种子 | 已完成步数 | 目标步数 | 展开 | 更新时间 / s | 步 / s | 峰值分配 / MiB | Train 视频 | GOP 窗口相位 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 1000 | 1000 | rollout_4f_detached_ref | 477.8 | 2.093 | 5371 | 35 | [0] |
+| 2 | 1000 | 1000 | rollout_4f_detached_ref | 477.9 | 2.092 | 5371 | 35 | [0] |
+
+晋级依据为两个种子在相同 B0-FSQ 历史和各自独立闭环上均改善至少 0.5 dB，且 LPIPS 均下降。B1-cont-diag 使用连续输入做额外诊断。
+
+| 种子 | 历史 | ΔPSNR / dB | LPIPS 改善 | DISTS 改善 | 通过 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | same_context_b0_fsq_history | -0.001 | +0.0736 | +0.0323 | 否 |
+| 2 | same_context_b0_fsq_history | -0.051 | +0.0701 | +0.0330 | 否 |
+| 1 | independent_closed | +0.209 | +0.0568 | +0.0253 | 否 |
+| 2 | independent_closed | +0.126 | +0.0619 | +0.0286 | 否 |
+
+| 历史 | 方法 | 种子 | 帧数 | 全局 PSNR / dB | 帧均 PSNR / dB | LPIPS-Alex | DISTS | CbCr 方差 % | CbCr MSE | CbCr 均值绝对偏差 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| same_context_b0_fsq_history | B0-fsq | — | 174 | 27.610 | 27.913 | 0.3256 | 0.1758 | 81.2 | 0.000125 | 0.001247 |
+| independent_closed | B0-fsq | — | 174 | 27.610 | 27.913 | 0.3256 | 0.1758 | 81.2 | 0.000125 | 0.001247 |
+| same_context_b0_fsq_history | B0-cont | — | 174 | 31.217 | 31.877 | 0.2851 | 0.1681 | 83.7 | 0.000070 | 0.000644 |
+| same_context_b0_fsq_history | B1-fsq | 1 | 174 | 27.609 | 27.854 | 0.2520 | 0.1435 | 88.9 | 0.000120 | 0.001104 |
+| same_context_b0_fsq_history | B1-cont-diag | 1 | 174 | 31.363 | 31.987 | 0.1976 | 0.1137 | 92.6 | 0.000069 | 0.000569 |
+| same_context_b0_fsq_history | B1-fsq | 2 | 174 | 27.559 | 27.801 | 0.2555 | 0.1428 | 88.0 | 0.000119 | 0.001132 |
+| same_context_b0_fsq_history | B1-cont-diag | 2 | 174 | 31.266 | 31.858 | 0.1970 | 0.1102 | 91.7 | 0.000069 | 0.000543 |
+| independent_closed | B1-fsq | 1 | 174 | 27.819 | 28.067 | 0.2689 | 0.1505 | 95.7 | 0.000126 | 0.001104 |
+| independent_closed | B1-fsq | 2 | 174 | 27.737 | 27.975 | 0.2637 | 0.1472 | 96.0 | 0.000125 | 0.000948 |
+
+![稠密补全的配对增益](../results/aip_vtok/c1/figures/dense_gain.png)
+
+图中每个符号为一个种子在 174 帧队列上的全局 PSNR 差。两种符号对应两种参考历史。
+
+[174 帧逐帧验证](../results/aip_vtok/c1/c1a/validation.json) · [验证 CSV](../results/aip_vtok/c1/c1a/validation.csv)
+
+### 门控停靠点
+
+同历史下，稠密 B0 的 FSQ 输入比连续输入低 **3.607 dB**。恢复网络保留实收 FSQ 值，两个种子改善了 LPIPS 与 DISTS，像素误差的改善幅度低于预定门槛。
+稀疏端的独立闭环显示，高斯插值在 P510 比零填充高 **1.992 dB**。这项证据来自固定插值基线，属于空间采样和重建诊断。
+实验停在 C1-A。C1-B 训练步数为 0。
+
+[双种子门控原始记录](../results/aip_vtok/c1/c1a/decision.json) · [C1-B 入口拒绝记录](../results/aip_vtok/c1/c1b_gate.log)
 
 ## 原生 DMC-LD 实际码流
 
