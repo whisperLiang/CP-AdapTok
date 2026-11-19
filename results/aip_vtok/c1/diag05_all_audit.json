@@ -1,0 +1,29 @@
+{
+  "stage": "diag05_all",
+  "start": "2026-11-19T17:29:53+08:00",
+  "gpu": {
+    "gpu": "NVIDIA H100 PCIe, GPU-d9c152fc-f054-180a-e06f-f6da82bd29a5, 580.159.03, 81559 MiB, 0 %",
+    "other_compute_pids": []
+  },
+  "protected": {
+    "sha256": "fb1a1036533641b1b727c96e0911b65e64e3a4b445c30bb07e1f138115b28ebc",
+    "files": 751
+  },
+  "projector_before": {
+    "path": "checkpoints/aip_vtok/projector_w128/latest.pt",
+    "sha256": "3b1bd715427bd177393e9552a99576e614ab7dd1ed307155129cf62896d5eb94"
+  },
+  "torch": "2.9.1+cu130",
+  "cuda": "13.0",
+  "test_images_read": 0,
+  "tf32": false,
+  "end": "2026-11-19T17:38:32+08:00",
+  "protected_after": {
+    "sha256": "fb1a1036533641b1b727c96e0911b65e64e3a4b445c30bb07e1f138115b28ebc",
+    "files": 751
+  },
+  "projector_after": {
+    "path": "checkpoints/aip_vtok/projector_w128/latest.pt",
+    "sha256": "3b1bd715427bd177393e9552a99576e614ab7dd1ed307155129cf62896d5eb94"
+  }
+}
