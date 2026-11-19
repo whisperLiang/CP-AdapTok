@@ -1,0 +1,54 @@
+Auto packing the repository in background for optimum performance.
+See "git help gc" for manual housekeeping.
+[experiment/aip-vtok-c1-followup 3e0ffc1] data(aip-vtok): publish C1 follow-up pilot stop
+ 50 files changed, 191607 insertions(+)
+ create mode 100644 checkpoints/aip_vtok/c1_followup/A2/seed1/step_0500.pt
+ create mode 100644 checkpoints/aip_vtok/c1_followup/A3/seed1/step_0500.pt
+ create mode 100644 docs/aip_vtok_c1_followup_report.md
+ create mode 100644 docs/aip_vtok_c1_followup_work_log.md
+ create mode 100644 results/aip_vtok/c1_followup/all.log
+ create mode 100644 results/aip_vtok/c1_followup/all_retry.log
+ create mode 100644 results/aip_vtok/c1_followup/audits/all_01.json
+ create mode 100644 results/aip_vtok/c1_followup/audits/all_02.json
+ create mode 100644 results/aip_vtok/c1_followup/audits/calibrate_01.json
+ create mode 100644 results/aip_vtok/c1_followup/audits/replay_01.json
+ create mode 100644 results/aip_vtok/c1_followup/audits/train_01.json
+ create mode 100644 results/aip_vtok/c1_followup/audits/validate_01.json
+ create mode 100644 results/aip_vtok/c1_followup/baseline.csv
+ create mode 100644 results/aip_vtok/c1_followup/baseline.json
+ create mode 100644 results/aip_vtok/c1_followup/calibrate.log
+ create mode 100644 results/aip_vtok/c1_followup/calibration.csv
+ create mode 100644 results/aip_vtok/c1_followup/calibration.json
+ create mode 100644 results/aip_vtok/c1_followup/candidates.json
+ create mode 100644 results/aip_vtok/c1_followup/commands.jsonl
+ create mode 100644 results/aip_vtok/c1_followup/commit_code.log
+ create mode 100644 results/aip_vtok/c1_followup/coverage.json
+ create mode 100644 results/aip_vtok/c1_followup/dense_training/A2/seed1/step_0500.csv
+ create mode 100644 results/aip_vtok/c1_followup/dense_training/A2/seed1/step_0500.json
+ create mode 100644 results/aip_vtok/c1_followup/dense_training/A2/seed1/updates.json
+ create mode 100644 results/aip_vtok/c1_followup/dense_training/A3/seed1/step_0500.csv
+ create mode 100644 results/aip_vtok/c1_followup/dense_training/A3/seed1/step_0500.json
+ create mode 100644 results/aip_vtok/c1_followup/dense_training/A3/seed1/updates.json
+ create mode 100644 results/aip_vtok/c1_followup/mutations.json
+ create mode 100644 results/aip_vtok/c1_followup/mutations.log
+ create mode 100644 results/aip_vtok/c1_followup/phase1_gate.json
+ create mode 100644 results/aip_vtok/c1_followup/protected.json
+ create mode 100644 results/aip_vtok/c1_followup/protocol.json
+ create mode 100644 results/aip_vtok/c1_followup/quality.json
+ create mode 100644 results/aip_vtok/c1_followup/quality.log
+ create mode 100644 results/aip_vtok/c1_followup/regression.log
+ create mode 100644 results/aip_vtok/c1_followup/regression.xml
+ create mode 100644 results/aip_vtok/c1_followup/replay.log
+ create mode 100644 results/aip_vtok/c1_followup/report.log
+ create mode 100644 results/aip_vtok/c1_followup/report_red.log
+ create mode 100644 results/aip_vtok/c1_followup/ruff.log
+ create mode 100644 results/aip_vtok/c1_followup/sparse_gate.json
+ create mode 100644 results/aip_vtok/c1_followup/tdd_green.log
+ create mode 100644 results/aip_vtok/c1_followup/tdd_red.log
+ create mode 100644 results/aip_vtok/c1_followup/train.log
+ create mode 100644 results/aip_vtok/c1_followup/training_gate.json
+ create mode 100644 results/aip_vtok/c1_followup/unit.log
+ create mode 100644 results/aip_vtok/c1_followup/validate.log
+ create mode 100644 results/aip_vtok/c1_followup/validation.csv
+ create mode 100644 results/aip_vtok/c1_followup/validation.json
+ create mode 100644 results/aip_vtok/c1_followup/verification.json

@@ -70,6 +70,15 @@
 - 覆盖率、旧用例逐项比对和保护审计，退出码 0。
 
   `bash /tmp/c1_followup_quality.sh`
+- 从原始文件生成报告和工作记录，退出码 0。
+
+  `.venv-native/bin/python scripts/aip_vtok/run_c1_followup.py --stage report`
+- 实验数据与报告提交，退出码 0。
+
+  `git commit -m 'data(aip-vtok): publish C1 follow-up pilot stop' -m 'Record the 174-frame comparisons, both 500-step pilots, seal checks and the conditional sparse stop. Include the generated report, frame evidence and milestone checkpoints.' -m 'Verified exact historical MSE, 306 regression cases, eight contract mutations and zero sealed Test reads.'`
+- 推送实验分支，退出码 0。
+
+  `git push -u origin experiment/aip-vtok-c1-followup`
 
 ## 代码验证
 
