@@ -1,0 +1,17 @@
+{
+  "measured_inputs_sha256": {
+    "d0_a_pca_and_sensitivity": "fcb588a2746f761a5d3fbd48b5a7e3b97956410c722a445739338cccd3b9105f",
+    "d0_b_spatial_vs_channel": "8f919887613116ea91877bd4ac74a05174c36a3cd6597e4be0698b9b382b42d4",
+    "d0_c_oracle_free_topk": "6d252a7dfa813da8eb30392cfac8fcdfbbfe63a87d6dffd4ad0db98774865e84",
+    "d0_d_oracle_depth_prefix": "3421178e5ba3b894034675b719ce1247f50a2d511c39395829955867bfa531e5",
+    "d0_e_closed_loop_64f": "96fb1c0b09d7293cda055c7534b94ff9cdce65d194070102bb9a5a85f79780a5"
+  },
+  "crops_xyxy_1080p": [
+    800,
+    400,
+    1056,
+    656
+  ],
+  "crops": "unscaled 256 by 256 pixels, no contrast, gamma or color adjustment",
+  "uncertainty": "descriptive matched-frame summaries of fixed clips, no inference or interval"
+}

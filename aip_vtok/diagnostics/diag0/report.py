@@ -58,7 +58,7 @@ def introduction(meta, native):
         "# AIP-VTok Diag-0 冻结潜在空间诊断",
         f"基线提交 `{meta['identity']['base_commit']}`。QP{meta['identity']['qp']}、"
         f"GOP{meta['identity']['gop']}、原生 1920×1080，单卡 H100。"
-        "本仓库的 I 帧为 DMCI，沿用 Gate 0 的 256→128 白化 PCA；P 帧使用 `video_model_ld.DMC` 的单参考低延迟路径，"
+        "本仓库的 I 帧为 DMCI，沿用 Gate 0 的 256→128 白化 PCA。P 帧使用 `video_model_ld.DMC` 的单参考低延迟路径，"
         "对原生 128 通道做可逆逐通道标准化。所有探针沿用冻结的 I/P Decoder 与对齐权重。"
         "RGB 潜在梯度只用于闭式通道排序。",
         f"训练统计来自 {len(train)} 个训练视频的四帧窗口，共 {sum(p['frames'] for p in train)} 帧。"
@@ -74,7 +74,7 @@ def introduction(meta, native):
         f"约 **{native['kbit_per_frame']:.1f} kbit/帧**，"
         f"64 帧全局 PSNR **{native['summary'][PSNR]:.3f} dB**。"
         "来源为 Gate 0 在相同视频/GOP/QP 的封存 SPS/IP 字节测量。"
-        "LPIPS-Alex 与 DISTS 按整幅原生 1080p 计算，逐帧平均；色度为 Gate 1-Fix 的 BT.709 Cb/Cr 方差保留率、MSE 和均值绝对偏差。"
+        "LPIPS-Alex 与 DISTS 按整幅原生 1080p 计算并逐帧平均。色度为 Gate 1-Fix 的 BT.709 Cb/Cr 方差保留率、MSE 和均值绝对偏差。"
         "全局 PSNR 由帧均 MSE 计算，帧均 PSNR 先对每帧换算再平均。",
         f"Gate 0 `projector_w128` 运行前后 SHA256 均为 `{projector}`。"
         f"[配置、检查点 SHA256、完整性与拟合样本]({SOURCE}provenance.json)",
@@ -134,17 +134,25 @@ def capacity_section(b):
     oracle = select(json_at(FIX / "tokenizer_oracle.json")["rows"], **{"pass": 0})
     historic = sum(r["raw_mse_after_oracle"] for r in oracle) / sum(r["raw_mse_before"] for r in oracle)
     gap = r0[PSNR] - final[PSNR]
+    residual = block6["latent_mse"] / before
+    recovered = (lift["latent_mse"] - block6["latent_mse"]) / before
+    capacity_finding = (
+        "训练 PCA 回收了部分冻结 lift 的损失，剩余误差仍主要来自低秩块表示容量。"
+        if residual > recovered > 0 else "留出帧的块 PCA 与冻结 lift 排名反映拟合分布和仿射中心的共同影响。"
+    )
     summaries = [
         "## Q1 · 块容量、空间和 lift",
         f"同一 Fix-A 六帧上，冻结 lift 连续最小二乘保留 **{100 * lift['latent_mse'] / before:.2f}%** 原始能量，"
         f"封存结果为 **{100 * historic:.2f}%**。训练最优的 1/64 块 6D 保留 **{100 * block6['latent_mse'] / before:.2f}%**，"
         f"同口径少 **{100 * (lift['latent_mse'] - block6['latent_mse']) / before:.2f} 个百分点**。"
         f"以训练块均值中心化后，该 6D 在六帧上仍剩 **{100 * block6['latent_mse'] / block6['latent_energy_train_centered']:.2f}%**。"
-        "闭式 PCA 优化的是潜在平方误差，分布和中心都会改变跨视频残差。",
+        f"{capacity_finding}块 PCA 相对冻结 lift 的 RGB PSNR 变化为 **{block6[PSNR] - lift[PSNR]:+.3f} dB**。"
+        "闭式 PCA 优化的是潜在平方误差，此结果刻画训练最优基底迁移到六帧时的误差。",
         block_table(matched),
         f"同历史复测的完整缺口为 **{gap:.3f} dB**。下面沿同一序列逐项替换，损失列可加总到该缺口。"
         "第一个约束保持低分辨率网格并给每块 128 个系数，双线性 128C 与全分辨率通道截断的独立对照见上表。"
-        "替换 lift 的差额包含仿射中心，实际 Pass 0 的差额包含编码器、FSQ 和 Fusion。",
+        "替换 lift 的差额包含仿射中心，实际 Pass 0 的差额包含编码器、FSQ 和 Fusion。"
+        "后续阶段追回画质时，可使前一步损失占最终缺口的比例超过 100%。",
         attribution(matched),
     ]
     clean = select(b["summary"], history=CLEAN, cohort="all")
@@ -168,7 +176,7 @@ def rank_control(variants):
         rows = variants[order]
         rank = next((r["rank"] for r in rows if r[PSNR] >= base[PSNR] and r["lpips"] <= base["lpips"] and r["dists"] <= base["dists"]), None)
         summary.append(f"{ORDER_NAMES[order]} {rank if rank is not None else '未命中'}")
-    return "；".join(summary)
+    return "、".join(summary)
 
 
 def rank_table(variants):
@@ -190,6 +198,16 @@ def rank_shift(summaries, order):
     ) + "。"
 
 
+def sensitivity_findings(summaries):
+    scopes = ((CLEAN, "I", "R0 I"), (CLEAN, "P", "R0 P"), (LOW, "P", "Fix-A P"))
+    comparisons = []
+    for history, kind, label in scopes:
+        rows = rank_rows(summaries, history, kind)
+        variance, pca, native = (one(rows[order], rank=24) for order in (*ORDERS, NATIVE_ORDER))
+        comparisons.append(f"{label} 为 {pca[PSNR] - variance[PSNR]:+.3f} dB（原生敏感坐标 {native[PSNR]:.3f} dB）")
+    return "保留 24 个方向时，PCA 内改用 RGB 敏感排序对全局 PSNR 的影响如下。" + "，".join(comparisons) + "。"
+
+
 def sensitivity_section(a):
     checks = [r for r in a["rows"] if "full_rank_max_abs" in r]
     max_abs = max(r["full_rank_max_abs"] for r in checks)
@@ -199,7 +217,8 @@ def sensitivity_section(a):
         f"FP32 128D 往返覆盖 {len(checks)} 个帧与排序组合，最大潜在绝对误差 **{max_abs:.3e}**，"
         f"与 R0 的最大单帧 PSNR 差 **{psnr_delta:.3e} dB**。"
         "RGB 敏感度来自训练 RGB MSE 在 PCA 或原生坐标的梯度平方均值。"
-        "下面各数值按方差 PCA / RGB 敏感度 PCA / 原生 RGB 敏感度列出。"
+        "下面各数值按方差 PCA / RGB 敏感度 PCA / 原生 RGB 敏感度列出。",
+        sensitivity_findings(a["summary"]),
     ]
     for history, kind, label in ((CLEAN, "I", "R0 I"), (CLEAN, "P", "R0 P"), (LOW, "P", "Fix-A P510 历史 P")):
         variants = rank_rows(a["summary"], history, kind)
@@ -215,7 +234,7 @@ def sensitivity_section(a):
 SPARSE_KEYS = ("layout", "order", "version", "budget")
 
 
-def sparse_section(c, d):
+def sparse_section(c, d, e):
     rows = pool(select(c["rows"] + d["rows"], history=CLEAN), SPARSE_KEYS)
     quality, ledger = [], []
     for layout in (FREE, *LAYOUTS):
@@ -245,6 +264,7 @@ def sparse_section(c, d):
         "真实 FSQ 使用 `[8,8,8,5,5,5]` 和离散 `codes → ids → codes`，反量化使用固定 tanh 分箱中心的逆变换。"
         "逐组 tanh 饱和率和从计数池化的六维熵见 D0-C/D0-D JSON。",
         "质量列为连续 / FSQ，Δ 为 FSQ 全局 PSNR 减去连续值。所有值使用 R0 同上下文的 30 帧。",
+        sparse_findings(rows, e),
         markdown_table(("布局", "排序", "K", "PSNR / dB", "LPIPS", "DISTS", "潜在 MSE", "Δ / dB", "FSQ 饱和 %"), quality),
         "### D0-D 逐项字节账本",
         "原始 token 按 **2K B** 计费。共享深度每次消耗 4 个 Token，上限可能留空。"
@@ -257,6 +277,47 @@ def sparse_section(c, d):
         markdown_table(("布局", "排序", "K", "已用", "Token 原始 B", "Token 熵 B", "深度原始 B", "深度 zlib B",
                         "深度熵 B", "帧头 B", "总原始 B", "总参考 B", "bpp 原始", "bpp 熵参考", "侧信息原始 %", "侧信息熵参考 %"), ledger),
     ))
+
+
+def sparse_findings(rows, e):
+    selected = {row["layout"]: row["order"] for row in e["candidates"]}
+    shared_order = e["candidate_ranking"]["pure"][0]["order"]
+    findings = []
+    for layout in (FREE, *LAYOUTS):
+        order = selected.get(layout, shared_order)
+        group = select(rows, layout=layout, order=order)
+        low, high = (one(group, budget=k, version="fsq_quantized") for k in (510, 8192))
+        raw = one(group, budget=8192, version="continuous")
+        detail = (
+            f"两档原始侧信息分别为 {low['side_info_raw_pct']:.1f}% 和 {high['side_info_raw_pct']:.1f}%，"
+            f"熵参考侧信息分别为 {low['side_info_entropy_ref_pct']:.1f}% 和 {high['side_info_entropy_ref_pct']:.1f}%。"
+            if layout != FREE else "自由槽位的位置按原始坐标开销计费。"
+        )
+        findings.append(
+            f"- {NAMES[layout]}（{ORDER_NAMES[order]}序）FSQ 在 K510、K8192 分别达到 {low[PSNR]:.3f}、"
+            f"{high[PSNR]:.3f} dB，K8192 连续值为 {raw[PSNR]:.3f} dB。{detail}"
+        )
+    return "\n".join(findings)
+
+
+def reference_findings(e):
+    summary = e["summary"]
+    pure_layout = e["candidate_ranking"]["pure"][0]["layout"]
+    pure, hybrid, fix = (one(summary, layout=layout, budget=510) for layout in (pure_layout, HYBRID, FIX_A))
+    pure_late, hybrid_late = (r["late_48_63"][FRAME_PSNR] for r in (pure, hybrid))
+    pure_drop = pure_late - pure["early_p_01_16"][FRAME_PSNR]
+    quality = [one(summary, layout=HYBRID, budget=k) for k in (4096, 8192)]
+    gain = "、".join(f"{row[PSNR] - hybrid[PSNR]:+.3f}" for row in quality)
+    pure_p = select(e["rows"], layout=pure_layout, budget=510, frame_type="P")
+    rms = [row["reference_latent_rms"] for row in pure_p]
+    return (
+        f"纯前缀 P510 平均显式覆盖 **{pure['P']['reference_spatial_coverage_pct']:.2f}%** 的潜在位置。"
+        f"晚期帧均 PSNR 为 **{pure_late:.3f} dB**，较自身早期变化 **{pure_drop:+.3f} dB**，"
+        f"帧 31/63 的参考 RMS 为 **{pure['reference_latent_rms_31']:.3f}/{pure['reference_latent_rms_63']:.3f}**。"
+        f"其全程 P 参考 RMS 在 **{min(rms):.3f}–{max(rms):.3f}** 之间，闭环主要问题表现为持续低画质。"
+        f"Hybrid 晚期为 **{hybrid_late:.3f} dB**，Fix-A 同档为 **{fix['late_48_63'][FRAME_PSNR]:.3f} dB**。"
+        f"Hybrid 显示扩展到 K4096/K8192 后，全局 PSNR 相对 K510 的增量分别为 **{gain} dB**，沿用相同 P510 提交。"
+    )
 
 
 def closed_section(e):
@@ -272,6 +333,7 @@ def closed_section(e):
     for row in select(values, budget=510):
         p510.append((
             NAMES[row["layout"]], f"{row['P']['reference_tokens_used']:.0f}",
+            f"{row['P']['reference_spatial_coverage_pct']:.2f}",
             *numeric(row["P"], (PSNR, "lpips", "dists", "reference_latent_mse")),
             *numeric(row, ("reference_to_native_rms_31", "reference_to_native_rms_63")),
             f"{row['late_48_63'][FRAME_PSNR] - row['early_p_01_16'][FRAME_PSNR]:+.3f}",
@@ -288,10 +350,11 @@ def closed_section(e):
         "I 帧在低显示档仍接收 I2048 用于提交。",
         f"Fix-A K8192 复跑与封存逐帧记录的最大差为 RGB MSE `{replay['mse']:.3e}`、"
         f"参考 RMS `{replay['reference_latent_rms']:.3e}`、原生潜在 RMS `{replay['native_aligned_latent_rms']:.3e}`。",
+        reference_findings(e),
         markdown_table(("布局", "显示 K", "全局 PSNR", "帧均 PSNR", "LPIPS", "DISTS", "CbCr 方差保留 %", "CbCr MSE",
                         "CbCr 均值偏差", "48–63 帧均 PSNR", "RMS 帧 31", "RMS 帧 63"), display),
         "### P510 参考与晚期变化",
-        markdown_table(("布局", "P 实用参考 Token", "P 全局 PSNR", "P LPIPS", "P DISTS", "P 参考潜在 MSE",
+        markdown_table(("布局", "P 实用参考 Token", "P 位置覆盖 %", "P 全局 PSNR", "P LPIPS", "P DISTS", "P 参考潜在 MSE",
                         "RMS/同历史原生 帧 31", "RMS/同历史原生 帧 63", "晚期减早期 PSNR / dB"), p510),
         "早期为第 1–16 帧，晚期为第 48–63 帧。RMS 与参考潜在误差同时衡量幅度和失真，"
         "该长期比较覆盖一个验证视频。",
@@ -359,7 +422,7 @@ def decision_section(b, c, d, e):
              f"LPIPS 为 {best['lpips']:.3f} 对 {r0['lpips']:.3f}，DISTS 为 {best['dists']:.3f} 对 {r0['dists']:.3f}。"),
         ]),
         "选择依据包括 P510 的参考误差与晚期质量、K8192 的四项重建指标，以及同历史侧信息与参考 RMS 的实测代价。"
-        "候选选择与报告覆盖固定验证帧和一条 64 帧闭环，结论适用于本次诊断样本。",
+        "闭环视频也参加了同历史候选比较，长程结果来自这条 64 帧序列。",
     ))
     return report, {
         "scenario": decision,
@@ -405,7 +468,7 @@ def generate_report():
             write_json(OUTPUT / f"{PROBES[label]}.json", artifact)
     decision, machine = decision_section(b, c, d, e)
     report = "\n\n".join((
-        introduction(meta, native), capacity_section(b), sensitivity_section(a), sparse_section(c, d),
+        introduction(meta, native), capacity_section(b), sensitivity_section(a), sparse_section(c, d, e),
         closed_section(e), decision, source_section(),
     ))
     build_figures(a, b, c, d, e, native)

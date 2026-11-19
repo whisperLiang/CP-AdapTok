@@ -36,7 +36,9 @@ def export(fig, output, name):
         require_matplotlib_panel_alignment(fig, json_out=output / f"{name}.alignment.json", strict=True)
     fig.savefig(output / f"{name}.png", dpi=300)
     fig.savefig(output / f"{name}.pdf", metadata={"CreationDate": None, "ModDate": None})
-    fig.savefig(output / f"{name}.svg", metadata={"Date": None})
+    svg = output / f"{name}.svg"
+    fig.savefig(svg, metadata={"Date": None})
+    svg.write_bytes(b"\n".join(line.rstrip() for line in svg.read_bytes().splitlines()) + b"\n")
     plt.close(fig)
 
 
@@ -104,18 +106,23 @@ def rate_legend(fig):
     handles = [Line2D([], [], color=c) for c in COLORS[:2]]
     handles.extend(Line2D([], [], color="#393939", ls=ls) for ls in ("--", "-", ":"))
     fig.legend(handles, (*ORDER_LABELS[:2], "Continuous", "FSQ", "DMC-LD actual bytes"),
-               loc="outside upper center", ncol=5)
+               loc="upper center", bbox_to_anchor=(0.5, 0.99), ncol=5)
+
+
+def rate_subsets(artifact, depth):
+    if depth:
+        rows = pool(select(artifact["rows"], history=CLEAN), SPARSE_KEYS)
+        return [(LABELS[layout], select(rows, layout=layout)) for layout in LAYOUTS]
+    return [
+        (f"Free Top-K · {kind}", select(artifact["summary"], history=CLEAN, cohort="all", frame_type=kind))
+        for kind in ("I", "P")
+    ]
 
 
 def rate_figure(art, native, output, *, depth):
-    cols = len(LAYOUTS) if depth else 2
-    fig, axes = plt.subplots(2, cols, figsize=(10.4, 5.6), sharey="row", layout="constrained")
-    if depth:
-        pool_rows = pool(select(art["rows"], history=CLEAN), SPARSE_KEYS)
-        subsets = [(LABELS[layout], select(pool_rows, layout=layout)) for layout in LAYOUTS]
-    else:
-        subsets = [(f"Free Top-K · {kind}", select(art["summary"], history=CLEAN, cohort="all", frame_type=kind))
-                   for kind in ("I", "P")]
+    subsets = rate_subsets(art, depth)
+    fig, axes = plt.subplots(2, len(subsets), figsize=(10.4, 5.6), sharex="row", sharey="row")
+    fig.subplots_adjust(left=0.08, right=0.98, top=0.87, bottom=0.11, wspace=0.22, hspace=0.45)
     versions = (("continuous", "--"), ("fsq_quantized", "-"))
     baseline = native["bpp"] * 1920 * 1080 / 8000
     for col, (title, rows) in enumerate(subsets):

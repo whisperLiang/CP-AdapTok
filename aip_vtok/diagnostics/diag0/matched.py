@@ -140,20 +140,23 @@ class MatchedProbes:
         rec, _ = self.codec.backbone.decode_aligned(y, frame.context)
         return measure(self.suite, frame.rgb, rec, y, frame.y)
 
+    def check_full_rank(self, frame, fields, fit, order, direct):
+        y = full_rank_latent(fit, frame.y, order)
+        measured = self.measure(frame, y)
+        maximum = (y - frame.y).abs().max().item()
+        delta = measured["psnr"] - direct["psnr"]
+        if maximum >= 1e-5 or abs(delta) >= 1e-4:
+            raise RuntimeError(f"128D FP32 self-check failed: {fields}, {order}, {maximum}, {delta}")
+        self.a.add({
+            **fields, "order": order, "rank": 128, "variance_explained_train": 1.0, **measured,
+            "full_rank_max_abs": maximum, "full_rank_psnr_delta": delta,
+        })
+
     def ranks(self, frame, fields, fit, compare_blocks):
         direct = measure(self.suite, frame.rgb, frame.direct, frame.y, frame.y)
         self.a.add({**fields, "order": "r0", "rank": 128, **direct})
         for order in (*ORDERS, NATIVE_ORDER):
-            y = full_rank_latent(fit, frame.y, order)
-            measured = self.measure(frame, y)
-            maximum = (y - frame.y).abs().max().item()
-            delta = measured["psnr"] - direct["psnr"]
-            if maximum >= 1e-5 or abs(delta) >= 1e-4:
-                raise RuntimeError(f"128D FP32 self-check failed: {fields}, {order}, {maximum}, {delta}")
-            self.a.add({
-                **fields, "order": order, "rank": 128, "variance_explained_train": 1.0, **measured,
-                "full_rank_max_abs": maximum, "full_rank_psnr_delta": delta,
-            })
+            self.check_full_rank(frame, fields, fit, order, direct)
         for order in (*ORDERS, NATIVE_ORDER):
             for rank, y, retained in rank_latents(fit, frame.y, order):
                 measured = self.measure(frame, y)

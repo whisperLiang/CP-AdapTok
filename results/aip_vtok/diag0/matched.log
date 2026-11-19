@@ -1,0 +1,133 @@
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+Traceback (most recent call last):
+  File "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/run_diag0.py", line 13, in <module>
+    main()
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/run.py", line 190, in main
+    run(args.stage)
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/run.py", line 171, in run
+    metadata["validation_frame_ids"] = run_matched(validation, codec, suite, fits, videos)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/matched.py", line 211, in run_matched
+    clip = catalog.read(video, 0, length)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/io.py", line 56, in read
+    raise ValueError("frame request outside the declared split")
+ValueError: frame request outside the declared split
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+A-D r0_aligned DAVIS2017:blackswan frame=0 (1/10)
+A-D r0_aligned DAVIS2017:blackswan frame=1 (2/10)
+A-D r0_aligned DAVIS2017:blackswan frame=8 (3/10)
+A-D r0_aligned DAVIS2017:blackswan frame=16 (4/10)
+A-D r0_aligned DAVIS2017:blackswan frame=31 (5/10)
+A-D r0_aligned DAVIS2017:blackswan frame=32 (6/10)
+A-D r0_aligned DAVIS2017:blackswan frame=33 (7/10)
+A-D r0_aligned DAVIS2017:blackswan frame=40 (8/10)
+A-D r0_aligned DAVIS2017:blackswan frame=48 (9/10)
+A-D r0_aligned DAVIS2017:blackswan frame=49 (10/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=0 (1/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=1 (2/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=8 (3/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=16 (4/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=31 (5/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=32 (6/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=33 (7/10)
+Traceback (most recent call last):
+  File "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/run_diag0.py", line 13, in <module>
+    main()
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/run.py", line 199, in main
+    run(args.stage)
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/run.py", line 180, in run
+    metadata["validation_frame_ids"] = run_matched(validation, codec, suite, fits, videos)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/matched.py", line 217, in run_matched
+    probes.evaluate(frame)
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/matched.py", line 194, in evaluate
+    self.ranks(frame, fields, fit, shared)
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/matched.py", line 142, in ranks
+    raise RuntimeError(f"128D FP32 self-check failed: {fields}, {order}, {maximum}, {delta}")
+RuntimeError: 128D FP32 self-check failed: {'video': 'DAVIS2017:blackswan', 'frame': 40, 'frame_type': 'P', 'history': 'fix_a_low_reference', 'matched_six': False, 'split': 'validation'}, pca_variance, 1.049041748046875e-05, 0.0
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+A-D r0_aligned DAVIS2017:blackswan frame=0 (1/10)
+A-D r0_aligned DAVIS2017:blackswan frame=1 (2/10)
+A-D r0_aligned DAVIS2017:blackswan frame=8 (3/10)
+A-D r0_aligned DAVIS2017:blackswan frame=16 (4/10)
+A-D r0_aligned DAVIS2017:blackswan frame=31 (5/10)
+A-D r0_aligned DAVIS2017:blackswan frame=32 (6/10)
+A-D r0_aligned DAVIS2017:blackswan frame=33 (7/10)
+A-D r0_aligned DAVIS2017:blackswan frame=40 (8/10)
+A-D r0_aligned DAVIS2017:blackswan frame=48 (9/10)
+A-D r0_aligned DAVIS2017:blackswan frame=49 (10/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=0 (1/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=1 (2/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=8 (3/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=16 (4/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=31 (5/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=32 (6/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=33 (7/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=40 (8/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=48 (9/10)
+A-D fix_a_low_reference DAVIS2017:blackswan frame=49 (10/10)
+A-D r0_aligned DAVIS2017:car-roundabout frame=0 (1/10)
+A-D r0_aligned DAVIS2017:car-roundabout frame=1 (2/10)
+A-D r0_aligned DAVIS2017:car-roundabout frame=8 (3/10)
+A-D r0_aligned DAVIS2017:car-roundabout frame=16 (4/10)
+A-D r0_aligned DAVIS2017:car-roundabout frame=31 (5/10)
+A-D r0_aligned DAVIS2017:car-roundabout frame=32 (6/10)
+A-D r0_aligned DAVIS2017:car-roundabout frame=33 (7/10)
+A-D r0_aligned DAVIS2017:car-roundabout frame=40 (8/10)
+A-D r0_aligned DAVIS2017:car-roundabout frame=48 (9/10)
+A-D r0_aligned DAVIS2017:car-roundabout frame=63 (10/10)
+A-D fix_a_low_reference DAVIS2017:car-roundabout frame=0 (1/10)
+A-D fix_a_low_reference DAVIS2017:car-roundabout frame=1 (2/10)
+A-D fix_a_low_reference DAVIS2017:car-roundabout frame=8 (3/10)
+A-D fix_a_low_reference DAVIS2017:car-roundabout frame=16 (4/10)
+A-D fix_a_low_reference DAVIS2017:car-roundabout frame=31 (5/10)
+A-D fix_a_low_reference DAVIS2017:car-roundabout frame=32 (6/10)
+A-D fix_a_low_reference DAVIS2017:car-roundabout frame=33 (7/10)
+A-D fix_a_low_reference DAVIS2017:car-roundabout frame=40 (8/10)
+A-D fix_a_low_reference DAVIS2017:car-roundabout frame=48 (9/10)
+A-D fix_a_low_reference DAVIS2017:car-roundabout frame=63 (10/10)
+A-D r0_aligned DAVIS2017:dog frame=0 (1/10)
+A-D r0_aligned DAVIS2017:dog frame=1 (2/10)
+A-D r0_aligned DAVIS2017:dog frame=8 (3/10)
+A-D r0_aligned DAVIS2017:dog frame=16 (4/10)
+A-D r0_aligned DAVIS2017:dog frame=31 (5/10)
+A-D r0_aligned DAVIS2017:dog frame=32 (6/10)
+A-D r0_aligned DAVIS2017:dog frame=33 (7/10)
+A-D r0_aligned DAVIS2017:dog frame=40 (8/10)
+A-D r0_aligned DAVIS2017:dog frame=48 (9/10)
+A-D r0_aligned DAVIS2017:dog frame=59 (10/10)
+A-D fix_a_low_reference DAVIS2017:dog frame=0 (1/10)
+A-D fix_a_low_reference DAVIS2017:dog frame=1 (2/10)
+A-D fix_a_low_reference DAVIS2017:dog frame=8 (3/10)
+A-D fix_a_low_reference DAVIS2017:dog frame=16 (4/10)
+A-D fix_a_low_reference DAVIS2017:dog frame=31 (5/10)
+A-D fix_a_low_reference DAVIS2017:dog frame=32 (6/10)
+A-D fix_a_low_reference DAVIS2017:dog frame=33 (7/10)
+A-D fix_a_low_reference DAVIS2017:dog frame=40 (8/10)
+A-D fix_a_low_reference DAVIS2017:dog frame=48 (9/10)
+A-D fix_a_low_reference DAVIS2017:dog frame=59 (10/10)

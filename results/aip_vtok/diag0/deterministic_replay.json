@@ -1,0 +1,19 @@
+{
+  "train_plan_equal": true,
+  "train_tensors_bitwise_equal": 38,
+  "matched_video": "DAVIS2017:blackswan",
+  "matched_frames": [
+    0,
+    1
+  ],
+  "contexts": [
+    "r0_aligned",
+    "fix_a_low_reference"
+  ],
+  "matched_rows_exact": {
+    "A": 112,
+    "B": 50,
+    "C": 80,
+    "D": 240
+  }
+}

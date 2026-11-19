@@ -1,0 +1,24 @@
+{
+  "method": "Radon with combined measured line coverage, repo AST similarity, isolated behavior mutation tests",
+  "coverage": {
+    "covered_lines": 1305,
+    "num_statements": 1336,
+    "percent_covered": 96.55172413793103,
+    "percent_covered_display": "97",
+    "missing_lines": 31,
+    "excluded_lines": 0,
+    "percent_statements_covered": 97.67964071856288,
+    "percent_statements_covered_display": "98",
+    "num_branches": 288,
+    "num_partial_branches": 23,
+    "covered_branches": 263,
+    "missing_branches": 25,
+    "percent_branches_covered": 91.31944444444444,
+    "percent_branches_covered_display": "91"
+  },
+  "functions": 186,
+  "max_cyclomatic": 9,
+  "max_crap": 9.0,
+  "crap_at_least_10": [],
+  "duplicates_at_least_0_8": []
+}

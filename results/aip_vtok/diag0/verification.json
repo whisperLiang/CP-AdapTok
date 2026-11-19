@@ -1,0 +1,35 @@
+{
+  "overall_passed": true,
+  "regression": {
+    "legacy_same_test_ids": 235,
+    "diag0_tests": 16,
+    "total_passed": 251,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "matching_contexts": {
+    "D0-A": 60,
+    "D0-B_C_D": 36
+  },
+  "probe_row_counts": {
+    "d0_a_pca_and_sensitivity": 1680,
+    "d0_b_spatial_vs_channel": 414,
+    "d0_c_oracle_free_topk": 720,
+    "d0_d_oracle_depth_prefix": 2160,
+    "d0_e_closed_loop_64f": 960
+  },
+  "pca_full_rank": {
+    "checks": 180,
+    "max_abs_fp32": 3.814697265625e-06,
+    "max_psnr_delta_db": 1.0005941035728938e-06
+  },
+  "fix_a_lift_oracle_max_abs_mse_delta": 1.1920928955078125e-07,
+  "exact_reference_commits": 192,
+  "gate0_projector_sha256_before_after": "3b1bd715427bd177393e9552a99576e614ab7dd1ed307155129cf62896d5eb94",
+  "isolated_mutations_killed": 6,
+  "depth_ledger_and_per_group_fsq_counts": "verified",
+  "projector_and_protected_645_artifacts": "verified",
+  "test_pixels_read": 0,
+  "new_neural_network_updates": 0
+}

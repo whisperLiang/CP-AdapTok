@@ -17,7 +17,7 @@ from .io import FIX, OUTPUT, gpu_snapshot, json_at, read_probe, write_probe
 from .matched import CLEAN
 from .metrics import measure, summarize
 from .packets import COARSE, FULL, HYBRID, Transform
-from .sparse import BUDGETS, REF_BUDGET
+from .sparse import BUDGETS, GROUPS, REF_BUDGET
 
 FIX_A = "fix_a_caae55b"
 ISOLATION_BUDGETS = (2048, 8192)
@@ -80,6 +80,18 @@ def same_state(a, b):
     )
 
 
+def sparse_reference_usage(transform, packet):
+    slots = transform.positions(packet.support)
+    enhancement_positions = torch.unique_consecutive(slots // GROUPS).numel()
+    anchor_tokens = 0 if packet.anchor is None else len(packet.anchor.values)
+    coverage = 100 * enhancement_positions / (transform.shape[0] * transform.shape[1])
+    return {
+        "reference_tokens_used": len(slots) + anchor_tokens,
+        "reference_spatial_coverage_pct": 100.0 if anchor_tokens else coverage,
+        "reference_enhancement_positions": enhancement_positions,
+    }
+
+
 def sparse_frame(codec, fits, fsq, candidate, rgb, states, frame):
     low, high = (codec.backbone.begin_frame(state, frame) for state in states)
     target = codec.backbone.aligned_latent(rgb, low)
@@ -99,8 +111,8 @@ def sparse_frame(codec, fits, fsq, candidate, rgb, states, frame):
     low_budgets = tuple(k for k in BUDGETS if k <= ISOLATION_BUDGETS[0])
     displays, first = receive_frame(low, receive, render, codec.projector, low_budgets)
     higher, second = receive_frame(high, receive, render, codec.projector, (4096, ISOLATION_BUDGETS[1]))
-    used = len(reference.symbols.values) + (len(reference.anchor.values) if reference.anchor else 0)
-    return low.intra, target, {**displays, **higher}, (first, second), used
+    usage = sparse_reference_usage(transform, reference)
+    return low.intra, target, {**displays, **higher}, (first, second), usage
 
 
 def fix_frame(codec, rgb, states, frame):
@@ -114,7 +126,8 @@ def fix_frame(codec, rgb, states, frame):
         image, _, fused = session.render_frame(with_latents=True)
         displays[budget] = image, fused
     first, second = low.commit_reference_once(), high.commit_reference_once()
-    return low.context.intra, encoded.native_latent, displays, (first, second), low.reference_budget
+    usage = {"reference_tokens_used": low.reference_budget, "reference_spatial_coverage_pct": 100.0}
+    return low.context.intra, encoded.native_latent, displays, (first, second), usage
 
 
 def save_crops(layout, rgb, displays, frame):
@@ -126,11 +139,11 @@ def save_crops(layout, rgb, displays, frame):
         save_rgb(directory / f"f{frame:03d}_{layout}_{budget}.png", rec[..., y0:y1, x0:x1])
 
 
-def closed_rows(suite, candidate, rgb, intra, target, displays, state, used, frame):
+def closed_rows(suite, candidate, rgb, intra, target, displays, state, usage, frame):
     reference_rms = rms(state.latent)
     target_rms = rms(target)
     reference = {
-        "reference_budget": REF_BUDGET[intra], "reference_tokens_used": used,
+        "reference_budget": REF_BUDGET[intra], **usage,
         "reference_latent_rms": reference_rms, "native_aligned_latent_rms": target_rms,
         "reference_to_native_rms": reference_rms / target_rms,
         "reference_latent_mse": F.mse_loss(state.latent, target).item(),
@@ -154,13 +167,13 @@ def roll_candidate(candidate, clip, codec, suite, fits):
     for frame, original in enumerate(clip):
         rgb = rgb_frame(original)
         if layout == FIX_A:
-            intra, target, displays, next_states, used = fix_frame(codec, rgb, states, frame)
+            intra, target, displays, next_states, usage = fix_frame(codec, rgb, states, frame)
         else:
-            intra, target, displays, next_states, used = sparse_frame(codec, fits, fsq, candidate, rgb, states, frame)
+            intra, target, displays, next_states, usage = sparse_frame(codec, fits, fsq, candidate, rgb, states, frame)
         if not same_state(*next_states):
             raise RuntimeError(f"display budget changed the next reference: {layout}, frame {frame}")
         states = next_states
-        rows.extend(closed_rows(suite, candidate, rgb, intra, target, displays, states[0], used, frame))
+        rows.extend(closed_rows(suite, candidate, rgb, intra, target, displays, states[0], usage, frame))
         if frame in (0, 31, 32, 63):
             fingerprints[str(frame)] = states[0].fingerprint()
         if frame in (31, 63):

@@ -107,7 +107,7 @@ def write_probe(probe, rows, summary, **details):
     fields = list(dict.fromkeys(key for row in rows for key in row))
     temp = base.with_suffix(".csv.tmp")
     with temp.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     temp.replace(base.with_suffix(".csv"))

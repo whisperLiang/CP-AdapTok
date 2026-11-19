@@ -1,0 +1,74 @@
+[
+  {
+    "mutation": "missing_mean",
+    "selector": "test_separate_full_rank",
+    "killed": true,
+    "exitcode": 1,
+    "log": [
+      "test_diag0.py:39: AssertionError",
+      "=========================== short test summary info ============================",
+      "FAILED test_diag0.py::test_separate_full_rank_bases_restore_their_channel_means",
+      "1 failed, 15 deselected in 1.63s"
+    ]
+  },
+  {
+    "mutation": "validation_reaches_fit",
+    "selector": "test_fit_refuses",
+    "killed": true,
+    "exitcode": 1,
+    "log": [
+      "aip_vtok/diagnostics/diag0/fit.py:55: AttributeError",
+      "=========================== short test summary info ============================",
+      "FAILED test_diag0.py::test_fit_refuses_other_splits_before_requesting_any_pixels[validation]",
+      "1 failed, 1 passed, 14 deselected in 1.67s"
+    ]
+  },
+  {
+    "mutation": "coarse_cost_undercounted",
+    "selector": "test_depth_packets",
+    "killed": true,
+    "exitcode": 1,
+    "log": [
+      "test_diag0.py:89: AssertionError",
+      "=========================== short test summary info ============================",
+      "FAILED test_diag0.py::test_depth_packets_are_nested_prefixes_and_have_a_real_packed_map[2-expected1]",
+      "1 failed, 1 passed, 14 deselected in 1.52s"
+    ]
+  },
+  {
+    "mutation": "missing_prefix_groups",
+    "selector": "test_depth_packets",
+    "killed": true,
+    "exitcode": 1,
+    "log": [
+      "=========================== short test summary info ============================",
+      "FAILED test_diag0.py::test_depth_packets_are_nested_prefixes_and_have_a_real_packed_map[1-expected0]",
+      "FAILED test_diag0.py::test_depth_packets_are_nested_prefixes_and_have_a_real_packed_map[2-expected1]",
+      "2 failed, 14 deselected in 1.60s"
+    ]
+  },
+  {
+    "mutation": "continuous_fsq_payload",
+    "selector": "test_fsq_decoder",
+    "killed": true,
+    "exitcode": 1,
+    "log": [
+      "test_diag0.py:144: AssertionError",
+      "=========================== short test summary info ============================",
+      "FAILED test_diag0.py::test_fsq_decoder_uses_only_integer_ids - assert (1 == 1...",
+      "1 failed, 15 deselected in 1.51s"
+    ]
+  },
+  {
+    "mutation": "display_drives_commit",
+    "selector": "test_display_suffix",
+    "killed": true,
+    "exitcode": 1,
+    "log": [
+      "FAILED test_diag0.py::test_display_suffix_does_not_change_next_reference_state[0-True-2048]",
+      "FAILED test_diag0.py::test_display_suffix_does_not_change_next_reference_state[1-False-510]",
+      "FAILED test_diag0.py::test_display_suffix_does_not_change_next_reference_state[32-True-2048]",
+      "3 failed, 13 deselected in 1.52s"
+    ]
+  }
+]
