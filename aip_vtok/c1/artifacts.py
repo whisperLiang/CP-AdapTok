@@ -29,6 +29,8 @@ from aip_vtok.runtime import ROOT, file_hash, resolve, write_json
 from aip_vtok.training.determinism import configure_determinism
 from aip_vtok.training.fix import fix_settings
 
+from .scan import SHAPE, scan_schedule
+
 BASE = "3cb3641"
 OUTPUT = resolve("results/aip_vtok/c1")
 WEIGHTS = resolve("checkpoints/aip_vtok/c1")
@@ -131,4 +133,13 @@ def locked_artifacts(identity):
     artifact = torch.load(FITTED, map_location="cuda:0", weights_only=True)
     if artifact["identity"] != identity:
         raise RuntimeError("C1 training statistics have a different source identity")
+    validate_scan_lock(locked)
     return locked, artifact
+
+
+def validate_scan_lock(locked):
+    winner = locked["winner"]
+    weights = locked["s3_static_weights"][winner["p_coordinate"]]
+    expected = scan_schedule(winner["schedule"], weights=tuple(weights))
+    if tuple(locked["shape"]) != SHAPE or tuple(locked["slots"]) != expected:
+        raise ValueError("locked protocol table differs from the deterministic slot order")
