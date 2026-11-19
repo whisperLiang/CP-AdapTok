@@ -49,7 +49,7 @@ def s1_curves(summary):
     budget_axis(ax)
     ax.set_ylabel("Global PSNR (dB)")
     ax.set_title("Spatial observations and residual refinement", loc="left", fontweight="bold")
-    ax.legend(loc="lower right", ncols=2)
+    fig.legend(loc="outside lower center", ncols=4)
     save(fig, "s1_closed_rate_distortion")
 
 
@@ -65,7 +65,7 @@ def s2_gains(decisions):
     budget_axis(ax)
     ax.set_ylabel("Independent B3 − B2 PSNR (dB)")
     ax.set_title("Closed-loop gains of sparse recovery", loc="left", fontweight="bold")
-    ax.legend(loc="lower center", bbox_to_anchor=(0.5, -0.39), ncols=4)
+    fig.legend(loc="outside lower center", ncols=4)
     save(fig, "s2_closed_psnr_gain")
 
 
@@ -83,5 +83,5 @@ def gradient_cosines(diagnostics):
     ax.set_xlabel("Optimizer update")
     ax.set_ylabel("Trunk-gradient cosine similarity")
     ax.set_title("Agreement between reconstruction objectives", loc="left", fontweight="bold")
-    ax.legend(loc="lower center", bbox_to_anchor=(0.5, -0.45), ncols=3, fontsize=7)
+    fig.legend(loc="outside lower center", ncols=3, fontsize=7)
     save(fig, "s2_gradient_cosines")

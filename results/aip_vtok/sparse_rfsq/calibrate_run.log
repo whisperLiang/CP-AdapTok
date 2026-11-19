@@ -1,0 +1,20 @@
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+S1 Train holdout DAVIS2017:dog-agility 4 frames
+S1 Train holdout DAVIS2017:horsejump-low 4 frames
+S1 Train holdout DAVIS2017:mallard-water 4 frames
+S1 Train holdout DAVIS2017:planes-water 4 frames
+S1 Train holdout DAVIS2017:snowboard 4 frames
+S1 Train holdout DAVIS2017:surf 4 frames
+S1 Train grid SP-1 residual=0%
+S1 Train grid SP-2 residual=0%
+S1 Train grid SP-3 residual=20%
+S1 Train grid SP-3 residual=30%
+S1 Train grid SP-3 residual=50%
+S1 frozen on Train: SP-1, sigma=1.5, SP-3 residual=20%

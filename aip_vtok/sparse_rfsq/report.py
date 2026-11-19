@@ -23,6 +23,7 @@ from .protocol import (
     WORK_LOG,
 )
 from .receiver import B2
+from .scan import LEGACY
 
 DATA = "../results/aip_vtok/sparse_rfsq"
 SCOPE = {"validation": "Validation 174 帧", "horizon": "car-roundabout 64 帧"}
@@ -48,7 +49,7 @@ def metrics_row(point):
     return (arm(point), point["history"], point["budget"], s["frames"],
             f"{s['level1_symbols']:.0f}/{s['level2_symbols']:.0f}", f"{s['mse']:.7f}",
             f"{s['psnr_global_mse']:.3f}", f"{s['psnr_frame_mean']:.3f}",
-            f"{point.get('I', {}).get('psnr_global_mse', float('nan')):.3f}", f"{point['P']['psnr_global_mse']:.3f}",
+            f"{point['I']['psnr_global_mse']:.3f}", f"{point['P']['psnr_global_mse']:.3f}",
             f"{s['lpips']:.5f}", f"{s['dists']:.5f}", f"{s['cb_mse']:.3e}/{s['cr_mse']:.3e}",
             f"{s['cb_var_retention_pct']:.2f}/{s['cr_var_retention_pct']:.2f}",
             f"{s['cb_mean_abs_bias']:.3e}/{s['cr_mean_abs_bias']:.3e}")
@@ -111,9 +112,17 @@ def s1_comparison(summary):
             rows.append((mode, policy, *(f"{v:.3f}" for v in curve)))
     focus = table(("历史", "B2 扫描表", *BUDGETS), rows)
     gain = by_point["SP-1", CLOSED, 8192]["psnr_global_mse"] - by_point["SP-2", CLOSED, 8192]["psnr_global_mse"]
+    last = {r["strategy"]: r for r in summary["validation"]["efficiency"]
+            if r["method"] == B2 and r["history"] == CLOSED and r["upper"] == 8192}
+    space, precision = (last[name]["delta_mse_per_fixed_bit"] for name in ("SP-1", "SP-2"))
+    low_control = by_point[LEGACY, CLOSED, 510]["psnr_global_mse"]
+    low_sp1 = by_point["SP-1", CLOSED, 510]["psnr_global_mse"]
     return ["### 空间覆盖与精修", focus,
             f"在 174 帧独立闭环的 K8192，SP‑1 相对 SP‑2 的全局 PSNR 差为 **{gain:+.3f} dB**。"
-            "两表到 K4096 使用相同的一级槽位，最后 4096 个符号分别用于新空间观测和已到达槽位的残差。"]
+            "两表到 K4096 使用相同的一级槽位，最后 4096 个符号分别用于新空间观测和已到达槽位的残差。"
+            f"该段每新增固定负载 bit 的 RGB MSE 下降量依次为 {space:+.5e} 和 {precision:+.5e}。",
+            f"在同一独立闭环队列的 K510，封存 C1‑A1 为 {low_control:.3f} dB，SP‑1 为 {low_sp1:.3f} dB。"
+            "S2 以 Train 优胜策略本身的 B2 作为学习恢复的对照。"]
 
 
 def measurements(summary):
@@ -138,6 +147,20 @@ def delta_table(decisions):
                  ((label, SCOPE.get(scope, "晚期 16 帧"), r["history"], r["budget"], f"{r['psnr_gain_db']:+.3f}",
                    f"{r['mean_frame_psnr_gain_db']:+.3f}", f"{r['lpips_change']:+.5f}", f"{r['dists_change']:+.5f}")
                   for label, trial in decisions.items() for scope, rows in trial["gains"].items() for r in rows))
+
+
+def late_history_comparison(decisions):
+    rows = []
+    for variant, trial in decisions.items():
+        modes = {(r["history"], r["budget"]): r for r in trial["gains"]["late"]}
+        for k in BUDGETS:
+            fixed, closed = modes[FIXED, k], modes[CLOSED, k]
+            rows.append((variant, k, f"{fixed['psnr_gain_db']:+.3f}", f"{closed['psnr_gain_db']:+.3f}",
+                         f"{closed['psnr_gain_db'] - fixed['psnr_gain_db']:+.3f}"))
+    return ["### 闭环对晚期恢复增益的影响",
+            "晚期第 48–63 帧按各自口径先计算 B3 相对 B2 的全局 PSNR 增益，再比较两种历史的增益。"
+            "差值为负表示独立推进后晚期 PSNR 收益缩小。",
+            table(("权重", "K", "固定参考增益 dB", "独立闭环增益 dB", "独立减固定 dB"), rows)]
 
 
 def gradient_records(training):
@@ -216,6 +239,7 @@ def write_s2(lock):
     return [title, conclusion, scope if lock["winner"] == "SP-1" else "", detail, s2_limits(), gate_table(decisions),
             f"[逐帧 CSV]({DATA}/s2.csv) · [S2 门控]({DATA}/s2_gate.json) · [闭环增益]({DATA}/figures/s2_closed_psnr_gain.pdf)",
             "表中 Δ 等于 B3 减同协议、同预算的 B2。LPIPS 和 DISTS 的负值表示改善。", delta_table(decisions),
+            *late_history_comparison(decisions),
             *gradient_tables(diagnostics), diagnostic_interpretation(diagnostics),
             f"[W1 更新]({DATA}/W1_training.json) · [W2 更新]({DATA}/W2_training.json) · "
             f"[余弦轨迹]({DATA}/figures/s2_gradient_cosines.pdf)", *measurements(summaries(data["rows"]))]
@@ -252,6 +276,10 @@ def work_log(protocol, tests):
         log.extend(["## 联合回归", command_table([{"stage": "pytest", **tests}]),
                     f"{tests['counts']['regression']} 项旧用例及 {tests['counts']['new']} 项新增用例。"
                     f" [JUnit]({DATA}/regression.xml) · [日志]({DATA}/regression.log)"])
+    if (OUTPUT / "mutations.json").is_file():
+        mutations = json_at(OUTPUT / "mutations.json")
+        log.append(f"隔离变异检出 {sum(m['killed'] for m in mutations)}/{len(mutations)} 项。"
+                   f" [变异记录]({DATA}/mutations.json) · [复杂度与重复审计]({DATA}/quality.json)")
     WORK_LOG.write_text("\n\n".join(log) + "\n")
 
 
@@ -265,6 +293,8 @@ def generate():
              "`independent_closed` 和 `independent_closed_B3` 分别在各方法自己的发送端和接收端状态上运行同一逐帧参考预算。"
              "显示 K 与参考 K 独立。独立闭环若显示 K 小于参考 K，以 `max(K, Kref)` 记录维持参考所需负载。"
              "固定历史的共享参考负载另列。64 帧 `car-roundabout` 是 174 帧队列的一部分。",
+             "扫描表以 Halton 顺序铺设每组的全图锚点。锚点后的一级组配额来自独立 Train 校准的梯度能量。"
+             "二级槽位优先选择敏感度较高且已到达一级的组，组内沿用到达顺序。",
              f"Gate 0 投影器 SHA256 `{protected['controls']['projector']['sha256']}`。"
              f"保护清单覆盖 {protected['files']} 项，C1‑B 两颗种子均为 0 步，Test 图像读取数为 0。"
              f" [保护清单]({DATA}/protected.json) · [工作记录](aip_vtok_sparse_rfsq_work_log.md)"]

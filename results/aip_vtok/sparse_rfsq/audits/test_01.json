@@ -1,0 +1,24 @@
+{
+  "stage": "test",
+  "started": "2026-11-19T21:25:34+08:00",
+  "command": [
+    ".venv-native/bin/python",
+    "-u",
+    "scripts/aip_vtok/run_sparse_rfsq.py",
+    "--stage",
+    "test",
+    "--wait-for-gpu"
+  ],
+  "torch": "2.9.1+cu130",
+  "cuda": "13.0",
+  "gpu": {
+    "gpu": "NVIDIA H100 PCIe, GPU-d9c152fc-f054-180a-e06f-f6da82bd29a5, 580.159.03, 81559 MiB, 0 %",
+    "other_compute_pids": []
+  },
+  "test_gate_sha256": "f603aca4e6694a37920016ebc77dbda785354e94cd22db300251beb326eda681",
+  "integrity": {
+    "passed": true
+  },
+  "exit_code": 0,
+  "finished": "2026-11-19T21:27:41+08:00"
+}

@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/run_sparse_rfsq.py", line 16, in <module>
+    main(parser.parse_args().stage)
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/sparse_rfsq/experiment.py", line 146, in main
+    audit["gpu"] = gpu_snapshot()
+                   ^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/io.py", line 93, in gpu_snapshot
+    raise RuntimeError(f"requires an idle H100 GPU 0; observed {gpu}; competing PIDs {foreign}")
+RuntimeError: requires an idle H100 GPU 0; observed NVIDIA H100 PCIe, GPU-d9c152fc-f054-180a-e06f-f6da82bd29a5, 580.159.03, 81559 MiB, 0 %; competing PIDs ['3824103']

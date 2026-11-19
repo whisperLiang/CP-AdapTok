@@ -1,0 +1,27 @@
+{
+  "started": "2026-11-19T21:25:47+08:00",
+  "finished": "2026-11-19T21:27:39+08:00",
+  "command": [
+    "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "cp_adaptok/tests",
+    "tests/aip_vtok",
+    "--junitxml=results/aip_vtok/sparse_rfsq/regression.xml",
+    "--cov=aip_vtok.sparse_rfsq",
+    "--cov-branch",
+    "--cov-report="
+  ],
+  "exit_code": 0,
+  "counts": {
+    "total": 333,
+    "regression": 306,
+    "new": 27,
+    "failed_or_skipped": 0
+  },
+  "source_sha256": "a76ed1478ff542bfc5be1d251aa3522a82ed9be1a091dd4a898b207305cb4aab",
+  "junit_sha256": "9cab2bc99727599da6eea914545f2bd9f3d36e1128f099b701109cd3b70dce69"
+}
