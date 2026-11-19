@@ -1,0 +1,731 @@
+{
+  "seed": 1,
+  "rows": [
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 510,
+      "mse": 0.01022258959710598,
+      "direct_mse": 0.00019161867385264486,
+      "raw_latent_mse": 0.6177913546562195,
+      "fused_latent_mse": 1.5663955211639404,
+      "native_latent_rms": 0.7102254629135132,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.3475208282470703,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 1024,
+      "mse": 0.008778520859777927,
+      "direct_mse": 0.00019161867385264486,
+      "raw_latent_mse": 0.6322762370109558,
+      "fused_latent_mse": 1.6056478023529053,
+      "native_latent_rms": 0.7102254629135132,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.3475208282470703,
+        0.13891775906085968,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 2048,
+      "mse": 0.006824880372732878,
+      "direct_mse": 0.00019161867385264486,
+      "raw_latent_mse": 0.6541205048561096,
+      "fused_latent_mse": 1.6572442054748535,
+      "native_latent_rms": 0.7102254629135132,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.3475208282470703,
+        0.21906235814094543,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 4096,
+      "mse": 0.005966076161712408,
+      "direct_mse": 0.00019161867385264486,
+      "raw_latent_mse": 0.66811603307724,
+      "fused_latent_mse": 1.674292802810669,
+      "native_latent_rms": 0.7102254629135132,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.3475208282470703,
+        0.2365790456533432,
+        0.13591830432415009
+      ]
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 8192,
+      "mse": 0.005216249264776707,
+      "direct_mse": 0.00019161867385264486,
+      "raw_latent_mse": 0.6842929124832153,
+      "fused_latent_mse": 1.6714879274368286,
+      "native_latent_rms": 0.7102254629135132,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.3475208282470703,
+        0.2365790456533432,
+        0.23124006390571594
+      ]
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 510,
+      "mse": 0.008428297005593777,
+      "direct_mse": 0.00023341966152656823,
+      "raw_latent_mse": 1.3936225175857544,
+      "fused_latent_mse": 3.271730661392212,
+      "native_latent_rms": 1.0468748807907104,
+      "prediction_rms": 0.43125954270362854,
+      "pass_rms": [
+        0.41108012199401855,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 1024,
+      "mse": 0.007330337539315224,
+      "direct_mse": 0.00023341966152656823,
+      "raw_latent_mse": 1.4225225448608398,
+      "fused_latent_mse": 3.3838579654693604,
+      "native_latent_rms": 1.0468748807907104,
+      "prediction_rms": 0.43125954270362854,
+      "pass_rms": [
+        0.41108012199401855,
+        0.18281441926956177,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 2048,
+      "mse": 0.005814885720610619,
+      "direct_mse": 0.00023341966152656823,
+      "raw_latent_mse": 1.4622172117233276,
+      "fused_latent_mse": 3.519564390182495,
+      "native_latent_rms": 1.0468748807907104,
+      "prediction_rms": 0.43125954270362854,
+      "pass_rms": [
+        0.41108012199401855,
+        0.28302374482154846,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 4096,
+      "mse": 0.004845291376113892,
+      "direct_mse": 0.00023341966152656823,
+      "raw_latent_mse": 1.4877004623413086,
+      "fused_latent_mse": 3.573988199234009,
+      "native_latent_rms": 1.0468748807907104,
+      "prediction_rms": 0.43125954270362854,
+      "pass_rms": [
+        0.41108012199401855,
+        0.3020098805427551,
+        0.16609075665473938
+      ]
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 8192,
+      "mse": 0.0038974445778876543,
+      "direct_mse": 0.00023341966152656823,
+      "raw_latent_mse": 1.5223346948623657,
+      "fused_latent_mse": 3.6597959995269775,
+      "native_latent_rms": 1.0468748807907104,
+      "prediction_rms": 0.43125954270362854,
+      "pass_rms": [
+        0.41108012199401855,
+        0.3020098805427551,
+        0.2863841652870178
+      ]
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 510,
+      "mse": 0.019385313615202904,
+      "direct_mse": 0.00019116578914690763,
+      "raw_latent_mse": 1.0828557014465332,
+      "fused_latent_mse": 1.8695029020309448,
+      "native_latent_rms": 0.9919952154159546,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.3235516846179962,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 1024,
+      "mse": 0.017082521691918373,
+      "direct_mse": 0.00019116578914690763,
+      "raw_latent_mse": 1.1091421842575073,
+      "fused_latent_mse": 1.9392377138137817,
+      "native_latent_rms": 0.9919952154159546,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.3235516846179962,
+        0.17916527390480042,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 2048,
+      "mse": 0.014510640874505043,
+      "direct_mse": 0.00019116578914690763,
+      "raw_latent_mse": 1.1418635845184326,
+      "fused_latent_mse": 2.0321204662323,
+      "native_latent_rms": 0.9919952154159546,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.3235516846179962,
+        0.2685268223285675,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 4096,
+      "mse": 0.01291054766625166,
+      "direct_mse": 0.00019116578914690763,
+      "raw_latent_mse": 1.1568225622177124,
+      "fused_latent_mse": 2.061983823776245,
+      "native_latent_rms": 0.9919952154159546,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.3235516846179962,
+        0.27838563919067383,
+        0.1757413148880005
+      ]
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 8192,
+      "mse": 0.011186189018189907,
+      "direct_mse": 0.00019116578914690763,
+      "raw_latent_mse": 1.1789335012435913,
+      "fused_latent_mse": 2.09759259223938,
+      "native_latent_rms": 0.9919952154159546,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.3235516846179962,
+        0.27838563919067383,
+        0.2878013849258423
+      ]
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 510,
+      "mse": 0.019825782626867294,
+      "direct_mse": 0.0002751725260168314,
+      "raw_latent_mse": 1.9640719890594482,
+      "fused_latent_mse": 3.345705270767212,
+      "native_latent_rms": 1.301931619644165,
+      "prediction_rms": 0.4512368440628052,
+      "pass_rms": [
+        0.39358940720558167,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 1024,
+      "mse": 0.01583787612617016,
+      "direct_mse": 0.0002751725260168314,
+      "raw_latent_mse": 1.9979842901229858,
+      "fused_latent_mse": 3.482192039489746,
+      "native_latent_rms": 1.301931619644165,
+      "prediction_rms": 0.4512368440628052,
+      "pass_rms": [
+        0.39358940720558167,
+        0.2167162150144577,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 2048,
+      "mse": 0.011525778099894524,
+      "direct_mse": 0.0002751725260168314,
+      "raw_latent_mse": 2.044576644897461,
+      "fused_latent_mse": 3.6644487380981445,
+      "native_latent_rms": 1.301931619644165,
+      "prediction_rms": 0.4512368440628052,
+      "pass_rms": [
+        0.39358940720558167,
+        0.33613690733909607,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 4096,
+      "mse": 0.00958362314850092,
+      "direct_mse": 0.0002751725260168314,
+      "raw_latent_mse": 2.073075294494629,
+      "fused_latent_mse": 3.7552218437194824,
+      "native_latent_rms": 1.301931619644165,
+      "prediction_rms": 0.4512368440628052,
+      "pass_rms": [
+        0.39358940720558167,
+        0.35036709904670715,
+        0.1931992471218109
+      ]
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 8192,
+      "mse": 0.007090650033205748,
+      "direct_mse": 0.0002751725260168314,
+      "raw_latent_mse": 2.1104931831359863,
+      "fused_latent_mse": 3.8474490642547607,
+      "native_latent_rms": 1.301931619644165,
+      "prediction_rms": 0.4512368440628052,
+      "pass_rms": [
+        0.39358940720558167,
+        0.35036709904670715,
+        0.32184189558029175
+      ]
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 510,
+      "mse": 0.006142323836684227,
+      "direct_mse": 0.00019708606123458594,
+      "raw_latent_mse": 0.40644901990890503,
+      "fused_latent_mse": 1.1717219352722168,
+      "native_latent_rms": 0.574471652507782,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.2810449004173279,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 1024,
+      "mse": 0.005560900550335646,
+      "direct_mse": 0.00019708606123458594,
+      "raw_latent_mse": 0.41754621267318726,
+      "fused_latent_mse": 1.1924879550933838,
+      "native_latent_rms": 0.574471652507782,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.2810449004173279,
+        0.11163515597581863,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 2048,
+      "mse": 0.004618944600224495,
+      "direct_mse": 0.00019708606123458594,
+      "raw_latent_mse": 0.43729496002197266,
+      "fused_latent_mse": 1.2346127033233643,
+      "native_latent_rms": 0.574471652507782,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.2810449004173279,
+        0.18545378744602203,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 4096,
+      "mse": 0.0041162543930113316,
+      "direct_mse": 0.00019708606123458594,
+      "raw_latent_mse": 0.45129895210266113,
+      "fused_latent_mse": 1.259384274482727,
+      "native_latent_rms": 0.574471652507782,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.2810449004173279,
+        0.20443476736545563,
+        0.10376764833927155
+      ]
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "frame_type": "I",
+      "budget": 8192,
+      "mse": 0.003557374468073249,
+      "direct_mse": 0.00019708606123458594,
+      "raw_latent_mse": 0.46918943524360657,
+      "fused_latent_mse": 1.285042405128479,
+      "native_latent_rms": 0.574471652507782,
+      "prediction_rms": 0.0,
+      "pass_rms": [
+        0.2810449004173279,
+        0.20443476736545563,
+        0.1910960078239441
+      ]
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 510,
+      "mse": 0.008259177207946777,
+      "direct_mse": 0.00020009280706290156,
+      "raw_latent_mse": 1.2574750185012817,
+      "fused_latent_mse": 2.8659987449645996,
+      "native_latent_rms": 0.9906719923019409,
+      "prediction_rms": 0.3693627119064331,
+      "pass_rms": [
+        0.3773358166217804,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 1024,
+      "mse": 0.007232615724205971,
+      "direct_mse": 0.00020009280706290156,
+      "raw_latent_mse": 1.281267762184143,
+      "fused_latent_mse": 2.951728105545044,
+      "native_latent_rms": 0.9906719923019409,
+      "prediction_rms": 0.3693627119064331,
+      "pass_rms": [
+        0.3773358166217804,
+        0.17339524626731873,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 2048,
+      "mse": 0.005274157039821148,
+      "direct_mse": 0.00020009280706290156,
+      "raw_latent_mse": 1.3222355842590332,
+      "fused_latent_mse": 3.0787086486816406,
+      "native_latent_rms": 0.9906719923019409,
+      "prediction_rms": 0.3693627119064331,
+      "pass_rms": [
+        0.3773358166217804,
+        0.28680142760276794,
+        0.0
+      ]
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 4096,
+      "mse": 0.004324417561292648,
+      "direct_mse": 0.00020009280706290156,
+      "raw_latent_mse": 1.346692442893982,
+      "fused_latent_mse": 3.1454830169677734,
+      "native_latent_rms": 0.9906719923019409,
+      "prediction_rms": 0.3693627119064331,
+      "pass_rms": [
+        0.3773358166217804,
+        0.31180790066719055,
+        0.15341676771640778
+      ]
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 1,
+      "frame_type": "P",
+      "budget": 8192,
+      "mse": 0.0035087685100734234,
+      "direct_mse": 0.00020009280706290156,
+      "raw_latent_mse": 1.3766849040985107,
+      "fused_latent_mse": 3.231766700744629,
+      "native_latent_rms": 0.9906719923019409,
+      "prediction_rms": 0.3693627119064331,
+      "pass_rms": [
+        0.3773358166217804,
+        0.31180790066719055,
+        0.2703528106212616
+      ]
+    }
+  ],
+  "summary": {
+    "510": {
+      "frames": 6,
+      "mse": 0.012043913981566826,
+      "psnr_global_mse": 19.192323549082214,
+      "psnr_frame_mean": 19.62454429555557,
+      "matched_direct": {
+        "frames": 6,
+        "mse": 0.00021475925314007327,
+        "psnr_global_mse": 36.68048115035252,
+        "psnr_frame_mean": 36.720870172012376
+      },
+      "raw_latent_mse": 1.1203776001930237,
+      "fused_latent_mse": 2.3485091725985208
+    },
+    "1024": {
+      "frames": 6,
+      "mse": 0.010303795415287217,
+      "psnr_global_mse": 19.870027729359233,
+      "psnr_frame_mean": 20.257942065362776,
+      "matched_direct": {
+        "frames": 6,
+        "mse": 0.00021475925314007327,
+        "psnr_global_mse": 36.68048115035252,
+        "psnr_frame_mean": 36.720870172012376
+      },
+      "raw_latent_mse": 1.1434565385182698,
+      "fused_latent_mse": 2.4258585969607034
+    },
+    "2048": {
+      "frames": 6,
+      "mse": 0.008094881117964784,
+      "psnr_global_mse": 20.917895249453213,
+      "psnr_frame_mean": 21.318851857373506,
+      "matched_direct": {
+        "frames": 6,
+        "mse": 0.00021475925314007327,
+        "psnr_global_mse": 36.68048115035252,
+        "psnr_frame_mean": 36.720870172012376
+      },
+      "raw_latent_mse": 1.177051415046056,
+      "fused_latent_mse": 2.531116525332133
+    },
+    "4096": {
+      "frames": 6,
+      "mse": 0.006957701717813809,
+      "psnr_global_mse": 21.57534193737936,
+      "psnr_frame_mean": 21.99347847514071,
+      "matched_direct": {
+        "frames": 6,
+        "mse": 0.00021475925314007327,
+        "psnr_global_mse": 36.68048115035252,
+        "psnr_frame_mean": 36.720870172012376
+      },
+      "raw_latent_mse": 1.1972842911879222,
+      "fused_latent_mse": 2.5783923268318176
+    },
+    "8192": {
+      "frames": 6,
+      "mse": 0.005742779312034448,
+      "psnr_global_mse": 22.408778728024505,
+      "psnr_frame_mean": 22.827015350850143,
+      "matched_direct": {
+        "frames": 6,
+        "mse": 0.00021475925314007327,
+        "psnr_global_mse": 36.68048115035252,
+        "psnr_frame_mean": 36.720870172012376
+      },
+      "raw_latent_mse": 1.223654771844546,
+      "fused_latent_mse": 2.6321891148885093
+    }
+  },
+  "loss_gradients": [
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "budget": 4096,
+      "terms": {
+        "l1": {
+          "weighted_value": 0.05672126263380051,
+          "gradient_norm_at_aligned_latent": 0.0012825075536966324
+        },
+        "mse": {
+          "weighted_value": 0.005966076161712408,
+          "gradient_norm_at_aligned_latent": 0.00021067738998681307
+        },
+        "chroma": {
+          "weighted_value": 0.007289804518222809,
+          "gradient_norm_at_aligned_latent": 0.00014775997260585427
+        },
+        "lpips": {
+          "weighted_value": 0.055671095848083496,
+          "gradient_norm_at_aligned_latent": 0.004296498838812113
+        }
+      }
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 1,
+      "budget": 4096,
+      "terms": {
+        "l1": {
+          "weighted_value": 0.05024994909763336,
+          "gradient_norm_at_aligned_latent": 0.00045702935312874615
+        },
+        "mse": {
+          "weighted_value": 0.004845291376113892,
+          "gradient_norm_at_aligned_latent": 6.365508306771517e-05
+        },
+        "chroma": {
+          "weighted_value": 0.006628386676311493,
+          "gradient_norm_at_aligned_latent": 6.141674384707585e-05
+        },
+        "lpips": {
+          "weighted_value": 0.048775870352983475,
+          "gradient_norm_at_aligned_latent": 0.0014687698567286134
+        }
+      }
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "budget": 4096,
+      "terms": {
+        "l1": {
+          "weighted_value": 0.07577516883611679,
+          "gradient_norm_at_aligned_latent": 0.0013838851591572165
+        },
+        "mse": {
+          "weighted_value": 0.01291054766625166,
+          "gradient_norm_at_aligned_latent": 0.00031825131736695766
+        },
+        "chroma": {
+          "weighted_value": 0.006858713924884796,
+          "gradient_norm_at_aligned_latent": 0.00015841986169107258
+        },
+        "lpips": {
+          "weighted_value": 0.062018923461437225,
+          "gradient_norm_at_aligned_latent": 0.004326455295085907
+        }
+      }
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 1,
+      "budget": 4096,
+      "terms": {
+        "l1": {
+          "weighted_value": 0.06503348797559738,
+          "gradient_norm_at_aligned_latent": 0.000468697224278003
+        },
+        "mse": {
+          "weighted_value": 0.00958362314850092,
+          "gradient_norm_at_aligned_latent": 9.081712050829083e-05
+        },
+        "chroma": {
+          "weighted_value": 0.005971444770693779,
+          "gradient_norm_at_aligned_latent": 5.569654604187235e-05
+        },
+        "lpips": {
+          "weighted_value": 0.054870158433914185,
+          "gradient_norm_at_aligned_latent": 0.001581325544975698
+        }
+      }
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "budget": 4096,
+      "terms": {
+        "l1": {
+          "weighted_value": 0.050324998795986176,
+          "gradient_norm_at_aligned_latent": 0.0014771117130294442
+        },
+        "mse": {
+          "weighted_value": 0.0041162543930113316,
+          "gradient_norm_at_aligned_latent": 0.0002127841580659151
+        },
+        "chroma": {
+          "weighted_value": 0.004624930210411549,
+          "gradient_norm_at_aligned_latent": 0.00015740693197585642
+        },
+        "lpips": {
+          "weighted_value": 0.07152692973613739,
+          "gradient_norm_at_aligned_latent": 0.005404171999543905
+        }
+      }
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 1,
+      "budget": 4096,
+      "terms": {
+        "l1": {
+          "weighted_value": 0.05023732781410217,
+          "gradient_norm_at_aligned_latent": 0.0004258155822753906
+        },
+        "mse": {
+          "weighted_value": 0.004324417561292648,
+          "gradient_norm_at_aligned_latent": 6.212641892489046e-05
+        },
+        "chroma": {
+          "weighted_value": 0.004694150760769844,
+          "gradient_norm_at_aligned_latent": 5.464653440867551e-05
+        },
+        "lpips": {
+          "weighted_value": 0.06336832791566849,
+          "gradient_norm_at_aligned_latent": 0.0018277540802955627
+        }
+      }
+    }
+  ],
+  "checkpoint_unchanged": true,
+  "source": "first two validation frames per video; same history for direct and token controls",
+  "native_encoder_calls": 6,
+  "note": "native targets captured by hooks from the one encoder call; diagnostic RGB controls never commit"
+}

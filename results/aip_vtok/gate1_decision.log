@@ -1,0 +1,34 @@
+{
+  "passed": false,
+  "both_seeds_complete": true,
+  "checks": {
+    "1": {
+      "training_complete": true,
+      "exact_independent_loops": true,
+      "healthy_fsq": false,
+      "content_interventions": true,
+      "paired_174_frames": true,
+      "paired_monotonic_core_gains": false,
+      "paired_absolute_quality": false,
+      "paired_chroma": true,
+      "independent_174_frames": true,
+      "independent_monotonic_core_gains": false,
+      "independent_absolute_quality": false,
+      "independent_chroma": true
+    },
+    "2": {
+      "training_complete": true,
+      "exact_independent_loops": true,
+      "healthy_fsq": false,
+      "content_interventions": true,
+      "paired_174_frames": true,
+      "paired_monotonic_core_gains": false,
+      "paired_absolute_quality": false,
+      "paired_chroma": true,
+      "independent_174_frames": true,
+      "independent_monotonic_core_gains": false,
+      "independent_absolute_quality": false,
+      "independent_chroma": true
+    }
+  }
+}

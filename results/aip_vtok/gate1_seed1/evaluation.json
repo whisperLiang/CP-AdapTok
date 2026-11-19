@@ -1,0 +1,200 @@
+{
+  "seed": 1,
+  "training_steps": 1000,
+  "summary": {
+    "paired": {
+      "510": {
+        "frames": 174,
+        "mse": 0.12904351775737843,
+        "psnr_global_mse": 8.892638064855346,
+        "psnr_frame_mean": 11.212950482219549,
+        "lpips": 0.7660648983785476,
+        "dists": 0.5275836306056757,
+        "ms-ssim": 0.19439842768184756,
+        "chroma_retention": 48.380690763394036,
+        "chroma_mse": 0.02388707254247221,
+        "chroma_mean_abs_bias": 0.05365769654557901,
+        "source_chroma_variance": 0.0010169572452395678
+      },
+      "1024": {
+        "frames": 174,
+        "mse": 0.12781715980896877,
+        "psnr_global_mse": 8.934108370221423,
+        "psnr_frame_mean": 11.448752367275118,
+        "lpips": 0.7619101389728743,
+        "dists": 0.523370326250449,
+        "ms-ssim": 0.2087448321325683,
+        "chroma_retention": 48.118137921410046,
+        "chroma_mse": 0.023682311909281963,
+        "chroma_mean_abs_bias": 0.05334144424320595,
+        "source_chroma_variance": 0.0010169572452395678
+      },
+      "2048": {
+        "frames": 174,
+        "mse": 0.12560871554319158,
+        "psnr_global_mse": 9.009802253998252,
+        "psnr_frame_mean": 11.82721538039437,
+        "lpips": 0.7535735841455131,
+        "dists": 0.5193914843016657,
+        "ms-ssim": 0.23203288577497005,
+        "chroma_retention": 47.73966964702497,
+        "chroma_mse": 0.02333285145547031,
+        "chroma_mean_abs_bias": 0.05225540590392233,
+        "source_chroma_variance": 0.0010169572452395678
+      },
+      "4096": {
+        "frames": 174,
+        "mse": 0.12376423013776583,
+        "psnr_global_mse": 9.074048553034087,
+        "psnr_frame_mean": 12.10692592052792,
+        "lpips": 0.7468154116951186,
+        "dists": 0.513557620432185,
+        "ms-ssim": 0.2515974201733011,
+        "chroma_retention": 47.5083719957834,
+        "chroma_mse": 0.023155619543354863,
+        "chroma_mean_abs_bias": 0.05167661448967397,
+        "source_chroma_variance": 0.0010169572452395678
+      },
+      "8192": {
+        "frames": 174,
+        "mse": 0.12149187984432083,
+        "psnr_global_mse": 9.154527480463498,
+        "psnr_frame_mean": 12.549673593992337,
+        "lpips": 0.7369803813682205,
+        "dists": 0.5059061160032776,
+        "ms-ssim": 0.2826580531124411,
+        "chroma_retention": 47.00969325776758,
+        "chroma_mse": 0.02307633779399885,
+        "chroma_mean_abs_bias": 0.05269282083522164,
+        "source_chroma_variance": 0.0010169572452395678
+      }
+    },
+    "independent": {
+      "510": {
+        "frames": 174,
+        "mse": 0.12904351775737843,
+        "psnr_global_mse": 8.892638064855346,
+        "psnr_frame_mean": 11.212950482219549,
+        "lpips": 0.7660648983785476,
+        "dists": 0.5275836306056757,
+        "ms-ssim": 0.19439842768184756,
+        "chroma_retention": 48.380690763394036,
+        "chroma_mse": 0.02388707254247221,
+        "chroma_mean_abs_bias": 0.05365769654557901,
+        "source_chroma_variance": 0.0010169572452395678
+      },
+      "1024": {
+        "frames": 174,
+        "mse": 0.12781715980896877,
+        "psnr_global_mse": 8.934108370221423,
+        "psnr_frame_mean": 11.448752367275118,
+        "lpips": 0.7619101389728743,
+        "dists": 0.523370326250449,
+        "ms-ssim": 0.2087448321325683,
+        "chroma_retention": 48.118137921410046,
+        "chroma_mse": 0.023682311909281963,
+        "chroma_mean_abs_bias": 0.05334144424320595,
+        "source_chroma_variance": 0.0010169572452395678
+      },
+      "2048": {
+        "frames": 174,
+        "mse": 0.12560871554319158,
+        "psnr_global_mse": 9.009802253998252,
+        "psnr_frame_mean": 11.82721538039437,
+        "lpips": 0.7535735841455131,
+        "dists": 0.5193914843016657,
+        "ms-ssim": 0.23203288577497005,
+        "chroma_retention": 47.73966964702497,
+        "chroma_mse": 0.02333285145547031,
+        "chroma_mean_abs_bias": 0.05225540590392233,
+        "source_chroma_variance": 0.0010169572452395678
+      },
+      "4096": {
+        "frames": 174,
+        "mse": 0.12376423013776583,
+        "psnr_global_mse": 9.074048553034087,
+        "psnr_frame_mean": 12.10692592052792,
+        "lpips": 0.7468154116951186,
+        "dists": 0.513557620432185,
+        "ms-ssim": 0.2515974201733011,
+        "chroma_retention": 47.5083719957834,
+        "chroma_mse": 0.023155619543354863,
+        "chroma_mean_abs_bias": 0.05167661448967397,
+        "source_chroma_variance": 0.0010169572452395678
+      },
+      "8192": {
+        "frames": 174,
+        "mse": 0.12149187984432083,
+        "psnr_global_mse": 9.154527480463498,
+        "psnr_frame_mean": 12.549673593992337,
+        "lpips": 0.7369803813682205,
+        "dists": 0.5059061160032776,
+        "ms-ssim": 0.2826580531124411,
+        "chroma_retention": 47.00969325776758,
+        "chroma_mse": 0.02307633779399885,
+        "chroma_mean_abs_bias": 0.05269282083522164,
+        "source_chroma_variance": 0.0010169572452395678
+      }
+    }
+  },
+  "health_summary": {
+    "0": {
+      "minimum_unique_ids": 2,
+      "minimum_id_entropy_bits": 0.20122909881409173,
+      "minimum_dimension_entropy_bits": -0.0
+    },
+    "1": {
+      "minimum_unique_ids": 4,
+      "minimum_id_entropy_bits": 0.21842093962754464,
+      "minimum_dimension_entropy_bits": -0.0
+    },
+    "2": {
+      "minimum_unique_ids": 12,
+      "minimum_id_entropy_bits": 0.9009168172294347,
+      "minimum_dimension_entropy_bits": -0.0
+    }
+  },
+  "intervention_summary": {
+    "pass1_shuffle": {
+      "mean_mse_increase": 0.004574396757654742,
+      "ci95_low": 0.0037333683382409313,
+      "ci95_high": 0.005186372683965601,
+      "independent_videos": 3,
+      "frames": 174
+    },
+    "pass1_cross_video": {
+      "mean_mse_increase": 0.005099602123502539,
+      "ci95_low": 0.004747610911726952,
+      "ci95_high": 0.005568829903495498,
+      "independent_videos": 3,
+      "frames": 174
+    },
+    "pass2_shuffle": {
+      "mean_mse_increase": 0.003947962019851224,
+      "ci95_low": 0.0034017387971592445,
+      "ci95_high": 0.00444976007565856,
+      "independent_videos": 3,
+      "frames": 174
+    },
+    "pass2_cross_video": {
+      "mean_mse_increase": 0.004143178418938381,
+      "ci95_low": 0.0038413528964156285,
+      "ci95_high": 0.004351080376654864,
+      "independent_videos": 3,
+      "frames": 174
+    }
+  },
+  "maximum_independent_rgb_error": 0.0,
+  "independent_ids_all_equal": true,
+  "manifest_hashes": {
+    "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
+    "validation": "8cca166ca7d1f6faf45cd6660b7074657164d2afa2fd14dec92d76f0cee25405",
+    "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
+  },
+  "checkpoint_sha256": "af5e49633b0433b47293f3214bdb67cb909cb67af6ffea8ef696501be98cbc66",
+  "real_bitstream": false,
+  "bpp": null,
+  "precision": "FP32",
+  "metric_reuse": "independent metrics reused only after exact full-RGB equality is checked",
+  "reference_policy": "I2048/P510; I renders below 2048 still receive reference prefix before commit"
+}

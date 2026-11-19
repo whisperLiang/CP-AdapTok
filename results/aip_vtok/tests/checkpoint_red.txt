@@ -1,0 +1,21 @@
+.F                                                                       [100%]
+=================================== FAILURES ===================================
+______ test_resume_rejects_frozen_weight_injection_before_mutating_model _______
+
+cpu_cuda_boundary = None
+
+    def test_resume_rejects_frozen_weight_injection_before_mutating_model(cpu_cuda_boundary):
+        model = SmallCodec()
+        optimizer = torch.optim.AdamW(model.predictor.parameters())
+        rng = RNGStreams(1)
+        artifact = checkpoint_artifact(0, model, optimizer, rng, [], {}, {})
+        artifact["model"]["backbone.weight"] = torch.zeros_like(model.backbone.weight)
+        before = model.backbone.weight.detach().clone()
+>       with pytest.raises(ValueError, match="trainable"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/aip_vtok/test_checkpoint_resume.py:69: Failed
+=========================== short test summary info ============================
+FAILED tests/aip_vtok/test_checkpoint_resume.py::test_resume_rejects_frozen_weight_injection_before_mutating_model
+1 failed, 1 passed in 2.32s

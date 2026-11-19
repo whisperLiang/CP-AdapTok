@@ -1,0 +1,36 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_append_only_updates_new_values_without_assembling_full_reference_canvas _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7b4c82551910>
+
+    @torch.no_grad()
+    def test_append_only_updates_new_values_without_assembling_full_reference_canvas(monkeypatch):
+        codec = AIPVTokCodec(HistoryOnlyBackbone(), LatentToRef(16), reference_i=15, reference_p=8)
+        prediction = torch.zeros(1, 128, 8, 16)
+        tokens = codec.tokenizer.encode(torch.randn_like(prediction), prediction)
+        expected = prefix_canvas(codec.tokenizer, tokens, prediction, 15, differentiable=False).latent()
+        session = codec.begin_frame(0, tokens.tiers, ReferenceState())
+    
+        def forbidden_full_canvas_read():
+            raise AssertionError("append must not assemble an entire latent canvas")
+    
+        monkeypatch.setattr(session.canvas, "latent", forbidden_full_canvas_read)
+        for offset in range(0, tokens.ids.shape[1], 7):
+>           session.append(tokens.ids[:, offset:min(offset + 7, tokens.ids.shape[1])], offset)
+
+tests/aip_vtok/test_append_complexity.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+aip_vtok/models/codec.py:56: in append
+    self.reference_latent = self.canvas.latent().clone()
+                            ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def forbidden_full_canvas_read():
+>       raise AssertionError("append must not assemble an entire latent canvas")
+E       AssertionError: append must not assemble an entire latent canvas
+
+tests/aip_vtok/test_append_complexity.py:24: AssertionError
+=========================== short test summary info ============================
+FAILED tests/aip_vtok/test_append_complexity.py::test_append_only_updates_new_values_without_assembling_full_reference_canvas
+1 failed in 1.46s

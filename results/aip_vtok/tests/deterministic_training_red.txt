@@ -1,0 +1,16 @@
+
+==================================== ERRORS ====================================
+________ ERROR collecting tests/aip_vtok/test_deterministic_training.py ________
+ImportError while importing test module '/home/whisperliang/CP-AdapTok/tests/aip_vtok/test_deterministic_training.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/aip_vtok/test_deterministic_training.py:4: in <module>
+    from aip_vtok.training.losses import native_global_view
+E   ImportError: cannot import name 'native_global_view' from 'aip_vtok.training.losses' (/home/whisperliang/CP-AdapTok/aip_vtok/training/losses.py)
+=========================== short test summary info ============================
+ERROR tests/aip_vtok/test_deterministic_training.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 1.27s

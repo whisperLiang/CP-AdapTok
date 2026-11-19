@@ -1,0 +1,131 @@
+{
+  "branch": "experiment/aip-vtok",
+  "gate0_passed": true,
+  "gate1_passed": false,
+  "gate2_status": "not_run_due_to_gate1_failure",
+  "gate3_status": "not_run_due_to_gate1_failure",
+  "regression_tests": {
+    "tests": 223,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "current_aip_tests": {
+    "tests": 52,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "protected_diff": "",
+  "official_weights_equal_to_start": {
+    "intra_checkpoint": true,
+    "ld_checkpoint": true
+  },
+  "checkpoints": {
+    "alignment.pt": {
+      "sha256": "d727cabf97ddea89381d063a795b8794fd4ff104ba0e0d4ff986f46d55f837cd",
+      "bytes": 269037
+    },
+    "projector_w128/latest.pt": {
+      "sha256": "3b1bd715427bd177393e9552a99576e614ab7dd1ed307155129cf62896d5eb94",
+      "bytes": 2088869
+    },
+    "gate1_smoke/latest.pt": {
+      "sha256": "980ae1b62139cdf786c2dba35e4b9fa7a6735109f4bebb2930f7eae5ab66db4c",
+      "bytes": 8464054
+    },
+    "gate1_seed1/latest.pt": {
+      "sha256": "af5e49633b0433b47293f3214bdb67cb909cb67af6ffea8ef696501be98cbc66",
+      "bytes": 9579382
+    },
+    "gate1_seed2/latest.pt": {
+      "sha256": "9da9efab22c0e75ec3ebd1b196bee1593d708638dfa2e77ec9ff946401a82ba3",
+      "bytes": 9579382
+    }
+  },
+  "gpu_resume": {
+    "source_step": 1000,
+    "maximum_parameter_error": 0.0,
+    "loss_error": 0.0,
+    "sample_plan_equal": true,
+    "four_rng_states_equal": true,
+    "checkpoint_unchanged": true,
+    "scope": "two temporary continuation updates; no saved-model changes",
+    "runtime": {
+      "deterministic_algorithms": true,
+      "cudnn_deterministic": true,
+      "cublas_workspace_config": ":4096:8"
+    },
+    "passed": true
+  },
+  "reference_cache": {
+    "all_64_frame_values_equal": true,
+    "summary_equal": true,
+    "note": "New O(delta K) reference scatter versus earlier full-canvas boundary snapshot; same checkpoint and input"
+  },
+  "seed2_recheck": {
+    "seed": 2,
+    "rows": 1740,
+    "all_csv_fields_equal": true,
+    "evaluation_json_equal": true,
+    "primary_session_exit_code": 143,
+    "primary_artifacts_completed_before_exit": true,
+    "scope": "same checkpoint, input, precision and algorithms; output directory redirected only"
+  },
+  "research_steps": {
+    "projector": 400,
+    "smoke": 200,
+    "seed1": 1000,
+    "seed2": 1000
+  },
+  "source_sha256": {
+    "aip_vtok/__init__.py": "93542223f9fabf313563cbf905123676071e0f0514ba43958a1897683ef58b94",
+    "aip_vtok/backbones/__init__.py": "cee17da30af5203f2de89be22e1d6847101ceba6ad1f78c27c19090e0c1bcb0e",
+    "aip_vtok/backbones/dcvc_aligned.py": "3a666cd2dfc25eca1aaac213292673a9883b25020702b31902d3a30b4c24f33b",
+    "aip_vtok/backbones/latent_to_ref.py": "6e2f6d8ac4605908d52b5c6dcebd5bf49a1d781067eb8155e6bbfbdcb01f1199",
+    "aip_vtok/backbones/temporal_predictor.py": "fb984cf9e0e971e76e304207e7f2ac0ca8d317f656194ffab677e0030f94702c",
+    "aip_vtok/decoder/__init__.py": "64815ae2bfa94a8a04035eb4e142db5f20d2cb36f61a49f7505b7d221a280bdb",
+    "aip_vtok/decoder/causal_state.py": "504d4ac2fd828eae5a67a92cb1d551a77796c26720428f017da81ecd05a6b464",
+    "aip_vtok/decoder/fusion_decoder.py": "73079f5f11f5c068a2fe4f48834f293b68eb0bab94f3a451fafec5eaebaf07df",
+    "aip_vtok/decoder/latent_canvas.py": "633274687c10884dfdc23f92b224a54a3e90d33e6bb9559a5db273ae998e3431",
+    "aip_vtok/evaluation/__init__.py": "4775e497145fc5e0eeb2dd25a7eb4f493c08cf1fcc1ae548220a2d2a6ea392c6",
+    "aip_vtok/evaluation/audit.py": "638b4041d1e7aa6bd502518e7ad5c6e3b1821ce30e368ef101a757673ca886de",
+    "aip_vtok/evaluation/benchmark.py": "9d0adf1dfd0426ae7aa730b87cba6d1fe5dade41d0d76e2308e06337dba020d7",
+    "aip_vtok/evaluation/diagnose.py": "7360208190afaab2b972c84fab09ff03bb2b205263e57f9eaf5bfce7053477de",
+    "aip_vtok/evaluation/evaluate.py": "fe80fcfa37aec5f1eb26805fa2b0c00d6c85012f9382d1b3cef693fb13539328",
+    "aip_vtok/evaluation/figures.py": "52da2a416367d58b8b36209424aa8b10eb4817298897d6c69bf31101bf95829c",
+    "aip_vtok/evaluation/formal.py": "cc19810694ab5ef0fe3dcf9af098b547d59937307ac17e50fadd67bff0a7eb0e",
+    "aip_vtok/evaluation/gate0.py": "2a774439dfa9e27d06dd73d0426e3f13b1a24bec488edfbb66a37246439b8706",
+    "aip_vtok/evaluation/gate1.py": "75c344cae7cff7c5516571958fd57c509392962ccd8303649cf5d178304f2c7e",
+    "aip_vtok/evaluation/gates.py": "37a1655c07c13969356e7b79ac6d82c8d5cae1d216d8dde6e48ddfbe3b5f3bd4",
+    "aip_vtok/evaluation/horizon.py": "31dcdecf982e0dd858cc2e5dadaf49183e87f9111b104fd0c3a4fe5b39b66734",
+    "aip_vtok/evaluation/report.py": "ac410bfc3c7d3eba2a2e005bd73db60ddf0f81f88eead65a0a2c39f84e544671",
+    "aip_vtok/evaluation/report_stage1.py": "3ac94f3c2f4a669eece3873ea18ba0a584d28571a8b7d64865e705ba45a01eb7",
+    "aip_vtok/evaluation/smoke.py": "d4bd2f3ab64f931d2936f995d5f94ff6c25ab198209781aee289505b10be0cd0",
+    "aip_vtok/models/__init__.py": "9b2076d4e4f44a08189ebd95a30dd82e304f73e1c5003802a31eb828c5681080",
+    "aip_vtok/models/codec.py": "38d7a756cfacd86683c892fcfcd574ed5eb79963c3ca1a262cdea1f9a3bfb6cf",
+    "aip_vtok/runtime.py": "5b1e65ac76485d9c6bf6b786b3eb0f55907d334cba79892d66b7bca762a90976",
+    "aip_vtok/tokenizer/__init__.py": "81e12e395cf7fb9d39345b061ee6a46e316976ca4da149e6e422b0bb0eaffe2f",
+    "aip_vtok/tokenizer/fsq.py": "963236dc703098bc60e0021b2ae3ec080a33678dcf4238b51b6dbbbea9fe28a0",
+    "aip_vtok/tokenizer/halton.py": "fd377aceddf7c05ad72b2fd1f133d13d205d0a54829323505485618c3d7ef9cc",
+    "aip_vtok/tokenizer/residual_tokenizer.py": "71bd3e351f41f0229c00ddc102626b457eac4d1c9f2b0aa7eeeeb1b5279ca96f",
+    "aip_vtok/tokenizer/tier_map.py": "e5f993d09b50c5ba0bd1d3472a697dd636f31ff2bdf2699cd888fb6ea4f0bc98",
+    "aip_vtok/training/__init__.py": "9c38cb5620074b58f6752163336687b0a46a5f0ccca97ee94b3c7967302f4788",
+    "aip_vtok/training/budgets.py": "104e1bee564298ccaf8017ca22eb07ea91fb8ed19c24afd1834bdce0087fd8c5",
+    "aip_vtok/training/checkpoint.py": "b55598f5c5cd4e1c9ed9c320ff6c1dbfa152cba22e691e85987b012142c04cbc",
+    "aip_vtok/training/components.py": "ff3278a9826a3cb844edd35ef32b9c7ae7ff2dad7ae7550043d5bac896e04714",
+    "aip_vtok/training/data.py": "701c83640281d69e8eff7ca758d746bd833107d1330f31c5a462c7d2271d0955",
+    "aip_vtok/training/determinism.py": "ea822fe360ce9a0acdeb04103e640fbbe02506882a0d44400ac87bb21671d64a",
+    "aip_vtok/training/diagnostics.py": "ae9098b2d12bb8a770b1fd59a9a7a08a17ceedc7e653528eabf35c7241db7289",
+    "aip_vtok/training/formal.py": "8d0f064a2ec2cc381e24df16ab6f22e442a669d1447517cec44cc4d1ab2367c1",
+    "aip_vtok/training/losses.py": "112d26f58a4c341712a0802dfde7bc1acd19f09f924f6df91bc133a57a481499",
+    "aip_vtok/training/paired_step.py": "10b0f5eefcd723efe684aa1035cb3c794427006bfadae034bfa0f4964634c9a2",
+    "aip_vtok/training/prefix.py": "18c3a1aeef223a76d92e15ddbcc5c832d7883ec73909f472b891d41ad04c058a",
+    "aip_vtok/training/smoke.py": "45f7d6f1e38b9734dfd2c0d7bae03efd2259502db4b1bcfede20886ac4645021",
+    "aip_vtok/training/trainer.py": "edacea573b83a18cc748e42cbe78be7e51375c07fcaa9a517019ea694787f068",
+    "configs/aip_vtok/gate0.yaml": "76d63cd37d4c4325702833dded3b739df3921fc3ce088d286a90660066b2c68b",
+    "configs/aip_vtok/gate1.yaml": "05ac05f70c56d61d0c9c6150a856cee461cd56ab196d16e00b40ce8b68995169",
+    "configs/aip_vtok/gate1_smoke.yaml": "cdab9485ab66eee9f5bbb8b1d190eb9bfeb5d7190b6c978759dba2be6a80310e",
+    "pyproject.toml": "748e53fcc535e4c95c7641ef4541a69c16a3af5b524190f65703da92c0af74b7"
+  }
+}

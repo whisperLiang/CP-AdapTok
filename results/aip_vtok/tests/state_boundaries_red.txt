@@ -1,0 +1,50 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_________ test_reference_fingerprint_supports_bf16_without_losing_bits _________
+
+    def test_reference_fingerprint_supports_bf16_without_losing_bits():
+        feature = torch.ones(1, 192, 8, 8, dtype=torch.bfloat16)
+        state = FrameContext(0, True, None, None).commit_reference_once(feature)
+>       original = state.fingerprint()
+                   ^^^^^^^^^^^^^^^^^^^
+
+tests/aip_vtok/test_state_boundaries.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = ReferenceState(frame_id=0, feature=tensor([[[[1., 1., 1.,  ..., 1., 1., 1.],
+          [1., 1., 1.,  ..., 1., 1., 1.],...., 1.,  ..., 1., 1., 1.],
+          [1., 1., 1.,  ..., 1., 1., 1.]]]], dtype=torch.bfloat16), memory=None, latent=None)
+
+    def fingerprint(self):
+        digest = hashlib.sha256(str(self.frame_id).encode())
+        for tensor in (self.feature, self.memory, self.latent):
+            if tensor is not None:
+                digest.update(str(tuple(tensor.shape)).encode())
+>               digest.update(tensor.detach().cpu().contiguous().numpy().tobytes())
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               TypeError: Got unsupported ScalarType BFloat16
+
+aip_vtok/decoder/causal_state.py:30: TypeError
+_ test_commit_rejects_wrong_frame_type_channels_and_does_not_lock_on_bad_input _
+
+    def test_commit_rejects_wrong_frame_type_channels_and_does_not_lock_on_bad_input():
+        context = FrameContext(0, True, None, None)
+>       with pytest.raises(ValueError, match="reference"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/aip_vtok/test_state_boundaries.py:17: Failed
+______________ test_p_reference_requires_its_synchronized_memory _______________
+
+    def test_p_reference_requires_its_synchronized_memory():
+        context = FrameContext(1, False, None, None)
+>       with pytest.raises(ValueError, match="memory"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/aip_vtok/test_state_boundaries.py:25: Failed
+=========================== short test summary info ============================
+FAILED tests/aip_vtok/test_state_boundaries.py::test_reference_fingerprint_supports_bf16_without_losing_bits
+FAILED tests/aip_vtok/test_state_boundaries.py::test_commit_rejects_wrong_frame_type_channels_and_does_not_lock_on_bad_input
+FAILED tests/aip_vtok/test_state_boundaries.py::test_p_reference_requires_its_synchronized_memory
+3 failed in 1.31s

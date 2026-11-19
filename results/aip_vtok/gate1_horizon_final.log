@@ -1,0 +1,3 @@
+original_gop32 {'frames': 64, 'mse': 0.13545889368106145, 'psnr_global_mse': 8.681924756820587, 'psnr_frame_mean': 11.128069334250744} {'frames': 16, 'mse': 0.2192019233480096, 'psnr_global_mse': 6.5915563953181655, 'psnr_frame_mean': 6.591718802792746}
+zero_prediction_gop32 {'frames': 64, 'mse': 0.006729589156748261, 'psnr_global_mse': 21.720114487631783, 'psnr_frame_mean': 21.75248123292212} {'frames': 16, 'mse': 0.007429042656440288, 'psnr_global_mse': 21.29067147990859, 'psnr_frame_mean': 21.293173468816228}
+reset_gop4 {'frames': 64, 'mse': 0.007947132689878345, 'psnr_global_mse': 20.997895356932005, 'psnr_frame_mean': 21.127796393296087} {'frames': 16, 'mse': 0.009117726993281394, 'psnr_global_mse': 20.40113415762754, 'psnr_frame_mean': 20.514226111056093}

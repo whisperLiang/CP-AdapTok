@@ -1,0 +1,15 @@
+{
+  "source_step": 1000,
+  "maximum_parameter_error": 0.0,
+  "loss_error": 0.0,
+  "sample_plan_equal": true,
+  "four_rng_states_equal": true,
+  "checkpoint_unchanged": true,
+  "scope": "two temporary continuation updates; no saved-model changes",
+  "runtime": {
+    "deterministic_algorithms": true,
+    "cudnn_deterministic": true,
+    "cublas_workspace_config": ":4096:8"
+  },
+  "passed": true
+}

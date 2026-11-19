@@ -829,16 +829,15 @@
   },
   "later_gates": {
     "1": {
-      "status": "not_run",
-      "reason": "Gate 0 prerequisite"
+      "status": "Gate 1 熔断，Gate 2/3 未启动"
     },
     "2": {
       "status": "not_run",
-      "reason": "Gate 0 prerequisite"
+      "reason": "requires Gate 1 quality release"
     },
     "3": {
       "status": "not_run",
-      "reason": "Gate 0 prerequisite"
+      "reason": "requires Gate 2 release"
     }
   }
 }

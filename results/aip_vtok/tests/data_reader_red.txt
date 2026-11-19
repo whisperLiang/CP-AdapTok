@@ -1,0 +1,34 @@
+FF.                                                                      [100%]
+=================================== FAILURES ===================================
+__ test_reads_manifest_names_even_if_unlisted_image_is_inserted_in_directory ___
+
+tmp_path = PosixPath('/tmp/pytest-of-whisperliang/pytest-525/test_reads_manifest_names_even0')
+
+    def test_reads_manifest_names_even_if_unlisted_image_is_inserted_in_directory(tmp_path):
+        row = source(tmp_path)
+        Image.new("RGB", (16, 8), (0, 255, 0)).save(tmp_path / "00000_extra.png")
+        frame = read_window(row, 1, 1)[0]
+>       assert np.array_equal(frame[:, 0, 0].numpy(), [0, 0, 255])
+E       assert False
+E        +  where False = <function array_equal at 0x770e5bb822b0>(array([  0, 255,   0], dtype=uint8), [0, 0, 255])
+E        +    where <function array_equal at 0x770e5bb822b0> = np.array_equal
+E        +    and   array([  0, 255,   0], dtype=uint8) = <built-in method numpy of Tensor object at 0x770d761e96d0>()
+E        +      where <built-in method numpy of Tensor object at 0x770d761e96d0> = tensor([  0, 255,   0], dtype=torch.uint8).numpy
+
+tests/aip_vtok/test_data.py:23: AssertionError
+______ test_rejects_unhashed_frames_wrong_dimensions_and_source_mutation _______
+
+tmp_path = PosixPath('/tmp/pytest-of-whisperliang/pytest-525/test_rejects_unhashed_frames_w0')
+
+    def test_rejects_unhashed_frames_wrong_dimensions_and_source_mutation(tmp_path):
+        row = source(tmp_path)
+        row["frame_hashes"] = row["frame_hashes"][:1]
+>       with pytest.raises(ValueError, match="manifest"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/aip_vtok/test_data.py:29: Failed
+=========================== short test summary info ============================
+FAILED tests/aip_vtok/test_data.py::test_reads_manifest_names_even_if_unlisted_image_is_inserted_in_directory
+FAILED tests/aip_vtok/test_data.py::test_rejects_unhashed_frames_wrong_dimensions_and_source_mutation
+2 failed, 1 passed in 1.78s

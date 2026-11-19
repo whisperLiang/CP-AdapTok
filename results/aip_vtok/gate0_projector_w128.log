@@ -1,0 +1,46 @@
+projector width=128 step=1/400 loss=47.982407 elapsed_s=1.6
+projector width=128 step=10/400 loss=33.130470 elapsed_s=3.9
+projector width=128 step=20/400 loss=8.940519 elapsed_s=6.4
+projector width=128 step=30/400 loss=2.816817 elapsed_s=8.9
+projector width=128 step=40/400 loss=0.810505 elapsed_s=11.4
+projector width=128 step=50/400 loss=2.258921 elapsed_s=13.8
+projector width=128 step=60/400 loss=2.675830 elapsed_s=16.3
+projector width=128 step=70/400 loss=0.509937 elapsed_s=18.8
+projector width=128 step=80/400 loss=0.691845 elapsed_s=21.3
+projector width=128 step=90/400 loss=0.580150 elapsed_s=23.8
+projector width=128 step=100/400 loss=0.648457 elapsed_s=26.3
+projector width=128 step=110/400 loss=0.572930 elapsed_s=28.8
+projector width=128 step=120/400 loss=0.417392 elapsed_s=31.3
+projector width=128 step=130/400 loss=0.455133 elapsed_s=33.8
+projector width=128 step=140/400 loss=0.368714 elapsed_s=36.3
+projector width=128 step=150/400 loss=0.360337 elapsed_s=38.8
+projector width=128 step=160/400 loss=0.454768 elapsed_s=41.3
+projector width=128 step=170/400 loss=0.582458 elapsed_s=43.8
+projector width=128 step=180/400 loss=0.365694 elapsed_s=46.3
+projector width=128 step=190/400 loss=0.681102 elapsed_s=48.8
+projector width=128 step=200/400 loss=0.412728 elapsed_s=51.3
+projector width=128 step=210/400 loss=0.235469 elapsed_s=53.9
+projector width=128 step=220/400 loss=0.371236 elapsed_s=56.4
+projector width=128 step=230/400 loss=0.274829 elapsed_s=58.9
+projector width=128 step=240/400 loss=0.360255 elapsed_s=61.3
+projector width=128 step=250/400 loss=0.369859 elapsed_s=63.9
+projector width=128 step=260/400 loss=0.334511 elapsed_s=66.4
+projector width=128 step=270/400 loss=0.386439 elapsed_s=68.9
+projector width=128 step=280/400 loss=0.447655 elapsed_s=71.4
+projector width=128 step=290/400 loss=0.305789 elapsed_s=73.9
+projector width=128 step=300/400 loss=0.365855 elapsed_s=76.4
+projector width=128 step=310/400 loss=0.434787 elapsed_s=78.9
+projector width=128 step=320/400 loss=0.345963 elapsed_s=81.4
+projector width=128 step=330/400 loss=0.388548 elapsed_s=83.9
+projector width=128 step=340/400 loss=0.280625 elapsed_s=86.4
+projector width=128 step=350/400 loss=0.295910 elapsed_s=88.9
+projector width=128 step=360/400 loss=0.328279 elapsed_s=91.5
+projector width=128 step=370/400 loss=0.312842 elapsed_s=94.0
+projector width=128 step=380/400 loss=0.409934 elapsed_s=96.5
+projector width=128 step=390/400 loss=0.465149 elapsed_s=99.0
+projector width=128 step=400/400 loss=0.414349 elapsed_s=101.5
+projector_w128 frames=16 psnr=34.8292
+projector_w128 frames=32 psnr=34.9246
+projector_w128 frames=48 psnr=34.7035
+projector_w128 frames=64 psnr=34.4253
+{'frames': 64, 'mse': 0.00039949089568835916, 'psnr_global_mse': 33.984931137151, 'psnr_frame_mean': 34.124580599616124, 'late_48_63': {'frames': 16, 'mse': 0.0004504156440816587, 'psnr_global_mse': 33.46386533742082, 'psnr_frame_mean': 33.55269138122106}, 'I': {'frames': 2, 'mse': 0.00019088176486548036, 'psnr_global_mse': 37.19235558230543, 'psnr_frame_mean': 37.19236038999982}, 'P': {'frames': 62, 'mse': 0.0004062202224890972, 'psnr_global_mse': 33.9123846030882, 'psnr_frame_mean': 34.025619961216655}} {'I': {'mean_ms': 0.7846748775243759, 'p50_ms': 0.7851040065288544, 'p95_ms': 0.7892719894647598, 'fps': 1274.4131724402441}, 'P': {'mean_ms': 0.8446790385246277, 'p50_ms': 0.8445279896259308, 'p95_ms': 0.8484511792659759, 'fps': 1183.8816336044827}, 'maximum_mean_ms': 0.8446790385246277, 'measurement': 'FP32 eager channels_last; CUDA events; includes both output heads separately', 'codec_fps': None}

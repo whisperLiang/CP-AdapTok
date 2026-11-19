@@ -1,0 +1,16 @@
+{
+  "traces": [
+    "tests_current",
+    "engineering_final",
+    "horizon_final",
+    "replay_final",
+    "diagnose_final",
+    "benchmark_final",
+    "gate1_final",
+    "figures_final",
+    "report_final",
+    "audit_final",
+    "trainer_final"
+  ],
+  "policy": "only final-source traces; old canvas records omitted after final no-grad guard"
+}

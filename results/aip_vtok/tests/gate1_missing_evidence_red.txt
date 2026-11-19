@@ -1,0 +1,15 @@
+..F                                                                      [100%]
+=================================== FAILURES ===================================
+______ test_missing_modality_or_health_evidence_cannot_pass_via_empty_all ______
+
+    def test_missing_modality_or_health_evidence_cannot_pass_via_empty_all():
+        for field in ("health_summary", "intervention_summary"):
+            one, two = valid_seed(1), valid_seed(2)
+            two[field] = {}
+>           assert not assess_gate1([one, two], LIMITS)["passed"]
+E           assert not True
+
+tests/aip_vtok/test_gate1_acceptance.py:58: AssertionError
+=========================== short test summary info ============================
+FAILED tests/aip_vtok/test_gate1_acceptance.py::test_missing_modality_or_health_evidence_cannot_pass_via_empty_all
+1 failed, 2 passed in 1.63s

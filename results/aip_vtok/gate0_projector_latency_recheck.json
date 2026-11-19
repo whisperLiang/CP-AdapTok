@@ -1,0 +1,18 @@
+{
+  "I": {
+    "mean_ms": 0.7923411190509796,
+    "p50_ms": 0.7920640110969543,
+    "p95_ms": 0.7945616155862808,
+    "fps": 1262.0826762061045
+  },
+  "P": {
+    "mean_ms": 0.8415001624822617,
+    "p50_ms": 0.8411680161952972,
+    "p95_ms": 0.843455970287323,
+    "fps": 1188.3539000755445
+  },
+  "maximum_mean_ms": 0.8415001624822617,
+  "measurement": "FP32 eager channels_last; CUDA events; includes both output heads separately",
+  "codec_fps": null,
+  "exclusive_gpu_verified_before_start": true
+}

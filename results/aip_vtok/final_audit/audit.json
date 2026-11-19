@@ -1,0 +1,91 @@
+{
+  "date_local": "2026-11-19T13:19:38.751701+08:00",
+  "branch": "experiment/aip-vtok",
+  "base_commit": "630e8146ab8b10e0d7593e019d2c8d8782ed142f",
+  "initial_working_branch": "experiment/adaptok-hr-perceptual-recovery",
+  "git_status": "M aip_vtok/decoder/causal_state.py\n M aip_vtok/decoder/latent_canvas.py\n M aip_vtok/evaluation/formal.py\n M aip_vtok/evaluation/gate1.py\n M aip_vtok/evaluation/report.py\n M aip_vtok/evaluation/smoke.py\n M aip_vtok/models/codec.py\n M aip_vtok/training/data.py\n M aip_vtok/training/formal.py\n M aip_vtok/training/losses.py\n M aip_vtok/training/paired_step.py\n M aip_vtok/training/smoke.py\n M aip_vtok/training/trainer.py\n M docs/aip_vtok_report.md\n M docs/aip_vtok_work_log.md\n M pyproject.toml\n M results/aip_vtok/gate0_backbone_and_ref.json\n M results/aip_vtok/tests/mutations.json\n M tests/aip_vtok/test_canvas.py\n M tests/aip_vtok/test_gate1_acceptance.py\n M tests/aip_vtok/test_gpu_integration.py\n?? aip_vtok/evaluation/diagnose.py\n?? aip_vtok/evaluation/figures.py\n?? aip_vtok/evaluation/horizon.py\n?? aip_vtok/evaluation/report_stage1.py\n?? aip_vtok/training/budgets.py\n?? aip_vtok/training/checkpoint.py\n?? aip_vtok/training/components.py\n?? aip_vtok/training/determinism.py\n?? aip_vtok/training/diagnostics.py\n?? scripts/aip_vtok/engineering_checks.py\n?? scripts/aip_vtok/finalize.py\n?? scripts/aip_vtok/merge_coverage.py\n?? scripts/aip_vtok/recheck_evaluation.py\n?? scripts/aip_vtok/replay_checkpoint.py\n?? tests/aip_vtok/test_append_complexity.py\n?? tests/aip_vtok/test_checkpoint_resume.py\n?? tests/aip_vtok/test_chroma_diagnostics.py\n?? tests/aip_vtok/test_cli.py\n?? tests/aip_vtok/test_data.py\n?? tests/aip_vtok/test_deterministic_training.py\n?? tests/aip_vtok/test_gpu_temporal.py\n?? tests/aip_vtok/test_state_boundaries.py",
+  "official_source": "a72076cf6474f930a181aa78971de70d65289b49 third_party/AdapTok (heads/main)\n cbdae87a5445114cdc7f48816da63ea80bdeac40 third_party/DCVC (heads/main)",
+  "gpu": "name, memory.total [MiB], memory.used [MiB], utilization.gpu [%]\nNVIDIA H100 PCIe, 81559 MiB, 14 MiB, 0 %",
+  "gpu_processes": "pid, process_name, used_gpu_memory [MiB]",
+  "packages": {
+    "torch": "2.9.1+cu130",
+    "numpy": "2.5.4",
+    "pytest": "9.2.0",
+    "lpips": "0.1.4",
+    "DISTS-pytorch": "0.1",
+    "pytorch-msssim": "1.0.0"
+  },
+  "cuda": "13.0",
+  "manifest_hashes": {
+    "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
+    "validation": "8cca166ca7d1f6faf45cd6660b7074657164d2afa2fd14dec92d76f0cee25405",
+    "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
+  },
+  "native_exact_train": {
+    "videos": 35,
+    "frames": 2428
+  },
+  "native_exact_validation": {
+    "videos": 18,
+    "frames": 1161
+  },
+  "sealed_test_metadata_only": [
+    "DAVIS2017:cows",
+    "DAVIS2017:goat",
+    "DAVIS2017:parkour"
+  ],
+  "weights_sha256": {
+    "intra_checkpoint": "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302",
+    "ld_checkpoint": "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799"
+  },
+  "protected_diff": "",
+  "config": {
+    "seed": 1,
+    "device": "cuda:0",
+    "cpu_threads": 4,
+    "manifest_dir": "data/manifests",
+    "intra_checkpoint": "checkpoints/cvpr2026_image.pth.tar",
+    "ld_checkpoint": "checkpoints/cvpr2026_video_ld.pth.tar",
+    "output": "results/aip_vtok/final_audit",
+    "checkpoints": "checkpoints/aip_vtok",
+    "qp": 32,
+    "gop": 32,
+    "geometry": [
+      1080,
+      1920
+    ],
+    "calibration": {
+      "videos": [
+        "DAVIS2017:bear",
+        "DAVIS2017:bmx-bumps",
+        "DAVIS2017:breakdance-flare",
+        "DAVIS2017:bus",
+        "DAVIS2017:car-turn",
+        "DAVIS2017:dance-jump",
+        "DAVIS2017:dancing",
+        "DAVIS2017:hike"
+      ],
+      "frames_per_video": 4
+    },
+    "validation": {
+      "video": "DAVIS2017:car-roundabout",
+      "frames": 64
+    },
+    "projector_training": {
+      "widths": [
+        128,
+        256
+      ],
+      "steps": 400,
+      "sequence_length": 4,
+      "lr": 0.001,
+      "save_every": 50
+    },
+    "limits": {
+      "minimum_r0_psnr_db": 32.0,
+      "maximum_ref_drop_db": 0.5,
+      "maximum_projector_ms": 1.0
+    }
+  },
+  "scope": "Gate 0; no test pixels, no network transport, no ABR"
+}

@@ -1,0 +1,16 @@
+calibration DAVIS2017:bear
+calibration DAVIS2017:bmx-bumps
+calibration DAVIS2017:breakdance-flare
+calibration DAVIS2017:bus
+calibration DAVIS2017:car-turn
+calibration DAVIS2017:dance-jump
+calibration DAVIS2017:dancing
+calibration DAVIS2017:hike
+r0_native frames=16 psnr=34.8153
+r0_native frames=32 psnr=34.6932
+r0_native frames=48 psnr=34.5850
+r0_native frames=64 psnr=34.7504
+r0_aligned frames=16 psnr=34.8149
+r0_aligned frames=32 psnr=34.6932
+r0_aligned frames=48 psnr=34.5849
+r0_aligned frames=64 psnr=34.7503
