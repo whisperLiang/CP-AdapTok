@@ -1,0 +1,47 @@
+"""One writer and an explicit commit lock, without a hidden RGB reference chain."""
+
+import hashlib
+from dataclasses import dataclass
+
+import torch
+
+
+def owned_tensor(tensor):
+    return None if tensor is None else tensor.detach().clone()
+
+
+@dataclass(frozen=True)
+class ReferenceState:
+    frame_id: int = -1
+    feature: torch.Tensor | None = None
+    memory: torch.Tensor | None = None
+
+    def is_intra(self, frame_id, gop):
+        if frame_id != self.frame_id + 1:
+            raise ValueError("reference frame IDs must be consecutive")
+        return frame_id % gop == 0
+
+    def fingerprint(self):
+        digest = hashlib.sha256(str(self.frame_id).encode())
+        for tensor in (self.feature, self.memory):
+            if tensor is not None:
+                digest.update(str(tuple(tensor.shape)).encode())
+                digest.update(tensor.detach().cpu().contiguous().numpy().tobytes())
+        return digest.hexdigest()
+
+
+@dataclass
+class FrameContext:
+    frame_id: int
+    intra: bool
+    context: torch.Tensor | None
+    memory: torch.Tensor | None
+    committed: bool = False
+
+    def commit_reference_once(self, feature):
+        if self.committed:
+            raise RuntimeError("reference already committed for this frame")
+        self.committed = True
+        return ReferenceState(
+            self.frame_id, owned_tensor(feature), None if self.intra else owned_tensor(self.memory)
+        )

@@ -1,0 +1,175 @@
+{
+  "statistics": {
+    "retained_variance": 0.9999044547388362,
+    "samples": 261120,
+    "rank_limit": 128
+  },
+  "sources": [
+    {
+      "video": "DAVIS2017:bear",
+      "start": 0,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:bear",
+      "start": 26,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:bear",
+      "start": 53,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:bear",
+      "start": 80,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:bmx-bumps",
+      "start": 0,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:bmx-bumps",
+      "start": 29,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:bmx-bumps",
+      "start": 58,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:bmx-bumps",
+      "start": 88,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:breakdance-flare",
+      "start": 0,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:breakdance-flare",
+      "start": 23,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:breakdance-flare",
+      "start": 46,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:breakdance-flare",
+      "start": 69,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:bus",
+      "start": 0,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:bus",
+      "start": 26,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:bus",
+      "start": 52,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:bus",
+      "start": 78,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:car-turn",
+      "start": 0,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:car-turn",
+      "start": 26,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:car-turn",
+      "start": 52,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:car-turn",
+      "start": 78,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:dance-jump",
+      "start": 0,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:dance-jump",
+      "start": 19,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:dance-jump",
+      "start": 38,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:dance-jump",
+      "start": 58,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:dancing",
+      "start": 0,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:dancing",
+      "start": 20,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:dancing",
+      "start": 40,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:dancing",
+      "start": 60,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:hike",
+      "start": 0,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:hike",
+      "start": 26,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:hike",
+      "start": 52,
+      "frames": 2
+    },
+    {
+      "video": "DAVIS2017:hike",
+      "start": 78,
+      "frames": 2
+    }
+  ],
+  "manifest_hashes": {
+    "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
+    "validation": "8cca166ca7d1f6faf45cd6660b7074657164d2afa2fd14dec92d76f0cee25405",
+    "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
+  },
+  "qp": 32
+}

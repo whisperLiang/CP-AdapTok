@@ -1,0 +1,27 @@
+
+==================================== ERRORS ====================================
+_________ ERROR collecting tests/aip_vtok/test_training_invariants.py __________
+ImportError while importing test module '/home/whisperliang/CP-AdapTok/tests/aip_vtok/test_training_invariants.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/aip_vtok/test_training_invariants.py:3: in <module>
+    from aip_vtok.training.trainer import RNGStreams
+E   ModuleNotFoundError: No module named 'aip_vtok.training'
+___________ ERROR collecting tests/aip_vtok/test_gate0_acceptance.py ___________
+ImportError while importing test module '/home/whisperliang/CP-AdapTok/tests/aip_vtok/test_gate0_acceptance.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/aip_vtok/test_gate0_acceptance.py:1: in <module>
+    from aip_vtok.evaluation.gates import assess_gate0, distortion_summary
+E   ModuleNotFoundError: No module named 'aip_vtok.evaluation'
+=========================== short test summary info ============================
+ERROR tests/aip_vtok/test_training_invariants.py
+ERROR tests/aip_vtok/test_gate0_acceptance.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!
+2 errors in 1.30s

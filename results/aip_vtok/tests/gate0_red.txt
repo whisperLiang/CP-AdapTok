@@ -1,0 +1,38 @@
+
+==================================== ERRORS ====================================
+_______ ERROR collecting tests/aip_vtok/test_causal_state_and_canvas.py ________
+ImportError while importing test module '/home/whisperliang/CP-AdapTok/tests/aip_vtok/test_causal_state_and_canvas.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/aip_vtok/test_causal_state_and_canvas.py:6: in <module>
+    from aip_vtok.decoder.causal_state import FrameContext, ReferenceState
+E   ModuleNotFoundError: No module named 'aip_vtok'
+________ ERROR collecting tests/aip_vtok/test_geometry_and_alignment.py ________
+ImportError while importing test module '/home/whisperliang/CP-AdapTok/tests/aip_vtok/test_geometry_and_alignment.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/aip_vtok/test_geometry_and_alignment.py:6: in <module>
+    from aip_vtok.backbones.dcvc_aligned import ChannelAlignment, Geometry, continuous_intra_latent
+E   ModuleNotFoundError: No module named 'aip_vtok'
+______________ ERROR collecting tests/aip_vtok/test_projector.py _______________
+ImportError while importing test module '/home/whisperliang/CP-AdapTok/tests/aip_vtok/test_projector.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/aip_vtok/test_projector.py:4: in <module>
+    from aip_vtok.backbones.latent_to_ref import LatentToRef
+E   ModuleNotFoundError: No module named 'aip_vtok'
+=========================== short test summary info ============================
+ERROR tests/aip_vtok/test_causal_state_and_canvas.py
+ERROR tests/aip_vtok/test_geometry_and_alignment.py
+ERROR tests/aip_vtok/test_projector.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 3 errors during collection !!!!!!!!!!!!!!!!!!!!
+3 errors in 1.33s

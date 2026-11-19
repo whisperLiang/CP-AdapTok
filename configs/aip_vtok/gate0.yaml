@@ -1,0 +1,27 @@
+seed: 1
+device: cuda:0
+cpu_threads: 4
+manifest_dir: data/manifests
+intra_checkpoint: checkpoints/cvpr2026_image.pth.tar
+ld_checkpoint: checkpoints/cvpr2026_video_ld.pth.tar
+output: results/aip_vtok
+checkpoints: checkpoints/aip_vtok
+qp: 32
+gop: 32
+geometry: [1080, 1920]
+calibration:
+  videos: ["DAVIS2017:bear", "DAVIS2017:bmx-bumps", "DAVIS2017:breakdance-flare", "DAVIS2017:bus", "DAVIS2017:car-turn", "DAVIS2017:dance-jump", "DAVIS2017:dancing", "DAVIS2017:hike"]
+  frames_per_video: 4
+validation:
+  video: "DAVIS2017:car-roundabout"
+  frames: 64
+projector_training:
+  widths: [128, 256]
+  steps: 400
+  sequence_length: 4
+  lr: 0.001
+  save_every: 50
+limits:
+  minimum_r0_psnr_db: 32.0
+  maximum_ref_drop_db: 0.5
+  maximum_projector_ms: 1.0
