@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "E0": 0,
+    "E1": 49312,
+    "E2": 61600,
+    "E3": 91640,
+    "E4": 91560
+  },
+  "r48g_gaussian_input_added_parameters": 12288,
+  "rwide_sld_parameter_relative_difference": 0.0008737439930100481,
+  "widths": {
+    "E2": 48,
+    "E3": 88,
+    "E4": 64
+  },
+  "depthwise_blocks": {
+    "E2": 4,
+    "E3": 4,
+    "E4": {
+      "stem": 1,
+      "full": 2,
+      "coarse": 3,
+      "fusion": 1
+    }
+  },
+  "coarse_shape": [
+    34,
+    60
+  ],
+  "full_shape": [
+    68,
+    120
+  ],
+  "budget_embedding_channels": 8,
+  "prediction_only_channels": 104,
+  "step_zero": "zero residual heads, A2/SP-1 Gaussian B2",
+  "precision": {
+    "inference": "FP32",
+    "training_rgb_decoder": "BF16 autocast"
+  }
+}

@@ -157,7 +157,7 @@ def gpu_snapshot():
 
 
 @contextmanager
-def stage_audit(stage, *, metrics=True):
+def stage_audit(stage, *, metrics=True, load=True):
     OUTPUT.mkdir(parents=True, exist_ok=True)
     with (OUTPUT / ".run.lock").open("a") as handle:
         fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -168,9 +168,12 @@ def stage_audit(stage, *, metrics=True):
         run = None
         try:
             entry["gpu"] = gpu_snapshot()
-            run = open_run(metrics=metrics)
+            run = open_run(metrics=metrics) if load else None
             yield run
-            entry["integrity"] = run.verify_integrity()
+            if run is not None:
+                entry["integrity"] = run.verify_integrity()
+            else:
+                verify_tree()
             entry["exit_code"] = 0
         except BaseException as exc:
             entry.update(exit_code=1, error=f"{type(exc).__name__}: {exc}")

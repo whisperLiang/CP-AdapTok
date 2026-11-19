@@ -1,0 +1,58 @@
+{
+  "exit_code": 0,
+  "counts": {
+    "legacy": 333,
+    "new": 19,
+    "failed_or_skipped": 0,
+    "contracts": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "command": [
+    "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "cp_adaptok/tests",
+    "tests/aip_vtok",
+    "--junitxml=results/aip_vtok/sparse_decoder/phase1_junit.xml",
+    "--cov=aip_vtok.sparse_decoder",
+    "--cov-branch",
+    "--cov-report="
+  ],
+  "source_sha256": {
+    "aip_vtok/sparse_decoder/evaluation.py": "5fbd274a1268e1c5f95dd8b0a7e757ae99f83b48b2efc674d8165f7e1c219497",
+    "aip_vtok/sparse_decoder/models.py": "b3a9a681164a16e19737b6e9d44d62c73a6b1f993f295139f37df48d5909f0e3",
+    "aip_vtok/sparse_decoder/phase0.py": "54965a766bb81b265c20e91efb9e8be60905a6af82385a64dba699191da778e8",
+    "aip_vtok/sparse_decoder/phase1.py": "e8ad56aff8b39304166498267bd88aae7a1b9140b2947ff40c284a7aca97b4bf",
+    "aip_vtok/sparse_decoder/protocol.py": "f0e53fd71ed8e667b0bfacf9ac6be1e2b5dadaf510074880ce64aa6995d62bf0",
+    "tests/aip_vtok/test_sparse_decoder.py": "8c8f0a2fab2c55982f3b4e563432f83694b140e58d8d06a30aa2b13ad00f19bd"
+  },
+  "provenance_sha256": "57403f63f0a0ac1cc35be23f815ab687cb422052c3c2908e3f572f7fde6f7be9",
+  "phase0_outputs": {
+    "phase0_diagnostics.json": "1d1042abf42ae806539ee8520db2b042ccc7db77268843609187103f05d9f3b2",
+    "phase0_factorial.json": "b2efa74e5dd8e225d58898269f7d66363099fd2553dc156daa5fb57556c3434f",
+    "phase0_per_frame.csv": "fecd6c0d451d23a95af6ac24f523774391ea6ec370ac434e73e64c2858390dc9",
+    "phase0_k510.png": "f553ab59f5af2b2b69d41d7fc09f3c75aab9620f7cd74a0dc1d405086d076092",
+    "phase0_report.md": "24addd4168b361e1b952454276ac3875bf118848e8378726afcc15dc632012e9"
+  },
+  "junit_sha256": "35a3bc56959f1c7d163436e4b640744a7c8fe7ba5aebbdf197c5d46031679ee6",
+  "test_inputs_sha256": "fe3b83ba6b285e40ee011eeb7ff173fb467656997973a1a87e9166f4a9ff1916",
+  "architectures_sha256": "44ce60caba842af8f02775ca372ed34cf3f8193ba18410a1bd5accc5fa366cee"
+}
