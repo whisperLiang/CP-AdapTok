@@ -1,0 +1,30 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________ test_report_renders_unstarted_seed_and_final_steps ______________
+
+    def test_report_renders_unstarted_seed_and_final_steps():
+        from aip_vtok.c1_followup.report import render_actual_steps
+    
+>       lines = render_actual_steps({"candidates": {"A2": {
+            "steps": {"seed1": 500, "seed2": 0}, "pilot": {"gate": {"passed": False}},
+            "seed1_final": None, "seed2_final": None,
+        }}})
+
+tests/aip_vtok/test_c1_followup.py:376: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+aip_vtok/c1_followup/report.py:193: in render_actual_steps
+    [(arm, result["steps"]["seed1"], result["steps"]["seed2"],
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <dict_keyiterator object at 0x7ea8920dc400>
+
+>         *("通过" if result[key]["gate"]["passed"] else "未通过" if result[key] else "未启动"
+                    ^^^^^^^^^^^^^^^^^^^
+            for key in MILESTONES)) for arm, result in training.get("candidates", {}).items()],
+    )
+E   TypeError: 'NoneType' object is not subscriptable
+
+aip_vtok/c1_followup/report.py:194: TypeError
+=========================== short test summary info ============================
+FAILED tests/aip_vtok/test_c1_followup.py::test_report_renders_unstarted_seed_and_final_steps
+1 failed, 37 deselected in 3.20s

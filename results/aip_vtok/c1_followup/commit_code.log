@@ -1,0 +1,15 @@
+[experiment/aip-vtok-c1-followup d8d80c7] feat(aip-vtok): implement gated C1 follow-up
+ 13 files changed, 2523 insertions(+)
+ create mode 100644 aip_vtok/c1_followup/__init__.py
+ create mode 100644 aip_vtok/c1_followup/calibration.py
+ create mode 100644 aip_vtok/c1_followup/dense.py
+ create mode 100644 aip_vtok/c1_followup/experiment.py
+ create mode 100644 aip_vtok/c1_followup/gates.py
+ create mode 100644 aip_vtok/c1_followup/io.py
+ create mode 100644 aip_vtok/c1_followup/quantization.py
+ create mode 100644 aip_vtok/c1_followup/report.py
+ create mode 100644 aip_vtok/c1_followup/rollout.py
+ create mode 100644 aip_vtok/c1_followup/sparse.py
+ create mode 100644 aip_vtok/c1_followup/training.py
+ create mode 100755 scripts/aip_vtok/run_c1_followup.py
+ create mode 100644 tests/aip_vtok/test_c1_followup.py

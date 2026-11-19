@@ -1,0 +1,28 @@
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+Phase 2/3 updates: [('A2', {'seed1': 500, 'seed2': 0}), ('A3', {'seed1': 500, 'seed2': 0})], sparse release []
+c1b_followup started: False, released arms: []
+Traceback (most recent call last):
+  File "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/run_c1_followup.py", line 17, in <module>
+    main(parser.parse_args().stage)
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/experiment.py", line 286, in main
+    generate()
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/report.py", line 333, in generate
+    "## Phase 2 / 3 · 受控稠密训练", "", *render_training(raw("training_gate")),
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/report.py", line 210, in render_training
+    *render_actual_steps(training),
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/report.py", line 193, in render_actual_steps
+    [(arm, result["steps"]["seed1"], result["steps"]["seed2"],
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/report.py", line 194, in <genexpr>
+    *("通过" if result[key]["gate"]["passed"] else "未通过" if result[key] else "未启动"
+                ~~~~~~~~~~~^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable

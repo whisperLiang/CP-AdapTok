@@ -1,0 +1,35 @@
+{
+  "candidates": {
+    "A2": {
+      "passed": true,
+      "checks": {
+        "finite": true,
+        "psnr": true,
+        "lpips": true,
+        "dists": true
+      },
+      "psnr_gain_db": 0.5924003853733595,
+      "lpips_delta": -0.004622772849839307,
+      "dists_delta": -0.0013418982083770181
+    },
+    "A3": {
+      "passed": true,
+      "checks": {
+        "finite": true,
+        "psnr": true,
+        "lpips": true,
+        "dists": true
+      },
+      "psnr_gain_db": 3.165844976201946,
+      "lpips_delta": -0.04175234962811414,
+      "dists_delta": -0.012764984249383549
+    }
+  },
+  "released": [
+    "A2",
+    "A3"
+  ],
+  "candidates_sha256": "e3c93883fb9869aeaf04dc2a449430e5a956f754b6e2e4bd90b56d17698c9ce8",
+  "validation_sha256": "2e39733ade62575c31036815f1dd3a272a55c39b9a4a4837d67a6fb57a555f49",
+  "finished": "2026-11-19T19:16:04+08:00"
+}

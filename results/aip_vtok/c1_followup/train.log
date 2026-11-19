@@ -1,0 +1,45 @@
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+A2 seed=1 step=50/500 loss=0.06647 grad=0.02900
+A2 seed=1 step=100/500 loss=0.09834 grad=0.00993
+A2 seed=1 step=150/500 loss=0.08734 grad=0.01154
+A2 seed=1 step=200/500 loss=0.09624 grad=0.00945
+A2 seed=1 step=250/500 loss=0.07276 grad=0.03747
+A2 seed=1 step=300/500 loss=0.07520 grad=0.03440
+A2 seed=1 step=350/500 loss=0.06321 grad=0.02056
+A2 seed=1 step=400/500 loss=0.06643 grad=0.00717
+A2 seed=1 step=450/500 loss=0.06986 grad=0.02715
+A2 seed=1 step=500/500 loss=0.07837 grad=0.01408
+A2 seed=1 step=500: DAVIS2017:blackswan, 50 Validation frames/arm
+A2 seed=1 step=500: DAVIS2017:car-roundabout, 64 Validation frames/arm
+A2 seed=1 step=500: DAVIS2017:dog, 60 Validation frames/arm
+A2 seed=1 step=500 gate: {'passed': False, 'histories': {'same_context': {'passed': False, 'checks': {'finite': True, 'psnr': False, 'lpips': True, 'dists': True, 'state_sync': True}, 'psnr_gain_db': -0.04623041829054131, 'lpips_delta': -0.07939297945677548, 'dists_delta': -0.03540871382273478}, 'independent_closed': {'passed': False, 'checks': {'finite': True, 'psnr': False, 'lpips': True, 'dists': True, 'state_sync': True}, 'psnr_gain_db': -0.03489715846747288, 'lpips_delta': -0.06138375470007973, 'dists_delta': -0.026415734284225556}}}
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+A3 seed=1 step=50/500 loss=0.03644 grad=0.04385
+A3 seed=1 step=100/500 loss=0.07050 grad=0.01649
+A3 seed=1 step=150/500 loss=0.05701 grad=0.00492
+A3 seed=1 step=200/500 loss=0.06594 grad=0.00691
+A3 seed=1 step=250/500 loss=0.04760 grad=0.02804
+A3 seed=1 step=300/500 loss=0.04924 grad=0.03233
+A3 seed=1 step=350/500 loss=0.03096 grad=0.02029
+A3 seed=1 step=400/500 loss=0.04237 grad=0.00769
+A3 seed=1 step=450/500 loss=0.04551 grad=0.01740
+A3 seed=1 step=500/500 loss=0.05198 grad=0.01024
+A3 seed=1 step=500: DAVIS2017:blackswan, 50 Validation frames/arm
+A3 seed=1 step=500: DAVIS2017:car-roundabout, 64 Validation frames/arm
+A3 seed=1 step=500: DAVIS2017:dog, 60 Validation frames/arm
+A3 seed=1 step=500 gate: {'passed': False, 'histories': {'same_context': {'passed': False, 'checks': {'finite': True, 'psnr': False, 'lpips': True, 'dists': True, 'state_sync': True}, 'psnr_gain_db': 0.0564260628936708, 'lpips_delta': -0.09543319337669462, 'dists_delta': -0.05665520651415848}, 'independent_closed': {'passed': True, 'checks': {'finite': True, 'psnr': True, 'lpips': True, 'dists': True, 'state_sync': True}, 'psnr_gain_db': 0.10138534199960958, 'lpips_delta': -0.09742458164691928, 'dists_delta': -0.05558830161375562}}}
+Phase 2/3 updates: [('A2', {'seed1': 500, 'seed2': 0}), ('A3', {'seed1': 500, 'seed2': 0})], sparse release []

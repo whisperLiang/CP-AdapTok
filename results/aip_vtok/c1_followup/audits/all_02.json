@@ -1,0 +1,77 @@
+{
+  "stage": "all",
+  "started": "2026-11-19T19:42:09+08:00",
+  "command": [
+    "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+    ".venv-native/bin/coverage",
+    "run",
+    "--branch",
+    "--source=aip_vtok.c1_followup",
+    "scripts/aip_vtok/run_c1_followup.py",
+    "--stage",
+    "all"
+  ],
+  "torch": "2.9.1+cu130",
+  "cuda": "13.0",
+  "gpu": {
+    "gpu": "NVIDIA H100 PCIe, GPU-d9c152fc-f054-180a-e06f-f6da82bd29a5, 580.159.03, 81559 MiB, 0 %",
+    "other_compute_pids": []
+  },
+  "integrity": {
+    "passed": true,
+    "assets_before": {
+      "sha256": "07aa7317447ab8e76c4ad6ed3ff88ae61d675e18df879c885ef016109f45280f",
+      "files": 2039,
+      "controls": {
+        "projector": {
+          "path": "checkpoints/aip_vtok/projector_w128/latest.pt",
+          "sha256": "3b1bd715427bd177393e9552a99576e614ab7dd1ed307155129cf62896d5eb94"
+        },
+        "legacy_c1b_steps": {
+          "seed1": 0,
+          "seed2": 0
+        },
+        "legacy_c1b_status": "blocked_by_c1a_psnr_gate",
+        "old_fit_sha256": "0bcb3a3885b437714bcbbb5150bba0b0290012643455faf18c083e9154b9cc21",
+        "old_scan_lock_sha256": "671331a8ca05e537d2f35e9409f714b0d7d8c3ec15408a5f5e1efb0d3ae11814",
+        "old_validation_sha256": "8e3fe6050b09902ce46c5d08ee821fcd4846448acc0fd7a8371f38c49152f31f"
+      }
+    },
+    "assets_after": {
+      "sha256": "07aa7317447ab8e76c4ad6ed3ff88ae61d675e18df879c885ef016109f45280f",
+      "files": 2039,
+      "controls": {
+        "projector": {
+          "path": "checkpoints/aip_vtok/projector_w128/latest.pt",
+          "sha256": "3b1bd715427bd177393e9552a99576e614ab7dd1ed307155129cf62896d5eb94"
+        },
+        "legacy_c1b_steps": {
+          "seed1": 0,
+          "seed2": 0
+        },
+        "legacy_c1b_status": "blocked_by_c1a_psnr_gate",
+        "old_fit_sha256": "0bcb3a3885b437714bcbbb5150bba0b0290012643455faf18c083e9154b9cc21",
+        "old_scan_lock_sha256": "671331a8ca05e537d2f35e9409f714b0d7d8c3ec15408a5f5e1efb0d3ae11814",
+        "old_validation_sha256": "8e3fe6050b09902ce46c5d08ee821fcd4846448acc0fd7a8371f38c49152f31f"
+      }
+    },
+    "tensors_before": {
+      "backbone": "afa741c800deec2d181a2ec14de87b8818b2aca8211fa0ccb57a1036c34d9931",
+      "projector": "7a7fe17df3fd9aff4257f1d78d9c9d7abf176abcbeeef2de8bea818a6492cf35"
+    },
+    "tensors_after": {
+      "backbone": "afa741c800deec2d181a2ec14de87b8818b2aca8211fa0ccb57a1036c34d9931",
+      "projector": "7a7fe17df3fd9aff4257f1d78d9c9d7abf176abcbeeef2de8bea818a6492cf35"
+    },
+    "frozen_parameter_gradients": [],
+    "test_images_read": 0
+  },
+  "exit_code": 0,
+  "images_read": {
+    "train": 0,
+    "validation": 0,
+    "test": 0
+  },
+  "denied_pixel_accesses": 0,
+  "finished": "2026-11-19T19:42:20+08:00"
+}

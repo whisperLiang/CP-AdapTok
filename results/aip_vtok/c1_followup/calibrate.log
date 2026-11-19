@@ -1,0 +1,30 @@
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Train holdout DAVIS2017:elephant (3 frames)
+Train holdout DAVIS2017:flamingo (4 frames)
+Train holdout DAVIS2017:hockey (2 frames)
+Train holdout DAVIS2017:koala (2 frames)
+Train holdout DAVIS2017:lady-running (4 frames)
+Train holdout DAVIS2017:mallard-fly (2 frames)
+Train holdout DAVIS2017:rallye (2 frames)
+Train holdout DAVIS2017:rhino (2 frames)
+Train holdout DAVIS2017:scooter-gray (3 frames)
+Train holdout DAVIS2017:sheep (2 frames)
+Train holdout DAVIS2017:stroller (4 frames)
+Train holdout DAVIS2017:tractor-sand (2 frames)
+Train holdout DAVIS2017:train (2 frames)
+Train A2 I MSE 0.0021377, {'allocation': 'sensitivity_2', 'scale_multiplier': 0.8, 'mu': 0, 'proxy_mse': 0.037412744015455246, 'rgb_mse': 0.0021377250444717132}
+Train A4-fsq I MSE 0.0019301, {'allocation': 'sensitivity_2', 'scale_multiplier': 0.8, 'mu': 0, 'proxy_mse': 0.03769512102007866, 'rgb_mse': 0.0019300720618607907}
+Train A5-fsq I MSE 0.0018442, {'allocation': 'sensitivity_2', 'scale_multiplier': 0.8, 'mu': 0, 'proxy_mse': 0.03780053183436394, 'rgb_mse': 0.0018442280393523665}
+Train A3 I MSE 0.0007707, {'allocation': 'sensitivity_1', 'scale_multiplier': 0.8, 'mu': 0, 'proxy_mse': 0.0033750918228179216, 'rgb_mse': 0.0007707074815138745}
+Train A2 P MSE 0.0016617, {'allocation': 'sensitivity_2', 'scale_multiplier': 0.8, 'mu': 0, 'proxy_mse': 0.10785716027021408, 'rgb_mse': 0.0016617276456340083}
+Train A4-fsq P MSE 0.0014935, {'allocation': 'sensitivity_2', 'scale_multiplier': 0.8, 'mu': 0, 'proxy_mse': 0.10762105137109756, 'rgb_mse': 0.0014934935496144352}
+Train A5-fsq P MSE 0.0013291, {'allocation': 'sensitivity_2', 'scale_multiplier': 0.8, 'mu': 0, 'proxy_mse': 0.10783039033412933, 'rgb_mse': 0.0013291134465751903}
+Train A3 P MSE 0.0008972, {'allocation': 'sensitivity_1', 'scale_multiplier': 1.2, 'mu': 2, 'proxy_mse': 0.008099492639303207, 'rgb_mse': 0.0008971950654605669}
+Train shortlist frozen: ['A2', 'A3']

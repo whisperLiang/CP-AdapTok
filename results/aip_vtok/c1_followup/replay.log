@@ -1,0 +1,13 @@
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Validation DAVIS2017:blackswan, 50 frames/arm
+Validation DAVIS2017:car-roundabout, 64 frames/arm
+Validation DAVIS2017:dog, 60 frames/arm
+A0 historical replay: {'same_frame_ids': True, 'max_per_frame_mse_error': 0.0, 'measured': {'frames': 174, 'mse': 0.0007556126655872922, 'psnr_global_mse': 31.217007710406083, 'psnr_frame_mean': 31.877236775675353}, 'sealed': {'frames': 174, 'mse': 0.0007556126655872922, 'psnr_global_mse': 31.217007710406083, 'psnr_frame_mean': 31.877236775675353}, 'passed': True}
+A1 historical replay: {'same_frame_ids': True, 'max_per_frame_mse_error': 0.0, 'measured': {'frames': 174, 'mse': 0.0017337790618773721, 'psnr_global_mse': 27.610062461452223, 'psnr_frame_mean': 27.912929413087056}, 'sealed': {'frames': 174, 'mse': 0.0017337790618773721, 'psnr_global_mse': 27.610062461452223, 'psnr_frame_mean': 27.912929413087056}, 'passed': True}
