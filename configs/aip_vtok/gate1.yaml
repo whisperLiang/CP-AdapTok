@@ -1,0 +1,23 @@
+gate0_config: configs/aip_vtok/gate0.yaml
+stage1:
+  seeds: [1, 2]
+  steps: 1000
+  sequence_length: 4
+  save_every: 100
+  lr: 0.001
+  amp_bf16: true
+  evaluation_precision: float32
+  loss:
+    l1: 1.0
+    mse: 1.0
+    chroma: 0.2
+    lpips: 0.15
+  validation:
+    videos: ["DAVIS2017:blackswan", "DAVIS2017:car-roundabout", "DAVIS2017:dog"]
+    max_frames_per_video: 64
+    total_frames: 174
+  limits:
+    core_psnr_gain_db: 0.5
+    minimum_high_budget_psnr_db: 24.0
+    minimum_chroma_retention: 0.75
+    minimum_dimension_entropy_bits: 0.05

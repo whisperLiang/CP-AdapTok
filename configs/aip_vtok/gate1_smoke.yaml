@@ -1,0 +1,13 @@
+gate0_config: configs/aip_vtok/gate0.yaml
+stage1:
+  video: "DAVIS2017:bear"
+  start: 0
+  sequence_length: 4
+  steps: 200
+  evaluate_every: 25
+  lr: 0.001
+  loss:
+    l1: 1.0
+    mse: 1.0
+    chroma: 0.2
+    lpips: 0.15

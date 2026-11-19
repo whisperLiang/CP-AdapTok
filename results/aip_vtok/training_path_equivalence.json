@@ -1,0 +1,21 @@
+{
+  "original_loss": 0.12823226116597652,
+  "shared_context_loss": 0.12823226116597652,
+  "loss_absolute_error": 0.0,
+  "maximum_parameter_gradient_error": 1.862645149230957e-09,
+  "original_step_s": 5.250184591975994,
+  "shared_context_step_s": 1.6722141819773242,
+  "passed": true,
+  "codec_fps": null,
+  "note": "training diagnostic only, four frames, no optimizer update",
+  "training_bf16": {
+    "loss": 0.12856100127100945,
+    "step_s": 4.4476078519946896,
+    "warm_step_s": [
+      0.7725514519843273,
+      0.7717750750016421
+    ],
+    "all_gradients_finite": true,
+    "validation_precision": "FP32; BF16 used only for training activations"
+  }
+}

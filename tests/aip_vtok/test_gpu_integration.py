@@ -60,3 +60,34 @@ def test_frozen_checkpointed_decoder_preserves_alignment_gradients(backbone):
     finally:
         backbone.geometry = Geometry()
         backbone.zero_grad(set_to_none=True)
+
+
+@torch.no_grad()
+def test_real_1080p_encode_once_reference_budget_invariance_and_exact_append(backbone):
+    from aip_vtok.backbones.latent_to_ref import LatentToRef
+    from aip_vtok.models.codec import AIPVTokCodec
+
+    codec = AIPVTokCodec(backbone, LatentToRef(16).cuda()).cuda().eval()
+    source = torch.rand(1, 3, 1080, 1920, device="cuda")
+    initial = ReferenceState()
+    encoded = codec.encode_frame(source, initial, 0)
+    assert codec.encode_calls == 1
+    assert encoded.tokens.ids.shape == (1, 8192)
+    session = codec.prefix_session(encoded, initial, 2048)
+    reference = session.commit_reference_once()
+    assert session.rgb_decoder_calls == 0
+    assert reference.latent.shape == (1, 128, 68, 120)
+    encoded = codec.encode_frame(source, reference, 1)
+    states = []
+    for budget in (510, 2048, 8192):
+        session = codec.prefix_session(encoded, reference, budget)
+        states.append(session.commit_reference_once())
+        assert session.rgb_decoder_calls == 0
+    assert states[0].fingerprint() == states[1].fingerprint() == states[2].fingerprint()
+    seven = codec.begin_frame(1, encoded.tokens.tiers, reference)
+    for offset in range(0, 8192, 7):
+        seven.append(encoded.tokens.ids[:, offset : min(offset + 7, 8192)], offset)
+    assert torch.equal(seven.canvas.latent(), session.canvas.latent())
+    a, b = seven.render_frame(), session.render_frame()
+    assert torch.equal(a, b)
+    assert seven.rgb_decoder_calls == session.rgb_decoder_calls == 1

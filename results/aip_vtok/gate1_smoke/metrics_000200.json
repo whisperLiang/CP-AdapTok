@@ -1,0 +1,536 @@
+{
+  "step": 200,
+  "summary": {
+    "510": {
+      "frames": 4,
+      "mse": 0.012181560508906841,
+      "psnr_global_mse": 19.142970731977297,
+      "psnr_frame_mean": 19.155821959790426,
+      "lpips": 0.42081479728221893,
+      "dists": 0.29836811125278473,
+      "ms-ssim": 0.45080821216106415,
+      "chroma_retention": 0.46209149807691574
+    },
+    "1024": {
+      "frames": 4,
+      "mse": 0.01123273791745305,
+      "psnr_global_mse": 19.495143739686128,
+      "psnr_frame_mean": 19.504354799089967,
+      "lpips": 0.4124962165951729,
+      "dists": 0.28585444390773773,
+      "ms-ssim": 0.4752177447080612,
+      "chroma_retention": 0.5283283889293671
+    },
+    "2048": {
+      "frames": 4,
+      "mse": 0.010150766000151634,
+      "psnr_global_mse": 19.935011836535597,
+      "psnr_frame_mean": 19.9423309652395,
+      "lpips": 0.3975020796060562,
+      "dists": 0.2757958620786667,
+      "ms-ssim": 0.5216904729604721,
+      "chroma_retention": 0.6219945177435875
+    },
+    "4096": {
+      "frames": 4,
+      "mse": 0.009360159980133176,
+      "psnr_global_mse": 20.287167284098327,
+      "psnr_frame_mean": 20.30192468171434,
+      "lpips": 0.3885965570807457,
+      "dists": 0.2674834728240967,
+      "ms-ssim": 0.5630811452865601,
+      "chroma_retention": 0.6689521744847298
+    },
+    "8192": {
+      "frames": 4,
+      "mse": 0.008387082605622709,
+      "psnr_global_mse": 20.76389079530598,
+      "psnr_frame_mean": 20.797979932642757,
+      "lpips": 0.3810925930738449,
+      "dists": 0.25687040388584137,
+      "ms-ssim": 0.6181029975414276,
+      "chroma_retention": 0.7314551472663879
+    }
+  },
+  "rows": [
+    {
+      "step": 200,
+      "frame": 0,
+      "budget": 510,
+      "mse": 0.013806321658194065,
+      "psnr": 18.599220126838105,
+      "ms-ssim": 0.40816760063171387,
+      "lpips": 0.45454102754592896,
+      "dists": 0.32982051372528076,
+      "chroma_retention": 0.08138531446456909,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 0,
+      "budget": 1024,
+      "mse": 0.012446812354028225,
+      "psnr": 19.049418577498606,
+      "ms-ssim": 0.4367784261703491,
+      "lpips": 0.4435232877731323,
+      "dists": 0.3013575077056885,
+      "chroma_retention": 0.1896476149559021,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 0,
+      "budget": 2048,
+      "mse": 0.011033149436116219,
+      "psnr": 19.573004995734497,
+      "ms-ssim": 0.483761727809906,
+      "lpips": 0.42201465368270874,
+      "dists": 0.2780408263206482,
+      "chroma_retention": 0.4039400517940521,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 0,
+      "budget": 4096,
+      "mse": 0.010603055357933044,
+      "psnr": 19.745689711607028,
+      "ms-ssim": 0.5070292949676514,
+      "lpips": 0.41263914108276367,
+      "dists": 0.26780903339385986,
+      "chroma_retention": 0.4866478741168976,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 0,
+      "budget": 8192,
+      "mse": 0.010180521756410599,
+      "psnr": 19.92229963637438,
+      "ms-ssim": 0.5298649072647095,
+      "lpips": 0.409761518239975,
+      "dists": 0.26053446531295776,
+      "chroma_retention": 0.5466080904006958,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 1,
+      "budget": 510,
+      "mse": 0.011905547231435776,
+      "psnr": 19.242506377113603,
+      "ms-ssim": 0.4649384021759033,
+      "lpips": 0.4263932704925537,
+      "dists": 0.270931601524353,
+      "chroma_retention": 0.5557271838188171,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 1,
+      "budget": 1024,
+      "mse": 0.01113892812281847,
+      "psnr": 19.531565984569102,
+      "ms-ssim": 0.48373112082481384,
+      "lpips": 0.4185419976711273,
+      "dists": 0.26703017950057983,
+      "chroma_retention": 0.6422514915466309,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 1,
+      "budget": 2048,
+      "mse": 0.010218526236712933,
+      "psnr": 19.9061173565104,
+      "ms-ssim": 0.5217775106430054,
+      "lpips": 0.4041876196861267,
+      "dists": 0.26709651947021484,
+      "chroma_retention": 0.7064000368118286,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 1,
+      "budget": 4096,
+      "mse": 0.009304714389145374,
+      "psnr": 20.312969531212666,
+      "ms-ssim": 0.5661530494689941,
+      "lpips": 0.39484545588493347,
+      "dists": 0.26452910900115967,
+      "chroma_retention": 0.767771303653717,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 1,
+      "budget": 8192,
+      "mse": 0.00811768975108862,
+      "psnr": 20.90567550944946,
+      "ms-ssim": 0.6290969848632812,
+      "lpips": 0.38721004128456116,
+      "dists": 0.2543027400970459,
+      "chroma_retention": 0.8627372980117798,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 2,
+      "budget": 510,
+      "mse": 0.011337503790855408,
+      "psnr": 19.45482554719296,
+      "ms-ssim": 0.4630502164363861,
+      "lpips": 0.40718892216682434,
+      "dists": 0.3024217486381531,
+      "chroma_retention": 0.4875541627407074,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 2,
+      "budget": 1024,
+      "mse": 0.010452721267938614,
+      "psnr": 19.80770630337925,
+      "ms-ssim": 0.49035534262657166,
+      "lpips": 0.3986307382583618,
+      "dists": 0.29286855459213257,
+      "chroma_retention": 0.5439152717590332,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 2,
+      "budget": 2048,
+      "mse": 0.009387891739606857,
+      "psnr": 20.274319272927087,
+      "ms-ssim": 0.5467237830162048,
+      "lpips": 0.38470736145973206,
+      "dists": 0.28264331817626953,
+      "chroma_retention": 0.6133237481117249,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 2,
+      "budget": 4096,
+      "mse": 0.008454566821455956,
+      "psnr": 20.729086390267028,
+      "ms-ssim": 0.597822904586792,
+      "lpips": 0.3763173222541809,
+      "dists": 0.27095943689346313,
+      "chroma_retention": 0.6496956944465637,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 2,
+      "budget": 8192,
+      "mse": 0.007281817030161619,
+      "psnr": 21.377602377598727,
+      "ms-ssim": 0.6671380996704102,
+      "lpips": 0.3673554062843323,
+      "dists": 0.2545475959777832,
+      "chroma_retention": 0.7205488681793213,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 3,
+      "budget": 510,
+      "mse": 0.011676869355142117,
+      "psnr": 19.32673578801704,
+      "ms-ssim": 0.4670766294002533,
+      "lpips": 0.3951359689235687,
+      "dists": 0.29029858112335205,
+      "chroma_retention": 0.7236993312835693,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 3,
+      "budget": 1024,
+      "mse": 0.010892489925026894,
+      "psnr": 19.628728330912903,
+      "ms-ssim": 0.49000608921051025,
+      "lpips": 0.38928884267807007,
+      "dists": 0.28216153383255005,
+      "chroma_retention": 0.7374991774559021,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 3,
+      "budget": 2048,
+      "mse": 0.009963496588170528,
+      "psnr": 20.015882235786012,
+      "ms-ssim": 0.5344988703727722,
+      "lpips": 0.37909868359565735,
+      "dists": 0.2754027843475342,
+      "chroma_retention": 0.7643142342567444,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 3,
+      "budget": 4096,
+      "mse": 0.00907830335199833,
+      "psnr": 20.41995309377064,
+      "ms-ssim": 0.5813193321228027,
+      "lpips": 0.37058430910110474,
+      "dists": 0.26663631200790405,
+      "chroma_retention": 0.7716938257217407,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    },
+    {
+      "step": 200,
+      "frame": 3,
+      "budget": 8192,
+      "mse": 0.007968301884829998,
+      "psnr": 20.98634220714846,
+      "ms-ssim": 0.6463119983673096,
+      "lpips": 0.36004340648651123,
+      "dists": 0.2580968141555786,
+      "chroma_retention": 0.7959263324737549,
+      "bpp": null,
+      "split": "train",
+      "mode": "paired_overfit_smoke",
+      "real_bitstream": false
+    }
+  ],
+  "health": [
+    {
+      "frame": 0,
+      "passes": {
+        "0": {
+          "tokens": 510,
+          "unique_ids": 482,
+          "id_entropy_bits": 8.874707260371299,
+          "dimension_entropy_bits": [
+            2.958950555753792,
+            2.879536951707818,
+            2.968594914747335,
+            2.291512253299656,
+            2.2773500981908414,
+            2.306290813961683
+          ]
+        },
+        "1": {
+          "tokens": 1938,
+          "unique_ids": 1772,
+          "id_entropy_bits": 10.733924846651668,
+          "dimension_entropy_bits": [
+            2.8914649423910164,
+            2.9656910333688034,
+            2.8657222351876297,
+            2.2509212805417675,
+            2.2825987585829317,
+            2.25182999171079
+          ]
+        },
+        "2": {
+          "tokens": 5744,
+          "unique_ids": 4465,
+          "id_entropy_bits": 11.938157971653402,
+          "dimension_entropy_bits": [
+            2.8579855688354154,
+            2.8890674274150676,
+            2.9258091009688885,
+            2.1084976827797854,
+            2.1434710899749505,
+            2.1576182832319137
+          ]
+        }
+      }
+    },
+    {
+      "frame": 1,
+      "passes": {
+        "0": {
+          "tokens": 510,
+          "unique_ids": 499,
+          "id_entropy_bits": 8.949736010384026,
+          "dimension_entropy_bits": [
+            2.960426676959295,
+            2.9114830789758903,
+            2.961914764861648,
+            2.3089117819270712,
+            2.1903314066505892,
+            2.19538589991738
+          ]
+        },
+        "1": {
+          "tokens": 1938,
+          "unique_ids": 1897,
+          "id_entropy_bits": 10.878041193908372,
+          "dimension_entropy_bits": [
+            2.9791033819005905,
+            2.9899041501269856,
+            2.9698513470837713,
+            2.3154285291534547,
+            2.313992962953722,
+            2.266288913716529
+          ]
+        },
+        "2": {
+          "tokens": 5744,
+          "unique_ids": 5188,
+          "id_entropy_bits": 12.285466368947688,
+          "dimension_entropy_bits": [
+            2.946129604759815,
+            2.9948786325050745,
+            2.945843288605407,
+            2.213991258537495,
+            2.2407312963501442,
+            2.2635560239535284
+          ]
+        }
+      }
+    },
+    {
+      "frame": 2,
+      "passes": {
+        "0": {
+          "tokens": 510,
+          "unique_ids": 507,
+          "id_entropy_bits": 8.982588730976502,
+          "dimension_entropy_bits": [
+            2.967829012770611,
+            2.8879823618743945,
+            2.9249964121875967,
+            2.3172006326362937,
+            2.282107762682781,
+            2.2864265722738426
+          ]
+        },
+        "1": {
+          "tokens": 1938,
+          "unique_ids": 1861,
+          "id_entropy_bits": 10.839720934617095,
+          "dimension_entropy_bits": [
+            2.960971371964142,
+            2.944942737462825,
+            2.8985614725726134,
+            2.2625464338057446,
+            2.3103211475848786,
+            2.2134597053261493
+          ]
+        },
+        "2": {
+          "tokens": 5744,
+          "unique_ids": 4871,
+          "id_entropy_bits": 12.151304519188436,
+          "dimension_entropy_bits": [
+            2.838687446393118,
+            2.9399774786061847,
+            2.913182645262112,
+            2.222133703851827,
+            2.162383724912681,
+            2.1042512663974087
+          ]
+        }
+      }
+    },
+    {
+      "frame": 3,
+      "passes": {
+        "0": {
+          "tokens": 510,
+          "unique_ids": 500,
+          "id_entropy_bits": 8.953657579011477,
+          "dimension_entropy_bits": [
+            2.8954475655564567,
+            2.78843053874776,
+            2.8700195229429233,
+            2.1724255028637223,
+            2.125415941834715,
+            2.19647708363644
+          ]
+        },
+        "1": {
+          "tokens": 1938,
+          "unique_ids": 1868,
+          "id_entropy_bits": 10.847334395660521,
+          "dimension_entropy_bits": [
+            2.9157558480469032,
+            2.9450537156443657,
+            2.8951818234509803,
+            2.2571380619124755,
+            2.307843263810539,
+            2.234973288342063
+          ]
+        },
+        "2": {
+          "tokens": 5744,
+          "unique_ids": 4979,
+          "id_entropy_bits": 12.201306414032052,
+          "dimension_entropy_bits": [
+            2.881063056251593,
+            2.9464979875477733,
+            2.9273492087116852,
+            2.192372910943446,
+            2.2010202752376515,
+            2.1545523801184165
+          ]
+        }
+      }
+    }
+  ],
+  "data_policy": "training video only; not the 174-frame validation gate"
+}

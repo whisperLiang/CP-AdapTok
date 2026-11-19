@@ -1,0 +1,27 @@
+
+==================================== ERRORS ====================================
+____________ ERROR collecting tests/aip_vtok/test_fsq_bijection.py _____________
+ImportError while importing test module '/home/whisperliang/CP-AdapTok/tests/aip_vtok/test_fsq_bijection.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/aip_vtok/test_fsq_bijection.py:3: in <module>
+    from aip_vtok.tokenizer.fsq import FSQ
+E   ModuleNotFoundError: No module named 'aip_vtok.tokenizer'
+_________ ERROR collecting tests/aip_vtok/test_tier_map_and_prefix.py __________
+ImportError while importing test module '/home/whisperliang/CP-AdapTok/tests/aip_vtok/test_tier_map_and_prefix.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/aip_vtok/test_tier_map_and_prefix.py:3: in <module>
+    from aip_vtok.tokenizer.halton import halton_order
+E   ModuleNotFoundError: No module named 'aip_vtok.tokenizer'
+=========================== short test summary info ============================
+ERROR tests/aip_vtok/test_fsq_bijection.py
+ERROR tests/aip_vtok/test_tier_map_and_prefix.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!
+2 errors in 1.25s

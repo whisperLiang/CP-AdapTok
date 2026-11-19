@@ -15,6 +15,7 @@ class ReferenceState:
     frame_id: int = -1
     feature: torch.Tensor | None = None
     memory: torch.Tensor | None = None
+    latent: torch.Tensor | None = None
 
     def is_intra(self, frame_id, gop):
         if frame_id != self.frame_id + 1:
@@ -23,7 +24,7 @@ class ReferenceState:
 
     def fingerprint(self):
         digest = hashlib.sha256(str(self.frame_id).encode())
-        for tensor in (self.feature, self.memory):
+        for tensor in (self.feature, self.memory, self.latent):
             if tensor is not None:
                 digest.update(str(tuple(tensor.shape)).encode())
                 digest.update(tensor.detach().cpu().contiguous().numpy().tobytes())
@@ -38,10 +39,13 @@ class FrameContext:
     memory: torch.Tensor | None
     committed: bool = False
 
-    def commit_reference_once(self, feature):
+    def commit_reference_once(self, feature, latent=None):
         if self.committed:
             raise RuntimeError("reference already committed for this frame")
         self.committed = True
         return ReferenceState(
-            self.frame_id, owned_tensor(feature), None if self.intra else owned_tensor(self.memory)
+            self.frame_id,
+            owned_tensor(feature),
+            None if self.intra else owned_tensor(self.memory),
+            owned_tensor(latent),
         )
