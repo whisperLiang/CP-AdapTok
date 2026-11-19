@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/home/whisperliang/CP-AdapTok/.venv-native/bin/python",
+    "-u",
+    "scripts/aip_vtok/run_sparse_decoder.py",
+    "preflight"
+  ],
+  "started": "2026-11-20T07:14:59+08:00",
+  "torch": "2.9.1+cu130",
+  "cuda": "13.0",
+  "gpu": "NVIDIA H100 PCIe, 580.159.03, 81559 MiB",
+  "exit_code": 1,
+  "error": "RuntimeError: W1 disagrees with the frozen codec, loss, scan, or training record",
+  "finished": "2026-11-20T07:15:02+08:00"
+}

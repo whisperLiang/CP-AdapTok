@@ -1,0 +1,25 @@
+{
+  "rows": 3654,
+  "integrity": {
+    "passed": true,
+    "frozen_tensors_sha256": {
+      "backbone": "afa741c800deec2d181a2ec14de87b8818b2aca8211fa0ccb57a1036c34d9931",
+      "projector": "7a7fe17df3fd9aff4257f1d78d9c9d7abf176abcbeeef2de8bea818a6492cf35",
+      "W1": "3ed006874cf67f195180bb2e7778c1b33aebd7b2cd1e9a56d8a244408532ab65"
+    },
+    "images_read": {
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    "denied_reads": 0
+  },
+  "provenance_sha256": "57403f63f0a0ac1cc35be23f815ab687cb422052c3c2908e3f572f7fde6f7be9",
+  "outputs": {
+    "phase0_diagnostics.json": "1d1042abf42ae806539ee8520db2b042ccc7db77268843609187103f05d9f3b2",
+    "phase0_factorial.json": "b2efa74e5dd8e225d58898269f7d66363099fd2553dc156daa5fb57556c3434f",
+    "phase0_per_frame.csv": "fecd6c0d451d23a95af6ac24f523774391ea6ec370ac434e73e64c2858390dc9",
+    "phase0_k510.png": "f553ab59f5af2b2b69d41d7fc09f3c75aab9620f7cd74a0dc1d405086d076092",
+    "phase0_report.md": "24addd4168b361e1b952454276ac3875bf118848e8378726afcc15dc632012e9"
+  }
+}
