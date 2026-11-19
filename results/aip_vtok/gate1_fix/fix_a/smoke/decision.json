@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "checks": {
+    "200_steps": true,
+    "closed_loop_stable": true,
+    "training_clip_improved": true,
+    "frozen_projector_gradient_to_prefix": true
+  },
+  "matched_anchor_checks": {
+    "fusion_delta_small": true,
+    "fused_mse_reduced": true
+  },
+  "loss_first_last10": [
+    1.6070916265249253,
+    1.3775369971990585
+  ],
+  "overfit_k8192_psnr_initial_final": [
+    13.592345906044827,
+    20.764389592486687
+  ],
+  "limits": {
+    "maximum_reference_latent_rms": 2.0,
+    "minimum_reference_to_native_rms": 0.1,
+    "maximum_reference_to_native_rms": 10.0,
+    "maximum_fusion_delta_mse": 0.02,
+    "minimum_fix_a_psnr_gain_db": 0.5,
+    "maximum_fix_a_fused_mse_fraction": 0.75,
+    "maximum_tanh_saturation_ratio": 0.1,
+    "smoke_tanh_saturation_advisory": 0.25,
+    "minimum_pooled_dim_entropy_bits": 0.5,
+    "core_psnr_gain_db": 0.5,
+    "minimum_k8192_psnr_db": 24.5,
+    "advanced_k8192_lpips": 0.3
+  }
+}

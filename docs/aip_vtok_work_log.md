@@ -45,3 +45,33 @@
 - 官方权重哈希未变：`{"intra_checkpoint": true, "ld_checkpoint": true}`；受保护文件diff为空。
 
 原始结果、原检查点、失败重放证据均保留。此节由 scripts/aip_vtok/finalize.py 从 JSON/XML 生成。
+
+<!-- BEGIN GENERATED GATE 1-FIX -->
+
+## Gate 1-Fix
+
+- 按 `ub-mode` 核对 508a97e 的 Fusion 输入、固定参考前缀与状态所有权，再用失败测试覆盖真实 tanh、双边色度和冻结 Projector 参考梯度。
+- 新模型以 `gate1-fix-v2` 保存。旧版入口显式实例化历史预测器，供历史检查点复验。
+- 引入原生同历史潜在与参考目标，保留确定性 CUDA、四流 RNG 和真实三段残差。
+
+- Fix-A 冒烟 完成 200 步。训练检查点 SHA256 `76a448ff3aef3559d59fcf11785a5bba9f3525b9e87a4b9e7a01d953df1268b0`。 [评估记录](../results/aip_vtok/gate1_fix/fix_a/smoke/evaluation.json)
+- Fix-A 完成 1000 步。训练检查点 SHA256 `360bab54aa3a2924ac348d131a2d23d57a6bd457c84fe5ee26301a49ae943465`。 [评估记录](../results/aip_vtok/gate1_fix/fix_a/seed1/evaluation.json)
+- 对同历史的三个冻结 lift 分别求最小二乘六维系数，测量当前 Tokenizer 的表示上限。
+- 在评估与回归共享 GPU 时旧版 CUDA 流测试出现一次失败。单项复跑和独占 GPU 联合回归均通过。 [回归记录](../results/aip_vtok/gate1_fix/tests/verification.json)
+- 使用仓库内的 Radon、覆盖率、AST 相似度和行为变异工具检查本轮改动。覆盖率按实际插桩的入口记录。 [工程核验](../results/aip_vtok/gate1_fix/tests/quality_audit.json)
+
+**Fix-A 触发止损，Gate 2 暂缓。**
+
+### 复现
+
+```bash
+python -m aip_vtok.training.fix smoke
+python -m aip_vtok.evaluation.fix smoke
+python -m aip_vtok.evaluation.fix_gate smoke
+python -m aip_vtok.training.fix fix_a
+python -m aip_vtok.evaluation.fix fix_a
+python -m aip_vtok.evaluation.fix_gate fix_a
+python -m aip_vtok.evaluation.report --gate1-fix
+```
+
+<!-- END GENERATED GATE 1-FIX -->

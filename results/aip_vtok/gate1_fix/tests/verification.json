@@ -1,0 +1,27 @@
+{
+  "tests": 235,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "historical_tests": 223,
+  "additional_tests": 12,
+  "execution": "isolated GPU after all measurements",
+  "overlapped_regression": {
+    "tests": 235,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "overlapped_failure": "cp_adaptok/tests/test_native_codec.py::test_native_teacher_preserves_the_callers_stream_and_waits_for_rgb",
+  "isolated_legacy_stream_recheck": "passed",
+  "mutations_killed": 6,
+  "mutations_tested": 6,
+  "passed": true,
+  "instrumented_isolated_recheck": {
+    "tests": 235,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "instrumented_junit": "regression_publish.xml"
+}

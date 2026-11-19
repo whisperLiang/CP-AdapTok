@@ -1,0 +1,12 @@
+{
+  "step": 200,
+  "seed": 1,
+  "phase": "smoke",
+  "manifest_hashes": {
+    "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
+    "validation": "8cca166ca7d1f6faf45cd6660b7074657164d2afa2fd14dec92d76f0cee25405",
+    "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
+  },
+  "checkpoint_sha256": "76a448ff3aef3559d59fcf11785a5bba9f3525b9e87a4b9e7a01d953df1268b0",
+  "precision": "FP32"
+}

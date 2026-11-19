@@ -1,0 +1,27 @@
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+seed=1 step=1/200 loss=1.654988 elapsed_s=5.8
+seed=1 step=10/200 loss=1.574901 elapsed_s=14.3
+seed=1 step=20/200 loss=1.520816 elapsed_s=23.6
+seed=1 step=30/200 loss=1.492318 elapsed_s=33.0
+seed=1 step=40/200 loss=1.472231 elapsed_s=41.9
+seed=1 step=50/200 loss=1.448285 elapsed_s=51.2
+seed=1 step=60/200 loss=1.439192 elapsed_s=60.2
+seed=1 step=70/200 loss=1.435188 elapsed_s=69.2
+seed=1 step=80/200 loss=1.429461 elapsed_s=78.2
+seed=1 step=90/200 loss=1.424474 elapsed_s=87.2
+seed=1 step=100/200 loss=1.422964 elapsed_s=96.5
+seed=1 step=110/200 loss=1.414329 elapsed_s=105.6
+seed=1 step=120/200 loss=1.405095 elapsed_s=114.5
+seed=1 step=130/200 loss=1.402858 elapsed_s=123.6
+seed=1 step=140/200 loss=1.398424 elapsed_s=132.4
+seed=1 step=150/200 loss=1.399970 elapsed_s=141.7
+seed=1 step=160/200 loss=1.386056 elapsed_s=150.7
+seed=1 step=170/200 loss=1.387254 elapsed_s=159.6
+seed=1 step=180/200 loss=1.380709 elapsed_s=168.6
+seed=1 step=190/200 loss=1.377471 elapsed_s=177.5
+seed=1 step=200/200 loss=1.385571 elapsed_s=186.8

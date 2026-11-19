@@ -1,0 +1,19 @@
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+fix_a seed=1 DAVIS2017:blackswan frames=16
+fix_a seed=1 DAVIS2017:blackswan frames=32
+fix_a seed=1 DAVIS2017:blackswan frames=48
+fix_a seed=1 DAVIS2017:car-roundabout frames=16
+fix_a seed=1 DAVIS2017:car-roundabout frames=32
+fix_a seed=1 DAVIS2017:car-roundabout frames=48
+fix_a seed=1 DAVIS2017:car-roundabout frames=64
+fix_a seed=1 DAVIS2017:dog frames=16
+fix_a seed=1 DAVIS2017:dog frames=32
+fix_a seed=1 DAVIS2017:dog frames=48
+{'phase': 'fix_a', 'seed': 1, 'step': 1000, 'checkpoint_sha256': '360bab54aa3a2924ac348d131a2d23d57a6bd457c84fe5ee26301a49ae943465'}

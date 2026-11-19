@@ -1,0 +1,168 @@
+{
+  "checkpoint_sha256": "360bab54aa3a2924ac348d131a2d23d57a6bd457c84fe5ee26301a49ae943465",
+  "rows": [
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "pass": 0,
+      "active_fraction": 1.0,
+      "raw_mse_before": 0.5044202208518982,
+      "raw_mse_after_fsq": 0.5158104300498962,
+      "raw_mse_after_oracle": 0.5034435987472534
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "pass": 1,
+      "active_fraction": 0.95,
+      "raw_mse_before": 0.5158104300498962,
+      "raw_mse_after_fsq": 0.519756019115448,
+      "raw_mse_after_oracle": 0.5094423890113831
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "pass": 2,
+      "active_fraction": 0.703921568627451,
+      "raw_mse_before": 0.519756019115448,
+      "raw_mse_after_fsq": 0.5134459137916565,
+      "raw_mse_after_oracle": 0.5009862780570984
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 1,
+      "pass": 0,
+      "active_fraction": 1.0,
+      "raw_mse_before": 1.0660148859024048,
+      "raw_mse_after_fsq": 1.0269887447357178,
+      "raw_mse_after_oracle": 1.0069502592086792
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 1,
+      "pass": 1,
+      "active_fraction": 0.95,
+      "raw_mse_before": 1.0269887447357178,
+      "raw_mse_after_fsq": 1.005199909210205,
+      "raw_mse_after_oracle": 0.9790480136871338
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 1,
+      "pass": 2,
+      "active_fraction": 0.703921568627451,
+      "raw_mse_before": 1.005199909210205,
+      "raw_mse_after_fsq": 0.9415362477302551,
+      "raw_mse_after_oracle": 0.9037439227104187
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "pass": 0,
+      "active_fraction": 1.0,
+      "raw_mse_before": 0.9840545058250427,
+      "raw_mse_after_fsq": 0.9931743144989014,
+      "raw_mse_after_oracle": 0.9806953072547913
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "pass": 1,
+      "active_fraction": 0.95,
+      "raw_mse_before": 0.9931743144989014,
+      "raw_mse_after_fsq": 0.9978715777397156,
+      "raw_mse_after_oracle": 0.9812067747116089
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "pass": 2,
+      "active_fraction": 0.703921568627451,
+      "raw_mse_before": 0.9978715777397156,
+      "raw_mse_after_fsq": 0.9764952063560486,
+      "raw_mse_after_oracle": 0.9533960223197937
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 1,
+      "pass": 0,
+      "active_fraction": 1.0,
+      "raw_mse_before": 1.6586976051330566,
+      "raw_mse_after_fsq": 1.635338306427002,
+      "raw_mse_after_oracle": 1.6162914037704468
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 1,
+      "pass": 1,
+      "active_fraction": 0.95,
+      "raw_mse_before": 1.635338306427002,
+      "raw_mse_after_fsq": 1.6159204244613647,
+      "raw_mse_after_oracle": 1.5851249694824219
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 1,
+      "pass": 2,
+      "active_fraction": 0.703921568627451,
+      "raw_mse_before": 1.6159204244613647,
+      "raw_mse_after_fsq": 1.5224342346191406,
+      "raw_mse_after_oracle": 1.4670929908752441
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "pass": 0,
+      "active_fraction": 1.0,
+      "raw_mse_before": 0.33001765608787537,
+      "raw_mse_after_fsq": 0.33550190925598145,
+      "raw_mse_after_oracle": 0.32933351397514343
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "pass": 1,
+      "active_fraction": 0.95,
+      "raw_mse_before": 0.33550190925598145,
+      "raw_mse_after_fsq": 0.33998337388038635,
+      "raw_mse_after_oracle": 0.3323356807231903
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "pass": 2,
+      "active_fraction": 0.703921568627451,
+      "raw_mse_before": 0.33998337388038635,
+      "raw_mse_after_fsq": 0.33741840720176697,
+      "raw_mse_after_oracle": 0.3296974003314972
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 1,
+      "pass": 0,
+      "active_fraction": 1.0,
+      "raw_mse_before": 0.972520112991333,
+      "raw_mse_after_fsq": 0.9462788105010986,
+      "raw_mse_after_oracle": 0.9301847219467163
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 1,
+      "pass": 1,
+      "active_fraction": 0.95,
+      "raw_mse_before": 0.9462788105010986,
+      "raw_mse_after_fsq": 0.9335252046585083,
+      "raw_mse_after_oracle": 0.9132050275802612
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 1,
+      "pass": 2,
+      "active_fraction": 0.703921568627451,
+      "raw_mse_before": 0.9335252046585083,
+      "raw_mse_after_fsq": 0.8788753151893616,
+      "raw_mse_after_oracle": 0.8476494550704956
+    }
+  ],
+  "protocol": "one pass replaced with its unconstrained least-squares 6D codes; earlier passes and committed history are measured FSQ"
+}

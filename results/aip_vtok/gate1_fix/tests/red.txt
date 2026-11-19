@@ -1,0 +1,90 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+_ test_reference_supervision_uses_the_exact_inference_prefix_with_tokenizer_gradients[0] _
+
+frame = 0
+
+    @pytest.mark.parametrize("frame", [0, 1])
+    def test_reference_supervision_uses_the_exact_inference_prefix_with_tokenizer_gradients(frame):
+>       from aip_vtok.training.losses import reference_loss
+E       ImportError: cannot import name 'reference_loss' from 'aip_vtok.training.losses' (/home/whisperliang/CP-AdapTok/aip_vtok/training/losses.py)
+
+tests/aip_vtok/test_gate1_fix.py:28: ImportError
+_ test_reference_supervision_uses_the_exact_inference_prefix_with_tokenizer_gradients[1] _
+
+frame = 1
+
+    @pytest.mark.parametrize("frame", [0, 1])
+    def test_reference_supervision_uses_the_exact_inference_prefix_with_tokenizer_gradients(frame):
+>       from aip_vtok.training.losses import reference_loss
+E       ImportError: cannot import name 'reference_loss' from 'aip_vtok.training.losses' (/home/whisperliang/CP-AdapTok/aip_vtok/training/losses.py)
+
+tests/aip_vtok/test_gate1_fix.py:28: ImportError
+______ test_fsq_distinguishes_boundary_codes_from_shifted_tanh_saturation ______
+
+    def test_fsq_distinguishes_boundary_codes_from_shifted_tanh_saturation():
+        fsq = FSQ()
+        values = torch.tensor([1.6, 2.1, 4.0]).view(1, 3, 1).expand(-1, -1, 6)
+>       codes, ids, saturated = fsq(values, measure_saturation=True)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/aip_vtok/test_gate1_fix.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py:1775: in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = FSQ()
+args = (tensor([[[1.6000, 1.6000, 1.6000, 1.6000, 1.6000, 1.6000],
+         [2.1000, 2.1000, 2.1000, 2.1000, 2.1000, 2.1000],
+         [4.0000, 4.0000, 4.0000, 4.0000, 4.0000, 4.0000]]]),)
+kwargs = {'measure_saturation': True}
+
+    def _call_impl(self, *args, **kwargs):
+        forward_call = (self._slow_forward if torch._C._get_tracing_state() else self.forward)
+        # If we don't have any hooks, we want to skip the rest of the logic in
+        # this function, and just call forward.
+        if not (self._backward_hooks or self._backward_pre_hooks or self._forward_hooks or self._forward_pre_hooks
+                or _global_backward_pre_hooks or _global_backward_hooks
+                or _global_forward_hooks or _global_forward_pre_hooks):
+>           return forward_call(*args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: FSQ.forward() got an unexpected keyword argument 'measure_saturation'
+
+.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py:1786: TypeError
+________ test_two_sided_chroma_gate_rejects_false_color_and_mean_shift _________
+
+    def test_two_sided_chroma_gate_rejects_false_color_and_mean_shift():
+>       from aip_vtok.evaluation.fix_metrics import chroma_passes
+E       ModuleNotFoundError: No module named 'aip_vtok.evaluation.fix_metrics'
+
+tests/aip_vtok/test_gate1_fix.py:66: ModuleNotFoundError
+_____ test_default_codec_has_no_external_predictor_in_64_frame_closed_loop _____
+
+codec = AIPVTokCodec(
+  (backbone): AlignedDCVC(
+    (intra): IntraBackboneAdapter(
+      (model): DMCI(
+        (bit_estimato...ize=(1, 1), stride=(1, 1))
+        )
+      )
+      (4): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+)
+
+    @torch.no_grad()
+    def test_default_codec_has_no_external_predictor_in_64_frame_closed_loop(codec):
+>       assert codec.predictor is None
+E       assert TemporalPredictor(\n  (blocks): Sequential(\n    (0): DepthwiseResidual(\n      (net): Sequential(\n        (0): Conv2d(12...), groups=128)\n        (1): SiLU()\n        (2): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))\n      )\n    )\n  )\n) is None
+E        +  where TemporalPredictor(\n  (blocks): Sequential(\n    (0): DepthwiseResidual(\n      (net): Sequential(\n        (0): Conv2d(12...), groups=128)\n        (1): SiLU()\n        (2): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))\n      )\n    )\n  )\n) = AIPVTokCodec(\n  (backbone): AlignedDCVC(\n    (intra): IntraBackboneAdapter(\n      (model): DMCI(\n        (bit_estimato...ize=(1, 1), stride=(1, 1))\n        )\n      )\n      (4): Conv2d(128, 128, kernel_size=(1, 1), stride=(1, 1))\n    )\n  )\n).predictor
+
+tests/aip_vtok/test_gpu_temporal.py:69: AssertionError
+=========================== short test summary info ============================
+FAILED tests/aip_vtok/test_gate1_fix.py::test_reference_supervision_uses_the_exact_inference_prefix_with_tokenizer_gradients[0]
+FAILED tests/aip_vtok/test_gate1_fix.py::test_reference_supervision_uses_the_exact_inference_prefix_with_tokenizer_gradients[1]
+FAILED tests/aip_vtok/test_gate1_fix.py::test_fsq_distinguishes_boundary_codes_from_shifted_tanh_saturation
+FAILED tests/aip_vtok/test_gate1_fix.py::test_two_sided_chroma_gate_rejects_false_color_and_mean_shift
+FAILED tests/aip_vtok/test_gpu_temporal.py::test_default_codec_has_no_external_predictor_in_64_frame_closed_loop
+5 failed, 2 deselected in 2.78s
