@@ -10,13 +10,14 @@ import torch
 from torch.nn import functional as F
 
 from aip_vtok.decoder.causal_state import ReferenceState
+from aip_vtok.evaluation.fix_metrics import fix_chroma
 from aip_vtok.evaluation.smoke import BUDGETS, aggregate_budgets, code_health
-from aip_vtok.models.codec import create_codec
+from aip_vtok.models.codec import create_legacy_codec
 from aip_vtok.runtime import file_hash, resolve, write_json
 from aip_vtok.training.checkpoint import load_trainable
 from aip_vtok.training.data import read_window, source_by_id, sources
 from aip_vtok.training.formal import settings
-from aip_vtok.training.losses import chroma_diagnostics
+from aip_vtok.training.losses import chroma_diagnostics, latent_mse_metrics
 from aip_vtok.training.prefix import prefix_canvas
 from cp_adaptok.data import save_rgb
 from cp_adaptok.metrics import MetricSuite
@@ -72,48 +73,74 @@ def images(directory, video, budget, original, rec):
     save_rgb(directory / "images" / f"{label}_k{budget}_crop.png", rec[..., 400:656, 800:1056])
 
 
+def measure_render(rendered, encoded, suite, rgb, fix):
+    if fix:
+        rec, raw, fused = rendered
+        return {
+            **suite(rgb, rec),
+            **fix_chroma(rgb, rec),
+            **latent_mse_metrics(raw, fused, encoded.native_latent),
+        }
+    return {**suite(rgb, rendered), **chroma_diagnostics(rgb, rendered)}
+
+
+def budget_row(config, video, frame_id, paired, budget, mode, values):
+    return {
+        "seed": config["seed"],
+        "mode": mode,
+        "video": video,
+        "frame": frame_id,
+        "frame_type": "I" if paired.context.intra else "P",
+        "budget": budget,
+        "required_reference_tokens": paired.reference_budget,
+        **values,
+        "bpp": None,
+        "real_bitstream": False,
+        "split": "validation",
+    }
+
+
 def evaluate_budget(
     config, codec, suite, video, frame_id, rgb, encoded, paired, independent_state, budget, directory
 ):
-    rows, exact_errors = [], []
+    fix = "model_version" in config
     append_until(paired, encoded.tokens.ids, budget)
-    rec = paired.render_frame()
-    metrics = {**suite(rgb, rec), **chroma_diagnostics(rgb, rec)}
+    rendered = paired.render_frame(with_latents=fix)
+    rec = rendered[0] if fix else rendered
+    metrics = measure_render(rendered, encoded, suite, rgb, fix)
+    if frame_id == 0 or (fix and directory is not None and frame_id == 63):
+        label = video if frame_id == 0 else f"{video}_f063"
+        if directory is not None:
+            images(directory, label, budget, rgb, rec)
+    rows = [budget_row(config, video, frame_id, paired, budget, "paired", metrics)]
+    if independent_state is None:
+        return rows, None, None, metrics["mse"]
     independent_encoded = codec.encode_frame(rgb, independent_state, frame_id)
     independent = codec.prefix_session(independent_encoded, independent_state, budget)
-    other = independent.render_frame()
+    independent_render = independent.render_frame(with_latents=fix)
+    other = independent_render[0] if fix else independent_render
     error = (rec - other).abs().max().item()
     equal_ids = torch.equal(encoded.tokens.ids, independent_encoded.tokens.ids)
-    exact_errors.append(
-        {
-            "video": video,
-            "frame": frame_id,
-            "budget": budget,
-            "max_rgb_error": error,
-            "equal_ids": equal_ids,
-        }
-    )
-    independent_metrics = metrics if error == 0 else {**suite(rgb, other), **chroma_diagnostics(rgb, other)}
-    for mode, values in (("paired", metrics), ("independent", independent_metrics)):
-        rows.append(
-            {
-                "seed": config["seed"],
-                "mode": mode,
-                "video": video,
-                "frame": frame_id,
-                "frame_type": "I" if paired.context.intra else "P",
-                "budget": budget,
-                "required_reference_tokens": paired.reference_budget,
-                **values,
-                "bpp": None,
-                "real_bitstream": False,
-                "split": "validation",
+    exact = {
+        "video": video,
+        "frame": frame_id,
+        "budget": budget,
+        "max_rgb_error": error,
+        "equal_ids": equal_ids,
+    }
+    if error == 0:
+        independent_metrics = metrics
+        if fix:
+            _, raw, fused = independent_render
+            independent_metrics = {
+                **metrics,
+                **latent_mse_metrics(raw, fused, independent_encoded.native_latent),
             }
-        )
+    else:
+        independent_metrics = measure_render(independent_render, independent_encoded, suite, rgb, fix)
+    rows.append(budget_row(config, video, frame_id, paired, budget, "independent", independent_metrics))
     independent_state = commit_after_render(independent, independent_encoded)
-    if frame_id == 0:
-        images(directory, video, budget, rgb, rec)
-    return rows, independent_state, exact_errors[0], metrics["mse"]
+    return rows, independent_state, exact, metrics["mse"]
 
 
 @torch.no_grad()
@@ -198,11 +225,21 @@ def evaluation_assets(config):
     artifact = torch.load(checkpoint, map_location="cpu", weights_only=False)
     if artifact["step"] != config["stage1"]["steps"] or artifact["config"] != config:
         raise ValueError("formal evaluation requires the declared completed checkpoint")
-    codec = create_codec(config).eval()
+    codec = create_legacy_codec(config).eval()
     load_trainable(codec, artifact["model"])
+    suite = metric_suite()
+    selected, clips, hashes = validation_inputs(config)
+    return directory, checkpoint, codec, suite, selected, clips, hashes
+
+
+def metric_suite():
     suite = MetricSuite("cuda:0")
     if suite.errors:
         raise RuntimeError(f"required metrics unavailable: {suite.errors}")
+    return suite
+
+
+def validation_inputs(config):
     available, hashes = sources(config, "validation")
     protocol = config["stage1"]["validation"]
     selected = [source_by_id(available, video) for video in protocol["videos"]]
@@ -211,7 +248,7 @@ def evaluation_assets(config):
     ]
     if sum(len(clip) for clip in clips) != protocol["total_frames"]:
         raise ValueError("validation protocol is not exactly 174 original frames")
-    return directory, checkpoint, codec, suite, selected, clips, hashes
+    return selected, clips, hashes
 
 
 def evaluate(config):
@@ -255,13 +292,17 @@ def store_evaluation(config, directory, checkpoint, hashes, rows, health, interv
     write_json(directory / "health.json", health)
     write_json(directory / "interventions.json", interventions)
     write_json(directory / "independent_exactness.json", exact)
+    write_frame_metrics(directory, rows)
+    write_json(directory / "evaluation.json", artifact)
+    return artifact
+
+
+def write_frame_metrics(directory, rows):
     with (directory / "frame_metrics.csv.tmp").open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
     (directory / "frame_metrics.csv.tmp").replace(directory / "frame_metrics.csv")
-    write_json(directory / "evaluation.json", artifact)
-    return artifact
 
 
 def main():

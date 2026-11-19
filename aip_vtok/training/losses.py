@@ -70,10 +70,36 @@ class ReconstructionLoss(nn.Module):
             "l1": F.l1_loss(original, reconstructed),
             "mse": F.mse_loss(original, reconstructed),
             "chroma": chroma_loss(original, reconstructed),
-            "lpips": self.perceptual_loss(original, reconstructed, crops),
         }
+        if crops is not None:
+            components["lpips"] = self.perceptual_loss(original, reconstructed, crops)
         total = sum(self.weights[name] * value for name, value in components.items())
         return total, components
+
+
+def latent_losses(raw, fused, native):
+    target = native.detach().float()
+    return {
+        "latent_raw": F.l1_loss(raw.float(), target),
+        "latent_fused": F.l1_loss(fused.float(), target),
+    }
+
+
+@torch.no_grad()
+def latent_mse_metrics(raw, fused, native):
+    raw_mse = F.mse_loss(raw.float(), native.float()).item()
+    fused_mse = F.mse_loss(fused.float(), native.float()).item()
+    return {
+        "raw_latent_mse": raw_mse,
+        "fused_latent_mse": fused_mse,
+        "delta_fusion_mse": fused_mse - raw_mse,
+    }
+
+
+def reference_loss(backbone, encoded, reference):
+    with torch.no_grad():
+        _, native_feature = backbone.decode_aligned(encoded.native_latent, encoded.context)
+    return F.l1_loss(reference.feature.float(), native_feature.float())
 
 
 @torch.no_grad()

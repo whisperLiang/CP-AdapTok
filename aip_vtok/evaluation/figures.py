@@ -75,6 +75,11 @@ def quality_plot(directory, output):
 
 def montage(directory, output, seed, video, crop):
     images = directory / f"gate1_seed{seed}/images"
+    filename = f"{video}_seed{seed}_{'crop' if crop else 'full'}_comparison.png"
+    return comparison(images, output / filename, video, crop)
+
+
+def comparison(images, output, video, crop):
     suffix = "_crop" if crop else ""
     labels = ["Original", *[f"K={k}" for k in BUDGETS]]
     paths = [
@@ -92,8 +97,36 @@ def montage(directory, output, seed, video, crop):
         x, y = index % 3 * width, index // 3 * (height + header)
         draw.text((x + 8, y + 5), label, fill="black")
         canvas.paste(frame, (x, y + header))
-    canvas.save(output / f"{video}_seed{seed}_{'crop' if crop else 'full'}_comparison.png")
+    canvas.save(output)
     return paths
+
+
+def fix_horizon_plot(cases, output):
+    fig, axes = plt.subplots(2, 1, sharex=True, figsize=(8, 5.5), constrained_layout=True)
+    for label, path in cases.items():
+        rows = json.loads(path.read_text())["rows"]
+        frames = [r["frame"] for r in rows]
+        line = axes[0].plot(frames, [r["reference_latent_rms"] for r in rows], label=label)[0]
+        axes[0].scatter([31, 63], [rows[i]["reference_latent_rms"] for i in (31, 63)], color=line.get_color())
+        axes[0].plot(
+            frames,
+            [r["native_aligned_latent_rms"] for r in rows],
+            color=line.get_color(),
+            linestyle=":",
+            alpha=0.6,
+            label=f"{label} native",
+        )
+        axes[1].plot(frames, [-10 * np.log10(max(r["mse"], 1e-12)) for r in rows], label=label)
+    axes[0].axhline(2, color="gray", linestyle="--", label="RMS limit")
+    for ax in axes:
+        ax.axvline(32, color="gray", linewidth=1, alpha=0.6)
+        ax.axvspan(48, 63, color="gray", alpha=0.08)
+        ax.legend(fontsize=8, ncol=2, loc="best")
+        ax.grid(alpha=0.2)
+    axes[0].set(ylabel="Aligned latent RMS", title="car-roundabout · 64 frames · GOP32")
+    axes[1].set(ylabel="K8192 frame PSNR (dB)", xlabel="Frame index", xticks=(0, 15, 31, 47, 63))
+    fig.savefig(output, dpi=180)
+    plt.close(fig)
 
 
 def horizon_series(rows):

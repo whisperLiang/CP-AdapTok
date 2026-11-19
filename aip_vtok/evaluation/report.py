@@ -162,8 +162,22 @@ def build(config):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default="configs/aip_vtok/gate0.yaml")
+    parser.add_argument("--gate1-fix", action="store_true")
+    parser.add_argument("--fix-config", default="configs/aip_vtok/gate1_fix.yaml")
     parser.add_argument("--require-pass", action="store_true")
     args = parser.parse_args()
+    if args.gate1_fix:
+        from aip_vtok.evaluation.report_fix import build_fix_report, status
+
+        result = build_fix_report(args.fix_config)
+        print(
+            json.dumps(
+                {"decision": status(result), "gate2_allowed": result["gate2_allowed"]}, ensure_ascii=False
+            )
+        )
+        if args.require_pass and not result["gate2_allowed"]:
+            raise SystemExit(2)
+        return
     result = build(load_config(args.config))
     print(json.dumps({k: result[k] for k in ("passed", "r0_passed", "reference_passed", "decision")}))
     if args.require_pass and not result["passed"]:

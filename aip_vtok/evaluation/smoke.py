@@ -50,6 +50,11 @@ def aggregate_budgets(rows):
                     "chroma_mse",
                     "chroma_mean_abs_bias",
                     "source_chroma_variance",
+                    "chroma_var_retention_pct",
+                    "chroma_mean_bias",
+                    "raw_latent_mse",
+                    "fused_latent_mse",
+                    "delta_fusion_mse",
                 )
                 if name in selected[0]
             },

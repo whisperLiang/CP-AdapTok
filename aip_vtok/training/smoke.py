@@ -11,7 +11,7 @@ import torch
 from aip_vtok.decoder.causal_state import ReferenceState
 from aip_vtok.evaluation.gates import assess_smoke
 from aip_vtok.evaluation.smoke import evaluate_smoke, write_curve
-from aip_vtok.models.codec import create_codec
+from aip_vtok.models.codec import create_legacy_codec
 from aip_vtok.runtime import file_hash, load_config, resolve, save_checkpoint, write_json
 from aip_vtok.training.budgets import sample_budgets
 from aip_vtok.training.checkpoint import checkpoint_artifact, restore
@@ -86,7 +86,7 @@ def initialize_smoke(config, resume):
         raise FileExistsError("existing smoke checkpoint: use --resume")
     directory.mkdir(parents=True, exist_ok=True)
     configure_determinism()
-    codec = create_codec(config).train()
+    codec = create_legacy_codec(config).train()
     objective = ReconstructionLoss(config["stage1"]["loss"]).cuda()
     suite = MetricSuite("cuda:0")
     if suite.errors:

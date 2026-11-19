@@ -19,6 +19,7 @@ class TokenEncoding:
     plan: ScanPlan
     residual1: torch.Tensor
     residual2: torch.Tensor
+    saturation: torch.Tensor | None = None
 
     def prefix_ids(self, budget):
         if not 0 <= budget <= self.ids.shape[1]:
@@ -69,24 +70,30 @@ class ResidualTokenizer(nn.Module):
             canvas = canvas.scatter_add(2, indices[None, None].expand_as(values), values)
         return canvas.reshape(codes.shape[0], 128, *shape)
 
-    def quantize_grid(self, grid, positions):
+    def quantize_grid(self, grid, positions, measure_saturation):
         values = grid.flatten(2).transpose(1, 2)[:, positions]
-        return self.fsq(values)
+        return self.fsq(values, measure_saturation=measure_saturation)
 
-    def encode(self, latent, prediction):
+    def encode(self, latent, prediction, *, measure_saturation=False):
         shape = latent.shape[-2:]
         positions0 = halton_order(shape[0] // 4, shape[1] // 4, latent.device)
-        codes0, ids0 = self.quantize_grid(self.anchor(latent - prediction), positions0)
+        codes0, ids0, *saturation0 = self.quantize_grid(
+            self.anchor(latent - prediction), positions0, measure_saturation
+        )
         reconstructed0 = prediction + self.synthesize_pass(codes0, positions0, 0, shape)
         residual1 = latent - reconstructed0.detach()
         tiers = make_tier_map(residual1)
         plan = scan_plan(tiers, self.maximum).to(latent.device)
         positions1 = plan.positions[plan.pass_ids == 1]
-        codes1, ids1 = self.quantize_grid(self.innovation(residual1), positions1)
+        codes1, ids1, *saturation1 = self.quantize_grid(
+            self.innovation(residual1), positions1, measure_saturation
+        )
         reconstructed1 = reconstructed0 + self.synthesize_pass(codes1, positions1, 1, shape)
         residual2 = latent - reconstructed1.detach()
         positions2 = plan.positions[plan.pass_ids == 2]
-        codes2, ids2 = self.quantize_grid(self.detail(residual2), positions2)
+        codes2, ids2, *saturation2 = self.quantize_grid(
+            self.detail(residual2), positions2, measure_saturation
+        )
         return TokenEncoding(
             torch.cat((ids0, ids1, ids2), 1),
             torch.cat((codes0, codes1, codes2), 1),
@@ -94,4 +101,5 @@ class ResidualTokenizer(nn.Module):
             plan,
             residual1,
             residual2,
+            torch.cat(saturation0 + saturation1 + saturation2, 1) if measure_saturation else None,
         )

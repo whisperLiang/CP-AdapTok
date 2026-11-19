@@ -5,7 +5,7 @@ import time
 import torch
 import yaml
 
-from aip_vtok.models.codec import create_codec
+from aip_vtok.models.codec import create_legacy_codec
 from aip_vtok.runtime import load_config, resolve, write_json
 from aip_vtok.training.data import read_window, source_by_id, sources
 from aip_vtok.training.losses import ReconstructionLoss
@@ -33,7 +33,7 @@ def main():
     config = load_config("configs/aip_vtok/gate0.yaml")
     settings = yaml.safe_load(resolve("configs/aip_vtok/gate1_smoke.yaml").read_text())
     config["stage1"] = settings["stage1"]
-    codec = create_codec(config).train()
+    codec = create_legacy_codec(config).train()
     artifact = torch.load(
         resolve(config["checkpoints"]) / "gate1_smoke/latest.pt", map_location="cpu", weights_only=False
     )

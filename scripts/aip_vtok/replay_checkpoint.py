@@ -6,6 +6,7 @@ import os
 
 import torch
 
+from aip_vtok.models.codec import LEGACY_MODEL_VERSION
 from aip_vtok.runtime import file_hash, resolve, write_json
 from aip_vtok.training.checkpoint import restore, trainable_state
 from aip_vtok.training.components import create_components
@@ -16,7 +17,7 @@ from aip_vtok.training.paired_step import paired_step
 
 def replay(config, artifact):
     artifact = copy.deepcopy(artifact)  # Optimizer step tensors must not alias another replay.
-    c = create_components(config)
+    c = create_components(config, model_version=LEGACY_MODEL_VERSION)
     rows, hashes = training_input(config)
     restore(artifact, c.codec, c.optimizer, c.rng, config, hashes)
     plan = training_plans(rows, 1, 4, c.rng)[0]

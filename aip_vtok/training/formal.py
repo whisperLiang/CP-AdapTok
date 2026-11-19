@@ -9,6 +9,7 @@ from pathlib import Path
 import torch
 import yaml
 
+from aip_vtok.models.codec import LEGACY_MODEL_VERSION
 from aip_vtok.runtime import file_hash, load_config, resolve, save_checkpoint, write_json
 from aip_vtok.training.checkpoint import checkpoint_artifact, restore
 from aip_vtok.training.components import TrainingComponents, create_components
@@ -68,7 +69,7 @@ def prepare(config, resume):
     if checkpoint.exists() and not resume:
         raise FileExistsError(f"{checkpoint}: use --resume")
     directory.mkdir(parents=True, exist_ok=True)
-    components = create_components(config)
+    components = create_components(config, model_version=LEGACY_MODEL_VERSION)
     rows, hashes = training_input(config)
     plans = training_plans(
         rows, config["stage1"]["steps"], config["stage1"]["sequence_length"], components.rng
@@ -95,12 +96,19 @@ def prepare(config, resume):
 
 def update(run, step, clip):
     config, components = run.config, run.components
+    stage = config["stage1"]
     if run.plans[step - 1]["flip"]:
         clip = clip.flip(-1)
     components.optimizer.zero_grad(set_to_none=True)
-    with torch.autocast("cuda", dtype=torch.bfloat16, enabled=config["stage1"]["amp_bf16"]):
+    with torch.autocast("cuda", dtype=torch.bfloat16, enabled=stage["amp_bf16"]):
         loss, records = paired_step(
-            components.codec, clip, components.objective, components.rng, step % 100 == 0 or step == 1
+            components.codec,
+            clip,
+            components.objective,
+            components.rng,
+            step % stage.get("gradient_every", 100) == 0 or step == 1,
+            weights=stage.get("alignment_loss"),
+            perceptual_frames=stage.get("perceptual_frames"),
         )
     gradients = gradient_diagnostics(components.codec)
     norm = torch.nn.utils.clip_grad_norm_(components.parameters, 1.0, error_if_nonfinite=True)
@@ -125,19 +133,29 @@ def record_progress(run, step, started):
             f"loss={run.history[-1]['loss']:.6f} elapsed_s={time.perf_counter() - started:.1f}",
             flush=True,
         )
-    if step % config["stage1"]["save_every"] == 0:
+    if step % config["stage1"]["save_every"] == 0 or step == config["stage1"]["steps"]:
         artifact = checkpoint_artifact(step, c.codec, c.optimizer, c.rng, run.history, config, run.hashes)
         artifact["plans"] = run.plans
+        progress = {
+            "peak_allocated_mib": torch.cuda.max_memory_allocated() / 2**20,
+            "wall_s_current_session": time.perf_counter() - started,
+        }
+        if "model_version" in config:
+            artifact["progress"] = progress
         save_checkpoint(run.checkpoint, artifact)
-        write_json(
-            run.directory / "training.json",
-            {
-                "history": run.history,
-                "steps": step,
-                "peak_allocated_mib": torch.cuda.max_memory_allocated() / 2**20,
-                "wall_s_current_session": time.perf_counter() - started,
-            },
-        )
+        publish_snapshot(run.checkpoint, step, config["stage1"].get("snapshots", ()))
+        write_json(run.directory / "training.json", {"history": run.history, "steps": step, **progress})
+
+
+def publish_snapshot(checkpoint, step, snapshots):
+    if step not in snapshots:
+        return
+    snapshot = checkpoint.with_name(f"step_{step:04d}.pt")
+    if not snapshot.exists() or file_hash(checkpoint) != file_hash(snapshot):
+        temporary = snapshot.with_suffix(".link")
+        temporary.unlink(missing_ok=True)
+        temporary.hardlink_to(checkpoint)
+        temporary.replace(snapshot)
 
 
 def finish(run):
@@ -156,9 +174,13 @@ def finish(run):
 
 def train(config, resume=False):
     run = prepare(config, resume)
+    return run_updates(run, prefetched_windows(run.rows, run.plans[run.start :]))
+
+
+def run_updates(run, clips):
     started = time.perf_counter()
     torch.cuda.reset_peak_memory_stats()
-    for step, clip in enumerate(prefetched_windows(run.rows, run.plans[run.start :]), run.start + 1):
+    for step, clip in enumerate(clips, run.start + 1):
         run.history.append(update(run, step, clip))
         record_progress(run, step, started)
     finish(run)

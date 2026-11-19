@@ -62,3 +62,17 @@ def test_frame_33_resets_prediction_and_reference_memory_without_rgb_commit(code
             assert torch.equal(encoded.tokens.ids, initial_ids)
             assert state.memory is None
             assert session.context.intra
+
+
+@torch.no_grad()
+def test_default_codec_has_no_external_predictor_in_64_frame_closed_loop(codec):
+    assert codec.predictor is None
+    rgb = torch.rand(1, 3, 64, 128, device="cuda")
+    state = ReferenceState()
+    for frame in range(64):
+        encoded = codec.encode_frame(rgb, state, frame)
+        session = codec.prefix_session(encoded, state, encoded.tokens.ids.shape[1])
+        rec = session.render_frame()
+        state = session.commit_reference_once()
+        assert torch.isfinite(rec).all() and torch.isfinite(state.feature).all()
+        assert state.latent.square().mean().sqrt() < 2

@@ -18,7 +18,7 @@ def load_trainable(codec, state):
 
 
 def checkpoint_artifact(step, codec, optimizer, rng, history, config, hashes):
-    return {
+    artifact = {
         "step": step,
         "model": trainable_state(codec),
         "optimizer": optimizer.state_dict(),
@@ -29,6 +29,22 @@ def checkpoint_artifact(step, codec, optimizer, rng, history, config, hashes):
         "config": config,
         "hashes": hashes,
     }
+    if "model_version" in config:
+        artifact["model_version"] = codec.model_version
+        if config["joint_projector"]:
+            artifact["projector"] = codec.projector.state_dict()
+    return artifact
+
+
+def load_fix_weights(codec, artifact):
+    if artifact.get("model_version") != codec.model_version:
+        raise ValueError("Gate 1-Fix model version mismatch; historical checkpoints require the legacy codec")
+    joint = artifact["config"]["joint_projector"]
+    if joint != ("projector" in artifact):
+        raise ValueError("Gate 1-Fix projector weights do not match the declared training policy")
+    load_trainable(codec, artifact["model"])
+    if joint:
+        codec.projector.load_state_dict(artifact["projector"])
 
 
 def require_identity(artifact, config, hashes, hash_key="hashes"):
@@ -45,6 +61,9 @@ def restore_training_state(artifact, optimizer, rng, stream_key="streams"):
 
 def restore(artifact, codec, optimizer, rng, config, hashes):
     require_identity(artifact, config, hashes)
-    load_trainable(codec, artifact["model"])
+    if "model_version" in config:
+        load_fix_weights(codec, artifact)
+    else:
+        load_trainable(codec, artifact["model"])
     restore_training_state(artifact, optimizer, rng)
     return artifact["step"], artifact["history"]

@@ -1,0 +1,44 @@
+gate1_config: configs/aip_vtok/gate1.yaml
+model_version: gate1-fix-v2
+use_temporal_predictor: false
+alignment_loss:
+  latent_raw: 0.5
+  latent_fused: 1.0
+  reference: 0.5
+smoke:
+  video: "DAVIS2017:bear"
+  start: 0
+  steps: 200
+  sequence_length: 4
+  save_every: 25
+  gradient_every: 50
+fix_a:
+  steps: 1000
+  sequence_length: 4
+  save_every: 100
+  snapshots: [500, 1000]
+fix_b:
+  fork_step: 500
+  steps: 500
+  sequence_length: 4
+  save_every: 100
+fix_c:
+  rollout: rollout_8f_detached_ref
+  steps: 2000
+  sequence_length: 8
+  perceptual_frames: 8
+  save_every: 100
+  snapshots: [500, 1000, 1500, 2000]
+limits:
+  maximum_reference_latent_rms: 2.0
+  minimum_reference_to_native_rms: 0.1
+  maximum_reference_to_native_rms: 10.0
+  maximum_fusion_delta_mse: 0.02
+  minimum_fix_a_psnr_gain_db: 0.5
+  maximum_fix_a_fused_mse_fraction: 0.75
+  maximum_tanh_saturation_ratio: 0.10
+  smoke_tanh_saturation_advisory: 0.25
+  minimum_pooled_dim_entropy_bits: 0.5
+  core_psnr_gain_db: 0.5
+  minimum_k8192_psnr_db: 24.5
+  advanced_k8192_lpips: 0.30

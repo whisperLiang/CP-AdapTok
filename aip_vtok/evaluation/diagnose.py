@@ -10,7 +10,7 @@ from aip_vtok.backbones.dcvc_aligned import continuous_intra_latent
 from aip_vtok.decoder.causal_state import ReferenceState
 from aip_vtok.evaluation.gates import distortion_summary
 from aip_vtok.evaluation.smoke import BUDGETS
-from aip_vtok.models.codec import create_codec
+from aip_vtok.models.codec import create_legacy_codec
 from aip_vtok.runtime import file_hash, resolve, write_json
 from aip_vtok.training.checkpoint import load_trainable
 from aip_vtok.training.data import read_window, source_by_id, sources
@@ -117,7 +117,7 @@ def diagnose(config):
     directory = resolve(config["output"]) / f"gate1_seed{config['seed']}"
     checkpoint = resolve(config["checkpoints"]) / f"gate1_seed{config['seed']}/latest.pt"
     before = file_hash(checkpoint)
-    codec = create_codec(config).eval()
+    codec = create_legacy_codec(config).eval()
     artifact = torch.load(checkpoint, map_location="cpu", weights_only=False)
     load_trainable(codec, artifact["model"])
     objective = ReconstructionLoss(config["stage1"]["loss"]).cuda()

@@ -11,6 +11,7 @@ from torch import nn
 
 from aip_vtok.backbones.latent_to_ref import LatentToRef
 from aip_vtok.backbones.temporal_predictor import TemporalPredictor
+from aip_vtok.decoder.causal_state import FrameContext
 from aip_vtok.decoder.fusion_decoder import FusionDecoder
 from aip_vtok.decoder.latent_canvas import LatentCanvas
 from aip_vtok.evaluation.evaluate import create_backbone, load_alignment
@@ -18,11 +19,17 @@ from aip_vtok.runtime import resolve
 from aip_vtok.tokenizer.residual_tokenizer import ResidualTokenizer, TokenEncoding
 from aip_vtok.tokenizer.tier_map import scan_plan
 
+MODEL_VERSION = "gate1-fix-v2"
+LEGACY_MODEL_VERSION = "gate1-508a97e"
+
 
 @dataclass
 class EncodedFrame:
     frame_id: int
     tokens: TokenEncoding
+    native_latent: torch.Tensor
+    context: FrameContext
+    prediction: torch.Tensor
 
 
 class DecodeSession:
@@ -31,7 +38,7 @@ class DecodeSession:
         self.context = codec.backbone.begin_frame(state, frame_id)
         device = codec.tokenizer.lifts[0].weight.device
         plan = scan_plan(tiers, codec.tokenizer.maximum).to(device)
-        prediction = codec.predictor(state.latent, self.context.intra, plan.latent_shape, device)
+        prediction = codec.base_latent(state, self.context, plan.latent_shape)
         self.canvas = LatentCanvas(codec.tokenizer, plan, prediction)
         self.reference_budget = min(
             codec.reference_i if self.context.intra else codec.reference_p, len(plan.positions)
@@ -54,11 +61,12 @@ class DecodeSession:
             else:
                 self.canvas.append_ids(part, position, reference)
 
-    def render_frame(self, checkpointed=False):
-        latent = self.codec.fusion(self.canvas.latent(), self.canvas.masks)
-        rgb, _ = self.codec.backbone.decode_aligned(latent, self.context, checkpointed)
+    def render_frame(self, checkpointed=False, *, with_latents=False):
+        raw = self.canvas.latent()
+        fused = self.codec.fusion(raw, self.canvas.masks)
+        rgb, _ = self.codec.backbone.decode_aligned(fused, self.context, checkpointed)
         self.rgb_decoder_calls += 1
-        return rgb
+        return (rgb, raw, fused) if with_latents else rgb
 
     def commit_reference_once(self):
         if self.canvas.count < self.reference_budget:
@@ -69,24 +77,36 @@ class DecodeSession:
 
 
 class AIPVTokCodec(nn.Module):
-    def __init__(self, backbone, projector, reference_i=2048, reference_p=510):
+    def __init__(
+        self, backbone, projector, reference_i=2048, reference_p=510, *, use_temporal_predictor=False
+    ):
         super().__init__()
         self.backbone, self.projector = backbone, projector
         self.backbone.requires_grad_(False)
         self.projector.requires_grad_(False).eval()
-        self.predictor = TemporalPredictor()
+        self.model_version = LEGACY_MODEL_VERSION if use_temporal_predictor else MODEL_VERSION
+        self.predictor = TemporalPredictor() if use_temporal_predictor else None
         self.tokenizer = ResidualTokenizer()
         self.fusion = FusionDecoder()
         self.reference_i, self.reference_p = reference_i, reference_p
         self.encode_calls = 0
 
+    def base_latent(self, state, context, shape):
+        weight = self.tokenizer.lifts[0].weight
+        if self.predictor is None:
+            return weight.new_zeros(1, 128, *shape)
+        return self.predictor(state.latent, context.intra, shape, weight.device)
+
     def encode_frame(self, rgb, state, frame_id):
         context = self.backbone.begin_frame(state, frame_id)
         with torch.no_grad():
-            native = self.backbone.aligned_latent(rgb, context)
-        prediction = self.predictor(state.latent, context.intra, native.shape[-2:], rgb.device)
+            native = self.backbone.aligned_latent(rgb, context).detach()
+        prediction = self.base_latent(state, context, native.shape[-2:])
         self.encode_calls += 1
-        return EncodedFrame(frame_id, self.tokenizer.encode(native, prediction))
+        tokens = self.tokenizer.encode(
+            native, prediction, measure_saturation=self.model_version == MODEL_VERSION
+        )
+        return EncodedFrame(frame_id, tokens, native, context, prediction)
 
     def begin_frame(self, frame_id, tiers, state):
         return DecodeSession(self, state, frame_id, tiers)
@@ -101,11 +121,20 @@ class AIPVTokCodec(nn.Module):
         return session
 
 
-def create_codec(config):
+def create_codec(config, *, model_version=MODEL_VERSION):
+    if model_version not in (MODEL_VERSION, LEGACY_MODEL_VERSION):
+        raise ValueError(f"unknown codec model version: {model_version}")
+    if config.get("model_version", model_version) != model_version:
+        raise ValueError("requested codec version differs from the model config")
     backbone = create_backbone(config)
     load_alignment(config, backbone)
     path = resolve(config["checkpoints"]) / "projector_w128/latest.pt"
     artifact = torch.load(path, map_location="cpu", weights_only=False)
     projector = LatentToRef(artifact["width"]).cuda()
     projector.load_state_dict(artifact["projector"])
-    return AIPVTokCodec(backbone, projector).cuda().to(memory_format=torch.channels_last)
+    codec = AIPVTokCodec(backbone, projector, use_temporal_predictor=model_version == LEGACY_MODEL_VERSION)
+    return codec.cuda().to(memory_format=torch.channels_last)
+
+
+def create_legacy_codec(config):
+    return create_codec(config, model_version=LEGACY_MODEL_VERSION)

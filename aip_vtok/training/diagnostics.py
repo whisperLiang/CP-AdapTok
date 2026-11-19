@@ -13,9 +13,12 @@ def gradient_diagnostics(codec):
         "anchor_encoder": codec.tokenizer.anchor,
         "innovation_encoder": codec.tokenizer.innovation,
         "detail_encoder": codec.tokenizer.detail,
-        "temporal_predictor": codec.predictor,
         "fusion": codec.fusion,
     }
+    if codec.predictor is not None:
+        modules["temporal_predictor"] = codec.predictor
+    else:
+        modules["projector"] = codec.projector
     modules.update({f"lift{index}": module for index, module in enumerate(codec.tokenizer.lifts)})
     return {name: module_gradient_norm(module) for name, module in modules.items()}
 

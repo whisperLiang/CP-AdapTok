@@ -16,15 +16,20 @@ class FSQ(nn.Module):
         self.register_buffer("radix", torch.cat((torch.ones(1, dtype=torch.long), levels.cumprod(0)[:-1])))
         self.register_buffer("half_width", levels // 2)
 
-    def forward(self, x):
+    def forward(self, x, *, measure_saturation=False):
         x = x.float()  # FP32 scalar bin boundaries under training autocast.
         extent = (self.levels.to(x.dtype) - 1) / 2
         offset = (self.levels % 2 == 0).to(x.dtype) / 2
         shift = torch.atanh(offset / extent)
-        bounded = torch.tanh(x + shift) * extent - offset
+        activated = torch.tanh(x + shift)
+        bounded = activated * extent - offset
         quantized = bounded + (bounded.round() - bounded).detach()
         codes = quantized / self.half_width
-        return codes, self.codes_to_ids(codes.detach())
+        ids = self.codes_to_ids(codes.detach())
+        if measure_saturation:
+            saturation = 1 - activated.detach().square() < 0.05
+            return codes, ids, saturation
+        return codes, ids
 
     def codes_to_ids(self, codes):
         digits = (codes * self.half_width).round().long() + self.half_width
