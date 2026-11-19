@@ -1,0 +1,22 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+____ test_independent_ref_comes_from_b3_and_display_budget_cannot_change_it ____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x73fd00b80560>
+
+    def test_independent_ref_comes_from_b3_and_display_budget_cannot_change_it(monkeypatch):
+>       from aip_vtok.sparse_rfsq import rollout
+E       ImportError: cannot import name 'rollout' from 'aip_vtok.sparse_rfsq' (/home/whisperliang/CP-AdapTok/aip_vtok/sparse_rfsq/__init__.py)
+
+tests/aip_vtok/test_sparse_rfsq.py:158: ImportError
+___________ test_gradient_diagnostics_match_known_norms_and_cosines ____________
+
+    def test_gradient_diagnostics_match_known_norms_and_cosines():
+>       from aip_vtok.sparse_rfsq.training import gradient_vectors, summarize_gradients
+E       ModuleNotFoundError: No module named 'aip_vtok.sparse_rfsq.training'
+
+tests/aip_vtok/test_sparse_rfsq.py:200: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED tests/aip_vtok/test_sparse_rfsq.py::test_independent_ref_comes_from_b3_and_display_budget_cannot_change_it
+FAILED tests/aip_vtok/test_sparse_rfsq.py::test_gradient_diagnostics_match_known_norms_and_cosines
+2 failed, 15 deselected in 2.99s

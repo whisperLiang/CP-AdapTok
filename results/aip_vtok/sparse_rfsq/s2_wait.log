@@ -1,0 +1,55 @@
+H100 busy. Waiting for the active GPU work to finish.
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+S2 2-frame smoke: loss=0.208442, GPU peak=15607 MiB
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+S2 4-frame smoke: loss=0.232803, GPU peak=3832 MiB
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+S2 W1 50/500, loss=0.243465, 1.250s/update
+S2 W1 100/500, loss=0.187792, 1.239s/update
+S2 W1 150/500, loss=0.237489, 1.221s/update
+S2 W1 200/500, loss=0.174743, 1.273s/update
+S2 W1 250/500, loss=0.248477, 1.316s/update
+S2 W1 300/500, loss=0.281965, 1.316s/update
+S2 W1 350/500, loss=0.152843, 1.353s/update
+S2 W1 400/500, loss=0.186733, 1.367s/update
+S2 W1 450/500, loss=0.190495, 1.392s/update
+S2 W1 500/500, loss=0.125069, 1.403s/update
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+S2 W2 50/500, loss=0.182385, 1.487s/update
+S2 W2 100/500, loss=0.141718, 1.489s/update
+S2 W2 150/500, loss=0.174927, 1.466s/update
+S2 W2 200/500, loss=0.132185, 1.463s/update
+S2 W2 250/500, loss=0.193413, 1.440s/update
+S2 W2 300/500, loss=0.228838, 1.432s/update
+S2 W2 350/500, loss=0.106707, 1.451s/update
+S2 W2 400/500, loss=0.134312, 1.434s/update
+S2 W2 450/500, loss=0.142126, 1.445s/update
+S2 W2 500/500, loss=0.089527, 1.424s/update
+Validation DAVIS2017:blackswan: 50 frames, 2 methods, two histories
+Validation DAVIS2017:car-roundabout: 64 frames, 2 methods, two histories
+Validation DAVIS2017:dog: 60 frames, 2 methods, two histories
+S2 gate: [('W1', {'hard_integrity': True, 'focus_psnr': True, 'focus_lpips_dists': True, 'late_quality': False, 'reference_rms': True, 'psnr_backslides': True}), ('W2', {'hard_integrity': True, 'focus_psnr': True, 'focus_lpips_dists': True, 'late_quality': False, 'reference_rms': True, 'psnr_backslides': True})]

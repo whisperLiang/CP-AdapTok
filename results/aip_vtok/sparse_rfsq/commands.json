@@ -1,0 +1,67 @@
+[
+  {
+    "stage": "从封存基线创建分支",
+    "command": "git switch -c experiment/aip-vtok-sparse-rfsq a8474ee",
+    "exit_code": 0
+  },
+  {
+    "stage": "ub-mode 接收端 TDD 红灯",
+    "command": "env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 .venv-native/bin/python -m pytest -q -p no:cacheprovider tests/aip_vtok/test_sparse_rfsq.py",
+    "exit_code": 2
+  },
+  {
+    "stage": "ub-mode 闭环和梯度 TDD 红灯",
+    "command": "env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 .venv-native/bin/python -m pytest -q -p no:cacheprovider tests/aip_vtok/test_sparse_rfsq.py -k 'independent_ref or gradient_diagnostics'",
+    "exit_code": 1
+  },
+  {
+    "stage": "27 项新增测试",
+    "command": "env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 .venv-native/bin/python -m pytest -q -p no:cacheprovider tests/aip_vtok/test_sparse_rfsq.py",
+    "exit_code": 0
+  },
+  {
+    "stage": "联合回归收集",
+    "command": "env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 .venv-native/bin/python -m pytest -q -p no:cacheprovider --collect-only cp_adaptok/tests tests/aip_vtok",
+    "exit_code": 0
+  },
+  {
+    "stage": "新增路径 lint",
+    "command": ".venv-native/bin/ruff check aip_vtok/sparse_rfsq scripts/aip_vtok/run_sparse_rfsq.py tests/aip_vtok/test_sparse_rfsq.py",
+    "exit_code": 0
+  },
+  {
+    "stage": "9 项隔离契约变异",
+    "command": "env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 .venv-native/bin/python /tmp/sparse_rfsq_mutations.py",
+    "exit_code": 0
+  },
+  {
+    "stage": "契约覆盖率",
+    "command": "env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 COVERAGE_FILE=results/aip_vtok/sparse_rfsq/.coverage.contracts .venv-native/bin/coverage run --branch --source=aip_vtok.sparse_rfsq -m pytest -q -p no:cacheprovider tests/aip_vtok/test_sparse_rfsq.py",
+    "exit_code": 0
+  },
+  {
+    "stage": "实现提交",
+    "command": "git commit -m 'feat(aip-vtok): add gated sparse residual FSQ study'",
+    "exit_code": 0
+  },
+  {
+    "stage": "S1 与联合回归产物提交",
+    "command": "git commit -m 'data(aip-vtok): record the Train-locked sparse scan selection'",
+    "exit_code": 0
+  },
+  {
+    "stage": "原始数据、门控与哈希复核",
+    "command": "env PYTHONPATH=. PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 .venv-native/bin/python -B /tmp/verify_sparse_rfsq.py",
+    "exit_code": 0
+  },
+  {
+    "stage": "自动汇总报告和图表",
+    "command": "env OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 CUBLAS_WORKSPACE_CONFIG=:4096:8 .venv-native/bin/python -u scripts/aip_vtok/run_sparse_rfsq.py --stage report",
+    "exit_code": 0
+  },
+  {
+    "stage": "导出 SVG 的初次空白检查",
+    "command": "git diff --cached --check",
+    "exit_code": 2
+  }
+]

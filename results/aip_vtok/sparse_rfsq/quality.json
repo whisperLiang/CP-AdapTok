@@ -1,0 +1,1227 @@
+{
+  "methods": {
+    "complexity": "radon cyclomatic complexity",
+    "crap": "CRAP with measured unit and report line coverage; live CUDA stages are separate evidence",
+    "duplication": "token sequence similarity, >= 0.8 across functions with >= 5 body lines"
+  },
+  "max_cc": 10,
+  "functions": [
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "codes",
+      "line": 40,
+      "cc": 2,
+      "measured_line_coverage_pct": 50.0,
+      "crap": 2.5
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "check_layouts",
+      "line": 59,
+      "cc": 8,
+      "measured_line_coverage_pct": 14.285714285714285,
+      "crap": 48.30320699708456
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "load_inputs",
+      "line": 68,
+      "cc": 4,
+      "measured_line_coverage_pct": 8.333333333333332,
+      "crap": 16.324074074074073
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "read_entropy",
+      "line": 84,
+      "cc": 6,
+      "measured_line_coverage_pct": 33.33333333333333,
+      "crap": 16.66666666666667
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "holdout_plan",
+      "line": 91,
+      "cc": 6,
+      "measured_line_coverage_pct": 14.285714285714285,
+      "crap": 28.670553935860063
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "training_catalog",
+      "line": 102,
+      "cc": 9,
+      "measured_line_coverage_pct": 85.71428571428571,
+      "crap": 9.236151603498543
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "holdout_frames",
+      "line": 113,
+      "cc": 6,
+      "measured_line_coverage_pct": 4.545454545454546,
+      "crap": 37.3106686701728
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "trial_tables",
+      "line": 137,
+      "cc": 3,
+      "measured_line_coverage_pct": 50.0,
+      "crap": 4.125
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "calibration_scores",
+      "line": 142,
+      "cc": 3,
+      "measured_line_coverage_pct": 16.666666666666664,
+      "crap": 8.208333333333336
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "score_frame",
+      "line": 151,
+      "cc": 2,
+      "measured_line_coverage_pct": 12.5,
+      "crap": 4.6796875
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "has_progress",
+      "line": 163,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "score_curves",
+      "line": 167,
+      "cc": 6,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 6.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "common_sigma_scores",
+      "line": 180,
+      "cc": 6,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 6.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "select",
+      "line": 186,
+      "cc": 7,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 7.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "freeze_scan",
+      "line": 198,
+      "cc": 4,
+      "measured_line_coverage_pct": 5.555555555555555,
+      "crap": 17.478737997256516
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "load_scan",
+      "line": 221,
+      "cc": 5,
+      "measured_line_coverage_pct": 12.5,
+      "crap": 21.748046875
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "validate_scan",
+      "line": 232,
+      "cc": 8,
+      "measured_line_coverage_pct": 8.333333333333332,
+      "crap": 57.29629629629629
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "Inputs.cases",
+      "line": 54,
+      "cc": 2,
+      "measured_line_coverage_pct": 33.33333333333333,
+      "crap": 3.1851851851851856
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/calibration.py",
+      "function": "Inputs.cases",
+      "line": 54,
+      "cc": 2,
+      "measured_line_coverage_pct": 33.33333333333333,
+      "crap": 3.1851851851851856
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "reference_stats",
+      "line": 48,
+      "cc": 2,
+      "measured_line_coverage_pct": 85.71428571428571,
+      "crap": 2.011661807580175
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "check_finite",
+      "line": 62,
+      "cc": 4,
+      "measured_line_coverage_pct": 33.33333333333333,
+      "crap": 8.740740740740742
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "score_frame",
+      "line": 96,
+      "cc": 4,
+      "measured_line_coverage_pct": 7.142857142857142,
+      "crap": 16.81049562682216
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "video_rows",
+      "line": 116,
+      "cc": 8,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 8.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "validate_inventory",
+      "line": 140,
+      "cc": 10,
+      "measured_line_coverage_pct": 77.77777777777779,
+      "crap": 11.097393689986282
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "health_passed",
+      "line": 151,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "evaluate",
+      "line": 155,
+      "cc": 6,
+      "measured_line_coverage_pct": 6.666666666666667,
+      "crap": 35.269333333333336
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "summarize_points",
+      "line": 172,
+      "cc": 4,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 4.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "efficiency",
+      "line": 179,
+      "cc": 5,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 5.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "summaries",
+      "line": 195,
+      "cc": 9,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 9.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "legacy_trial",
+      "line": 207,
+      "cc": 1,
+      "measured_line_coverage_pct": 50.0,
+      "crap": 1.125
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "s1_trials",
+      "line": 211,
+      "cc": 2,
+      "measured_line_coverage_pct": 16.666666666666664,
+      "crap": 4.314814814814815
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "balanced_curve",
+      "line": 219,
+      "cc": 4,
+      "measured_line_coverage_pct": 33.33333333333333,
+      "crap": 8.740740740740742
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "s1_decision",
+      "line": 225,
+      "cc": 8,
+      "measured_line_coverage_pct": 12.5,
+      "crap": 50.875
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "run_s1",
+      "line": 238,
+      "cc": 2,
+      "measured_line_coverage_pct": 9.090909090909092,
+      "crap": 5.005259203606311
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "load_s1",
+      "line": 252,
+      "cc": 7,
+      "measured_line_coverage_pct": 10.0,
+      "crap": 42.721000000000004
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "Trial.history",
+      "line": 40,
+      "cc": 2,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 2.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "Trial.fields",
+      "line": 43,
+      "cc": 1,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 1.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "Trial.history",
+      "line": 40,
+      "cc": 2,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 2.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "Trial.fields",
+      "line": 43,
+      "cc": 1,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 1.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "FrameScorer.__init__",
+      "line": 70,
+      "cc": 1,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 1.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "FrameScorer.context_cache",
+      "line": 75,
+      "cc": 7,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 7.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "FrameScorer.measure",
+      "line": 85,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "FrameScorer.__init__",
+      "line": 70,
+      "cc": 1,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 1.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "FrameScorer.context_cache",
+      "line": 75,
+      "cc": 7,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 7.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/evaluation.py",
+      "function": "FrameScorer.measure",
+      "line": 85,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "open_run",
+      "line": 67,
+      "cc": 1,
+      "measured_line_coverage_pct": 11.11111111111111,
+      "crap": 1.7023319615912207
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "test_counts",
+      "line": 79,
+      "cc": 4,
+      "measured_line_coverage_pct": 20.0,
+      "crap": 12.192000000000002
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "test_gate",
+      "line": 86,
+      "cc": 8,
+      "measured_line_coverage_pct": 16.666666666666664,
+      "crap": 45.037037037037045
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "run_tests",
+      "line": 96,
+      "cc": 3,
+      "measured_line_coverage_pct": 9.090909090909092,
+      "crap": 9.761833208114199
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "execute_stage",
+      "line": 112,
+      "cc": 4,
+      "measured_line_coverage_pct": 10.0,
+      "crap": 15.664000000000001
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "audit_path",
+      "line": 126,
+      "cc": 1,
+      "measured_line_coverage_pct": 33.33333333333333,
+      "crap": 1.2962962962962963
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "idle_gpu",
+      "line": 131,
+      "cc": 6,
+      "measured_line_coverage_pct": 8.333333333333332,
+      "crap": 33.729166666666664
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "preflight",
+      "line": 145,
+      "cc": 3,
+      "measured_line_coverage_pct": 11.11111111111111,
+      "crap": 9.320987654320987
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "main",
+      "line": 156,
+      "cc": 10,
+      "measured_line_coverage_pct": 17.647058823529413,
+      "crap": 65.85182169753713
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "Experiment.frozen_modules",
+      "line": 46,
+      "cc": 2,
+      "measured_line_coverage_pct": 50.0,
+      "crap": 2.5
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "Experiment.tensor_hashes",
+      "line": 49,
+      "cc": 2,
+      "measured_line_coverage_pct": 50.0,
+      "crap": 2.5
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "Experiment.verify_integrity",
+      "line": 52,
+      "cc": 10,
+      "measured_line_coverage_pct": 10.0,
+      "crap": 82.9
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "Experiment.frozen_modules",
+      "line": 46,
+      "cc": 2,
+      "measured_line_coverage_pct": 50.0,
+      "crap": 2.5
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "Experiment.tensor_hashes",
+      "line": 49,
+      "cc": 2,
+      "measured_line_coverage_pct": 50.0,
+      "crap": 2.5
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/experiment.py",
+      "function": "Experiment.verify_integrity",
+      "line": 52,
+      "cc": 10,
+      "measured_line_coverage_pct": 10.0,
+      "crap": 82.9
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/figures.py",
+      "function": "new_axes",
+      "line": 15,
+      "cc": 1,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 1.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/figures.py",
+      "function": "save",
+      "line": 26,
+      "cc": 2,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 2.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/figures.py",
+      "function": "budget_axis",
+      "line": 37,
+      "cc": 2,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 2.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/figures.py",
+      "function": "s1_curves",
+      "line": 43,
+      "cc": 6,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 6.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/figures.py",
+      "function": "s2_gains",
+      "line": 58,
+      "cc": 7,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 7.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/figures.py",
+      "function": "gradient_cosines",
+      "line": 74,
+      "cc": 5,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 5.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/gates.py",
+      "function": "point_index",
+      "line": 10,
+      "cc": 3,
+      "measured_line_coverage_pct": 50.0,
+      "crap": 4.125
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/gates.py",
+      "function": "gains",
+      "line": 14,
+      "cc": 3,
+      "measured_line_coverage_pct": 16.666666666666664,
+      "crap": 8.208333333333336
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/gates.py",
+      "function": "paired_backslides",
+      "line": 26,
+      "cc": 2,
+      "measured_line_coverage_pct": 12.5,
+      "crap": 4.6796875
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/gates.py",
+      "function": "focus_checks",
+      "line": 40,
+      "cc": 10,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 10.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/gates.py",
+      "function": "meets_perceptual_gate",
+      "line": 51,
+      "cc": 2,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 2.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/gates.py",
+      "function": "horizon_checks",
+      "line": 55,
+      "cc": 9,
+      "measured_line_coverage_pct": 33.33333333333333,
+      "crap": 33.00000000000001
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/gates.py",
+      "function": "pilot_decision",
+      "line": 69,
+      "cc": 5,
+      "measured_line_coverage_pct": 14.285714285714285,
+      "crap": 20.743440233236157
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/protocol.py",
+      "function": "freeze_protocol",
+      "line": 45,
+      "cc": 2,
+      "measured_line_coverage_pct": 14.285714285714285,
+      "crap": 4.518950437317785
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/protocol.py",
+      "function": "experiment_lock",
+      "line": 86,
+      "cc": 1,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 1.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/protocol.py",
+      "function": "allowed",
+      "line": 93,
+      "cc": 2,
+      "measured_line_coverage_pct": 50.0,
+      "crap": 2.5
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/protocol.py",
+      "function": "protected_digest",
+      "line": 101,
+      "cc": 9,
+      "measured_line_coverage_pct": 8.333333333333332,
+      "crap": 71.390625
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/protocol.py",
+      "function": "source_digest",
+      "line": 115,
+      "cc": 3,
+      "measured_line_coverage_pct": 12.5,
+      "crap": 9.029296875
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/protocol.py",
+      "function": "write_integrity",
+      "line": 125,
+      "cc": 3,
+      "measured_line_coverage_pct": 16.666666666666664,
+      "crap": 8.208333333333336
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/receiver.py",
+      "function": "require_prefixes",
+      "line": 17,
+      "cc": 3,
+      "measured_line_coverage_pct": 66.66666666666666,
+      "crap": 3.3333333333333335
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/receiver.py",
+      "function": "sparse_values",
+      "line": 29,
+      "cc": 6,
+      "measured_line_coverage_pct": 83.33333333333334,
+      "crap": 6.166666666666667
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/receiver.py",
+      "function": "interpolate",
+      "line": 43,
+      "cc": 1,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 1.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/receiver.py",
+      "function": "RecoveryNet.__init__",
+      "line": 51,
+      "cc": 2,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 2.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/receiver.py",
+      "function": "RecoveryNet.forward",
+      "line": 57,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/receiver.py",
+      "function": "RecoveryNet.__init__",
+      "line": 51,
+      "cc": 2,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 2.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/receiver.py",
+      "function": "RecoveryNet.forward",
+      "line": 57,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/receiver.py",
+      "function": "Receiver.__call__",
+      "line": 74,
+      "cc": 3,
+      "measured_line_coverage_pct": 11.11111111111111,
+      "crap": 9.320987654320987
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/receiver.py",
+      "function": "Receiver.__call__",
+      "line": 74,
+      "cc": 3,
+      "measured_line_coverage_pct": 11.11111111111111,
+      "crap": 9.320987654320987
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "table",
+      "line": 35,
+      "cc": 2,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 2.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "arm",
+      "line": 42,
+      "cc": 2,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 2.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "metrics_row",
+      "line": 47,
+      "cc": 1,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 1.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "metrics_table",
+      "line": 58,
+      "cc": 2,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 2.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "efficiency_table",
+      "line": 64,
+      "cc": 2,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 2.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "backslide_table",
+      "line": 72,
+      "cc": 4,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 4.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "horizon_tables",
+      "line": 81,
+      "cc": 4,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 4.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "locked_selection",
+      "line": 94,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "s1_comparison",
+      "line": 105,
+      "cc": 7,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 7.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "s1_final_step",
+      "line": 126,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "measurements",
+      "line": 131,
+      "cc": 2,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 2.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "gate_table",
+      "line": 141,
+      "cc": 6,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 6.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "delta_table",
+      "line": 148,
+      "cc": 4,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 4.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "late_history_comparison",
+      "line": 155,
+      "cc": 4,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 4.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "late_perceptual_peaks",
+      "line": 169,
+      "cc": 4,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 4.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "gradient_records",
+      "line": 180,
+      "cc": 4,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 4.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "cosine_cell",
+      "line": 185,
+      "cc": 5,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 5.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "gradient_tables",
+      "line": 190,
+      "cc": 10,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 10.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "diagnostic_interpretation",
+      "line": 202,
+      "cc": 6,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 6.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "write_s1",
+      "line": 212,
+      "cc": 5,
+      "measured_line_coverage_pct": 90.9090909090909,
+      "crap": 5.018782870022539
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "write_s2",
+      "line": 233,
+      "cc": 7,
+      "measured_line_coverage_pct": 85.0,
+      "crap": 7.165375
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "s2_limits",
+      "line": 263,
+      "cc": 1,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 1.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "command_table",
+      "line": 272,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "work_log",
+      "line": 278,
+      "cc": 8,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 8.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/report.py",
+      "function": "generate",
+      "line": 301,
+      "cc": 7,
+      "measured_line_coverage_pct": 93.75,
+      "crap": 7.011962890625
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/rollout.py",
+      "function": "FrameCode.encode",
+      "line": 23,
+      "cc": 1,
+      "measured_line_coverage_pct": 33.33333333333333,
+      "crap": 1.2962962962962963
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/rollout.py",
+      "function": "FrameCode.encode",
+      "line": 23,
+      "cc": 1,
+      "measured_line_coverage_pct": 33.33333333333333,
+      "crap": 1.2962962962962963
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/rollout.py",
+      "function": "CausalPair.commit",
+      "line": 41,
+      "cc": 2,
+      "measured_line_coverage_pct": 83.33333333333334,
+      "crap": 2.0185185185185186
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/rollout.py",
+      "function": "CausalPair.advance",
+      "line": 49,
+      "cc": 1,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 1.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/rollout.py",
+      "function": "CausalPair.commit",
+      "line": 41,
+      "cc": 2,
+      "measured_line_coverage_pct": 83.33333333333334,
+      "crap": 2.0185185185185186
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/rollout.py",
+      "function": "CausalPair.advance",
+      "line": 49,
+      "cc": 1,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 1.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/scan.py",
+      "function": "coarse_slots",
+      "line": 20,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/scan.py",
+      "function": "scan_table",
+      "line": 31,
+      "cc": 9,
+      "measured_line_coverage_pct": 81.81818181818183,
+      "crap": 9.486851990984222
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/scan.py",
+      "function": "refine_slots",
+      "line": 44,
+      "cc": 7,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 7.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/scan.py",
+      "function": "rates",
+      "line": 62,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/scan.py",
+      "function": "Plan.encode",
+      "line": 79,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/scan.py",
+      "function": "Plan.receive",
+      "line": 85,
+      "cc": 5,
+      "measured_line_coverage_pct": 93.33333333333333,
+      "crap": 5.007407407407407
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/scan.py",
+      "function": "Plan.encode",
+      "line": 79,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/scan.py",
+      "function": "Plan.receive",
+      "line": 85,
+      "cc": 5,
+      "measured_line_coverage_pct": 93.33333333333333,
+      "crap": 5.007407407407407
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "gradient_vectors",
+      "line": 46,
+      "cc": 3,
+      "measured_line_coverage_pct": 100.0,
+      "crap": 3.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "summarize_gradients",
+      "line": 52,
+      "cc": 7,
+      "measured_line_coverage_pct": 83.33333333333334,
+      "crap": 7.226851851851852
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "budgets_for",
+      "line": 61,
+      "cc": 3,
+      "measured_line_coverage_pct": 25.0,
+      "crap": 6.796875
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "create_model",
+      "line": 67,
+      "cc": 1,
+      "measured_line_coverage_pct": 33.33333333333333,
+      "crap": 1.2962962962962963
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "smoke",
+      "line": 159,
+      "cc": 6,
+      "measured_line_coverage_pct": 5.555555555555555,
+      "crap": 36.32716049382716
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "checkpoint_path",
+      "line": 182,
+      "cc": 1,
+      "measured_line_coverage_pct": 50.0,
+      "crap": 1.125
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "pilot_identity",
+      "line": 186,
+      "cc": 1,
+      "measured_line_coverage_pct": 50.0,
+      "crap": 1.125
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "resume",
+      "line": 192,
+      "cc": 8,
+      "measured_line_coverage_pct": 9.090909090909092,
+      "crap": 56.08414725770097
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "save_progress",
+      "line": 205,
+      "cc": 2,
+      "measured_line_coverage_pct": 20.0,
+      "crap": 4.048
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "train_variant",
+      "line": 214,
+      "cc": 9,
+      "measured_line_coverage_pct": 5.263157894736842,
+      "crap": 77.87184720804784
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "compare_training",
+      "line": 236,
+      "cc": 8,
+      "measured_line_coverage_pct": 14.285714285714285,
+      "crap": 48.30320699708456
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "baseline_rows",
+      "line": 245,
+      "cc": 4,
+      "measured_line_coverage_pct": 50.0,
+      "crap": 6.0
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "verify_fixed_history",
+      "line": 249,
+      "cc": 8,
+      "measured_line_coverage_pct": 20.0,
+      "crap": 40.76800000000001
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "score_pilot",
+      "line": 258,
+      "cc": 8,
+      "measured_line_coverage_pct": 5.88235294117647,
+      "crap": 61.357215550580094
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "run_pilot",
+      "line": 278,
+      "cc": 10,
+      "measured_line_coverage_pct": 21.428571428571427,
+      "crap": 58.505830903790084
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "Trainer.__init__",
+      "line": 73,
+      "cc": 1,
+      "measured_line_coverage_pct": 14.285714285714285,
+      "crap": 1.6297376093294462
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "Trainer.objective_terms",
+      "line": 81,
+      "cc": 3,
+      "measured_line_coverage_pct": 7.6923076923076925,
+      "crap": 10.078743741465637
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "Trainer.frame_update",
+      "line": 97,
+      "cc": 5,
+      "measured_line_coverage_pct": 5.263157894736842,
+      "crap": 26.25674296544686
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "Trainer.check_step_zero",
+      "line": 118,
+      "cc": 5,
+      "measured_line_coverage_pct": 9.090909090909092,
+      "crap": 23.78287002253944
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "Trainer.step",
+      "line": 130,
+      "cc": 9,
+      "measured_line_coverage_pct": 4.0,
+      "crap": 80.66361599999999
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "Trainer.__init__",
+      "line": 73,
+      "cc": 1,
+      "measured_line_coverage_pct": 14.285714285714285,
+      "crap": 1.6297376093294462
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "Trainer.objective_terms",
+      "line": 81,
+      "cc": 3,
+      "measured_line_coverage_pct": 7.6923076923076925,
+      "crap": 10.078743741465637
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "Trainer.frame_update",
+      "line": 97,
+      "cc": 5,
+      "measured_line_coverage_pct": 5.263157894736842,
+      "crap": 26.25674296544686
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "Trainer.check_step_zero",
+      "line": 118,
+      "cc": 5,
+      "measured_line_coverage_pct": 9.090909090909092,
+      "crap": 23.78287002253944
+    },
+    {
+      "file": "aip_vtok/sparse_rfsq/training.py",
+      "function": "Trainer.step",
+      "line": 130,
+      "cc": 9,
+      "measured_line_coverage_pct": 4.0,
+      "crap": 80.66361599999999
+    }
+  ],
+  "duplicate_pairs": []
+}

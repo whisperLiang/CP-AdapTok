@@ -112,17 +112,20 @@ def s1_comparison(summary):
             rows.append((mode, policy, *(f"{v:.3f}" for v in curve)))
     focus = table(("历史", "B2 扫描表", *BUDGETS), rows)
     gain = by_point["SP-1", CLOSED, 8192]["psnr_global_mse"] - by_point["SP-2", CLOSED, 8192]["psnr_global_mse"]
-    last = {r["strategy"]: r for r in summary["validation"]["efficiency"]
-            if r["method"] == B2 and r["history"] == CLOSED and r["upper"] == 8192}
-    space, precision = (last[name]["delta_mse_per_fixed_bit"] for name in ("SP-1", "SP-2"))
+    last = s1_final_step(summary["validation"]["efficiency"])
     low_control = by_point[LEGACY, CLOSED, 510]["psnr_global_mse"]
     low_sp1 = by_point["SP-1", CLOSED, 510]["psnr_global_mse"]
     return ["### 空间覆盖与精修", focus,
             f"在 174 帧独立闭环的 K8192，SP‑1 相对 SP‑2 的全局 PSNR 差为 **{gain:+.3f} dB**。"
             "两表到 K4096 使用相同的一级槽位，最后 4096 个符号分别用于新空间观测和已到达槽位的残差。"
-            f"该段每新增固定负载 bit 的 RGB MSE 下降量依次为 {space:+.5e} 和 {precision:+.5e}。",
+            f"该段每新增固定负载 bit 的 RGB MSE 下降量依次为 {last['SP-1']:+.5e} 和 {last['SP-2']:+.5e}。",
             f"在同一独立闭环队列的 K510，封存 C1‑A1 为 {low_control:.3f} dB，SP‑1 为 {low_sp1:.3f} dB。"
             "S2 以 Train 优胜策略本身的 B2 作为学习恢复的对照。"]
+
+
+def s1_final_step(entries):
+    return {r["strategy"]: r["delta_mse_per_fixed_bit"] for r in entries
+            if (r["method"], r["history"], r["upper"]) == (B2, CLOSED, 8192)}
 
 
 def measurements(summary):
@@ -161,6 +164,17 @@ def late_history_comparison(decisions):
             "晚期第 48–63 帧按各自口径先计算 B3 相对 B2 的全局 PSNR 增益，再比较两种历史的增益。"
             "差值为负表示独立推进后晚期 PSNR 收益缩小。",
             table(("权重", "K", "固定参考增益 dB", "独立闭环增益 dB", "独立减固定 dB"), rows)]
+
+
+def late_perceptual_peaks(decisions):
+    findings = []
+    for variant, trial in decisions.items():
+        closed = [r for r in trial["gains"]["late"] if r["history"] == CLOSED]
+        lpips = max(closed, key=lambda r: r["lpips_change"])
+        dists = max(closed, key=lambda r: r["dists_change"])
+        findings.append(f"{variant} 的最大晚期 DISTS 增量为 {dists['dists_change']:+.5f}（K{dists['budget']}），"
+                        f"最大 LPIPS 变化为 {lpips['lpips_change']:+.5f}（K{lpips['budget']}）。")
+    return " ".join(findings)
 
 
 def gradient_records(training):
@@ -237,6 +251,7 @@ def write_s2(lock):
     detail = ("W1 与 W2 共享初始化哈希、500 个训练窗口及逐步预算和裁剪 RNG。每步监督 4 帧，使用各自 B3 参考。"
               "冻住的重建器通过 BF16 和非重入 checkpoint 回传输入梯度。同上下文参考损失使用 FP32 投影器。")
     return [title, conclusion, scope if lock["winner"] == "SP-1" else "", detail, s2_limits(), gate_table(decisions),
+            late_perceptual_peaks(decisions),
             f"[逐帧 CSV]({DATA}/s2.csv) · [S2 门控]({DATA}/s2_gate.json) · [闭环增益]({DATA}/figures/s2_closed_psnr_gain.pdf)",
             "表中 Δ 等于 B3 减同协议、同预算的 B2。LPIPS 和 DISTS 的负值表示改善。", delta_table(decisions),
             *late_history_comparison(decisions),
@@ -305,5 +320,7 @@ def generate():
     lines.extend(write_s2(lock))
     if tests:
         lines.append(f"联合回归 {tests['counts']['total']} 项。 [JUnit]({DATA}/regression.xml)")
+    if (OUTPUT / "verification.json").is_file():
+        lines.append(f"[逐帧、检查点和保护哈希复核]({DATA}/verification.json)")
     REPORT.write_text("\n\n".join(line for line in lines if line) + "\n")
     work_log(protocol, tests)

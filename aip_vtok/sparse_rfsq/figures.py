@@ -27,7 +27,9 @@ def save(fig, name):
     folder = OUTPUT / "figures"
     folder.mkdir(parents=True, exist_ok=True)
     fig.savefig(folder / f"{name}.pdf")
-    fig.savefig(folder / f"{name}.svg")
+    svg = folder / f"{name}.svg"
+    fig.savefig(svg)
+    svg.write_text("\n".join(line.rstrip() for line in svg.read_text().splitlines()) + "\n")
     fig.savefig(folder / f"{name}.png", dpi=600)
     plt.close(fig)
 

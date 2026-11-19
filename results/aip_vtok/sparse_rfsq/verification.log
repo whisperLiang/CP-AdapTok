@@ -1,0 +1,48 @@
+{
+  "tests": {
+    "total": 333,
+    "regression": 306,
+    "new": 27,
+    "failed_or_skipped": 0
+  },
+  "s1": {
+    "rows": 12180,
+    "frame_history_checks": 2436,
+    "separate_reference_anchors_checked": 56,
+    "csv_rows": 12180
+  },
+  "s2": {
+    "rows": 3480,
+    "frame_history_checks": 696,
+    "separate_reference_anchors_checked": 16,
+    "csv_rows": 3480
+  },
+  "unchanged_protected_assets": {
+    "sha256": "d3d37250e65a67ed38029cee58bba8570f45097e2f688cb36d33a1b9591d9ed8",
+    "files": 2110,
+    "controls": {
+      "projector": {
+        "path": "checkpoints/aip_vtok/projector_w128/latest.pt",
+        "sha256": "3b1bd715427bd177393e9552a99576e614ab7dd1ed307155129cf62896d5eb94"
+      },
+      "legacy_c1b_steps": {
+        "seed1": 0,
+        "seed2": 0
+      },
+      "legacy_c1b_status": "blocked_by_c1a_psnr_gate",
+      "old_fit_sha256": "0bcb3a3885b437714bcbbb5150bba0b0290012643455faf18c083e9154b9cc21",
+      "old_scan_lock_sha256": "671331a8ca05e537d2f35e9409f714b0d7d8c3ec15408a5f5e1efb0d3ae11814",
+      "old_validation_sha256": "8e3fe6050b09902ce46c5d08ee821fcd4846448acc0fd7a8371f38c49152f31f"
+    }
+  },
+  "sealed_test_images_read": 0,
+  "recommend_s3": false,
+  "projector_tensor_replay": {
+    "sealed_file": {
+      "path": "checkpoints/aip_vtok/projector_w128/latest.pt",
+      "sha256": "3b1bd715427bd177393e9552a99576e614ab7dd1ed307155129cf62896d5eb94"
+    },
+    "tensor_sha256": "7a7fe17df3fd9aff4257f1d78d9c9d7abf176abcbeeef2de8bea818a6492cf35",
+    "matched_s1": true
+  }
+}
