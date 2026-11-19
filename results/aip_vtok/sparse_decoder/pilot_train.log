@@ -1,0 +1,60 @@
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+E2 step 0 saved
+E2 50/500 · loss=0.221534 · 1.79 s/update
+E2 step 100 saved
+E2 100/500 · loss=0.166815 · 1.79 s/update
+E2 150/500 · loss=0.222357 · 1.79 s/update
+E2 200/500 · loss=0.167836 · 1.79 s/update
+E2 250/500 · loss=0.216100 · 1.78 s/update
+E2 step 300 saved
+E2 300/500 · loss=0.278924 · 1.79 s/update
+E2 350/500 · loss=0.129444 · 1.79 s/update
+E2 400/500 · loss=0.177760 · 1.78 s/update
+E2 450/500 · loss=0.163211 · 1.78 s/update
+E2 step 500 saved
+E2 500/500 · loss=0.100310 · 1.79 s/update
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+E3 step 0 saved
+E3 50/500 · loss=0.218452 · 1.77 s/update
+E3 step 100 saved
+E3 100/500 · loss=0.162795 · 1.77 s/update
+E3 150/500 · loss=0.218214 · 1.77 s/update
+E3 200/500 · loss=0.165825 · 1.77 s/update
+E3 250/500 · loss=0.208599 · 1.77 s/update
+E3 step 300 saved
+E3 300/500 · loss=0.275927 · 1.77 s/update
+E3 350/500 · loss=0.126509 · 1.78 s/update
+E3 400/500 · loss=0.171789 · 1.77 s/update
+E3 450/500 · loss=0.158664 · 1.77 s/update
+E3 step 500 saved
+E3 500/500 · loss=0.098644 · 1.77 s/update
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+E4 step 0 saved
+E4 50/500 · loss=0.220519 · 1.84 s/update
+E4 step 100 saved
+E4 100/500 · loss=0.169278 · 1.84 s/update
+E4 150/500 · loss=0.220464 · 1.84 s/update
+E4 200/500 · loss=0.170229 · 1.84 s/update
+E4 250/500 · loss=0.218020 · 1.84 s/update
+E4 step 300 saved
+E4 300/500 · loss=0.278616 · 1.84 s/update
+E4 350/500 · loss=0.128561 · 1.85 s/update
+E4 400/500 · loss=0.174028 · 1.84 s/update
+E4 450/500 · loss=0.159533 · 1.84 s/update
+E4 step 500 saved
+E4 500/500 · loss=0.100679 · 1.84 s/update

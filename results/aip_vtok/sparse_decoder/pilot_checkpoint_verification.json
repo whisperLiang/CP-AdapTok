@@ -1,0 +1,88 @@
+{
+  "training_exit_code": 0,
+  "training_pixel_counts": {
+    "train": 6024,
+    "validation": 0,
+    "test": 0
+  },
+  "models": {
+    "E2": {
+      "steps": 500,
+      "snapshots": {
+        "0": {
+          "sha256": "d97624d563e12c77ad97f3d6ed836effab578836455894be333c28ae4d117666",
+          "optimizer_step": 0,
+          "model_finite": true
+        },
+        "100": {
+          "sha256": "e57a17b05d86c9d6d0cd69bc15387ab5fe8d12fe78264f4c51b8193e3106bb78",
+          "optimizer_step": 100,
+          "model_finite": true
+        },
+        "300": {
+          "sha256": "288f76ad1c062c1e59754df61e3da495505f28680641b4ea808c7623c9cee8b1",
+          "optimizer_step": 300,
+          "model_finite": true
+        },
+        "500": {
+          "sha256": "ed6b19ae2353d8a077b1399a5df606d2f0e8f73f8198cb5d14be23fb89dad0df",
+          "optimizer_step": 500,
+          "model_finite": true
+        }
+      },
+      "matched_budget_plan": true
+    },
+    "E3": {
+      "steps": 500,
+      "snapshots": {
+        "0": {
+          "sha256": "7e6663e9d05195778b4e605515f069d79cea03eec403e139ce7a4bfe3d59df3a",
+          "optimizer_step": 0,
+          "model_finite": true
+        },
+        "100": {
+          "sha256": "a0a73aa19211c174d5a1c34fd3b71b178de1d6c2cf4d5f65769dd2f34512d4a9",
+          "optimizer_step": 100,
+          "model_finite": true
+        },
+        "300": {
+          "sha256": "7a5f19a07d2a4369bdc28bd683f18266c4157ba8342c0a492dcec51acc3c573d",
+          "optimizer_step": 300,
+          "model_finite": true
+        },
+        "500": {
+          "sha256": "fa5b25f271db9a3582fa707b84bc69f7b460266125dd6f506a7d8a453fe40eff",
+          "optimizer_step": 500,
+          "model_finite": true
+        }
+      },
+      "matched_budget_plan": true
+    },
+    "E4": {
+      "steps": 500,
+      "snapshots": {
+        "0": {
+          "sha256": "fd4970d01c5091ead743cad671be0b672dbd85747bd1d76e4026f0b7a74558e2",
+          "optimizer_step": 0,
+          "model_finite": true
+        },
+        "100": {
+          "sha256": "32b8ba32b9125de4bf8c0577ef6b0539154b3a00651746deb7a673e8d7fa79ce",
+          "optimizer_step": 100,
+          "model_finite": true
+        },
+        "300": {
+          "sha256": "2c2b71c93ad79fb3bfb2a39808d556c05ee316b23ebdd8209722386364bf0d1f",
+          "optimizer_step": 300,
+          "model_finite": true
+        },
+        "500": {
+          "sha256": "27dd77bc6819e9357a2b83942abbb663a8461f4cc6b064806f1bab45133be4ca",
+          "optimizer_step": 500,
+          "model_finite": true
+        }
+      },
+      "matched_budget_plan": true
+    }
+  }
+}

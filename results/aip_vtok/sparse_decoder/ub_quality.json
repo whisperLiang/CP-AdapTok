@@ -1,0 +1,144 @@
+{
+  "tools": [
+    "coverage.py",
+    "Radon",
+    "Python AST and isolated source mutations",
+    "Ruff"
+  ],
+  "receiver_crap_from_phase1": {
+    "preserve": {
+      "cyclomatic_complexity": 1,
+      "covered_fraction": 1.0,
+      "crap": 1.0
+    },
+    "frame_input": {
+      "cyclomatic_complexity": 2,
+      "covered_fraction": 1.0,
+      "crap": 2.0
+    },
+    "create_model": {
+      "cyclomatic_complexity": 1,
+      "covered_fraction": 1.0,
+      "crap": 1.0
+    },
+    "R48G.__init__": {
+      "cyclomatic_complexity": 2,
+      "covered_fraction": 1.0,
+      "crap": 2.0
+    },
+    "R48G.forward": {
+      "cyclomatic_complexity": 2,
+      "covered_fraction": 1.0,
+      "crap": 2.0
+    },
+    "BudgetRecovery.__init__": {
+      "cyclomatic_complexity": 3,
+      "covered_fraction": 1.0,
+      "crap": 3.0
+    },
+    "BudgetRecovery.hidden": {
+      "cyclomatic_complexity": 2,
+      "covered_fraction": 1.0,
+      "crap": 2.0
+    },
+    "BudgetRecovery.correction": {
+      "cyclomatic_complexity": 1,
+      "covered_fraction": 1.0,
+      "crap": 1.0
+    },
+    "BudgetRecovery.forward": {
+      "cyclomatic_complexity": 1,
+      "covered_fraction": 1.0,
+      "crap": 1.0
+    },
+    "RWide.__init__": {
+      "cyclomatic_complexity": 2,
+      "covered_fraction": 1.0,
+      "crap": 2.0
+    },
+    "MultiscaleBody.__init__": {
+      "cyclomatic_complexity": 2,
+      "covered_fraction": 1.0,
+      "crap": 2.0
+    },
+    "MultiscaleBody.forward": {
+      "cyclomatic_complexity": 1,
+      "covered_fraction": 1.0,
+      "crap": 1.0
+    },
+    "SLD.__init__": {
+      "cyclomatic_complexity": 1,
+      "covered_fraction": 1.0,
+      "crap": 1.0
+    },
+    "SLD.correction": {
+      "cyclomatic_complexity": 1,
+      "covered_fraction": 1.0,
+      "crap": 1.0
+    },
+    "DecoderReceiver.__call__": {
+      "cyclomatic_complexity": 1,
+      "covered_fraction": 1.0,
+      "crap": 1.0
+    }
+  },
+  "receiver_ast_similarity_ge_0_8": [],
+  "mutations_killed": 9,
+  "mutations": [
+    {
+      "probe": "preserve",
+      "original": "return torch.where(observed, canvas, base + correction.to(base.dtype))",
+      "mutation": "return base + correction.to(base.dtype)",
+      "caught": "AssertionError"
+    },
+    {
+      "probe": "gaussian",
+      "original": "torch.cat((previous, base), dim=1)",
+      "mutation": "torch.cat((previous, torch.zeros_like(base)), dim=1)",
+      "caught": "AssertionError"
+    },
+    {
+      "probe": "budget",
+      "original": "self.budget_embedding.weight[BUDGETS.index(budget)]",
+      "mutation": "self.budget_embedding.weight[0]",
+      "caught": "AssertionError"
+    },
+    {
+      "probe": "intra",
+      "original": "if not context.intra:",
+      "mutation": "if context.context is not None:",
+      "caught": "RuntimeError"
+    },
+    {
+      "probe": "coarse",
+      "original": "torch.cat((full, up), dim=1)",
+      "mutation": "torch.cat((full, torch.zeros_like(up)), dim=1)",
+      "caught": "AssertionError"
+    },
+    {
+      "probe": "confidence",
+      "original": "return self.outputs[key](hidden) * self.confidence(hidden).sigmoid()",
+      "mutation": "return self.outputs[key](hidden)",
+      "caught": "AssertionError"
+    },
+    {
+      "probe": "interaction",
+      "original": "difference(scan_a2, scan_a1)",
+      "mutation": "difference(scan_a1, scan_a2)",
+      "caught": "AssertionError"
+    },
+    {
+      "probe": "inventory",
+      "original": "if len(rows) != len(expected) or actual != expected:",
+      "mutation": "if len(rows) != len(expected):",
+      "caught": "AssertionError"
+    },
+    {
+      "probe": "union",
+      "original": "return max(k, REF_BUDGET[intra])",
+      "mutation": "return k",
+      "caught": "AssertionError"
+    }
+  ],
+  "scope": "Core receiver and nine targeted semantic mutations. Stage orchestration has separate end-to-end evidence."
+}
