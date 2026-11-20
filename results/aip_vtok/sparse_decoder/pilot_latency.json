@@ -1,0 +1,4848 @@
+{
+  "hardware": "NVIDIA H100 PCIe",
+  "gpu_start": "NVIDIA H100 PCIe, 580.159.03, 81559 MiB",
+  "gpu_end": "NVIDIA H100 PCIe, 580.159.03, 81559 MiB",
+  "batch": 1,
+  "rgb_height_width": [
+    1080,
+    1920
+  ],
+  "precision": "FP32",
+  "warmup": 5,
+  "repeats": 30,
+  "device": "cuda:0",
+  "source": {
+    "split": "train",
+    "video": "DAVIS2017:dog-agility",
+    "start": 2,
+    "rgb_sha256": [
+      "503e655fe8f0908cec20cad8040373b7c9cc0a9453aae4a39a005ebec79262c1",
+      "2ebae75811f5d471acdac571b71d381a068f60fcf500bc4e33e6cc8d3ac8a7fe"
+    ]
+  },
+  "timing_method": "CUDA events for phases. Synchronized wall time for encode+decode, both reference projections and commits. The sender and receiver histories are independent. The receiver reuses display recovery when its budget equals the reference budget.",
+  "complexity_method": "Count learned Conv2d and the two normalized Gaussian convolutions. FLOPs = 2 × MACs. Timing also includes masks, FSQ decoding, layout/scatter, activation, pool, upsample, fusion and hard observation preservation.",
+  "rate_method": "Fixed 16-bit symbols, declared packet framing bytes, and Train marginal entropy estimates. The union is the larger of the two nested prefixes.",
+  "provenance_sha256": "57403f63f0a0ac1cc35be23f815ab687cb422052c3c2908e3f572f7fde6f7be9",
+  "checkpoints_sha256": {
+    "E2": "ed6b19ae2353d8a077b1399a5df606d2f0e8f73f8198cb5d14be23fb89dad0df",
+    "E3": "fa5b25f271db9a3582fa707b84bc69f7b460266125dd6f506a7d8a453fe40eff",
+    "E4": "27dd77bc6819e9357a2b83942abbb663a8461f4cc6b064806f1bab45133be4ca"
+  },
+  "integrity": {
+    "passed": true,
+    "frozen_tensors_sha256": {
+      "backbone": "afa741c800deec2d181a2ec14de87b8818b2aca8211fa0ccb57a1036c34d9931",
+      "projector": "7a7fe17df3fd9aff4257f1d78d9c9d7abf176abcbeeef2de8bea818a6492cf35",
+      "W1": "3ed006874cf67f195180bb2e7778c1b33aebd7b2cd1e9a56d8a244408532ab65"
+    },
+    "images_read": {
+      "train": 2,
+      "validation": 0,
+      "test": 0
+    },
+    "denied_reads": 0
+  },
+  "rows": [
+    {
+      "arm": "E0",
+      "network": "B2",
+      "frame_type": "I",
+      "budget": 510,
+      "parameters": 0,
+      "network_macs": 0,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 5026560,
+      "recovery_flops_estimate": 10053120,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.708845138549805,
+          "p50_ms": 44.480560302734375,
+          "p95_ms": 45.110467720031735
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7499797383944193,
+          "p50_ms": 0.748304009437561,
+          "p95_ms": 0.7816832095384597
+        },
+        "receiver_context": {
+          "mean_ms": 0.0168394667096436,
+          "p50_ms": 0.016527999192476273,
+          "p95_ms": 0.018451199773699044
+        },
+        "receiver_recovery": {
+          "mean_ms": 1.4511306643486024,
+          "p50_ms": 1.4509919881820679,
+          "p95_ms": 1.4819808065891267
+        },
+        "rgb_decoder": {
+          "mean_ms": 79.9253298441569,
+          "p50_ms": 79.80822372436523,
+          "p95_ms": 80.59440307617187
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.75471248626709,
+          "p50_ms": 4.724735975265503,
+          "p95_ms": 4.965439844131469
+        },
+        "end_to_end": {
+          "mean_ms": 131.6567807846392,
+          "p50_ms": 131.38214201899245,
+          "p95_ms": 133.66413529147394
+        },
+        "cuda_span": {
+          "mean_ms": 131.6068359375,
+          "p50_ms": 131.33356475830078,
+          "p95_ms": 133.61502532958983
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 510,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 4309.244595168275,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 3893.2445951682753,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E0",
+      "network": "B2",
+      "frame_type": "I",
+      "budget": 1024,
+      "parameters": 0,
+      "network_macs": 0,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 5026560,
+      "recovery_flops_estimate": 10053120,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.67490056355794,
+          "p50_ms": 44.61731147766113,
+          "p95_ms": 44.97475891113281
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.9187189261118571,
+          "p50_ms": 0.7486880123615265,
+          "p95_ms": 0.7883247971534728
+        },
+        "receiver_context": {
+          "mean_ms": 0.018676266881326835,
+          "p50_ms": 0.017071999609470367,
+          "p95_ms": 0.02906720014289021
+        },
+        "receiver_recovery": {
+          "mean_ms": 1.4540021340052287,
+          "p50_ms": 1.449728012084961,
+          "p95_ms": 1.5123775959014891
+        },
+        "rgb_decoder": {
+          "mean_ms": 79.8800557454427,
+          "p50_ms": 79.82569885253906,
+          "p95_ms": 80.30376892089843
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.845684242248535,
+          "p50_ms": 4.800431966781616,
+          "p95_ms": 5.01544313430786
+        },
+        "end_to_end": {
+          "mean_ms": 131.84245831798762,
+          "p50_ms": 131.59015047131106,
+          "p95_ms": 132.9248934343923
+        },
+        "cuda_span": {
+          "mean_ms": 131.7920374552409,
+          "p50_ms": 131.54054260253906,
+          "p95_ms": 132.86812896728514
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 1024,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 9852.312747856568,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 9148.312747856568,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E0",
+      "network": "B2",
+      "frame_type": "I",
+      "budget": 2048,
+      "parameters": 0,
+      "network_macs": 0,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 5026560,
+      "recovery_flops_estimate": 10053120,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.70648002624512,
+          "p50_ms": 44.70654487609863,
+          "p95_ms": 45.06808242797852
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7466698706150054,
+          "p50_ms": 0.7452000081539154,
+          "p95_ms": 0.7778832107782364
+        },
+        "receiver_context": {
+          "mean_ms": 0.016906666507323583,
+          "p50_ms": 0.016831999644637108,
+          "p95_ms": 0.01790079930797219
+        },
+        "receiver_recovery": {
+          "mean_ms": 1.4578176061312358,
+          "p50_ms": 1.4535040259361267,
+          "p95_ms": 1.4872096121311187
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.23402201334635,
+          "p50_ms": 80.18350219726562,
+          "p95_ms": 80.76613311767578
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 3.5034207900365195,
+          "p50_ms": 3.4873759746551514,
+          "p95_ms": 3.582641589641571
+        },
+        "end_to_end": {
+          "mean_ms": 130.71431633240232,
+          "p50_ms": 130.71556552313268,
+          "p95_ms": 131.1920159845613
+        },
+        "cuda_span": {
+          "mean_ms": 130.66531778971355,
+          "p50_ms": 130.6670379638672,
+          "p95_ms": 131.14373779296875
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 2048,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E0",
+      "network": "B2",
+      "frame_type": "I",
+      "budget": 4096,
+      "parameters": 0,
+      "network_macs": 0,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 5026560,
+      "recovery_flops_estimate": 10053120,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.65269877115885,
+          "p50_ms": 44.6121768951416,
+          "p95_ms": 44.99824180603027
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7383317351341248,
+          "p50_ms": 0.7403839826583862,
+          "p95_ms": 0.778692790865898
+        },
+        "receiver_context": {
+          "mean_ms": 0.016930133383721114,
+          "p50_ms": 0.016976000741124153,
+          "p95_ms": 0.01813440006226301
+        },
+        "receiver_recovery": {
+          "mean_ms": 1.4803904016812643,
+          "p50_ms": 1.4876160025596619,
+          "p95_ms": 1.510612827539444
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.04057973225912,
+          "p50_ms": 79.87673568725586,
+          "p95_ms": 80.8126651763916
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.749082644780477,
+          "p50_ms": 4.755936145782471,
+          "p95_ms": 4.811404657363892
+        },
+        "end_to_end": {
+          "mean_ms": 131.7277607624419,
+          "p50_ms": 131.6166875185445,
+          "p95_ms": 132.54152517183684
+        },
+        "cuda_span": {
+          "mean_ms": 131.67801462809246,
+          "p50_ms": 131.56734466552734,
+          "p95_ms": 132.49233474731446
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 4096,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 4096,
+        "display": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 42997.21771097602,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 40565.21771097602,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 42997.21771097602,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 40565.21771097602,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E0",
+      "network": "B2",
+      "frame_type": "I",
+      "budget": 8192,
+      "parameters": 0,
+      "network_macs": 0,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 5026560,
+      "recovery_flops_estimate": 10053120,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.70818557739258,
+          "p50_ms": 44.71985626220703,
+          "p95_ms": 45.02374000549317
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7482847988605499,
+          "p50_ms": 0.7443680167198181,
+          "p95_ms": 0.7894496142864226
+        },
+        "receiver_context": {
+          "mean_ms": 0.017060266559322676,
+          "p50_ms": 0.01703999936580658,
+          "p95_ms": 0.017833600658923386
+        },
+        "receiver_recovery": {
+          "mean_ms": 1.4849471886952719,
+          "p50_ms": 1.484559953212738,
+          "p95_ms": 1.5170207917690277
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.05964991251628,
+          "p50_ms": 80.03220748901367,
+          "p95_ms": 80.45965957641602
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.759909327824911,
+          "p50_ms": 4.752223968505859,
+          "p95_ms": 4.920947003364563
+        },
+        "end_to_end": {
+          "mean_ms": 131.8275690971253,
+          "p50_ms": 131.81432703277096,
+          "p95_ms": 132.34847717685625
+        },
+        "cuda_span": {
+          "mean_ms": 131.77803853352864,
+          "p50_ms": 131.76348876953125,
+          "p95_ms": 132.29860763549806
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 8192,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 8192,
+        "display": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 87182.71805764106,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 82446.71805764106,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 87182.71805764106,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 82446.71805764106,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E0",
+      "network": "B2",
+      "frame_type": "P",
+      "budget": 510,
+      "parameters": 0,
+      "network_macs": 0,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 5026560,
+      "recovery_flops_estimate": 10053120,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.71987393697103,
+          "p50_ms": 24.72208023071289,
+          "p95_ms": 24.78187141418457
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.38530346751213074,
+          "p50_ms": 0.38492800295352936,
+          "p95_ms": 0.3953151911497116
+        },
+        "receiver_context": {
+          "mean_ms": 16.633382288614907,
+          "p50_ms": 16.636591911315918,
+          "p95_ms": 16.663443660736085
+        },
+        "receiver_recovery": {
+          "mean_ms": 1.3648778756459554,
+          "p50_ms": 1.3641120195388794,
+          "p95_ms": 1.3993648052215577
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.930282624562581,
+          "p50_ms": 12.930047988891602,
+          "p95_ms": 12.957772827148437
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 3.607478388150533,
+          "p50_ms": 3.6090400218963623,
+          "p95_ms": 3.6406991481781006
+        },
+        "end_to_end": {
+          "mean_ms": 59.67787344319125,
+          "p50_ms": 59.68560901237652,
+          "p95_ms": 59.786601638188586
+        },
+        "cuda_span": {
+          "mean_ms": 59.64119911193848,
+          "p50_ms": 59.64854431152344,
+          "p95_ms": 59.749836158752444
+        }
+      },
+      "peak_gpu_allocated_mib": 975.927734375,
+      "incremental_peak_gpu_allocated_mib": 520.56591796875,
+      "rate": {
+        "display_budget": 510,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 510,
+        "display": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E0",
+      "network": "B2",
+      "frame_type": "P",
+      "budget": 1024,
+      "parameters": 0,
+      "network_macs": 0,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 5026560,
+      "recovery_flops_estimate": 10053120,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.71718521118164,
+          "p50_ms": 24.7108793258667,
+          "p95_ms": 24.788378047943116
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.38953066766262057,
+          "p50_ms": 0.38383999466896057,
+          "p95_ms": 0.3926592081785202
+        },
+        "receiver_context": {
+          "mean_ms": 16.643210728963215,
+          "p50_ms": 16.64291286468506,
+          "p95_ms": 16.67352361679077
+        },
+        "receiver_recovery": {
+          "mean_ms": 1.3626250545183818,
+          "p50_ms": 1.3620160222053528,
+          "p95_ms": 1.3931135892868043
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.939458115895588,
+          "p50_ms": 12.939023971557617,
+          "p95_ms": 12.963569736480713
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.7341461181640625,
+          "p50_ms": 4.735119819641113,
+          "p95_ms": 4.763008165359497
+        },
+        "end_to_end": {
+          "mean_ms": 60.82381656160578,
+          "p50_ms": 60.79752498771995,
+          "p95_ms": 60.97597721382044
+        },
+        "cuda_span": {
+          "mean_ms": 60.78615608215332,
+          "p50_ms": 60.760623931884766,
+          "p95_ms": 60.9375078201294
+        }
+      },
+      "peak_gpu_allocated_mib": 975.931640625,
+      "incremental_peak_gpu_allocated_mib": 520.56982421875,
+      "rate": {
+        "display_budget": 1024,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 1024,
+        "display": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 11425.400579493506,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 10721.400579493506,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 11425.400579493506,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 10721.400579493506,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E0",
+      "network": "B2",
+      "frame_type": "P",
+      "budget": 2048,
+      "parameters": 0,
+      "network_macs": 0,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 5026560,
+      "recovery_flops_estimate": 10053120,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.723743883768716,
+          "p50_ms": 24.720959663391113,
+          "p95_ms": 24.787182426452638
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.38400427003701526,
+          "p50_ms": 0.38438400626182556,
+          "p95_ms": 0.3902064025402069
+        },
+        "receiver_context": {
+          "mean_ms": 16.638022486368815,
+          "p50_ms": 16.643232345581055,
+          "p95_ms": 16.664066314697266
+        },
+        "receiver_recovery": {
+          "mean_ms": 1.3803424080212912,
+          "p50_ms": 1.3600000143051147,
+          "p95_ms": 1.3891296088695526
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.938102436065673,
+          "p50_ms": 12.940288066864014,
+          "p95_ms": 12.958677005767822
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.741151984532674,
+          "p50_ms": 4.7370240688323975,
+          "p95_ms": 4.781377506256104
+        },
+        "end_to_end": {
+          "mean_ms": 60.84267809831848,
+          "p50_ms": 60.83713500993326,
+          "p95_ms": 60.921826044796035
+        },
+        "cuda_span": {
+          "mean_ms": 60.80536753336589,
+          "p50_ms": 60.799856185913086,
+          "p95_ms": 60.88506393432617
+        }
+      },
+      "peak_gpu_allocated_mib": 975.939453125,
+      "incremental_peak_gpu_allocated_mib": 520.57763671875,
+      "rate": {
+        "display_budget": 2048,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 22704.97809558989,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 21424.97809558989,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 22704.97809558989,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 21424.97809558989,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E0",
+      "network": "B2",
+      "frame_type": "P",
+      "budget": 4096,
+      "parameters": 0,
+      "network_macs": 0,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 5026560,
+      "recovery_flops_estimate": 10053120,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.73271147410075,
+          "p50_ms": 24.71855926513672,
+          "p95_ms": 24.785214233398438
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.38636373380819955,
+          "p50_ms": 0.38521599769592285,
+          "p95_ms": 0.3931184083223343
+        },
+        "receiver_context": {
+          "mean_ms": 16.64282137552897,
+          "p50_ms": 16.649871826171875,
+          "p95_ms": 16.666816806793214
+        },
+        "receiver_recovery": {
+          "mean_ms": 1.3969205379486085,
+          "p50_ms": 1.3876480460166931,
+          "p95_ms": 1.4304383993148804
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.938834158579509,
+          "p50_ms": 12.936223983764648,
+          "p95_ms": 12.964561271667481
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.736411714553833,
+          "p50_ms": 4.735247850418091,
+          "p95_ms": 4.774236845970154
+        },
+        "end_to_end": {
+          "mean_ms": 60.87270493929585,
+          "p50_ms": 60.86219602730125,
+          "p95_ms": 61.06383734731935
+        },
+        "cuda_span": {
+          "mean_ms": 60.83406295776367,
+          "p50_ms": 60.81252861022949,
+          "p95_ms": 61.02546997070313
+        }
+      },
+      "peak_gpu_allocated_mib": 975.955078125,
+      "incremental_peak_gpu_allocated_mib": 520.59326171875,
+      "rate": {
+        "display_budget": 4096,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 4096,
+        "display": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 45261.607821467864,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 42829.607821467864,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 45261.607821467864,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 42829.607821467864,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E0",
+      "network": "B2",
+      "frame_type": "P",
+      "budget": 8192,
+      "parameters": 0,
+      "network_macs": 0,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 5026560,
+      "recovery_flops_estimate": 10053120,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.754615338643394,
+          "p50_ms": 24.71776008605957,
+          "p95_ms": 24.7743070602417
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.380978133281072,
+          "p50_ms": 0.38129599392414093,
+          "p95_ms": 0.3862111985683441
+        },
+        "receiver_context": {
+          "mean_ms": 16.63965212504069,
+          "p50_ms": 16.648783683776855,
+          "p95_ms": 16.664762783050538
+        },
+        "receiver_recovery": {
+          "mean_ms": 1.4000416000684102,
+          "p50_ms": 1.3986400365829468,
+          "p95_ms": 1.438212764263153
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.935155232747396,
+          "p50_ms": 12.937695980072021,
+          "p95_ms": 12.961811208724976
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.739261865615845,
+          "p50_ms": 4.742496013641357,
+          "p95_ms": 4.769534277915954
+        },
+        "end_to_end": {
+          "mean_ms": 60.886913406041764,
+          "p50_ms": 60.857554024551064,
+          "p95_ms": 60.96400192473084
+        },
+        "cuda_span": {
+          "mean_ms": 60.84970474243164,
+          "p50_ms": 60.82017707824707,
+          "p95_ms": 60.927532005310056
+        }
+      },
+      "peak_gpu_allocated_mib": 975.986328125,
+      "incremental_peak_gpu_allocated_mib": 520.62451171875,
+      "rate": {
+        "display_budget": 8192,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 8192,
+        "display": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 90378.12631893044,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 85642.12631893044,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 90378.12631893044,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 85642.12631893044,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E1",
+      "network": "W1",
+      "frame_type": "I",
+      "budget": 510,
+      "parameters": 49312,
+      "network_macs": 192706560,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 197733120,
+      "recovery_flops_estimate": 395466240,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.49504127502441,
+          "p50_ms": 44.45585632324219,
+          "p95_ms": 44.872201919555664
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7397503972053527,
+          "p50_ms": 0.7429919838905334,
+          "p95_ms": 0.7664784014225006
+        },
+        "receiver_context": {
+          "mean_ms": 0.017675733317931493,
+          "p50_ms": 0.016944000497460365,
+          "p95_ms": 0.022025600355118493
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.34661119778951,
+          "p50_ms": 2.3519999980926514,
+          "p95_ms": 2.379209589958191
+        },
+        "rgb_decoder": {
+          "mean_ms": 79.87812118530273,
+          "p50_ms": 79.82009887695312,
+          "p95_ms": 80.46939239501953
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.574858617782593,
+          "p50_ms": 6.568880081176758,
+          "p95_ms": 6.72254557609558
+        },
+        "end_to_end": {
+          "mean_ms": 134.1016958661688,
+          "p50_ms": 134.08823253121227,
+          "p95_ms": 134.861767309485
+        },
+        "cuda_span": {
+          "mean_ms": 134.05205586751302,
+          "p50_ms": 134.03913116455078,
+          "p95_ms": 134.81188201904297
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.3115234375,
+      "incremental_peak_gpu_allocated_mib": 766.79443359375,
+      "rate": {
+        "display_budget": 510,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 4309.244595168275,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 3893.2445951682753,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E1",
+      "network": "W1",
+      "frame_type": "I",
+      "budget": 1024,
+      "parameters": 49312,
+      "network_macs": 192706560,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 197733120,
+      "recovery_flops_estimate": 395466240,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.59474271138509,
+          "p50_ms": 44.636240005493164,
+          "p95_ms": 44.867065811157225
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.742112002770106,
+          "p50_ms": 0.7426239848136902,
+          "p95_ms": 0.7766703963279724
+        },
+        "receiver_context": {
+          "mean_ms": 0.017028266688187917,
+          "p50_ms": 0.01702400017529726,
+          "p95_ms": 0.018153599370270966
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.3438250700632732,
+          "p50_ms": 2.3453599214553833,
+          "p95_ms": 2.370670437812805
+        },
+        "rgb_decoder": {
+          "mean_ms": 79.90885111490886,
+          "p50_ms": 79.85512161254883,
+          "p95_ms": 80.48872413635254
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.594487476348877,
+          "p50_ms": 6.544143915176392,
+          "p95_ms": 6.804684829711913
+        },
+        "end_to_end": {
+          "mean_ms": 134.25141293555498,
+          "p50_ms": 134.12569247884676,
+          "p95_ms": 134.96993673034012
+        },
+        "cuda_span": {
+          "mean_ms": 134.20104522705077,
+          "p50_ms": 134.07694244384766,
+          "p95_ms": 134.9203727722168
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.3115234375,
+      "incremental_peak_gpu_allocated_mib": 766.79443359375,
+      "rate": {
+        "display_budget": 1024,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 9852.312747856568,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 9148.312747856568,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E1",
+      "network": "W1",
+      "frame_type": "I",
+      "budget": 2048,
+      "parameters": 49312,
+      "network_macs": 192706560,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 197733120,
+      "recovery_flops_estimate": 395466240,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.784450149536134,
+          "p50_ms": 44.8110237121582,
+          "p95_ms": 45.17663421630859
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7532490730285645,
+          "p50_ms": 0.750976026058197,
+          "p95_ms": 0.7755984187126159
+        },
+        "receiver_context": {
+          "mean_ms": 0.017585066705942155,
+          "p50_ms": 0.01727999933063984,
+          "p95_ms": 0.01853280002251267
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.371399474143982,
+          "p50_ms": 2.3680800199508667,
+          "p95_ms": 2.4108287811279294
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.09535319010416,
+          "p50_ms": 80.10734176635742,
+          "p95_ms": 80.57807235717773
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.358829863866171,
+          "p50_ms": 4.3679039478302,
+          "p95_ms": 4.409065413475036
+        },
+        "end_to_end": {
+          "mean_ms": 132.43073113262653,
+          "p50_ms": 132.45326350443065,
+          "p95_ms": 133.17476059892215
+        },
+        "cuda_span": {
+          "mean_ms": 132.38086649576823,
+          "p50_ms": 132.4038543701172,
+          "p95_ms": 133.1258445739746
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.3115234375,
+      "incremental_peak_gpu_allocated_mib": 766.79443359375,
+      "rate": {
+        "display_budget": 2048,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E1",
+      "network": "W1",
+      "frame_type": "I",
+      "budget": 4096,
+      "parameters": 49312,
+      "network_macs": 192706560,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 197733120,
+      "recovery_flops_estimate": 395466240,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.66517321268717,
+          "p50_ms": 44.66411209106445,
+          "p95_ms": 44.94575500488281
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7377877334753672,
+          "p50_ms": 0.7335520088672638,
+          "p95_ms": 0.7631535857915879
+        },
+        "receiver_context": {
+          "mean_ms": 0.017394133222599823,
+          "p50_ms": 0.01679999940097332,
+          "p95_ms": 0.02176479920744894
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.387056001027425,
+          "p50_ms": 2.388432025909424,
+          "p95_ms": 2.419619286060333
+        },
+        "rgb_decoder": {
+          "mean_ms": 79.92725423177083,
+          "p50_ms": 79.87905502319336,
+          "p95_ms": 80.34991798400878
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.581033595403036,
+          "p50_ms": 6.587775945663452,
+          "p95_ms": 6.648201537132263
+        },
+        "end_to_end": {
+          "mean_ms": 134.36528653061637,
+          "p50_ms": 134.29192744661123,
+          "p95_ms": 134.88541604019701
+        },
+        "cuda_span": {
+          "mean_ms": 134.3156987508138,
+          "p50_ms": 134.24259185791016,
+          "p95_ms": 134.8346839904785
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.3115234375,
+      "incremental_peak_gpu_allocated_mib": 766.79443359375,
+      "rate": {
+        "display_budget": 4096,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 4096,
+        "display": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 42997.21771097602,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 40565.21771097602,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 42997.21771097602,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 40565.21771097602,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E1",
+      "network": "W1",
+      "frame_type": "I",
+      "budget": 8192,
+      "parameters": 49312,
+      "network_macs": 192706560,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 197733120,
+      "recovery_flops_estimate": 395466240,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.64695879618327,
+          "p50_ms": 44.640159606933594,
+          "p95_ms": 44.964724922180174
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7348021328449249,
+          "p50_ms": 0.7353119850158691,
+          "p95_ms": 0.7665504276752472
+        },
+        "receiver_context": {
+          "mean_ms": 0.017009066604077815,
+          "p50_ms": 0.01696000061929226,
+          "p95_ms": 0.01774880001321435
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.3863328218460085,
+          "p50_ms": 2.3927040100097656,
+          "p95_ms": 2.4125648140907288
+        },
+        "rgb_decoder": {
+          "mean_ms": 79.96149470011393,
+          "p50_ms": 79.9286880493164,
+          "p95_ms": 80.45671157836914
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.574026679992675,
+          "p50_ms": 6.580656051635742,
+          "p95_ms": 6.662353730201721
+        },
+        "end_to_end": {
+          "mean_ms": 134.36991163762286,
+          "p50_ms": 134.3189855106175,
+          "p95_ms": 134.93541382486
+        },
+        "cuda_span": {
+          "mean_ms": 134.32062327067058,
+          "p50_ms": 134.26972198486328,
+          "p95_ms": 134.88562469482423
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.3115234375,
+      "incremental_peak_gpu_allocated_mib": 766.79443359375,
+      "rate": {
+        "display_budget": 8192,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 8192,
+        "display": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 87182.71805764106,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 82446.71805764106,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 87182.71805764106,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 82446.71805764106,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E1",
+      "network": "W1",
+      "frame_type": "P",
+      "budget": 510,
+      "parameters": 49312,
+      "network_macs": 292976640,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 298003200,
+      "recovery_flops_estimate": 596006400,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.720116424560548,
+          "p50_ms": 24.713151931762695,
+          "p95_ms": 24.78240203857422
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.37878933250904084,
+          "p50_ms": 0.37883199751377106,
+          "p95_ms": 0.3875856041908264
+        },
+        "receiver_context": {
+          "mean_ms": 16.64284070332845,
+          "p50_ms": 16.635855674743652,
+          "p95_ms": 16.673073482513427
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.2073397397994996,
+          "p50_ms": 2.2064319849014282,
+          "p95_ms": 2.2303887605667114
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.937580744425455,
+          "p50_ms": 12.918960094451904,
+          "p95_ms": 12.960096216201782
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.421294927597046,
+          "p50_ms": 4.426016092300415,
+          "p95_ms": 4.443099331855774
+        },
+        "end_to_end": {
+          "mean_ms": 61.34513037201638,
+          "p50_ms": 61.328674433752894,
+          "p95_ms": 61.46482363692485
+        },
+        "cuda_span": {
+          "mean_ms": 61.30796190897624,
+          "p50_ms": 61.29127883911133,
+          "p95_ms": 61.42793273925781
+        }
+      },
+      "peak_gpu_allocated_mib": 976.0009765625,
+      "incremental_peak_gpu_allocated_mib": 520.48388671875,
+      "rate": {
+        "display_budget": 510,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 510,
+        "display": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E1",
+      "network": "W1",
+      "frame_type": "P",
+      "budget": 1024,
+      "parameters": 49312,
+      "network_macs": 292976640,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 298003200,
+      "recovery_flops_estimate": 596006400,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.71026331583659,
+          "p50_ms": 24.708528518676758,
+          "p95_ms": 24.76212978363037
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.3857056001822154,
+          "p50_ms": 0.38491199910640717,
+          "p95_ms": 0.39303199350833895
+        },
+        "receiver_context": {
+          "mean_ms": 16.646611150105795,
+          "p50_ms": 16.637791633605957,
+          "p95_ms": 16.671986770629882
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.214634656906128,
+          "p50_ms": 2.2006720304489136,
+          "p95_ms": 2.2717919826507567
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.927263005574543,
+          "p50_ms": 12.928256034851074,
+          "p95_ms": 12.953725051879882
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.416252851486206,
+          "p50_ms": 6.412288188934326,
+          "p95_ms": 6.452766299247742
+        },
+        "end_to_end": {
+          "mean_ms": 63.338231233259044,
+          "p50_ms": 63.32867400487885,
+          "p95_ms": 63.43913282616995
+        },
+        "cuda_span": {
+          "mean_ms": 63.30073064168294,
+          "p50_ms": 63.28934288024902,
+          "p95_ms": 63.401923942565915
+        }
+      },
+      "peak_gpu_allocated_mib": 976.0048828125,
+      "incremental_peak_gpu_allocated_mib": 520.48779296875,
+      "rate": {
+        "display_budget": 1024,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 1024,
+        "display": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 11425.400579493506,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 10721.400579493506,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 11425.400579493506,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 10721.400579493506,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E1",
+      "network": "W1",
+      "frame_type": "P",
+      "budget": 2048,
+      "parameters": 49312,
+      "network_macs": 292976640,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 298003200,
+      "recovery_flops_estimate": 596006400,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.72615477244059,
+          "p50_ms": 24.73128032684326,
+          "p95_ms": 24.77928247451782
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.3911136001348495,
+          "p50_ms": 0.38652800023555756,
+          "p95_ms": 0.4193712025880813
+        },
+        "receiver_context": {
+          "mean_ms": 16.651034673055012,
+          "p50_ms": 16.65708827972412,
+          "p95_ms": 16.677776050567626
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.2083904186884564,
+          "p50_ms": 2.2049120664596558,
+          "p95_ms": 2.24976966381073
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.92851209640503,
+          "p50_ms": 12.926752090454102,
+          "p95_ms": 12.954363441467285
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.433444293340047,
+          "p50_ms": 6.419104099273682,
+          "p95_ms": 6.560542273521423
+        },
+        "end_to_end": {
+          "mean_ms": 63.37637837277725,
+          "p50_ms": 63.392707030288875,
+          "p95_ms": 63.46941088559106
+        },
+        "cuda_span": {
+          "mean_ms": 63.338650131225585,
+          "p50_ms": 63.35611343383789,
+          "p95_ms": 63.4321102142334
+        }
+      },
+      "peak_gpu_allocated_mib": 976.0126953125,
+      "incremental_peak_gpu_allocated_mib": 520.49560546875,
+      "rate": {
+        "display_budget": 2048,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 22704.97809558989,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 21424.97809558989,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 22704.97809558989,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 21424.97809558989,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E1",
+      "network": "W1",
+      "frame_type": "P",
+      "budget": 4096,
+      "parameters": 49312,
+      "network_macs": 292976640,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 298003200,
+      "recovery_flops_estimate": 596006400,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.729276847839355,
+          "p50_ms": 24.721184730529785,
+          "p95_ms": 24.77650318145752
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.38598613341649374,
+          "p50_ms": 0.38499200344085693,
+          "p95_ms": 0.4080687999725341
+        },
+        "receiver_context": {
+          "mean_ms": 16.648376655578613,
+          "p50_ms": 16.639391899108887,
+          "p95_ms": 16.678931427001952
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.2683690706888835,
+          "p50_ms": 2.239791989326477,
+          "p95_ms": 2.4562545061111445
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.931017621358235,
+          "p50_ms": 12.928575992584229,
+          "p95_ms": 12.96088137626648
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.483450667063395,
+          "p50_ms": 6.439856052398682,
+          "p95_ms": 6.64486722946167
+        },
+        "end_to_end": {
+          "mean_ms": 63.48376019935434,
+          "p50_ms": 63.45929345116019,
+          "p95_ms": 63.83360616164282
+        },
+        "cuda_span": {
+          "mean_ms": 63.44647687276204,
+          "p50_ms": 63.421823501586914,
+          "p95_ms": 63.7965145111084
+        }
+      },
+      "peak_gpu_allocated_mib": 976.0283203125,
+      "incremental_peak_gpu_allocated_mib": 520.51123046875,
+      "rate": {
+        "display_budget": 4096,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 4096,
+        "display": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 45261.607821467864,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 42829.607821467864,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 45261.607821467864,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 42829.607821467864,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E1",
+      "network": "W1",
+      "frame_type": "P",
+      "budget": 8192,
+      "parameters": 49312,
+      "network_macs": 292976640,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 298003200,
+      "recovery_flops_estimate": 596006400,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.73085657755534,
+          "p50_ms": 24.72492790222168,
+          "p95_ms": 24.78969430923462
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.3885109315315882,
+          "p50_ms": 0.38335999846458435,
+          "p95_ms": 0.41728639602661133
+        },
+        "receiver_context": {
+          "mean_ms": 16.650914319356282,
+          "p50_ms": 16.654687881469727,
+          "p95_ms": 16.68124465942383
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.2560277303059895,
+          "p50_ms": 2.248463988304138,
+          "p95_ms": 2.3321919798851014
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.930269845326741,
+          "p50_ms": 12.93345594406128,
+          "p95_ms": 12.954064226150512
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.442397864659627,
+          "p50_ms": 6.430304050445557,
+          "p95_ms": 6.583271956443786
+        },
+        "end_to_end": {
+          "mean_ms": 63.436251308303326,
+          "p50_ms": 63.456632022280246,
+          "p95_ms": 63.603583618532866
+        },
+        "cuda_span": {
+          "mean_ms": 63.39897689819336,
+          "p50_ms": 63.41990280151367,
+          "p95_ms": 63.566121673583986
+        }
+      },
+      "peak_gpu_allocated_mib": 976.0595703125,
+      "incremental_peak_gpu_allocated_mib": 520.54248046875,
+      "rate": {
+        "display_budget": 8192,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 8192,
+        "display": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 90378.12631893044,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 85642.12631893044,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 90378.12631893044,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 85642.12631893044,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E2",
+      "network": "R48-G",
+      "frame_type": "I",
+      "budget": 510,
+      "parameters": 61600,
+      "network_macs": 242841600,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 247868160,
+      "recovery_flops_estimate": 495736320,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.69185167948405,
+          "p50_ms": 44.65752029418945,
+          "p95_ms": 45.16638870239258
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7492885331312815,
+          "p50_ms": 0.7476959824562073,
+          "p95_ms": 0.7833951979875564
+        },
+        "receiver_context": {
+          "mean_ms": 0.017165866401046514,
+          "p50_ms": 0.01673599984496832,
+          "p95_ms": 0.017702399659901856
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.392311461766561,
+          "p50_ms": 2.394864082336426,
+          "p95_ms": 2.4213616490364074
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.09872029622396,
+          "p50_ms": 80.02044677734375,
+          "p95_ms": 80.69888572692871
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.74268372853597,
+          "p50_ms": 6.74288010597229,
+          "p95_ms": 6.826327919960022
+        },
+        "end_to_end": {
+          "mean_ms": 134.74165662579858,
+          "p50_ms": 134.74765152204782,
+          "p95_ms": 135.92416812316515
+        },
+        "cuda_span": {
+          "mean_ms": 134.69202117919923,
+          "p50_ms": 134.69853973388672,
+          "p95_ms": 135.8748046875
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.3115234375,
+      "incremental_peak_gpu_allocated_mib": 766.79443359375,
+      "rate": {
+        "display_budget": 510,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 4309.244595168275,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 3893.2445951682753,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E2",
+      "network": "R48-G",
+      "frame_type": "I",
+      "budget": 1024,
+      "parameters": 61600,
+      "network_macs": 242841600,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 247868160,
+      "recovery_flops_estimate": 495736320,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.74261767069499,
+          "p50_ms": 44.745967864990234,
+          "p95_ms": 45.10405521392822
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7598677317301432,
+          "p50_ms": 0.75108802318573,
+          "p95_ms": 0.814364778995514
+        },
+        "receiver_context": {
+          "mean_ms": 0.017263999891777834,
+          "p50_ms": 0.017071999609470367,
+          "p95_ms": 0.01904480000957846
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.413681070009867,
+          "p50_ms": 2.38918399810791,
+          "p95_ms": 2.6512528419494625
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.03672841389974,
+          "p50_ms": 80.0689582824707,
+          "p95_ms": 80.34900932312011
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.798788213729859,
+          "p50_ms": 6.750159978866577,
+          "p95_ms": 7.4117903947830195
+        },
+        "end_to_end": {
+          "mean_ms": 134.8192080234488,
+          "p50_ms": 134.77262645028532,
+          "p95_ms": 135.73861764161848
+        },
+        "cuda_span": {
+          "mean_ms": 134.7689473470052,
+          "p50_ms": 134.72325897216797,
+          "p95_ms": 135.67926788330078
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.3115234375,
+      "incremental_peak_gpu_allocated_mib": 766.79443359375,
+      "rate": {
+        "display_budget": 1024,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 9852.312747856568,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 9148.312747856568,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E2",
+      "network": "R48-G",
+      "frame_type": "I",
+      "budget": 2048,
+      "parameters": 61600,
+      "network_macs": 242841600,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 247868160,
+      "recovery_flops_estimate": 495736320,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.87183163960775,
+          "p50_ms": 44.832176208496094,
+          "p95_ms": 45.24219093322754
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7478421330451965,
+          "p50_ms": 0.741023987531662,
+          "p95_ms": 0.7759792059659958
+        },
+        "receiver_context": {
+          "mean_ms": 0.017555199998120465,
+          "p50_ms": 0.017023999243974686,
+          "p95_ms": 0.017676799464970826
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.425722670555115,
+          "p50_ms": 2.40937602519989,
+          "p95_ms": 2.5690767407417296
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.30202229817708,
+          "p50_ms": 80.34527969360352,
+          "p95_ms": 80.79820251464844
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.523838917414348,
+          "p50_ms": 4.487407922744751,
+          "p95_ms": 4.715796971321105
+        },
+        "end_to_end": {
+          "mean_ms": 132.93879669702923,
+          "p50_ms": 132.89676397107542,
+          "p95_ms": 133.85902050649747
+        },
+        "cuda_span": {
+          "mean_ms": 132.88881276448566,
+          "p50_ms": 132.8478240966797,
+          "p95_ms": 133.81025772094728
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.3115234375,
+      "incremental_peak_gpu_allocated_mib": 766.79443359375,
+      "rate": {
+        "display_budget": 2048,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E2",
+      "network": "R48-G",
+      "frame_type": "I",
+      "budget": 4096,
+      "parameters": 61600,
+      "network_macs": 242841600,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 247868160,
+      "recovery_flops_estimate": 495736320,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.737395985921225,
+          "p50_ms": 44.7347354888916,
+          "p95_ms": 44.92328224182129
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7428394675254821,
+          "p50_ms": 0.7459200024604797,
+          "p95_ms": 0.7691136062145233
+        },
+        "receiver_context": {
+          "mean_ms": 0.01719999983906746,
+          "p50_ms": 0.016863999888300896,
+          "p95_ms": 0.017943999636918305
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.4206101417541506,
+          "p50_ms": 2.421663999557495,
+          "p95_ms": 2.452839958667755
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.0858782450358,
+          "p50_ms": 80.0771369934082,
+          "p95_ms": 80.47853050231933
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.671437915166219,
+          "p50_ms": 6.652896165847778,
+          "p95_ms": 6.794739246368408
+        },
+        "end_to_end": {
+          "mean_ms": 134.725072234869,
+          "p50_ms": 134.78969252901152,
+          "p95_ms": 135.23514624102972
+        },
+        "cuda_span": {
+          "mean_ms": 134.67536265055338,
+          "p50_ms": 134.74041748046875,
+          "p95_ms": 135.1841613769531
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.3115234375,
+      "incremental_peak_gpu_allocated_mib": 766.79443359375,
+      "rate": {
+        "display_budget": 4096,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 4096,
+        "display": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 42997.21771097602,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 40565.21771097602,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 42997.21771097602,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 40565.21771097602,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E2",
+      "network": "R48-G",
+      "frame_type": "I",
+      "budget": 8192,
+      "parameters": 61600,
+      "network_macs": 242841600,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 247868160,
+      "recovery_flops_estimate": 495736320,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.74689064025879,
+          "p50_ms": 44.76652908325195,
+          "p95_ms": 44.90020484924317
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.737554128964742,
+          "p50_ms": 0.7368800044059753,
+          "p95_ms": 0.7610448032617569
+        },
+        "receiver_context": {
+          "mean_ms": 0.01677973326295614,
+          "p50_ms": 0.016831999644637108,
+          "p95_ms": 0.017535999417304993
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.4150293350219725,
+          "p50_ms": 2.415328025817871,
+          "p95_ms": 2.4414623856544493
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.1743532816569,
+          "p50_ms": 80.19115447998047,
+          "p95_ms": 80.62943382263184
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.646115191777548,
+          "p50_ms": 6.64790415763855,
+          "p95_ms": 6.7139424800872805
+        },
+        "end_to_end": {
+          "mean_ms": 134.7867304303994,
+          "p50_ms": 134.74488601787016,
+          "p95_ms": 135.23848552140407
+        },
+        "cuda_span": {
+          "mean_ms": 134.73672180175782,
+          "p50_ms": 134.69351959228516,
+          "p95_ms": 135.18935928344726
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.3115234375,
+      "incremental_peak_gpu_allocated_mib": 766.79443359375,
+      "rate": {
+        "display_budget": 8192,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 8192,
+        "display": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 87182.71805764106,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 82446.71805764106,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 87182.71805764106,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 82446.71805764106,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E2",
+      "network": "R48-G",
+      "frame_type": "P",
+      "budget": 510,
+      "parameters": 61600,
+      "network_macs": 343111680,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 348138240,
+      "recovery_flops_estimate": 696276480,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.786793581644694,
+          "p50_ms": 24.780512809753418,
+          "p95_ms": 24.857601737976076
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.38848639925320944,
+          "p50_ms": 0.38758400082588196,
+          "p95_ms": 0.39597919285297395
+        },
+        "receiver_context": {
+          "mean_ms": 16.710952440897625,
+          "p50_ms": 16.6943359375,
+          "p95_ms": 16.749419498443604
+        },
+        "receiver_recovery": {
+          "mean_ms": 8.217182922363282,
+          "p50_ms": 8.214447975158691,
+          "p95_ms": 8.239736032485961
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.930291175842285,
+          "p50_ms": 12.933071613311768,
+          "p95_ms": 12.970543718338012
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 10.477618185679118,
+          "p50_ms": 10.473919868469238,
+          "p95_ms": 10.511740922927856
+        },
+        "end_to_end": {
+          "mean_ms": 73.55171860350917,
+          "p50_ms": 73.53465200867504,
+          "p95_ms": 73.70418445207179
+        },
+        "cuda_span": {
+          "mean_ms": 73.51132481892904,
+          "p50_ms": 73.49470520019531,
+          "p95_ms": 73.66366882324219
+        }
+      },
+      "peak_gpu_allocated_mib": 3967.05322265625,
+      "incremental_peak_gpu_allocated_mib": 3511.5361328125,
+      "rate": {
+        "display_budget": 510,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 510,
+        "display": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E2",
+      "network": "R48-G",
+      "frame_type": "P",
+      "budget": 1024,
+      "parameters": 61600,
+      "network_macs": 343111680,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 348138240,
+      "recovery_flops_estimate": 696276480,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.790915298461915,
+          "p50_ms": 24.78923225402832,
+          "p95_ms": 24.83921413421631
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.3909376005331675,
+          "p50_ms": 0.39105600118637085,
+          "p95_ms": 0.40083358585834505
+        },
+        "receiver_context": {
+          "mean_ms": 16.697825241088868,
+          "p50_ms": 16.69798469543457,
+          "p95_ms": 16.731766414642333
+        },
+        "receiver_recovery": {
+          "mean_ms": 8.221457036336263,
+          "p50_ms": 8.221999645233154,
+          "p95_ms": 8.247175788879394
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.929690647125245,
+          "p50_ms": 12.931056022644043,
+          "p95_ms": 12.954558610916138
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 18.59399897257487,
+          "p50_ms": 18.59836769104004,
+          "p95_ms": 18.641942501068115
+        },
+        "end_to_end": {
+          "mean_ms": 81.66603756059583,
+          "p50_ms": 81.6470985300839,
+          "p95_ms": 81.74788791220635
+        },
+        "cuda_span": {
+          "mean_ms": 81.62482426961263,
+          "p50_ms": 81.60598373413086,
+          "p95_ms": 81.70658836364746
+        }
+      },
+      "peak_gpu_allocated_mib": 3971.04150390625,
+      "incremental_peak_gpu_allocated_mib": 3515.5244140625,
+      "rate": {
+        "display_budget": 1024,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 1024,
+        "display": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 11425.400579493506,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 10721.400579493506,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 11425.400579493506,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 10721.400579493506,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E2",
+      "network": "R48-G",
+      "frame_type": "P",
+      "budget": 2048,
+      "parameters": 61600,
+      "network_macs": 343111680,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 348138240,
+      "recovery_flops_estimate": 696276480,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.786913045247395,
+          "p50_ms": 24.782608032226562,
+          "p95_ms": 24.846224975585937
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.38773866593837736,
+          "p50_ms": 0.38680000603199005,
+          "p95_ms": 0.39862239807844163
+        },
+        "receiver_context": {
+          "mean_ms": 16.6903102238973,
+          "p50_ms": 16.693055152893066,
+          "p95_ms": 16.716137218475343
+        },
+        "receiver_recovery": {
+          "mean_ms": 8.216484228769938,
+          "p50_ms": 8.208943843841553,
+          "p95_ms": 8.247257471084595
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.92590192159017,
+          "p50_ms": 12.930416107177734,
+          "p95_ms": 12.94205617904663
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 18.594381777445474,
+          "p50_ms": 18.598095893859863,
+          "p95_ms": 18.64146089553833
+        },
+        "end_to_end": {
+          "mean_ms": 81.64272143039852,
+          "p50_ms": 81.64808549918234,
+          "p95_ms": 81.72857714234851
+        },
+        "cuda_span": {
+          "mean_ms": 81.60172958374024,
+          "p50_ms": 81.60774230957031,
+          "p95_ms": 81.68737754821777
+        }
+      },
+      "peak_gpu_allocated_mib": 3971.04931640625,
+      "incremental_peak_gpu_allocated_mib": 3515.5322265625,
+      "rate": {
+        "display_budget": 2048,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 22704.97809558989,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 21424.97809558989,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 22704.97809558989,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 21424.97809558989,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E2",
+      "network": "R48-G",
+      "frame_type": "P",
+      "budget": 4096,
+      "parameters": 61600,
+      "network_macs": 343111680,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 348138240,
+      "recovery_flops_estimate": 696276480,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.80545488993327,
+          "p50_ms": 24.78927993774414,
+          "p95_ms": 24.87464475631714
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.3892117311557134,
+          "p50_ms": 0.38947199285030365,
+          "p95_ms": 0.3960128054022789
+        },
+        "receiver_context": {
+          "mean_ms": 16.691554260253906,
+          "p50_ms": 16.68940830230713,
+          "p95_ms": 16.739213275909425
+        },
+        "receiver_recovery": {
+          "mean_ms": 8.256083170572916,
+          "p50_ms": 8.249104022979736,
+          "p95_ms": 8.278781080245972
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.926379744211832,
+          "p50_ms": 12.933519840240479,
+          "p95_ms": 12.949119758605956
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 18.589061292012534,
+          "p50_ms": 18.58577537536621,
+          "p95_ms": 18.644661617279052
+        },
+        "end_to_end": {
+          "mean_ms": 81.69929427870859,
+          "p50_ms": 81.65985549567267,
+          "p95_ms": 81.83146647643298
+        },
+        "cuda_span": {
+          "mean_ms": 81.65774485270182,
+          "p50_ms": 81.61860656738281,
+          "p95_ms": 81.79021453857422
+        }
+      },
+      "peak_gpu_allocated_mib": 3971.06494140625,
+      "incremental_peak_gpu_allocated_mib": 3515.5478515625,
+      "rate": {
+        "display_budget": 4096,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 4096,
+        "display": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 45261.607821467864,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 42829.607821467864,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 45261.607821467864,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 42829.607821467864,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E2",
+      "network": "R48-G",
+      "frame_type": "P",
+      "budget": 8192,
+      "parameters": 61600,
+      "network_macs": 343111680,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 348138240,
+      "recovery_flops_estimate": 696276480,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.828983497619628,
+          "p50_ms": 24.788639068603516,
+          "p95_ms": 24.8942400932312
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.3849151988824209,
+          "p50_ms": 0.38444800674915314,
+          "p95_ms": 0.3944623962044716
+        },
+        "receiver_context": {
+          "mean_ms": 16.69650363922119,
+          "p50_ms": 16.695039749145508,
+          "p95_ms": 16.738696098327637
+        },
+        "receiver_recovery": {
+          "mean_ms": 8.244692293802897,
+          "p50_ms": 8.240511894226074,
+          "p95_ms": 8.274706888198853
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.928924814860027,
+          "p50_ms": 12.92796802520752,
+          "p95_ms": 12.948494482040406
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 18.607443364461265,
+          "p50_ms": 18.610112190246582,
+          "p95_ms": 18.66114263534546
+        },
+        "end_to_end": {
+          "mean_ms": 81.7334368902569,
+          "p50_ms": 81.68749848846346,
+          "p95_ms": 81.88795211608522
+        },
+        "cuda_span": {
+          "mean_ms": 81.69146143595377,
+          "p50_ms": 81.64622116088867,
+          "p95_ms": 81.83837890625
+        }
+      },
+      "peak_gpu_allocated_mib": 3971.09619140625,
+      "incremental_peak_gpu_allocated_mib": 3515.5791015625,
+      "rate": {
+        "display_budget": 8192,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 8192,
+        "display": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 90378.12631893044,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 85642.12631893044,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 90378.12631893044,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 85642.12631893044,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E3",
+      "network": "R-Wide",
+      "frame_type": "I",
+      "budget": 510,
+      "parameters": 91640,
+      "network_macs": 416486400,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 421512960,
+      "recovery_flops_estimate": 843025920,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.76464767456055,
+          "p50_ms": 44.739871978759766,
+          "p95_ms": 45.39189167022705
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7413781325022379,
+          "p50_ms": 0.7412320077419281,
+          "p95_ms": 0.7835520058870316
+        },
+        "receiver_context": {
+          "mean_ms": 0.01706346683204174,
+          "p50_ms": 0.017008000053465366,
+          "p95_ms": 0.017873600125312805
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.4034272114435833,
+          "p50_ms": 2.406496047973633,
+          "p95_ms": 2.4305135369300843
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.29328791300456,
+          "p50_ms": 80.23185729980469,
+          "p95_ms": 81.44007873535156
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.696485265096029,
+          "p50_ms": 6.6943199634552,
+          "p95_ms": 6.815755295753479
+        },
+        "end_to_end": {
+          "mean_ms": 134.96581513124207,
+          "p50_ms": 134.8965719807893,
+          "p95_ms": 136.5182080771774
+        },
+        "cuda_span": {
+          "mean_ms": 134.91628977457682,
+          "p50_ms": 134.84228515625,
+          "p95_ms": 136.46915130615236
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 510,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 4309.244595168275,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 3893.2445951682753,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E3",
+      "network": "R-Wide",
+      "frame_type": "I",
+      "budget": 1024,
+      "parameters": 91640,
+      "network_macs": 416486400,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 421512960,
+      "recovery_flops_estimate": 843025920,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.74981867472331,
+          "p50_ms": 44.73324966430664,
+          "p95_ms": 44.98286075592041
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7391018629074096,
+          "p50_ms": 0.7381439805030823,
+          "p95_ms": 0.760705628991127
+        },
+        "receiver_context": {
+          "mean_ms": 0.016832000017166136,
+          "p50_ms": 0.016767999157309532,
+          "p95_ms": 0.01756000043824315
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.402889585494995,
+          "p50_ms": 2.407104015350342,
+          "p95_ms": 2.4308943152427673
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.30354410807291,
+          "p50_ms": 80.29401397705078,
+          "p95_ms": 80.5869255065918
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.708531188964844,
+          "p50_ms": 6.689728021621704,
+          "p95_ms": 6.796476650238037
+        },
+        "end_to_end": {
+          "mean_ms": 134.97082754038274,
+          "p50_ms": 135.00651548383757,
+          "p95_ms": 135.20510949892923
+        },
+        "cuda_span": {
+          "mean_ms": 134.92071889241535,
+          "p50_ms": 134.95565032958984,
+          "p95_ms": 135.1551383972168
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 1024,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 9852.312747856568,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 9148.312747856568,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E3",
+      "network": "R-Wide",
+      "frame_type": "I",
+      "budget": 2048,
+      "parameters": 91640,
+      "network_macs": 416486400,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 421512960,
+      "recovery_flops_estimate": 843025920,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.9389897664388,
+          "p50_ms": 44.92086410522461,
+          "p95_ms": 45.247962188720706
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7392074724038442,
+          "p50_ms": 0.7424960136413574,
+          "p95_ms": 0.7593727856874466
+        },
+        "receiver_context": {
+          "mean_ms": 0.017245866606632868,
+          "p50_ms": 0.016736000776290894,
+          "p95_ms": 0.018628800101578233
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.422102387746175,
+          "p50_ms": 2.4243680238723755,
+          "p95_ms": 2.4505744576454163
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.48352762858073,
+          "p50_ms": 80.53562927246094,
+          "p95_ms": 80.88557777404785
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.459084765116374,
+          "p50_ms": 4.457040071487427,
+          "p95_ms": 4.519695901870728
+        },
+        "end_to_end": {
+          "mean_ms": 133.10968694665158,
+          "p50_ms": 133.1768175587058,
+          "p95_ms": 133.56612622737885
+        },
+        "cuda_span": {
+          "mean_ms": 133.0601577758789,
+          "p50_ms": 133.12721252441406,
+          "p95_ms": 133.5166244506836
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 2048,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E3",
+      "network": "R-Wide",
+      "frame_type": "I",
+      "budget": 4096,
+      "parameters": 91640,
+      "network_macs": 416486400,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 421512960,
+      "recovery_flops_estimate": 843025920,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.767283248901364,
+          "p50_ms": 44.74635314941406,
+          "p95_ms": 44.961890029907224
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7441888054211935,
+          "p50_ms": 0.7405439913272858,
+          "p95_ms": 0.7665808200836182
+        },
+        "receiver_context": {
+          "mean_ms": 0.017137066647410392,
+          "p50_ms": 0.01702400017529726,
+          "p95_ms": 0.017638400197029114
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.4525802612304686,
+          "p50_ms": 2.4464640617370605,
+          "p95_ms": 2.4750095129013063
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.29821141560872,
+          "p50_ms": 80.27913665771484,
+          "p95_ms": 80.56204833984376
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.699773899714152,
+          "p50_ms": 6.705983877182007,
+          "p95_ms": 6.766468620300293
+        },
+        "end_to_end": {
+          "mean_ms": 135.02904403721914,
+          "p50_ms": 135.03314252011478,
+          "p95_ms": 135.51487838849425
+        },
+        "cuda_span": {
+          "mean_ms": 134.9791748046875,
+          "p50_ms": 134.9840087890625,
+          "p95_ms": 135.4658416748047
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 4096,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 4096,
+        "display": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 42997.21771097602,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 40565.21771097602,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 42997.21771097602,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 40565.21771097602,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E3",
+      "network": "R-Wide",
+      "frame_type": "I",
+      "budget": 8192,
+      "parameters": 91640,
+      "network_macs": 416486400,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 421512960,
+      "recovery_flops_estimate": 843025920,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.76973050435384,
+          "p50_ms": 44.76841735839844,
+          "p95_ms": 45.019749069213866
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7352469305197398,
+          "p50_ms": 0.7371520102024078,
+          "p95_ms": 0.7681855767965317
+        },
+        "receiver_context": {
+          "mean_ms": 0.01665920000523329,
+          "p50_ms": 0.016607999801635742,
+          "p95_ms": 0.01741120032966137
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.42970240910848,
+          "p50_ms": 2.4415040016174316,
+          "p95_ms": 2.466860818862915
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.28651479085286,
+          "p50_ms": 80.30379104614258,
+          "p95_ms": 80.79775543212891
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.6901120026906336,
+          "p50_ms": 6.7047200202941895,
+          "p95_ms": 6.762510228157043
+        },
+        "end_to_end": {
+          "mean_ms": 134.97748660156503,
+          "p50_ms": 134.97380004264414,
+          "p95_ms": 135.58631914202124
+        },
+        "cuda_span": {
+          "mean_ms": 134.92796783447267,
+          "p50_ms": 134.92467498779297,
+          "p95_ms": 135.53689193725586
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 8192,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 8192,
+        "display": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 87182.71805764106,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 82446.71805764106,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 87182.71805764106,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 82446.71805764106,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E3",
+      "network": "R-Wide",
+      "frame_type": "P",
+      "budget": 510,
+      "parameters": 91640,
+      "network_macs": 600314880,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 605341440,
+      "recovery_flops_estimate": 1210682880,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.74813117980957,
+          "p50_ms": 24.71140766143799,
+          "p95_ms": 24.771076202392578
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.38365119993686675,
+          "p50_ms": 0.38206399977207184,
+          "p95_ms": 0.39225120991468426
+        },
+        "receiver_context": {
+          "mean_ms": 16.636236826578777,
+          "p50_ms": 16.626720428466797,
+          "p95_ms": 16.668300533294676
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.2792330582936606,
+          "p50_ms": 2.2779040336608887,
+          "p95_ms": 2.3078511714935304
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.916686884562175,
+          "p50_ms": 12.917104244232178,
+          "p95_ms": 12.946369838714599
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.503108263015747,
+          "p50_ms": 4.492464065551758,
+          "p95_ms": 4.531889653205871
+        },
+        "end_to_end": {
+          "mean_ms": 61.50477413320914,
+          "p50_ms": 61.43863598117605,
+          "p95_ms": 61.77126870024949
+        },
+        "cuda_span": {
+          "mean_ms": 61.467047627766924,
+          "p50_ms": 61.4017276763916,
+          "p95_ms": 61.72827224731445
+        }
+      },
+      "peak_gpu_allocated_mib": 975.724609375,
+      "incremental_peak_gpu_allocated_mib": 520.36279296875,
+      "rate": {
+        "display_budget": 510,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 510,
+        "display": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E3",
+      "network": "R-Wide",
+      "frame_type": "P",
+      "budget": 1024,
+      "parameters": 91640,
+      "network_macs": 600314880,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 605341440,
+      "recovery_flops_estimate": 1210682880,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.71336949666341,
+          "p50_ms": 24.713552474975586,
+          "p95_ms": 24.780158519744873
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.38413760463396707,
+          "p50_ms": 0.38499200344085693,
+          "p95_ms": 0.38999679684638977
+        },
+        "receiver_context": {
+          "mean_ms": 16.638753128051757,
+          "p50_ms": 16.63267230987549,
+          "p95_ms": 16.668755435943602
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.281225570042928,
+          "p50_ms": 2.2802079916000366,
+          "p95_ms": 2.30343359708786
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.919400533040365,
+          "p50_ms": 12.916032314300537,
+          "p95_ms": 12.950342702865601
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.569594701131185,
+          "p50_ms": 6.570048093795776,
+          "p95_ms": 6.613171100616455
+        },
+        "end_to_end": {
+          "mean_ms": 63.54399756528437,
+          "p50_ms": 63.529621984343976,
+          "p95_ms": 63.6610564077273
+        },
+        "cuda_span": {
+          "mean_ms": 63.5064811706543,
+          "p50_ms": 63.49239921569824,
+          "p95_ms": 63.623702430725096
+        }
+      },
+      "peak_gpu_allocated_mib": 975.728515625,
+      "incremental_peak_gpu_allocated_mib": 520.36669921875,
+      "rate": {
+        "display_budget": 1024,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 1024,
+        "display": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 11425.400579493506,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 10721.400579493506,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 11425.400579493506,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 10721.400579493506,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E3",
+      "network": "R-Wide",
+      "frame_type": "P",
+      "budget": 2048,
+      "parameters": 91640,
+      "network_macs": 600314880,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 605341440,
+      "recovery_flops_estimate": 1210682880,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.720441563924155,
+          "p50_ms": 24.715776443481445,
+          "p95_ms": 24.768799018859863
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.3838570684194565,
+          "p50_ms": 0.3838240057229996,
+          "p95_ms": 0.3940319985151291
+        },
+        "receiver_context": {
+          "mean_ms": 16.638309224446616,
+          "p50_ms": 16.632448196411133,
+          "p95_ms": 16.667115688323975
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.2944021145502727,
+          "p50_ms": 2.286687970161438,
+          "p95_ms": 2.354534411430359
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.919730154673259,
+          "p50_ms": 12.920207977294922,
+          "p95_ms": 12.951645946502685
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.584572792053223,
+          "p50_ms": 6.577647924423218,
+          "p95_ms": 6.64618878364563
+        },
+        "end_to_end": {
+          "mean_ms": 63.57888746618604,
+          "p50_ms": 63.544944510795176,
+          "p95_ms": 63.74820821220055
+        },
+        "cuda_span": {
+          "mean_ms": 63.541313298543294,
+          "p50_ms": 63.50779342651367,
+          "p95_ms": 63.711127281188965
+        }
+      },
+      "peak_gpu_allocated_mib": 975.736328125,
+      "incremental_peak_gpu_allocated_mib": 520.37451171875,
+      "rate": {
+        "display_budget": 2048,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 22704.97809558989,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 21424.97809558989,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 22704.97809558989,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 21424.97809558989,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E3",
+      "network": "R-Wide",
+      "frame_type": "P",
+      "budget": 4096,
+      "parameters": 91640,
+      "network_macs": 600314880,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 605341440,
+      "recovery_flops_estimate": 1210682880,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.72809518178304,
+          "p50_ms": 24.718287467956543,
+          "p95_ms": 24.78183994293213
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.3820799976587296,
+          "p50_ms": 0.3813280016183853,
+          "p95_ms": 0.39002240300178526
+        },
+        "receiver_context": {
+          "mean_ms": 16.63574956258138,
+          "p50_ms": 16.632927894592285,
+          "p95_ms": 16.660928344726564
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.3023797353108724,
+          "p50_ms": 2.3014559745788574,
+          "p95_ms": 2.3386768341064452
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.91678409576416,
+          "p50_ms": 12.912544250488281,
+          "p95_ms": 12.947664356231689
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.569198926289876,
+          "p50_ms": 6.567759990692139,
+          "p95_ms": 6.598358416557312
+        },
+        "end_to_end": {
+          "mean_ms": 63.571575501312815,
+          "p50_ms": 63.557752524502575,
+          "p95_ms": 63.65822333027609
+        },
+        "cuda_span": {
+          "mean_ms": 63.53428700764974,
+          "p50_ms": 63.52080154418945,
+          "p95_ms": 63.620926475524904
+        }
+      },
+      "peak_gpu_allocated_mib": 975.751953125,
+      "incremental_peak_gpu_allocated_mib": 520.39013671875,
+      "rate": {
+        "display_budget": 4096,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 4096,
+        "display": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 45261.607821467864,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 42829.607821467864,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 45261.607821467864,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 42829.607821467864,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E3",
+      "network": "R-Wide",
+      "frame_type": "P",
+      "budget": 8192,
+      "parameters": 91640,
+      "network_macs": 600314880,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 605341440,
+      "recovery_flops_estimate": 1210682880,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.718583615620933,
+          "p50_ms": 24.712592124938965,
+          "p95_ms": 24.75402240753174
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.38310933609803516,
+          "p50_ms": 0.3824800103902817,
+          "p95_ms": 0.38857761174440386
+        },
+        "receiver_context": {
+          "mean_ms": 16.640275065104166,
+          "p50_ms": 16.643792152404785,
+          "p95_ms": 16.672452545166017
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.3168437480926514,
+          "p50_ms": 2.3085280656814575,
+          "p95_ms": 2.3513360381126405
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.920609029134114,
+          "p50_ms": 12.919151782989502,
+          "p95_ms": 12.950520038604736
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 6.578745619455973,
+          "p50_ms": 6.581200122833252,
+          "p95_ms": 6.607391977310181
+        },
+        "end_to_end": {
+          "mean_ms": 63.59584240320449,
+          "p50_ms": 63.590215460862964,
+          "p95_ms": 63.689885375788435
+        },
+        "cuda_span": {
+          "mean_ms": 63.558166122436525,
+          "p50_ms": 63.55272102355957,
+          "p95_ms": 63.652404594421384
+        }
+      },
+      "peak_gpu_allocated_mib": 975.783203125,
+      "incremental_peak_gpu_allocated_mib": 520.42138671875,
+      "rate": {
+        "display_budget": 8192,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 8192,
+        "display": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 90378.12631893044,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 85642.12631893044,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 90378.12631893044,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 85642.12631893044,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E4",
+      "network": "SLD",
+      "frame_type": "I",
+      "budget": 510,
+      "parameters": 91560,
+      "network_macs": 415050240,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 420076800,
+      "recovery_flops_estimate": 840153600,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.68717880249024,
+          "p50_ms": 44.74143981933594,
+          "p95_ms": 45.08624076843262
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7358197371164957,
+          "p50_ms": 0.7320480048656464,
+          "p95_ms": 0.7698703914880752
+        },
+        "receiver_context": {
+          "mean_ms": 0.01730346673478683,
+          "p50_ms": 0.01711999997496605,
+          "p95_ms": 0.01785120079293847
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.841747196515401,
+          "p50_ms": 2.8379520177841187,
+          "p95_ms": 2.8946512699127194
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.2308723449707,
+          "p50_ms": 80.12257766723633,
+          "p95_ms": 81.18550987243653
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 7.570050144195557,
+          "p50_ms": 7.5739359855651855,
+          "p95_ms": 7.6421024084091185
+        },
+        "end_to_end": {
+          "mean_ms": 136.13281291521466,
+          "p50_ms": 136.11839700024575,
+          "p95_ms": 137.56106057553552
+        },
+        "cuda_span": {
+          "mean_ms": 136.08297170003254,
+          "p50_ms": 136.0688018798828,
+          "p95_ms": 137.51130905151368
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 510,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 4309.244595168275,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 3893.2445951682753,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E4",
+      "network": "SLD",
+      "frame_type": "I",
+      "budget": 1024,
+      "parameters": 91560,
+      "network_macs": 415050240,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 420076800,
+      "recovery_flops_estimate": 840153600,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.70322761535645,
+          "p50_ms": 44.68272018432617,
+          "p95_ms": 44.99875411987305
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7414826730887095,
+          "p50_ms": 0.7437120079994202,
+          "p95_ms": 0.760324802994728
+        },
+        "receiver_context": {
+          "mean_ms": 0.016709333378821613,
+          "p50_ms": 0.016896000131964684,
+          "p95_ms": 0.01745279962196946
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.826142923037211,
+          "p50_ms": 2.828544020652771,
+          "p95_ms": 2.8534239649772646
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.15644454956055,
+          "p50_ms": 80.16964721679688,
+          "p95_ms": 80.67900886535645
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 7.547094424565633,
+          "p50_ms": 7.558560132980347,
+          "p95_ms": 7.629569578170776
+        },
+        "end_to_end": {
+          "mean_ms": 136.04050622864938,
+          "p50_ms": 136.0970139503479,
+          "p95_ms": 136.56834124703892
+        },
+        "cuda_span": {
+          "mean_ms": 135.99109903971353,
+          "p50_ms": 136.04737091064453,
+          "p95_ms": 136.51982498168945
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 1024,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 9852.312747856568,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 9148.312747856568,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E4",
+      "network": "SLD",
+      "frame_type": "I",
+      "budget": 2048,
+      "parameters": 91560,
+      "network_macs": 415050240,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 420076800,
+      "recovery_flops_estimate": 840153600,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.93814074198405,
+          "p50_ms": 44.953392028808594,
+          "p95_ms": 45.273664474487305
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.73992746869723,
+          "p50_ms": 0.7375520169734955,
+          "p95_ms": 0.7588016152381897
+        },
+        "receiver_context": {
+          "mean_ms": 0.017307733185589314,
+          "p50_ms": 0.017023999243974686,
+          "p95_ms": 0.017702399659901856
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.862940804163615,
+          "p50_ms": 2.854143977165222,
+          "p95_ms": 2.895211160182953
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.49934158325195,
+          "p50_ms": 80.51179122924805,
+          "p95_ms": 80.86221694946289
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.8951039950052895,
+          "p50_ms": 4.876336097717285,
+          "p95_ms": 4.938772654533386
+        },
+        "end_to_end": {
+          "mean_ms": 134.00296390367052,
+          "p50_ms": 134.04861802700907,
+          "p95_ms": 134.53714718925767
+        },
+        "cuda_span": {
+          "mean_ms": 133.952761332194,
+          "p50_ms": 133.99937438964844,
+          "p95_ms": 134.4881507873535
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 2048,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E4",
+      "network": "SLD",
+      "frame_type": "I",
+      "budget": 4096,
+      "parameters": 91560,
+      "network_macs": 415050240,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 420076800,
+      "recovery_flops_estimate": 840153600,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.71646397908528,
+          "p50_ms": 44.72617721557617,
+          "p95_ms": 45.03608283996582
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7328309337298076,
+          "p50_ms": 0.7353439927101135,
+          "p95_ms": 0.7649056255817414
+        },
+        "receiver_context": {
+          "mean_ms": 0.01726826677719752,
+          "p50_ms": 0.016896000131964684,
+          "p95_ms": 0.01801120014861226
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.853038962682088,
+          "p50_ms": 2.874880075454712,
+          "p95_ms": 2.9116048574447633
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.22758433024089,
+          "p50_ms": 80.20275115966797,
+          "p95_ms": 80.74427680969238
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 7.5433429400126135,
+          "p50_ms": 7.5746238231658936,
+          "p95_ms": 7.6519519805908205
+        },
+        "end_to_end": {
+          "mean_ms": 136.13996900385246,
+          "p50_ms": 136.20966958114877,
+          "p95_ms": 136.7905657272786
+        },
+        "cuda_span": {
+          "mean_ms": 136.0905288696289,
+          "p50_ms": 136.15985870361328,
+          "p95_ms": 136.73640518188478
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 4096,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 4096,
+        "display": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 42997.21771097602,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 40565.21771097602,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 42997.21771097602,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 40565.21771097602,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E4",
+      "network": "SLD",
+      "frame_type": "I",
+      "budget": 8192,
+      "parameters": 91560,
+      "network_macs": 415050240,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 420076800,
+      "recovery_flops_estimate": 840153600,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 44.78360443115234,
+          "p50_ms": 44.76790428161621,
+          "p95_ms": 45.03111248016357
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.7403424004713695,
+          "p50_ms": 0.7384479939937592,
+          "p95_ms": 0.7651935994625091
+        },
+        "receiver_context": {
+          "mean_ms": 0.017341866654654346,
+          "p50_ms": 0.017040000297129154,
+          "p95_ms": 0.017855999991297722
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.8739872137705484,
+          "p50_ms": 2.871567964553833,
+          "p95_ms": 2.906228768825531
+        },
+        "rgb_decoder": {
+          "mean_ms": 80.25057754516601,
+          "p50_ms": 80.269775390625,
+          "p95_ms": 80.74089698791504
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 7.5920085430145265,
+          "p50_ms": 7.576751947402954,
+          "p95_ms": 7.760033512115478
+        },
+        "end_to_end": {
+          "mean_ms": 136.30818576784804,
+          "p50_ms": 136.2639864673838,
+          "p95_ms": 136.89590211724862
+        },
+        "cuda_span": {
+          "mean_ms": 136.25786387125652,
+          "p50_ms": 136.21465301513672,
+          "p95_ms": 136.83926544189453
+        }
+      },
+      "peak_gpu_allocated_mib": 1222.4375,
+      "incremental_peak_gpu_allocated_mib": 767.07568359375,
+      "rate": {
+        "display_budget": 8192,
+        "reference_budget": 2048,
+        "transmitted_union_symbols": 8192,
+        "display": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 87182.71805764106,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 82446.71805764106,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 20898.971273288735,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 19618.971273288735,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 87182.71805764106,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 82446.71805764106,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E4",
+      "network": "SLD",
+      "frame_type": "P",
+      "budget": 510,
+      "parameters": 91560,
+      "network_macs": 548743680,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 553770240,
+      "recovery_flops_estimate": 1107540480,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.73968423207601,
+          "p50_ms": 24.73102378845215,
+          "p95_ms": 24.79241180419922
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.38352746665477755,
+          "p50_ms": 0.3830239921808243,
+          "p95_ms": 0.3969119966030121
+        },
+        "receiver_context": {
+          "mean_ms": 16.637611707051594,
+          "p50_ms": 16.63705539703369,
+          "p95_ms": 16.665025329589845
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.6638229211171467,
+          "p50_ms": 2.657663941383362,
+          "p95_ms": 2.686913585662842
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.920764859517416,
+          "p50_ms": 12.921295642852783,
+          "p95_ms": 12.947979497909547
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 4.85555731455485,
+          "p50_ms": 4.855727910995483,
+          "p95_ms": 4.880059218406677
+        },
+        "end_to_end": {
+          "mean_ms": 62.23821250411371,
+          "p50_ms": 62.204903981182724,
+          "p95_ms": 62.43040668196045
+        },
+        "cuda_span": {
+          "mean_ms": 62.200968678792314,
+          "p50_ms": 62.167999267578125,
+          "p95_ms": 62.39347114562988
+        }
+      },
+      "peak_gpu_allocated_mib": 975.646484375,
+      "incremental_peak_gpu_allocated_mib": 520.28466796875,
+      "rate": {
+        "display_budget": 510,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 510,
+        "display": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E4",
+      "network": "SLD",
+      "frame_type": "P",
+      "budget": 1024,
+      "parameters": 91560,
+      "network_macs": 548743680,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 553770240,
+      "recovery_flops_estimate": 1107540480,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.717891120910643,
+          "p50_ms": 24.71623992919922,
+          "p95_ms": 24.76961431503296
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.3848341315984726,
+          "p50_ms": 0.3856000006198883,
+          "p95_ms": 0.3909023955464363
+        },
+        "receiver_context": {
+          "mean_ms": 16.641277885437013,
+          "p50_ms": 16.646384239196777,
+          "p95_ms": 16.66888189315796
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.65413761138916,
+          "p50_ms": 2.6532320976257324,
+          "p95_ms": 2.7274000525474547
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.92063897450765,
+          "p50_ms": 12.923648357391357,
+          "p95_ms": 12.947022342681885
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 7.312491766611735,
+          "p50_ms": 7.311023950576782,
+          "p95_ms": 7.356105780601501
+        },
+        "end_to_end": {
+          "mean_ms": 64.6686851978302,
+          "p50_ms": 64.65818302240223,
+          "p95_ms": 64.79224742506631
+        },
+        "cuda_span": {
+          "mean_ms": 64.63127085367839,
+          "p50_ms": 64.61718368530273,
+          "p95_ms": 64.75439262390137
+        }
+      },
+      "peak_gpu_allocated_mib": 975.650390625,
+      "incremental_peak_gpu_allocated_mib": 520.28857421875,
+      "rate": {
+        "display_budget": 1024,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 1024,
+        "display": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 11425.400579493506,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 10721.400579493506,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 8,
+          "header_bytes": 88,
+          "payload_bits": 16384,
+          "raw_total_bytes": 2136,
+          "entropy_est_bits": 11425.400579493506,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 10721.400579493506,
+          "level1_symbols": 1024,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E4",
+      "network": "SLD",
+      "frame_type": "P",
+      "budget": 2048,
+      "parameters": 91560,
+      "network_macs": 548743680,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 553770240,
+      "recovery_flops_estimate": 1107540480,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.71536865234375,
+          "p50_ms": 24.715551376342773,
+          "p95_ms": 24.760255813598633
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.3826912005742391,
+          "p50_ms": 0.38356800377368927,
+          "p95_ms": 0.3885295957326889
+        },
+        "receiver_context": {
+          "mean_ms": 16.63878167470296,
+          "p50_ms": 16.637104034423828,
+          "p95_ms": 16.666631984710694
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.6482666730880737,
+          "p50_ms": 2.6493760347366333,
+          "p95_ms": 2.675505542755127
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.923555215199789,
+          "p50_ms": 12.925680160522461,
+          "p95_ms": 12.950832223892212
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 7.304759422938029,
+          "p50_ms": 7.306064128875732,
+          "p95_ms": 7.35426881313324
+        },
+        "end_to_end": {
+          "mean_ms": 64.6511336361679,
+          "p50_ms": 64.65417298022658,
+          "p95_ms": 64.74094935692847
+        },
+        "cuda_span": {
+          "mean_ms": 64.61342239379883,
+          "p50_ms": 64.61690902709961,
+          "p95_ms": 64.70322608947754
+        }
+      },
+      "peak_gpu_allocated_mib": 975.658203125,
+      "incremental_peak_gpu_allocated_mib": 520.29638671875,
+      "rate": {
+        "display_budget": 2048,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 2048,
+        "display": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 22704.97809558989,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 21424.97809558989,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 16,
+          "header_bytes": 160,
+          "payload_bits": 32768,
+          "raw_total_bytes": 4256,
+          "entropy_est_bits": 22704.97809558989,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 21424.97809558989,
+          "level1_symbols": 2048,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E4",
+      "network": "SLD",
+      "frame_type": "P",
+      "budget": 4096,
+      "parameters": 91560,
+      "network_macs": 548743680,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 553770240,
+      "recovery_flops_estimate": 1107540480,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.718068186442057,
+          "p50_ms": 24.72327995300293,
+          "p95_ms": 24.770420932769774
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.38123200039068855,
+          "p50_ms": 0.3829120099544525,
+          "p95_ms": 0.3881792053580284
+        },
+        "receiver_context": {
+          "mean_ms": 16.652934519449868,
+          "p50_ms": 16.644832611083984,
+          "p95_ms": 16.666928577423096
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.68745600382487,
+          "p50_ms": 2.681872010231018,
+          "p95_ms": 2.716870379447937
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.92284377415975,
+          "p50_ms": 12.922880172729492,
+          "p95_ms": 12.94541277885437
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 7.306309350331625,
+          "p50_ms": 7.305600166320801,
+          "p95_ms": 7.350460696220398
+        },
+        "end_to_end": {
+          "mean_ms": 64.70679286479329,
+          "p50_ms": 64.68441401375458,
+          "p95_ms": 64.90522835520096
+        },
+        "cuda_span": {
+          "mean_ms": 64.66884358723958,
+          "p50_ms": 64.6469612121582,
+          "p95_ms": 64.867671585083
+        }
+      },
+      "peak_gpu_allocated_mib": 975.673828125,
+      "incremental_peak_gpu_allocated_mib": 520.31201171875,
+      "rate": {
+        "display_budget": 4096,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 4096,
+        "display": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 45261.607821467864,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 42829.607821467864,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 32,
+          "header_bytes": 304,
+          "payload_bits": 65536,
+          "raw_total_bytes": 8496,
+          "entropy_est_bits": 45261.607821467864,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 42829.607821467864,
+          "level1_symbols": 4096,
+          "level2_symbols": 0
+        }
+      }
+    },
+    {
+      "arm": "E4",
+      "network": "SLD",
+      "frame_type": "P",
+      "budget": 8192,
+      "parameters": 91560,
+      "network_macs": 548743680,
+      "gaussian_macs": 5026560,
+      "recovery_macs": 553770240,
+      "recovery_flops_estimate": 1107540480,
+      "timing": {
+        "backbone_encode": {
+          "mean_ms": 24.721507199605306,
+          "p50_ms": 24.71595287322998,
+          "p95_ms": 24.780083751678468
+        },
+        "token_select_quantize": {
+          "mean_ms": 0.3817472030719121,
+          "p50_ms": 0.38147200644016266,
+          "p95_ms": 0.3875808075070381
+        },
+        "receiver_context": {
+          "mean_ms": 16.638989957173667,
+          "p50_ms": 16.642720222473145,
+          "p95_ms": 16.668384742736816
+        },
+        "receiver_recovery": {
+          "mean_ms": 2.691347185770671,
+          "p50_ms": 2.6836639642715454,
+          "p95_ms": 2.7185439586639406
+        },
+        "rgb_decoder": {
+          "mean_ms": 12.919310887654623,
+          "p50_ms": 12.915263652801514,
+          "p95_ms": 12.949833583831786
+        },
+        "reference_projection_and_commit": {
+          "mean_ms": 7.307497596740722,
+          "p50_ms": 7.309632062911987,
+          "p95_ms": 7.349900722503662
+        },
+        "end_to_end": {
+          "mean_ms": 64.6980118084078,
+          "p50_ms": 64.67663054354489,
+          "p95_ms": 64.83497285516933
+        },
+        "cuda_span": {
+          "mean_ms": 64.6604008992513,
+          "p50_ms": 64.63940811157227,
+          "p95_ms": 64.79667510986329
+        }
+      },
+      "peak_gpu_allocated_mib": 975.705078125,
+      "incremental_peak_gpu_allocated_mib": 520.34326171875,
+      "rate": {
+        "display_budget": 8192,
+        "reference_budget": 510,
+        "transmitted_union_symbols": 8192,
+        "display": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 90378.12631893044,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 85642.12631893044,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        },
+        "reference": {
+          "packet_count": 4,
+          "header_bytes": 52,
+          "payload_bits": 8160,
+          "raw_total_bytes": 1072,
+          "entropy_est_bits": 5765.288960391838,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 5349.288960391838,
+          "level1_symbols": 510,
+          "level2_symbols": 0
+        },
+        "required_union": {
+          "packet_count": 64,
+          "header_bytes": 592,
+          "payload_bits": 131072,
+          "raw_total_bytes": 16976,
+          "entropy_est_bits": 90378.12631893044,
+          "real_bitstream": false,
+          "scan_table_bytes": 0,
+          "entropy_payload_bits": 85642.12631893044,
+          "level1_symbols": 8192,
+          "level2_symbols": 0
+        }
+      }
+    }
+  ]
+}

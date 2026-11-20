@@ -1,0 +1,56 @@
+{
+  "rows": 8700,
+  "cohort": {
+    "DAVIS2017:blackswan": 50,
+    "DAVIS2017:car-roundabout": 64,
+    "DAVIS2017:dog": 60
+  },
+  "reconstruction": {
+    "video": "DAVIS2017:car-roundabout",
+    "frame_zero_based": 55,
+    "history": "fixed_reference",
+    "crop_xywh": [
+      768,
+      432,
+      384,
+      216
+    ],
+    "color": "8-bit RGB, exact native crop"
+  },
+  "provenance_sha256": "57403f63f0a0ac1cc35be23f815ab687cb422052c3c2908e3f572f7fde6f7be9",
+  "training_sha256": {
+    "E2": "6381db63162fb3af63e3da0cb94a9ed9628c30f162bb31dc7551fe406bdc18b2",
+    "E3": "00518248e45d008958aa59275716caf52fda800a3c7b4475885a7090a9f09c5e",
+    "E4": "8aeb46bdfc05e14167f1b36f682803a73b5f5e14764d759e8d615ac6738af455"
+  },
+  "sealed_controls_replay": {
+    "E0": {
+      "frames_and_budgets": 1740,
+      "max_abs_difference": {
+        "mse": 0.0,
+        "psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0,
+        "latent_mse": 0.0,
+        "reference_latent_rms": 0.0
+      }
+    },
+    "E1": {
+      "frames_and_budgets": 1740,
+      "max_abs_difference": {
+        "mse": 0.0,
+        "psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0,
+        "latent_mse": 0.0,
+        "reference_latent_rms": 0.0
+      }
+    }
+  },
+  "outputs": {
+    "pilot_per_frame.csv": "38440d8994eadd9b73d3d71ea67bfe737a044938133b7c24028db2f0ca83874c",
+    "pilot_metrics.csv": "7f85f7e335607804fa529cfa6a9c5b34322a88bb53473082317a9ba6416fc994",
+    "pilot_gates.json": "8c46b3890f57a08bb785539f750f442ba902e6558a1973e752b9e95638321798",
+    "pilot_reconstruction.png": "47ac955e94eb93e7e32f6792350b720bd27e43c99abed7f649a73c01fd60b6a8"
+  }
+}

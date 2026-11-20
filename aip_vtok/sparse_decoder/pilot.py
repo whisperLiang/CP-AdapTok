@@ -225,7 +225,10 @@ def run_evaluation(run):
     training = completed_training()
     if COMPLETE.is_file():
         audit = json_at(COMPLETE)
-        if audit["outputs"] != {name: file_hash(OUTPUT / name) for name in EVIDENCE}:
+        training_hashes = {arm: file_hash(OUTPUT / f"pilot_train_{arm}.json") for arm in training}
+        if (audit["outputs"] != {name: file_hash(OUTPUT / name) for name in EVIDENCE}
+                or audit["training_sha256"] != training_hashes
+                or audit["provenance_sha256"] != file_hash(PROVENANCE)):
             raise RuntimeError("final evaluation files changed after publication")
         print("Final evaluation already verified.", flush=True)
         return
