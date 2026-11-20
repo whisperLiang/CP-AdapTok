@@ -1,0 +1,315 @@
+{
+  "status": "TESTED",
+  "baseline": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+  "source_sha256": "76c638a2e8348b18f12b4b10eeea7f0cb0fe4600c10c8569b3056c488325848c",
+  "passed": 22,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "test_names": [
+    "test_rans_prefixes_and_every_independent_packet_round_trip",
+    "test_reject_out_of_range_id_wrong_header_and_corrupt_or_truncated_packets",
+    "test_gop_boundary_and_reference_floor_do_not_depend_on_display",
+    "test_receiver_rejects_repeated_or_shuffled_packets_without_mutation",
+    "test_wrong_fsq_profile_and_model_version_reject_same_frame_header",
+    "test_journal_replays_exact_optimizer_boundary_and_discards_uncommitted_tail",
+    "test_cuda_checkpoint_replays_identical_model_and_optimizer",
+    "test_preserves_received_coefficients_and_migrates_heads",
+    "test_summary_distinguishes_global_and_frame_psnr_and_charges_reference_floor",
+    "test_exact_duplicate_across_splits_is_fatal",
+    "test_native_64_frame_closed_rollout",
+    "test_one_native_frame_full_metrics_and_fixed_controls",
+    "test_prefix_cover_and_frozen_table",
+    "test_reject_duplicate_slots",
+    "test_train_hard_path_matches_a2_and_integer_decode",
+    "test_mixed_radix_covers_all_uint16_symbols",
+    "test_window_and_budget_resume_sequences",
+    "test_native_rgb_dists_and_rate_gradients",
+    "test_real_native_bf16_update",
+    "test_history_mismatch_is_fatal",
+    "test_schedule_phases_export_one_matching_frozen_scan",
+    "test_initial_permutation_and_learned_inverse"
+  ],
+  "baseline_sparse_decoder": {
+    "passed": 19,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "test_names": [
+      "test_factorial_effects_are_oriented_and_include_history",
+      "test_inventory_rejects_dropped_duplicate_and_unverified_rows",
+      "test_t01_t03_t10_t14_step_zero_shapes_and_hard_observations[E2]",
+      "test_t01_t03_t10_t14_step_zero_shapes_and_hard_observations[E3]",
+      "test_t01_t03_t10_t14_step_zero_shapes_and_hard_observations[E4]",
+      "test_t02_t11_fixed_models_receive_exact_independently_extracted_ids",
+      "test_t04_intra_ignores_predictive_context[E2]",
+      "test_t04_intra_ignores_predictive_context[E3]",
+      "test_t04_intra_ignores_predictive_context[E4]",
+      "test_t05_t09_t13_real_causal_reference_chain[E2]",
+      "test_t05_t09_t13_real_causal_reference_chain[E3]",
+      "test_t05_t09_t13_real_causal_reference_chain[E4]",
+      "test_t06_t07_t08_frozen_native_gradient_and_recovery_update[E2]",
+      "test_t06_t07_t08_frozen_native_gradient_and_recovery_update[E3]",
+      "test_t06_t07_t08_frozen_native_gradient_and_recovery_update[E4]",
+      "test_t12_unreceived_level2_ids_are_invisible",
+      "test_t15_full_native_1080p_rgb_inference[E2]",
+      "test_t15_full_native_1080p_rgb_inference[E3]",
+      "test_t15_full_native_1080p_rgb_inference[E4]"
+    ]
+  },
+  "broader_repository_selection": {
+    "passed": 335,
+    "failures": 0,
+    "errors": 17,
+    "skipped": 0,
+    "scope": "not gpu and not integration and not slow",
+    "errors_explanation": "17 legacy fixtures require the sparse-decoder branch. The pinned parent worktree passed all 19 legacy decoder tests."
+  },
+  "ruff": "passed",
+  "mypy": "passed, 17 source files with --no-site-packages and external stubs excluded",
+  "cli_help": [
+    "run_joint_v1.py",
+    "evaluate_joint_v1.py",
+    "benchmark_joint_v1.py"
+  ],
+  "native_cuda": {
+    "gop_frames": 64,
+    "gop_size": 32,
+    "hardware": "NVIDIA H100 PCIe",
+    "real_frame_all_budget_fixed_and_closed": true,
+    "checkpoint_replay_exact": true
+  },
+  "joint_gradient_probe": {
+    "stage_b_grad_norm_sum": {
+      "transform": 0.0948605015873909,
+      "fsq": 0.010376188904047012,
+      "scan": 0.01829991675913334,
+      "entropy": 5.954285734333098e-05,
+      "sld": 0.1320310673036147
+    },
+    "elapsed_s": 9.866844616015442,
+    "uncoded_80d_intervention_preserved_ids": true,
+    "test_reads": 0,
+    "formal_optimizer_steps": 0,
+    "source_sha256": "76c638a2e8348b18f12b4b10eeea7f0cb0fe4600c10c8569b3056c488325848c"
+  },
+  "fault_injections": [
+    "invalid FSQ ID",
+    "packet corruption",
+    "truncated packet",
+    "duplicate scan slots",
+    "shuffled or repeated prefix packet",
+    "missing reference prefix",
+    "duplicate commit",
+    "scan hash mismatch",
+    "FSQ profile mismatch",
+    "wrong bitstream version",
+    "wrong checkpoint step",
+    "wrong resumed window",
+    "checkpoint byte corruption",
+    "TX/RX divergence",
+    "cross-split duplicate frame SHA256",
+    "journal changed after save"
+  ],
+  "quality": {
+    "branch_aware_coverage": 71.40204271123491,
+    "max_cyclomatic_complexity": 24,
+    "crap_at_least_10": [
+      {
+        "file": "aip_vtok/joint/checkpoint.py",
+        "function": "load_model",
+        "line": 50,
+        "complexity": 6,
+        "coverage": 0.4666666666666667,
+        "crap": 11.461333333333332
+      },
+      {
+        "file": "aip_vtok/joint/checkpoint.py",
+        "function": "load",
+        "line": 172,
+        "complexity": 10,
+        "coverage": 0.8461538461538461,
+        "crap": 10.364132908511607
+      },
+      {
+        "file": "aip_vtok/joint/checkpoint.py",
+        "function": "load",
+        "line": 172,
+        "complexity": 10,
+        "coverage": 0.8461538461538461,
+        "crap": 10.364132908511607
+      },
+      {
+        "file": "aip_vtok/joint/decoder.py",
+        "function": "migrate_sld",
+        "line": 76,
+        "complexity": 13,
+        "coverage": 0.8846153846153846,
+        "crap": 13.259615384615385
+      },
+      {
+        "file": "aip_vtok/joint/entropy.py",
+        "function": "rans_decode",
+        "line": 101,
+        "complexity": 10,
+        "coverage": 0.8260869565217391,
+        "crap": 10.52601298594559
+      },
+      {
+        "file": "aip_vtok/joint/evaluation.py",
+        "function": "cohort",
+        "line": 206,
+        "complexity": 8,
+        "coverage": 0.08333333333333333,
+        "crap": 57.29629629629629
+      },
+      {
+        "file": "aip_vtok/joint/evaluation.py",
+        "function": "evaluate",
+        "line": 221,
+        "complexity": 22,
+        "coverage": 0.9512195121951219,
+        "crap": 22.056180264360645
+      },
+      {
+        "file": "aip_vtok/joint/evaluation.py",
+        "function": "validate_rows",
+        "line": 273,
+        "complexity": 12,
+        "coverage": 0.75,
+        "crap": 14.25
+      },
+      {
+        "file": "aip_vtok/joint/evaluation.py",
+        "function": "aggregate",
+        "line": 287,
+        "complexity": 24,
+        "coverage": 1.0,
+        "crap": 24.0
+      },
+      {
+        "file": "aip_vtok/joint/evaluation.py",
+        "function": "export_evaluation",
+        "line": 320,
+        "complexity": 19,
+        "coverage": 1.0,
+        "crap": 19.0
+      },
+      {
+        "file": "aip_vtok/joint/evaluation.py",
+        "function": "select_checkpoint",
+        "line": 341,
+        "complexity": 6,
+        "coverage": 0.0625,
+        "crap": 35.6630859375
+      },
+      {
+        "file": "aip_vtok/joint/evaluation.py",
+        "function": "load_selection",
+        "line": 362,
+        "complexity": 5,
+        "coverage": 0.09090909090909091,
+        "crap": 23.78287002253944
+      },
+      {
+        "file": "aip_vtok/joint/evaluation.py",
+        "function": "claim_test",
+        "line": 375,
+        "complexity": 6,
+        "coverage": 0.07692307692307693,
+        "crap": 34.31497496586255
+      },
+      {
+        "file": "aip_vtok/joint/report.py",
+        "function": "architecture",
+        "line": 25,
+        "complexity": 5,
+        "coverage": 0.0,
+        "crap": 30.0
+      },
+      {
+        "file": "aip_vtok/joint/report.py",
+        "function": "rd_figures",
+        "line": 53,
+        "complexity": 4,
+        "coverage": 0.0,
+        "crap": 20.0
+      },
+      {
+        "file": "aip_vtok/joint/report.py",
+        "function": "reconstruction_figure",
+        "line": 67,
+        "complexity": 6,
+        "coverage": 0.0,
+        "crap": 42.0
+      },
+      {
+        "file": "aip_vtok/joint/report.py",
+        "function": "temporal_figures",
+        "line": 90,
+        "complexity": 23,
+        "coverage": 0.0,
+        "crap": 552.0
+      },
+      {
+        "file": "aip_vtok/joint/report.py",
+        "function": "training_figure",
+        "line": 132,
+        "complexity": 13,
+        "coverage": 0.0,
+        "crap": 182.0
+      },
+      {
+        "file": "aip_vtok/joint/report.py",
+        "function": "figures",
+        "line": 164,
+        "complexity": 11,
+        "coverage": 0.0,
+        "crap": 132.0
+      },
+      {
+        "file": "aip_vtok/joint/report.py",
+        "function": "metric_table",
+        "line": 191,
+        "complexity": 5,
+        "coverage": 0.0,
+        "crap": 30.0
+      },
+      {
+        "file": "aip_vtok/joint/report.py",
+        "function": "write_report",
+        "line": 207,
+        "complexity": 8,
+        "coverage": 0.0,
+        "crap": 72.0
+      },
+      {
+        "file": "aip_vtok/joint/trainer.py",
+        "function": "_validation",
+        "line": 229,
+        "complexity": 4,
+        "coverage": 0.125,
+        "crap": 14.71875
+      },
+      {
+        "file": "aip_vtok/joint/trainer.py",
+        "function": "publish_status",
+        "line": 255,
+        "complexity": 5,
+        "coverage": 0.1111111111111111,
+        "crap": 22.55829903978052
+      },
+      {
+        "file": "aip_vtok/joint/trainer.py",
+        "function": "train_experiment",
+        "line": 273,
+        "complexity": 23,
+        "coverage": 0.014285714285714285,
+        "crap": 529.6509067055395
+      }
+    ],
+    "ast_similarity_at_least_0_8": [],
+    "method": "Coverage/Radon and AST comparison from repository, plus targeted fault injection.",
+    "tool_availability": "Named crapper/dryer/mutator binaries unavailable."
+  }
+}

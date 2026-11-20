@@ -1,0 +1,25 @@
+version: AIP-VTok-Joint-V1
+geometry: [1080, 1920]
+gop: 32
+budgets: [510, 1024, 2048, 4096, 8192, 16320, 32640, 65280]
+reference_budgets: {I: 2048, P: 510}
+device: cuda:0
+cpu_threads: 4
+batch: 1
+precision: bf16
+scan_temperature: 0.02
+steps: 40000
+phase_a_end: 2000
+phase_b_end: 28000
+scan_freeze_step: 24001
+window_ab: 4
+window_c: 8
+optimizer: AdamW
+lr: {sld: 0.0001, transform: 0.00005, fsq: 0.00002, scan: 0.00002, entropy: 0.0001}
+weight_decay: 0.01
+clip_norm: 1.0
+warmup_steps: 1000
+cosine_end_factor: 0.1
+save_every: 1000
+validate_every: 2000
+loss: {l1: 1.0, mse: 1.0, chroma: 0.20, lpips: 0.10, dists: 0.10, latent: 0.05, reference: 0.15, rate: 0.02}
