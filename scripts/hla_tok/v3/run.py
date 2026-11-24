@@ -6,11 +6,9 @@ from pathlib import Path
 
 from hla_tok import BUDGETS
 from hla_tok.evaluation.metrics import FullFrameQuality, sha256_file
-from scripts.hla_tok.v2.protocol import frozen_data, json_at, setup
+from scripts.hla_tok.v2.protocol import frozen_data, setup
 from scripts.hla_tok.v3.benchmark import codec_benchmark, dense_benchmark
-from scripts.hla_tok.v3.diagnostics import diagnose
 from scripts.hla_tok.v3.downstream import (
-    _approved_checkpoint,
     continuous_trials,
     full_pipeline,
     model_from_checkpoint,
@@ -20,6 +18,7 @@ from scripts.hla_tok.v3.downstream import (
 )
 from scripts.hla_tok.v3.experiments import dense_trials, legacy_model, on_gpu, require_pass, state_of
 from scripts.hla_tok.v3.inputs import baseline_replay, preflight, r2_source
+from scripts.hla_tok.v3.migration_audit import run_diagnostics
 from scripts.hla_tok.v3.protocol import OUTPUT, PROTOCOL, ROOT, STAGES, read_config
 from scripts.hla_tok.v3.quality import evaluate
 from scripts.hla_tok.v3.samples import export_samples
@@ -49,6 +48,8 @@ def _arguments():
             child.add_argument("--trend", action="store_true")
     child = commands.add_parser("diagnose")
     child.add_argument("--seed", type=int, choices=(1, 2), default=1)
+    child.add_argument("--step", type=int, help="published B0 checkpoint update")
+    child.add_argument("--full", action="store_true", help="use all 174 Validation frames")
     child = commands.add_parser("report")
     child.add_argument("--output", type=Path, default=OUTPUT)
     child.add_argument("--figures", action="store_true")
@@ -107,26 +108,10 @@ def _inference(args, config):
             raise ValueError("the codec benchmark requires calibrated fixed or progressive VQ weights")
         return codec_benchmark(model, reader, cohort, config, out, BUDGETS)
     if args.command == "samples":
-        return export_samples(model, reader, cohort, source, mode, out, budget=fixed)
+        return export_samples(model, reader, cohort, source, mode, out, budget=fixed, progressive=progressive)
     quality = FullFrameQuality("cuda", identity["metric_weights"])
     return evaluate(model, reader, cohort, quality, out, budgets=budgets, quantized=mode == "fixed13",
                     subset=args.trend, bypass=mode == "fixed13" and not progressive)
-
-
-def _diagnose(args, config):
-    setup(args.seed)
-    decision = json_at(state_of("continuous", args.seed))
-    if decision["candidate_quality"] != "FAIL":
-        raise ValueError("B0 failure is required to open the conditional location diagnostic")
-    dense_path = _approved_checkpoint(require_pass(state_of("dense", args.seed)))
-    b0_folder = OUTPUT / "continuous" / f"seed{args.seed}" / "B0"
-    b0_path = _approved_checkpoint({"selected": json_at(b0_folder / "latest.json")})
-    dense, _ = model_from_checkpoint(dense_path)
-    model, _ = model_from_checkpoint(b0_path)
-    reader, cohort, identity = frozen_data()
-    quality = FullFrameQuality("cuda", identity["metric_weights"])
-    return diagnose(on_gpu(dense), on_gpu(model), reader, cohort, quality, config["native_budget"],
-                    b0_folder / "bottleneck")
 
 
 def _dispatch(args, config):
@@ -148,7 +133,7 @@ def _dispatch(args, config):
     if args.command == "sealed-test":
         return evaluate_sealed(config)
     if args.command == "diagnose":
-        return _diagnose(args, config)
+        return run_diagnostics(config, args.seed, step=args.step, full=args.full)
     return _inference(args, config)
 
 

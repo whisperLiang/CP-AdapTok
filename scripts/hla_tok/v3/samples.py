@@ -4,9 +4,9 @@ import subprocess
 from contextlib import ExitStack
 
 import torch
-from PIL import Image
+from PIL import Image, ImageDraw
 
-from hla_tok import HLATok
+from hla_tok import BUDGETS, HLATok
 from hla_tok.evaluation.benchmark import transfer
 from hla_tok.evaluation.io import write_json
 from hla_tok.evaluation.metrics import sha256_file
@@ -29,31 +29,64 @@ def _verify_first_frame(output, label):
                                       "-frames:v", "1", "-f", "rawvideo", "-pix_fmt", "rgb24", "pipe:1"])
     if rgb != replay:
         raise RuntimeError("FFV1 first frame differs from the original native PNG")
-    return {"native_png_sha256": sha256_file(image), "ffv1_sha256": sha256_file(clip)}
+    return {"native_png_sha256": sha256_file(image), "ffv1_sha256": sha256_file(clip),
+            "crop_sha256": sha256_file(output / f"{label}_crop.png")}
+
+
+def _progressive_sheet(output, labels):
+    width, height = 384, 216
+    row_height = height + 24
+    sheet = Image.new("RGB", (3 * width, 3 * row_height), "white")
+    text = ImageDraw.Draw(sheet)
+    for index, label in enumerate(labels):
+        left, top = index % 3 * width, index // 3 * row_height
+        with Image.open(output / f"{label}_crop.png") as image:
+            if image.size != (width, height):
+                raise ValueError("progressive comparison requires unscaled native crops")
+            sheet.paste(image, (left, top + 24))
+        text.text((left + 8, top + 5), label, fill="black")
+    destination = output / "progressive_native_crops.png"
+    sheet.save(destination)
+    return destination
+
+
+def _sample_images(model, source, budgets, mode, progressive):
+    yield "source", source
+    for (_, budget), image, _, _, _ in _native_reconstructions(model, source, budgets, mode == "fixed13", False):
+        yield (f"K{budget}" if progressive else "reconstruction"), image
+
+
+def _write_sample_frames(model, reader, output, mode, budgets, labels, progressive):
+    with ExitStack() as stack, torch.autocast("cuda", dtype=torch.bfloat16):
+        streams = {tag: stack.enter_context(video_writer(output / f"{tag}.mkv", 30)) for tag in labels}
+        for index in range(START, START + FRAMES):
+            source = transfer(reader.read("validation", VIDEO, index)[None])
+            for tag, image in _sample_images(model, source, budgets, mode, progressive):
+                if index == START:
+                    save_native(output, tag, image)
+                streams[tag].write(_rgb24(image))
 
 
 @torch.inference_mode()
-def export_samples(model, reader, cohort, checkpoint, mode, output, *, budget):
+def export_samples(model, reader, cohort, checkpoint, mode, output, *, budget, progressive=False):
     if cohort[VIDEO] < START + FRAMES:
         raise RuntimeError("frozen native Validation does not contain the registered sample clip")
+    if progressive and mode != "fixed13":
+        raise ValueError("progressive samples require true Fixed13 reconstruction")
     output.mkdir(parents=True, exist_ok=False)
     before = dict(reader.counts)
-    budgets = (budget,) if isinstance(model, HLATok) else ()
+    budgets = BUDGETS if progressive else ((budget,) if isinstance(model, HLATok) else ())
+    labels = ["source", *(f"K{value}" for value in budgets)] if progressive else ["source", "reconstruction"]
     try:
-        with ExitStack() as stack, torch.autocast("cuda", dtype=torch.bfloat16):
-            streams = {tag: stack.enter_context(video_writer(output / f"{tag}.mkv", 30))
-                       for tag in ("source", "reconstruction")}
-            for index in range(START, START + FRAMES):
-                source = transfer(reader.read("validation", VIDEO, index)[None])
-                _, decoded, _, _, _ = next(_native_reconstructions(model, source, budgets, mode == "fixed13", False))
-                for tag, image in (("source", source), ("reconstruction", decoded)):
-                    if index == START:
-                        save_native(output, tag, image)
-                    streams[tag].write(_rgb24(image))
+        _write_sample_frames(model, reader, output, mode, budgets, labels, progressive)
         record = {"mode": mode, "checkpoint_sha256": sha256_file(checkpoint), "budget": budget if budgets else None,
                   "video": VIDEO, "start": START, "frames": FRAMES, "fps": 30,
                   "crop_xywh": [768, 432, 384, 216],
-                  "samples": {tag: _verify_first_frame(output, tag) for tag in ("source", "reconstruction")}}
+                  "samples": {tag: _verify_first_frame(output, tag) for tag in labels}}
+        if progressive:
+            sheet = _progressive_sheet(output, labels)
+            record |= {"budgets": list(budgets), "native_crop_comparison": sheet.name,
+                       "native_crop_comparison_sha256": sha256_file(sheet)}
         write_json(output / "manifest.json", record)
         return record
     finally:
