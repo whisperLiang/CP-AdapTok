@@ -1,24 +1,54 @@
 """Frame-local HLA-Tok analysis and synthesis from discrete prefixes."""
 
 from dataclasses import dataclass, field
+from enum import Enum
 
 import torch
 from torch import Tensor, nn
 from torch.nn import functional as F
 from torch.profiler import record_function
 
-from hla_tok.models.local import RANK_CHUNK, LocalQueryEncoder, LocalTokenDecoder, Memory
+from hla_tok.models.anchors import DIRECT_CAPACITY, anchor_digest
+from hla_tok.models.local import (
+    RANK_CHUNK,
+    AnchoredQueryEncoder,
+    DirectProjection,
+    LocalQueryEncoder,
+    LocalTokenDecoder,
+    Memory,
+)
 from hla_tok.models.quantizer import VectorQuantizer
+from hla_tok.models.rank_causal import RankHistory
 from hla_tok.models.spatial import RGBDecoder, SpatialEncoder
 from hla_tok.progressive.geometry import MAX_QUERIES, Geometry, group_prefix, merge_regions, rank_major
+
+
+class Architecture(str, Enum):
+    R0 = "R0"
+    R1 = "R1"
+    R2 = "R2"
+    R3 = "R3"
+
+    @property
+    def local_capacity(self) -> int:
+        return DIRECT_CAPACITY if self is self.R1 else MAX_QUERIES
+
+    def query_encoder(self) -> nn.Module:
+        if self is self.R0:
+            return LocalQueryEncoder()
+        if self is self.R1:
+            return DirectProjection()
+        return AnchoredQueryEncoder(causal=self is self.R3)
 
 
 @dataclass
 class SenderFrame:
     geometry: Geometry
     batch: int
-    memory: tuple[Memory, ...]
+    memory: tuple[Memory, ...] | Tensor
     autocast_dtype: torch.dtype | None
+    device: torch.device
+    rank_history: RankHistory | None = None
     chunks: list[Tensor] = field(default_factory=list)
 
 
@@ -33,13 +63,31 @@ class TrainingTokens:
 
 
 class HLATok(nn.Module):
-    def __init__(self):
+    def __init__(self, architecture: Architecture | str = Architecture.R0):
         super().__init__()
+        self.architecture = Architecture(architecture)
         self.encoder = SpatialEncoder()
-        self.query_encoder = LocalQueryEncoder()
+        self.query_encoder = self.architecture.query_encoder()
         self.quantizer = VectorQuantizer()
         self.local_decoder = LocalTokenDecoder()
         self.rgb_decoder = RGBDecoder()
+
+    def architecture_metadata(self) -> dict:
+        table = getattr(self.query_encoder, "anchor_table", None)
+        return {
+            "architecture_version": f"hla-tok.{self.architecture.value}",
+            "anchor_table_sha256": None if table is None else anchor_digest(table),
+            "rank_causal": {"enabled": self.architecture is Architecture.R3, "layers": int(self.architecture is Architecture.R3),
+                            "rank_chunk": RANK_CHUNK, "heads": 4, "ffn_ratio": 2, "dropout": 0.0},
+        }
+
+    def _capacity(self, geometry: Geometry) -> int:
+        return self.architecture.local_capacity * geometry.num_regions
+
+    def _check_budget(self, geometry: Geometry, budget: int) -> None:
+        geometry.check_budget(budget)
+        if budget > self._capacity(geometry):
+            raise ValueError("budget exceeds the selected architecture's spatial capacity")
 
     def _prepare(self, rgb: Tensor) -> SenderFrame:
         if rgb.ndim != 4 or rgb.shape[1] != 3 or rgb.shape[0] == 0 or not rgb.is_floating_point():
@@ -51,7 +99,8 @@ class HLATok(nn.Module):
             memory = self.query_encoder.prepare(fine, coarse, geometry)
         device = rgb.device.type
         precision = torch.get_autocast_dtype(device) if torch.is_autocast_enabled(device) else None
-        return SenderFrame(geometry, rgb.shape[0], memory, precision)
+        history = RankHistory() if self.architecture is Architecture.R3 else None
+        return SenderFrame(geometry, rgb.shape[0], memory, precision, rgb.device, history)
 
     @torch.no_grad()
     def prepare_frame(self, rgb: Tensor) -> SenderFrame:
@@ -59,9 +108,9 @@ class HLATok(nn.Module):
 
     def _block(self, sender: SenderFrame, start: int) -> Tensor:
         with record_function("hla/local_query"):
-            with torch.autocast(sender.memory[0][0].device.type, dtype=sender.autocast_dtype,
+            with torch.autocast(sender.device.type, dtype=sender.autocast_dtype,
                                 enabled=sender.autocast_dtype is not None):
-                block = self.query_encoder(sender.memory, start)
+                block = self.query_encoder(sender.memory, start, sender.rank_history)
         return block.unflatten(0, (sender.batch, sender.geometry.num_regions))
 
     def _ids(self, z: Tensor) -> Tensor:
@@ -75,14 +124,14 @@ class HLATok(nn.Module):
 
     def encode_frame(self, rgb: Tensor, budget: int | None = None) -> Tensor:
         sender = self.prepare_frame(rgb)
-        return self.encode_prefix(sender, sender.geometry.capacity if budget is None else budget)
+        return self.encode_prefix(sender, self._capacity(sender.geometry) if budget is None else budget)
 
     def encode_prefix(self, sender: SenderFrame, budget: int) -> Tensor:
         return self.extend_prefix(sender, budget)
 
     @torch.no_grad()
     def extend_prefix(self, sender: SenderFrame, budget: int) -> Tensor:
-        sender.geometry.check_budget(budget)
+        self._check_budget(sender.geometry, budget)
         block_size = sender.geometry.num_regions * RANK_CHUNK
         required = (budget + block_size - 1) // block_size
         for index in range(len(sender.chunks), required):
@@ -92,10 +141,10 @@ class HLATok(nn.Module):
     @torch.no_grad()
     def encode_regions(self, sender: SenderFrame, lengths: tuple[int, ...]) -> tuple[Tensor, ...]:
         regions = sender.geometry.num_regions
-        if len(lengths) != regions or any(type(n) is not int or not 0 <= n <= MAX_QUERIES for n in lengths):
+        if len(lengths) != regions or any(type(n) is not int or not 0 <= n <= self.architecture.local_capacity for n in lengths):
             raise ValueError("expected a legal local prefix length for each region")
         if max(lengths) == 0:
-            device = sender.memory[0][0].device
+            device = sender.device
             return tuple(torch.empty(sender.batch, 0, dtype=torch.long, device=device) for _ in lengths)
         ordered = self.extend_prefix(sender, max(lengths) * regions).reshape(sender.batch, -1, regions)
         return tuple(ordered[:, :count, index] for index, count in enumerate(lengths))
@@ -112,14 +161,14 @@ class HLATok(nn.Module):
     def decode_prefix(self, ids: Tensor, geometry: Geometry) -> Tensor:
         if ids.ndim != 2 or ids.dtype != torch.long or ids.shape[0] == 0:
             raise ValueError("expected nonempty batched int64 sequences")
-        geometry.check_budget(ids.shape[1])
+        self._check_budget(geometry, ids.shape[1])
         with record_function("hla/codebook_lookup"):
             values = self.quantizer.lookup(ids)
         return self._decode(values, geometry)
 
     def encode_training(self, rgb: Tensor, budget: int, *, quantize: bool = True) -> TrainingTokens:
         sender = self._prepare(rgb)
-        sender.geometry.check_budget(budget)
+        self._check_budget(sender.geometry, budget)
         regions = sender.geometry.num_regions
         max_rank = (budget + regions - 1) // regions
         chunks = [self._block(sender, start) for start in range(0, max_rank, RANK_CHUNK)]
