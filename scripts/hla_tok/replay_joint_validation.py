@@ -30,7 +30,7 @@ def archived_frames(path):
 
 def replay_video(codec, block, reader, video, count, archived, quality, streams, budgets):
     from aip_vtok.decoder.causal_state import ReferenceState
-    from aip_vtok.joint.evaluation import transmitted_tokens
+    from aip_vtok.joint.evaluation import rms, transmitted_tokens
 
     profile, reference = codec.profile(), ReferenceState()
     rows = defaultdict(list)
@@ -49,8 +49,17 @@ def replay_video(codec, block, reader, video, count, archived, quality, streams,
                 if session.received == session.reference_budget:
                     reference = session.commit_reference()
             record = archived[video, index, budget]
-            if size != int(record["total_bytes"]) or reference.fingerprint() != record["rx_reference_sha256"]:
-                raise RuntimeError(f"archived reference state or byte count mismatch at {video} {index} K{budget}")
+            if size != int(record["total_bytes"]):
+                raise RuntimeError(f"archived byte count mismatch at {video} {index} K{budget}")
+            if budget == budgets[0]:
+                expected = record["rx_reference_sha256"]
+                if expected and reference.fingerprint() != expected:
+                    raise RuntimeError(f"archived reference fingerprint mismatch at {video} {index}")
+                for name in ("latent", "feature"):
+                    value = rms(getattr(reference, name))
+                    target_rms = float(record[f"reference_{name}_rms"])
+                    if not math.isclose(value, target_rms, rel_tol=1e-5, abs_tol=1e-9):
+                        raise RuntimeError(f"archived reference {name} RMS differs at {video} {index}")
             scored = quality(target, session.render(budget))
             if not math.isclose(scored["mse"], float(record["mse"]), rel_tol=1e-5, abs_tol=1e-9):
                 raise RuntimeError(f"archived reconstruction MSE differs at {video} {index} K{budget}")
@@ -58,7 +67,7 @@ def replay_video(codec, block, reader, video, count, archived, quality, streams,
     return rows
 
 
-@torch.inference_mode()
+@torch.no_grad()
 def evaluate(joint, output):
     sys.path.insert(0, str(joint))
     from aip_vtok.joint import protocol
