@@ -1,0 +1,15 @@
+{
+  "gpu": "NVIDIA H100 PCIe",
+  "cuda": "13.0",
+  "driver": "580.159.03",
+  "torch": "2.9.1+cu130",
+  "tf32_matmul": false,
+  "tf32_cudnn": false,
+  "attention": "PyTorch SDPA dispatcher",
+  "compile": "eager",
+  "arm": "R2",
+  "weights": "v2/pilot/R2/1",
+  "checkpoint_sha256": "37ebb0bc319ec9dd6673993740dba2cd420bb194c2bb61515d801909929297ba",
+  "fps_scope": "neural serial; real Fixed13 and device copy; real source decode + codec pipeline",
+  "untrained_rate_points": "Timing only outside the trained fixed budget; continuous arms use uncalibrated VQ for timing."
+}

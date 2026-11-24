@@ -1,0 +1,77 @@
+{
+  "repositories": {
+    "original": {
+      "commit": "606216e768c277aa59b4dde6d3bd84247a02f905",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": []
+    },
+    "joint": {
+      "commit": "73ea8b4b027587afd2149c298a82f5d14f013580",
+      "tracked_diff_sha256": "800a25c56559a35944d84d4b71aab45c8be8330f81614aec84d99d55103c6734",
+      "status": [
+        " M results/aip_vtok/joint_v1/final_report.md"
+      ]
+    },
+    "official_source": {
+      "commit": "a72076cf6474f930a181aa78971de70d65289b49",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": []
+    },
+    "r0": {
+      "commit": "7c158491b18fab87bea03b114a7ac242368e99b4",
+      "status": [],
+      "path": "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok"
+    },
+    "official_checkpoint": "/home/whisperliang/CP-AdapTok/checkpoints/original_adaptok_official/c514b22615a140c06f4c9792e93cbef9e5c79f32"
+  },
+  "asset_sha256": {
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/c1/scan_lock.json": "671331a8ca05e537d2f35e9409f714b0d7d8c3ec15408a5f5e1efb0d3ae11814",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/checkpoints/aip_vtok/c1/train_fit.pt": "0bcb3a3885b437714bcbbb5150bba0b0290012643455faf18c083e9154b9cc21",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/c1_followup/candidates.json": "e3c93883fb9869aeaf04dc2a449430e5a956f754b6e2e4bd90b56d17698c9ce8",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/c1_followup/calibration.json": "b159b36c0bbbcffd6ffaeda94697e9e8dda68b1a6464e7b07a47281608300bce",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/c1_followup/protocol.json": "158284112e0d52a246683292272099521f8cda05cf4b6c16c5ff2bc44244e5d9",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/sparse_rfsq/protocol.json": "aa687428b383b599ea1a390de740b818561eb38356f35f96c78661a3d42f8858",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/sparse_rfsq/scan_lock.json": "1871981743beb2cf51455bfe1d1c43f8e50219093a913215809ddb6f914ab0be",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/sparse_rfsq/calibration.json": "0501034014a9442f9aab93e15ec01f9f713b937a65a03a7acdea5a710eca8ea9",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/sparse_rfsq/s1_gate.json": "cffd9bb6d2b811aea55d0920f469a77660abfd967b6cd93e786d6fa0201561be",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/sparse_rfsq/s2_gate.json": "44fa17f6a151a3feabc6918dc75c32b731ddea4c0fd7e9089f4f9b81236d139a",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/sparse_rfsq/W1_training.json": "b48a0f8d11b775ed8f0df5fe340af52d4b8714eb616d56929b900319fc082d02",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/sparse_rfsq/s1.json": "2c003dfd6e022be541ee33147b2f5a95bd2d3f9406e2ef3d5e4abe5608b7d92e",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/sparse_rfsq/s2.json": "8b9404943fdfa06482eb707fa7547e96e04bb24f81d1ecc48f01de275e276dc9",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/sparse_rfsq/training_plan.json": "99fdd04f0744ab33ef829eded7332b618826d88afc6ac960af4f41db46e22b17",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/checkpoints/aip_vtok/sparse_rfsq/W1/seed1.pt": "d0fab3fe2af2b49e1b3cfabe2ff3b5cc7f12a4a2cf7f2742a18149a37f67d3da",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/c1_followup/validation.json": "2e39733ade62575c31036815f1dd3a272a55c39b9a4a4837d67a6fb57a555f49",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/checkpoints/cvpr2026_image.pth.tar": "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/checkpoints/cvpr2026_video_ld.pth.tar": "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/checkpoints/aip_vtok/alignment.pt": "d727cabf97ddea89381d063a795b8794fd4ff104ba0e0d4ff986f46d55f837cd",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/checkpoints/aip_vtok/projector_w128/latest.pt": "3b1bd715427bd177393e9552a99576e614ab7dd1ed307155129cf62896d5eb94",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/checkpoints/aip_vtok/gate1_fix/fix_a/seed1/step_1000.pt": "360bab54aa3a2924ac348d131a2d23d57a6bd457c84fe5ee26301a49ae943465",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/data/manifests/cpat_test.json": "09738a77219eb1d78269a0788c109b268de29b54dec3aab68a365599e08bed5e",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/data/manifests/cpat_train.json": "88e18e6a6a38f61e335f48882aab855460e76f72205d5724cb761e7d3604dcc1",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/data/manifests/cpat_validation.json": "6e1753a5026d60f8e4b279bd15043b73e2e3a1bda01263159f7b93ddedcb5d37",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/checkpoints/aip_vtok/sparse_decoder/E4/seed1/step_0500.pt": "27dd77bc6819e9357a2b83942abbb663a8461f4cc6b064806f1bab45133be4ca",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/checkpoints/aip_vtok/joint_v1/seed1/step_40000.pt": "a42ff1df5fffb5698b54428bf8cf327dba5a8e01f79db2be283b20e709fa6c85",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/checkpoints/aip_vtok/joint_v1/seed2/step_17004.pt": "4fbfec723a55232f5d4bdcaccf8de41de9e9491be510b3f98136f4d46a3ce9e4",
+    "/home/whisperliang/CP-AdapTok/checkpoints/original_adaptok_official/c514b22615a140c06f4c9792e93cbef9e5c79f32/config.json": "7ebf3ed0bb451b39424a2c89154da95f542ce12559175061ef94702e7e01bc4c",
+    "/home/whisperliang/CP-AdapTok/checkpoints/original_adaptok_official/c514b22615a140c06f4c9792e93cbef9e5c79f32/model.safetensors": "be5432949a87dee253c86f7ccb87bb5370b435ed180f8cda546b09d6a63c8cdd",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/results/original_adaptok_1080p/checkpoint_manifest.json": "c5bc01994723a4647373fa778b403d4066eba5a9059cc93f7dc1859757629d27",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/results/original_adaptok_1080p/input_manifest.json": "ce3b19c6c5b457391cbcfc08d252f2dad9af9fe489192caf443b69575b1df85d",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/results/original_adaptok_1080p/metric_manifest.json": "2cbbdd9840fa45b8674218695fced559a97747731acaea2d51b1d351e87e0e07",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/results/aip_vtok/joint_v1/seed1/selection.json": "ef51a6022c0ac98543bf7fc03ba5dece8329cadfe1aaba87607adcee2615cc95",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/checkpoints/hla_tok/continuous/step_00500.pt": "031a963cb42fc394c609c0d31f09584dde854e9bea14b9db98d092b45be470e6",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/checkpoints/hla_tok/fixed/step_00500.pt": "21ea347ae310cf7ed841d0201f6a7b2e50d5f279d4340cdaa91028e55eb1f17d",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/checkpoints/hla_tok/fixed/step_01000.pt": "6224939f9c14a5292ede17ed310abbcefa7c29dac1602dd5d26aa05665cf15f0",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/checkpoints/hla_tok/fixed/step_01500.pt": "62fb933462afe04ad4e21681dddca04ae36940b9f64630e896276c4424086698",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/checkpoints/hla_tok/fixed/step_02000.pt": "84a45dca10857be6324181fb5846e8de8eeb83740a7a1243594fef38653731d9",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/checkpoints/hla_tok/fixed/step_02500.pt": "33dde4dd49bdae733c08bcb5f8e4b3248f20dc771361db01196ee3080e87cded",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/checkpoints/hla_tok/fixed/step_03000.pt": "d4664970e83868d82b4b710e821f307790c7948f0f125f01ae7ce6f82dedb574",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/checkpoints/hla_tok/fixed/step_03500.pt": "4d906923a9c8a8b70fd4d6649c41ceedd8f7cab94dbe8234b26a1ddbb9ec931a",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/checkpoints/hla_tok/fixed/step_04000.pt": "95e33632597fe19f26e9bfd9166bc7ac6b61c53a09b2b7f0d2d9c514dc3454bb",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/checkpoints/hla_tok/fixed/step_04500.pt": "3925dceb4a710bb0b70d1f308a74ccc9e4677c29e485042e6a8226ea8af87a66",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/results/hla_tok/acceptance.json": "3734043f83a736b3167efafce94021b1d818ac01eedf93e4b22cd1b083260b94",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/results/hla_tok/baselines/metrics.csv": "8e8529b6eb49e5ab428c96927978de509a5edfbdfcfc21da5c525e27ce711846",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/results/hla_tok/phase1/validation_metrics.csv": "9dd39c928b2ab346b5989b93d72af991d87bb8b18c51371743a112311ee29ee4",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/results/hla_tok/phase0/benchmark.csv": "7eec0c0a049b9f83d2b056df8ec3e38b5254e4a9ba745f60737551dff63cea87",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/results/hla_tok/final_report.md": "25e27ef67e522dda96bb6cd47d01787985ec60061d7a06ba24b131c90efeba04"
+  }
+}

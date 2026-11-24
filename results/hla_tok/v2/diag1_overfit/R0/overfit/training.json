@@ -1,0 +1,27 @@
+{
+  "architecture": {
+    "architecture_version": "hla-tok.R0",
+    "anchor_table_sha256": null,
+    "rank_causal": {
+      "enabled": false,
+      "layers": 0,
+      "rank_chunk": 32,
+      "heads": 4,
+      "ffn_ratio": 2,
+      "dropout": 0.0
+    }
+  },
+  "seen_frames": 500,
+  "seen_pixels": 32768000,
+  "optimization_seconds": 27.67257600400626,
+  "validation_seconds": 1.3416287210002338,
+  "sample_chain": "a64ac482461d781300162e7aa43ae0ee2ffd0614d7f7f77fb27ee45fb707585b",
+  "latest_codebook": null,
+  "optimizer_updates": 500,
+  "physical_batch": 1,
+  "effective_batch": 1,
+  "segment_seconds": 33.12552488700021,
+  "peak_allocated_mib": 779.203125,
+  "peak_reserved_mib": 848.0,
+  "parameter_update_l2": 5.9805843462777455
+}

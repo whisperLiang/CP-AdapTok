@@ -1,0 +1,18 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______ test_anchor_grid_uses_deterministic_order_and_two_balanced_rounds _______
+tests/test_v2_architecture.py:29: in test_anchor_grid_uses_deterministic_order_and_two_balanced_rounds
+    assert [tuple(p) for p in table[:16].tolist()] == expected
+E   assert [(6, 7), (4, ..., (5, 6), ...] == [(0, 0), (2, ..., (2, 2), ...]
+E
+E     At index 0 diff: (6, 7) != (0, 0)
+E     Use -v to get more diff
+=============================== warnings summary ===============================
+tests/test_v2_architecture.py:145
+  /tmp/hla-mutation-ogem2_pf/tests/test_v2_architecture.py:145: PytestUnknownMarkWarning: Unknown pytest.mark.gpu - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.gpu
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_v2_architecture.py::test_anchor_grid_uses_deterministic_order_and_two_balanced_rounds
+1 failed, 1 warning in 1.29s

@@ -1,0 +1,607 @@
+{
+  "scope": "Production model and V2 checkpoint identity",
+  "functions": [
+    {
+      "file": "hla_tok/models/quantizer.py",
+      "function": "__init__",
+      "line": 8,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/quantizer.py",
+      "function": "lookup",
+      "line": 15,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/quantizer.py",
+      "function": "_search_block",
+      "line": 18,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "hla_tok/models/quantizer.py",
+      "function": "forward",
+      "line": 35,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/spatial.py",
+      "function": "blocks",
+      "line": 24,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/spatial.py",
+      "function": "__init__",
+      "line": 12,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/spatial.py",
+      "function": "forward",
+      "line": 19,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/spatial.py",
+      "function": "__init__",
+      "line": 29,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/spatial.py",
+      "function": "forward",
+      "line": 35,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/spatial.py",
+      "function": "__init__",
+      "line": 42,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/spatial.py",
+      "function": "forward",
+      "line": 51,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "local_capacity",
+      "line": 33,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "query_encoder",
+      "line": 36,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "__init__",
+      "line": 66,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "architecture_metadata",
+      "line": 75,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "_capacity",
+      "line": 84,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "_check_budget",
+      "line": 87,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "_prepare",
+      "line": 92,
+      "complexity": 7,
+      "coverage": 0.9166666666666666,
+      "crap": 7.028356481481482
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "prepare_frame",
+      "line": 106,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "_block",
+      "line": 109,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "_ids",
+      "line": 116,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "_ordered",
+      "line": 121,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "encode_frame",
+      "line": 125,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "encode_prefix",
+      "line": 129,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "extend_prefix",
+      "line": 133,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "encode_regions",
+      "line": 142,
+      "complexity": 8,
+      "coverage": 1.0,
+      "crap": 8.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "_decode_features",
+      "line": 152,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "_decode",
+      "line": 157,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "decode_prefix",
+      "line": 161,
+      "complexity": 4,
+      "coverage": 0.8571428571428571,
+      "crap": 4.0466472303206995
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "encode_training",
+      "line": 169,
+      "complexity": 5,
+      "coverage": 1.0,
+      "crap": 5.0
+    },
+    {
+      "file": "hla_tok/models/codec.py",
+      "function": "decode_training",
+      "line": 188,
+      "complexity": 2,
+      "coverage": 0.75,
+      "crap": 2.0625
+    },
+    {
+      "file": "hla_tok/models/rank_causal.py",
+      "function": "rank_causal_mask",
+      "line": 11,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/rank_causal.py",
+      "function": "append",
+      "line": 22,
+      "complexity": 4,
+      "coverage": 0.8888888888888888,
+      "crap": 4.021947873799726
+    },
+    {
+      "file": "hla_tok/models/rank_causal.py",
+      "function": "nbytes",
+      "line": 33,
+      "complexity": 3,
+      "coverage": 0.5,
+      "crap": 4.125
+    },
+    {
+      "file": "hla_tok/models/rank_causal.py",
+      "function": "__init__",
+      "line": 38,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/rank_causal.py",
+      "function": "forward",
+      "line": 46,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/anchors.py",
+      "function": "grid_positions",
+      "line": 15,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/anchors.py",
+      "function": "anchor_table",
+      "line": 20,
+      "complexity": 4,
+      "coverage": 1.0,
+      "crap": 4.0
+    },
+    {
+      "file": "hla_tok/models/anchors.py",
+      "function": "gaussian_bias",
+      "line": 38,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/anchors.py",
+      "function": "position_embedding",
+      "line": 47,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/anchors.py",
+      "function": "anchor_digest",
+      "line": 53,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "__init__",
+      "line": 27,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "prepare",
+      "line": 36,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "project_query",
+      "line": 42,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "forward",
+      "line": 46,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "__init__",
+      "line": 55,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "features",
+      "line": 61,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "__init__",
+      "line": 69,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "prepare",
+      "line": 76,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "initial",
+      "line": 80,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "forward",
+      "line": 85,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "__init__",
+      "line": 94,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "prepare",
+      "line": 101,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "forward",
+      "line": 104,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "__init__",
+      "line": 110,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "forward",
+      "line": 118,
+      "complexity": 3,
+      "coverage": 0.9285714285714286,
+      "crap": 3.003279883381924
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "__init__",
+      "line": 135,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/models/local.py",
+      "function": "forward",
+      "line": 142,
+      "complexity": 3,
+      "coverage": 0.9,
+      "crap": 3.009
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "split_regions",
+      "line": 61,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "merge_regions",
+      "line": 69,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "rank_major",
+      "line": 78,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "region_lengths",
+      "line": 83,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "group_prefix",
+      "line": 90,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "__post_init__",
+      "line": 24,
+      "complexity": 5,
+      "coverage": 1.0,
+      "crap": 5.0
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "rows",
+      "line": 30,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "columns",
+      "line": 34,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "num_regions",
+      "line": 38,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "capacity",
+      "line": 42,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "pad",
+      "line": 45,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "crop",
+      "line": 49,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "scale_budget",
+      "line": 52,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/progressive/geometry.py",
+      "function": "check_budget",
+      "line": 56,
+      "complexity": 3,
+      "coverage": 0.6666666666666666,
+      "crap": 3.3333333333333335
+    },
+    {
+      "file": "hla_tok/training/v2.py",
+      "function": "state_digest",
+      "line": 15,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/training/v2.py",
+      "function": "matched_initialization",
+      "line": 23,
+      "complexity": 8,
+      "coverage": 1.0,
+      "crap": 8.0
+    },
+    {
+      "file": "hla_tok/training/v2.py",
+      "function": "load_experimental_checkpoint",
+      "line": 44,
+      "complexity": 5,
+      "coverage": 1.0,
+      "crap": 5.0
+    }
+  ],
+  "crap_over_10": [],
+  "duplicates_over_08": []
+}

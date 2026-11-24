@@ -1,0 +1,28 @@
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/vgg.pth
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/vgg.pth
+pilot R0 1 250 15.91074153660826 0.89309604300393 0.6008800665537516
+pilot R0 1 500 14.906030205888467 0.7501815954844157 0.5384302139282227
+pilot R0 1 750 15.821700963414806 0.6918863389227126 0.5582680635982089
+pilot R0 1 1000 16.32809839383618 0.671858184867435 0.5552916593021817
+pilot R1 1 250 16.161258828832516 0.9419637984699674 0.6204222970538669
+pilot R1 1 500 15.831026072607276 0.8116694423887465 0.5388105180528429
+pilot R1 1 750 16.802202231872002 0.8878401319185892 0.4746940533320109
+pilot R1 1 1000 16.083380356155015 0.7761518557866415 0.4175035291247898
+pilot R2 1 250 15.07612966766748 0.7195610735151503 0.6084478696187338
+pilot R2 1 500 15.916936996746093 0.6948716640472412 0.5715839862823486
+pilot R2 1 750 16.802884845091413 0.6960506306754218 0.5282506677839491
+pilot R2 1 1000 17.025787449866122 0.6753533085187277 0.4927334917916192
+pilot R3 1 250 15.129929801483375 1.1793247991138034 0.6781033542421129
+pilot R3 1 500 16.103190919486472 1.19595205783844 0.6383932100401984
+pilot R3 1 750 16.26092681029402 1.117540544933743 0.6222941875457764
+pilot R3 1 1000 16.870565362040704 1.0682796902126737 0.599586115943061

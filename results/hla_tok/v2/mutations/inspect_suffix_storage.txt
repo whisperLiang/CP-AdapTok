@@ -1,0 +1,19 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________ test_receiver_cannot_inspect_unreceived_backing_storage ____________
+tests/test_v2_architecture.py:235: in test_receiver_cannot_inspect_unreceived_backing_storage
+    torch.testing.assert_close(rx.decode_prefix(view_a, geometry), rx.decode_prefix(view_b, geometry),
+E   AssertionError: Tensor-likes are not equal!
+E
+E   Mismatched elements: 49149 / 49152 (100.0%)
+E   Greatest absolute difference: 0.0029082894325256348 at index (0, 1, 59, 108)
+E   Greatest relative difference: 0.005758332554250956 at index (0, 0, 16, 101)
+=============================== warnings summary ===============================
+tests/test_v2_architecture.py:145
+  /tmp/hla-mutation-wu4r1a7q/tests/test_v2_architecture.py:145: PytestUnknownMarkWarning: Unknown pytest.mark.gpu - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.gpu
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_v2_architecture.py::test_receiver_cannot_inspect_unreceived_backing_storage
+1 failed, 1 warning in 1.32s

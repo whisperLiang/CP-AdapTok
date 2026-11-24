@@ -1,0 +1,28 @@
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/vgg.pth
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/vgg.pth
+rgb R0 1 50 17.33980231324423 0.9949673414230347 0.5811826586723328
+rgb R0 1 100 20.290818152768612 0.9430639743804932 0.5129337310791016
+rgb R0 1 150 22.175190631855802 0.8565845489501953 0.4663875699043274
+rgb R0 1 200 23.55878033230226 0.6936818361282349 0.4161204695701599
+rgb R1 1 50 17.511085858194818 0.9675270915031433 0.5696863532066345
+rgb R1 1 100 20.733415694428132 0.980234682559967 0.5028365254402161
+rgb R1 1 150 23.10094899243108 0.8090368509292603 0.43999427556991577
+rgb R1 1 200 24.97781428418588 0.5847609043121338 0.37758469581604004
+rgb R2 1 50 17.590198985275787 0.9728116989135742 0.571329653263092
+rgb R2 1 100 20.850670635023903 0.9431461095809937 0.49593979120254517
+rgb R2 1 150 22.947306547616968 0.7988793849945068 0.4329656958580017
+rgb R2 1 200 24.910462519943795 0.5933059453964233 0.36853474378585815
+rgb R3 1 50 17.352019515770994 0.9859923124313354 0.5813173055648804
+rgb R3 1 100 20.715733685861075 0.9628833532333374 0.5043184757232666
+rgb R3 1 150 22.853128973632167 0.7978800535202026 0.4467255473136902
+rgb R3 1 200 24.75325905683551 0.6015670895576477 0.37593191862106323

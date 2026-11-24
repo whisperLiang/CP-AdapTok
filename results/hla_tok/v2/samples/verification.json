@@ -1,0 +1,222 @@
+[
+  {
+    "clip": "extension/R0.mkv",
+    "probe": {
+      "codec_name": "ffv1",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_read_frames": "16"
+    },
+    "first_frame_png": "extension/R0.png",
+    "first_frame_png_equals_decoded_rgb": true,
+    "first_frame_rgb_sha256": "b45879cb162613295ac491431000d9e05a10c09971a6ebd85972f77f8d1a7375",
+    "crop_sha256": "86b4b769c1f67a2b3e46576a89a19ad41c645bd621e7a3dcf920387d67b64508",
+    "crop_xyxy": [
+      768,
+      432,
+      1152,
+      648
+    ],
+    "video_sha256": "293bd5251c44947aeac2c3d7cfb76dae1016c73869c5df9d96df9901126e336a",
+    "png_sha256": "4bd41aadc5e80bc060870058f943bd318c357b8e0d17ace734aa7c39fc7babb9"
+  },
+  {
+    "clip": "extension/R2.mkv",
+    "probe": {
+      "codec_name": "ffv1",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_read_frames": "16"
+    },
+    "first_frame_png": "extension/R2.png",
+    "first_frame_png_equals_decoded_rgb": true,
+    "first_frame_rgb_sha256": "b18b12e4c4686dfa6d8ccb60a1bd32a854ae9540dbb71f14564a5c1b6775536c",
+    "crop_sha256": "2a1ca3ff2ac2c9a59cf7395d20d9aae9d843e4be31f15a9e2d5abb13615d0d41",
+    "crop_xyxy": [
+      768,
+      432,
+      1152,
+      648
+    ],
+    "video_sha256": "69aeb62776e49adc4a34b34311cd8615383d446d64addf98f0ecbb3c91aa7219",
+    "png_sha256": "1e6bb38f33a4c591f060a442aa5bb401c87a9c670553ea4888623ab231c41199"
+  },
+  {
+    "clip": "joint/joint_v1.mkv",
+    "probe": {
+      "codec_name": "ffv1",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_read_frames": "16"
+    },
+    "first_frame_png": "joint/joint_v1.png",
+    "first_frame_png_equals_decoded_rgb": true,
+    "first_frame_rgb_sha256": "afbf26f8f342bee333294f88ebea811a7ee312926dbad4401ce3f044ab029e50",
+    "crop_sha256": "f7bb816a44f82085ce920b8f46375cf70e8466ca77e446ddffd32b560e6b8649",
+    "crop_xyxy": [
+      768,
+      432,
+      1152,
+      648
+    ],
+    "video_sha256": "e83071df6fa9caad62178d37928faaabca9d7f0a7c0698872ca1034ab0cdbcb9",
+    "png_sha256": "76b007dca9923d9a7bde829d7f4e9c5230e2dbff728939797089b538c07579bf"
+  },
+  {
+    "clip": "legacy/R0_fixed.mkv",
+    "probe": {
+      "codec_name": "ffv1",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_read_frames": "16"
+    },
+    "first_frame_png": "legacy/R0_fixed.png",
+    "first_frame_png_equals_decoded_rgb": true,
+    "first_frame_rgb_sha256": "e348909bc2de323dfef81664dc6e2d274cf83e5fefe9771f3c6d9dbec66a7a91",
+    "crop_sha256": "a71c47ac5c9de9daa65164fb1d0481cfe0093b34968a5f52595df282f004e17d",
+    "crop_xyxy": [
+      768,
+      432,
+      1152,
+      648
+    ],
+    "video_sha256": "d10117e77bf8162c027c257201e7940a7b5c04d5c18c70bd1a22d65885479f0c",
+    "png_sha256": "43adafc49c1be2da2c06037cf098b807cd51aa491235d93e4a45eb78164aaee6"
+  },
+  {
+    "clip": "official/original_adaptok.mkv",
+    "probe": {
+      "codec_name": "ffv1",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_read_frames": "16"
+    },
+    "first_frame_png": "official/original_adaptok.png",
+    "first_frame_png_equals_decoded_rgb": true,
+    "first_frame_rgb_sha256": "abda1904ec9b90eef11cb6c090f5c1486a2035d281528c91e4cd059249458751",
+    "crop_sha256": "7c00321f162b13cf77fefbe8011bf8c860807a38c23623bf453d027afbc6af00",
+    "crop_xyxy": [
+      768,
+      432,
+      1152,
+      648
+    ],
+    "video_sha256": "61c195ff45a91249023f92077599780b2424e807a5de2b1b29dda672dc3c0bfb",
+    "png_sha256": "e38de0059eb0ace92ac62c891979c0c273d74c1e2431ea8e0e6a2ce49182150a"
+  },
+  {
+    "clip": "pilots/source.mkv",
+    "probe": {
+      "codec_name": "ffv1",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_read_frames": "16"
+    },
+    "first_frame_png": "pilots/source.png",
+    "first_frame_png_equals_decoded_rgb": true,
+    "first_frame_rgb_sha256": "a6890db9ea72937da9d31843b3e4182a46e38b08f18664d3eb108a8e8f97bfa5",
+    "crop_sha256": "8ae5af6f6b4b174b687ae67b174af567616a050b468b4e1cc34a85685bf5401a",
+    "crop_xyxy": [
+      768,
+      432,
+      1152,
+      648
+    ],
+    "video_sha256": "3d705d5f1944fe3ffd6ee7a305d94c1d6476cf0ab8ede024cf1e6f95bbbf9d6e",
+    "png_sha256": "1d5da2661c4415150302d2e52ed1d21f5ae0e37229343d059dadf0ad81b487c2"
+  },
+  {
+    "clip": "pilots/R0.mkv",
+    "probe": {
+      "codec_name": "ffv1",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_read_frames": "16"
+    },
+    "first_frame_png": "pilots/R0.png",
+    "first_frame_png_equals_decoded_rgb": true,
+    "first_frame_rgb_sha256": "05bdced337b0936772cf0f1eb07425334cdcb1fa231efdfddad325751b6c869d",
+    "crop_sha256": "55eaf143bd5beab3401db99f72e37215dd51eb46864cc1b8a306f057cbb955ce",
+    "crop_xyxy": [
+      768,
+      432,
+      1152,
+      648
+    ],
+    "video_sha256": "5b009c6199f96b2fb4da6cce3cd2b3571ce5130ceed59cb1178d060ffdfa15f2",
+    "png_sha256": "9c5a4fb756b465f7dea2f6ad62e662d88de92bb800f9627e5c83a82cf185a9b7"
+  },
+  {
+    "clip": "pilots/R1.mkv",
+    "probe": {
+      "codec_name": "ffv1",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_read_frames": "16"
+    },
+    "first_frame_png": "pilots/R1.png",
+    "first_frame_png_equals_decoded_rgb": true,
+    "first_frame_rgb_sha256": "6c3a0f733017671ce7b81f37ad8c3fb60c797ce5ee76f81cbc7fa5dc4628cc56",
+    "crop_sha256": "d65c490e0c116717ae3737761317f8e699f6778bac583fc928f6f4846b48290e",
+    "crop_xyxy": [
+      768,
+      432,
+      1152,
+      648
+    ],
+    "video_sha256": "78d05ebe65f3045a0a2ffaf622b83d871ace2aa91e27c1795a5738ca2c09cb54",
+    "png_sha256": "0e56f27aec12c612ecc2d1d48f290ecbb240859678730d62152b67fa95cbfbb3"
+  },
+  {
+    "clip": "pilots/R2.mkv",
+    "probe": {
+      "codec_name": "ffv1",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_read_frames": "16"
+    },
+    "first_frame_png": "pilots/R2.png",
+    "first_frame_png_equals_decoded_rgb": true,
+    "first_frame_rgb_sha256": "723efcabf6c4049975b45108792aa5ccbe7da7932abddd556bb9d6b7bafb7918",
+    "crop_sha256": "8adcdbd37281809dbc6e5c1ca70a0ad8822c7a0b1f483b524929b91fe148bcdf",
+    "crop_xyxy": [
+      768,
+      432,
+      1152,
+      648
+    ],
+    "video_sha256": "85f296c04bd50248b33bc4eff5e78c4c9786c527771fc4ff6ec6e4c979f0b600",
+    "png_sha256": "d15890f1ddabe3ba7207d13ed8a93d0f5f979dd7cb09dc2b4709ae954b8b8a7c"
+  },
+  {
+    "clip": "pilots/R3.mkv",
+    "probe": {
+      "codec_name": "ffv1",
+      "width": 1920,
+      "height": 1080,
+      "r_frame_rate": "30/1",
+      "nb_read_frames": "16"
+    },
+    "first_frame_png": "pilots/R3.png",
+    "first_frame_png_equals_decoded_rgb": true,
+    "first_frame_rgb_sha256": "f205a90775c340df83cedd3bb33069dd564c4641222909f4d60d519be43cc8e5",
+    "crop_sha256": "f87e48a7e5f5a5325e780f86127b94debc29fecec74f2662ba5881bb8623b55a",
+    "crop_xyxy": [
+      768,
+      432,
+      1152,
+      648
+    ],
+    "video_sha256": "41a2126e943722c135d15475add0ac703eba268772d2841eeb0a5d8c9255ecec",
+    "png_sha256": "2a9649eebc2af17185cbd77a594e87a110f83b3384dce76af7cb70e2ff14667d"
+  }
+]

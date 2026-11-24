@@ -1,0 +1,18 @@
+{
+  "seed": 1,
+  "architecture": {
+    "architecture_version": "hla-tok.R0",
+    "anchor_table_sha256": null,
+    "rank_causal": {
+      "enabled": false,
+      "layers": 0,
+      "rank_chunk": 32,
+      "heads": 4,
+      "ffn_ratio": 2,
+      "dropout": 0.0
+    }
+  },
+  "shared_sha256": "13b1aa70394e85afe2618d61759854d010b633e63a9494896c92cf55fe61a567",
+  "parameter_count": 2478560,
+  "initialization": "torch seed; matching parameters copied from one fresh R0; new layers use default seeded init"
+}

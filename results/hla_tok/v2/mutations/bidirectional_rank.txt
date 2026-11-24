@@ -1,0 +1,19 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_rank_mask_uses_absolute_indices_and_cache_carries_history_and_gradients _
+tests/test_v2_architecture.py:88: in test_rank_mask_uses_absolute_indices_and_cache_carries_history_and_gradients
+    assert mask[0, :33].all() and not mask[0, 33:].any()
+E   assert (tensor(True) and not tensor(True))
+E    +  where tensor(True) = <built-in method all of Tensor object at 0x74d0116a8b90>()
+E    +    where <built-in method all of Tensor object at 0x74d0116a8b90> = tensor([True, True, True, True, True, True, True, True, True, True, True, True,\n        True, True, True, True, True, True, True, True, True, True, True, True,\n        True, True, True, True, True, True, True, True, True]).all
+E    +  and   tensor(True) = <built-in method any of Tensor object at 0x74d0116a8be0>()
+E    +    where <built-in method any of Tensor object at 0x74d0116a8be0> = tensor([True, True, True, True, True, True, True, True, True, True, True, True,\n        True, True, True, True, True, True, True, True, True, True, True, True,\n        True, True, True, True, True, True, True]).any
+=============================== warnings summary ===============================
+tests/test_v2_architecture.py:145
+  /tmp/hla-mutation-77ov1wsj/tests/test_v2_architecture.py:145: PytestUnknownMarkWarning: Unknown pytest.mark.gpu - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.gpu
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_v2_architecture.py::test_rank_mask_uses_absolute_indices_and_cache_carries_history_and_gradients
+1 failed, 1 warning in 1.23s

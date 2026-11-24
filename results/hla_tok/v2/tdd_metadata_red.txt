@@ -1,0 +1,23 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_____ test_r0_r1_r2_r3_share_exact_initial_spatial_and_decoder_parameters ______
+
+    def test_r0_r1_r2_r3_share_exact_initial_spatial_and_decoder_parameters():
+>       from hla_tok.training.v2 import matched_initialization
+E       ModuleNotFoundError: No module named 'hla_tok.training.v2'
+
+tests/hla_tok/test_v2_architecture.py:188: ModuleNotFoundError
+____ test_v2_checkpoint_requires_matching_architecture_and_anchor_metadata _____
+
+tmp_path = PosixPath('/tmp/pytest-of-whisperliang/pytest-14/test_v2_checkpoint_requires_ma0')
+
+    def test_v2_checkpoint_requires_matching_architecture_and_anchor_metadata(tmp_path):
+        from hla_tok.training.checkpoint import ResumeIdentity, save_checkpoint
+>       from hla_tok.training.v2 import load_experimental_checkpoint
+E       ModuleNotFoundError: No module named 'hla_tok.training.v2'
+
+tests/hla_tok/test_v2_architecture.py:201: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED tests/hla_tok/test_v2_architecture.py::test_r0_r1_r2_r3_share_exact_initial_spatial_and_decoder_parameters
+FAILED tests/hla_tok/test_v2_architecture.py::test_v2_checkpoint_requires_matching_architecture_and_anchor_metadata
+2 failed, 13 deselected in 1.28s
