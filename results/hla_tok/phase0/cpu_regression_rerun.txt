@@ -10,7 +10,7 @@ monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x793d4c0b8f50>
 
     def test_phase_configuration_forks_same_warmup_and_fixed_training_budget(tmp_path, monkeypatch):
         from cp_adaptok import large_scale
-    
+
         monkeypatch.setattr(large_scale, "source_checkpoint", lambda *args: None)
         manifest = {"seed": 1, "run_id": "test", "manifest_hashes": {"train": "same"}}
         row = {"path": str(tmp_path), "content_id": "video", "resolution": [1920, 1080],
@@ -19,15 +19,15 @@ monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x793d4c0b8f50>
 >       a = large_scale.phase_config("s3", "B0", manifest, splits)
             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-cp_adaptok/tests/test_large_scale_training.py:170: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+cp_adaptok/tests/test_large_scale_training.py:170:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 cp_adaptok/large_scale.py:196: in phase_config
     "official_weights_sha256": {k: file_hash(resolve(config["paths"][k]))
                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 cp_adaptok/large_scale_data.py:20: in file_hash
     with Path(path).open("rb") as handle:
          ^^^^^^^^^^^^^^^^^^^^^
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 self = PosixPath('/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/checkpoints/cvpr2026_video_ld.pth.tar')
 mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None

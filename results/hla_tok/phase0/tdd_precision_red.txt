@@ -14,8 +14,8 @@ ___________ test_cached_sender_retains_the_precision_it_started_with ___________
 >           assert torch.equal(model.extend_prefix(cache, 67), expected)
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-tests/hla_tok/test_codec.py:149: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/hla_tok/test_codec.py:149:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 ../../../../CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/utils/_contextlib.py:120: in decorate_context
     return func(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^
@@ -49,7 +49,7 @@ hla_tok/models/local.py:35: in forward
 ../../../../CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py:1786: in _call_impl
     return forward_call(*args, **kwargs)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 self = Linear(in_features=128, out_features=128, bias=True)
 input = tensor([[[ 0.7539,  2.0938, -0.1836,  ..., -0.9844, -1.6094, -0.7227],

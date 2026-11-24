@@ -4,7 +4,7 @@ _________ test_rate_counts_written_padding_and_only_real_source_frames _________
 tests/test_fixed13.py:37: in test_rate_counts_written_padding_and_only_real_source_frames
     assert rate["actual_bpp"] == pytest.approx(56 / (3 * 1080 * 1920))
 E   assert 8.359053497942386e-06 == 9.00205761316...e-06 ± 9.0e-12
-E     
+E
 E     comparison failed
 E     Obtained: 8.359053497942386e-06
 E     Expected: 9.002057613168725e-06 ± 9.0e-12
