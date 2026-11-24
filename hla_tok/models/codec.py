@@ -21,6 +21,7 @@ from hla_tok.models.quantizer import VectorQuantizer
 from hla_tok.models.rank_causal import RankHistory
 from hla_tok.models.spatial import RGBDecoder, SpatialEncoder
 from hla_tok.progressive.geometry import MAX_QUERIES, Geometry, group_prefix, merge_regions, rank_major
+from hla_tok.streaming.fixed13 import unpack_tokens_13bit
 
 
 class Architecture(str, Enum):
@@ -62,24 +63,11 @@ class TrainingTokens:
     commitment_loss: Tensor
 
 
-class HLATok(nn.Module):
-    def __init__(self, architecture: Architecture | str = Architecture.R0):
-        super().__init__()
-        self.architecture = Architecture(architecture)
-        self.encoder = SpatialEncoder()
-        self.query_encoder = self.architecture.query_encoder()
-        self.quantizer = VectorQuantizer()
-        self.local_decoder = LocalTokenDecoder()
-        self.rgb_decoder = RGBDecoder()
-
-    def architecture_metadata(self) -> dict:
-        table = getattr(self.query_encoder, "anchor_table", None)
-        return {
-            "architecture_version": f"hla-tok.{self.architecture.value}",
-            "anchor_table_sha256": None if table is None else anchor_digest(table),
-            "rank_causal": {"enabled": self.architecture is Architecture.R3, "layers": int(self.architecture is Architecture.R3),
-                            "rank_chunk": RANK_CHUNK, "heads": 4, "ffn_ratio": 2, "dropout": 0.0},
-        }
+class PrefixDecoding:
+    architecture: Architecture
+    quantizer: VectorQuantizer
+    local_decoder: LocalTokenDecoder
+    rgb_decoder: RGBDecoder
 
     def _capacity(self, geometry: Geometry) -> int:
         return self.architecture.local_capacity * geometry.num_regions
@@ -88,6 +76,67 @@ class HLATok(nn.Module):
         geometry.check_budget(budget)
         if budget > self._capacity(geometry):
             raise ValueError("budget exceeds the selected architecture's spatial capacity")
+
+    def _decode_features(self, values: Tensor, geometry: Geometry) -> Tensor:
+        with record_function("hla/local_decoder"):
+            local = [self.local_decoder(group) for group in group_prefix(values, geometry.num_regions)]
+            return merge_regions(torch.cat(local, dim=1), geometry)
+
+    def _decode(self, values: Tensor, geometry: Geometry) -> Tensor:
+        return self.rgb_decoder(self._decode_features(values, geometry), geometry)
+
+    @torch.no_grad()
+    def decode_prefix(self, ids: Tensor, geometry: Geometry) -> Tensor:
+        if ids.ndim != 2 or ids.dtype != torch.long or ids.shape[0] == 0:
+            raise ValueError("expected nonempty batched int64 sequences")
+        self._check_budget(geometry, ids.shape[1])
+        with record_function("hla/codebook_lookup"):
+            values = self.quantizer.lookup(ids)
+        return self._decode(values, geometry)
+
+
+class PrefixReceiver(nn.Module, PrefixDecoding):
+    """Synthesis-only endpoint with no sender modules or frame state."""
+
+    def __init__(self, architecture: Architecture, quantizer: VectorQuantizer,
+                 local_decoder: LocalTokenDecoder, rgb_decoder: RGBDecoder):
+        super().__init__()
+        self.architecture = architecture
+        self.quantizer = quantizer
+        self.local_decoder = local_decoder
+        self.rgb_decoder = rgb_decoder
+
+    def decode_bytes(self, payload: bytes, count: int, geometry: Geometry) -> Tensor:
+        self._check_budget(geometry, count)
+        with record_function("hla/fixed13_deserialize"):
+            ids = unpack_tokens_13bit(payload, count)
+        with record_function("hla/host_device_ids"):
+            received = torch.tensor([ids], dtype=torch.long, device=self.quantizer.embedding.weight.device)
+        return self.decode_prefix(received, geometry)
+
+
+class HLATok(nn.Module, PrefixDecoding):
+    def __init__(self, architecture: Architecture | str = Architecture.R0, *, rgb_variant: str = "D0"):
+        super().__init__()
+        self.architecture = Architecture(architecture)
+        self.encoder = SpatialEncoder()
+        self.query_encoder = self.architecture.query_encoder()
+        self.quantizer = VectorQuantizer()
+        self.local_decoder = LocalTokenDecoder()
+        self.rgb_decoder = RGBDecoder(rgb_variant)
+
+    def architecture_metadata(self) -> dict:
+        table = getattr(self.query_encoder, "anchor_table", None)
+        metadata = {
+            "architecture_version": f"hla-tok.{self.architecture.value}",
+            "anchor_table_sha256": None if table is None else anchor_digest(table),
+            "rank_causal": {"enabled": self.architecture is Architecture.R3, "layers": int(self.architecture is Architecture.R3),
+                            "rank_chunk": RANK_CHUNK, "heads": 4, "ffn_ratio": 2, "dropout": 0.0},
+        }
+        return metadata if self.rgb_decoder.variant == "D0" else metadata | {"rgb_decoder": self.rgb_decoder.variant}
+
+    def receiver(self) -> PrefixReceiver:
+        return PrefixReceiver(self.architecture, self.quantizer, self.local_decoder, self.rgb_decoder)
 
     def _prepare(self, rgb: Tensor) -> SenderFrame:
         if rgb.ndim != 4 or rgb.shape[1] != 3 or rgb.shape[0] == 0 or not rgb.is_floating_point():
@@ -148,23 +197,6 @@ class HLATok(nn.Module):
             return tuple(torch.empty(sender.batch, 0, dtype=torch.long, device=device) for _ in lengths)
         ordered = self.extend_prefix(sender, max(lengths) * regions).reshape(sender.batch, -1, regions)
         return tuple(ordered[:, :count, index] for index, count in enumerate(lengths))
-
-    def _decode_features(self, values: Tensor, geometry: Geometry) -> Tensor:
-        with record_function("hla/local_decoder"):
-            local = [self.local_decoder(group) for group in group_prefix(values, geometry.num_regions)]
-            return merge_regions(torch.cat(local, dim=1), geometry)
-
-    def _decode(self, values: Tensor, geometry: Geometry) -> Tensor:
-        return self.rgb_decoder(self._decode_features(values, geometry), geometry)
-
-    @torch.no_grad()
-    def decode_prefix(self, ids: Tensor, geometry: Geometry) -> Tensor:
-        if ids.ndim != 2 or ids.dtype != torch.long or ids.shape[0] == 0:
-            raise ValueError("expected nonempty batched int64 sequences")
-        self._check_budget(geometry, ids.shape[1])
-        with record_function("hla/codebook_lookup"):
-            values = self.quantizer.lookup(ids)
-        return self._decode(values, geometry)
 
     def encode_training(self, rgb: Tensor, budget: int, *, quantize: bool = True) -> TrainingTokens:
         sender = self._prepare(rgb)

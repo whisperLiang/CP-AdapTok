@@ -39,7 +39,7 @@ class TrainingFrames:
                    if row["official_split"] == row["role"] == "train" and not row["resized"]]
         self.catalog = {geometry: eligible_sources(sources, geometry) for geometry in dict.fromkeys(schedule)}
 
-    def read(self, step):
+    def plan(self, step):
         rng = random.Random(self.seed + step)
         geometry = self.schedule[step]
         row = rng.choice(self.catalog[geometry])
@@ -47,16 +47,28 @@ class TrainingFrames:
         w, h = row["resolution"]
         y = rng.randrange(h - geometry.height + 1)
         x = rng.randrange(w - geometry.width + 1)
-        raw = self.reader.read("train", row["content_id"], index)
-        crop = raw[:, y:y+geometry.height, x:x+geometry.width]
         flip = bool(rng.randrange(2))
-        if flip:
-            crop = crop.flip(-1)
         perceptual = (rng.randrange(max(1, geometry.height - 255)), rng.randrange(max(1, geometry.width - 255)))
         sample = {"video": row["content_id"], "frame": index, "crop_xyhw": [x, y, geometry.width, geometry.height],
                   "source_sha256": row["frame_hashes"][index]["sha256"],
                   "flip_horizontal": flip, "perceptual_crop_yx": list(perceptual)}
-        return crop, geometry, perceptual, sample
+        return sample
+
+    def load(self, sample):
+        x, y, width, height = sample["crop_xyhw"]
+        row = self.reader.catalog("train")[sample["video"]]
+        if row["frame_hashes"][sample["frame"]]["sha256"] != sample["source_sha256"]:
+            raise ValueError("planned Train source differs from the frozen manifest")
+        raw = self.reader.read("train", sample["video"], sample["frame"])
+        crop = raw[:, y:y+height, x:x+width]
+        if tuple(crop.shape[-2:]) != (height, width):
+            raise ValueError("planned Train crop exceeds the native source")
+        if sample["flip_horizontal"]:
+            crop = crop.flip(-1)
+        return crop, Geometry(height, width), tuple(sample["perceptual_crop_yx"]), sample
+
+    def read(self, step):
+        return self.load(self.plan(step))
 
     def batches(self, first):
         # Only one pending reader advances counters. Plans are keyed by completed update index.
