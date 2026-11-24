@@ -14,7 +14,7 @@ from scripts.hla_tok.v2.benchmark import pipeline
 from scripts.hla_tok.v2.protocol import COHORT, frozen_data, json_at, setup
 from scripts.hla_tok.v3.benchmark import dense_benchmark, native_references
 from scripts.hla_tok.v3.calibration import calibration
-from scripts.hla_tok.v3.gates import preferred_alternative, quality_pass, supports_extension
+from scripts.hla_tok.v3.gates import quality_pass, select_dense, supports_extension
 from scripts.hla_tok.v3.inputs import r2_source
 from scripts.hla_tok.v3.protocol import OUTPUT, PROTOCOL, Trial, curriculum
 from scripts.hla_tok.v3.training import TrialRun, execute
@@ -136,8 +136,7 @@ def _d1_working_budget(config, dense, source, reader, cohort):
     return results | {"scope": "performance only, legacy uncalibrated codebook"}
 
 
-def dense_trials(config, v2, seed=1, *, r2_override=None, variants=("D0", "D1")):
-    setup(seed)
+def _dense_initializer(v2, seed, r2_override, variants):
     preflight = require_pass(OUTPUT / "preflight.json")
     replay = require_pass(OUTPUT / "baseline" / "replay.json")
     source, _ = r2_source(v2)
@@ -145,53 +144,68 @@ def dense_trials(config, v2, seed=1, *, r2_override=None, variants=("D0", "D1"))
         raise RuntimeError("replay or preflight no longer matches the frozen V3 input")
     if seed == 2 and (r2_override is None or len(variants) != 1 or sha256_file(r2_override) == sha256_file(source)):
         raise ValueError("Seed 2 must have independent R2 weights and reuse the selected architecture")
-    reader, cohort, identity = frozen_data()
-    quality = FullFrameQuality("cuda", identity["metric_weights"])
-    loss = _loss(config, reader, source)
-    init = r2_override or source
-    results, runs = {}, []
-    extending = extension_active("dense", seed)
+    return source, r2_override or source
+
+
+def _dense_runs(config, seed, variants, initializer, loss, reader, cohort, quality):
+    init_hash = sha256_file(initializer)
     for variant in variants:
         setup(seed)
-        model, shared = dense_model(init, variant)
+        model, shared = dense_model(initializer, variant)
         trial = Trial("dense", "A0" if variant == "D0" else "A1", seed, variant)
-        run = TrialRun(trial, config, on_gpu(model), loss, None,
-                       {"shared_sha256": shared, "r2_sha256": sha256_file(init)}, reader, cohort, quality)
-        runs.append(run)
+        yield TrialRun(trial, config, model, loss, None, {"shared_sha256": shared, "r2_sha256": init_hash},
+                       reader, cohort, quality)
+
+
+def _measure_dense_trials(runs, extending):
+    results = {}
+    for run in runs:
+        on_gpu(run.model)
         rows = execute(run, extend=extending)
+        run.model.cpu()
         if rows is None:
             return None
-        results[trial.arm] = rows[0]
+        results[run.trial.arm] = rows[0]
     _matching(runs)
-    thresholds = config["dense_thresholds"]
-    if not extending and not any(quality_pass(row, thresholds) for row in results.values()) and _extension(
-        runs, config, thresholds
-    ):
-        for run in runs:
-            rows = execute(run, extend=True)
-            if rows is None:
-                return None
-            results[run.trial.arm] = rows[0]
-        _matching(runs)
-    passing = {arm for arm, row in results.items() if quality_pass(row, thresholds)}
-    decision = {"status": "PASS" if passing else "FAIL", "thresholds": thresholds, "observed": results,
-                "selected": None, "parameters": {}}
+    return results
+
+
+def _dense_parameters(runs):
+    parameters = {}
     for run in runs:
         arm = run.trial.arm
         target = run.output / "performance"
         if not (target / "timings.csv").exists():
-            dense_benchmark(run.model, reader, cohort, config, target)
-        decision["parameters"][arm] = sum(param.numel() for param in run.model.parameters())
-    selected = "A0" if "A0" in passing else ("A1" if "A1" in passing else None)
-    if passing == {"A0", "A1"} and preferred_alternative(results["A1"], results["A0"], config):
-        challenger, = (run for run in runs if run.trial.arm == "A1")
-        perf = _d1_working_budget(config, challenger.model, init, reader, cohort)
+            dense_benchmark(on_gpu(run.model), run.reader, run.cohort, run.config, target)
+            run.model.cpu()
+        parameters[arm] = sum(param.numel() for param in run.model.parameters())
+    return parameters
+
+
+def dense_trials(config, v2, seed=1, *, r2_override=None, variants=("D0", "D1")):
+    setup(seed)
+    source, initializer = _dense_initializer(v2, seed, r2_override, variants)
+    reader, cohort, identity = frozen_data()
+    quality = FullFrameQuality("cuda", identity["metric_weights"])
+    loss = _loss(config, reader, source)
+    runs = list(_dense_runs(config, seed, variants, initializer, loss, reader, cohort, quality))
+    extending = extension_active("dense", seed)
+    results = _measure_dense_trials(runs, extending)
+    if results is None:
+        return None
+    thresholds = config["dense_thresholds"]
+    if not extending and not any(quality_pass(row, thresholds) for row in results.values()):
+        if _extension(runs, config, thresholds):
+            results = _measure_dense_trials(runs, True)
+            if results is None:
+                return None
+    by_arm = {run.trial.arm: run for run in runs}
+    selected, perf = select_dense(
+        results, config, lambda: _d1_working_budget(config, by_arm["A1"].model, initializer, reader, cohort))
+    decision = {"status": "PASS" if selected else "FAIL", "thresholds": thresholds, "observed": results,
+                "selected": _selected(by_arm[selected]) if selected else None, "parameters": _dense_parameters(runs)}
+    if perf is not None:
         decision["d1_working_budget"] = perf
-        if perf["pipeline_fps"] >= config["performance"]["pipeline_fps"]:
-            selected = "A1"
-    if selected:
-        winner, = (run for run in runs if run.trial.arm == selected)
-        decision["selected"] = _selected(winner)
     write_json(state_of("dense", seed), decision)
     return decision
 

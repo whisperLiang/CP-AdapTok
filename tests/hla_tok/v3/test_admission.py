@@ -2,11 +2,12 @@ import pytest
 
 from hla_tok import BUDGETS
 from hla_tok.streaming.fixed13 import payload_ledger
-from scripts.hla_tok.v3 import sealed
+from scripts.hla_tok.v3 import downstream, sealed
 from scripts.hla_tok.v3.gates import (
     discrete_thresholds,
     progressive_decision,
     quality_pass,
+    select_dense,
     supports_extension,
 )
 from scripts.hla_tok.v3.protocol import PROTOCOL, read_config
@@ -43,3 +44,32 @@ def test_sealed_test_fails_before_evaluating_or_opening_any_sources(tmp_path, mo
     monkeypatch.setattr(sealed, "FREEZE", tmp_path / "missing.json")
     with pytest.raises(PermissionError, match="remains sealed"):
         sealed.evaluate_sealed(read_config(PROTOCOL))
+
+
+def test_fixed_and_progressive_training_refuse_missing_phase_admission(tmp_path, monkeypatch):
+    monkeypatch.setattr(downstream, "state_of", lambda stage, seed: tmp_path / f"{stage}_{seed}.json")
+    config = read_config(PROTOCOL)
+    for start in (downstream.continuous_trials, downstream.quantized_trials):
+        with pytest.raises(RuntimeError, match="not admitted"):
+            start(config, tmp_path, 1)
+    with pytest.raises(RuntimeError, match="not admitted"):
+        downstream.progressive_trials(config, tmp_path)
+
+
+def test_dense_selection_checks_extra_decoder_cost_only_when_it_can_change_the_choice():
+    config = read_config(PROTOCOL)
+    base = {"global_psnr": 28, "lpips": 0.16, "dists": 0.068, "frames": 174, "matched_174": True}
+    calls = []
+
+    def measure():
+        calls.append("timed")
+        return {"pipeline_fps": 29.0}
+
+    assert select_dense({"A0": base, "A1": base | {"global_psnr": 27.0}}, config, measure) == ("A0", None)
+    assert not calls
+    faster_quality = base | {"global_psnr": 28.4}
+    assert select_dense({"A0": base, "A1": faster_quality}, config, measure) == (
+        "A0", {"pipeline_fps": 29.0})
+    assert calls == ["timed"]
+    assert select_dense({"A0": base, "A1": faster_quality}, config, lambda: {"pipeline_fps": 35.0})[0] == "A1"
+    assert select_dense({"A0": base | {"dists": 0.10}, "A1": base}, config, measure) == ("A1", None)

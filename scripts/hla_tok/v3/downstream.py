@@ -16,6 +16,7 @@ from scripts.hla_tok.v2.train import Trial as LegacyTrial
 from scripts.hla_tok.v2.train import execute as run_legacy
 from scripts.hla_tok.v3.benchmark import codec_benchmark
 from scripts.hla_tok.v3.calibration import calibration
+from scripts.hla_tok.v3.diagnostics import diagnose
 from scripts.hla_tok.v3.experiments import (
     _extension,
     _loss,
@@ -168,6 +169,9 @@ def continuous_trials(config, v2, seed):
                 "thresholds": thresholds, "observed": observed, "selected": _selected(run) if passed else None,
                 "reason": None if passed else "B0 missed the gate; the conditional matched ARD decision is required"}
     write_json(state_of("continuous", seed), decision)
+    if not passed:
+        target = run.output / "bottleneck"
+        diagnose(on_gpu(dense_model), model, reader, cohort, quality, config["native_budget"], target)
     return decision
 
 

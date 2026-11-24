@@ -165,6 +165,10 @@ def main():
             verdict = report(config, args.v2, args.output, figures=args.figures)
         else:
             verdict = _dispatch(args, config)
+            if args.command in ("train", "resume") and verdict is not None:
+                from scripts.hla_tok.v3.report import report
+
+                report(config, args.v2, OUTPUT / "live_report")
         if isinstance(verdict, dict) and "status" in verdict:
             print(verdict["status"])
         elif isinstance(verdict, list):

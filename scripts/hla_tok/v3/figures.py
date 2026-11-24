@@ -71,7 +71,7 @@ def _rate(metrics, folder, scripts):
                 if row["precision"] != "fp32" or row["stride"] != "128":
                     continue
                 label = "Original AdapTok, stride 128"
-            elif row["arm"] in ("AIP-VTok Joint V1", "HLA-Tok T0"):
+            elif row["arm"] in ("AIP-VTok Joint V1", "HLA-Tok R0 Fixed13"):
                 label = row["arm"]
             else:
                 continue

@@ -32,6 +32,17 @@ def preferred_alternative(candidate, control, config):
             and all(gain[key] >= -limit for key, limit in config["material_degradation"].items()))
 
 
+def select_dense(results, config, measure_alternative):
+    passing = {arm for arm, row in results.items() if quality_pass(row, config["dense_thresholds"])}
+    if len(passing) < 2:
+        return next(iter(passing), None), None
+    if not preferred_alternative(results["A1"], results["A0"], config):
+        return "A0", None
+    performance = measure_alternative()
+    preferred = "A1" if performance["pipeline_fps"] >= config["performance"]["pipeline_fps"] else "A0"
+    return preferred, performance
+
+
 def discrete_thresholds(row, config, baselines):
     if row["mode"] != "fixed13" or row["rate_basis"] != "actual_fixed13_payload":
         raise ValueError("equal-rate admission requires a real Fixed13 payload")

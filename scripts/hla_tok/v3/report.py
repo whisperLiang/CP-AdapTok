@@ -10,6 +10,7 @@ from hla_tok.training.checkpoint import read_checkpoint
 from scripts.hla_tok.v2.acceptance import record_test_counts
 from scripts.hla_tok.v2.protocol import ROOT, csv_at, json_at
 from scripts.hla_tok.v3.experiments import state_of, terminal_step
+from scripts.hla_tok.v3.gates import quality_pass
 from scripts.hla_tok.v3.protocol import CHECKPOINTS, OUTPUT, STAGES
 
 METRICS = ("global_psnr", "lpips", "dists")
@@ -55,6 +56,8 @@ def metric_rows():
                                "step": 2000, "mode": "continuous"})
     rows.extend(row | {"stage": "historical", "arm": f"{row['arm']} frozen encoder", "scope": "trend", "mode": "dense"}
                 for row in csv_at(V2 / "diag0/oracles/metrics.csv"))
+    rows.extend(row | {"stage": "historical", "arm": "HLA-Tok R0 Fixed13", "scope": "full", "mode": "fixed13"}
+                for row in csv_at(ROOT / "results/hla_tok/phase1/fixed/validation_metrics.csv"))
     rows.extend(row | {"stage": "historical", "scope": "full", "arm": row["method"]}
                 for row in csv_at(ROOT / "results/hla_tok/baselines/metrics.csv")
                 if row["frames"] == "174" and row["global_psnr"])
@@ -131,13 +134,19 @@ def _metric_string(row):
     return " / ".join(f"{float(row[key]):.5f}" for key in METRICS)
 
 
+def _historical_reference(row):
+    arm = row["arm"]
+    if arm in {"V2 R0", "V2 R2 replay", "O0 frozen encoder", "O1 frozen encoder", "HLA-Tok R0 Fixed13"}:
+        return True
+    if arm == "AIP-VTok Joint V1":
+        return row["budget"] == "16320" and row["history"] == "CLOSED"
+    return (arm == "Original AdapTok" and row["precision"] == "fp32" and row["stride"] == "128"
+            and round(float(row["actual_bpp"]), 6) in (0.089655, 0.112069))
+
+
 def _comparison(rows):
-    candidates = []
-    for row in rows:
-        if row["stage"] != "historical" and row["scope"] == "full":
-            candidates.append(row)
-        elif row["arm"] in {"V2 R0", "V2 R2 replay", "O0 frozen encoder", "O1 frozen encoder"}:
-            candidates.append(row)
+    candidates = [row for row in rows if (row["scope"] == "full" if row["stage"] != "historical"
+                                          else _historical_reference(row))]
     table = ["| 模型 / 观察 | 更新 | 帧数 | PSNR / LPIPS-Alex / DISTS | Actual bpp |",
              "|---|---:|---:|---|---:|"]
     for row in candidates:
@@ -164,6 +173,8 @@ def _render(acceptance, training, metrics, audit):
     for row in training:
         lines.append(f"- {row['arm']} {row['seed']}：实际 {row['optimizer_updates']:,}/{row['planned_updates']:,} 更新；"
                      f"最近可恢复 {row['checkpoint_updates']:,}；有效 Train 像素 {row['seen_pixels']:,}。")
+    for arm, result in acceptance["completed_dense_arms"].items():
+        lines.append(f"- {arm} 终点质量 **{result['quality_status']}**。单臂达标不等于 Phase A 配对准入。")
     latest = {}
     for row in metrics:
         if row["stage"] == "dense":
@@ -218,9 +229,17 @@ def report(config, v2, output, *, figures=False):
         raise ValueError("report requires the separate frozen V2 worktree")
     training, metrics = progress(config), metric_rows()
     audit = _audit_pixels(training)
+    terminal = terminal_step(config, "dense")
+    complete = {f"{row['arm']} {row['seed']}": {
+                    "quality_status": "PASS" if quality_pass(row, config["dense_thresholds"]) else "FAIL",
+                    "step": terminal, "metrics": {key: row[key] for key in METRICS},
+                } for row in metrics if row["stage"] == "dense" and row["scope"] == "full" and row["step"] == terminal}
     acceptance = _verdicts(training) | {
         "snapshot_time_cst": datetime.now(ZoneInfo("Asia/Shanghai")).isoformat(timespec="seconds"),
         "pixel_reads": audit["closed_read_ledgers"],
+        "completed_dense_arms": complete,
+        "resume_check": _get(OUTPUT / "resume_audit.json"),
+        "old_assets": _get(OUTPUT / "legacy_invariance.json"),
     }
     output.mkdir(parents=True, exist_ok=True)
     write_json(output / "acceptance.json", acceptance)

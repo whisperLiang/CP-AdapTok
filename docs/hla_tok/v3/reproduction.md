@@ -22,6 +22,7 @@ RUN train all
 SIGINT/SIGTERM 亦保存最近一个成功更新。用 `RUN resume all` 读取符合身份的最新检查点；
 它不会放宽模型、优化器、调度器、RNG、数据游标、样本链、像素与 update 契约。
 同一工作区的训练、评估、测速与解封有单写者锁；报告可以读取训练中原子发布的记录。
+训练入口得到阶段终局裁决时将刷新 `results/hla_tok/v3/live_report/`，不改动 Git 中的报告快照。
 
 A0/A1 继承相同 Encoder/RGB Decoder 参数；D1 仅新增两个恒等初始化块。进入 1080p 时保留 AdamW
 历史、重启该 leg 的低学习率 warmup/cosine；B 从冻结切到解冻显式重建 optimizer。
@@ -30,7 +31,7 @@ Phase A 之前以 16 个 512×512 和 16 个原生 Train 样本校准，目标�
 B 同样审计适用模块和 latent 梯度，但不再改权重。唯一匹配延长沿用末 leg 的 LR 下限和连续游标。
 
 阶段比较中的 9 帧是趋势；只用 174 帧原生评价判断准入。若 B0 失败且无允许的延长，
-`RUN diagnose --seed 1` 对同一批 174 帧重放 A/B0 稠密、B0 Local 特征与 Rank 干预。
+自动在同一批 174 帧重放 A/B0 稠密、B0 Local 特征与 Rank 干预；可用 `RUN diagnose --seed 1` 复验。
 本轮未启用 ARD，也不预置 B1 生产路径；若实际进入该分支，须先完成注册的 1000 步匹配
 Local Decoder 诊断并经过质量与耗时裁决。未通过时 C/D 不会启动。D 的最高三档如两个相邻
 增量皆未超过任一质量噪声容差，则不通过饱和检查。可选单调损失预设关闭（权重 0）。
