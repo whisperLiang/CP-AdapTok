@@ -1,0 +1,29 @@
+native_budget: 16320
+optimizer: AdamW
+learning_rate: 0.0002
+weight_decay: 0.01
+gradient_clip_norm: 1.0
+warmup_steps: 100
+precision: bf16
+loss:
+  rgb_l1: 1.0
+  rgb_mse: 0.1
+  lpips_vgg: 1.0
+  dists: 0.2
+  vq_codebook: 1.0
+  vq_commitment: 0.25
+rgb:
+  {height: 256, width: 256, updates: 200, every: 50, fixed_samples: 1, quantized: false}
+overfit:
+  {height: 256, width: 256, updates: 500, every: 50, fixed_samples: 4, quantized: false}
+pilot:
+  {height: 512, width: 512, updates: 1000, every: 250, fixed_samples: 0, quantized: false}
+quantized:
+  {height: 512, width: 512, updates: 2000, every: 500, fixed_samples: 0, quantized: true}
+control:
+  {height: 512, width: 512, updates: 2000, every: 500, fixed_samples: 0, quantized: false}
+native:
+  {height: 1080, width: 1920, updates: 1000, every: 500, fixed_samples: 0, quantized: true}
+continue:
+  {height: 1080, width: 1920, updates: 1000, every: 500, fixed_samples: 0, quantized: true}
+calibration_frames: 40

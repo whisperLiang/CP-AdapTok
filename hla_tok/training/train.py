@@ -49,11 +49,13 @@ class TrainingFrames:
         x = rng.randrange(w - geometry.width + 1)
         raw = self.reader.read("train", row["content_id"], index)
         crop = raw[:, y:y+geometry.height, x:x+geometry.width]
-        if rng.randrange(2):
+        flip = bool(rng.randrange(2))
+        if flip:
             crop = crop.flip(-1)
         perceptual = (rng.randrange(max(1, geometry.height - 255)), rng.randrange(max(1, geometry.width - 255)))
         sample = {"video": row["content_id"], "frame": index, "crop_xyhw": [x, y, geometry.width, geometry.height],
-                  "source_sha256": row["frame_hashes"][index]["sha256"]}
+                  "source_sha256": row["frame_hashes"][index]["sha256"],
+                  "flip_horizontal": flip, "perceptual_crop_yx": list(perceptual)}
         return crop, geometry, perceptual, sample
 
     def batches(self, first):

@@ -72,7 +72,8 @@ def save_native(output, label, image):
 
 
 @torch.inference_mode()
-def validate(model, reader, cohort, quality, budgets, output, *, quantize=True, subset=False, bf16=True):
+def validate(model, reader, cohort, quality, budgets, output, *, quantize=True, subset=False, bf16=True,
+             observe=None):
     geometry = Geometry(*NATIVE_SHAPE)
     rows = defaultdict(list)
     usage = {k: CodeUsage(model.quantizer.embedding.num_embeddings) for k in budgets} if quantize else {}
@@ -82,10 +83,9 @@ def validate(model, reader, cohort, quality, budgets, output, *, quantize=True, 
         for index in indices:
             source = transfer(reader.read("validation", video, index)[None])
             with torch.autocast("cuda", dtype=torch.bfloat16, enabled=bf16):
-                if quantize:
-                    encoded = model.encode_training(source, max(budgets))
-                else:
-                    encoded = model.encode_training(source, max(budgets), quantize=False)
+                encoded = model.encode_training(source, max(budgets), quantize=quantize)
+            if observe is not None:
+                observe(encoded, video, index)
             for k in budgets:
                 with torch.autocast("cuda", dtype=torch.bfloat16, enabled=bf16):
                     if quantize:
