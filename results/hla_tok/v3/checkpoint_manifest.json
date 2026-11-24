@@ -19,6 +19,1086 @@
     "is_setup_audit": true
   },
   {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_00500.pt",
+    "sha256": "7130535b299257d189d2516e27fd89f5e6450bddbc72e638d25a36579a9d397b",
+    "step": 500,
+    "data_cursor": 500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "2b53fa2a3441f2e7075657234df47d9736323075d8a78ab6677a542d5fc48dfb",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_01000.pt",
+    "sha256": "2d9a133d8f5fa2d9dd84284eecb2b6823cb38926a778ad8f05dcb91d0a67f139",
+    "step": 1000,
+    "data_cursor": 1000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "75e0d55eb8eb406ac415d6dbd275d0a5072404bad2b0e7c149dc754a7e38542b",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_01500.pt",
+    "sha256": "a7fdfd860e83e975bfe34ce2db916360529d700a14bda5c0275c32f133adde6c",
+    "step": 1500,
+    "data_cursor": 1500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "d3c69748975a10369d6268e4b4e7e9d93e62cd0df151c6c97b8e633a4c968a5c",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_02000.pt",
+    "sha256": "4a787486e5afe0bb2fc482746ad6dcc265b7a567ade928406383ae3e4e2f5224",
+    "step": 2000,
+    "data_cursor": 2000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "4f855d48d6cbea035893f31585ab21bedd3dc4c3d6814aa249f7ae95b25b3249",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_02500.pt",
+    "sha256": "eb05d4f2cf3990759c8d4026f71eca51fb09ee52e533b7e08be6dffe42ade1ba",
+    "step": 2500,
+    "data_cursor": 2500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "14efac6e2a7cc6a09c01b3bcce02dc4a6081160cac5cae2bc0511c1e647b78e6",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_03000.pt",
+    "sha256": "0b7dca687578bf8fbd2ec399344a96d8c58d6e6298e7e2ae3b6fabd8a100e560",
+    "step": 3000,
+    "data_cursor": 3000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "0c4efae78bd9c367ffc32e272843b97d2bee44e85223ec28dcfecb00f00f31f9",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_03500.pt",
+    "sha256": "1b5fa7b8b594af330ee6345bb4b4b5d7d2f8645f165a893a4bc83855e2469353",
+    "step": 3500,
+    "data_cursor": 3500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "033ec1f161f894502d08d305534ad401c736f19a8ed899c33f013ef5a8ce8240",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_04000.pt",
+    "sha256": "eaf48804e2111231689cd26fac74eb21f70970330e213aebe7dd9fab4e76ddb7",
+    "step": 4000,
+    "data_cursor": 4000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "35063825e2dc7dcca0cf8417e71268203199c801a42d8f4eb0904d133baa566b",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_04500.pt",
+    "sha256": "caba42981f389a5a29748c219c482c47073af5661e1e905b0bebaf82e7df7b63",
+    "step": 4500,
+    "data_cursor": 4500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "c3fb6adc12c7bfc01ec63738ca1c943ebc8fab55d98be0dfcd231890c6f6bb3c",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_05000.pt",
+    "sha256": "aad6b1f87363b04956df466d99519bde3fb2de429b53e2adb4a8d6d200aa4bd7",
+    "step": 5000,
+    "data_cursor": 5000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "a7e99a047d9145b6d071f80ad410e61d835c555caea267895aabeda2096bcfe5",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_05500.pt",
+    "sha256": "9209bc45b67db9c1e43dd15a7ce536aacf59c21cfc44320e0c23db0ba47a8156",
+    "step": 5500,
+    "data_cursor": 5500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "a85cb45feb476d89e220e4e621e5cbb7142f2154ccd73474d60baf5025914b93",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_06000.pt",
+    "sha256": "d1b7cc6fe08cc19f2269636f6474ed987ddcd4a199e98285bb3ac5c832c4fac4",
+    "step": 6000,
+    "data_cursor": 6000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "ac29c11fcca110ed34c72e2761f9578f3f401fa620fdeb6d4da0f4875c3ecded",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_06500.pt",
+    "sha256": "019ae7d59651e700662eedfc646a105f08a2bfdc14c23be870b2548cb3aa9243",
+    "step": 6500,
+    "data_cursor": 6500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "b1145933ce2e4b16149e63f0bc2a131804dab4689f502ddbc282a1c1dcce5520",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_07000.pt",
+    "sha256": "535ec8861175495625a477e8cc2c2814cccd3ee75e8951678a32f8f475d58149",
+    "step": 7000,
+    "data_cursor": 7000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "37b567fe63d0fe1cf94cef897184efb1085fe3a1166bc7e0686830ac8eaf597d",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_07500.pt",
+    "sha256": "502fe44c78755079adb3de07811dab83f86c7a13d4ad968fbe53d9c6625ad9d3",
+    "step": 7500,
+    "data_cursor": 7500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "8e5ff5c75a533c3966ae3c0be39d4542e081adcb37c6f3a1c8233bc23a417885",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_08000.pt",
+    "sha256": "2b864fae78c179e5fbbedee320c0b3a34d72bda41e07d6ebd479cddaa599c03c",
+    "step": 8000,
+    "data_cursor": 8000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "fea956832770de3753648bb563427b45b54f5cd139940e558bd18538a65cee1e",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_08500.pt",
+    "sha256": "5a9d3a1b2e0515843ecaef51a861dc90fc95a19072d4832042478bf68f68301b",
+    "step": 8500,
+    "data_cursor": 8500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "2c132b99ab818792131e1a896a70fe33afc976fbe82e1ba0771bb8f63f9fb65c",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_09000.pt",
+    "sha256": "b9e31b7f0736b45be237b8986f6befb7bb2d83ddc559ac6344001cd8d41c9458",
+    "step": 9000,
+    "data_cursor": 9000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "0309255064d2717bc3e28eb808374edbe821268207a0131c5868f288c4576793",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_09500.pt",
+    "sha256": "91f1a3d938bc905ad9353d496e50d338d2c5a565c0e10542c93cc41af571ff51",
+    "step": 9500,
+    "data_cursor": 9500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "3f5dd265602051c29c4953fb8c7f5ac9fb0f93f4bf81e4e88c86dd16ae0f6fb1",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_10000.pt",
+    "sha256": "cd7da9140b54389f709c1c58b2a8889d99536fb1178fc3b3af3e16ef17caee04",
+    "step": 10000,
+    "data_cursor": 10000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "02b3402dc09fe393156f0aa31e6098a25a245868899f11012683a48692cbf8fa",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_10500.pt",
+    "sha256": "30bca3c994a4abee02aa51142ef27cf9e8f4c25bbd4d0dbf9d7d9e491a979085",
+    "step": 10500,
+    "data_cursor": 10500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "8ff6fde907a4283dbbf15a3ea0d4630409622cef3163381fd259d6018778a889",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_11000.pt",
+    "sha256": "806ed13d1a0d47dbca938d9e5837e76af24f5197e6ec92f35f0cfaef917c04e2",
+    "step": 11000,
+    "data_cursor": 11000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "299985f943805f9300a66535749ccbdc94f4b6d33fac042df93e7ac5587169a8",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_11500.pt",
+    "sha256": "1d3c9e4e2ec5f979db23beef0038698325c87516a67ecca9c060afcb5f4f199d",
+    "step": 11500,
+    "data_cursor": 11500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "95ba2e46a2fb1f5b98fccbc2b76f27c3bc3aaa424c08e818e35faf7d7c3da5b5",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_12000.pt",
+    "sha256": "a014c3b4e0a03bd88da8c24c66e1d0da2a276f23c7b966f7b4714daf4d8f4ba6",
+    "step": 12000,
+    "data_cursor": 12000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "8548f442024cb9241b38b16dd93f65b29dbc60189a4033b8bbf2d4a3de03d967",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_12500.pt",
+    "sha256": "2aa644471a9c5682697143950ae16dfb1450cf43acb431c32b3ae2b0f85fe518",
+    "step": 12500,
+    "data_cursor": 12500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "4d870f72202106217c921123f880b12c2144e8a6aa09bc4b322983d219fe345d",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_13000.pt",
+    "sha256": "d79eeac9bfe0b9791fe3572f5c932b3e7f3e6578014bc5b356c9127ced3c94d8",
+    "step": 13000,
+    "data_cursor": 13000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "d2b49b62a927c788f3b51aff1cfabe302bf035f1e3d1ac1bea8fb6d5d1424b7e",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_13500.pt",
+    "sha256": "859e652f6b54c79f9caf0454f0790d545bb3f51c226cacddcb0eb1b6614a11e2",
+    "step": 13500,
+    "data_cursor": 13500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "1b03d536ab51e23e0d5c235681e90818840926ae125a78d5bb3c80b9b1f660f1",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_14000.pt",
+    "sha256": "5844a164481a81a6e5af72e5be44b353b1ddafcf9fc5dd8c627ae858df608ea4",
+    "step": 14000,
+    "data_cursor": 14000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "38d342093b29c61987c8c08c25145a6c8465e830b6bde230d5d50086a5b61c17",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_14500.pt",
+    "sha256": "6ea70d57b26faac4362cea2e78b7091eedc7be250301c7351c22c249d4961c2d",
+    "step": 14500,
+    "data_cursor": 14500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "42d2a1dad39675b2dbf12742a2841941efb6e1ff03e1fc4c59bfad32d3719062",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_15000.pt",
+    "sha256": "5154e9f758a09f4a726a015a32467f08f9eb15cdcbd81d0a63cfc6c6e61340d4",
+    "step": 15000,
+    "data_cursor": 15000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "36ffb5cf2ac1c3cf23dfed2989019baf663881ba3942267c1f4d7dfc7296c494",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_15500.pt",
+    "sha256": "209e2b0f301e1667b1ac40db3804f44ecc5a471eda483977875971269ab22e69",
+    "step": 15500,
+    "data_cursor": 15500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "fe33b844821301d8366418cbdae72a77a9bd51b2780be3d6d6cd976907129bea",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_16000.pt",
+    "sha256": "7b32323369e7a2c48092365cf95ab0ebde7402de6a595e326ce03ce5bfab843c",
+    "step": 16000,
+    "data_cursor": 16000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "90342f91506af6e289160781471e0abba352e810f2e141c3b07954a9de226705",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_16500.pt",
+    "sha256": "6c4c5035f51cf5db1c134e8a093288e86ab317c8a79175ed4da75979f0467b69",
+    "step": 16500,
+    "data_cursor": 16500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "fc971318a0d5898c11097f77ac278aee355b6890195a7039e8a635cfb59c7482",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_17000.pt",
+    "sha256": "0d430d70857728ad8705094d908f659e1bd58129ab2d2a19b58755d7778f5368",
+    "step": 17000,
+    "data_cursor": 17000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "c8134c2fe6be3b5d86e62a2ad99a9aed72e955a434cd9ecd0d32f37d5e1313c5",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_17500.pt",
+    "sha256": "c5b137d75ce6f1757338cdae285af5a7617f8b8096ae1340d82462b03fc83146",
+    "step": 17500,
+    "data_cursor": 17500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "f1062b1a19fcfb9e1271f02378857e45ff0c957c415157f7a0dc186b378dd781",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_18000.pt",
+    "sha256": "e2cb8f2b86030568c3aa633077e1d5671c468e6cbf64cf661db549086789d735",
+    "step": 18000,
+    "data_cursor": 18000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "5f6751bac5b254e6074a33f5db26022930eb73e0dfd7b7bfcdba634833d5a7a0",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_18500.pt",
+    "sha256": "317190e5ece270c36e19794f15a549c8da412dc6df6555f9cd542d36fb0a3263",
+    "step": 18500,
+    "data_cursor": 18500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "760bacffa023af92c99b4688b2b55abee10ae1710dcdead2636bf2845cbb72ff",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_19000.pt",
+    "sha256": "3c62d01fbf7cf9912fa14e79fb44e992f4e57afcfe24a261c783333654ee6030",
+    "step": 19000,
+    "data_cursor": 19000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "45bc4dba003ad02d0591ad464301b52482e7afe747f5957b2e6cd3c5a60894f8",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_19500.pt",
+    "sha256": "cba1457fc5b4339a1312a770f5d803172d10ab67cd58bb52a6517c58588ace1b",
+    "step": 19500,
+    "data_cursor": 19500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "6ec2b1fe74875335eb5a6bbc4145ca8ad6db55c6d566adeb09649ca6a234499c",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/continuous/seed1/B0/step_20000.pt",
+    "sha256": "274fa31b0794ff4499edd6d30d4af80884b0366efca7505e506b56855fb7089e",
+    "step": 20000,
+    "data_cursor": 20000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/continuous/seed1/B0",
+      "config_sha256": "e3a26fd009a08e258a276d8071b72bffa84c420525b3289845153ca9ef8cae59",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "aa0e84a5cc8ece4e1bbc5f166c6358598b6dd0397b0417789de96b484612a6e6",
+    "is_setup_audit": false
+  },
+  {
     "path": "checkpoints/hla_tok/v3/dense/seed1/A0/step_00500.pt",
     "sha256": "262a00fde2d51c2b4b4a694e48c7e8d766c154715f8459fd4e42c52f5564210b",
     "step": 500,
@@ -548,6 +1628,1523 @@
       "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
     },
     "sample_chain": "2b53fa2a3441f2e7075657234df47d9736323075d8a78ab6677a542d5fc48dfb",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_01000.pt",
+    "sha256": "36e50b231dee31314c79735a2913afb437693ffcebc198bee7280ed3afe02f85",
+    "step": 1000,
+    "data_cursor": 1000,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "75e0d55eb8eb406ac415d6dbd275d0a5072404bad2b0e7c149dc754a7e38542b",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_01500.pt",
+    "sha256": "516fed58304840c259cbaf5b4bfeb6e1ca7133840efe58572dc73a3c33bb132f",
+    "step": 1500,
+    "data_cursor": 1500,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "d3c69748975a10369d6268e4b4e7e9d93e62cd0df151c6c97b8e633a4c968a5c",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_02000.pt",
+    "sha256": "423be19ea2984727273f6dba0ffa198a42ad1a4218ee3f9eb6e778e16b94e68f",
+    "step": 2000,
+    "data_cursor": 2000,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "4f855d48d6cbea035893f31585ab21bedd3dc4c3d6814aa249f7ae95b25b3249",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_02500.pt",
+    "sha256": "0c35aa3753c8b4dc723724f77909ac4390af3ff83114577662cfd036e0cde6f4",
+    "step": 2500,
+    "data_cursor": 2500,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "14efac6e2a7cc6a09c01b3bcce02dc4a6081160cac5cae2bc0511c1e647b78e6",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_03000.pt",
+    "sha256": "bc6e6b1dae5d6633de24aa52ad79b6d6ecd8069e1119eb9f98d9e6d85e38ccac",
+    "step": 3000,
+    "data_cursor": 3000,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "0c4efae78bd9c367ffc32e272843b97d2bee44e85223ec28dcfecb00f00f31f9",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_03500.pt",
+    "sha256": "3e04f4f932e2d8f6e43247223a35dd9343ce32e3f58895fabf66d9144e02c87e",
+    "step": 3500,
+    "data_cursor": 3500,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "033ec1f161f894502d08d305534ad401c736f19a8ed899c33f013ef5a8ce8240",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_04000.pt",
+    "sha256": "80d73dfd7313c2d6f2a1529783d9e37ff825b898020ba77510ed9febe711e823",
+    "step": 4000,
+    "data_cursor": 4000,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "35063825e2dc7dcca0cf8417e71268203199c801a42d8f4eb0904d133baa566b",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_04500.pt",
+    "sha256": "dcbd55739795ce8f7e3f0f26aae098831dfd38315e7dd1853d37be0c8ce67957",
+    "step": 4500,
+    "data_cursor": 4500,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "c3fb6adc12c7bfc01ec63738ca1c943ebc8fab55d98be0dfcd231890c6f6bb3c",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_05000.pt",
+    "sha256": "1d3690f845f624946c24850f7e65118be4066239406638cff352745243765ab1",
+    "step": 5000,
+    "data_cursor": 5000,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "a7e99a047d9145b6d071f80ad410e61d835c555caea267895aabeda2096bcfe5",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_05500.pt",
+    "sha256": "5a5cbfca7644d9cf55e10dffdd3117b0e6fbe716b69e4fc0a8d90d4cd8429ebb",
+    "step": 5500,
+    "data_cursor": 5500,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "a85cb45feb476d89e220e4e621e5cbb7142f2154ccd73474d60baf5025914b93",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_06000.pt",
+    "sha256": "80ea0578c20fe72ad99a74334dc65fc4ac8959e7c14ca148101ef141d6965104",
+    "step": 6000,
+    "data_cursor": 6000,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "ac29c11fcca110ed34c72e2761f9578f3f401fa620fdeb6d4da0f4875c3ecded",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_06500.pt",
+    "sha256": "ae6296180a99e8c24871ff19e5d19978f06f4703fcdf2e587335eeef4721f3c6",
+    "step": 6500,
+    "data_cursor": 6500,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "b1145933ce2e4b16149e63f0bc2a131804dab4689f502ddbc282a1c1dcce5520",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_07000.pt",
+    "sha256": "e13407ef2364319cf63984e4f1ee04ed35b462cf6ba6c2727e19d60cec4a6776",
+    "step": 7000,
+    "data_cursor": 7000,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "37b567fe63d0fe1cf94cef897184efb1085fe3a1166bc7e0686830ac8eaf597d",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_07500.pt",
+    "sha256": "afec825c3b878f7b5a1d01a40ab00f4a378ac6c44278f7c5812cc1db9be79e0a",
+    "step": 7500,
+    "data_cursor": 7500,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "8e5ff5c75a533c3966ae3c0be39d4542e081adcb37c6f3a1c8233bc23a417885",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_08000.pt",
+    "sha256": "0ad510c8aa200208fbf2d234067d6f42dc6c3c215bc64d19ca00bc49ebacc0ef",
+    "step": 8000,
+    "data_cursor": 8000,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "fea956832770de3753648bb563427b45b54f5cd139940e558bd18538a65cee1e",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_08500.pt",
+    "sha256": "2bb171ad8c55d162548b02195f082595ac755a19c1179534c8ad796fe222c8fb",
+    "step": 8500,
+    "data_cursor": 8500,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "07804b221916ee819652bd170d4bfc3246ef5cb71e8c8bad81c34433ad92533c",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_09000.pt",
+    "sha256": "7ca86efe267fa1a4279056033af05078cbe1a66475f1db43b0c2c72e25fc1ca0",
+    "step": 9000,
+    "data_cursor": 9000,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "96ab18aaff85cadff96091ad90d6f272d4dc1c637bfbbd08dacd59dbcfe26b71",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_09500.pt",
+    "sha256": "72a5828d7e9a04e64c2e92ad0e7c55a80957e19dd1820c940eaccc5b2ebdfd8e",
+    "step": 9500,
+    "data_cursor": 9500,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "46abfdb3ef877c1e21777fed539807da5c003963e0055ed7a5687791d0ff8ebe",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_10000.pt",
+    "sha256": "dc07d0c7bd58408aec192bdeae68b35920d494026dae2dc62d8f21cd09c3a044",
+    "step": 10000,
+    "data_cursor": 10000,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "7273da27637cced8897413fc8b1ebc641825a505fff2eb0b21902daa07e8b9ee",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_10500.pt",
+    "sha256": "f9c37af4cf672e3a8ac2be64777c6cb0cf60858ca2afa38036586b412e091b0b",
+    "step": 10500,
+    "data_cursor": 10500,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "1b0add2f91e295d4021935363563ff591426f13df801f599714023dbfc948921",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_11000.pt",
+    "sha256": "2d398397af09e787de85abaa61dd44c2b2a04951466b153fad1a7f59a69565c9",
+    "step": 11000,
+    "data_cursor": 11000,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "05da0b4f2c95d481bdbed22303eedcd7980c632514249c2c3f995c4d91113727",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_11500.pt",
+    "sha256": "ce687681d31db6a1320a3fa4bd60373cd7be3596ba1e058e2bda35b0aceba5fd",
+    "step": 11500,
+    "data_cursor": 11500,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "9c4d4a31e9a7d1cd848d02537be43d02229ed4a3301287325904e3358f3c3a62",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/dense/seed1/A1/step_12000.pt",
+    "sha256": "b3d8b7dd8435e4e627d65ac6a47b1259520009e33244fb908f7f756a5dbc3fbd",
+    "step": 12000,
+    "data_cursor": 12000,
+    "architecture": {
+      "architecture_version": "hla-tok.dense",
+      "rgb_decoder": "D1"
+    },
+    "identity": {
+      "stage": "v3/dense/seed1/A1",
+      "config_sha256": "805403392edc408f283a800fd6221eb564d6721b16349abc5190328fde9628a1",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "0dad31f044c09381fe49de2eb61509733d6f2e18",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "aa59cd92b43e98dc095193ecd251127ead3b9fc4e873f0ab026bb0084b3d0746",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_00500.pt",
+    "sha256": "ae103270a000a17308cd69f22c3882ef979063529cb247df6e313c1b524f9d4c",
+    "step": 500,
+    "data_cursor": 500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "2b53fa2a3441f2e7075657234df47d9736323075d8a78ab6677a542d5fc48dfb",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_01000.pt",
+    "sha256": "048031435cec19afc7e99942dffafb35eb24f302c642ce8b1788766f5a243f74",
+    "step": 1000,
+    "data_cursor": 1000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "75e0d55eb8eb406ac415d6dbd275d0a5072404bad2b0e7c149dc754a7e38542b",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_01500.pt",
+    "sha256": "66548e73fad5038e195df27b86bf4f931c688738340d4e54a0ad9af1c1871245",
+    "step": 1500,
+    "data_cursor": 1500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "d3c69748975a10369d6268e4b4e7e9d93e62cd0df151c6c97b8e633a4c968a5c",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_02000.pt",
+    "sha256": "994700f5a1edf23bfd0da37602f5ce548ebeb1eb9ad73c5537c5d7d61d5ecc1d",
+    "step": 2000,
+    "data_cursor": 2000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "4f855d48d6cbea035893f31585ab21bedd3dc4c3d6814aa249f7ae95b25b3249",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_02500.pt",
+    "sha256": "094b6be29be83fea132b4c5cf5760985db0e5ee32cd711223e76c21c465e3eb0",
+    "step": 2500,
+    "data_cursor": 2500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "14efac6e2a7cc6a09c01b3bcce02dc4a6081160cac5cae2bc0511c1e647b78e6",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_03000.pt",
+    "sha256": "76c793abc9b86e5f914f4a8b5da15c72d70598be0753203822f63c329d5badd7",
+    "step": 3000,
+    "data_cursor": 3000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "0c4efae78bd9c367ffc32e272843b97d2bee44e85223ec28dcfecb00f00f31f9",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_03500.pt",
+    "sha256": "15f46cd3aa1b3a6b67827471216e798563d5a812a0bb6c47e3e3e4899b8f4300",
+    "step": 3500,
+    "data_cursor": 3500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "033ec1f161f894502d08d305534ad401c736f19a8ed899c33f013ef5a8ce8240",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_04000.pt",
+    "sha256": "0ec5f8f9396694b2124f581a7e54303f9f1f234f93d4dadce0d3fb274aa90583",
+    "step": 4000,
+    "data_cursor": 4000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "35063825e2dc7dcca0cf8417e71268203199c801a42d8f4eb0904d133baa566b",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_04500.pt",
+    "sha256": "57d18bcb5416f69a704a2ca5d98a534449928e38d073a12f6ac2ff0e1363b54e",
+    "step": 4500,
+    "data_cursor": 4500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "476e053eac1e76b94466687a65141440e1ea8959e4018c1b15093e543ed65c0c",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_05000.pt",
+    "sha256": "7e118a36152738d47f1be4110f9f57a1e58a01f24c96f68b22f53d68cda40db6",
+    "step": 5000,
+    "data_cursor": 5000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "a0777deec65a88f1115625f12f6c270b2213c4d4f517251e7094aba310e936e2",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_05500.pt",
+    "sha256": "e4ec657d125ecc5426e5ceb8fb1a7694b38c72fdd1d891edcd655f9573a8685c",
+    "step": 5500,
+    "data_cursor": 5500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "5cb98b6d563ce7bb7f77e499967770decfb3ece0592043737df1ee97e28cc003",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_06000.pt",
+    "sha256": "9376680362af39fb2232c5d07f55de627223832b2fb5caec6848543e4fdee14d",
+    "step": 6000,
+    "data_cursor": 6000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "b4a5c3a23793a532a30c6abf407ed2b41d9a5a0c15e42b691e55ddafd41ee927",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_06500.pt",
+    "sha256": "e851818a143614da6b347fc1d19747c69efac4a7e02c98506511d131ee9d0635",
+    "step": 6500,
+    "data_cursor": 6500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "8b88eb332cccf75452a0655ab0c1a219d0c80fa6124796fcef6eaaf67a7fb08e",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_07000.pt",
+    "sha256": "d8056fb9422c5667612c34edcee9df0a80a1c44568b4ff0ec30551edc433fed3",
+    "step": 7000,
+    "data_cursor": 7000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "d1a1687209a5c2cd2638aac76d8493626a977faa0d3dc0410aa0dde1b5affddd",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_07500.pt",
+    "sha256": "edfebfe9c6504281b67b4a4fb293095acf8d2758660db6c11bd1bc03563daf65",
+    "step": 7500,
+    "data_cursor": 7500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "236a0ba5b8afa02414406ed26b23b694a928d0aa1854a57513202649201b7144",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_08000.pt",
+    "sha256": "525096065641805f7af62c8e744dede978fcfb62e54cf3b439f8ab9283750229",
+    "step": 8000,
+    "data_cursor": 8000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "b5f34c645023338b9c8ee300a83aa179444c24b1b06bdf446a4663411d62251f",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_08500.pt",
+    "sha256": "502a547337a458430df1f82acb31c0cebe1c5b12c04f8645cf7cae0cff12171a",
+    "step": 8500,
+    "data_cursor": 8500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "ea8933c2f13c3809e2ec41a469f41e5b9a95e95765910c5119702b139b66e41b",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_09000.pt",
+    "sha256": "0e5e05ec2f8a71d5326e58a4e46a5be7a125fbf91305b6a3929a24fe1b472ff7",
+    "step": 9000,
+    "data_cursor": 9000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "2225908f49471348fd0a08925a63c35ddb58bd3663f9400ab313893fc28eb017",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_09500.pt",
+    "sha256": "34f7f539b2418fad1aa64696b4c474ca0a7ef08a2a795e494b99165bc44280fe",
+    "step": 9500,
+    "data_cursor": 9500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "0c0d2fe65371cd51b57ceafe40749a84c0ecd21a341e22e6722556b9db5179bb",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C0/step_10000.pt",
+    "sha256": "40beff895ff615c1f73cae18f9c025557ff2d35516a04f51be916a77a2e16249",
+    "step": 10000,
+    "data_cursor": 10000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C0",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "133b82405e024f206d2bcdce69a0b6b96847a69398c40c0a16e4b781869a6069",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_00500.pt",
+    "sha256": "f8769fa981a2362f7a4a9fe56550c39a300f5045a2b970c334efbee382a354d6",
+    "step": 500,
+    "data_cursor": 500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "2b53fa2a3441f2e7075657234df47d9736323075d8a78ab6677a542d5fc48dfb",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_01000.pt",
+    "sha256": "fb9cafdb128c432e4bbc57062bea9cf898738927c342677c404e85d0861ed4ed",
+    "step": 1000,
+    "data_cursor": 1000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "75e0d55eb8eb406ac415d6dbd275d0a5072404bad2b0e7c149dc754a7e38542b",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_01500.pt",
+    "sha256": "baaf8f83122fcb29fde32e9f405f7b4ea02089a53295a55a52e9b4740d1385e0",
+    "step": 1500,
+    "data_cursor": 1500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "d3c69748975a10369d6268e4b4e7e9d93e62cd0df151c6c97b8e633a4c968a5c",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_02000.pt",
+    "sha256": "fc7f23ad30c55182229e5a521dd7a0603ba98262e8a473b3740bd65af9c0d6a8",
+    "step": 2000,
+    "data_cursor": 2000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "4f855d48d6cbea035893f31585ab21bedd3dc4c3d6814aa249f7ae95b25b3249",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_02500.pt",
+    "sha256": "f60ea3a132ac333935f736ae1bc6f0d611385666010943b436621cab740548a3",
+    "step": 2500,
+    "data_cursor": 2500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "14efac6e2a7cc6a09c01b3bcce02dc4a6081160cac5cae2bc0511c1e647b78e6",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_03000.pt",
+    "sha256": "80d600612c94592f1bcc802db0bda48212146b7eefd33acfa6975f43bc4d4da9",
+    "step": 3000,
+    "data_cursor": 3000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "0c4efae78bd9c367ffc32e272843b97d2bee44e85223ec28dcfecb00f00f31f9",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_03500.pt",
+    "sha256": "ef92a8d94f300c98d14f8b8035e73c94f5d23e1f47aedcf59e107b0002aeac9e",
+    "step": 3500,
+    "data_cursor": 3500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "033ec1f161f894502d08d305534ad401c736f19a8ed899c33f013ef5a8ce8240",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_04000.pt",
+    "sha256": "1d33c78a5487e8148ab74da074ff3092a73a0943db15338b8126218503d0d77c",
+    "step": 4000,
+    "data_cursor": 4000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "35063825e2dc7dcca0cf8417e71268203199c801a42d8f4eb0904d133baa566b",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_04500.pt",
+    "sha256": "6145fb49e260ff805d332ee497edf1dca8f380574d979348e16cf103cf798d71",
+    "step": 4500,
+    "data_cursor": 4500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "476e053eac1e76b94466687a65141440e1ea8959e4018c1b15093e543ed65c0c",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_05000.pt",
+    "sha256": "48a36b9b6e71d414ccb8ce5d9a4c1ed8d08a9bd776854218b4e15091e0269560",
+    "step": 5000,
+    "data_cursor": 5000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "a0777deec65a88f1115625f12f6c270b2213c4d4f517251e7094aba310e936e2",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_05500.pt",
+    "sha256": "dc35b6783f49b3195ac9f25d0222c7bc7f7d1409d45eb58946bfff914b37f402",
+    "step": 5500,
+    "data_cursor": 5500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "5cb98b6d563ce7bb7f77e499967770decfb3ece0592043737df1ee97e28cc003",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_06000.pt",
+    "sha256": "01a7e00f7a187942e344420aa4de08589a7f55003fd80b6d19b4abc435933072",
+    "step": 6000,
+    "data_cursor": 6000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "b4a5c3a23793a532a30c6abf407ed2b41d9a5a0c15e42b691e55ddafd41ee927",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_06500.pt",
+    "sha256": "f5d9ee610045b07adeb8e8d593b2e954533e2c029d8d83f38a2322deb28b3c19",
+    "step": 6500,
+    "data_cursor": 6500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "8b88eb332cccf75452a0655ab0c1a219d0c80fa6124796fcef6eaaf67a7fb08e",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_07000.pt",
+    "sha256": "403614d417c2fed890734ac1e53b21f870ebf0d0487e4558405c3ce32ad72067",
+    "step": 7000,
+    "data_cursor": 7000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "d1a1687209a5c2cd2638aac76d8493626a977faa0d3dc0410aa0dde1b5affddd",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_07500.pt",
+    "sha256": "c8df84320e0635b9c930da6ae930fd0dda8d2c7cbce5a128f5b5e5b5b087102d",
+    "step": 7500,
+    "data_cursor": 7500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "236a0ba5b8afa02414406ed26b23b694a928d0aa1854a57513202649201b7144",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_08000.pt",
+    "sha256": "9789317be835afcb6c84fec2587b50c5feb35fad568c6deaeb1666817c4e51d5",
+    "step": 8000,
+    "data_cursor": 8000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "b5f34c645023338b9c8ee300a83aa179444c24b1b06bdf446a4663411d62251f",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_08500.pt",
+    "sha256": "cd9f477ff9047b0275a40314648ab90fbece993d5d4e6ad98d2c2d705ede25f8",
+    "step": 8500,
+    "data_cursor": 8500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "ea8933c2f13c3809e2ec41a469f41e5b9a95e95765910c5119702b139b66e41b",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_09000.pt",
+    "sha256": "6593f0e3e47c96dec2c9e4900229066802b148bea820ab1b0794c8e3a43576d5",
+    "step": 9000,
+    "data_cursor": 9000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "2225908f49471348fd0a08925a63c35ddb58bd3663f9400ab313893fc28eb017",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_09500.pt",
+    "sha256": "326581810e44f4ab3665fcbed47a6715f7ea819984fe04004bb50e9ea70654d8",
+    "step": 9500,
+    "data_cursor": 9500,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "0c0d2fe65371cd51b57ceafe40749a84c0ecd21a341e22e6722556b9db5179bb",
+    "is_setup_audit": false
+  },
+  {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_10000.pt",
+    "sha256": "6c3711b4f93b8f59b470577d13173481d7bdbf5323bcb08ec249cfe562711355",
+    "step": 10000,
+    "data_cursor": 10000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "133b82405e024f206d2bcdce69a0b6b96847a69398c40c0a16e4b781869a6069",
     "is_setup_audit": false
   }
 ]

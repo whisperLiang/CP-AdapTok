@@ -1,0 +1,29 @@
+{
+  "mode": "fixed13",
+  "checkpoint_sha256": "6c3711b4f93b8f59b470577d13173481d7bdbf5323bcb08ec249cfe562711355",
+  "budget": 16320,
+  "video": "DAVIS2017:car-roundabout",
+  "start": 32,
+  "frames": 16,
+  "fps": 30,
+  "crop_xywh": [
+    768,
+    432,
+    384,
+    216
+  ],
+  "samples": {
+    "source": {
+      "native_png_sha256": "1d5da2661c4415150302d2e52ed1d21f5ae0e37229343d059dadf0ad81b487c2",
+      "ffv1_sha256": "f89d03c52d0d88a8f7d581bb9e77690b51ef70a11ee8e5cc50a7ba3c04bbeca2",
+      "crop_sha256": "8ae5af6f6b4b174b687ae67b174af567616a050b468b4e1cc34a85685bf5401a"
+    },
+    "reconstruction": {
+      "native_png_sha256": "be77b2343d79963be2fdb975cb3bb804f28c6294397311f9ba602d63c6dd2b08",
+      "ffv1_sha256": "adf8c1121273e1d7efb9d840c370018d199d800d8cd3ced91b17f0ff80d0141c",
+      "crop_sha256": "4d45a932775f84ac5b1fc8796a65e5bae7830813f03451b840dadbd789cb183d"
+    }
+  },
+  "device": "cpu",
+  "precision": "bf16"
+}

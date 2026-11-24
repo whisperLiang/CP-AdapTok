@@ -1,82 +1,121 @@
 {
-  "scope": "V3 training and orchestration; CPU unit line coverage only, excludes formal H100 activity",
-  "method": "Radon cyclomatic complexity and estimated CRAP; normalized AST-token similarity",
-  "functions": 147,
-  "over_crap_10": 75,
+  "status": "PARTIAL PASS",
+  "method": "repository Radon + pytest-cov + AST similarity; CUDA training excluded from line coverage",
+  "checked_commit": "612bd01a413c28b252e7c54acd7b16b0e58da3f5",
+  "threshold": 10,
+  "scope": "V3 training and orchestration",
+  "functions": 212,
+  "at_or_above_crap_10": 65,
   "highest": [
     {
-      "function": "scripts/hla_tok/v3/quality.py:90:evaluate",
-      "cyclomatic": 22,
-      "coverage": 0.03225806451612903,
-      "crap_estimate": 460.656
+      "file": "scripts/hla_tok/v3/run.py",
+      "function": "_inference",
+      "line": 89,
+      "complexity": 12,
+      "coverage": 0.041666666666666664,
+      "crap": 138.73958333333334,
+      "origin": "v3_training_orchestration"
     },
     {
-      "function": "scripts/hla_tok/v3/downstream.py:265:progressive_trials",
-      "cyclomatic": 20,
-      "coverage": 0.02631578947368421,
-      "crap_estimate": 389.245
+      "file": "scripts/hla_tok/v3/samples.py",
+      "function": "export_samples",
+      "line": 71,
+      "complexity": 12,
+      "coverage": 0.05555555555555555,
+      "crap": 133.30864197530863,
+      "origin": "v3_training_orchestration"
     },
     {
-      "function": "scripts/hla_tok/v3/training.py:225:execute",
-      "cyclomatic": 19,
-      "coverage": 0.02127659574468085,
-      "crap_estimate": 357.444
+      "file": "scripts/hla_tok/v3/calibration.py",
+      "function": "_gradient_terms",
+      "line": 23,
+      "complexity": 12,
+      "coverage": 0.07142857142857142,
+      "crap": 127.29446064139943,
+      "origin": "v3_training_orchestration"
     },
     {
-      "function": "scripts/hla_tok/v3/report.py:111:_verdicts",
-      "cyclomatic": 15,
-      "coverage": 0.0,
-      "crap_estimate": 240.0
+      "file": "scripts/hla_tok/v3/calibration.py",
+      "function": "_audit_sample",
+      "line": 39,
+      "complexity": 12,
+      "coverage": 0.07692307692307693,
+      "crap": 125.25989986345017,
+      "origin": "v3_training_orchestration"
     },
     {
-      "function": "scripts/hla_tok/v3/downstream.py:200:quantized_trials",
-      "cyclomatic": 15,
-      "coverage": 0.030303030303030304,
-      "crap_estimate": 220.159
+      "file": "scripts/hla_tok/v3/experiments.py",
+      "function": "dense_trials",
+      "line": 185,
+      "complexity": 11,
+      "coverage": 0.041666666666666664,
+      "crap": 117.49645543981482,
+      "origin": "v3_training_orchestration"
     },
     {
-      "function": "scripts/hla_tok/v3/report.py:227:report",
-      "cyclomatic": 13,
-      "coverage": 0.0,
-      "crap_estimate": 182.0
+      "file": "scripts/hla_tok/v3/calibration.py",
+      "function": "calibration",
+      "line": 89,
+      "complexity": 11,
+      "coverage": 0.043478260869565216,
+      "crap": 116.89364674940414,
+      "origin": "v3_training_orchestration"
     },
     {
-      "function": "scripts/hla_tok/v3/report.py:39:metric_rows",
-      "cyclomatic": 12,
-      "coverage": 0.0,
-      "crap_estimate": 156.0
+      "file": "scripts/hla_tok/v3/calibration.py",
+      "function": "_measure_update",
+      "line": 63,
+      "complexity": 11,
+      "coverage": 0.047619047619047616,
+      "crap": 115.52434942230859,
+      "origin": "v3_training_orchestration"
     },
     {
-      "function": "scripts/hla_tok/v3/report.py:199:_answers",
-      "cyclomatic": 12,
-      "coverage": 0.0,
-      "crap_estimate": 156.0
+      "file": "scripts/hla_tok/v3/sealed.py",
+      "function": "_score_test",
+      "line": 96,
+      "complexity": 11,
+      "coverage": 0.047619047619047616,
+      "crap": 115.52434942230859,
+      "origin": "v3_training_orchestration"
     },
     {
-      "function": "scripts/hla_tok/v3/run.py:88:_inference",
-      "cyclomatic": 12,
-      "coverage": 0.0,
-      "crap_estimate": 156.0
+      "file": "scripts/hla_tok/v3/quality.py",
+      "function": "_bootstrap",
+      "line": 46,
+      "complexity": 11,
+      "coverage": 0.06666666666666667,
+      "crap": 109.3774814814815,
+      "origin": "v3_training_orchestration"
     },
     {
-      "function": "scripts/hla_tok/v3/downstream.py:139:continuous_trials",
-      "cyclomatic": 13,
-      "coverage": 0.0625,
-      "crap_estimate": 152.252
+      "file": "scripts/hla_tok/v3/run.py",
+      "function": "_dispatch",
+      "line": 117,
+      "complexity": 10,
+      "coverage": 0.047619047619047616,
+      "crap": 96.3837598531476,
+      "origin": "v3_training_orchestration"
     },
     {
-      "function": "scripts/hla_tok/v3/training.py:193:_update_span",
-      "cyclomatic": 12,
-      "coverage": 0.03333333333333333,
-      "crap_estimate": 142.075
+      "file": "scripts/hla_tok/v3/figures.py",
+      "function": "_trend",
+      "line": 42,
+      "complexity": 10,
+      "coverage": 0.05555555555555555,
+      "crap": 94.24211248285322,
+      "origin": "v3_training_orchestration"
     },
     {
-      "function": "scripts/hla_tok/v3/figures.py:64:_rate",
-      "cyclomatic": 11,
-      "coverage": 0.0,
-      "crap_estimate": 132.0
+      "file": "scripts/hla_tok/v3/downstream.py",
+      "function": "_nonmonotonic",
+      "line": 278,
+      "complexity": 10,
+      "coverage": 0.07142857142857142,
+      "crap": 90.06559766763849,
+      "origin": "v3_training_orchestration"
     }
   ],
-  "candidate_duplicates": [],
-  "all_functions_below_crap_10": false
+  "all_functions_below_crap_10": false,
+  "complete_before_after": "complexity_before_after.json"
 }

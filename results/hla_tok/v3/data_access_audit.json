@@ -1,10 +1,10 @@
 {
   "closed_read_ledgers": {
-    "train_pixel_reads": 12470,
-    "validation_pixel_reads": 1257,
+    "train_pixel_reads": 64545,
+    "validation_pixel_reads": 4860,
     "test_pixel_reads": 0
   },
-  "train_completed_optimizer_updates": 12875,
+  "train_completed_optimizer_updates": 64000,
   "test_pixel_reads": 0,
   "test_sealed": true,
   "note": "A live optimization segment flushes its read ledger on stop; prefetched Train reads are separate.",
@@ -44,6 +44,318 @@
       "test": 0
     },
     {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/bottleneck/step_02000/gradient_cpu_bf16/pixel_reads.json",
+      "train": 1,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/bottleneck/step_02000/trend_cpu_fp32/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/bottleneck/step_12000/gradient_cpu_bf16/pixel_reads.json",
+      "train": 1,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/bottleneck/step_12000/trend_cpu_fp32/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/bottleneck/step_20000/full/gradient_audit/pixel_reads.json",
+      "train": 1,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/bottleneck/step_20000/full/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/bottleneck/step_20000/full_cpu_fp32/pixel_reads.json",
+      "train": 0,
+      "validation": 28,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/bottleneck/step_20000/gradient_cpu_bf16/pixel_reads.json",
+      "train": 1,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/full/step_04000/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/full/step_08000/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/full/step_20000/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/gradient_calibration/pixel_reads.json",
+      "train": 32,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_00500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_01000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_01500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_02000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_02500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_03000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_03500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_04000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_04500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_05000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_05500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_06000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_06500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_07000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_07500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_08000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_08500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_09000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_09500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_10000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_10500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_11000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_11500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_12000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_12500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_13000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_13500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_14000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_14500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_15000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_15500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_16000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_16500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_17000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_17500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_18000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_18500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_19000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_19500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/continuous/seed1/B0/trend/step_20000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
       "source": "results/hla_tok/v3/dense/seed1/A0/full/step_04000/pixel_reads.json",
       "train": 0,
       "validation": 174,
@@ -59,6 +371,12 @@
       "source": "results/hla_tok/v3/dense/seed1/A0/full/step_12000/pixel_reads.json",
       "train": 0,
       "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A0/performance/pixel_reads.json",
+      "train": 0,
+      "validation": 64,
       "test": 0
     },
     {
@@ -206,7 +524,169 @@
       "test": 0
     },
     {
+      "source": "results/hla_tok/v3/dense/seed1/A1/full/step_04000/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/full/step_08000/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/full/step_12000/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/performance/pixel_reads.json",
+      "train": 0,
+      "validation": 64,
+      "test": 0
+    },
+    {
       "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_00500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_01000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_01500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_02000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_02500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_03000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_03500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_04000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_04500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_05000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_05500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_06000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_06500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_07000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_07500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_08000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_08500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_09000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_09500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_10000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_10500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_11000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_11500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/dense/seed1/A1/trend/step_12000/pixel_reads.json",
       "train": 0,
       "validation": 9,
       "test": 0
@@ -214,6 +694,294 @@
     {
       "source": "results/hla_tok/v3/gradient_calibration/pixel_reads.json",
       "train": 32,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/full/step_04000/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/full/step_08000/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/full/step_10000/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_00500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_01000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_01500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_02000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_02500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_03000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_03500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_04000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_04500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_05000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_05500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_06000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_06500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_07000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_07500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_08000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_08500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_09000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_09500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C0/trend/step_10000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/full/step_00000/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/full/step_04000/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/full/step_08000/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/full/step_10000/pixel_reads.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_00500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_01000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_01500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_02000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_02500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_03000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_03500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_04000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_04500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_05000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_05500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_06000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_06500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_07000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_07500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_08000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_08500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_09000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_09500/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/trend/step_10000/pixel_reads.json",
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/quantized/seed1/C1/vq_calibration/pixel_reads.json",
+      "train": 40,
       "validation": 0,
       "test": 0
     },
@@ -227,6 +995,36 @@
       "source": "results/hla_tok/v3/samples/A0_step12000/pixel_reads.json",
       "train": 0,
       "validation": 16,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/samples/A1_step12000/pixel_reads.json",
+      "train": 0,
+      "validation": 16,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/samples/B0_step20000/pixel_reads.json",
+      "train": 0,
+      "validation": 16,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/samples/C0_step10000/pixel_reads.json",
+      "train": 0,
+      "validation": 16,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/samples/C1_step10000/pixel_reads.json",
+      "train": 0,
+      "validation": 16,
+      "test": 0
+    },
+    {
+      "source": "results/hla_tok/v3/verify/C1_step10000/pixel_reads.json",
+      "train": 0,
+      "validation": 2,
       "test": 0
     },
     {
