@@ -143,6 +143,7 @@ def update(model, batch, optimizer, scheduler, losses, config, counters, log, st
 
 def train(model, reader, cohort, quality, losses, config, identity, output, checkpoint_dir, *,
           resume=None, initialize_from=None):
+    started = perf_counter()
     stage = identity.stage
     budget = config["native_budget"]
     seed = config["seed"]
@@ -191,7 +192,8 @@ def train(model, reader, cohort, quality, losses, config, identity, output, chec
                              quantize=quantize, subset=True, bf16=bf16)
         finally:
             write_json(output / "training_progress.json", {"completed_updates": completed, "physical_batch": 1,
-                       "effective_batch": 1, "stopping_requested": stopping()} | counters)
+                       "effective_batch": 1, "stopping_requested": stopping(),
+                       "segment_wall_s_including_periodic_validation": perf_counter() - started} | counters)
         if not stopping():
             validate(model, reader, cohort, quality, (budget,), output, quantize=quantize, bf16=bf16)
 

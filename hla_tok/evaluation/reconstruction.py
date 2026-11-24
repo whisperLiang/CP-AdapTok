@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 
+import numpy as np
 import torch
 from PIL import Image
 from torch.nn import functional as F
@@ -113,4 +114,9 @@ def validate(model, reader, cohort, quality, budgets, output, *, quantize=True, 
     write_csv(output / "per_frame.csv", [r for k in budgets for r in rows[k]])
     if quantize:
         write_json(output / "codebook.json", {k: stats.report() for k, stats in usage.items()})
+        if not subset:
+            np.savez_compressed(output / "codebook_distributions.npz", **{
+                f"K{k}_{name}": table.numpy() for k, stats in usage.items()
+                for name, table in (("rank", stats.rank), ("region", stats.region))
+            })
     return report

@@ -108,6 +108,10 @@ def main():
     for number in range(2, 7):
         record[f"phase{number}"] = {"status": "BLOCKED", "reason": f"Phase {number - 1} has no full pass"}
     write_json(results / "acceptance.json", record)
+    original = [r for r in csv_at(results / "baselines/metrics.csv") if r["method"] == "Original AdapTok"]
+    joint_replay = csv_at(results / "baselines/joint_replay/metrics.csv")
+    if original and joint_replay:
+        write_csv(results / "baselines/metrics.csv", original + joint_replay)
     if (args.benchmark_dir / "benchmark.csv").exists() and args.benchmark_dir != results / "phase0":
         write_csv(results / "phase0/benchmark.csv", csv_at(args.benchmark_dir / "benchmark.csv"))
     print(json.dumps(record, indent=2))

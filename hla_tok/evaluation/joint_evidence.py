@@ -38,4 +38,3 @@ def archived_joint_rows(root: Path, identity: dict) -> list[dict]:
                              "precision": "bf16", "token_per_frame": sum(int(r["transmitted_tokens"]) for r in measured)
                              / len(measured), "checkpoint_sha256": identity["joint_checkpoint_sha256"]})
     return result
-
