@@ -1,0 +1,3 @@
+stage,seed,arm,planned_updates,checkpoint_updates,stage_decision,sample_chain,seen_pixels,optimizer_updates,optimization_seconds,leg,physical_batch,effective_batch,stopping_requested,last_invocation_peak_allocated_mib,last_invocation_peak_reserved_mib
+dense,seed1,A0,12000,12000,PARTIAL PASS,aa59cd92b43e98dc095193ecd251127ead3b9fc4e873f0ab026bb0084b3d0746,10391552000,12000,1251.645445996135,1,1,1,False,265.99658203125,296.0
+dense,seed1,A1,12000,500,PARTIAL PASS,6fd6a2a9079f11f466c2de932c554c9aa41205a6a3f22c66871d633afa39f7c5,229376000,875,107.26367501794812,0,1,1,False,5523.8271484375,6728.0

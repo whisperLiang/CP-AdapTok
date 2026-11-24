@@ -1,0 +1,82 @@
+{
+  "scope": "V3 training and orchestration; CPU unit line coverage only, excludes formal H100 activity",
+  "method": "Radon cyclomatic complexity and estimated CRAP; normalized AST-token similarity",
+  "functions": 147,
+  "over_crap_10": 75,
+  "highest": [
+    {
+      "function": "scripts/hla_tok/v3/quality.py:90:evaluate",
+      "cyclomatic": 22,
+      "coverage": 0.03225806451612903,
+      "crap_estimate": 460.656
+    },
+    {
+      "function": "scripts/hla_tok/v3/downstream.py:265:progressive_trials",
+      "cyclomatic": 20,
+      "coverage": 0.02631578947368421,
+      "crap_estimate": 389.245
+    },
+    {
+      "function": "scripts/hla_tok/v3/training.py:225:execute",
+      "cyclomatic": 19,
+      "coverage": 0.02127659574468085,
+      "crap_estimate": 357.444
+    },
+    {
+      "function": "scripts/hla_tok/v3/report.py:111:_verdicts",
+      "cyclomatic": 15,
+      "coverage": 0.0,
+      "crap_estimate": 240.0
+    },
+    {
+      "function": "scripts/hla_tok/v3/downstream.py:200:quantized_trials",
+      "cyclomatic": 15,
+      "coverage": 0.030303030303030304,
+      "crap_estimate": 220.159
+    },
+    {
+      "function": "scripts/hla_tok/v3/report.py:227:report",
+      "cyclomatic": 13,
+      "coverage": 0.0,
+      "crap_estimate": 182.0
+    },
+    {
+      "function": "scripts/hla_tok/v3/report.py:39:metric_rows",
+      "cyclomatic": 12,
+      "coverage": 0.0,
+      "crap_estimate": 156.0
+    },
+    {
+      "function": "scripts/hla_tok/v3/report.py:199:_answers",
+      "cyclomatic": 12,
+      "coverage": 0.0,
+      "crap_estimate": 156.0
+    },
+    {
+      "function": "scripts/hla_tok/v3/run.py:88:_inference",
+      "cyclomatic": 12,
+      "coverage": 0.0,
+      "crap_estimate": 156.0
+    },
+    {
+      "function": "scripts/hla_tok/v3/downstream.py:139:continuous_trials",
+      "cyclomatic": 13,
+      "coverage": 0.0625,
+      "crap_estimate": 152.252
+    },
+    {
+      "function": "scripts/hla_tok/v3/training.py:193:_update_span",
+      "cyclomatic": 12,
+      "coverage": 0.03333333333333333,
+      "crap_estimate": 142.075
+    },
+    {
+      "function": "scripts/hla_tok/v3/figures.py:64:_rate",
+      "cyclomatic": 11,
+      "coverage": 0.0,
+      "crap_estimate": 132.0
+    }
+  ],
+  "candidate_duplicates": [],
+  "all_functions_below_crap_10": false
+}

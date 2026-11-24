@@ -29,7 +29,8 @@ def progress(config):
             info = json_at(path)
             latest = _get(path.parent / "latest.json", {})
             selected = _get(state_of(stage, int(seed.removeprefix("seed"))), {})
-            counters = {key: value for key, value in info.items() if not isinstance(value, dict)}
+            counters = {(f"last_invocation_{key}" if key.startswith("peak_") else key): value
+                        for key, value in info.items() if not isinstance(value, dict)}
             rows.append({"stage": stage, "seed": seed, "arm": arm, "planned_updates": terminal_step(config, stage),
                          "checkpoint_updates": latest.get("step", 0),
                          "stage_decision": selected.get("status", "PARTIAL PASS"), **counters})
@@ -182,6 +183,12 @@ def _render(acceptance, training, metrics, audit):
     for (_, scope), row in latest.items():
         lines.append(f"- {row['arm']} 第 {row['step']:,} 步，{row['frames']} 帧 "
                      f"{'完整 Validation' if scope == 'full' else '趋势诊断'}：{_metric_string(row)}。")
+    benchmark = OUTPUT / "benchmark" / "A0_step12000" / "timings.csv"
+    if benchmark.is_file():
+        timing, = (row for row in csv_at(benchmark) if row["precision"] == "bf16")
+        lines.append(f"- A0 终点 H100 BF16 稠密前向：{float(timing['fps']):.2f} FPS，"
+                     f"P95 {float(timing['p95_ms']):.3f} ms，峰值分配 {float(timing['peak_allocated_mib']):.0f} MiB。"
+                     " 此处没有 Token、码率或网络流水线。")
     replay = _get(OUTPUT / "baseline" / "replay.json", {})
     if replay:
         lines.extend(["", "## 历史复现与准入边界", "",
@@ -203,10 +210,11 @@ def _answers(latest, acceptance):
     fixed = stages["C_seed1"]
     progressive = stages["D_seed1"]
     perf = progressive.get("performance") or fixed.get("performance")
+    dense_pass = any(record["quality_status"] == "PASS" for record in acceptance["completed_dense_arms"].values())
     answers = [
         f"原生稠密可恢复性：{measured or '没有完成 V3 全帧评价'}；以 Phase A 终点裁决为准。",
-        "V2 感知质量不足是否解决：" + ("稠密阶段已达标；连续/离散结果单独裁决。" if
-                                     stages["A_seed1"]["status"] == "PASS" else "尚不能由中途稠密结果裁决。"),
+        "V2 感知质量不足是否解决：" + ("端到端稠密臂已有达标终点；这不能证明连续或离散 Token 也已达标。" if
+                                     dense_pass else "尚无达到质量门槛的稠密终点。"),
         "连续 Token 损失：" + (_metric_string(stages["B_seed1"]["observed"]) if "observed" in stages["B_seed1"]
                                else "尚无匹配的 B0 全帧读数。"),
         "是否需要 ARD：未启用；只有 B0 的真实失配与成对 Local Decoder 诊断能够触发。",

@@ -1,0 +1,367 @@
+{
+  "status": "PARTIAL PASS",
+  "stages": {
+    "A_seed1": {
+      "status": "PARTIAL PASS",
+      "reason": "\u6b63\u5f0f\u8bad\u7ec3\u672a\u5b8c\u6210\uff0c\u4e0d\u7ed9\u51fa\u8d28\u91cf\u51c6\u5165\u7ed3\u8bba"
+    },
+    "B_seed1": {
+      "status": "BLOCKED",
+      "reason": "\u524d\u7f6e\u9636\u6bb5\u672a\u53d6\u5f97 PASS"
+    },
+    "C_seed1": {
+      "status": "BLOCKED",
+      "reason": "\u524d\u7f6e\u9636\u6bb5\u672a\u53d6\u5f97 PASS"
+    },
+    "D_seed1": {
+      "status": "BLOCKED",
+      "reason": "\u524d\u7f6e\u9636\u6bb5\u672a\u53d6\u5f97 PASS"
+    },
+    "A_seed2": {
+      "status": "BLOCKED",
+      "reason": "\u524d\u7f6e\u9636\u6bb5\u672a\u53d6\u5f97 PASS"
+    },
+    "B_seed2": {
+      "status": "BLOCKED",
+      "reason": "\u524d\u7f6e\u9636\u6bb5\u672a\u53d6\u5f97 PASS"
+    },
+    "C_seed2": {
+      "status": "BLOCKED",
+      "reason": "\u524d\u7f6e\u9636\u6bb5\u672a\u53d6\u5f97 PASS"
+    },
+    "D_seed2": {
+      "status": "BLOCKED",
+      "reason": "\u524d\u7f6e\u9636\u6bb5\u672a\u53d6\u5f97 PASS"
+    }
+  },
+  "v2_d2": "FAIL",
+  "test_status": "BLOCKED",
+  "checkpoint_freeze": null,
+  "tests": {
+    "cpu": {
+      "passed": 217,
+      "failed": 0,
+      "skipped": 0
+    },
+    "cuda": {
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "strict_reference": {
+    "status": "PASS",
+    "precisions": {
+      "fp32": {
+        "strict_budgets": [
+          1,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          267,
+          268,
+          269,
+          270,
+          271,
+          272,
+          273,
+          4096,
+          4317,
+          4318,
+          4319,
+          4320,
+          4321,
+          4322,
+          4323,
+          6144,
+          8192,
+          8637,
+          8638,
+          8639,
+          8640,
+          8641,
+          8642,
+          8643,
+          12288,
+          12957,
+          12958,
+          12959,
+          12960,
+          12961,
+          12962,
+          12963,
+          16320,
+          17277,
+          17278,
+          17279,
+          17280,
+          17281,
+          17282,
+          17283,
+          24512,
+          32640,
+          65280,
+          69113,
+          69114,
+          69115,
+          69116,
+          69117,
+          69118,
+          69119
+        ],
+        "nonpresets": 50,
+        "rate": {
+          "total_bytes": 26520,
+          "padding_bits": 0,
+          "token_per_frame": 16320.0,
+          "actual_bpp": 0.10231481481481482,
+          "rate_basis": "actual_fixed13_payload"
+        }
+      },
+      "bf16": {
+        "strict_budgets": [
+          1,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          267,
+          268,
+          269,
+          270,
+          271,
+          272,
+          273,
+          4096,
+          4317,
+          4318,
+          4319,
+          4320,
+          4321,
+          4322,
+          4323,
+          6144,
+          8192,
+          8637,
+          8638,
+          8639,
+          8640,
+          8641,
+          8642,
+          8643,
+          12288,
+          12957,
+          12958,
+          12959,
+          12960,
+          12961,
+          12962,
+          12963,
+          16320,
+          17277,
+          17278,
+          17279,
+          17280,
+          17281,
+          17282,
+          17283,
+          24512,
+          32640,
+          65280,
+          69113,
+          69114,
+          69115,
+          69116,
+          69117,
+          69118,
+          69119
+        ],
+        "nonpresets": 50,
+        "rate": {
+          "total_bytes": 26520,
+          "padding_bits": 0,
+          "token_per_frame": 16320.0,
+          "actual_bpp": 0.10231481481481482,
+          "rate_basis": "actual_fixed13_payload"
+        }
+      }
+    },
+    "anchor_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+    "tests": {
+      "T1": "PASS",
+      "T2": "PASS",
+      "T3": "PASS",
+      "T4": "PASS",
+      "T5": "PASS",
+      "T6": "PASS",
+      "T7": "PASS",
+      "T8": "PASS",
+      "T9": "PASS",
+      "T10": "PASS",
+      "T11": "PASS",
+      "T12": "PASS",
+      "T13": "PASS",
+      "T14": "PASS",
+      "T19": "PASS",
+      "T20": "PASS",
+      "T15": "NOT_APPLICABLE",
+      "T16": "NOT_APPLICABLE"
+    }
+  },
+  "mutations": {
+    "status": "PASS",
+    "observed": [
+      {
+        "mutation": "drop_spatial_bias",
+        "killed": true
+      },
+      {
+        "mutation": "scramble_anchors",
+        "killed": true
+      },
+      {
+        "mutation": "bidirectional_rank",
+        "killed": true
+      },
+      {
+        "mutation": "ignore_history",
+        "killed": true
+      },
+      {
+        "mutation": "inspect_suffix_storage",
+        "killed": true
+      },
+      {
+        "mutation": "read_encoder_in_receiver",
+        "killed": true
+      },
+      {
+        "mutation": "vq_lookup_bypass",
+        "killed": true
+      },
+      {
+        "mutation": "illegal_test_alias",
+        "killed": true
+      },
+      {
+        "mutation": "dense_sender_feature_in_receiver",
+        "killed": true
+      },
+      {
+        "mutation": "lpips_rgb_gradient_detach",
+        "killed": true
+      },
+      {
+        "mutation": "hidden_native_resize",
+        "killed": true
+      },
+      {
+        "mutation": "validation_as_training_source",
+        "killed": true
+      }
+    ],
+    "not_applicable": [
+      "ard_uses_suffix",
+      "ard_wrong_anchor_mapping"
+    ]
+  },
+  "ard": "NOT_APPLICABLE",
+  "adaptive_streaming_ready": false,
+  "snapshot_time_cst": "2026-11-25T01:53:32+08:00",
+  "pixel_reads": {
+    "train_pixel_reads": 12470,
+    "validation_pixel_reads": 1257,
+    "test_pixel_reads": 0
+  },
+  "completed_dense_arms": {
+    "A0 seed1": {
+      "quality_status": "PASS",
+      "step": 12000,
+      "metrics": {
+        "global_psnr": 31.756557999243494,
+        "lpips": 0.1003992914211476,
+        "dists": 0.067048706199931
+      }
+    }
+  },
+  "resume_check": {
+    "status": "PASS",
+    "actual_gpu_job": "hla-tok-v3-formal.service",
+    "checkpoint_step": 4012,
+    "data_cursor": 4012,
+    "checkpoint_sha256": "4bcea3ea12bfe9958418547b4c6576208795512c5257078f6c01262d2c79bcf8",
+    "saved_sample_chain": "b8e99dce0a371a1bf8e96608ccbb6673479605747a343a1583b16455ccf0f14a",
+    "saved_valid_pixels": 1051721728,
+    "optimizer_state_tensors": 124,
+    "scheduler_last_epoch": 4012,
+    "first_resumed_update": 4013,
+    "first_resumed_sample_matches_frozen_plan": true,
+    "first_resumed_sample_chain": "96bf2e434c37303f4626b5a461bfe66e361d078ca06e71c47131a05b1d8411f6",
+    "identical_preliminary_trajectory_updates_ignoring_walltime": 0,
+    "archived_revalidation": {
+      "same_planned_updates": 429,
+      "bitwise_forward_step1": true,
+      "gradient_norm_abs_delta_step1": 2.777576446533203e-05,
+      "note": "Archived setup and final training were separate CUDA process launches; not a bitwise float reproducibility claim."
+    },
+    "native_resume": {
+      "checkpoint_step": 9251,
+      "data_cursor": 9251,
+      "first_resumed_step": 9252,
+      "saved_native_pixel_count": 4691225600,
+      "checkpoint_sha256": "5231b6301857ac550f027ba2d0921082ab4548ad0021b1e8d7d817f152ec51f2",
+      "scheduler_last_epoch_in_native_leg": 1251,
+      "sample_matches_original_plan": true
+    }
+  },
+  "old_assets": {
+    "status": "PASS",
+    "base": "50bd9cc6f28c6cde0e65f82723af2e7b11e48bd9",
+    "verified_asset_paths": 938,
+    "v2_head": "50bd9cc6f28c6cde0e65f82723af2e7b11e48bd9",
+    "v2_worktree_clean": true,
+    "v2_d2": "FAIL",
+    "metric_weight_sha256": {
+      "imagenet_alexnet": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02",
+      "imagenet_vgg16": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0",
+      "lpips_alex_v01": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+      "dists": "f5e65c96230b7f6ca995691647d482237e4cab8a50c5c4a5784f219ef0748218",
+      "lpips_vgg_v01": "a78928a0af1e5f0fcb1f3b9e8f8c3a2a5a3de244d830ad5c1feddc79b8432868"
+    },
+    "protocol_sha256": "8d6ac1d7b7b702189e4b7a4fea97def37841bf2ab39e97b302c40bf2645ae8b0",
+    "cohort_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+    "manifest_sha256": {
+      "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
+      "validation": "8cca166ca7d1f6faf45cd6660b7074657164d2afa2fd14dec92d76f0cee25405",
+      "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
+    },
+    "hardware": {
+      "gpu": "NVIDIA H100 PCIe",
+      "cuda": "13.0",
+      "driver": "580.159.03",
+      "torch": "2.9.1+cu130",
+      "tf32_matmul": false,
+      "tf32_cudnn": false,
+      "attention": "PyTorch SDPA dispatcher",
+      "compile": "eager",
+      "total_memory_bytes": 85017493504
+    },
+    "dependencies": {
+      "torch": "2.9.1+cu130",
+      "torchvision": "0.24.1+cu130",
+      "numpy": "2.5.4",
+      "PyYAML": "6.0.3",
+      "Pillow": "13.0.0",
+      "lpips": "0.1.4",
+      "DISTS-pytorch": "0.1",
+      "pytorch-msssim": "1.0.0"
+    }
+  }
+}

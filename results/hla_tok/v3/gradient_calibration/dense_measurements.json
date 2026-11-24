@@ -1,0 +1,3164 @@
+{
+  "initial_weights": {
+    "rgb_l1": 1.0,
+    "rgb_mse": 0.5,
+    "lpips_vgg": 0.5,
+    "dists": 0.2,
+    "vq_codebook": 1.0,
+    "vq_commitment": 0.25,
+    "lpips_alex": 0.5
+  },
+  "weights": {
+    "rgb_l1": 1.0,
+    "rgb_mse": 0.5,
+    "lpips_vgg": 0.125,
+    "dists": 0.05,
+    "vq_codebook": 1.0,
+    "vq_commitment": 0.25,
+    "lpips_alex": 0.125
+  },
+  "samples": [
+    {
+      "sample": {
+        "video": "REDS:train:089",
+        "frame": 88,
+        "crop_xyhw": [
+          6,
+          137,
+          512,
+          512
+        ],
+        "source_sha256": "b930cd8b62d401a301806929c1324f84d2499218853613faa79db89da6e9ec2c",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          39,
+          128
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            81,
+            81
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.2441403865814209,
+        "rgb_mse": 0.08997827768325806,
+        "lpips_alex": 0.9508486986160278,
+        "lpips_vgg": 0.8065630197525024,
+        "dists": 0.5904613137245178
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.2441403865814209,
+        "rgb_mse": 0.04498913884162903,
+        "lpips_alex": 0.4754243493080139,
+        "lpips_vgg": 0.4032815098762512,
+        "dists": 0.11809226125478745
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.0006765007341474564,
+        "lpips_alex": 0.1309080744980689,
+        "lpips_vgg": 0.08832232629470191,
+        "dists": 0.07995370759503852
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8138994164912448,
+        "rgb_l1:lpips_alex": 0.004327170171438914,
+        "rgb_l1:lpips_vgg": 0.022198782774984115,
+        "rgb_l1:dists": 0.0041197754155078955,
+        "rgb_mse:lpips_alex": 0.0032601288840415437,
+        "rgb_mse:lpips_vgg": 0.019885774879918224,
+        "rgb_mse:dists": 0.0015149538606517498,
+        "lpips_alex:lpips_vgg": 0.019915427950552077,
+        "lpips_alex:dists": 0.03381103807146647,
+        "lpips_vgg:dists": 0.11459857563250885
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 0.5307658314704895,
+          "rgb_decoder": 0.41937583684921265
+        },
+        "rgb_mse": {
+          "encoder": 0.3273390531539917,
+          "rgb_decoder": 0.310811311006546
+        },
+        "lpips_alex": {
+          "encoder": 1.3460359573364258,
+          "rgb_decoder": 2.808828115463257
+        },
+        "lpips_vgg": {
+          "encoder": 0.6126106381416321,
+          "rgb_decoder": 1.3359404802322388
+        },
+        "dists": {
+          "encoder": 0.4381190538406372,
+          "rgb_decoder": 1.0544945001602173
+        }
+      },
+      "pixel_gradient_square": 2.0068603134859586e-06,
+      "perceptual_gradient_square": 0.006837904918938875,
+      "gradient_l2_before_clip": 1.0812695026397705,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006728722946718335,
+        "rgb_decoder": 0.0009631991269998252
+      },
+      "weighted_final": {
+        "rgb_l1": 0.2441403865814209,
+        "rgb_mse": 0.04498913884162903,
+        "lpips_alex": 0.11885608732700348,
+        "lpips_vgg": 0.1008203774690628,
+        "dists": 0.02952306531369686
+      }
+    },
+    {
+      "sample": {
+        "video": "REDS:train:164",
+        "frame": 37,
+        "crop_xyhw": [
+          271,
+          96,
+          512,
+          512
+        ],
+        "source_sha256": "1db90cc6e171e3d5c826e0273057c12ae78c0a2b55968e169bc0180bbef85cc9",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          247,
+          67
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            98,
+            152
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.28448280692100525,
+        "rgb_mse": 0.1268482506275177,
+        "lpips_alex": 0.8484530448913574,
+        "lpips_vgg": 0.7290545105934143,
+        "dists": 0.5560997724533081
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.28448280692100525,
+        "rgb_mse": 0.06342412531375885,
+        "lpips_alex": 0.4242265224456787,
+        "lpips_vgg": 0.36452725529670715,
+        "dists": 0.11121995747089386
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.0008032332191336178,
+        "lpips_alex": 0.13817010685644499,
+        "lpips_vgg": 0.07103927498100486,
+        "dists": 0.07991781994944558
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.798755263958929,
+        "rgb_l1:lpips_alex": 0.00986060213066387,
+        "rgb_l1:lpips_vgg": 0.01291059327660312,
+        "rgb_l1:dists": 0.002162734453117943,
+        "rgb_mse:lpips_alex": 0.0036154691894896684,
+        "rgb_mse:lpips_vgg": 0.009597699799081644,
+        "rgb_mse:dists": 0.0015455562049508848,
+        "lpips_alex:lpips_vgg": 0.015337663140185307,
+        "lpips_alex:dists": 0.020366933944722252,
+        "lpips_vgg:dists": 0.0520135164280788
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 0.8802542686462402,
+          "rgb_decoder": 0.7930940985679626
+        },
+        "rgb_mse": {
+          "encoder": 0.823543906211853,
+          "rgb_decoder": 0.720477283000946
+        },
+        "lpips_alex": {
+          "encoder": 0.9203197956085205,
+          "rgb_decoder": 2.4771347045898438
+        },
+        "lpips_vgg": {
+          "encoder": 0.4510419964790344,
+          "rgb_decoder": 0.831744372844696
+        },
+        "dists": {
+          "encoder": 0.5122576951980591,
+          "rgb_decoder": 1.0694036483764648
+        }
+      },
+      "pixel_gradient_square": 2.1563389509537956e-06,
+      "perceptual_gradient_square": 0.006469175685197115,
+      "gradient_l2_before_clip": 1.823412537574768,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006728511652909219,
+        "rgb_decoder": 0.0009631393477320671
+      },
+      "weighted_final": {
+        "rgb_l1": 0.28448280692100525,
+        "rgb_mse": 0.06342412531375885,
+        "lpips_alex": 0.10605663061141968,
+        "lpips_vgg": 0.09113181382417679,
+        "dists": 0.027804989367723465
+      }
+    },
+    {
+      "sample": {
+        "video": "REDS:train:024",
+        "frame": 55,
+        "crop_xyhw": [
+          574,
+          28,
+          512,
+          512
+        ],
+        "source_sha256": "3fabdf5956cbe56d5025d27e025464e2f315b2b230f721ac0052f4364e31bb63",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          97,
+          231
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            115,
+            223
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.4876248240470886,
+        "rgb_mse": 0.28049778938293457,
+        "lpips_alex": 0.9718073606491089,
+        "lpips_vgg": 0.7293866872787476,
+        "dists": 0.6009493470191956
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.4876248240470886,
+        "rgb_mse": 0.14024889469146729,
+        "lpips_alex": 0.48590368032455444,
+        "lpips_vgg": 0.3646933436393738,
+        "dists": 0.12018986791372299
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.0011944394381715338,
+        "lpips_alex": 0.16416491990039564,
+        "lpips_vgg": 0.06502998735502673,
+        "dists": 0.09615579420303408
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.9207061136640085,
+        "rgb_l1:lpips_alex": 0.0011055362177989864,
+        "rgb_l1:lpips_vgg": 0.0032143092345452316,
+        "rgb_l1:dists": 0.002008502539208939,
+        "rgb_mse:lpips_alex": 0.0007318439929877859,
+        "rgb_mse:lpips_vgg": 0.006094485581023277,
+        "rgb_mse:dists": 0.0016098413232401487,
+        "lpips_alex:lpips_vgg": 0.018349532455394956,
+        "lpips_alex:dists": 0.024274323116773088,
+        "lpips_vgg:dists": 0.04860817301332427
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 2.093301773071289,
+          "rgb_decoder": 1.4608135223388672
+        },
+        "rgb_mse": {
+          "encoder": 2.258570432662964,
+          "rgb_decoder": 1.663611650466919
+        },
+        "lpips_alex": {
+          "encoder": 1.592706561088562,
+          "rgb_decoder": 3.333908796310425
+        },
+        "lpips_vgg": {
+          "encoder": 0.3186890780925751,
+          "rgb_decoder": 0.7700551748275757
+        },
+        "dists": {
+          "encoder": 0.8376034498214722,
+          "rgb_decoder": 1.4540166854858398
+        }
+      },
+      "pixel_gradient_square": 2.868331421268522e-06,
+      "perceptual_gradient_square": 0.0083999652415514,
+      "gradient_l2_before_clip": 4.163356304168701,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006728079169988632,
+        "rgb_decoder": 0.0009630403947085142
+      },
+      "weighted_final": {
+        "rgb_l1": 0.4876248240470886,
+        "rgb_mse": 0.14024889469146729,
+        "lpips_alex": 0.12147592008113861,
+        "lpips_vgg": 0.09117333590984344,
+        "dists": 0.030047466978430748
+      }
+    },
+    {
+      "sample": {
+        "video": "REDS:train:114",
+        "frame": 69,
+        "crop_xyhw": [
+          112,
+          56,
+          512,
+          512
+        ],
+        "source_sha256": "3e9516a56601c61c8b90c587fb19307f838c5e6d60a0b8d7b519cd624ba8d327",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          109,
+          115
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            132,
+            37
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.3624340295791626,
+        "rgb_mse": 0.18337324261665344,
+        "lpips_alex": 0.9544256329536438,
+        "lpips_vgg": 0.7848943471908569,
+        "dists": 0.6371895670890808
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.3624340295791626,
+        "rgb_mse": 0.09168662130832672,
+        "lpips_alex": 0.4772128164768219,
+        "lpips_vgg": 0.39244717359542847,
+        "dists": 0.12743791937828064
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.0009657559437722263,
+        "lpips_alex": 0.15343908095467926,
+        "lpips_vgg": 0.062060836052989954,
+        "dists": 0.0733219348360133
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.846371464998814,
+        "rgb_l1:lpips_alex": 0.002573368968043503,
+        "rgb_l1:lpips_vgg": 0.0063824405599495265,
+        "rgb_l1:dists": -0.0005519184802233053,
+        "rgb_mse:lpips_alex": 0.003203214268552948,
+        "rgb_mse:lpips_vgg": 0.007636802150811001,
+        "rgb_mse:dists": 0.0009692795038260396,
+        "lpips_alex:lpips_vgg": 0.009371327773824831,
+        "lpips_alex:dists": 0.01624746977356058,
+        "lpips_vgg:dists": 0.005211776019300988
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.3958796262741089,
+          "rgb_decoder": 1.0847560167312622
+        },
+        "rgb_mse": {
+          "encoder": 1.3235688209533691,
+          "rgb_decoder": 1.0548367500305176
+        },
+        "lpips_alex": {
+          "encoder": 1.2960859537124634,
+          "rgb_decoder": 2.827136278152466
+        },
+        "lpips_vgg": {
+          "encoder": 0.20407956838607788,
+          "rgb_decoder": 0.6181356310844421
+        },
+        "dists": {
+          "encoder": 0.5680909752845764,
+          "rgb_decoder": 1.0365550518035889
+        }
+      },
+      "pixel_gradient_square": 2.426454557280522e-06,
+      "perceptual_gradient_square": 0.007149739656597376,
+      "gradient_l2_before_clip": 2.7870051860809326,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006728421431034803,
+        "rgb_decoder": 0.0009630893473513424
+      },
+      "weighted_final": {
+        "rgb_l1": 0.3624340295791626,
+        "rgb_mse": 0.09168662130832672,
+        "lpips_alex": 0.11930320411920547,
+        "lpips_vgg": 0.09811179339885712,
+        "dists": 0.03185947984457016
+      }
+    },
+    {
+      "sample": {
+        "video": "REDS:train:011",
+        "frame": 25,
+        "crop_xyhw": [
+          334,
+          47,
+          512,
+          512
+        ],
+        "source_sha256": "49808034494d09c53c6ec06e2ba09b76d083e41a13d36aee807ba3da997d69dd",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          234,
+          95
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            149,
+            108
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.46679502725601196,
+        "rgb_mse": 0.26001298427581787,
+        "lpips_alex": 0.9110737442970276,
+        "lpips_vgg": 0.7444603443145752,
+        "dists": 0.634355366230011
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.46679502725601196,
+        "rgb_mse": 0.13000649213790894,
+        "lpips_alex": 0.4555368721485138,
+        "lpips_vgg": 0.3722301721572876,
+        "dists": 0.12687107920646667
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.0011499975768924956,
+        "lpips_alex": 0.14389062357585738,
+        "lpips_vgg": 0.05804754222804715,
+        "dists": 0.07612609098659591
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.9154374539368062,
+        "rgb_l1:lpips_alex": 0.0008500938546816156,
+        "rgb_l1:lpips_vgg": 0.00236682035428195,
+        "rgb_l1:dists": 0.0015737907041776882,
+        "rgb_mse:lpips_alex": 0.0008424235105895979,
+        "rgb_mse:lpips_vgg": 0.006543584612698032,
+        "rgb_mse:dists": 0.0025157506108064195,
+        "lpips_alex:lpips_vgg": 0.006911637766998923,
+        "lpips_alex:dists": 0.021089281914261775,
+        "lpips_vgg:dists": 0.004019308054202827
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 2.052205801010132,
+          "rgb_decoder": 1.5843034982681274
+        },
+        "rgb_mse": {
+          "encoder": 2.0526134967803955,
+          "rgb_decoder": 1.5827910900115967
+        },
+        "lpips_alex": {
+          "encoder": 1.2363840341567993,
+          "rgb_decoder": 2.5332748889923096
+        },
+        "lpips_vgg": {
+          "encoder": 0.1422918438911438,
+          "rgb_decoder": 0.5621832609176636
+        },
+        "dists": {
+          "encoder": 0.707466721534729,
+          "rgb_decoder": 1.1291018724441528
+        }
+      },
+      "pixel_gradient_square": 2.7893106562260073e-06,
+      "perceptual_gradient_square": 0.006328932475298643,
+      "gradient_l2_before_clip": 4.045302867889404,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006728300359100103,
+        "rgb_decoder": 0.0009630300919525325
+      },
+      "weighted_final": {
+        "rgb_l1": 0.46679502725601196,
+        "rgb_mse": 0.13000649213790894,
+        "lpips_alex": 0.11388421803712845,
+        "lpips_vgg": 0.0930575430393219,
+        "dists": 0.03171776980161667
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:dance-jump",
+        "frame": 26,
+        "crop_xyhw": [
+          675,
+          445,
+          512,
+          512
+        ],
+        "source_sha256": "ec27c6bd2eb5ea42c43c81c9a704a2032a75cabe474911231912d228511ed745",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          199,
+          177
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            166,
+            179
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.17036931216716766,
+        "rgb_mse": 0.04338451474905014,
+        "lpips_alex": 0.8997081518173218,
+        "lpips_vgg": 0.7261030077934265,
+        "dists": 0.5167772769927979
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.17036931216716766,
+        "rgb_mse": 0.02169225737452507,
+        "lpips_alex": 0.4498540759086609,
+        "lpips_vgg": 0.36305150389671326,
+        "dists": 0.10335545986890793
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.00046975001010398965,
+        "lpips_alex": 0.15264927354213997,
+        "lpips_vgg": 0.0752329051190084,
+        "dists": 0.10819970204692192
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.817944720120202,
+        "rgb_l1:lpips_alex": 0.004237071771058597,
+        "rgb_l1:lpips_vgg": 0.010245160274609038,
+        "rgb_l1:dists": 0.0016074316497848877,
+        "rgb_mse:lpips_alex": 0.005609431411321433,
+        "rgb_mse:lpips_vgg": 0.011637887056025068,
+        "rgb_mse:dists": 0.0013802415576734668,
+        "lpips_alex:lpips_vgg": 0.026204125473916148,
+        "lpips_alex:dists": 0.03685767990474359,
+        "lpips_vgg:dists": 0.034974917538516594
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 0.667712926864624,
+          "rgb_decoder": 0.44128209352493286
+        },
+        "rgb_mse": {
+          "encoder": 0.3236187994480133,
+          "rgb_decoder": 0.21938718855381012
+        },
+        "lpips_alex": {
+          "encoder": 1.2999123334884644,
+          "rgb_decoder": 3.014785051345825
+        },
+        "lpips_vgg": {
+          "encoder": 0.38138285279273987,
+          "rgb_decoder": 0.7430907487869263
+        },
+        "dists": {
+          "encoder": 0.5965906977653503,
+          "rgb_decoder": 1.300478458404541
+        }
+      },
+      "pixel_gradient_square": 1.7600036699150223e-06,
+      "perceptual_gradient_square": 0.00803789496421814,
+      "gradient_l2_before_clip": 1.1511354446411133,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006728808511979878,
+        "rgb_decoder": 0.0009631832363083959
+      },
+      "weighted_final": {
+        "rgb_l1": 0.17036931216716766,
+        "rgb_mse": 0.02169225737452507,
+        "lpips_alex": 0.11246351897716522,
+        "lpips_vgg": 0.09076287597417831,
+        "dists": 0.025838864967226982
+      }
+    },
+    {
+      "sample": {
+        "video": "REDS:train:048",
+        "frame": 93,
+        "crop_xyhw": [
+          446,
+          81,
+          512,
+          512
+        ],
+        "source_sha256": "c6ccb467654c298b2549401495d3387333228f5365282369f6552a284fa63c3d",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          3,
+          69
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            183,
+            250
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.32569271326065063,
+        "rgb_mse": 0.15027588605880737,
+        "lpips_alex": 0.9322066903114319,
+        "lpips_vgg": 0.7494012713432312,
+        "dists": 0.6502045392990112
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.32569271326065063,
+        "rgb_mse": 0.07513794302940369,
+        "lpips_alex": 0.46610334515571594,
+        "lpips_vgg": 0.3747006356716156,
+        "dists": 0.13004091382026672
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.000874266983235156,
+        "lpips_alex": 0.1444348194000671,
+        "lpips_vgg": 0.051306198268945155,
+        "dists": 0.05309280250769262
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8401625253711847,
+        "rgb_l1:lpips_alex": 0.002787488081772432,
+        "rgb_l1:lpips_vgg": 0.009807995027218895,
+        "rgb_l1:dists": 0.001360491744601492,
+        "rgb_mse:lpips_alex": 0.0019470264922440842,
+        "rgb_mse:lpips_vgg": 0.010442230583831725,
+        "rgb_mse:dists": 0.0013326172880834522,
+        "lpips_alex:lpips_vgg": 0.0187081991813073,
+        "lpips_alex:dists": 0.0276489942676566,
+        "lpips_vgg:dists": 0.01817085566209745
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.0432156324386597,
+          "rgb_decoder": 0.7911522388458252
+        },
+        "rgb_mse": {
+          "encoder": 0.8898297548294067,
+          "rgb_decoder": 0.7253347039222717
+        },
+        "lpips_alex": {
+          "encoder": 0.8104716539382935,
+          "rgb_decoder": 2.189833164215088
+        },
+        "lpips_vgg": {
+          "encoder": 0.20955504477024078,
+          "rgb_decoder": 0.5294448733329773
+        },
+        "dists": {
+          "encoder": 0.37130817770957947,
+          "rgb_decoder": 0.6702039241790771
+        }
+      },
+      "pixel_gradient_square": 2.2909309791430132e-06,
+      "perceptual_gradient_square": 0.006107811350375414,
+      "gradient_l2_before_clip": 1.9350895881652832,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006728643784299493,
+        "rgb_decoder": 0.0009631273569539189
+      },
+      "weighted_final": {
+        "rgb_l1": 0.32569271326065063,
+        "rgb_mse": 0.07513794302940369,
+        "lpips_alex": 0.11652583628892899,
+        "lpips_vgg": 0.0936751589179039,
+        "dists": 0.03251022845506668
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:flamingo",
+        "frame": 7,
+        "crop_xyhw": [
+          312,
+          114,
+          512,
+          512
+        ],
+        "source_sha256": "54bdfe337447e43ba451870f4489e6b56b57e9f889a160012b1a5fb380fb435e",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          108,
+          41
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            200,
+            64
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.38811346888542175,
+        "rgb_mse": 0.20341083407402039,
+        "lpips_alex": 0.9186643362045288,
+        "lpips_vgg": 0.7302795648574829,
+        "dists": 0.5503678321838379
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.38811346888542175,
+        "rgb_mse": 0.10170541703701019,
+        "lpips_alex": 0.4593321681022644,
+        "lpips_vgg": 0.36513978242874146,
+        "dists": 0.11007356643676758
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.0010171533451728554,
+        "lpips_alex": 0.15481517151747895,
+        "lpips_vgg": 0.06259042561230904,
+        "dists": 0.08664371201628493
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8605412590121265,
+        "rgb_l1:lpips_alex": 0.004137672595882449,
+        "rgb_l1:lpips_vgg": 0.006683911737499258,
+        "rgb_l1:dists": 0.0025775493303885756,
+        "rgb_mse:lpips_alex": 0.0027132591750162406,
+        "rgb_mse:lpips_vgg": 0.007225590395998588,
+        "rgb_mse:dists": 0.0017496955152519205,
+        "lpips_alex:lpips_vgg": 0.010446585228248376,
+        "lpips_alex:dists": 0.031903757898426394,
+        "lpips_vgg:dists": 0.026128711207954083
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.3323982954025269,
+          "rgb_decoder": 0.9640213847160339
+        },
+        "rgb_mse": {
+          "encoder": 1.2841013669967651,
+          "rgb_decoder": 1.0069748163223267
+        },
+        "lpips_alex": {
+          "encoder": 1.0336138010025024,
+          "rgb_decoder": 2.524996280670166
+        },
+        "lpips_vgg": {
+          "encoder": 0.21418927609920502,
+          "rgb_decoder": 0.5164853930473328
+        },
+        "dists": {
+          "encoder": 0.5464611649513245,
+          "rgb_decoder": 1.190061092376709
+        }
+      },
+      "pixel_gradient_square": 2.517239636290469e-06,
+      "perceptual_gradient_square": 0.007436152081936598,
+      "gradient_l2_before_clip": 2.546485662460327,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006728576263412833,
+        "rgb_decoder": 0.0009631045977585018
+      },
+      "weighted_final": {
+        "rgb_l1": 0.38811346888542175,
+        "rgb_mse": 0.10170541703701019,
+        "lpips_alex": 0.1148330420255661,
+        "lpips_vgg": 0.09128494560718536,
+        "dists": 0.027518391609191895
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:night-race",
+        "frame": 35,
+        "crop_xyhw": [
+          2999,
+          835,
+          512,
+          512
+        ],
+        "source_sha256": "e646b4cd8f57bcfa2c04fbd81635b952a81bf59b86344542c2646774584932fb",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          246,
+          187
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            217,
+            135
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.6055434942245483,
+        "rgb_mse": 0.37580955028533936,
+        "lpips_alex": 0.8730974793434143,
+        "lpips_vgg": 0.8007493019104004,
+        "dists": 0.4953632950782776
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.6055434942245483,
+        "rgb_mse": 0.18790477514266968,
+        "lpips_alex": 0.43654873967170715,
+        "lpips_vgg": 0.4003746509552002,
+        "dists": 0.0990726575255394
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.0013825578261689822,
+        "lpips_alex": 0.19381975025933615,
+        "lpips_vgg": 0.11018118745158413,
+        "dists": 0.16681654655540862
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.9877827320309581,
+        "rgb_l1:lpips_alex": 0.002863803356454946,
+        "rgb_l1:lpips_vgg": 0.00293883636391022,
+        "rgb_l1:dists": 0.0005406573884128951,
+        "rgb_mse:lpips_alex": 0.004261452910609229,
+        "rgb_mse:lpips_vgg": 0.005274968933669253,
+        "rgb_mse:dists": 0.0013785035789273467,
+        "lpips_alex:lpips_vgg": 0.016072436324783015,
+        "lpips_alex:dists": -0.012351293267128083,
+        "lpips_vgg:dists": 0.06371802795913636
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 2.535508632659912,
+          "rgb_decoder": 2.13053035736084
+        },
+        "rgb_mse": {
+          "encoder": 3.0134994983673096,
+          "rgb_decoder": 2.522463321685791
+        },
+        "lpips_alex": {
+          "encoder": 1.4234517812728882,
+          "rgb_decoder": 5.602503299713135
+        },
+        "lpips_vgg": {
+          "encoder": 0.7527573704719543,
+          "rgb_decoder": 3.0650815963745117
+        },
+        "dists": {
+          "encoder": 1.1224734783172607,
+          "rgb_decoder": 2.3135716915130615
+        }
+      },
+      "pixel_gradient_square": 3.2894090509216767e-06,
+      "perceptual_gradient_square": 0.013865582644939423,
+      "gradient_l2_before_clip": 5.34963846206665,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006727095460519195,
+        "rgb_decoder": 0.0009630146087147295
+      },
+      "weighted_final": {
+        "rgb_l1": 0.6055434942245483,
+        "rgb_mse": 0.18790477514266968,
+        "lpips_alex": 0.10913718491792679,
+        "lpips_vgg": 0.10009366273880005,
+        "dists": 0.02476816438138485
+      }
+    },
+    {
+      "sample": {
+        "video": "REDS:train:198",
+        "frame": 54,
+        "crop_xyhw": [
+          65,
+          127,
+          512,
+          512
+        ],
+        "source_sha256": "ab5ff431cf955217f99149773cf38130b051874ae2bd7bcef9008e4169504843",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          111,
+          40
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            234,
+            206
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.3445257842540741,
+        "rgb_mse": 0.15927712619304657,
+        "lpips_alex": 0.8970687985420227,
+        "lpips_vgg": 0.7032202482223511,
+        "dists": 0.5698221921920776
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.3445257842540741,
+        "rgb_mse": 0.07963856309652328,
+        "lpips_alex": 0.44853439927101135,
+        "lpips_vgg": 0.35161012411117554,
+        "dists": 0.11396443843841553
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.0009000696400947524,
+        "lpips_alex": 0.13209873427316013,
+        "lpips_vgg": 0.05937653825047217,
+        "dists": 0.09275537616193974
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8632666823843559,
+        "rgb_l1:lpips_alex": 0.0006787900917663275,
+        "rgb_l1:lpips_vgg": 0.00617533410139932,
+        "rgb_l1:dists": 0.0017605780260620115,
+        "rgb_mse:lpips_alex": 0.0013137609289203646,
+        "rgb_mse:lpips_vgg": 0.007714565345410586,
+        "rgb_mse:dists": 0.0007740474423317616,
+        "lpips_alex:lpips_vgg": 0.025441518494679245,
+        "lpips_alex:dists": 0.026950231154579042,
+        "lpips_vgg:dists": 0.08768135000970657
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.3374158143997192,
+          "rgb_decoder": 0.7942526936531067
+        },
+        "rgb_mse": {
+          "encoder": 1.053313970565796,
+          "rgb_decoder": 0.7023661732673645
+        },
+        "lpips_alex": {
+          "encoder": 0.8526897430419922,
+          "rgb_decoder": 1.9889105558395386
+        },
+        "lpips_vgg": {
+          "encoder": 0.2803589105606079,
+          "rgb_decoder": 0.5069020986557007
+        },
+        "dists": {
+          "encoder": 0.5745201706886292,
+          "rgb_decoder": 1.161598563194275
+        }
+      },
+      "pixel_gradient_square": 2.3502716430812143e-06,
+      "perceptual_gradient_square": 0.0058504557237029076,
+      "gradient_l2_before_clip": 2.2492830753326416,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006728644948452711,
+        "rgb_decoder": 0.0009631026769056916
+      },
+      "weighted_final": {
+        "rgb_l1": 0.3445257842540741,
+        "rgb_mse": 0.07963856309652328,
+        "lpips_alex": 0.11213359981775284,
+        "lpips_vgg": 0.08790253102779388,
+        "dists": 0.028491109609603882
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:color-run",
+        "frame": 60,
+        "crop_xyhw": [
+          92,
+          125,
+          512,
+          512
+        ],
+        "source_sha256": "69d07756c758e69d39a8489c9bcc89df932b5b9cb8b0b83da7570483b251e340",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          154,
+          41
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            251,
+            20
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.4952257573604584,
+        "rgb_mse": 0.290556401014328,
+        "lpips_alex": 1.0211302042007446,
+        "lpips_vgg": 0.979931116104126,
+        "dists": 0.5779684782028198
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.4952257573604584,
+        "rgb_mse": 0.145278200507164,
+        "lpips_alex": 0.5105651021003723,
+        "lpips_vgg": 0.489965558052063,
+        "dists": 0.11559369415044785
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.0012156670406557968,
+        "lpips_alex": 0.10269670176446015,
+        "lpips_vgg": 0.07363427120251288,
+        "dists": 0.10576858551051146
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.9187301675257233,
+        "rgb_l1:lpips_alex": 0.0037730805911867695,
+        "rgb_l1:lpips_vgg": 0.0013666701822138661,
+        "rgb_l1:dists": 0.0007515791686070637,
+        "rgb_mse:lpips_alex": 0.005421999993115398,
+        "rgb_mse:lpips_vgg": 0.006222117298560793,
+        "rgb_mse:dists": 0.0009565793493450859,
+        "lpips_alex:lpips_vgg": 0.014972962066972484,
+        "lpips_alex:dists": 0.008280564527414101,
+        "lpips_vgg:dists": 0.06446786617382874
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 2.524595022201538,
+          "rgb_decoder": 2.0069758892059326
+        },
+        "rgb_mse": {
+          "encoder": 2.920252799987793,
+          "rgb_decoder": 2.29392671585083
+        },
+        "lpips_alex": {
+          "encoder": 1.7943159341812134,
+          "rgb_decoder": 2.9461476802825928
+        },
+        "lpips_vgg": {
+          "encoder": 0.6131747364997864,
+          "rgb_decoder": 1.719337821006775
+        },
+        "dists": {
+          "encoder": 0.6742823719978333,
+          "rgb_decoder": 0.991640031337738
+        }
+      },
+      "pixel_gradient_square": 2.9004515909036854e-06,
+      "perceptual_gradient_square": 0.004614653997123241,
+      "gradient_l2_before_clip": 5.27860164642334,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006727793370373547,
+        "rgb_decoder": 0.0009629896958358586
+      },
+      "weighted_final": {
+        "rgb_l1": 0.4952257573604584,
+        "rgb_mse": 0.145278200507164,
+        "lpips_alex": 0.12764127552509308,
+        "lpips_vgg": 0.12249138951301575,
+        "dists": 0.02889842353761196
+      }
+    },
+    {
+      "sample": {
+        "video": "REDS:train:156",
+        "frame": 6,
+        "crop_xyhw": [
+          368,
+          140,
+          512,
+          512
+        ],
+        "source_sha256": "782b173746807b3d7a7d0c4f325c70852883c2791d30ebc669f56e1a897827fe",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          144,
+          202
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            11,
+            91
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.3788754940032959,
+        "rgb_mse": 0.19237451255321503,
+        "lpips_alex": 0.9807898998260498,
+        "lpips_vgg": 0.779856264591217,
+        "dists": 0.6638984680175781
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.3788754940032959,
+        "rgb_mse": 0.09618725627660751,
+        "lpips_alex": 0.4903949499130249,
+        "lpips_vgg": 0.3899281322956085,
+        "dists": 0.13277970254421234
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.000989175095395277,
+        "lpips_alex": 0.13985455247510525,
+        "lpips_vgg": 0.05234618047864725,
+        "dists": 0.07317925292438167
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8638189088892356,
+        "rgb_l1:lpips_alex": 0.0024988993733401584,
+        "rgb_l1:lpips_vgg": 0.009183326236926397,
+        "rgb_l1:dists": 0.002168135307074679,
+        "rgb_mse:lpips_alex": 0.002907841341130742,
+        "rgb_mse:lpips_vgg": 0.011844124685254963,
+        "rgb_mse:dists": 0.002041958380011524,
+        "lpips_alex:lpips_vgg": 0.012960543999673295,
+        "lpips_alex:dists": 0.02580663293828541,
+        "lpips_vgg:dists": -0.018936363426301863
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.3465397357940674,
+          "rgb_decoder": 1.0697858333587646
+        },
+        "rgb_mse": {
+          "encoder": 1.2694607973098755,
+          "rgb_decoder": 1.0426851511001587
+        },
+        "lpips_alex": {
+          "encoder": 0.8789310455322266,
+          "rgb_decoder": 2.2213852405548096
+        },
+        "lpips_vgg": {
+          "encoder": 0.14919006824493408,
+          "rgb_decoder": 0.49571555852890015
+        },
+        "dists": {
+          "encoder": 0.5435347557067871,
+          "rgb_decoder": 0.8589680790901184
+        }
+      },
+      "pixel_gradient_square": 2.479712748026941e-06,
+      "perceptual_gradient_square": 0.005874819587916136,
+      "gradient_l2_before_clip": 2.631222724914551,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006728473235853016,
+        "rgb_decoder": 0.000963091675657779
+      },
+      "weighted_final": {
+        "rgb_l1": 0.3788754940032959,
+        "rgb_mse": 0.09618725627660751,
+        "lpips_alex": 0.12259873747825623,
+        "lpips_vgg": 0.09748203307390213,
+        "dists": 0.033194925636053085
+      }
+    },
+    {
+      "sample": {
+        "video": "REDS:train:170",
+        "frame": 16,
+        "crop_xyhw": [
+          40,
+          194,
+          512,
+          512
+        ],
+        "source_sha256": "b1a3d2d0d5823ab50ffe12daea85106ea7a756c79f14ee5be35c0fafddb162be",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          101,
+          255
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            28,
+            162
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.344157338142395,
+        "rgb_mse": 0.1647528111934662,
+        "lpips_alex": 0.9183025360107422,
+        "lpips_vgg": 0.7285054922103882,
+        "dists": 0.6408146619796753
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.344157338142395,
+        "rgb_mse": 0.0823764055967331,
+        "lpips_alex": 0.4591512680053711,
+        "lpips_vgg": 0.3642527461051941,
+        "dists": 0.1281629353761673
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.0009154103932090143,
+        "lpips_alex": 0.14721273539999588,
+        "lpips_vgg": 0.06356042310862502,
+        "dists": 0.07104243441287598
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8478920943219461,
+        "rgb_l1:lpips_alex": 0.0016795920367911972,
+        "rgb_l1:lpips_vgg": 0.005871941260209858,
+        "rgb_l1:dists": 0.002982548689800009,
+        "rgb_mse:lpips_alex": 0.001177794116511658,
+        "rgb_mse:lpips_vgg": 0.009249091552799411,
+        "rgb_mse:dists": 0.0025280154209492743,
+        "lpips_alex:lpips_vgg": 0.017904080273250245,
+        "lpips_alex:dists": 0.0274222902408572,
+        "lpips_vgg:dists": 0.004098068464088812
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.083848476409912,
+          "rgb_decoder": 0.8862087726593018
+        },
+        "rgb_mse": {
+          "encoder": 0.9637047648429871,
+          "rgb_decoder": 0.8535599112510681
+        },
+        "lpips_alex": {
+          "encoder": 0.9493167400360107,
+          "rgb_decoder": 2.39306378364563
+        },
+        "lpips_vgg": {
+          "encoder": 0.19980524480342865,
+          "rgb_decoder": 0.5377506017684937
+        },
+        "dists": {
+          "encoder": 0.4652639627456665,
+          "rgb_decoder": 0.9201568961143494
+        }
+      },
+      "pixel_gradient_square": 2.3562972728541354e-06,
+      "perceptual_gradient_square": 0.006774582900106907,
+      "gradient_l2_before_clip": 2.177593231201172,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006728641455993056,
+        "rgb_decoder": 0.0009631231077946723
+      },
+      "weighted_final": {
+        "rgb_l1": 0.344157338142395,
+        "rgb_mse": 0.0823764055967331,
+        "lpips_alex": 0.11478781700134277,
+        "lpips_vgg": 0.09106318652629852,
+        "dists": 0.032040733844041824
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:cat-girl",
+        "frame": 34,
+        "crop_xyhw": [
+          2471,
+          110,
+          512,
+          512
+        ],
+        "source_sha256": "2ca3fd1e3e5c0280710d051b33a6ee7a36d1beb731cc01b21ca9c0428026ecc1",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          241,
+          8
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            45,
+            233
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.49021250009536743,
+        "rgb_mse": 0.27855607867240906,
+        "lpips_alex": 1.0858458280563354,
+        "lpips_vgg": 1.0010895729064941,
+        "dists": 0.5116062164306641
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.49021250009536743,
+        "rgb_mse": 0.13927803933620453,
+        "lpips_alex": 0.5429229140281677,
+        "lpips_vgg": 0.5005447864532471,
+        "dists": 0.10232124477624893
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.001190298064427484,
+        "lpips_alex": 0.12452141219160866,
+        "lpips_vgg": 0.0774843982933811,
+        "dists": 0.11923440775410299
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.9288124653884878,
+        "rgb_l1:lpips_alex": 0.0023579280431772305,
+        "rgb_l1:lpips_vgg": 0.005284198179122142,
+        "rgb_l1:dists": 0.0006838106442407892,
+        "rgb_mse:lpips_alex": 0.001300477098583814,
+        "rgb_mse:lpips_vgg": 0.018292977337543957,
+        "rgb_mse:dists": 0.0004934638461759935,
+        "lpips_alex:lpips_vgg": 0.007880683743198254,
+        "lpips_alex:dists": -0.004307338383210541,
+        "lpips_vgg:dists": 0.033172642138402715
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 2.291038990020752,
+          "rgb_decoder": 1.8864606618881226
+        },
+        "rgb_mse": {
+          "encoder": 2.3076791763305664,
+          "rgb_decoder": 1.8879637718200684
+        },
+        "lpips_alex": {
+          "encoder": 0.8735299706459045,
+          "rgb_decoder": 1.9455605745315552
+        },
+        "lpips_vgg": {
+          "encoder": 0.5204343199729919,
+          "rgb_decoder": 2.0227439403533936
+        },
+        "dists": {
+          "encoder": 0.4075184166431427,
+          "rgb_decoder": 1.1925023794174194
+        }
+      },
+      "pixel_gradient_square": 2.8724430194415618e-06,
+      "perceptual_gradient_square": 0.006032549776136875,
+      "gradient_l2_before_clip": 4.620122909545898,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006727861473336816,
+        "rgb_decoder": 0.0009630158310756087
+      },
+      "weighted_final": {
+        "rgb_l1": 0.49021250009536743,
+        "rgb_mse": 0.13927803933620453,
+        "lpips_alex": 0.13573072850704193,
+        "lpips_vgg": 0.12513619661331177,
+        "dists": 0.025580311194062233
+      }
+    },
+    {
+      "sample": {
+        "video": "REDS:train:135",
+        "frame": 32,
+        "crop_xyhw": [
+          97,
+          92,
+          512,
+          512
+        ],
+        "source_sha256": "aca65713431298343ed70e0382672637ba4f67b8e584b226d7f269169e6400c3",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          161,
+          248
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            62,
+            47
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.4001360833644867,
+        "rgb_mse": 0.21050944924354553,
+        "lpips_alex": 0.9210818409919739,
+        "lpips_vgg": 0.7437642812728882,
+        "dists": 0.5848531723022461
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.4001360833644867,
+        "rgb_mse": 0.10525472462177277,
+        "lpips_alex": 0.46054092049598694,
+        "lpips_vgg": 0.3718821406364441,
+        "dists": 0.11697063595056534
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.0010347494331130723,
+        "lpips_alex": 0.12672779186224653,
+        "lpips_vgg": 0.07192822576934993,
+        "dists": 0.08923696257730925
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8721113072293611,
+        "rgb_l1:lpips_alex": 0.004843078995608852,
+        "rgb_l1:lpips_vgg": 0.0049190264860414345,
+        "rgb_l1:dists": 0.0025648247594767994,
+        "rgb_mse:lpips_alex": 0.0027094706200067368,
+        "rgb_mse:lpips_vgg": 0.0066589430430267485,
+        "rgb_mse:dists": 0.0019497584477794867,
+        "lpips_alex:lpips_vgg": 0.01203515480734182,
+        "lpips_alex:dists": 0.015803021831866687,
+        "lpips_vgg:dists": 0.04988372030558456
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.6444576978683472,
+          "rgb_decoder": 1.1783710718154907
+        },
+        "rgb_mse": {
+          "encoder": 1.5655255317687988,
+          "rgb_decoder": 1.2046802043914795
+        },
+        "lpips_alex": {
+          "encoder": 0.9213696718215942,
+          "rgb_decoder": 2.173814296722412
+        },
+        "lpips_vgg": {
+          "encoder": 0.24580562114715576,
+          "rgb_decoder": 0.5607571601867676
+        },
+        "dists": {
+          "encoder": 0.6713197231292725,
+          "rgb_decoder": 1.2048530578613281
+        }
+      },
+      "pixel_gradient_square": 2.556841309342417e-06,
+      "perceptual_gradient_square": 0.0057815625332295895,
+      "gradient_l2_before_clip": 3.1401336193084717,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006728303269483149,
+        "rgb_decoder": 0.0009630415006540716
+      },
+      "weighted_final": {
+        "rgb_l1": 0.4001360833644867,
+        "rgb_mse": 0.10525472462177277,
+        "lpips_alex": 0.11513523012399673,
+        "lpips_vgg": 0.09297053515911102,
+        "dists": 0.029242658987641335
+      }
+    },
+    {
+      "sample": {
+        "video": "REDS:train:020",
+        "frame": 1,
+        "crop_xyhw": [
+          282,
+          9,
+          512,
+          512
+        ],
+        "source_sha256": "89a3064a9d205419b41a1fee52e93a390566823a88c740b157184f599dd8098f",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          28,
+          73
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            79,
+            118
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.31973856687545776,
+        "rgb_mse": 0.14733420312404633,
+        "lpips_alex": 0.9511655569076538,
+        "lpips_vgg": 0.7371101975440979,
+        "dists": 0.6280535459518433
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.31973856687545776,
+        "rgb_mse": 0.07366710156202316,
+        "lpips_alex": 0.4755827784538269,
+        "lpips_vgg": 0.36855509877204895,
+        "dists": 0.12561070919036865
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.0011276373117234033,
+        "rgb_mse": 0.0008656676885210608,
+        "lpips_alex": 0.15399899278348525,
+        "lpips_vgg": 0.05475719515247968,
+        "dists": 0.06546282996403543
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8329965796552076,
+        "rgb_l1:lpips_alex": 0.0018223394097473598,
+        "rgb_l1:lpips_vgg": 0.0074275451323690235,
+        "rgb_l1:dists": -0.0007513367277766618,
+        "rgb_mse:lpips_alex": 0.00023869728983962307,
+        "rgb_mse:lpips_vgg": 0.01105015878139202,
+        "rgb_mse:dists": 0.0019971351605370105,
+        "lpips_alex:lpips_vgg": 0.0122940383479452,
+        "lpips_alex:dists": 0.015874690302573102,
+        "lpips_vgg:dists": 0.0007221427516495442
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.1562179327011108,
+          "rgb_decoder": 1.054500699043274
+        },
+        "rgb_mse": {
+          "encoder": 0.9203469157218933,
+          "rgb_decoder": 0.8194345235824585
+        },
+        "lpips_alex": {
+          "encoder": 1.1471443176269531,
+          "rgb_decoder": 2.662553548812866
+        },
+        "lpips_vgg": {
+          "encoder": 0.18632473051548004,
+          "rgb_decoder": 0.5508279204368591
+        },
+        "dists": {
+          "encoder": 0.4639418423175812,
+          "rgb_decoder": 0.9193753600120544
+        }
+      },
+      "pixel_gradient_square": 2.272048277518479e-06,
+      "perceptual_gradient_square": 0.006934285629540682,
+      "gradient_l2_before_clip": 2.3422484397888184,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0006728475564159453,
+        "rgb_decoder": 0.0009631235734559596
+      },
+      "weighted_final": {
+        "rgb_l1": 0.31973856687545776,
+        "rgb_mse": 0.07366710156202316,
+        "lpips_alex": 0.11889569461345673,
+        "lpips_vgg": 0.09213877469301224,
+        "dists": 0.03140267729759216
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:lucia",
+        "frame": 61,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "75e2f97656737b4793ac28cb73ef32d0f22f6ec9a00e894b722b1163c41f1eb6",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          142,
+          647
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            797,
+            101
+          ],
+          [
+            369,
+            1028
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.32219618558883667,
+        "rgb_mse": 0.1498250961303711,
+        "lpips_alex": 0.9050964117050171,
+        "lpips_vgg": 0.7979673743247986,
+        "dists": 0.5122144818305969
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.32219618558883667,
+        "rgb_mse": 0.07491254806518555,
+        "lpips_alex": 0.45254820585250854,
+        "lpips_vgg": 0.3989836871623993,
+        "dists": 0.1024428978562355
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.0003103838836522023,
+        "lpips_alex": 0.09883747490089777,
+        "lpips_vgg": 0.045983383017976956,
+        "dists": 0.062286610581867734
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8323922652446986,
+        "rgb_l1:lpips_alex": 0.00022918964999774284,
+        "rgb_l1:lpips_vgg": 0.007370635050025444,
+        "rgb_l1:dists": 0.0004695054398965763,
+        "rgb_mse:lpips_alex": 0.0009666331846625674,
+        "rgb_mse:lpips_vgg": 0.008390434530215351,
+        "rgb_mse:dists": 0.00014806769900911967,
+        "lpips_alex:lpips_vgg": 0.024937017212438743,
+        "lpips_alex:dists": 0.02367351513519925,
+        "lpips_vgg:dists": -0.005132264881255885
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.4599804878234863,
+          "rgb_decoder": 1.3259116411209106
+        },
+        "rgb_mse": {
+          "encoder": 1.2129929065704346,
+          "rgb_decoder": 1.0923398733139038
+        },
+        "lpips_alex": {
+          "encoder": 0.9078717231750488,
+          "rgb_decoder": 2.251056432723999
+        },
+        "lpips_vgg": {
+          "encoder": 0.23153264820575714,
+          "rgb_decoder": 0.6950966715812683
+        },
+        "dists": {
+          "encoder": 0.3989295959472656,
+          "rgb_decoder": 0.7062872052192688
+        }
+      },
+      "pixel_gradient_square": 2.884223135879438e-07,
+      "perceptual_gradient_square": 0.00320889032445848,
+      "gradient_l2_before_clip": 2.8843154907226562,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0001684091257629916,
+        "rgb_decoder": 0.0002407477149972692
+      },
+      "weighted_final": {
+        "rgb_l1": 0.32219618558883667,
+        "rgb_mse": 0.07491254806518555,
+        "lpips_alex": 0.11313705146312714,
+        "lpips_vgg": 0.09974592179059982,
+        "dists": 0.025610724464058876
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:car-turn",
+        "frame": 72,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "0d6b8076972a8289085a1a2557118e317566b8dc91d62c135ef0f4519edc46f8",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          246,
+          1212
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            814,
+            172
+          ],
+          [
+            386,
+            1141
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.33756083250045776,
+        "rgb_mse": 0.17292416095733643,
+        "lpips_alex": 0.7502303123474121,
+        "lpips_vgg": 0.6702468395233154,
+        "dists": 0.4484837055206299
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.33756083250045776,
+        "rgb_mse": 0.08646208047866821,
+        "lpips_alex": 0.37511515617370605,
+        "lpips_vgg": 0.3351234197616577,
+        "dists": 0.0896967425942421
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.000333453080487009,
+        "lpips_alex": 0.10912037912178811,
+        "lpips_vgg": 0.0747070655324022,
+        "dists": 0.06810226111793828
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8117534516259085,
+        "rgb_l1:lpips_alex": 0.0011240559781814077,
+        "rgb_l1:lpips_vgg": 0.0014254102005651964,
+        "rgb_l1:dists": 0.00020721203260571814,
+        "rgb_mse:lpips_alex": 0.0007879053287941171,
+        "rgb_mse:lpips_vgg": 0.002120635381564929,
+        "rgb_mse:dists": 0.000159710601811445,
+        "lpips_alex:lpips_vgg": 0.007892260609154616,
+        "lpips_alex:dists": -0.0013692897738787901,
+        "lpips_vgg:dists": 0.004922283807109001
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.4846280813217163,
+          "rgb_decoder": 1.5495085716247559
+        },
+        "rgb_mse": {
+          "encoder": 1.3856669664382935,
+          "rgb_decoder": 1.2021044492721558
+        },
+        "lpips_alex": {
+          "encoder": 1.2956324815750122,
+          "rgb_decoder": 2.971639394760132
+        },
+        "lpips_vgg": {
+          "encoder": 0.43849289417266846,
+          "rgb_decoder": 0.9134655594825745
+        },
+        "dists": {
+          "encoder": 0.43089818954467773,
+          "rgb_decoder": 0.7800295352935791
+        }
+      },
+      "pixel_gradient_square": 2.9707527460232086e-07,
+      "perceptual_gradient_square": 0.0045927600003778934,
+      "gradient_l2_before_clip": 3.084209680557251,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0001684075250523165,
+        "rgb_decoder": 0.00024074829707387835
+      },
+      "weighted_final": {
+        "rgb_l1": 0.33756083250045776,
+        "rgb_mse": 0.08646208047866821,
+        "lpips_alex": 0.09377878904342651,
+        "lpips_vgg": 0.08378085494041443,
+        "dists": 0.022424185648560524
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:tractor-sand",
+        "frame": 28,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "94eb413406664cdac6abb396d6ac947932161ed5cd862343385663433c9a4ba7",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          286,
+          88
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            6,
+            243
+          ],
+          [
+            403,
+            1254
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.35789862275123596,
+        "rgb_mse": 0.1691434532403946,
+        "lpips_alex": 0.8542388677597046,
+        "lpips_vgg": 0.7369130253791809,
+        "dists": 0.5383842587471008
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.35789862275123596,
+        "rgb_mse": 0.0845717266201973,
+        "lpips_alex": 0.4271194338798523,
+        "lpips_vgg": 0.36845651268959045,
+        "dists": 0.10767685621976852
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.000329787711098906,
+        "lpips_alex": 0.08649968096692864,
+        "lpips_vgg": 0.03952908362278266,
+        "dists": 0.049862374761808576
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8702266690188182,
+        "rgb_l1:lpips_alex": 0.0016646875539939809,
+        "rgb_l1:lpips_vgg": 0.0009792951335395278,
+        "rgb_l1:dists": -2.7526470819874577e-05,
+        "rgb_mse:lpips_alex": 0.0014177393475471754,
+        "rgb_mse:lpips_vgg": 0.002933208798604335,
+        "rgb_mse:dists": 0.00041821454450045815,
+        "lpips_alex:lpips_vgg": 0.0077150264426274155,
+        "lpips_alex:dists": 0.012131198283818138,
+        "lpips_vgg:dists": 0.04248682435821922
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.7483710050582886,
+          "rgb_decoder": 1.7732962369918823
+        },
+        "rgb_mse": {
+          "encoder": 1.3691627979278564,
+          "rgb_decoder": 1.2987185716629028
+        },
+        "lpips_alex": {
+          "encoder": 0.8829546570777893,
+          "rgb_decoder": 1.9521563053131104
+        },
+        "lpips_vgg": {
+          "encoder": 0.2570807635784149,
+          "rgb_decoder": 0.5064155459403992
+        },
+        "dists": {
+          "encoder": 0.6127123832702637,
+          "rgb_decoder": 0.6919735074043274
+        }
+      },
+      "pixel_gradient_square": 3.030061748177104e-07,
+      "perceptual_gradient_square": 0.002401038771495223,
+      "gradient_l2_before_clip": 3.5205190181732178,
+      "actual_parameter_update_l2": {
+        "encoder": 0.00016840288299135864,
+        "rgb_decoder": 0.00024074075918179005
+      },
+      "weighted_final": {
+        "rgb_l1": 0.35789862275123596,
+        "rgb_mse": 0.0845717266201973,
+        "lpips_alex": 0.10677985846996307,
+        "lpips_vgg": 0.09211412817239761,
+        "dists": 0.02691921405494213
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:paragliding",
+        "frame": 32,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "f6d0a4886407d1ea46dc8bb1853f90f9b43a23fcb99f29beb4183701c31c43b7",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          741,
+          1568
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            23,
+            314
+          ],
+          [
+            420,
+            1367
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.37024977803230286,
+        "rgb_mse": 0.15955521166324615,
+        "lpips_alex": 0.8046412467956543,
+        "lpips_vgg": 0.725088894367218,
+        "dists": 0.4818075895309448
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.37024977803230286,
+        "rgb_mse": 0.07977760583162308,
+        "lpips_alex": 0.40232062339782715,
+        "lpips_vgg": 0.362544447183609,
+        "dists": 0.09636151790618896
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.00032030400333066104,
+        "lpips_alex": 0.10146968984183309,
+        "lpips_vgg": 0.06835589740626835,
+        "dists": 0.07381442954680999
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.9269137133359374,
+        "rgb_l1:lpips_alex": 0.0006777480511694174,
+        "rgb_l1:lpips_vgg": 0.0011917916026730647,
+        "rgb_l1:dists": 6.348726863273538e-05,
+        "rgb_mse:lpips_alex": 0.0017228789162703746,
+        "rgb_mse:lpips_vgg": 0.0029432081049649617,
+        "rgb_mse:dists": 0.00036485475656309517,
+        "lpips_alex:lpips_vgg": 0.014287335627870771,
+        "lpips_alex:dists": 0.0024155527406282545,
+        "lpips_vgg:dists": 0.06677684972948275
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.8300516605377197,
+          "rgb_decoder": 1.7824891805648804
+        },
+        "rgb_mse": {
+          "encoder": 1.3850202560424805,
+          "rgb_decoder": 1.34280526638031
+        },
+        "lpips_alex": {
+          "encoder": 1.0438628196716309,
+          "rgb_decoder": 2.256326913833618
+        },
+        "lpips_vgg": {
+          "encoder": 0.2852036654949188,
+          "rgb_decoder": 0.8294917345046997
+        },
+        "dists": {
+          "encoder": 0.3733575940132141,
+          "rgb_decoder": 0.8310793042182922
+        }
+      },
+      "pixel_gradient_square": 3.0543577622665907e-07,
+      "perceptual_gradient_square": 0.004080653190612793,
+      "gradient_l2_before_clip": 3.594996690750122,
+      "actual_parameter_update_l2": {
+        "encoder": 0.000168386657605879,
+        "rgb_decoder": 0.0002407348802080378
+      },
+      "weighted_final": {
+        "rgb_l1": 0.37024977803230286,
+        "rgb_mse": 0.07977760583162308,
+        "lpips_alex": 0.10058015584945679,
+        "lpips_vgg": 0.09063611179590225,
+        "dists": 0.02409037947654724
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:paragliding",
+        "frame": 20,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "1d69b630e5e54c3c55dd4b18fec4f0c0b85d9614b76eb02e5df017511ce26f69",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          367,
+          1551
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            40,
+            385
+          ],
+          [
+            437,
+            1480
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.35108813643455505,
+        "rgb_mse": 0.14632229506969452,
+        "lpips_alex": 0.8112722039222717,
+        "lpips_vgg": 0.733675479888916,
+        "dists": 0.49218523502349854
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.35108813643455505,
+        "rgb_mse": 0.07316114753484726,
+        "lpips_alex": 0.40563610196113586,
+        "lpips_vgg": 0.366837739944458,
+        "dists": 0.09843704849481583
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.0003067341541792741,
+        "lpips_alex": 0.11384939902125624,
+        "lpips_vgg": 0.060178218892468896,
+        "dists": 0.06132051707719768
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.9178270821506189,
+        "rgb_l1:lpips_alex": 0.0008226867035838274,
+        "rgb_l1:lpips_vgg": 0.0015695939375576936,
+        "rgb_l1:dists": -0.0007082880254283908,
+        "rgb_mse:lpips_alex": 0.0013485343140077753,
+        "rgb_mse:lpips_vgg": 0.0033457983400806274,
+        "rgb_mse:dists": 0.00026740024953498235,
+        "lpips_alex:lpips_vgg": 0.010939807451732519,
+        "lpips_alex:dists": 0.01368291020043002,
+        "lpips_vgg:dists": 0.05202009910082173
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.7644658088684082,
+          "rgb_decoder": 1.741557002067566
+        },
+        "rgb_mse": {
+          "encoder": 1.2880353927612305,
+          "rgb_decoder": 1.2656787633895874
+        },
+        "lpips_alex": {
+          "encoder": 1.0772287845611572,
+          "rgb_decoder": 2.094650983810425
+        },
+        "lpips_vgg": {
+          "encoder": 0.2939034104347229,
+          "rgb_decoder": 0.7991849780082703
+        },
+        "dists": {
+          "encoder": 0.3783625066280365,
+          "rgb_decoder": 0.7704302072525024
+        }
+      },
+      "pixel_gradient_square": 2.971480341784627e-07,
+      "perceptual_gradient_square": 0.004391157068312168,
+      "gradient_l2_before_clip": 3.4192614555358887,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0001683874725131318,
+        "rgb_decoder": 0.00024073607346508652
+      },
+      "weighted_final": {
+        "rgb_l1": 0.35108813643455505,
+        "rgb_mse": 0.07316114753484726,
+        "lpips_alex": 0.10140902549028397,
+        "lpips_vgg": 0.0917094349861145,
+        "dists": 0.024609262123703957
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:bear",
+        "frame": 66,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "2125b52e038becd97a6d6f14b5c039bbe4f7c2c1a043022082d0d5c8e96106fe",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          51,
+          455
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            57,
+            456
+          ],
+          [
+            454,
+            1593
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.398654580116272,
+        "rgb_mse": 0.19538545608520508,
+        "lpips_alex": 0.8450729250907898,
+        "lpips_vgg": 0.6963568925857544,
+        "dists": 0.5304770469665527
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.398654580116272,
+        "rgb_mse": 0.09769272804260254,
+        "lpips_alex": 0.4225364625453949,
+        "lpips_vgg": 0.3481784462928772,
+        "dists": 0.10609541088342667
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.0003544483706907135,
+        "lpips_alex": 0.10762116845412759,
+        "lpips_vgg": 0.050852285731920834,
+        "dists": 0.056905771232792654
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.9018839490636245,
+        "rgb_l1:lpips_alex": -8.123901757325054e-05,
+        "rgb_l1:lpips_vgg": 0.000960208947818781,
+        "rgb_l1:dists": -0.0006205016376747771,
+        "rgb_mse:lpips_alex": 0.00046774019457985095,
+        "rgb_mse:lpips_vgg": 0.00253024979823653,
+        "rgb_mse:dists": -0.0003011449939765087,
+        "lpips_alex:lpips_vgg": 0.01215811532784144,
+        "lpips_alex:dists": 0.013700143331465554,
+        "lpips_vgg:dists": 0.03940983313891681
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.7430812120437622,
+          "rgb_decoder": 1.5406650304794312
+        },
+        "rgb_mse": {
+          "encoder": 1.5679879188537598,
+          "rgb_decoder": 1.380111813545227
+        },
+        "lpips_alex": {
+          "encoder": 1.0557067394256592,
+          "rgb_decoder": 2.5534262657165527
+        },
+        "lpips_vgg": {
+          "encoder": 0.2673715353012085,
+          "rgb_decoder": 0.5750764012336731
+        },
+        "dists": {
+          "encoder": 0.40741777420043945,
+          "rgb_decoder": 0.793352484703064
+        }
+      },
+      "pixel_gradient_square": 3.203277287866513e-07,
+      "perceptual_gradient_square": 0.003744457382708788,
+      "gradient_l2_before_clip": 3.4698805809020996,
+      "actual_parameter_update_l2": {
+        "encoder": 0.00016839610179886222,
+        "rgb_decoder": 0.00024073566601146013
+      },
+      "weighted_final": {
+        "rgb_l1": 0.398654580116272,
+        "rgb_mse": 0.09769272804260254,
+        "lpips_alex": 0.10563411563634872,
+        "lpips_vgg": 0.0870446115732193,
+        "dists": 0.026523852720856667
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:lucia",
+        "frame": 54,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "5a0d419324065833a0f7a7407b9b02f9dab70582c17da635dd2aa2e31b660642",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          593,
+          232
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            74,
+            527
+          ],
+          [
+            471,
+            1001
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.32815954089164734,
+        "rgb_mse": 0.1529810130596161,
+        "lpips_alex": 0.9469303488731384,
+        "lpips_vgg": 0.8298804759979248,
+        "dists": 0.5008846521377563
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.32815954089164734,
+        "rgb_mse": 0.07649050652980804,
+        "lpips_alex": 0.4734651744365692,
+        "lpips_vgg": 0.4149402379989624,
+        "dists": 0.10017693042755127
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.00031363581213214565,
+        "lpips_alex": 0.08242298154856502,
+        "lpips_vgg": 0.03679757034804963,
+        "dists": 0.04920877145477762
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8390082756348765,
+        "rgb_l1:lpips_alex": -0.000216587367220386,
+        "rgb_l1:lpips_vgg": 0.005601963607946176,
+        "rgb_l1:dists": -0.00031634852151636524,
+        "rgb_mse:lpips_alex": 0.0007796154910620575,
+        "rgb_mse:lpips_vgg": 0.011678683242089634,
+        "rgb_mse:dists": -0.0002365956055466569,
+        "lpips_alex:lpips_vgg": 0.0015088206133922566,
+        "lpips_alex:dists": 0.013712919868824263,
+        "lpips_vgg:dists": 0.039443972913930626
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.504939079284668,
+          "rgb_decoder": 1.3534281253814697
+        },
+        "rgb_mse": {
+          "encoder": 1.247157335281372,
+          "rgb_decoder": 1.1150705814361572
+        },
+        "lpips_alex": {
+          "encoder": 0.7792299389839172,
+          "rgb_decoder": 2.0209481716156006
+        },
+        "lpips_vgg": {
+          "encoder": 0.23934310674667358,
+          "rgb_decoder": 0.9313645362854004
+        },
+        "dists": {
+          "encoder": 0.36603453755378723,
+          "rgb_decoder": 0.5729100108146667
+        }
+      },
+      "pixel_gradient_square": 2.9084685593261383e-07,
+      "perceptual_gradient_square": 0.0021614590659737587,
+      "gradient_l2_before_clip": 2.963019609451294,
+      "actual_parameter_update_l2": {
+        "encoder": 0.00016840637545101345,
+        "rgb_decoder": 0.00024074350949376822
+      },
+      "weighted_final": {
+        "rgb_l1": 0.32815954089164734,
+        "rgb_mse": 0.07649050652980804,
+        "lpips_alex": 0.1183662936091423,
+        "lpips_vgg": 0.1037350594997406,
+        "dists": 0.025044232606887817
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:bus",
+        "frame": 31,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "c29005e7cf88f73473597f435fa0dc6ed4b45c7859704ab01ca20136b44e5f7d",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          776,
+          1360
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            91,
+            598
+          ],
+          [
+            488,
+            1114
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.3633318841457367,
+        "rgb_mse": 0.16906440258026123,
+        "lpips_alex": 0.7136317491531372,
+        "lpips_vgg": 0.6643276214599609,
+        "dists": 0.47992587089538574
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.3633318841457367,
+        "rgb_mse": 0.08453220129013062,
+        "lpips_alex": 0.3568158745765686,
+        "lpips_vgg": 0.33216381072998047,
+        "dists": 0.09598517417907715
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.0003297106339876517,
+        "lpips_alex": 0.09881975850964746,
+        "lpips_vgg": 0.06465838001470736,
+        "dists": 0.059737722655902305
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8836440603007969,
+        "rgb_l1:lpips_alex": -0.00043504488498468,
+        "rgb_l1:lpips_vgg": 0.0006851692372260043,
+        "rgb_l1:dists": 0.00032105910764131167,
+        "rgb_mse:lpips_alex": 0.0005064272924536509,
+        "rgb_mse:lpips_vgg": 0.0028909760089819154,
+        "rgb_mse:dists": 0.00033835494787537175,
+        "lpips_alex:lpips_vgg": 0.009095923055338219,
+        "lpips_alex:dists": 0.00981044377669241,
+        "lpips_vgg:dists": -0.02609486333649104
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.5866856575012207,
+          "rgb_decoder": 1.474534034729004
+        },
+        "rgb_mse": {
+          "encoder": 1.22345769405365,
+          "rgb_decoder": 1.1036885976791382
+        },
+        "lpips_alex": {
+          "encoder": 0.9317988753318787,
+          "rgb_decoder": 2.0262763500213623
+        },
+        "lpips_vgg": {
+          "encoder": 0.36097919940948486,
+          "rgb_decoder": 0.7829116582870483
+        },
+        "dists": {
+          "encoder": 0.38293740153312683,
+          "rgb_decoder": 0.8479347825050354
+        }
+      },
+      "pixel_gradient_square": 3.047402401534782e-07,
+      "perceptual_gradient_square": 0.0036497400142252445,
+      "gradient_l2_before_clip": 2.9597651958465576,
+      "actual_parameter_update_l2": {
+        "encoder": 0.0001684114831732586,
+        "rgb_decoder": 0.00024074403336271644
+      },
+      "weighted_final": {
+        "rgb_l1": 0.3633318841457367,
+        "rgb_mse": 0.08453220129013062,
+        "lpips_alex": 0.08920396864414215,
+        "lpips_vgg": 0.08304095268249512,
+        "dists": 0.023996293544769287
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:train",
+        "frame": 50,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "5f6de8a2761aafcfd359513a545ba0ba58cd5710cd9d7e5bfcf535b834f19724",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          455,
+          695
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            108,
+            669
+          ],
+          [
+            505,
+            1227
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.27313855290412903,
+        "rgb_mse": 0.10900548100471497,
+        "lpips_alex": 0.7493418455123901,
+        "lpips_vgg": 0.7077764272689819,
+        "dists": 0.5370382070541382
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.27313855290412903,
+        "rgb_mse": 0.05450274050235748,
+        "lpips_alex": 0.37467092275619507,
+        "lpips_vgg": 0.35388821363449097,
+        "dists": 0.10740764439105988
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.00026474700485234077,
+        "lpips_alex": 0.09655312721818403,
+        "lpips_vgg": 0.04941724156342277,
+        "dists": 0.06618267879766626
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8272919817120317,
+        "rgb_l1:lpips_alex": 0.0002837509522769152,
+        "rgb_l1:lpips_vgg": 0.005101069388571291,
+        "rgb_l1:dists": 0.00040985897319799797,
+        "rgb_mse:lpips_alex": -0.0002956332779773583,
+        "rgb_mse:lpips_vgg": 0.0071189317326848045,
+        "rgb_mse:dists": 0.0008429588247650209,
+        "lpips_alex:lpips_vgg": 0.010625833196657608,
+        "lpips_alex:dists": 0.019411155224970802,
+        "lpips_vgg:dists": -0.00037688033523855475
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.2668275833129883,
+          "rgb_decoder": 1.2018508911132812
+        },
+        "rgb_mse": {
+          "encoder": 0.8697810173034668,
+          "rgb_decoder": 0.8271433115005493
+        },
+        "lpips_alex": {
+          "encoder": 0.7322436571121216,
+          "rgb_decoder": 1.6920552253723145
+        },
+        "lpips_vgg": {
+          "encoder": 0.24648341536521912,
+          "rgb_decoder": 0.6439171433448792
+        },
+        "dists": {
+          "encoder": 0.4902510344982147,
+          "rgb_decoder": 0.8905904293060303
+        }
+      },
+      "pixel_gradient_square": 2.6608836378727574e-07,
+      "perceptual_gradient_square": 0.003166259964928031,
+      "gradient_l2_before_clip": 2.412729501724243,
+      "actual_parameter_update_l2": {
+        "encoder": 0.00016841082833707333,
+        "rgb_decoder": 0.0002407489955658093
+      },
+      "weighted_final": {
+        "rgb_l1": 0.27313855290412903,
+        "rgb_mse": 0.05450274050235748,
+        "lpips_alex": 0.09366773068904877,
+        "lpips_vgg": 0.08847205340862274,
+        "dists": 0.02685191109776497
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:surf",
+        "frame": 0,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "b273f49477936b89b9426898986b9baeca783711b1b031437ff3526792f33e35",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          481,
+          498
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            125,
+            35
+          ],
+          [
+            522,
+            1340
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.17985570430755615,
+        "rgb_mse": 0.05812631547451019,
+        "lpips_alex": 0.6280137300491333,
+        "lpips_vgg": 0.6492733359336853,
+        "dists": 0.43515336513519287
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.17985570430755615,
+        "rgb_mse": 0.029063157737255096,
+        "lpips_alex": 0.31400686502456665,
+        "lpips_vgg": 0.32463666796684265,
+        "dists": 0.08703067153692245
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.00019332733225202028,
+        "lpips_alex": 0.08319818600694627,
+        "lpips_vgg": 0.062004338598753705,
+        "dists": 0.07353190975951061
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.745998176797034,
+        "rgb_l1:lpips_alex": 0.0042729690822729234,
+        "rgb_l1:lpips_vgg": 0.0066045470758412045,
+        "rgb_l1:dists": 0.0028532778154723533,
+        "rgb_mse:lpips_alex": 0.0038474989135380212,
+        "rgb_mse:lpips_vgg": 0.005783458326341709,
+        "rgb_mse:dists": 0.0018031419105234414,
+        "lpips_alex:lpips_vgg": 0.015578428313413285,
+        "lpips_alex:dists": 0.012244283859378174,
+        "lpips_vgg:dists": 0.017952866211203965
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 0.7368997931480408,
+          "rgb_decoder": 0.6921535730361938
+        },
+        "rgb_mse": {
+          "encoder": 0.43635353446006775,
+          "rgb_decoder": 0.4346649646759033
+        },
+        "lpips_alex": {
+          "encoder": 1.1982547044754028,
+          "rgb_decoder": 2.3796701431274414
+        },
+        "lpips_vgg": {
+          "encoder": 0.5365568995475769,
+          "rgb_decoder": 1.6551175117492676
+        },
+        "dists": {
+          "encoder": 0.5267515778541565,
+          "rgb_decoder": 0.868761420249939
+        }
+      },
+      "pixel_gradient_square": 2.2791886067352607e-07,
+      "perceptual_gradient_square": 0.0029794303700327873,
+      "gradient_l2_before_clip": 1.301538348197937,
+      "actual_parameter_update_l2": {
+        "encoder": 0.00016841695469338447,
+        "rgb_decoder": 0.00024076359113678336
+      },
+      "weighted_final": {
+        "rgb_l1": 0.17985570430755615,
+        "rgb_mse": 0.029063157737255096,
+        "lpips_alex": 0.07850171625614166,
+        "lpips_vgg": 0.08115916699171066,
+        "dists": 0.021757667884230614
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:rallye",
+        "frame": 8,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "5ac653e722dadd6ad2afa3830dabaf2b83aaca9378f7143f5d7085e0dd6dcfad",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          433,
+          965
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            142,
+            106
+          ],
+          [
+            539,
+            1453
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.28405696153640747,
+        "rgb_mse": 0.12068833410739899,
+        "lpips_alex": 0.8579704165458679,
+        "lpips_vgg": 0.7675625681877136,
+        "dists": 0.49460363388061523
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.28405696153640747,
+        "rgb_mse": 0.06034416705369949,
+        "lpips_alex": 0.42898520827293396,
+        "lpips_vgg": 0.3837812840938568,
+        "dists": 0.09892072528600693
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.0002785733247846128,
+        "lpips_alex": 0.08338985041558271,
+        "lpips_vgg": 0.03817302272158763,
+        "dists": 0.06173214819801585
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8176600094795841,
+        "rgb_l1:lpips_alex": 0.00348105245525196,
+        "rgb_l1:lpips_vgg": 0.019000778702279054,
+        "rgb_l1:dists": -0.0003952871108581604,
+        "rgb_mse:lpips_alex": 0.0020790102775664226,
+        "rgb_mse:lpips_vgg": 0.015288497231774048,
+        "rgb_mse:dists": 0.0007428159248097343,
+        "lpips_alex:lpips_vgg": 0.010143334601940108,
+        "lpips_alex:dists": 0.014028887089235952,
+        "lpips_vgg:dists": 0.027412618303400617
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 0.6369331479072571,
+          "rgb_decoder": 0.49399879574775696
+        },
+        "rgb_mse": {
+          "encoder": 0.5255272388458252,
+          "rgb_decoder": 0.4502559006214142
+        },
+        "lpips_alex": {
+          "encoder": 0.8020762205123901,
+          "rgb_decoder": 1.867444396018982
+        },
+        "lpips_vgg": {
+          "encoder": 0.38236236572265625,
+          "rgb_decoder": 0.8113844394683838
+        },
+        "dists": {
+          "encoder": 0.4230581521987915,
+          "rgb_decoder": 0.7129030227661133
+        }
+      },
+      "pixel_gradient_square": 2.714767219913483e-07,
+      "perceptual_gradient_square": 0.002298703882843256,
+      "gradient_l2_before_clip": 1.2458945512771606,
+      "actual_parameter_update_l2": {
+        "encoder": 0.00016842485638335347,
+        "rgb_decoder": 0.00024076324189081788
+      },
+      "weighted_final": {
+        "rgb_l1": 0.28405696153640747,
+        "rgb_mse": 0.06034416705369949,
+        "lpips_alex": 0.10724630206823349,
+        "lpips_vgg": 0.0959453210234642,
+        "dists": 0.024730181321501732
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:sheep",
+        "frame": 17,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "93cb75d365821db6cefb737ea2e521ff09e3cb24102ad32edaedee0e078a0941",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          570,
+          217
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            159,
+            177
+          ],
+          [
+            556,
+            1566
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.2816995084285736,
+        "rgb_mse": 0.1162809431552887,
+        "lpips_alex": 0.9439532160758972,
+        "lpips_vgg": 0.8248083591461182,
+        "dists": 0.5370455980300903
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.2816995084285736,
+        "rgb_mse": 0.05814047157764435,
+        "lpips_alex": 0.4719766080379486,
+        "lpips_vgg": 0.4124041795730591,
+        "dists": 0.10740911960601807
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.0002734394375390712,
+        "lpips_alex": 0.09861789250599697,
+        "lpips_vgg": 0.05161788081397361,
+        "dists": 0.0480145360112176
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8260983821198152,
+        "rgb_l1:lpips_alex": 0.00034257649242530483,
+        "rgb_l1:lpips_vgg": 0.008666058146244073,
+        "rgb_l1:dists": -0.0007256449426623434,
+        "rgb_mse:lpips_alex": 0.0009105986308813246,
+        "rgb_mse:lpips_vgg": 0.013355780542157124,
+        "rgb_mse:dists": 1.8521898346707405e-05,
+        "lpips_alex:lpips_vgg": 0.004938551021637072,
+        "lpips_alex:dists": 0.015019994187597072,
+        "lpips_vgg:dists": 0.0036599478907561695
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.5935992002487183,
+          "rgb_decoder": 1.516788125038147
+        },
+        "rgb_mse": {
+          "encoder": 0.9801866412162781,
+          "rgb_decoder": 0.9396899938583374
+        },
+        "lpips_alex": {
+          "encoder": 0.9441003799438477,
+          "rgb_decoder": 2.1951708793640137
+        },
+        "lpips_vgg": {
+          "encoder": 0.41282176971435547,
+          "rgb_decoder": 1.4824919700622559
+        },
+        "dists": {
+          "encoder": 0.4087541997432709,
+          "rgb_decoder": 0.7352777719497681
+        }
+      },
+      "pixel_gradient_square": 2.700102754715772e-07,
+      "perceptual_gradient_square": 0.003218297613784671,
+      "gradient_l2_before_clip": 3.0349178314208984,
+      "actual_parameter_update_l2": {
+        "encoder": 0.00016840391617733985,
+        "rgb_decoder": 0.0002407436550129205
+      },
+      "weighted_final": {
+        "rgb_l1": 0.2816995084285736,
+        "rgb_mse": 0.05814047157764435,
+        "lpips_alex": 0.11799415200948715,
+        "lpips_vgg": 0.10310104489326477,
+        "dists": 0.026852279901504517
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:lady-running",
+        "frame": 51,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "032032344c73abe6b4179ba1e58bb8e1a6fa7aa787a3715e3f33651e5732a411",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          593,
+          1169
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            176,
+            248
+          ],
+          [
+            573,
+            974
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.3936402201652527,
+        "rgb_mse": 0.20057034492492676,
+        "lpips_alex": 0.8250049352645874,
+        "lpips_vgg": 0.7314493656158447,
+        "dists": 0.5371776819229126
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.3936402201652527,
+        "rgb_mse": 0.10028517246246338,
+        "lpips_alex": 0.4125024676322937,
+        "lpips_vgg": 0.36572468280792236,
+        "dists": 0.10743553936481476
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.00035912051239548725,
+        "lpips_alex": 0.07717994758688788,
+        "lpips_vgg": 0.040978056868586195,
+        "dists": 0.048174976719515095
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8789539197737484,
+        "rgb_l1:lpips_alex": 0.001350719379130622,
+        "rgb_l1:lpips_vgg": 0.001535469402114217,
+        "rgb_l1:dists": 0.0006389479676288163,
+        "rgb_mse:lpips_alex": 0.001932394393925919,
+        "rgb_mse:lpips_vgg": 0.003244899981329234,
+        "rgb_mse:dists": -0.00022945587503631198,
+        "lpips_alex:lpips_vgg": 0.010243199113340751,
+        "lpips_alex:dists": 0.017334587933807915,
+        "lpips_vgg:dists": 0.052596912308789955
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.899543046951294,
+          "rgb_decoder": 1.252031922340393
+        },
+        "rgb_mse": {
+          "encoder": 1.8124347925186157,
+          "rgb_decoder": 1.1887751817703247
+        },
+        "lpips_alex": {
+          "encoder": 0.7146621346473694,
+          "rgb_decoder": 1.5988487005233765
+        },
+        "lpips_vgg": {
+          "encoder": 0.2693551778793335,
+          "rgb_decoder": 0.5608875155448914
+        },
+        "dists": {
+          "encoder": 0.5958200097084045,
+          "rgb_decoder": 0.7246244549751282
+        }
+      },
+      "pixel_gradient_square": 3.1954908763509593e-07,
+      "perceptual_gradient_square": 0.0020516742952167988,
+      "gradient_l2_before_clip": 3.435439348220825,
+      "actual_parameter_update_l2": {
+        "encoder": 0.00016841100296005607,
+        "rgb_decoder": 0.00024072604719549417
+      },
+      "weighted_final": {
+        "rgb_l1": 0.3936402201652527,
+        "rgb_mse": 0.10028517246246338,
+        "lpips_alex": 0.10312561690807343,
+        "lpips_vgg": 0.09143117070198059,
+        "dists": 0.02685888484120369
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:rhino",
+        "frame": 66,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "240e561c0521563f084a75ef5ddae2a7311fa63e601457db4d79ea84d7115f03",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          232,
+          998
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            193,
+            319
+          ],
+          [
+            590,
+            1087
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.383667528629303,
+        "rgb_mse": 0.19037681818008423,
+        "lpips_alex": 0.8093217611312866,
+        "lpips_vgg": 0.7265628576278687,
+        "dists": 0.5602225065231323
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.383667528629303,
+        "rgb_mse": 0.09518840909004211,
+        "lpips_alex": 0.4046608805656433,
+        "lpips_vgg": 0.3632814288139343,
+        "dists": 0.11204450577497482
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.0003498757921075773,
+        "lpips_alex": 0.08527924662473813,
+        "lpips_vgg": 0.041657455489135936,
+        "dists": 0.05444629943504356
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.879322145062209,
+        "rgb_l1:lpips_alex": 0.00044303546345079206,
+        "rgb_l1:lpips_vgg": 0.0016768875812329573,
+        "rgb_l1:dists": -0.0007406263182902647,
+        "rgb_mse:lpips_alex": 0.0012691282943741195,
+        "rgb_mse:lpips_vgg": 0.003185477178095309,
+        "rgb_mse:dists": 0.00015411796891012022,
+        "lpips_alex:lpips_vgg": -0.0025338456474692027,
+        "lpips_alex:dists": 0.027254809252766077,
+        "lpips_vgg:dists": -0.004429433993863258
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 1.6479849815368652,
+          "rgb_decoder": 1.4562979936599731
+        },
+        "rgb_mse": {
+          "encoder": 1.504485845565796,
+          "rgb_decoder": 1.3179653882980347
+        },
+        "lpips_alex": {
+          "encoder": 0.904513418674469,
+          "rgb_decoder": 2.18392276763916
+        },
+        "lpips_vgg": {
+          "encoder": 0.2523581087589264,
+          "rgb_decoder": 0.5976759195327759
+        },
+        "dists": {
+          "encoder": 0.37978315353393555,
+          "rgb_decoder": 0.6844979524612427
+        }
+      },
+      "pixel_gradient_square": 3.1470420935875154e-07,
+      "perceptual_gradient_square": 0.0023893488105386496,
+      "gradient_l2_before_clip": 3.2283523082733154,
+      "actual_parameter_update_l2": {
+        "encoder": 0.00016840682656038553,
+        "rgb_decoder": 0.0002407421707175672
+      },
+      "weighted_final": {
+        "rgb_l1": 0.383667528629303,
+        "rgb_mse": 0.09518840909004211,
+        "lpips_alex": 0.10116522014141083,
+        "lpips_vgg": 0.09082035720348358,
+        "dists": 0.028011126443743706
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:dance-jump",
+        "frame": 25,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "63a5b1548b893a73b2f6ef5ee8ae5829991a9eaa0eb6357bb795ba267f9f2832",
+        "flip_horizontal": false,
+        "perceptual_crop_yx": [
+          201,
+          45
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            210,
+            390
+          ],
+          [
+            607,
+            1200
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.2602458596229553,
+        "rgb_mse": 0.09759333729743958,
+        "lpips_alex": 0.814936637878418,
+        "lpips_vgg": 0.662345290184021,
+        "dists": 0.49429821968078613
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.2602458596229553,
+        "rgb_mse": 0.04879666864871979,
+        "lpips_alex": 0.407468318939209,
+        "lpips_vgg": 0.3311726450920105,
+        "dists": 0.09885964542627335
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.0002505053243525903,
+        "lpips_alex": 0.10850689591300727,
+        "lpips_vgg": 0.056358931783472704,
+        "dists": 0.06502762785621662
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8330551685891114,
+        "rgb_l1:lpips_alex": 0.0005062100601662191,
+        "rgb_l1:lpips_vgg": 0.002042469425216284,
+        "rgb_l1:dists": 0.0005893190123342938,
+        "rgb_mse:lpips_alex": 0.0008129388123518153,
+        "rgb_mse:lpips_vgg": 0.002995967563933269,
+        "rgb_mse:dists": 0.00043487094167472796,
+        "lpips_alex:lpips_vgg": 0.023142589767002418,
+        "lpips_alex:dists": 0.027546866544550103,
+        "lpips_vgg:dists": 0.08397871928259981
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 0.9697847962379456,
+          "rgb_decoder": 0.8643062114715576
+        },
+        "rgb_mse": {
+          "encoder": 0.6489371657371521,
+          "rgb_decoder": 0.6014642119407654
+        },
+        "lpips_alex": {
+          "encoder": 1.189096450805664,
+          "rgb_decoder": 2.5689806938171387
+        },
+        "lpips_vgg": {
+          "encoder": 0.2580821216106415,
+          "rgb_decoder": 0.5814633369445801
+        },
+        "dists": {
+          "encoder": 0.40228164196014404,
+          "rgb_decoder": 0.7555051445960999
+        }
+      },
+      "pixel_gradient_square": 2.6010883402705076e-07,
+      "perceptual_gradient_square": 0.0040778531692922115,
+      "gradient_l2_before_clip": 1.798779845237732,
+      "actual_parameter_update_l2": {
+        "encoder": 0.00016841529577504843,
+        "rgb_decoder": 0.0002407623833278194
+      },
+      "weighted_final": {
+        "rgb_l1": 0.2602458596229553,
+        "rgb_mse": 0.04879666864871979,
+        "lpips_alex": 0.10186707973480225,
+        "lpips_vgg": 0.08279316127300262,
+        "dists": 0.024714911356568336
+      }
+    },
+    {
+      "sample": {
+        "video": "DAVIS2017:mallard-fly",
+        "frame": 2,
+        "crop_xyhw": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "source_sha256": "d2b8a5e2fa71cb3391e24d2492f24be2cda19e765665c6ac2ec5a61c47f874ae",
+        "flip_horizontal": true,
+        "perceptual_crop_yx": [
+          512,
+          1397
+        ],
+        "split": "train",
+        "perceptual_crops_yx": [
+          [
+            227,
+            461
+          ],
+          [
+            624,
+            1313
+          ]
+        ],
+        "native_budget": 16320
+      },
+      "finite": true,
+      "raw": {
+        "rgb_l1": 0.4133113622665405,
+        "rgb_mse": 0.2153812199831009,
+        "lpips_alex": 0.9820072650909424,
+        "lpips_vgg": 0.8465626835823059,
+        "dists": 0.5678249597549438
+      },
+      "weighted_initial": {
+        "rgb_l1": 0.4133113622665405,
+        "rgb_mse": 0.10769060999155045,
+        "lpips_alex": 0.4910036325454712,
+        "lpips_vgg": 0.42328134179115295,
+        "dists": 0.11356499046087265
+      },
+      "rgb_gradient_l2": {
+        "rgb_l1": 0.00040093772198454683,
+        "rgb_mse": 0.00037214379418983837,
+        "lpips_alex": 0.0916758815331333,
+        "lpips_vgg": 0.054759580503770514,
+        "dists": 0.061183862729526445
+      },
+      "rgb_gradient_cosines": {
+        "rgb_l1:rgb_mse": 0.8905808909220195,
+        "rgb_l1:lpips_alex": -0.00013843535725729613,
+        "rgb_l1:lpips_vgg": 0.0036771439648227815,
+        "rgb_l1:dists": 0.0003869177426211653,
+        "rgb_mse:lpips_alex": 0.0013172916518716172,
+        "rgb_mse:lpips_vgg": 0.009319584046452774,
+        "rgb_mse:dists": 0.00045140255054097923,
+        "lpips_alex:lpips_vgg": 0.0002379744065633654,
+        "lpips_alex:dists": 0.01720427104397161,
+        "lpips_vgg:dists": -0.006019622074084724
+      },
+      "module_gradient_l2_unweighted": {
+        "rgb_l1": {
+          "encoder": 2.1329972743988037,
+          "rgb_decoder": 1.8705164194107056
+        },
+        "rgb_mse": {
+          "encoder": 1.9047186374664307,
+          "rgb_decoder": 1.6705430746078491
+        },
+        "lpips_alex": {
+          "encoder": 0.810968279838562,
+          "rgb_decoder": 2.013124704360962
+        },
+        "lpips_vgg": {
+          "encoder": 0.31702300906181335,
+          "rgb_decoder": 1.2187867164611816
+        },
+        "dists": {
+          "encoder": 0.3961455821990967,
+          "rgb_decoder": 0.8121868968009949
+        }
+      },
+      "pixel_gradient_square": 3.282542309079872e-07,
+      "perceptual_gradient_square": 0.0030163719784468412,
+      "gradient_l2_before_clip": 4.234195232391357,
+      "actual_parameter_update_l2": {
+        "encoder": 0.00016839540330693126,
+        "rgb_decoder": 0.00024072942323982716
+      },
+      "weighted_final": {
+        "rgb_l1": 0.4133113622665405,
+        "rgb_mse": 0.10769060999155045,
+        "lpips_alex": 0.1227509081363678,
+        "lpips_vgg": 0.10582033544778824,
+        "dists": 0.028391247615218163
+      }
+    }
+  ],
+  "initial_perceptual_pixel_ratio": 60.65384855331875,
+  "perceptual_multiplier": 0.25,
+  "calibrated_ratio": 15.163462138329688,
+  "sample_chain": "afe4076e3c77e9910ba1cbe8caf46bdc1bebbd2e8f0991ed9d489bff74657841",
+  "freeze_weights": false,
+  "adjustment": "clip(1/ratio) outside registered band"
+}
