@@ -143,3 +143,85 @@ def test_training_plan_reads_only_train_at_the_predeclared_native_coordinates():
         assert len(sample["perceptual_crops_yx"]) == (2 if geometry == NATIVE else 1)
     with pytest.raises(PermissionError):
         plan._load(plan.records[0] | {"split": "validation"})
+
+
+def test_run_resumes_at_the_native_boundary_with_the_same_adamw_state(tmp_path, monkeypatch):
+    from contextlib import contextmanager
+
+    from torch import nn
+
+    from scripts.hla_tok.v3 import training
+    from scripts.hla_tok.v3.protocol import Trial
+
+    class Reader:
+        counts = {"train": 0, "test": 0, "validation": 0}
+        raw = torch.ones(3, 1080, 1920, dtype=torch.uint8)
+
+        def catalog(self, split):
+            assert split == "train"
+            return {"v": {"content_id": "v", "official_split": "train", "role": "train", "resized": False,
+                          "resolution": [1920, 1080], "frame_hashes": [{"sha256": "fixture"}]}}
+
+        def read(self, split, video, index):
+            assert (split, video, index) == ("train", "v", 0)
+            self.counts[split] += 1
+            return self.raw
+
+    class Network(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.encoder = nn.Linear(1, 1, bias=False)
+            self.rgb_decoder = nn.Linear(1, 1, bias=False)
+            self.rgb_decoder.variant = "D0"
+            self.encoder.weight.data.fill_(0.5)
+            self.rgb_decoder.weight.data.fill_(0.5)
+
+    class LocalRun(training.TrialRun):
+        def update(self, batch, optimizer, step):
+            steps.append(step)
+            x = batch[0][0, 0, 0].float().reshape(1)
+            optimizer.zero_grad(set_to_none=True)
+            self.model.rgb_decoder(self.model.encoder(x)).square().sum().backward()
+            optimizer.step()
+            return {}
+
+        def observation(self, step, *, full):
+            return [{"step": step, "full": full}]
+
+    steps = []
+    stop_at = [2]
+
+    @contextmanager
+    def stopping_signal():
+        yield lambda: bool(steps and steps[-1] == stop_at[0])
+
+    monkeypatch.setattr(training, "stopping_signal", stopping_signal)
+    monkeypatch.setattr(torch.cuda, "reset_peak_memory_stats", lambda: None)
+    config = read_config(PROTOCOL)
+    config["dense"] = [{"updates": 2, "resolution": "crop"}, {"updates": 2, "resolution": "native"}]
+    config["checkpoint_every"] = 1
+    config["extension"]["max_updates"] = 1
+
+    def launch(name):
+        monkeypatch.setattr(training, "OUTPUT", tmp_path / name / "results")
+        monkeypatch.setattr(training, "CHECKPOINTS", tmp_path / name / "weights")
+        loss = type("Loss", (), {"weights": {"rgb_l1": 1}})()
+        return LocalRun(Trial("dense", "A0", 1, "D0"), config, Network(), loss, None, {}, Reader(), {}, None)
+
+    interrupted = launch("resumed")
+    assert training.execute(interrupted) is None
+    at_boundary = read_checkpoint(training.latest_path(interrupted)).state
+    assert at_boundary["step"] == 2 and at_boundary["counters"]["leg"] == 0
+    stop_at[0] = 0
+    resumed = launch("resumed")
+    assert training.execute(resumed) == [{"step": 4, "full": True}]
+    assert steps == [1, 2, 3, 4]
+    restored = read_checkpoint(training.latest_path(resumed)).state
+
+    control = launch("control")
+    training.execute(control)
+    uninterrupted = read_checkpoint(training.latest_path(control)).state
+    assert restored["counters"]["sample_chain"] == uninterrupted["counters"]["sample_chain"]
+    assert restored["scheduler"]["last_epoch"] == 2
+    assert all(int(value["step"]) == 4 for value in restored["optimizer"]["state"].values())
+    assert all(torch.equal(value, uninterrupted["model"][key]) for key, value in restored["model"].items())

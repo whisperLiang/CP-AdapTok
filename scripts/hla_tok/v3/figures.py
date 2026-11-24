@@ -39,11 +39,11 @@ def _curve(ax, series, field, axis):
                 label=label, color=COLORS[index % len(COLORS)], marker=marker, markersize=3, linewidth=1.0)
 
 
-def _trend(metrics, config, folder, scripts):
+def _trend(metrics, folder, scripts, *, stage, stage_label, title, thresholds):
     series = defaultdict(list)
     full = defaultdict(list)
     for row in metrics:
-        if row["stage"] == "dense":
+        if row["stage"] == stage:
             label = f"{row['arm']} {row['seed']} (9-frame subset)"
             (series if row["scope"] == "trend" else full)[label].append(row)
     if not series:
@@ -55,10 +55,10 @@ def _trend(metrics, config, folder, scripts):
             ax.scatter([row["step"] for row in points], [row[field] for row in points],
                        facecolors="white", edgecolors="#202020", marker="D", s=21, linewidths=0.85,
                        label="Full Validation (174 frames)" if index == 0 else None, zorder=5)
-        ax.axhline(config["dense_thresholds"][field], linestyle="--", color="#9B9FA5", label="Phase A threshold")
-        ax.set(xlabel="Optimizer updates", ylabel=label, title="Dense reconstruction | Native 1080p")
+        ax.axhline(thresholds[field], linestyle="--", color="#9B9FA5", label=f"Phase {stage_label} threshold")
+        ax.set(xlabel="Optimizer updates", ylabel=label, title=title)
         ax.legend(loc="best")
-        _save(fig, f"dense_trend_{field}", folder, scripts)
+        _save(fig, f"{stage}_trend_{field}", folder, scripts)
 
 
 def _rate(metrics, folder, scripts):
@@ -104,5 +104,8 @@ def figures_from(metrics, config, folder):
     validation = subprocess.check_output([sys.executable, str(validator), __file__, "--backend", "python", "--json"],
                                          text=True)
     (folder / "source-audit.json").write_text(validation)
-    _trend(metrics, config, folder, scripts)
+    _trend(metrics, folder, scripts, stage="dense", stage_label="A",
+           title="Dense reconstruction | Native 1080p", thresholds=config["dense_thresholds"])
+    _trend(metrics, folder, scripts, stage="continuous", stage_label="B",
+           title="Continuous K16320 | Native 1080p", thresholds=config["fixed_thresholds"])
     _rate(metrics, folder, scripts)

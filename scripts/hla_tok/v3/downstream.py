@@ -136,7 +136,7 @@ def _make_continuous(r2, dense):
     return model
 
 
-def continuous_trials(config, v2, seed):
+def _continuous_run(config, v2, seed):
     dense = require_pass(state_of("dense", seed))
     parent = _approved_checkpoint(dense)
     r2 = _seed_r2(v2, seed)
@@ -148,22 +148,38 @@ def continuous_trials(config, v2, seed):
     run = TrialRun(Trial("continuous", "B0", seed, variant), config, model, loss, teacher,
                    {"shared_sha256": _digest(model), "dense_sha256": sha256_file(parent),
                     "r2_sha256": sha256_file(r2)}, reader, cohort, quality)
+    return run, dense_model
+
+
+def _audit_continuous_initialization(run):
     audit = run.output / "gradient_calibration.json"
-    if not audit.is_file():
-        before = dict(reader.counts)
-        calibration(model, reader, loss, config, audit, teacher=teacher, freeze_weights=True)
-        write_json(run.output / "gradient_calibration" / "pixel_reads.json",
-                   {key: reader.counts[key] - before[key] for key in before})
-    extending = extension_active("continuous", seed)
+    if audit.is_file():
+        return
+    before = dict(run.reader.counts)
+    calibration(run.model, run.reader, run.loss, run.config, audit, teacher=run.teacher, freeze_weights=True)
+    write_json(run.output / "gradient_calibration" / "pixel_reads.json",
+               {key: run.reader.counts[key] - before[key] for key in before})
+
+
+def _continuous_endpoint(run, extending, thresholds):
     rows = execute(run, extend=extending)
     if rows is None:
         return None
-    thresholds = config["fixed_thresholds"]
-    if not extending and not quality_pass(rows[0], thresholds) and _extension([run], config, thresholds):
+    if not extending and not quality_pass(rows[0], thresholds) and _extension([run], run.config, thresholds):
         rows = execute(run, extend=True)
         if rows is None:
             return None
-    observed = rows[0]
+    return rows[0]
+
+
+def continuous_trials(config, v2, seed):
+    run, dense_model = _continuous_run(config, v2, seed)
+    _audit_continuous_initialization(run)
+    extending = extension_active("continuous", seed)
+    thresholds = config["fixed_thresholds"]
+    observed = _continuous_endpoint(run, extending, thresholds)
+    if observed is None:
+        return None
     passed = quality_pass(observed, thresholds)
     decision = {"status": "PASS" if passed else "BLOCKED", "candidate_quality": "PASS" if passed else "FAIL",
                 "thresholds": thresholds, "observed": observed, "selected": _selected(run) if passed else None,
@@ -171,7 +187,7 @@ def continuous_trials(config, v2, seed):
     write_json(state_of("continuous", seed), decision)
     if not passed:
         target = run.output / "bottleneck"
-        diagnose(on_gpu(dense_model), model, reader, cohort, quality, config["native_budget"], target)
+        diagnose(on_gpu(dense_model), run.model, run.reader, run.cohort, run.quality, config["native_budget"], target)
     return decision
 
 
@@ -197,44 +213,64 @@ def _performance_and_contract(run, budgets, precisions):
     return primary
 
 
-def quantized_trials(config, v2, seed):
+def _quantized_runs(config, v2, seed):
     continuous = require_pass(state_of("continuous", seed))
     parent = _approved_checkpoint(continuous)
     reader, cohort, loss, quality = _context(config, v2, seed)
-    runs, observations = [], {}
-    extending = extension_active("quantized", seed)
+    variant = continuous["selected"]["variant"]
     for arm in ("C0", "C1"):
         model, _ = model_from_checkpoint(parent)
-        variant = continuous["selected"]["variant"]
         run = TrialRun(Trial("quantized", arm, seed, variant), config, on_gpu(model), loss, None,
                        {"shared_sha256": _digest(model), "continuous_sha256": sha256_file(parent)},
                        reader, cohort, quality)
-        runs.append(run)
         if arm == "C1":
             _calibrate_quantizer(run)
-        observations[arm] = execute(run, extend=extending)
-        if observations[arm] is None:
+        yield run
+
+
+def _run_observations(runs, extending):
+    observations = []
+    for run in runs:
+        rows = execute(run, extend=extending)
+        if rows is None:
             return None
-    _matching(runs)
-    candidate = runs[-1]
-    reported, bypass = observations["C1"]
-    thresholds = discrete_thresholds(reported, config, csv_at(BASELINES))
-    if not extending and not quality_pass(reported, thresholds) and _extension([candidate], config, thresholds):
-        for run in runs:
-            observations[run.trial.arm] = execute(run, extend=True)
-            if observations[run.trial.arm] is None:
-                return None
-        _matching(runs)
-        reported, bypass = observations["C1"]
-    passed = quality_pass(reported, thresholds)
-    perf = _performance_and_contract(candidate, (config["native_budget"],), ("bf16",)) if passed else None
-    passed = passed and perf["pipeline_fps"] >= config["performance"]["pipeline_fps"]
-    decision = {
+        observations.append((run, rows))
+    return observations
+
+
+def _passes_performance(performance, config):
+    return performance is not None and performance["pipeline_fps"] >= config["performance"]["pipeline_fps"]
+
+
+def _fixed_verdict(observations, thresholds, config):
+    (_, (control,)), (candidate, (reported, bypass)) = observations
+    perf = None
+    if quality_pass(reported, thresholds):
+        perf = _performance_and_contract(candidate, (config["native_budget"],), ("bf16",))
+    passed = _passes_performance(perf, config)
+    return {
         "status": "PASS" if passed else "FAIL", "thresholds": thresholds, "observed": reported,
         "selected": _selected(candidate) if passed else None, "performance": perf,
         "immediate_fixed13_minus_bypass": {key: reported[key] - bypass[key] for key in thresholds},
-        "continuous_training_trajectory": {key: bypass[key] - observations["C0"][0][key] for key in thresholds},
+        "continuous_training_trajectory": {key: bypass[key] - control[key] for key in thresholds},
     }
+
+
+def quantized_trials(config, v2, seed):
+    extending = extension_active("quantized", seed)
+    observations = _run_observations(_quantized_runs(config, v2, seed), extending)
+    if observations is None:
+        return None
+    runs = [run for run, _ in observations]
+    _matching(runs)
+    candidate, (reported, _) = observations[-1]
+    thresholds = discrete_thresholds(reported, config, csv_at(BASELINES))
+    if not extending and not quality_pass(reported, thresholds) and _extension([candidate], config, thresholds):
+        observations = _run_observations(runs, True)
+        if observations is None:
+            return None
+        _matching(runs)
+    decision = _fixed_verdict(observations, thresholds, config)
     write_json(state_of("quantized", seed), decision)
     return decision
 
@@ -262,48 +298,67 @@ def _fixed_trends(run):
     return [next(row for row in json_at(path) if row["budget"] == fixed) for path in folders]
 
 
-def progressive_trials(config, v2):
-    parents = {seed: require_pass(state_of("quantized", seed)) for seed in (1, 2)}
-    runs, rows = [], {}
-    extension = OUTPUT / "decisions" / "progressive_extension.json"
-    extending = extension.is_file() and json_at(extension)["authorized"]
+def _progressive_runs(config, v2, parents):
     for seed, parent in parents.items():
         source = _approved_checkpoint(parent)
         reader, cohort, loss, quality = _context(config, v2, seed)
         model, _ = model_from_checkpoint(source)
         trial = Trial("progressive", "D", seed, parent["selected"]["variant"])
-        run = TrialRun(trial, config, on_gpu(model), loss, None,
+        yield TrialRun(trial, config, on_gpu(model), loss, None,
                        {"shared_sha256": _digest(model), "fixed_vq_sha256": sha256_file(source)},
                        reader, cohort, quality)
-        runs.append(run)
-        rows[seed] = execute(run, extend=extending)
-        if rows[seed] is None:
-            return None
+
+
+def _progressive_extension(path, runs, decisions, config):
+    if path.is_file():
+        return json_at(path)["authorized"]
+    attempts = {run.trial.seed: _fixed_trends(run) for run in runs}
+    allowed = any(supports_extension(attempts[seed], verdict["fixed_thresholds"], config["extension"]["near"])
+                  for seed, verdict in decisions.items())
+    write_json(path, {"authorized": allowed, "updates_per_seed": config["extension"]["max_updates"] if allowed else 0})
+    return allowed
+
+
+def _publish_progressive(run, decision, config):
+    selected = _selected(run)
+    _nonmonotonic(run, selected["step"])
+    if decision["status"] == "PASS":
+        perf = _performance_and_contract(run, BUDGETS, ("bf16", "fp32"))
+        decision["performance"] = perf
+        decision["status"] = "PASS" if _passes_performance(perf, config) else "FAIL"
+    decision["selected"] = selected if decision["status"] == "PASS" else None
+    write_json(state_of("progressive", run.trial.seed), decision)
+
+
+def _progressive_verdicts(observations, config, baselines):
+    return {run.trial.seed: progressive_decision(rows, config, baselines) for run, rows in observations}
+
+
+def _progressive_observations(config, v2, parents, extension):
+    extending = extension.is_file() and json_at(extension)["authorized"]
+    observations = _run_observations(_progressive_runs(config, v2, parents), extending)
+    if observations is None:
+        return None
+    runs = [run for run, _ in observations]
     baselines = csv_at(BASELINES)
-    quality_results = {seed: progressive_decision(report, config, baselines) for seed, report in rows.items()}
-    if not extension.is_file():
-        attempts = {run.trial.seed: _fixed_trends(run) for run in runs}
-        allowed = any(supports_extension(attempts[seed], verdict["fixed_thresholds"], config["extension"]["near"])
-                      for seed, verdict in quality_results.items())
-        write_json(extension, {"authorized": allowed, "updates_per_seed": config["extension"]["max_updates"] if allowed else 0})
-    if not extending and json_at(extension)["authorized"]:
-        for run in runs:
-            extra = execute(run, extend=True)
-            if extra is None:
-                return None
-            quality_results[run.trial.seed] = progressive_decision(extra, config, baselines)
+    decisions = _progressive_verdicts(observations, config, baselines)
+    if not _progressive_extension(extension, runs, decisions, config) or extending:
+        return runs, decisions
+    extra = _run_observations(runs, True)
+    return None if extra is None else (runs, _progressive_verdicts(extra, config, baselines))
+
+
+def progressive_trials(config, v2):
+    parents = {seed: require_pass(state_of("quantized", seed)) for seed in (1, 2)}
+    extension = OUTPUT / "decisions" / "progressive_extension.json"
+    observations = _progressive_observations(config, v2, parents, extension)
+    if observations is None:
+        return None
+    runs, decisions = observations
     for run in runs:
-        decision = quality_results[run.trial.seed]
-        selected = _selected(run)
-        _nonmonotonic(run, selected["step"])
-        if decision["status"] == "PASS":
-            perf = _performance_and_contract(run, BUDGETS, ("bf16", "fp32"))
-            decision["performance"] = perf
-            decision["status"] = "PASS" if perf["pipeline_fps"] >= config["performance"]["pipeline_fps"] else "FAIL"
-        decision["selected"] = selected if decision["status"] == "PASS" else None
-        write_json(state_of("progressive", run.trial.seed), decision)
-    return {"status": "PASS" if all(row["status"] == "PASS" for row in quality_results.values()) else "FAIL",
-            "seeds": quality_results}
+        _publish_progressive(run, decisions[run.trial.seed], config)
+    return {"status": "PASS" if all(row["status"] == "PASS" for row in decisions.values()) else "FAIL",
+            "seeds": decisions}
 
 
 def _run_if_pending(phase, seed, work):

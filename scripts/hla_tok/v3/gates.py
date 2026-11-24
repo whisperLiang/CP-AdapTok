@@ -57,27 +57,40 @@ def discrete_thresholds(row, config, baselines):
     return {"global_psnr": limits["global_psnr_lower"], "lpips": limits["lpips_upper"], "dists": limits["dists_upper"]}
 
 
-def progressive_decision(rows, config, baselines):
+def _validate_progressive_rows(rows):
     if tuple(row["budget"] for row in rows) != BUDGETS:
         raise ValueError("progressive admission requires all eight ordered physical budgets")
     if any(row.get("frames") != 174 or not row.get("matched_174") or row["mode"] != "fixed13" for row in rows):
         raise ValueError("progressive admission requires full native Fixed13 observations")
+
+
+def _progressive_gains(base, mid, fixed):
+    return {
+        "base_to_fixed_psnr": fixed["global_psnr"] - base["global_psnr"],
+        "base_to_fixed_lpips": base["lpips"] - fixed["lpips"],
+        "mid_to_fixed_psnr": fixed["global_psnr"] - mid["global_psnr"],
+    }
+
+
+def _progressive_checks(fixed, thresholds, adjacent, improvements, limits):
+    tolerance = limits["tolerance"]
+    return {
+        "fixed_quality": quality_pass(fixed, thresholds),
+        "adjacent_average_monotonic": all(gain[key] >= -tolerance[key] for gain in adjacent for key in MAIN),
+        "primary_gains": all(improvements[key] >= limit for key, limit in limits["gains"].items()),
+        "not_saturated_in_top_three": any(gain[key] > tolerance[key] for gain in adjacent[-2:] for key in MAIN),
+    }
+
+
+def progressive_decision(rows, config, baselines):
+    _validate_progressive_rows(rows)
     limits = config["progressive"]
     by_budget = {row["budget"]: row for row in rows}
     base, mid, fixed = (by_budget[budget] for budget in (BUDGETS[0], BUDGETS[2], config["native_budget"]))
     adjacent = [signed_gain(new, old) for old, new in zip(rows, rows[1:])]
     thresholds = discrete_thresholds(fixed, config, baselines)
-    improvements = {
-        "base_to_fixed_psnr": fixed["global_psnr"] - base["global_psnr"],
-        "base_to_fixed_lpips": base["lpips"] - fixed["lpips"],
-        "mid_to_fixed_psnr": fixed["global_psnr"] - mid["global_psnr"],
-    }
-    checks = {
-        "fixed_quality": quality_pass(fixed, thresholds),
-        "adjacent_average_monotonic": all(gain[key] >= -limits["tolerance"][key] for gain in adjacent for key in MAIN),
-        "primary_gains": all(improvements[key] >= limit for key, limit in limits["gains"].items()),
-        "not_saturated_in_top_three": any(gain[key] > limits["tolerance"][key] for gain in adjacent[-2:] for key in MAIN),
-    }
+    improvements = _progressive_gains(base, mid, fixed)
+    checks = _progressive_checks(fixed, thresholds, adjacent, improvements, limits)
     return {"status": "PASS" if all(checks.values()) else "FAIL", "checks": checks,
             "fixed_thresholds": thresholds, "gains": improvements,
             "adjacent": [{"lower_budget": old, "upper_budget": new, **gain}
