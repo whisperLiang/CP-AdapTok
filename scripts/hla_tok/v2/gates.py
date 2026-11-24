@@ -70,9 +70,11 @@ def pick(rows):
     ) else eligible["R2"]
 
 
-def pilot(seed, candidate):
+def pilot(seed, candidate, extension=False):
     output = OUTPUT / f"continuous_pilot/seed{seed}"
-    names = ARMS if seed == 1 else ("R0", candidate)
+    if extension:
+        output /= f"extension_{candidate}"
+    names = ARMS if seed == 1 and not extension else ("R0", candidate)
     rows = [load_arm(seed, arm) for arm in names]
     comparable(rows)
     control = rows[0]
@@ -90,16 +92,30 @@ def pilot(seed, candidate):
             "reason": "Short-screen initial thresholds" if seed == 1 else "Held-out seed signs on matched data"}
 
 
+def pilot_gate_path(pilot, seed):
+    folder = pilot / f"seed{seed}"
+    extensions = list(folder.glob("extension_*/acceptance.json"))
+    if len(extensions) > 1:
+        raise RuntimeError("only one paired extension is allowed")
+    return extensions[0] if extensions else folder / "acceptance.json"
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("stage", choices=("overfit", "pilot"))
     parser.add_argument("--seed", default=1, type=int)
     parser.add_argument("--candidate", choices=("R2", "R3"))
+    parser.add_argument("--extension-pair", action="store_true")
     args = parser.parse_args()
     if args.stage == "overfit":
         result, path = overfit(), OUTPUT / "diag1_overfit/acceptance.json"
     else:
-        result, path = pilot(args.seed, args.candidate), OUTPUT / f"continuous_pilot/seed{args.seed}/acceptance.json"
+        if (args.extension_pair or args.seed == 2) and args.candidate is None:
+            raise ValueError("paired pilot requires an anchored candidate")
+        output = OUTPUT / f"continuous_pilot/seed{args.seed}"
+        if args.extension_pair:
+            output /= f"extension_{args.candidate}"
+        result, path = pilot(args.seed, args.candidate, args.extension_pair), output / "acceptance.json"
     write_json(path, result)
     print(result["status"], flush=True)
 
