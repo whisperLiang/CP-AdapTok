@@ -85,13 +85,15 @@ def record_phase1(results):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results", type=Path, default=Path("results/hla_tok"))
-    parser.add_argument("--benchmark-dir", type=Path, default=Path("results/hla_tok/phase0/t0_initial"))
+    parser.add_argument("--benchmark-dir", type=Path)
     args = parser.parse_args()
     results = args.results
+    final = results / "phase0/t0_final"
+    benchmark_dir = args.benchmark_dir or (final if (final / "environment.json").is_file() else results / "phase0/t0_initial")
     identity = json.loads(Path("configs/hla_tok/validation_cohort.json").read_bytes())
     cpu = test_summary(results / "phase0/cpu_regression.xml")
     cuda = test_summary(results / "phase0/cuda_tests.xml")
-    phase0 = measured_phase0(results, args.benchmark_dir, cpu, cuda)
+    phase0 = measured_phase0(results, benchmark_dir, cpu, cuda)
     pixel_reads = {"train_pixel_reads": 0, "validation_pixel_reads": 0, "test_pixel_reads": 0}
     for path in results.rglob("pixel_reads.json"):
         for name, count in json.loads(path.read_bytes()).items():
@@ -112,8 +114,8 @@ def main():
     joint_replay = csv_at(results / "baselines/joint_replay/metrics.csv")
     if original and joint_replay:
         write_csv(results / "baselines/metrics.csv", original + joint_replay)
-    if (args.benchmark_dir / "benchmark.csv").exists() and args.benchmark_dir != results / "phase0":
-        write_csv(results / "phase0/benchmark.csv", csv_at(args.benchmark_dir / "benchmark.csv"))
+    if (benchmark_dir / "benchmark.csv").exists() and benchmark_dir != results / "phase0":
+        write_csv(results / "phase0/benchmark.csv", csv_at(benchmark_dir / "benchmark.csv"))
     print(json.dumps(record, indent=2))
 
 
