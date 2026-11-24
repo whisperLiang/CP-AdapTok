@@ -222,3 +222,15 @@ def test_v2_checkpoint_requires_matching_architecture_and_anchor_metadata(tmp_pa
                     step=1, data_cursor=1, counters=counters)
     with pytest.raises(ValueError, match="anchor"):
         load_experimental_checkpoint(invalid, rebuilt, "cohort")
+
+
+def test_receiver_cannot_inspect_unreceived_backing_storage():
+    torch.manual_seed(71)
+    rx = HLATok("R2").eval()
+    geometry = Geometry(128, 128)
+    common = torch.randint(0, 8192, (1, 45))
+    view_a = torch.cat((common, torch.zeros(1, 8, dtype=torch.int64)), 1)[:, :45]
+    view_b = torch.cat((common, torch.full((1, 8), 8191, dtype=torch.int64)), 1)[:, :45]
+    with torch.inference_mode():
+        torch.testing.assert_close(rx.decode_prefix(view_a, geometry), rx.decode_prefix(view_b, geometry),
+                                   atol=0, rtol=0)
