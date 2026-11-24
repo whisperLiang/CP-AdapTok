@@ -10,9 +10,9 @@ dependencies = ["torch>=2.6", "numpy", "PyYAML", "Pillow", "scipy", "opencv-pyth
 eval = ["lpips", "pytorch-msssim", "DISTS-pytorch", "matplotlib"]
 dev = ["pytest", "pytest-cov", "radon", "ruff"]
 [tool.setuptools.packages.find]
-include = ["cp_adaptok*"]
+include = ["cp_adaptok*", "hla_tok*"]
 [tool.pytest.ini_options]
-testpaths = ["cp_adaptok/tests"]
+testpaths = ["cp_adaptok/tests", "tests/hla_tok"]
 markers = ["integration: actual upstream networks", "gpu: CUDA required", "slow: native resolution"]
 [tool.ruff]
 line-length = 110
