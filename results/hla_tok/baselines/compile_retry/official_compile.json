@@ -1,0 +1,15 @@
+{
+  "status": "MEASURED",
+  "precision": "bf16",
+  "tile_batch": 1,
+  "integer_ids_equal": false,
+  "rgb_exact": false,
+  "rgb_max_abs": 0.224609375,
+  "rgb_mean_abs": 0.004170198924839497,
+  "eager_wall_ms": 500.94637499933015,
+  "eager_cuda_ms": 500.87841796875,
+  "first_call_wall_ms": 17851.03245100072,
+  "compile_and_first_two_calls_s": 19.2050958990003,
+  "warm_wall_ms": 22.40510699994047,
+  "warm_cuda_ms": 22.3832950592041
+}

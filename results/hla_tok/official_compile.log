@@ -1,0 +1,9 @@
+/usr/bin/ld: skipping incompatible /lib/i386-linux-gnu/libcuda.so when searching for -lcuda
+/usr/bin/ld: cannot find -lcuda: No such file or directory
+/usr/bin/ld: skipping incompatible /lib/i386-linux-gnu/libcuda.so when searching for -lcuda
+collect2: error: ld returned 1 exit status
+train_deterministic=False
+eval_deterministic=True
+encoder_attn_type=full_causal_type1
+decoder_attn_type=full_causal_type2
+scorer_attn_type=None

@@ -1,0 +1,80 @@
+{
+  "migrated": [
+    "inputs.I.bias",
+    "inputs.P.bias",
+    "body.stem.1.net.0.weight",
+    "body.stem.1.net.0.bias",
+    "body.stem.1.net.2.weight",
+    "body.stem.1.net.2.bias",
+    "body.full.0.net.0.weight",
+    "body.full.0.net.0.bias",
+    "body.full.0.net.2.weight",
+    "body.full.0.net.2.bias",
+    "body.full.1.net.0.weight",
+    "body.full.1.net.0.bias",
+    "body.full.1.net.2.weight",
+    "body.full.1.net.2.bias",
+    "body.coarse.0.net.0.weight",
+    "body.coarse.0.net.0.bias",
+    "body.coarse.0.net.2.weight",
+    "body.coarse.0.net.2.bias",
+    "body.coarse.1.net.0.weight",
+    "body.coarse.1.net.0.bias",
+    "body.coarse.1.net.2.weight",
+    "body.coarse.1.net.2.bias",
+    "body.coarse.2.net.0.weight",
+    "body.coarse.2.net.0.bias",
+    "body.coarse.2.net.2.weight",
+    "body.coarse.2.net.2.bias",
+    "body.fusion.0.weight",
+    "body.fusion.0.bias",
+    "body.fusion.2.net.0.weight",
+    "body.fusion.2.net.0.bias",
+    "body.fusion.2.net.2.weight",
+    "body.fusion.2.net.2.bias",
+    "outputs.I.weight",
+    "outputs.I.bias",
+    "outputs.P.weight",
+    "outputs.P.bias",
+    "confidence.weight",
+    "confidence.bias"
+  ],
+  "adapted_shapes": {
+    "budget_embedding.weight": "K16320+ initialized from K8192",
+    "inputs.I.weight": "legacy observation, Gaussian fill, L1 mask, budget and context columns",
+    "inputs.P.weight": "legacy observation, Gaussian fill, L1 mask, budget and context columns"
+  },
+  "shape_mismatches": {},
+  "new_parameters": [
+    "stem enhancement observations, fill and mask slices",
+    "three higher budget rows"
+  ],
+  "reinitialized": [
+    "new stem slices set to zero"
+  ],
+  "discarded": [
+    "legacy level-2 mask columns, inactive in SP-1"
+  ],
+  "output_mapping": "I/P permuted output rows and indexed shared confidence",
+  "initialization_comparison": {
+    "I_510": {
+      "max_abs": 0.0,
+      "mse": 0.0
+    },
+    "I_8192": {
+      "max_abs": 0.0,
+      "mse": 0.0
+    },
+    "P_510": {
+      "max_abs": 0.0,
+      "mse": 0.0
+    },
+    "P_8192": {
+      "max_abs": 0.0,
+      "mse": 0.0
+    }
+  },
+  "source": "checkpoints/aip_vtok/sparse_decoder/E4/seed1/step_0500.pt",
+  "step": 500,
+  "sha256": "27dd77bc6819e9357a2b83942abbb663a8461f4cc6b064806f1bab45133be4ca"
+}

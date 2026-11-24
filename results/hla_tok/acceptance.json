@@ -1,0 +1,67 @@
+{
+  "phase0": {
+    "status": "PASS",
+    "checks": {
+      "matched_original_full_cohort": true,
+      "matched_joint_step40000": true,
+      "official_source_and_weights": true,
+      "official_precision_tile_matrix": true,
+      "official_4frame_latency": true,
+      "official_compile_diagnostic": true,
+      "native_h100_performance": true,
+      "cpu_regression": true,
+      "cuda_native_tests": true,
+      "sealed_old_assets": true
+    },
+    "K8192_neural_serial_fps": {
+      "bf16": 91.19405588278025,
+      "fp32": 86.21371926866031
+    }
+  },
+  "phase1": {
+    "status": "BLOCKED",
+    "reason": "fixed-budget native Validation has not completed"
+  },
+  "manifest_hashes": {
+    "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
+    "validation": "8cca166ca7d1f6faf45cd6660b7074657164d2afa2fd14dec92d76f0cee25405",
+    "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
+  },
+  "pixel_reads": {
+    "train_pixel_reads": 0,
+    "validation_pixel_reads": 2520,
+    "test_pixel_reads": 0
+  },
+  "tests": {
+    "cpu": {
+      "passed": 222,
+      "failed": 0,
+      "skipped": 1
+    },
+    "cuda": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "phase2": {
+    "status": "BLOCKED",
+    "reason": "Phase 1 has no full pass"
+  },
+  "phase3": {
+    "status": "BLOCKED",
+    "reason": "Phase 2 has no full pass"
+  },
+  "phase4": {
+    "status": "BLOCKED",
+    "reason": "Phase 3 has no full pass"
+  },
+  "phase5": {
+    "status": "BLOCKED",
+    "reason": "Phase 4 has no full pass"
+  },
+  "phase6": {
+    "status": "BLOCKED",
+    "reason": "Phase 5 has no full pass"
+  }
+}

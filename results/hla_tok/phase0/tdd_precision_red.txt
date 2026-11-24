@@ -1,0 +1,71 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________ test_cached_sender_retains_the_precision_it_started_with ___________
+
+    def test_cached_sender_retains_the_precision_it_started_with():
+        torch.manual_seed(12)
+        model = HLATok().eval()
+        source = torch.rand(1, 3, 128, 128)
+        with torch.inference_mode():
+            with torch.autocast("cpu", dtype=torch.bfloat16):
+                cache = model.prepare_frame(source)
+                expected = model.encode_frame(source, 67)
+                assert torch.equal(model.encode_prefix(cache, 17), expected[:, :17])
+>           assert torch.equal(model.extend_prefix(cache, 67), expected)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/hla_tok/test_codec.py:149: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../../../CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/utils/_contextlib.py:120: in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+hla_tok/models/codec.py:83: in extend_prefix
+    sender.chunks.append(self._ordered(self._ids(self._block(sender, index * RANK_CHUNK))))
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+hla_tok/models/codec.py:59: in _block
+    return self.query_encoder(sender.memory, start).unflatten(0, (sender.batch, sender.geometry.num_regions))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py:1775: in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py:1786: in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+hla_tok/models/local.py:66: in forward
+    x = layer(x, context)
+        ^^^^^^^^^^^^^^^^^
+../../../../CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py:1775: in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py:1786: in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+hla_tok/models/local.py:35: in forward
+    q = self.query(self.query_norm(x)).reshape(batch, length, HEADS, DIM // HEADS).transpose(1, 2)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py:1775: in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../../CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/module.py:1786: in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Linear(in_features=128, out_features=128, bias=True)
+input = tensor([[[ 0.7539,  2.0938, -0.1836,  ..., -0.9844, -1.6094, -0.7227],
+         [ 1.4688,  0.3789,  0.6523,  ..., -1.0...1.0469, -0.9688],
+         [ 0.0081, -1.2188,  0.1953,  ..., -0.4883,  1.0234, -0.0298]]],
+       dtype=torch.bfloat16)
+
+    def forward(self, input: Tensor) -> Tensor:
+        """
+        Runs the forward pass.
+        """
+>       return F.linear(input, self.weight, self.bias)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       RuntimeError: mat1 and mat2 must have the same dtype, but got BFloat16 and Float
+
+../../../../CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/nn/modules/linear.py:134: RuntimeError
+=========================== short test summary info ============================
+FAILED tests/hla_tok/test_codec.py::test_cached_sender_retains_the_precision_it_started_with
+1 failed, 8 deselected in 1.32s

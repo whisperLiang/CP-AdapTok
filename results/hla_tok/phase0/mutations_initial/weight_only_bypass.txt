@@ -1,0 +1,11 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________ test_receiver_has_only_prefix_and_public_geometry _______________
+tests/test_codec.py:105: in test_receiver_has_only_prefix_and_public_geometry
+    assert not torch.equal(a, c)
+E   assert not True
+E    +  where True = <built-in method equal of type object at 0x7ef16efd6c20>(tensor([[[[0.5626, 0.4817, 0.5177,  ..., 0.5141, 0.5027, 0.5012],\n          [0.5187, 0.5534, 0.5137,  ..., 0.4991, 0.4...76, 0.4325, 0.4893,  ..., 0.5118, 0.4291, 0.5516],\n          [0.5323, 0.5022, 0.4944,  ..., 0.4790, 0.4926, 0.5432]]]]), tensor([[[[0.5626, 0.4817, 0.5177,  ..., 0.5141, 0.5027, 0.5012],\n          [0.5187, 0.5534, 0.5137,  ..., 0.4991, 0.4...76, 0.4325, 0.4893,  ..., 0.5118, 0.4291, 0.5516],\n          [0.5323, 0.5022, 0.4944,  ..., 0.4790, 0.4926, 0.5432]]]]))
+E    +    where <built-in method equal of type object at 0x7ef16efd6c20> = torch.equal
+=========================== short test summary info ============================
+FAILED tests/test_codec.py::test_receiver_has_only_prefix_and_public_geometry
+1 failed in 1.33s

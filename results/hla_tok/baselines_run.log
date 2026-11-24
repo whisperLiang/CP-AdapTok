@@ -1,0 +1,71 @@
+/home/whisperliang/CP-AdapTok/.venv-adaptok-official/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-adaptok-official/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+/home/whisperliang/CP-AdapTok/.venv-adaptok-official/lib/python3.10/site-packages/lpips/lpips.py:107: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  self.load_state_dict(torch.load(model_path, map_location='cpu'), strict=False)
+/home/whisperliang/CP-AdapTok/.venv-adaptok-official/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+train_deterministic=False
+eval_deterministic=True
+encoder_attn_type=full_causal_type1
+decoder_attn_type=full_causal_type2
+scorer_attn_type=None
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-adaptok-official/lib/python3.10/site-packages/lpips/weights/v0.1/alex.pth
+Setting up [LPIPS] perceptual loss: trunk [vgg], v[0.1], spatial [off]
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-adaptok-official/lib/python3.10/site-packages/lpips/weights/v0.1/vgg.pth
+Official stride 128 fp32 DAVIS2017:blackswan frame 0 + 16, 25.78s codec
+Official stride 128 fp32 DAVIS2017:blackswan frame 16 + 16, 25.53s codec
+Official stride 128 fp32 DAVIS2017:blackswan frame 32 + 16, 25.63s codec
+Official stride 128 fp32 DAVIS2017:blackswan frame 48 + 2, 25.59s codec
+Official stride 128 fp32 DAVIS2017:car-roundabout frame 0 + 16, 25.61s codec
+Official stride 128 fp32 DAVIS2017:car-roundabout frame 16 + 16, 25.63s codec
+Official stride 128 fp32 DAVIS2017:car-roundabout frame 32 + 16, 25.64s codec
+Official stride 128 fp32 DAVIS2017:car-roundabout frame 48 + 16, 25.63s codec
+Official stride 128 fp32 DAVIS2017:dog frame 0 + 16, 25.63s codec
+Official stride 128 fp32 DAVIS2017:dog frame 16 + 16, 25.66s codec
+Official stride 128 fp32 DAVIS2017:dog frame 32 + 16, 25.65s codec
+Official stride 128 fp32 DAVIS2017:dog frame 48 + 12, 25.64s codec
+Official stride 128 bf16 DAVIS2017:blackswan frame 0 + 16, 6.88s codec
+Official stride 128 bf16 DAVIS2017:blackswan frame 16 + 16, 6.82s codec
+Official stride 128 bf16 DAVIS2017:blackswan frame 32 + 16, 6.82s codec
+Official stride 128 bf16 DAVIS2017:blackswan frame 48 + 2, 6.83s codec
+Official stride 128 bf16 DAVIS2017:car-roundabout frame 0 + 16, 6.82s codec
+Official stride 128 bf16 DAVIS2017:car-roundabout frame 16 + 16, 6.80s codec
+Official stride 128 bf16 DAVIS2017:car-roundabout frame 32 + 16, 6.84s codec
+Official stride 128 bf16 DAVIS2017:car-roundabout frame 48 + 16, 6.81s codec
+Official stride 128 bf16 DAVIS2017:dog frame 0 + 16, 6.85s codec
+Official stride 128 bf16 DAVIS2017:dog frame 16 + 16, 6.80s codec
+Official stride 128 bf16 DAVIS2017:dog frame 32 + 16, 6.80s codec
+Official stride 128 bf16 DAVIS2017:dog frame 48 + 12, 6.81s codec
+Official stride 96 fp32 DAVIS2017:blackswan frame 0 + 16, 41.81s codec
+Official stride 96 fp32 DAVIS2017:blackswan frame 16 + 16, 41.80s codec
+Official stride 96 fp32 DAVIS2017:blackswan frame 32 + 16, 41.80s codec
+Official stride 96 fp32 DAVIS2017:blackswan frame 48 + 2, 41.82s codec
+Official stride 96 fp32 DAVIS2017:car-roundabout frame 0 + 16, 41.81s codec
+Official stride 96 fp32 DAVIS2017:car-roundabout frame 16 + 16, 41.81s codec
+Official stride 96 fp32 DAVIS2017:car-roundabout frame 32 + 16, 41.81s codec
+Official stride 96 fp32 DAVIS2017:car-roundabout frame 48 + 16, 41.80s codec
+Official stride 96 fp32 DAVIS2017:dog frame 0 + 16, 41.81s codec
+Official stride 96 fp32 DAVIS2017:dog frame 16 + 16, 41.84s codec
+Official stride 96 fp32 DAVIS2017:dog frame 32 + 16, 41.82s codec
+Official stride 96 fp32 DAVIS2017:dog frame 48 + 12, 41.80s codec
+Official stride 96 bf16 DAVIS2017:blackswan frame 0 + 16, 11.12s codec
+Official stride 96 bf16 DAVIS2017:blackswan frame 16 + 16, 11.13s codec
+Official stride 96 bf16 DAVIS2017:blackswan frame 32 + 16, 11.13s codec
+Official stride 96 bf16 DAVIS2017:blackswan frame 48 + 2, 11.15s codec
+Official stride 96 bf16 DAVIS2017:car-roundabout frame 0 + 16, 11.14s codec
+Official stride 96 bf16 DAVIS2017:car-roundabout frame 16 + 16, 11.14s codec
+Official stride 96 bf16 DAVIS2017:car-roundabout frame 32 + 16, 11.12s codec
+Official stride 96 bf16 DAVIS2017:car-roundabout frame 48 + 16, 11.13s codec
+Official stride 96 bf16 DAVIS2017:dog frame 0 + 16, 11.14s codec
+Official stride 96 bf16 DAVIS2017:dog frame 16 + 16, 11.14s codec
+Official stride 96 bf16 DAVIS2017:dog frame 32 + 16, 11.13s codec
+Official stride 96 bf16 DAVIS2017:dog frame 48 + 12, 11.12s codec
+Official stride128 bf16 tile batch 4, 8.12 codec FPS
+Official stride128 bf16 tile batch 8, 8.67 codec FPS
+Official stride128 bf16 tile batch 16, 8.91 codec FPS
+Official stride128 fp32 tile batch 4, 2.02 codec FPS
+Official stride128 fp32 tile batch 8, 2.11 codec FPS
+Official stride128 fp32 tile batch 16, 2.17 codec FPS

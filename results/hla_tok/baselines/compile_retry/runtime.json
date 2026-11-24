@@ -1,0 +1,10 @@
+{
+  "gpu": "NVIDIA H100 PCIe",
+  "cuda": "12.1",
+  "driver": "580.159.03",
+  "torch": "2.5.1+cu121",
+  "tf32_matmul": false,
+  "tf32_cudnn": false,
+  "attention": "PyTorch SDPA dispatcher",
+  "compile": "eager"
+}

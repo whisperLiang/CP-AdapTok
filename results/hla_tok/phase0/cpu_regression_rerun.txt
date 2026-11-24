@@ -1,0 +1,50 @@
+...........................................................F............ [ 32%]
+.......................................................................s [ 65%]
+........................................................................ [ 98%]
+...                                                                      [100%]
+=================================== FAILURES ===================================
+_____ test_phase_configuration_forks_same_warmup_and_fixed_training_budget _____
+
+tmp_path = PosixPath('/tmp/pytest-of-whisperliang/pytest-2/test_phase_configuration_forks0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x793d4c0b8f50>
+
+    def test_phase_configuration_forks_same_warmup_and_fixed_training_budget(tmp_path, monkeypatch):
+        from cp_adaptok import large_scale
+    
+        monkeypatch.setattr(large_scale, "source_checkpoint", lambda *args: None)
+        manifest = {"seed": 1, "run_id": "test", "manifest_hashes": {"train": "same"}}
+        row = {"path": str(tmp_path), "content_id": "video", "resolution": [1920, 1080],
+               "original_frames": 100, "role": "train", "fps": 30}
+        splits = {"train": [row], "validation": [], "test": []}
+>       a = large_scale.phase_config("s3", "B0", manifest, splits)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+cp_adaptok/tests/test_large_scale_training.py:170: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+cp_adaptok/large_scale.py:196: in phase_config
+    "official_weights_sha256": {k: file_hash(resolve(config["paths"][k]))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+cp_adaptok/large_scale_data.py:20: in file_hash
+    with Path(path).open("rb") as handle:
+         ^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/checkpoints/cvpr2026_video_ld.pth.tar')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok/checkpoints/cvpr2026_video_ld.pth.tar'
+
+../../../../.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/pathlib.py:1013: FileNotFoundError
+=========================== short test summary info ============================
+FAILED cp_adaptok/tests/test_large_scale_training.py::test_phase_configuration_forks_same_warmup_and_fixed_training_budget
+1 failed, 217 passed, 1 skipped, 12 deselected in 44.06s

@@ -1,0 +1,17 @@
+{
+  "gpu": "NVIDIA H100 PCIe",
+  "cuda": "13.0",
+  "driver": "580.159.03",
+  "torch": "2.9.1+cu130",
+  "tf32_matmul": false,
+  "tf32_cudnn": false,
+  "attention": "PyTorch SDPA dispatcher",
+  "compile": "eager",
+  "random_seed": 1,
+  "geometry": [
+    1080,
+    1920
+  ],
+  "fixed13_rate_scope": "benchmark transports only standalone index payloads",
+  "io": "serial raw RGB host-to-device and reconstruction device-to-host; no disk"
+}
