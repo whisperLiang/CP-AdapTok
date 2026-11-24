@@ -19,7 +19,7 @@ from hla_tok.evaluation.data import AuditedFrames, load_cohort
 from hla_tok.evaluation.io import write_json
 from hla_tok.evaluation.metrics import FullFrameQuality, sha256_file
 from hla_tok.evaluation.reconstruction import validate
-from hla_tok.training.checkpoint import ResumeIdentity, read_checkpoint
+from hla_tok.training.checkpoint import ResumeIdentity, implementation_hash, read_checkpoint
 from hla_tok.training.losses import Losses
 from hla_tok.training.train import fixed_quality_gate, train
 
@@ -90,7 +90,8 @@ def main():
             require_pass(args.acceptance, provenance)
         config = yaml.safe_load(args.config.read_bytes())
         commit = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
-        identity = ResumeIdentity(args.stage, sha256_file(args.config), sha256_file(args.cohort), commit)
+        code = implementation_hash(Path(__file__).resolve().parents[2])
+        identity = ResumeIdentity(args.stage, sha256_file(args.config), sha256_file(args.cohort), commit, code)
         torch.manual_seed(config["seed"])
         random.seed(config["seed"])
         model = HLATok().cuda().to(memory_format=torch.channels_last)

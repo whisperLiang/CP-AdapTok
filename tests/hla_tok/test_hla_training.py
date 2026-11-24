@@ -90,3 +90,18 @@ def test_quality_gate_interpolates_observed_bpp_and_rejects_extrapolation():
     assert not record["quality_pass"]
     with pytest.raises(ValueError, match="bracket"):
         fixed_quality_gate(measured | {"actual_bpp": 0.04}, baseline)
+
+
+def test_resume_accepts_report_commit_but_rejects_a_changed_codec(tmp_path):
+    model = torch.nn.Linear(2, 2)
+    optimizer = torch.optim.AdamW(model.parameters())
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, 1)
+    rng = torch.Generator().manual_seed(1)
+    initial = ResumeIdentity("fixed", "config", "dataset", "run-commit", "code")
+    report_only = ResumeIdentity("fixed", "config", "dataset", "report-commit", "code")
+    incompatible = ResumeIdentity("fixed", "config", "dataset", "another-commit", "changed-code")
+    path = tmp_path / "step_00001.pt"
+    save_checkpoint(path, initial, model, optimizer, scheduler, rng, step=1, data_cursor=1, counters={})
+    assert read_checkpoint(path, report_only).state["identity"]["git_commit"] == "run-commit"
+    with pytest.raises(ValueError, match="identity"):
+        read_checkpoint(path, incompatible)

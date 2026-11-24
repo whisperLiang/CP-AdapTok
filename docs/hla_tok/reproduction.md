@@ -30,7 +30,7 @@ for mode in cache compile; do
 done
 ```
 
-在 Phase 0 验收文件标为 PASS 后，以下命令运行固定预算诊断。使用相同配置、清单和 Git 提交从指定检查点续跑。训练和验证通过同一个只允许 Train/Validation 的数据入口统计像素读取次数。
+在 Phase 0 验收文件标为 PASS 后，以下命令运行固定预算诊断。使用相同配置、清单和实现源码从指定检查点续跑。检查点另记下训练时的 Git 提交。训练和验证通过同一个只允许 Train/Validation 的数据入口统计像素读取次数。
 
 ```bash
 python scripts/hla_tok/run_phase1.py --train --stage continuous \

@@ -1,5 +1,6 @@
 """Atomic append-only artifacts for reproducible HLA-Tok training."""
 
+import hashlib
 import os
 import random
 import tempfile
@@ -17,6 +18,7 @@ class ResumeIdentity:
     config_sha256: str
     dataset_sha256: str
     git_commit: str
+    implementation_sha256: str = ""
 
 
 @dataclass(frozen=True)
@@ -36,13 +38,29 @@ class Checkpoint:
         return self.state
 
 
+def implementation_hash(root: Path) -> str:
+    digest = hashlib.sha256()
+    sources = [*root.joinpath("hla_tok").rglob("*.py"), root / "scripts/hla_tok/run_phase1.py"]
+    for source in sorted(sources):
+        digest.update(str(source.relative_to(root)).encode() + b"\0")
+        digest.update(hashlib.sha256(source.read_bytes()).digest())
+    return digest.hexdigest()
+
+
+def _compatible(stored: dict, identity: ResumeIdentity) -> bool:
+    proposed = asdict(identity)
+    if identity.implementation_sha256:
+        proposed["git_commit"] = stored["git_commit"]
+    return stored == proposed
+
+
 def read_checkpoint(path: Path, identity: ResumeIdentity | None = None) -> Checkpoint:
     state = torch.load(path, map_location="cpu", weights_only=True)
     required = {"schema", "identity", "model", "optimizer", "scheduler", "rng", "budget_rng",
                 "step", "data_cursor", "counters", "amp"}
     if state.keys() != required or state["schema"] != SCHEMA:
         raise ValueError("incompatible checkpoint schema")
-    if identity is not None and state["identity"] != asdict(identity):
+    if identity is not None and not _compatible(state["identity"], identity):
         raise ValueError("checkpoint identity differs from the frozen training run")
     if state["step"] != state["data_cursor"] or state["step"] < 1:
         raise ValueError("checkpoint step and deterministic data cursor disagree")
