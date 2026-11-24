@@ -8,10 +8,12 @@
       "official_precision_tile_matrix": true,
       "official_4frame_latency": true,
       "official_compile_diagnostic": true,
+      "native_io_pipeline": true,
       "native_h100_performance": true,
       "cpu_regression": true,
       "cuda_native_tests": true,
-      "sealed_old_assets": true
+      "sealed_old_assets": true,
+      "behavior_mutations": true
     },
     "K8192_neural_serial_fps": {
       "bf16": 91.19405588278025,
@@ -19,8 +21,46 @@
     }
   },
   "phase1": {
-    "status": "BLOCKED",
-    "reason": "fixed-budget native Validation has not completed"
+    "status": "FAIL",
+    "quality": {
+      "passes": {
+        "lpips": false,
+        "dists": false,
+        "psnr": false
+      },
+      "quality_pass": false,
+      "linear_bpp_interpolation": {
+        "global_psnr": 25.923072735632473,
+        "lpips": 0.18520508064833308,
+        "dists": 0.08339049027683178
+      },
+      "thresholds": {
+        "lpips_upper": 0.2037255887131664,
+        "dists_upper": 0.09172953930451497,
+        "global_psnr_lower": 24.923072735632473
+      },
+      "observed": {
+        "actual_bpp": 0.10231481481481482,
+        "global_psnr": 16.975220891419095,
+        "lpips": 0.74229376343475,
+        "dists": 0.39795504938596965
+      },
+      "bracket": [
+        0.0896551724137931,
+        0.11206896551724138
+      ]
+    },
+    "reason": "Fixed K16320 failed matched actual-bpp quality thresholds",
+    "representation": {
+      "same_code_fraction": 0.5514368703816149,
+      "adjacent_query_cosine_mean": 0.9944940446467568,
+      "perplexity": 359.258787248429
+    },
+    "same_checkpoint_bypass": {
+      "global_psnr": 16.960220766253112,
+      "lpips": 0.7428997059663137,
+      "dists": 0.3987658900776129
+    }
   },
   "manifest_hashes": {
     "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
@@ -28,8 +68,8 @@
     "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
   },
   "pixel_reads": {
-    "train_pixel_reads": 0,
-    "validation_pixel_reads": 2520,
+    "train_pixel_reads": 5040,
+    "validation_pixel_reads": 3148,
     "test_pixel_reads": 0
   },
   "tests": {

@@ -1,0 +1,142 @@
+[
+  {
+    "stage": "continuous",
+    "step": 500,
+    "data_cursor": 500,
+    "checkpoint": "checkpoints/hla_tok/continuous/step_00500.pt",
+    "sha256": "031a963cb42fc394c609c0d31f09584dde854e9bea14b9db98d092b45be470e6",
+    "identity": {
+      "stage": "continuous",
+      "config_sha256": "cd71d1a066ef472c9e78719467180e7228001a62aa0b18fb02257c23da341f72",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "bf8ee377dfba101f1ef0883a07b82c1d87112c4b",
+      "implementation_sha256": "e1d07a10764a15e486be69c4b2f59db2e7901cb518c4b19028aac0feaca8194b"
+    }
+  },
+  {
+    "stage": "fixed",
+    "step": 500,
+    "data_cursor": 500,
+    "checkpoint": "checkpoints/hla_tok/fixed/step_00500.pt",
+    "sha256": "21ea347ae310cf7ed841d0201f6a7b2e50d5f279d4340cdaa91028e55eb1f17d",
+    "identity": {
+      "stage": "fixed",
+      "config_sha256": "cd71d1a066ef472c9e78719467180e7228001a62aa0b18fb02257c23da341f72",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "5af9c46c557328d383919e69b71d0ff99f0fcd4a",
+      "implementation_sha256": "e1d07a10764a15e486be69c4b2f59db2e7901cb518c4b19028aac0feaca8194b"
+    }
+  },
+  {
+    "stage": "fixed",
+    "step": 1000,
+    "data_cursor": 1000,
+    "checkpoint": "checkpoints/hla_tok/fixed/step_01000.pt",
+    "sha256": "6224939f9c14a5292ede17ed310abbcefa7c29dac1602dd5d26aa05665cf15f0",
+    "identity": {
+      "stage": "fixed",
+      "config_sha256": "cd71d1a066ef472c9e78719467180e7228001a62aa0b18fb02257c23da341f72",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "5af9c46c557328d383919e69b71d0ff99f0fcd4a",
+      "implementation_sha256": "e1d07a10764a15e486be69c4b2f59db2e7901cb518c4b19028aac0feaca8194b"
+    }
+  },
+  {
+    "stage": "fixed",
+    "step": 1500,
+    "data_cursor": 1500,
+    "checkpoint": "checkpoints/hla_tok/fixed/step_01500.pt",
+    "sha256": "62fb933462afe04ad4e21681dddca04ae36940b9f64630e896276c4424086698",
+    "identity": {
+      "stage": "fixed",
+      "config_sha256": "cd71d1a066ef472c9e78719467180e7228001a62aa0b18fb02257c23da341f72",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "5af9c46c557328d383919e69b71d0ff99f0fcd4a",
+      "implementation_sha256": "e1d07a10764a15e486be69c4b2f59db2e7901cb518c4b19028aac0feaca8194b"
+    }
+  },
+  {
+    "stage": "fixed",
+    "step": 2000,
+    "data_cursor": 2000,
+    "checkpoint": "checkpoints/hla_tok/fixed/step_02000.pt",
+    "sha256": "84a45dca10857be6324181fb5846e8de8eeb83740a7a1243594fef38653731d9",
+    "identity": {
+      "stage": "fixed",
+      "config_sha256": "cd71d1a066ef472c9e78719467180e7228001a62aa0b18fb02257c23da341f72",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "5af9c46c557328d383919e69b71d0ff99f0fcd4a",
+      "implementation_sha256": "e1d07a10764a15e486be69c4b2f59db2e7901cb518c4b19028aac0feaca8194b"
+    }
+  },
+  {
+    "stage": "fixed",
+    "step": 2500,
+    "data_cursor": 2500,
+    "checkpoint": "checkpoints/hla_tok/fixed/step_02500.pt",
+    "sha256": "33dde4dd49bdae733c08bcb5f8e4b3248f20dc771361db01196ee3080e87cded",
+    "identity": {
+      "stage": "fixed",
+      "config_sha256": "cd71d1a066ef472c9e78719467180e7228001a62aa0b18fb02257c23da341f72",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "5af9c46c557328d383919e69b71d0ff99f0fcd4a",
+      "implementation_sha256": "e1d07a10764a15e486be69c4b2f59db2e7901cb518c4b19028aac0feaca8194b"
+    }
+  },
+  {
+    "stage": "fixed",
+    "step": 3000,
+    "data_cursor": 3000,
+    "checkpoint": "checkpoints/hla_tok/fixed/step_03000.pt",
+    "sha256": "d4664970e83868d82b4b710e821f307790c7948f0f125f01ae7ce6f82dedb574",
+    "identity": {
+      "stage": "fixed",
+      "config_sha256": "cd71d1a066ef472c9e78719467180e7228001a62aa0b18fb02257c23da341f72",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "5af9c46c557328d383919e69b71d0ff99f0fcd4a",
+      "implementation_sha256": "e1d07a10764a15e486be69c4b2f59db2e7901cb518c4b19028aac0feaca8194b"
+    }
+  },
+  {
+    "stage": "fixed",
+    "step": 3500,
+    "data_cursor": 3500,
+    "checkpoint": "checkpoints/hla_tok/fixed/step_03500.pt",
+    "sha256": "4d906923a9c8a8b70fd4d6649c41ceedd8f7cab94dbe8234b26a1ddbb9ec931a",
+    "identity": {
+      "stage": "fixed",
+      "config_sha256": "cd71d1a066ef472c9e78719467180e7228001a62aa0b18fb02257c23da341f72",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "5af9c46c557328d383919e69b71d0ff99f0fcd4a",
+      "implementation_sha256": "e1d07a10764a15e486be69c4b2f59db2e7901cb518c4b19028aac0feaca8194b"
+    }
+  },
+  {
+    "stage": "fixed",
+    "step": 4000,
+    "data_cursor": 4000,
+    "checkpoint": "checkpoints/hla_tok/fixed/step_04000.pt",
+    "sha256": "95e33632597fe19f26e9bfd9166bc7ac6b61c53a09b2b7f0d2d9c514dc3454bb",
+    "identity": {
+      "stage": "fixed",
+      "config_sha256": "cd71d1a066ef472c9e78719467180e7228001a62aa0b18fb02257c23da341f72",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "5af9c46c557328d383919e69b71d0ff99f0fcd4a",
+      "implementation_sha256": "e1d07a10764a15e486be69c4b2f59db2e7901cb518c4b19028aac0feaca8194b"
+    }
+  },
+  {
+    "stage": "fixed",
+    "step": 4500,
+    "data_cursor": 4500,
+    "checkpoint": "checkpoints/hla_tok/fixed/step_04500.pt",
+    "sha256": "3925dceb4a710bb0b70d1f308a74ccc9e4677c29e485042e6a8226ea8af87a66",
+    "identity": {
+      "stage": "fixed",
+      "config_sha256": "cd71d1a066ef472c9e78719467180e7228001a62aa0b18fb02257c23da341f72",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "5af9c46c557328d383919e69b71d0ff99f0fcd4a",
+      "implementation_sha256": "e1d07a10764a15e486be69c4b2f59db2e7901cb518c4b19028aac0feaca8194b"
+    }
+  }
+]

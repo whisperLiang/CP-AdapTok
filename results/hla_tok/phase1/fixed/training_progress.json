@@ -1,0 +1,20 @@
+{
+  "completed_updates": 4500,
+  "physical_batch": 1,
+  "effective_batch": 1,
+  "stopping_requested": false,
+  "segment_wall_s_including_periodic_validation": 379.97833062599966,
+  "processed_pixels": 2696192000,
+  "processed_frames": 4500,
+  "budget_exposures": {
+    "16320": 4500
+  },
+  "optimization_wall_s": 344.7849990580289,
+  "latest_codebook_statistics": {
+    "active_ratio": 0.04736328125,
+    "dead_ratio": 0.95263671875,
+    "entropy_bits": 5.976975917816162,
+    "perplexity": 62.986725995600935,
+    "top_code_fraction": 0.12585784494876862
+  }
+}

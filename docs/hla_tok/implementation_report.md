@@ -11,3 +11,7 @@
 | 7 | 实现并验证固定预算训练入口。测试检查点精确恢复、码本拟合的可重复性、损失项梯度与实测 bpp 插值。 |
 
 核心 T0 采用仓库已有的 Radon、覆盖率和 AST 相似度工具检查复杂度及重复。独立的 crapper、dryer、mutator 命令在环境中不可用，变异通过仓库同样的临时副本执行法复验。早期 CPU 回归遇到同名测试模块以及隔离 worktree 中缺少历史权重，修复方式为命名独立的测试文件和仅在新 worktree 建立只读权重引用。 [Causal、码率与数据变异结果](../../results/hla_tok/phase0/mutations/summary.json) · [代码质量记录](../../results/hla_tok/phase0/quality_audit.json)
+
+Phase 0 后复测了最终 T0 代码。Joint V1 的第一次重放将无指纹记录的 P 帧当成指纹异常，随后按归档实际频率验证指纹并对每帧检查 RMS 与字节账本。第一次 Inductor 测试缺少 64 位 libcuda 链接项，在隔离构建目录补足链接后完成复测。BF16 编译与 KV 缓存候选均保留了整数不一致的测量。
+
+完成 500 步连续训练及 4,500 步 VQ 训练并核验十份检查点。固定预算门槛失败后，以相同检查点完成一次连续表示配对诊断，并从实收索引导出 16 帧原生无损视频。实验在 Phase 1 门槛停止。 [实验结果](../../results/hla_tok/final_report.md)

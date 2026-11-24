@@ -48,3 +48,11 @@ python scripts/hla_tok/run_phase1.py --evaluate checkpoints/hla_tok/fixed/step_0
 ```
 
 归档每次运行的 CSV、GPU 环境、读取计数及检查点哈希。产物所用正式路径见 [最终报告](../../results/hla_tok/final_report.md)。
+
+固定检查点可另外导出 16 帧原生 RGB 视频。输出目录同时保存同样本源视频、实际索引字节、帧范围及两个视频的 SHA-256。
+
+```bash
+python scripts/hla_tok/export_validation_video.py \
+  --checkpoint checkpoints/hla_tok/fixed/step_04500.pt \
+  --output results/hla_tok/reproduced_video
+```

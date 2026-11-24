@@ -53,6 +53,9 @@ def measured_phase0(root, benchmark, cpu, cuda):
     replay = csv_at(measure / "metrics.csv")
     fps = hardware_floor(csv_at(benchmark / "benchmark.csv"))
     assets = root / "audit/final/assets.json"
+    compile_report = root / "baselines/compile_retry/official_compile.json"
+    mutations = root / "phase0/mutations/summary.json"
+    pipeline = csv_at(root / "phase0/pipeline/pipeline.csv")
     checks = {
         "matched_original_full_cohort": original_matched(baselines),
         "matched_joint_step40000": len(replay) == 8 and all(
@@ -61,11 +64,13 @@ def measured_phase0(root, benchmark, cpu, cuda):
         "official_source_and_weights": (root / "baselines/official_weights.json").is_file(),
         "official_precision_tile_matrix": len(csv_at(root / "baselines/tile_batch.csv")) == 6,
         "official_4frame_latency": len(csv_at(root / "baselines/cache/four_frame_cache_latency.csv")) == 8,
-        "official_compile_diagnostic": (root / "baselines/compile/official_compile.json").is_file(),
+        "official_compile_diagnostic": compile_report.is_file() and json.loads(compile_report.read_bytes())["status"] == "MEASURED",
+        "native_io_pipeline": len(pipeline) == 20 and all(int(r["source_frames"]) == 64 for r in pipeline),
         "native_h100_performance": set(fps) == {"fp32", "bf16"} and fps["bf16"] >= 15,
         "cpu_regression": cpu is not None and cpu["failed"] == 0 and cpu["passed"] > 0,
         "cuda_native_tests": cuda is not None and cuda == {"passed": 3, "failed": 0, "skipped": 0},
         "sealed_old_assets": assets.is_file() and json.loads(assets.read_bytes())["verified_unchanged"],
+        "behavior_mutations": mutations.is_file() and all(r["killed"] for r in json.loads(mutations.read_bytes())),
     }
     status = "PASS" if all(checks.values()) else "PARTIAL PASS"
     if fps.get("bf16", float("inf")) < 15:
@@ -78,8 +83,21 @@ def record_phase1(results):
     if not quality.is_file():
         return {"status": "BLOCKED", "reason": "fixed-budget native Validation has not completed"}
     measured = json.loads(quality.read_bytes())
-    return {"status": "PARTIAL PASS" if measured["quality_pass"] else "FAIL", "quality": measured,
-            "reason": "Phase 1 engineering and codebook acceptance must also be reviewed"}
+    record = {"status": "PARTIAL PASS" if measured["quality_pass"] else "FAIL", "quality": measured,
+              "reason": ("Engineering and codebook acceptance pending" if measured["quality_pass"]
+                         else "Fixed K16320 failed matched actual-bpp quality thresholds")}
+    usage = results / "phase1/fixed/codebook.json"
+    if usage.is_file():
+        statistics = json.loads(usage.read_bytes())["16320"]
+        record["representation"] = {key: statistics[key]
+                                    for key in ("same_code_fraction", "adjacent_query_cosine_mean")}
+        record["representation"]["perplexity"] = statistics["overall"]["perplexity"]
+    bypass = csv_at(results / "phase1/vq_bypass/validation_metrics.csv")
+    if bypass:
+        record["same_checkpoint_bypass"] = {
+            key: float(bypass[0][key]) for key in ("global_psnr", "lpips", "dists")
+        }
+    return record
 
 
 def main():
@@ -114,6 +132,13 @@ def main():
     joint_replay = csv_at(results / "baselines/joint_replay/metrics.csv")
     if original and joint_replay:
         write_csv(results / "baselines/metrics.csv", original + joint_replay)
+    phase1 = [
+        {"case": case} | row
+        for case in ("continuous", "fixed", "vq_bypass")
+        for row in csv_at(results / "phase1" / case / "validation_metrics.csv")
+    ]
+    if phase1:
+        write_csv(results / "phase1/validation_metrics.csv", phase1)
     if (benchmark_dir / "benchmark.csv").exists() and benchmark_dir != results / "phase0":
         write_csv(results / "phase0/benchmark.csv", csv_at(benchmark_dir / "benchmark.csv"))
     print(json.dumps(record, indent=2))

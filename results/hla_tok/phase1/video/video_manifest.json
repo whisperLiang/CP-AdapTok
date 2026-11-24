@@ -1,0 +1,21 @@
+{
+  "video": "DAVIS2017:car-roundabout",
+  "start_frame": 32,
+  "frames": 16,
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "ffv1_lossless_rgb": true,
+  "checkpoint_sha256": "3925dceb4a710bb0b70d1f308a74ccc9e4677c29e485042e6a8226ea8af87a66",
+  "video_sha256": {
+    "source.mkv": "c29bb6cb30ab0aaa5b7ac16a3271450cfa0bfba2a318338403504f6d28c92a97",
+    "K16320.mkv": "d10117e77bf8162c027c257201e7940a7b5c04d5c18c70bd1a22d65885479f0c"
+  },
+  "codec_rate": {
+    "total_bytes": 424320,
+    "padding_bits": 0,
+    "token_per_frame": 16320.0,
+    "actual_bpp": 0.10231481481481482,
+    "rate_basis": "actual_fixed13_payload"
+  }
+}
