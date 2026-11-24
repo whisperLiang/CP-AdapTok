@@ -18,6 +18,7 @@ class SenderFrame:
     geometry: Geometry
     batch: int
     memory: tuple[Memory, ...]
+    autocast_dtype: torch.dtype | None
     chunks: list[Tensor] = field(default_factory=list)
 
 
@@ -48,7 +49,9 @@ class HLATok(nn.Module):
             fine, coarse = self.encoder(rgb, geometry)
         with record_function("hla/query_prepare"):
             memory = self.query_encoder.prepare(fine, coarse, geometry)
-        return SenderFrame(geometry, rgb.shape[0], memory)
+        device = rgb.device.type
+        precision = torch.get_autocast_dtype(device) if torch.is_autocast_enabled(device) else None
+        return SenderFrame(geometry, rgb.shape[0], memory, precision)
 
     @torch.no_grad()
     def prepare_frame(self, rgb: Tensor) -> SenderFrame:
@@ -56,7 +59,10 @@ class HLATok(nn.Module):
 
     def _block(self, sender: SenderFrame, start: int) -> Tensor:
         with record_function("hla/local_query"):
-            return self.query_encoder(sender.memory, start).unflatten(0, (sender.batch, sender.geometry.num_regions))
+            with torch.autocast(sender.memory[0][0].device.type, dtype=sender.autocast_dtype,
+                                enabled=sender.autocast_dtype is not None):
+                block = self.query_encoder(sender.memory, start)
+        return block.unflatten(0, (sender.batch, sender.geometry.num_regions))
 
     def _ids(self, z: Tensor) -> Tensor:
         with record_function("hla/vq_search"):

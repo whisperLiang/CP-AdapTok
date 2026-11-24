@@ -3,6 +3,7 @@ import torch
 from torch.nn import functional as F
 
 from hla_tok import BUDGETS, Geometry, HLATok
+from hla_tok.evaluation.causality import reconstruct_clip
 from hla_tok.models.quantizer import VectorQuantizer
 from hla_tok.progressive.geometry import merge_regions, rank_major, region_lengths, split_regions
 
@@ -107,18 +108,20 @@ def test_receiver_has_only_prefix_and_public_geometry():
 def test_future_frames_cannot_change_previous_ids_or_reconstruction():
     torch.manual_seed(5)
     model = HLATok().eval()
-    frames = torch.rand(3, 1, 3, 128, 128)
-    altered = torch.cat((frames[:2], 1 - frames[2:]))
+    frames = torch.zeros(3, 1, 3, 128, 128)
+    frames[-1].fill_(1)
+    altered = torch.zeros_like(frames)
     with torch.inference_mode():
-        def run(sequence):
-            return [
-                (ids, model.decode_prefix(ids, Geometry(128, 128)))
-                for ids in (model.encode_frame(frame, 31) for frame in sequence)
-            ]
-
-        base, changed = run(frames), run(altered)
+        # Separate the two known inputs in the test book so a future-frame mutation is observable.
+        dark = model.encode_training(frames[0], 31, quantize=False).values[0]
+        light = model.encode_training(frames[-1], 31, quantize=False).values[0]
+        model.quantizer.embedding.weight.fill_(100)
+        model.quantizer.embedding.weight[:62].copy_(torch.cat((dark, light)))
+        base = list(reconstruct_clip(model, frames, 31))
+        changed = list(reconstruct_clip(model, altered, 31))
     for lhs, rhs in zip(base[:2], changed[:2]):
         assert all(torch.equal(x, y) for x, y in zip(lhs, rhs))
+    assert all(not torch.equal(x, y) for x, y in zip(base[-1], changed[-1]))
 
 
 def test_shared_training_prefix_reaches_each_module_and_uses_hard_vq_values():
@@ -135,3 +138,18 @@ def test_shared_training_prefix_reaches_each_module_and_uses_hard_vq_values():
         stats = [p.grad for p in module.parameters() if p.grad is not None]
         assert stats and all(torch.isfinite(g).all() for g in stats)
         assert any(g.count_nonzero() for g in stats)
+
+
+def test_cached_sender_retains_the_precision_it_started_with():
+    torch.manual_seed(12)
+    model = HLATok().eval()
+    source = torch.rand(1, 3, 128, 128)
+    with torch.inference_mode():
+        with torch.autocast("cpu", dtype=torch.bfloat16):
+            cache = model.prepare_frame(source)
+            expected = model.encode_frame(source, 67)
+            assert torch.equal(model.encode_prefix(cache, 17), expected[:, :17])
+        assert torch.equal(model.extend_prefix(cache, 67), expected)
+        assert model.encode_regions(cache, (0,))[0].shape == (1, 0)
+        with pytest.raises(ValueError):
+            model.encode_regions(cache, (513,))
