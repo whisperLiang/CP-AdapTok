@@ -33,6 +33,9 @@ def test_quantization_table_uses_real_fixed13_same_weights_and_continuous_contro
     assert first["lookup_quality_gain"] == -1
     assert rows[1]["lookup_quality_gain"] == -0.02
     assert rows[2]["training_trajectory_quality_gain"] == -0.006
+    total, components = report._quantization_answers(results)
+    assert "-2.00000 / +0.03000 / +0.01000" in total
+    assert "-1.00000 / +0.02000 / +0.00400" in components
 
 
 def test_frame_gains_keep_the_identity_of_regressing_frames():
@@ -111,3 +114,17 @@ def test_report_reuses_observed_native_metrics_without_assigning_a_continuous_bi
     assert set(row["mode"] for row in csv_at(destination / "rate_distortion.csv")) == {"fixed13"}
     [by_video] = csv_at(destination / "reconstruction_metrics_by_video.csv")
     assert by_video["video"] == "v" and by_video["mode"] == "continuous"
+
+
+def test_rate_figure_uses_the_latest_actual_checkpoint_and_all_historical_payloads():
+    from scripts.hla_tok.v3.figures import rate_observations
+
+    history = {"stage": "historical", "arm": "Original AdapTok", "frames": "174", "actual_bpp": "0.10"}
+    fixed = {"stage": "quantized", "arm": "C1", "seed": "seed1", "frames": 174, "actual_bpp": 0.102315}
+    old = fixed | {"step": 4000}
+    endpoint = fixed | {"step": 10000}
+    continuous = fixed | {"step": 10000, "arm": "C0", "actual_bpp": None}
+    progressive = fixed | {"stage": "progressive", "arm": "D", "step": 20000}
+    additional_budget = progressive | {"actual_bpp": 0.25}
+    observations = rate_observations([history, old, endpoint, continuous, progressive, additional_budget])
+    assert observations == [history, endpoint, progressive, additional_budget]

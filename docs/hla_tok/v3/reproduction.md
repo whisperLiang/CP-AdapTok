@@ -93,3 +93,7 @@ mypy --explicit-package-bases --follow-imports=skip --ignore-missing-imports \
 
 正式结果、权重、视频和长日志保留本地；Git 只提交轻量快照和复现代码。图件来自当前实测记录，
 未训练预算不画成实测点。`report --figures` 使用 Python；`NATURE_FIGURE_SCRIPTS` 可指定 PDF QA 工具目录。
+
+率失真图使用每个 V3 臂和种子的最新完整真实码流检查点，保留同一检查点全部实测预算。
+所有中途真实码率点留在 `rate_distortion.csv`。本次 C1 终点图保留 1 个 V3 码率点，
+另 3 个 C1 训练过程点留在 CSV。

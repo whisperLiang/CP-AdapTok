@@ -61,11 +61,20 @@ def _trend(metrics, folder, scripts, *, stage, stage_label, title, thresholds):
         _save(fig, f"{stage}_trend_{field}", folder, scripts)
 
 
+def rate_observations(metrics):
+    payloads = [row for row in metrics if row.get("actual_bpp") and int(row["frames"]) == 174]
+    latest = {}
+    for row in payloads:
+        if row["stage"] != "historical":
+            key = row["arm"], row["seed"]
+            latest[key] = max(row["step"], latest.get(key, 0))
+    return [row for row in payloads if row["stage"] == "historical"
+            or row["step"] == latest[(row["arm"], row["seed"])]]
+
+
 def _rate(metrics, folder, scripts):
     series = defaultdict(list)
-    for row in metrics:
-        if not row.get("actual_bpp") or int(row["frames"]) != 174:
-            continue
+    for row in rate_observations(metrics):
         if row["stage"] == "historical":
             if row["arm"] == "Original AdapTok":
                 if row["precision"] != "fp32" or row["stride"] != "128":

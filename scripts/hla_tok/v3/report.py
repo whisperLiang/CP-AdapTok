@@ -350,14 +350,39 @@ def _runtime_answer(performance, required_fps):
         f"{key} {'、'.join(budgets)}" for key, budgets in by_seed.items()) + "。串行截止时间见性能表。"
 
 
+def _signed_metric_string(deltas):
+    return " / ".join(f"{float(deltas[key]):+.5f}" for key in METRICS)
+
+
+def _quantization_answers(fixed):
+    lookup = fixed.get("immediate_fixed13_minus_bypass")
+    if lookup is None:
+        return "等待 C0 与 C1 完整验证。", "等待 C1 同权重旁路。"
+    trajectory = fixed["continuous_training_trajectory"]
+    total = {key: lookup[key] + trajectory[key] for key in METRICS}
+    return (f"C1 真实码流相对 C0 的三项原始指标变化为 {_signed_metric_string(total)}。",
+            f"同权重查表变化为 {_signed_metric_string(lookup)}。"
+            f"C1 旁路相对 C0 的训练轨迹变化为 {_signed_metric_string(trajectory)}。"
+            " [三路径量化对照](quantization_gap.csv)。")
+
+
+def _strict_answer(acceptance):
+    strict = acceptance["final_strict_verification"]
+    if strict:
+        return "、".join(f"{key} {value}" for key, value in strict.items()) + "。"
+    fixed = acceptance["fixed_terminal_verification"]
+    if fixed:
+        return f"C1 终点 FP32 与 BF16 整数前缀验证为 {fixed['status']}。最终渐进权重为 BLOCKED。"
+    return "BLOCKED，等待最终训练权重。"
+
+
 def _answers(acceptance):
     stages = acceptance["stages"]
     selection = acceptance["phase_a_selection"]
     fixed = stages["C_seed1"]
     continuous = stages["B_seed1"]
     metrics = continuous.get("observed")
-    lookup = fixed.get("immediate_fixed13_minus_bypass")
-    strict = acceptance["final_strict_verification"]
+    quantization, attribution = _quantization_answers(fixed)
     answers = [
         ("A0 与 A1 哪个更适合迁移？",
          selection["selection_reason"] if selection else "配对裁决等待完整验证。"),
@@ -367,13 +392,10 @@ def _answers(acceptance):
         ("B0 的剩余差距来自哪里？", _bottleneck_answer(acceptance["phase_b_attribution"])),
         ("ARD 是否必要？",
          "B0 已通过连续门槛，ARD 为 NOT_APPLICABLE。" if continuous["status"] == "PASS" else acceptance["ard"]),
-        ("连续与离散的质量差距是多少？",
-         "实测结果见 [三路径量化对照](quantization_gap.csv)。" if lookup else "等待 C0 与 C1 完整验证。"),
-        ("即时查表与量化训练轨迹的影响分别是多少？",
-         "三项指标的差异及方向见 [三路径量化对照](quantization_gap.csv)。" if lookup else "等待 C1 同权重旁路。"),
+        ("连续与离散的质量差距是多少？", quantization),
+        ("即时查表与量化训练轨迹的影响分别是多少？", attribution),
         ("渐进训练的边际收益是多少？", _progressive_answer(stages)),
-        ("最终模型的八档严格前缀成立吗？",
-         "、".join(f"{key} {value}" for key, value in strict.items()) or "BLOCKED，等待渐进检查点。"),
+        ("最终模型的八档严格前缀成立吗？", _strict_answer(acceptance)),
         ("哪些预算达到实时吞吐？", _runtime_answer(acceptance["timing_rows"], acceptance["required_pipeline_fps"])),
         ("是否达到原版 AdapTok 的同码率质量门槛？",
          f"Seed 1 固定离散 {fixed['status']}，Seed 2 固定离散 {stages['C_seed2']['status']}。"),
@@ -502,6 +524,7 @@ def report(config, v2, output, *, figures=False):
         "phase_a_selection": _dense_selection(config, acceptance["stages"], performance, state_audit),
         "phase_b_attribution": _bottleneck_result(),
         "final_strict_verification": _final_verification(),
+        "fixed_terminal_verification": _get(OUTPUT / "engineering_audit.json", {}).get("fixed_terminal_verification"),
         "required_pipeline_fps": config["performance"]["pipeline_fps"],
         "timing_rows": [row for row in performance if row["source"].startswith("results/hla_tok/v3/progressive/")],
     }
