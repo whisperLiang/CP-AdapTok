@@ -16,13 +16,25 @@ def _git(*arguments: str) -> str:
     return subprocess.check_output(["git", *arguments], cwd=ROOT, text=True).strip()
 
 
+def _gitlink(name: str) -> str:
+    mode, commit, stage = _git("ls-files", "--stage", "--", name).split("\t", 1)[0].split()
+    if (mode, stage) != ("160000", "0"):
+        raise RuntimeError(f"protected path is no longer a gitlink: {name}")
+    submodule = ROOT / name
+    if (submodule / ".git").exists():
+        observed = _git("-C", str(submodule), "rev-parse", "HEAD")
+        if observed != commit or _git("-C", str(submodule), "status", "--porcelain", "--untracked-files=no"):
+            raise RuntimeError(f"protected gitlink checkout is not clean: {name}")
+    return commit
+
+
 def protected_tree() -> dict:
     files, links = {}, {}
     records = _git("ls-tree", "-rz", BASELINE).rstrip("\0").split("\0")
     for entry in records:
         meta, name = entry.split("\t", 1)
         if " commit " in meta:
-            links[name] = meta.split()[-1]
+            links[name] = _gitlink(name)
         else:
             path = ROOT / name
             if path.is_symlink():

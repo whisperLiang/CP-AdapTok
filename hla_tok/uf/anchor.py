@@ -79,7 +79,8 @@ class RecordCodec:
 
     def records(self, coarse: Tensor, fine: Tensor) -> Iterator[Enhancement]:
         array = (coarse.numpy()[0], fine.numpy()[0])
-        layout = self.layout(tuple(coarse.shape[1:]))
+        channels, height, width = coarse.shape[1:]
+        layout = self.layout((channels, height, width))
         regions = [layout.region(group) for group in range(len(layout))]
         scores, active, cdfs = self._scores(array, layout)
         order = priority_order(scores, active) if self.segmentation.ranked else _scan(active)

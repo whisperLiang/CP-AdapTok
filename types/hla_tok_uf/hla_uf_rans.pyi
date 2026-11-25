@@ -1,0 +1,9 @@
+from collections.abc import Sequence
+
+import numpy as np
+from numpy.typing import NDArray
+
+class SegmentCodec:
+    def __init__(self, tables: Sequence[Sequence[int]]) -> None: ...
+    def encode(self, values: NDArray[np.int8], index: int) -> bytes: ...
+    def decode(self, payload: bytes, index: int, count: int) -> NDArray[np.int8]: ...

@@ -141,7 +141,8 @@ class NativeEncoder(NativeEndpoint):
     def encode(self, rgb: Tensor, index: int, qp: int, intra: bool, reset: bool = False) -> BaseFrame:
         if rgb.ndim != 4 or rgb.shape[:2] != (1, 3) or not rgb.is_cuda:
             raise ValueError("expected one batch-1 CUDA RGB frame")
-        info = FrameInfo(index, *rgb.shape[-2:], qp, intra, 1, reset)
+        height, width = rgb.shape[-2:]
+        info = FrameInfo(index, height, width, qp, intra, 1, reset)
         self.order.check(info)
         self.stream.wait_stream(torch.cuda.current_stream())
         with torch.cuda.stream(self.stream):

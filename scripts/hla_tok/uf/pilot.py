@@ -11,7 +11,7 @@ from scripts.hla_tok.v2.protocol import csv_at, json_at
 
 
 def paired_gains(frames: list[dict]) -> dict:
-    clips = defaultdict(dict)
+    clips: dict[str, dict[tuple[int, int], dict]] = defaultdict(dict)
     for row in frames:
         clips[row["video"]][(int(row["frame"]), int(row["budget_mbps"]))] = row
     gains = {}

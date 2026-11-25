@@ -75,8 +75,9 @@ class GroupLayout:
 
 def priority_order(scores: NDArray[np.float64], active: NDArray[np.bool_]) -> Iterator[tuple[int, int]]:
     queue: list[tuple[float, int, int]] = []
-    for group in np.flatnonzero(active.any(axis=0)):
-        heappush(queue, (-float(scores[0, group]), 0, int(group)))
+    for active_index in np.flatnonzero(active.any(axis=0)):
+        group = int(active_index)
+        heappush(queue, (-float(scores[0, group]), 0, group))
     while queue:
         _, level, group = heappop(queue)
         yield level, group

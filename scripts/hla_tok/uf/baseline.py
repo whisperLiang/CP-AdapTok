@@ -90,7 +90,8 @@ def summary(rows: list[dict]) -> dict:
 def evaluate(assets: OfficialAssets, reader: AuditedFrames, clips: list[Clip], point: Point,
              quality: NativeQuality | None) -> tuple[list[dict], dict]:
     torch.cuda.reset_peak_memory_stats()
-    encoder, decoder = (cls(assets, point.video) for cls in (NativeEncoder, NativeDecoder))
+    encoder = NativeEncoder(assets, point.video)
+    decoder = NativeDecoder(assets, point.video)
     warmup = Clip(clips[0].split, clips[0].video, clips[0].start, 4)
     run_clip(encoder, decoder, reader, warmup, point, None)
     rows = [row for clip in clips for row in run_clip(encoder, decoder, reader, clip, point, quality)]

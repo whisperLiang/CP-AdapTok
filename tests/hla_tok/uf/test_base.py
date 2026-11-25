@@ -30,6 +30,17 @@ def test_reference_gap_stays_desynchronized_until_real_i_frame():
         order.check(recovery)
 
 
+def test_delayed_p_packet_cannot_clear_a_declared_gap():
+    order = ReferenceOrder()
+    intra = FrameInfo(0, 1080, 1920, 0, True, 1, False)
+    order.commit(intra)
+    with pytest.raises(ValueError, match="DESYNC"):
+        order.check(replace(intra, index=2, intra=False))
+    with pytest.raises(ValueError, match="DESYNC"):
+        order.commit(replace(intra, index=1, intra=False))
+    assert order.last == intra
+
+
 @pytest.mark.parametrize("changes", [{"qp": 64}, {"parallel": 0}, {"parallel": 9}, {"height": 0}, {"reset": True}])
 def test_rejects_invalid_official_frame_fields(changes):
     with pytest.raises(ValueError):

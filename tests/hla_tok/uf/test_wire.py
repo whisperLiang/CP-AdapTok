@@ -35,6 +35,15 @@ def test_every_byte_budget_preserves_integer_record_and_byte_prefix():
         family.prefix(family.base_end - 1)
 
 
+def test_once_packed_family_respects_its_physical_maximum_including_exact_boundaries():
+    complete = PrefixFamily.build(BASE, TAG, ENHANCEMENTS)
+    for budget in range(complete.base_end, len(complete.raw) + 1):
+        limited = PrefixFamily.build(BASE, TAG, iter(ENHANCEMENTS), max_bytes=budget)
+        expected, count = complete.prefix(budget)
+        assert limited.raw == expected
+        assert limited.ends == complete.ends[:count + 1]
+
+
 @pytest.mark.parametrize("seed", range(4))
 def test_random_fragments_emit_records_exactly_once(seed):
     family = PrefixFamily.build(BASE, TAG, ENHANCEMENTS)

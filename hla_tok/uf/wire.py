@@ -52,8 +52,10 @@ class RefinementOrder:
 
     def add(self, group: int, level: int) -> None:
         expected = self.levels.get(group, 0)
-        if level != expected:
-            raise WireError("duplicate enhancement" if level < expected else "missing refinement dependency")
+        if level < expected:
+            raise WireError("duplicate enhancement")
+        if level > expected:
+            raise WireError("missing refinement dependency")
         self.levels[group] = level + 1
 
 

@@ -3,7 +3,7 @@ from random import Random
 import pytest
 import torch
 
-from hla_tok.uf.anchor import AnchorModel, ProgressiveReceiver, RefinementCodec
+from hla_tok.uf.anchor import AnchorModel, ProgressiveReceiver, RefinementCodec, Segmentation
 from hla_tok.uf.base import BaseFrame, FrameInfo
 from hla_tok.uf.wire import PrefixFamily
 
@@ -16,6 +16,15 @@ def test_rgb_analysis_and_exact_no_enhancement_path():
     assert latent.shape == (1, model.channels, 8, 6)
     coarse, fine = model.quantizer(latent)
     assert model.display(base, coarse + fine).sub(rgb).square().mean() < base.sub(rgb).square().mean()
+
+
+def test_static_cdf_scan_orders_coarse_records_before_fine():
+    pytest.importorskip("hla_uf_rans")
+    codec = RefinementCodec(AnchorModel(), "fp32", Segmentation(2, 12, conditional=False, ranked=False))
+    coarse = torch.ones((1, 12, 2, 4), dtype=torch.int8)
+    fine = -coarse
+    records = list(codec.records_codec.records(coarse, fine))
+    assert [(row.level, row.group, row.cdf) for row in records] == [(0, 0, 1), (0, 1, 1), (1, 0, 5), (1, 1, 5)]
 
 
 @pytest.mark.integration
