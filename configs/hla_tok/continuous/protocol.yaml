@@ -1,0 +1,56 @@
+experiment: HLA-Tok-C
+base_commit: b3b3366bba277906c97cad291ab643395280786b
+cohort_sha256: d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8
+v3_protocol_sha256: 8d6ac1d7b7b702189e4b7a4fea97def37841bf2ab39e97b302c40bf2645ae8b0
+checkpoint_sha256:
+  C0: 40beff895ff615c1f73cae18f9c025557ff2d35516a04f51be916a77a2e16249
+  C1: 6c3711b4f93b8f59b470577d13173481d7bdbf5323bcb08ec249cfe562711355
+max_budget: 16320
+legal_budget: {minimum: 1, step: 1}
+budgets: [510, 1020, 2040, 4080, 6120, 8160, 12240, 16320]
+prefix:
+  seed: 6351
+  nonpreset_count: 50
+  boundaries: [1, 2, 134, 135, 136, 4319, 4320, 4321, 16319, 16320]
+  frames_per_video: [first, middle, last]
+  precisions: [fp32, bf16]
+reproduction:
+  tolerances: {global_psnr: 0.05, lpips: 0.001, dists: 0.001}
+progressive:
+  tolerances: {global_psnr: 0.05, lpips: 0.002, dists: 0.002}
+  minimum_gains: {base_to_fixed_psnr: 2.0, base_to_fixed_lpips: 0.03, mid_to_fixed_psnr: 0.5}
+  low_budget_ordering_gain: {global_psnr: 0.3, lpips: 0.02, dists: 0.005}
+  low_budget_comparison: [510, 1020, 2040]
+calibration:
+  split: train
+  seed: 6352
+  sources: 12
+  sampling: one seeded frame per randomly selected native Train source
+  score: mean_leave_one_rank_out_rgb_mse_delta
+  tie_break: ascending_original_rank
+dynamics:
+  seed: 6353
+  constant_budget: 8160
+  scheduled: [constant, descending, ascending, alternate, random, recover]
+  recovery_switch: floor_two_thirds
+quality_compute_dtype: bf16
+wire_formats: [fp32, fp16, bf16]
+target_bandwidth_mbps: [5, 10, 20, 40]
+target_fps: 30
+sample:
+  video: "DAVIS2017:car-roundabout"
+  frame: 32
+  budgets: [510, 2040, 8160, 12240, 16320]
+  crop_xywh: [768, 432, 384, 216]
+benchmark:
+  device: cuda
+  batch_size: 1
+  resolution: [1080, 1920]
+  compute_dtypes: [fp32, bf16]
+  warmup_frames: 100
+  measured_frames: 1000
+  repeats: 3
+  minimum_fps: 30
+  ideal_fps: 60
+  p95_target_ms: 33.33
+  frames_from_each_video: [first, middle, last]
