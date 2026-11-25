@@ -1,0 +1,109 @@
+import os
+from pathlib import Path
+
+import pytest
+import torch
+
+from hla_tok.uf.anchor import BUDGETS
+from hla_tok.uf.latent import UnifiedRefinement
+from hla_tok.uf.official import OfficialAssets
+from hla_tok.uf.wire import WireError
+from hla_tok.uf_v2.decoder import SharedRefinement
+from hla_tok.uf_v2.runtime import Unified
+from scripts.hla_tok.temporal.inputs import source_frame
+from scripts.hla_tok.uf.inputs import inputs
+from scripts.hla_tok.v2.protocol import setup
+
+pytestmark = pytest.mark.gpu
+
+
+@pytest.fixture(scope="module")
+def codec_and_frames():
+    directory = os.environ.get("UF_OFFICIAL_WEIGHTS")
+    if not torch.cuda.is_available() or not directory:
+        pytest.skip("requires the pinned UF-LD weights and a CUDA device")
+    setup()
+    assets = OfficialAssets.verify(Path(directory))
+    reader, plans = inputs()
+    frames = [source_frame(reader, plans["validation"][0], i) for i in range(4)]
+    quantizer = UnifiedRefinement().cuda().eval()
+    head = SharedRefinement().cuda().half().to(memory_format=torch.channels_last).eval()
+    with torch.no_grad():
+        for branch in (head.intra, head.inter):
+            branch.out.weight.normal_(std=0.01)
+    return Unified(assets, quantizer, (0, 8), head), frames
+
+
+def ingest(codec, decoder, family, cap):
+    receiver = codec.receiver(decoder)
+    prefix, records = family.prefix(cap)
+    receiver.feed(prefix)
+    assert receiver.decode_available() == records + 1
+    receiver.finish()
+    return receiver
+
+
+@torch.no_grad()
+def test_native_d1_caches_current_features_and_never_updates_reference_with_display(codec_and_frames):
+    codec, images = codec_and_frames
+    codec.reset()
+    base_endpoint, enhanced_endpoint = codec.new_decoder(), codec.new_decoder()
+    retained = None
+    for i, rgb in enumerate(images[:3]):
+        encoded = codec.encode(rgb, i, i == 0)
+        family = encoded.family
+        base = ingest(codec, base_endpoint, family, family.base_end)
+        display = ingest(codec, enhanced_endpoint, family, BUDGETS[5])
+        zero = base.render()
+        assert zero.shape == (1, 3, 1080, 1920) and torch.equal(zero, display.base)
+        assert codec.matches(encoded, enhanced_endpoint, display)
+        if i:
+            before = enhanced_endpoint.video.proxy.uf_state_snapshot()
+        shown = display.render()
+        assert torch.isfinite(shown).all()
+        assert not torch.equal(shown, zero)
+        if i:
+            after = enhanced_endpoint.video.proxy.uf_state_snapshot()
+            expected = base_endpoint.video.proxy.uf_state_snapshot()
+            for a, b, c in zip(before, after, expected, strict=True):
+                assert torch.equal(a, b)
+                assert torch.equal(a, c)
+        if i == 1:
+            retained = display, shown.clone()
+            display.feed(family.raw[family.ends[display.canvas.records]:family.ends[display.canvas.records + 1]])
+            assert display.decode_available() == 1
+            retained = display, display.render()
+    assert retained is not None
+    old, image = retained
+    assert torch.equal(old.render(), image)
+    assert enhanced_endpoint.order.last.index == 2
+
+
+@torch.no_grad()
+def test_native_future_change_loss_recovery_and_family_isolation(codec_and_frames):
+    codec, images = codec_and_frames
+
+    def generate(future):
+        codec.reset()
+        return [codec.encode(rgb, i, i in (0, 3)).family
+                for i, rgb in enumerate([*images[:2], future, images[3]])]
+
+    left = generate(images[2])
+    right = generate(1 - images[2])
+    assert left[:2] == right[:2]
+    assert left[2].raw != right[2].raw
+    decoder = codec.new_decoder()
+    broken = codec.receiver(decoder)
+    broken.feed(left[0].raw[:left[0].base_end - 1])
+    assert broken.decode_available() == 0
+    with pytest.raises(WireError, match="incomplete"):
+        broken.finish()
+    with pytest.raises(WireError, match="DESYNC"):
+        ingest(codec, decoder, left[1], left[1].base_end)
+    with pytest.raises(WireError, match="DESYNC"):
+        ingest(codec, decoder, left[2], left[2].base_end)
+    recovered = ingest(codec, decoder, left[3], left[3].base_end)
+    assert recovered.render().shape == (1, 3, 1080, 1920)
+    other = Unified(codec.assets, codec.model, (0, 0), codec.refiner, base_cap=4096, family_id="lite")
+    with pytest.raises(WireError, match="model"):
+        ingest(other, other.new_decoder(), left[3], left[3].base_end)
