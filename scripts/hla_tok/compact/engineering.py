@@ -53,6 +53,8 @@ def historical(v3: Path, continuous: Path, output: Path, *, before: bool) -> Non
     config = read_config(CONFIG)
     training = json_at(output / "training_selection.json")
     stages = SEALED + (("trained_checks_inputs",) if training["adopted"] else ())
+    if (output / "adapter_gradient_preflight.json").is_file():
+        stages += ("adapter_gradient_preflight",)
     counts = {stage: json_at(output / f"{stage}.json")["test_pixel_reads"] for stage in stages}
     if report != json_at(path) or not _same_historical_source(config["base_commit"]) or any(counts.values()):
         raise ValueError("historical or Test sentinel differs")

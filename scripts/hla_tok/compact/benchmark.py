@@ -14,7 +14,7 @@ from hla_tok.evaluation.io import environment, write_csv, write_json
 from hla_tok.evaluation.metrics import sha256_file
 from hla_tok.streaming.compact import CompactCodec
 from hla_tok.streaming.compact_wire import CompactFrame, max_budget
-from hla_tok.streaming.continuous import MAX_K, ContinuousReceiver, encode_continuous
+from hla_tok.streaming.continuous import MAX_K, ContinuousReceiver, RankOrder, encode_continuous
 from scripts.hla_tok.compact.assets import load_asset
 from scripts.hla_tok.compact.inputs import CONFIG, OUTPUT, compact_inputs, compact_orders
 from scripts.hla_tok.continuous.benchmark import latency_summary, timed
@@ -196,12 +196,27 @@ def _validation_run(inputs: Inputs, config: dict, codec: CompactCodec, asset: di
     ])
 
 
+def _deployment(output: Path, assets: dict, order: RankOrder, model_sha256: str) -> None:
+    rows = []
+    for name, spec in assets.items():
+        before = torch.cuda.memory_allocated()
+        codec, load = load_asset(output / "profiles" / spec["filename"], spec,
+                                 PROFILES_BY_LABEL[spec["profile"]], order, model_sha256)
+        allocated = torch.cuda.memory_allocated() - before
+        rows.append({"asset": name, "profile": spec["profile"], "projection": spec["projection"],
+                     "storage_bytes": spec["storage_bytes"], "asset_sha256": spec["sha256"],
+                     "allocated_gpu_bytes_after_load": allocated} | load)
+        del codec
+    write_csv(output / "profile_deployment.csv", rows)
+
+
 @torch.inference_mode()
 def run(inputs: Inputs, config: dict, output: Path, selection: dict, assets: dict) -> None:
     keys = bench_assets(selection, assets)
     _bind(output, inputs, config, keys, assets)
     frames = [frame for _, _, frame in validation_frames(inputs, representative(inputs.cohort))]
     order = compact_orders()[selection["order"]]
+    _deployment(output, assets, order, inputs.checkpoint["state_dict_sha256"])
     cases = []
     for key in keys:
         spec = assets[key]

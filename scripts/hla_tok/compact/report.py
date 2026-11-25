@@ -282,7 +282,7 @@ Original 的 K 表示每个空间 Tile 在整个 16 帧窗口内的 Token 数。
 
 ## 复现与验收
 
-[工程验收](engineering_audit.json) · [独立接收](wire_audit.json) · [因果性](causality_audit.json) · [实际 H100 延迟](latency_breakdown.csv) · [完整逐帧延迟](validation_latency.csv) · [图表](figures/README.md) · [原生样例](samples/manifest.json) · [复现入口](../../../docs/hla_tok/compact/README.md)
+[工程验收](engineering_audit.json) · [独立接收](wire_audit.json) · [因果性](causality_audit.json) · [Profile 设备成本](profile_deployment.csv) · [实际 H100 延迟](latency_breakdown.csv) · [完整逐帧延迟](validation_latency.csv) · [图表](figures/README.md) · [原生样例](samples/manifest.json) · [复现入口](../../../docs/hla_tok/compact/README.md)
 """
     (output / "final_report.md").write_text(text)
 
