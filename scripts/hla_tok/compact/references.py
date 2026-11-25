@@ -188,6 +188,16 @@ def original_reference(inputs: Inputs, config: dict, output: Path, checkpoint: P
     manifest = json_at(OFFICIAL_CHECKPOINT)
     path = Path(manifest["directory"]) if checkpoint is None else checkpoint
     model = OfficialBaseline(ROOT / "third_party/AdapTok", path, manifest)
+    checkpoint_config = manifest["config"]
+    write_json(output / "original_temporal_scope.json", {
+        "api_input_frames": CLIP_LENGTH, "encoder_temporal_patch_frames": model.model.temporal_patch_size,
+        "decoder_temporal_patch_frames": model.model.decoder_temporal_patch_size,
+        "temporal_groups": model.groups, "encoder_attention": checkpoint_config["encoder_attn_type"],
+        "decoder_attention": checkpoint_config["decoder_attn_type"], "cross_window_state": False,
+        "frames_waited_after_first_input": CLIP_LENGTH - 1,
+        "buffer_ms_at_30fps": (CLIP_LENGTH - 1) * 1000 / 30,
+        "scope": "entire 16-frame input required by the measured evaluation API",
+    })
     quality = NativeQuality()
     reference = config["reference"]
     budgets = sorted({k if k <= model.ranks else k // model.groups for k in reference["original_budgets"]})

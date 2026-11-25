@@ -100,7 +100,7 @@ def projection(output: Path, config: dict):
            "C0 BF16", marker="s", style=":")
     b.set(xlabel="Received Tokens", ylabel="Global PSNR (dB)", xscale="log", xticks=[510, 2040, 8160, 16320])
     b.set_xticklabels(["510", "2040", "8160", "16320"])
-    b.legend(ncols=2, loc="lower right")
+    b.legend(ncols=2, loc="upper left")
     _tags((a, b))
     return figure
 

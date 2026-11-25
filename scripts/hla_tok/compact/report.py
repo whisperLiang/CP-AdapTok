@@ -260,7 +260,7 @@ def run(output: Path) -> None:
 
 {_primary_table(output, selection, training, runtime)}
 
-Original 的 K 表示每个空间 Tile 在整个 16 帧窗口内的 Token 数。Original 的 FPS 包含物理 Fixed13 往返与拼接，且算法必须等待整窗，30 FPS 输入时首帧等待 500 ms。C1 的带头结果使用新增的 24 字节 F13W 实验封装。 [窗口账本](original_window_ledger.csv) · [C1 权重](c1_reference_identity.json) · [原版归档核验](original_archive_identity.json)
+Original 的 K 表示每个空间 Tile 在整个 16 帧窗口内的 Token 数。Original 以 4 帧时间 Patch 做组内处理，测量 API 等待完整 16 帧。30 FPS 输入时首帧等待 500 ms，FPS 包含物理 Fixed13 往返与拼接。C1 的带头结果使用新增的 24 字节 F13W 实验封装。 [窗口账本](original_window_ledger.csv) · [时间口径](original_temporal_scope.json) · [C1 权重](c1_reference_identity.json) · [原版归档核验](original_archive_identity.json)
 
 ## 共同字节上限
 
