@@ -1,0 +1,78 @@
+{
+  "experiment": "HLA-Tok-T",
+  "baseline_commit": "533ac3b533ae62fea7b64f16124727817794254d",
+  "native_shape_hw": [1080, 1920],
+  "validation_frames": 174,
+  "native_tokens": 16320,
+  "token_components": 32,
+  "fps_rate_basis": 30,
+  "wire_caps": {"5": 20833, "10": 41666, "20": 83333, "40": 166666, "6.7392": 28080},
+  "equal_payload_bytes": 26520,
+  "equal_c1_wire_bytes": 26544,
+  "baseline_reproduction_tolerances": {"global_psnr": 0.05, "lpips": 0.001, "dists": 0.001},
+  "base_profiles": {
+    "B1": {"cap": 4166, "ranks": 48, "components": 1},
+    "B2": {"cap": 10416, "ranks": 121, "components": 1},
+    "B3": {"cap": 20833, "ranks": 121, "components": 2}
+  },
+  "refresh_intervals": [16, 32, 64],
+  "refresh_scene_threshold": 0.85,
+  "linear_bound_steps": 2,
+  "quantizer_bits": [4, 8],
+  "block_sizes": [64, 128, 256],
+  "train_window_lengths": [4, 8, 16, 32],
+  "train_calibration_sources": {"fit": 8, "holdout": 4},
+  "seed": 60419,
+  "long_validation_frames": [64, 128, 256],
+  "scan_fit_rule": {
+    "fixed": "O2, tokens in native region order, first 16 dimensions, then remaining dimensions",
+    "rank_aware": "Train fit mean coefficient squared, absolute representation for Intra, innovation for T0",
+    "utility": "Train RGB MSE only, mean positive gradient dot coefficient reduction measured per rank and component, divided by mean physical record bits on Train holdout",
+    "rgb_weight": 1.0,
+    "lpips_weight": 0.0,
+    "dists_weight": 0.0,
+    "region_group_size": 135,
+    "rank_tie_break": "frozen O2, then component, then native region"
+  },
+  "scales": {"lattice_train_peak_steps": 4096, "clip_percentiles": [99.0, 99.9, 100.0], "holdout_selection": "per rank/component candidate with lowest MSE after integer quantization"},
+  "temporal_admission": {
+    "5": {"psnr_gain": 0.75, "lpips_gain_at_noninferior_psnr": 0.025},
+    "10": {"psnr_gain": 0.50, "lpips_gain_at_noninferior_psnr": 0.015},
+    "maximum_low_rate_psnr_loss": 0.10,
+    "maximum_dists_loss": 0.005,
+    "maximum_20mbps_psnr_loss": 0.20,
+    "maximum_20mbps_lpips_loss": 0.005,
+    "source_passes_required": 2
+  },
+  "target_quality": {
+    "5": {"global_psnr": 25.5, "lpips": 0.2043, "dists": 0.0924},
+    "10": {"global_psnr": 27.5, "lpips": 0.1826, "dists": 0.0821},
+    "20": {"global_psnr": 30.0, "lpips": 0.165, "dists": 0.105},
+    "40": {"global_psnr": 31.0, "lpips": 0.130, "dists": 0.085}
+  },
+  "runtime": {"warmup": 100, "frames": 1000, "repeats": 3, "min_fps": 30, "max_p95_ms": 33.33, "target_fps": 50, "precisions": ["bf16", "fp32"]},
+  "training": {
+    "pilot":{"steps":[0, 250, 500, 1000, 3000], "unroll":[4, 8, 16], "predictor_max_parameters": 500000, "predictor_max_p95_ms": 2},
+    "optimizer": "AdamW",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "gradient_clip": 1.0,
+    "seeds": [1, 2],
+    "stages": [[1, 5000, 4], [5001, 15000, 8], [15001, 25000, 16], [25001, 30000, 32]],
+    "validation_steps": [0, 250, 500, 1000, 2000, 3000, 5000],
+    "validation_interval_after_5000": 2000,
+    "formal_stop_patience": 3,
+    "stop_immediately": ["NaN or Inf", "reference mismatch or divergence", "gradient failure", "unauthorized Test read"],
+    "loss_weights": {"rgb": 1.0, "lpips": 0.1, "dists": 0.05, "temporal": 0.1, "monotonic": 0.1, "rate_proxy": 0.01},
+    "budget_sampling": {"5": 0.35, "10": 0.35, "20": 0.20, "40": 0.10}
+  },
+  "evaluation": {
+    "global_psnr": "-10 log10(mean squared error over equal-size native RGB frames in [0,1])",
+    "lpips": "frozen FP32 LPIPS-Alex, mean per frame",
+    "dists": "frozen FP32 DISTS, mean per frame",
+    "temporal_difference_error": "mean squared error between successive reconstructed and source RGB differences inside one sequence",
+    "wire_cap": "floor(target_bits_per_second / (8 * 30))",
+    "bpp": "8 * application wire bytes / (1920 * 1080)",
+    "test_access": "sealed unless Validation and all formal admission criteria pass"
+  }
+}
