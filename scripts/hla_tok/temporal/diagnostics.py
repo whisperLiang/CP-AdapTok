@@ -19,7 +19,15 @@ from scripts.hla_tok.continuous.inputs import open_inputs, run_arguments
 from scripts.hla_tok.continuous.matrix import compute, groups
 from scripts.hla_tok.continuous.quality import NativeQuality, summarize
 from scripts.hla_tok.temporal.engine import Link, prediction_coordinates, rms
-from scripts.hla_tok.temporal.inputs import COMPACT, RESULTS, Assets, Setting, source_frame, validation_plan
+from scripts.hla_tok.temporal.inputs import (
+    COMPACT,
+    RESULTS,
+    Assets,
+    Setting,
+    project_source,
+    source_frame,
+    validation_plan,
+)
 from scripts.hla_tok.v2.protocol import json_at
 
 MODES = ("A0 absolute", "A1 oracle", "A2 CP decoded", "A3 copy CLOSED", "A4 linear CLOSED")
@@ -189,8 +197,46 @@ def run(v3: Path, output: Path) -> None:
     inputs.finish(output / "diagnostic_inputs.json")
 
 
+@torch.inference_mode()
+def matched_support(v3: Path, output: Path) -> None:
+    """Attribute the Oracle gap at exactly the deployed reference support on the first 16 pairs per source."""
+    inputs = open_inputs(v3)
+    assets = Assets(output)
+    setting = Setting(**json_at(output / "candidate_selection.json")["setting"])
+    profile = assets.profile(setting)
+    synth = assets.synthesis(inputs.model)
+    quality = NativeQuality()
+    scale = assets.arrays["scale"][LAYOUT.ranks]
+    support = np.frombuffer(profile.base_support, dtype=bool)
+    selected = profile.scan[:profile.base_components]
+    results = []
+    for clip in validation_plan(inputs)[0]:
+        link = Link(profile)
+        old = None
+        for i in range(17):
+            rgb = source_frame(inputs.reader, clip, i)
+            coefficients = project_source(inputs, assets.transform, rgb)
+            target = target_lattice(coefficients, scale)
+            sent = link.send(target, i, profile.max_base_bytes, channel="base-only")
+            if old is not None:
+                same_support = np.zeros_like(old)
+                same_support.reshape(-1)[selected] = old.reshape(-1)[selected]
+                actual = prediction_coordinates(sent, profile) * scale
+                quality.prepare(rgb)
+                for method, values in (("Same-support Oracle", same_support), ("CLOSED base", actual)):
+                    with compute("bf16"):
+                        image = synth.render_coefficients(torch.from_numpy(values).cuda()[None], support)
+                    results.append({"video": clip.video, "frame": i, "method": method} | quality.score(image))
+            old = coefficients
+    write_csv(output / "matched_support_oracle_per_frame.csv", results)
+    write_csv(output / "matched_support_oracle.csv", [
+        labels | summarize(rows) for labels, rows in groups(results, ("method",))])
+    inputs.finish(output / "matched_support_inputs.json")
+
+
 if __name__ == "__main__":
     parser = run_arguments(__doc__)
     parser.set_defaults(output=RESULTS)
+    parser.add_argument("--matched-support", action="store_true")
     args = parser.parse_args()
-    run(args.v3, args.output)
+    (matched_support if args.matched_support else run)(args.v3, args.output)

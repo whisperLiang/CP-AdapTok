@@ -150,3 +150,7 @@ def test_invalid_headers_are_rejected_before_serialization(value):
 def test_rejected_short_block_inputs(data, bits):
     with pytest.raises(ValueError):
         pack_block(data, bits, False)
+
+
+def test_native_index_does_not_wrap_small_integer_rank_dtypes():
+    assert int(NativeLayout().index(np.uint8(120), np.uint8(119))) == 16319

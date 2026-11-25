@@ -1,0 +1,258 @@
+{
+  "method": "T0-RA S2",
+  "setting": {
+    "label": "T0-RA S2",
+    "base": "B2",
+    "scan": "S2",
+    "predictor": "copy",
+    "sparse": true,
+    "bits": 4,
+    "block_size": 256,
+    "refresh": 32,
+    "scene": false,
+    "score_basis": "temporal"
+  },
+  "ranking": [
+    {
+      "method": "T0-RA S2",
+      "low_three_metric_rank_sum": 4,
+      "high_three_metric_rank_sum": 6
+    },
+    {
+      "method": "T0 fixed",
+      "low_three_metric_rank_sum": 8,
+      "high_three_metric_rank_sum": 11
+    },
+    {
+      "method": "T0 linear",
+      "low_three_metric_rank_sum": 17,
+      "high_three_metric_rank_sum": 23
+    },
+    {
+      "method": "T0-RA",
+      "low_three_metric_rank_sum": 18,
+      "high_three_metric_rank_sum": 14
+    },
+    {
+      "method": "T0 fixed RAW",
+      "low_three_metric_rank_sum": 19,
+      "high_three_metric_rank_sum": 15
+    },
+    {
+      "method": "T0-RA RAW",
+      "low_three_metric_rank_sum": 24,
+      "high_three_metric_rank_sum": 21
+    }
+  ],
+  "quality_admission": false,
+  "full_three_metric_targets": {
+    "5": {
+      "global_psnr": false,
+      "lpips": false,
+      "dists": false
+    },
+    "10": {
+      "global_psnr": false,
+      "lpips": false,
+      "dists": false
+    },
+    "20": {
+      "global_psnr": false,
+      "lpips": false,
+      "dists": false
+    },
+    "40": {
+      "global_psnr": false,
+      "lpips": true,
+      "dists": true
+    }
+  },
+  "gate": {
+    "5": {
+      "global_psnr_gain_vs_strongest": -0.34393674417588826,
+      "lpips_reduction_vs_strongest": -0.12051731981765262,
+      "dists_increase_vs_strongest": 0.11397387104472897,
+      "baselines": [
+        "CP Q16-4",
+        "CP Q4-4",
+        "CP Q8-4 T1",
+        "Intra RA",
+        "Intra RA S2",
+        "Intra fixed"
+      ],
+      "pass": false,
+      "source_passes": 0
+    },
+    "10": {
+      "global_psnr_gain_vs_strongest": -0.4875431140001609,
+      "lpips_reduction_vs_strongest": -0.05897121071472933,
+      "dists_increase_vs_strongest": 0.04609521161550764,
+      "baselines": [
+        "CP Q16-4",
+        "CP Q8-4 T1",
+        "Intra RA",
+        "Intra RA S2",
+        "Intra fixed"
+      ],
+      "pass": false,
+      "source_passes": 0
+    },
+    "20": {
+      "global_psnr_gain_vs_strongest": -0.33545466882615926,
+      "lpips_reduction_vs_strongest": -0.0003099585401600824,
+      "dists_increase_vs_strongest": 0.00182048685249242,
+      "baselines": [
+        "CP Q16-4",
+        "CP Q8-4 T1",
+        "Intra RA",
+        "Intra RA S2",
+        "Intra fixed"
+      ],
+      "pass": false,
+      "source_passes": 2
+    }
+  },
+  "paired_by_video": [
+    {
+      "video": "DAVIS2017:blackswan",
+      "bandwidth": "5",
+      "global_psnr_gain_vs_strongest": -0.2869317974047476,
+      "lpips_reduction_vs_strongest": -0.1371130710840225,
+      "dists_increase_vs_strongest": 0.12930780887603763,
+      "baselines": [
+        "CP Q16-4",
+        "CP Q4-4",
+        "CP Q8-4 T1",
+        "Intra RA",
+        "Intra RA S2",
+        "Intra fixed"
+      ],
+      "pass": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "bandwidth": "5",
+      "global_psnr_gain_vs_strongest": -0.3329478977679443,
+      "lpips_reduction_vs_strongest": -0.10567669197916985,
+      "dists_increase_vs_strongest": 0.09913788735866547,
+      "baselines": [
+        "CP Q16-4",
+        "CP Q4-4",
+        "CP Q8-4 T1",
+        "Intra RA",
+        "Intra RA S2",
+        "Intra fixed"
+      ],
+      "pass": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "bandwidth": "5",
+      "global_psnr_gain_vs_strongest": -0.49229422503871945,
+      "lpips_reduction_vs_strongest": -0.12493762423594795,
+      "dists_increase_vs_strongest": 0.11702063878377278,
+      "baselines": [
+        "CP Q16-4",
+        "CP Q4-4",
+        "CP Q8-4 T1",
+        "Intra RA",
+        "Intra RA S2",
+        "Intra fixed"
+      ],
+      "pass": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "bandwidth": "10",
+      "global_psnr_gain_vs_strongest": -0.28478988692740614,
+      "lpips_reduction_vs_strongest": -0.05457534968852995,
+      "dists_increase_vs_strongest": 0.044650683403015146,
+      "baselines": [
+        "CP Q16-4",
+        "CP Q8-4 T1",
+        "Intra RA",
+        "Intra RA S2",
+        "Intra fixed"
+      ],
+      "pass": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "bandwidth": "10",
+      "global_psnr_gain_vs_strongest": -0.6218753436032145,
+      "lpips_reduction_vs_strongest": -0.042890388052910566,
+      "dists_increase_vs_strongest": 0.0391452107578516,
+      "baselines": [
+        "CP Q16-4",
+        "CP Q8-4 T1",
+        "Intra RA",
+        "Intra RA S2",
+        "Intra fixed"
+      ],
+      "pass": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "bandwidth": "10",
+      "global_psnr_gain_vs_strongest": -0.22611023049043766,
+      "lpips_reduction_vs_strongest": -0.0797873057425022,
+      "dists_increase_vs_strongest": 0.05471231937408447,
+      "baselines": [
+        "CP Q16-4",
+        "CP Q8-4 T1",
+        "Intra RA",
+        "Intra RA S2",
+        "Intra fixed"
+      ],
+      "pass": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "bandwidth": "20",
+      "global_psnr_gain_vs_strongest": 0.09717501058652545,
+      "lpips_reduction_vs_strongest": -0.0004458859562873896,
+      "dists_increase_vs_strongest": 0.002116692066192624,
+      "baselines": [
+        "CP Q16-4",
+        "CP Q8-4 T1",
+        "Intra RA",
+        "Intra RA S2",
+        "Intra fixed"
+      ],
+      "pass": true
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "bandwidth": "20",
+      "global_psnr_gain_vs_strongest": -0.6191856955847932,
+      "lpips_reduction_vs_strongest": 0.00224206387065351,
+      "dists_increase_vs_strongest": -0.0005281772464513779,
+      "baselines": [
+        "CP Q16-4",
+        "CP Q8-4 T1",
+        "Intra RA",
+        "Intra RA S2",
+        "Intra fixed"
+      ],
+      "pass": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "bandwidth": "20",
+      "global_psnr_gain_vs_strongest": 0.07683583431199281,
+      "lpips_reduction_vs_strongest": -0.002918842931588478,
+      "dists_increase_vs_strongest": 0.004078890879948935,
+      "baselines": [
+        "CP Q16-4",
+        "CP Q8-4 T1",
+        "Intra RA",
+        "Intra RA S2",
+        "Intra fixed"
+      ],
+      "pass": true
+    }
+  ],
+  "candidate_scope": "four-rate temporal profiles",
+  "low_rate_only_profile_probes": 9,
+  "tie_break": "low-rate three-metric rank sum, high-rate rank sum, method label"
+}

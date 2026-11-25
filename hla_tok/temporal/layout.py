@@ -39,7 +39,7 @@ class NativeLayout:
             raise ValueError("native rank and region must be integers")
         if np.any((rank < 0) | (rank >= len(NATIVE_RANKS)) | (region < 0) | (region >= REGIONS)):
             raise ValueError("rank or region is outside the native layout")
-        token = rank * REGIONS + region
+        token = rank.astype(np.int32) * REGIONS + region.astype(np.int32)
         if np.any(token >= MAX_K):
             raise ValueError("rank and region do not identify a native token")
         return token
