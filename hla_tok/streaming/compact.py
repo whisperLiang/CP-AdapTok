@@ -74,7 +74,11 @@ class CompactCodec:
         return codes[None]
 
     def dequantize(self, codes: Tensor) -> Tensor:
-        return codes if self.scalar is None else self.scalar.decode(codes, self.ranks[:codes.shape[1]])
+        if self.scalar is not None:
+            return self.scalar.decode(codes, self.ranks[:codes.shape[1]])
+        device = self.device.type
+        dtype = torch.get_autocast_dtype(device) if torch.is_autocast_enabled(device) else torch.float32
+        return codes.to(dtype)
 
     def lift(self, u: Tensor) -> Tensor:
         return self.transform.decode(u, self.ranks[:u.shape[1]])
@@ -97,15 +101,16 @@ class CompactCodec:
             raise ValueError("expected a base prefix of the configured Compact identity")
         return self.unpack(packet.payload)
 
+    def _decode_codes(self, receiver: ContinuousReceiver, codes: Tensor) -> Tensor:
+        return receiver.decode(self.lift(self.dequantize(codes.to(self.device))), self.order)
+
     @torch.inference_mode()
     def decode_payload(self, receiver: ContinuousReceiver, payload: bytes | memoryview) -> Tensor:
-        codes = self.unpack(payload).to(self.device)
-        return receiver.decode(self.lift(self.dequantize(codes)), self.order)
+        return self._decode_codes(receiver, self.unpack(payload))
 
     @torch.inference_mode()
     def decode(self, receiver: ContinuousReceiver, raw: bytes) -> Tensor:
-        codes = self.prefix_codes(raw).to(self.device)
-        return receiver.decode(self.lift(self.dequantize(codes)), self.order)
+        return self._decode_codes(receiver, self.prefix_codes(raw))
 
 
 def encode_frames(model: HLATok, codec: CompactCodec, frames: Iterable[tuple[Tensor, int]]) -> Iterator[CompactFrame]:

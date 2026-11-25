@@ -64,3 +64,16 @@ def test_stream_yields_before_reading_future_frames(codec, monkeypatch):
         yield torch.zeros(1), 1
         raise AssertionError("future frame requested before first output")
     assert next(encode_frames(None, codec, inputs())).count == 1
+
+
+def test_bf16_wire_is_widened_for_fp32_receiver():
+    transform = CompactTransform.from_pca(torch.zeros(1, 32), torch.eye(32)[None, :, :4])
+    order = RankOrder.native()
+    codec = CompactCodec(Profile.PCA4, transform, None, order, "aa" * 32, "bb" * 32, "cpu")
+    chosen = torch.tensor([[[.25, 2., -.5, 1.]]], dtype=torch.bfloat16)
+    packet = codec.frame(chosen, 27).serialize_range(0, 1)
+    coded = codec.prefix_codes(packet)
+    assert coded.dtype == torch.bfloat16
+    z = codec.lift(codec.dequantize(coded))
+    assert z.dtype == torch.float32
+    assert torch.equal(z[..., :4], chosen.float())
