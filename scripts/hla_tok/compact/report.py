@@ -141,7 +141,8 @@ def _bands_table(output: Path) -> str:
     for row in rows:
         values = [_metric_triplet(row, method + "_") if row[method + "_status"] == "MEASURED" else "NOT_COMPARABLE"
                   for method in ("c0", "c1_f13w", "original", "best_compact")]
-        label = f"{row['best_compact_profile']} · " + values[-1]
+        method = " · T1" if row["best_compact_variant"] == "adapter" else ""
+        label = f"{row['best_compact_profile']}{method} · " + values[-1]
         lines.append("| " + " | ".join([row["target_mbps"], *values[:-1], label, f"{float(row['gain_vs_c0_db']):+.2f}"]) + " |")
     return "\n".join(lines)
 
@@ -203,6 +204,20 @@ def conclusions(output: Path, selection: dict, training: dict, state: dict, targ
     original_gain = float(first8["best_compact_global_psnr"]) - float(first8["original_global_psnr"]) if compare else None
     original = f"在 5 Mbps 共同上限下，最佳 Compact 与 Original 相差 {original_gain:+.2f} dB。" if compare else "5 Mbps 缺少可比点。"
     saturation = selection["first_saturated_band_mbps"]
+    t1 = training.get("T1", {})
+    t2 = training.get("T2", {})
+    if "full_cohort_signed_gains_low" in training:
+        a = sum(record["steps"] for record in t1.values())
+        b = t2.get("steps", 0) if isinstance(t2, dict) else 0
+        psnr_gain, lpips_gain, dists_gain = training["full_cohort_signed_gains_low"]
+        steps = f"T1 {a} 步，T2 {b} 步"
+        trained_eq, = [row for row in csv_at(output / "training_final_bandwidth.csv") if row["basis"] == "payload_only"]
+        outcome = "纳入固定主线" if training["adopted"] else "保留为对照"
+        adapter_summary = (f"{steps}。完整队列同码率低预算相对初始 Q8-4 获得 "
+                           f"{psnr_gain:+.3f} dB、LPIPS 降低 {lpips_gain:.4f}、DISTS 降低 {dists_gain:.4f}。"
+                           f"适配后的等 Payload 为 {_metric_triplet(trained_eq)}，{outcome}。")
+    else:
+        adapter_summary = f"轻量适配裁决为 {training['status']}。"
     return "\n".join([
         f"1. 全局熵有效维数 {float(global_row['effective_rank_entropy']):.2f}，各 Rank 中位数 {median(ranks):.2f}。",
         f"2. 16D、8D、4D 的冻结排序分别选中 {projection['16']['projection']}、{projection['8']['projection']}、{projection['4']['projection']}。",
@@ -217,7 +232,7 @@ def conclusions(output: Path, selection: dict, training: dict, state: dict, targ
         f"11. 主 Profile 在单卡 H100 实测 {min(float(r['steady_state_fps']) for r in hardware):.2f}–"
         f"{max(float(r['steady_state_fps']) for r in hardware):.2f} FPS，串行 P95 最高 "
         f"{max(float(r['p95_ms']) for r in hardware):.3f} ms。",
-        f"12. 轻量适配裁决为 {training['status']}。见 [适配证据](training_selection.json)。",
+        f"12. {adapter_summary} [适配证据](training_selection.json)。",
         "13. 本轮证据的训练范围是紧凑映射与 Lift。解冻 Tokenizer 的增益留待独立实验裁决。",
         "14. 码流为逐帧无状态路径。时间冗余压缩的增益留待独立实验裁决。",
         f"15. 唯一推荐主线为 {recommend[0]}。{recommend[1]}。",
@@ -264,7 +279,7 @@ Original 的 K 表示每个空间 Tile 在整个 16 帧窗口内的 Token 数。
 
 ## 共同字节上限
 
-各单元格为 PSNR / LPIPS-Alex / DISTS。Best Compact 按每档联合排序，固定主 Profile 的结果列于核心表。Original 按窗口均摊，使用小于或等于上限的实测档位。 [来源表](bandwidth_baseline_comparison.csv)
+各单元格为 PSNR / LPIPS-Alex / DISTS。Best Compact 按每档联合排序，含已测的 T1 对照。固定主 Profile 的结果列于核心表。Original 按窗口均摊，使用小于或等于上限的实测档位。 [来源表](bandwidth_baseline_comparison.csv)
 
 {_bands_table(output)}
 

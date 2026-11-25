@@ -4,9 +4,12 @@ from pathlib import Path
 
 from hla_tok.compression.profiles import PROFILES_BY_LABEL
 from hla_tok.evaluation.io import write_csv, write_json
+from hla_tok.evaluation.metrics import sha256_file
 from hla_tok.streaming.continuous import MAX_K
 from scripts.hla_tok.compact.decision import dominates, signed_quality
 from scripts.hla_tok.compact.inputs import CONFIG
+from scripts.hla_tok.continuous.matrix import groups
+from scripts.hla_tok.continuous.quality import summarize
 from scripts.hla_tok.v2.protocol import csv_at, json_at
 from scripts.hla_tok.v3.protocol import read_config
 
@@ -48,7 +51,7 @@ def bandwidth_comparison(output: Path, config: dict, selection: dict, training: 
     sources = [r for r in compact if r["order"] == order]
     priorities = config["quantization"]["profiles"]
     c1, = [r for r in legacy if r["method"] == "C1 Fixed13"]
-    if training.get("adopted"):
+    if (output / "training_final_bandwidth.csv").is_file():
         trained = csv_at(output / "training_final_bandwidth.csv")
         sources.extend(r | {"cap_bytes": r["cap"]} for r in trained if r["basis"] == "total_wire")
     main = training["asset"] if training.get("adopted") else selection["main_asset"]
@@ -63,7 +66,9 @@ def bandwidth_comparison(output: Path, config: dict, selection: dict, training: 
         gain = signed_quality(best)[0] - signed_quality(c0)[0]
         comparison.append({
             "target_mbps": band, "cap_bytes": cap, "best_compact_asset": best["asset"], "main_asset": main,
-            "gain_vs_c0_db": gain, "original_time_basis": "16-frame window average" if b else "",
+            "gain_vs_c0_db": gain,
+            "best_compact_variant": "adapter" if best["asset"] == training.get("asset") else "static",
+            "original_time_basis": "16-frame window average" if b else "",
             **_comparison_columns("c0", c0), **_comparison_columns("c1_f13w", a),
             **_comparison_columns("original", b), **_comparison_columns("best_compact", best),
             **_comparison_columns("main_compact", fixed),
@@ -145,6 +150,35 @@ def _raw_parity(output: Path) -> None:
                                                        "status": "PASS" if not any(maximum.values()) else "PARTIAL PASS"})
 
 
+def _training_evidence(output: Path, selection: dict, training: dict) -> None:
+    sources = sorted(path for path in (output / "profiles").glob("T[123]_*.npz"))
+    if sources:
+        write_json(output / "training_asset_manifest.json", {
+            path.name: {"sha256": sha256_file(path), "storage_bytes": path.stat().st_size} for path in sources})
+    final = output / "training_final_per_frame.csv"
+    if not final.is_file():
+        return
+    source = [r for r in csv_at(output / "scalar_quantization_per_frame.csv")
+              if r["asset"] == training["parent_asset"] and r["order"] == selection["order"]]
+    base = {(r["video"], r["frame"], r["budget"]): r for r in source}
+    raw = csv_at(final)
+    summaries = []
+    fields = ("mse", "psnr", "lpips", "dists")
+
+    def metrics(items: list[dict]) -> dict:
+        return summarize([{field: float(row[field]) for field in fields} for row in items])
+
+    for tags, rows in groups(raw, ("video", "budget")):
+        original = [base[(r["video"], r["frame"], r["budget"])] for r in rows]
+        a, b = metrics(rows), metrics(original)
+        summaries.append(tags | {"paired_frames": len(rows), "adapter": training["asset"],
+                                 "initial": training["parent_asset"]} | {
+            f"gain_{metric}": gain for metric, gain in zip(
+                METRICS, (x-y for x, y in zip(signed_quality(a), signed_quality(b), strict=True)), strict=True)
+        })
+    write_csv(output / "training_paired_by_video.csv", summaries)
+
+
 def write_tables(output: Path) -> None:
     config = read_config(CONFIG)
     selection = json_at(output / "no_training_selection.json")
@@ -153,3 +187,4 @@ def write_tables(output: Path) -> None:
     write_csv(output / "bandwidth_baseline_comparison.csv", bandwidth_comparison(output, config, selection, training))
     ablation(output, config)
     _raw_parity(output)
+    _training_evidence(output, selection, training)
