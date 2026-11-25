@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "test_pixel_reads": 0,
+  "test_unsealed": false,
+  "stage_pixel_reads": {
+    "baseline_inputs": {
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    "calibration_inputs": {
+      "train": 392,
+      "validation": 0,
+      "test": 0
+    },
+    "diagnostic_inputs": {
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    "matrix_inputs": {
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    "dynamic_inputs": {
+      "train": 0,
+      "validation": 253,
+      "test": 0
+    },
+    "runtime_inputs": {
+      "train": 0,
+      "validation": 64,
+      "test": 0
+    },
+    "runtime_inputs_native": {
+      "train": 0,
+      "validation": 64,
+      "test": 0
+    },
+    "matched_support_inputs": {
+      "train": 0,
+      "validation": 51,
+      "test": 0
+    },
+    "c0_native_replay": {
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    }
+  },
+  "frozen_test_manifest_sha256": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e",
+  "access_scope": "AuditedFrames",
+  "synthetic_boundary_tests_use_isolated_fixture": true
+}

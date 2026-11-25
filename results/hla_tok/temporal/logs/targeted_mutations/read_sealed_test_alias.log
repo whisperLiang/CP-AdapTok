@@ -1,0 +1,21 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________ test_sealed_test_alias_is_rejected_before_decode _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-whisperliang/pytest-164/test_sealed_test_alias_is_reje0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7aa997174b00>
+
+    def test_sealed_test_alias_is_rejected_before_decode(tmp_path, monkeypatch):
+        audit, sources = setup_rows(tmp_path, monkeypatch)
+        alias = tmp_path / "validation" / "000.png"
+        alias.unlink()
+        alias.symlink_to(tmp_path / "test" / "000.png")
+        sources["validation"][0]["frame_hashes"][0]["sha256"] = sources["test"][0]["frame_hashes"][0]["sha256"]
+>       with pytest.raises(PermissionError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE PermissionError
+
+tests/hla_tok/test_data_boundary.py:46: Failed
+=========================== short test summary info ============================
+FAILED tests/hla_tok/test_data_boundary.py::test_sealed_test_alias_is_rejected_before_decode
+1 failed in 1.48s

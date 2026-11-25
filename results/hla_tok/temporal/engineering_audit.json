@@ -2,11 +2,11 @@
   "status": "PASS",
   "recorded_tests": {
     "cpu_regression": {
-      "tests": 389,
+      "tests": 396,
       "failure": 0,
       "error": 0,
       "skipped": 1,
-      "temporal_cases": 83,
+      "temporal_cases": 90,
       "status": "PASS"
     },
     "cuda_regression": {
@@ -18,11 +18,11 @@
       "status": "PASS"
     },
     "temporal_cpu": {
-      "tests": 76,
+      "tests": 83,
       "failure": 0,
       "error": 0,
       "skipped": 0,
-      "temporal_cases": 76,
+      "temporal_cases": 83,
       "status": "PASS"
     },
     "cross_device": {
@@ -41,8 +41,7 @@
     },
     "mypy": {
       "status": "PASS",
-      "scope": "hla_tok, scripts/hla_tok",
-      "report": "Success: no issues found in 139 source files"
+      "report": "Success: no issues found in 140 source files"
     },
     "crapper": {
       "status": "PASS",
@@ -59,7 +58,7 @@
       "status": "PASS",
       "killed": 1,
       "survived": 0,
-      "scope": "exact integer remainder multiply-to-divide site"
+      "scope": "deterministic integer remainder site"
     }
   },
   "named_mutations": {

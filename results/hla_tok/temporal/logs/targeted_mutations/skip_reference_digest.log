@@ -1,0 +1,22 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________ test_invalid_binding_frame_id_and_history_digest _______________
+
+profile = Profile(profile_id=1, scan=array([   0,   32,   64, ..., 8610, 8611, 8612],
+      shape=(1350,), dtype=int32), base_co...ctor='copy', refresh=32, scene_threshold=None, linear_bound_steps=2, base_cap=None, base_records=5, max_base_bytes=302)
+
+    def test_invalid_binding_frame_id_and_history_digest(profile):
+        first = encode_frame(target(9), 10, None, profile, 800)
+        second = encode_frame(target(11), 11, first.base, profile, 800)
+        receiver = TemporalReceiver(profile)
+        received(receiver, first)
+        header = open_header(second.raw)
+        for altered in (replace(header, reference_id=9), replace(header, reference_digest=bytes(32))):
+>           with pytest.raises(ReferenceMismatch):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE ReferenceMismatch
+
+tests/hla_tok/temporal/test_stream.py:135: Failed
+=========================== short test summary info ============================
+FAILED tests/hla_tok/temporal/test_stream.py::test_invalid_binding_frame_id_and_history_digest
+1 failed in 1.23s

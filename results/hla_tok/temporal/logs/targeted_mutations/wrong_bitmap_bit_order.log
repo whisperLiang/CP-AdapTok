@@ -1,0 +1,31 @@
+...F..                                                                   [100%]
+=================================== FAILURES ===================================
+___ test_sparse_physical_mode_and_padding[symbols3-4-True-3-\x02\x01\x7f-7] ____
+
+symbols = [0, -1, 0, 0, 0, 0, ...], bits = 4, sparse = True
+mode = <Mode.BITMAP4: 3>, payload = b'\x02\x01\x7f', padding = 7
+
+    @pytest.mark.parametrize(
+        "symbols,bits,sparse,mode,payload,padding",
+        [
+            ([-8, -1, 7], 4, False, Mode.RAW4, b"\xf8\x07", 4),
+            ([-128, -1, 127], 8, False, Mode.RAW8, b"\x80\xff\x7f", 0),
+            ([0] * 9, 4, True, Mode.ZERO, b"", 0),
+            ([0, -1, 0, 0, 0, 0, 0, 0, 7], 4, True, Mode.BITMAP4, b"\x02\x01\x7f", 7),
+            ([-17, 0, 0], 8, True, Mode.RAW8, b"\xef\x00\x00", 0),
+            ([1, 2, 3, 4], 8, True, Mode.RAW4, b"\x21\x43", 0),
+        ],
+    )
+    def test_sparse_physical_mode_and_padding(symbols, bits, sparse, mode, payload, padding):
+        values = np.array(symbols, dtype=np.int8)
+        block = pack_block(values, bits, sparse)
+>       assert (block.mode, block.payload, block.padding_bits) == (mode, payload, padding)
+E       AssertionError: assert (<Mode.BITMAP..., np.int64(7)) == (<Mode.BITMAP...2\x01\x7f', 7)
+E
+E         At index 1 diff: b'@\x80\x7f' != b'\x02\x01\x7f'
+E         Use -v to get more diff
+
+tests/hla_tok/temporal/test_contract.py:88: AssertionError
+=========================== short test summary info ============================
+FAILED tests/hla_tok/temporal/test_contract.py::test_sparse_physical_mode_and_padding[symbols3-4-True-3-\x02\x01\x7f-7]
+1 failed, 5 passed in 1.22s

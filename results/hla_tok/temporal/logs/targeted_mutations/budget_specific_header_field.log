@@ -1,0 +1,23 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_independent_budgets_share_wire_and_integer_prefix ____________
+
+profile = Profile(profile_id=1, scan=array([   0,   32,   64, ..., 8610, 8611, 8612],
+      shape=(1350,), dtype=int32), base_co...ctor='copy', refresh=32, scene_threshold=None, linear_bound_steps=2, base_cap=None, base_records=5, max_base_bytes=302)
+
+    def test_independent_budgets_share_wire_and_integer_prefix(profile):
+        first = encode_frame(target(1), 0, None, profile, 1700)
+        large = encode_frame(target(8), 1, first.base, profile, 1700)
+        small = encode_frame(target(8), 1, first.base, profile, large.base_bytes + 70)
+        assert len(small.raw) < len(large.raw)
+>       assert large.raw.startswith(small.raw)
+E       AssertionError: assert False
+E        +  where False = <built-in method startswith of bytes object at 0x38244aa0>(b'HLT\x01\x01\x04\x00\x01\x00\x00\x00\x00\x00\x00\x008\x04\x80\x07\xc0? \x05\x00_\xa1\xfd\xaa\xbakg\xf0\xa4$\x1d=\xb9S...0\x0e\x00\x07\x00DDDDDDD\xeb\xe8\'\x8c\x05\x00\x0e\x01\x00\x00\x00@\x00 \x00TwTwTwTwTwTwTwTwTwTwTwTwTwTwTwTwb0\x8e\xe7')
+E        +    where <built-in method startswith of bytes object at 0x38244aa0> = b'HLT\x01\x01\t\x00\x01\x00\x00\x00\x00\x00\x00\x008\x04\x80\x07\xc0? \x05\x00_\xa1\xfd\xaa\xbakg\xf0\xa4$\x1d=\xb9S^\...TwTwTwTwTwTwTwTwTwTwTwTwTw\x15A\xee\x7f\x15\x00\x0e\x05\x00\x00\x008\x00\x1c\x00TwTwTwTwTwTwTwTwTwTwTwTwTwTw\xd9s\xffF'.startswith
+E        +      where b'HLT\x01\x01\t\x00\x01\x00\x00\x00\x00\x00\x00\x008\x04\x80\x07\xc0? \x05\x00_\xa1\xfd\xaa\xbakg\xf0\xa4$\x1d=\xb9S^\...TwTwTwTwTwTwTwTwTwTwTwTwTw\x15A\xee\x7f\x15\x00\x0e\x05\x00\x00\x008\x00\x1c\x00TwTwTwTwTwTwTwTwTwTwTwTwTwTw\xd9s\xffF' = EncodedFrame(frame_id=1, raw=b'HLT\x01\x01\t\x00\x01\x00\x00\x00\x00\x00\x00\x008\x04\x80\x07\xc0? \x05\x00_\xa1\xfd\x... 0, 0,\n       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 0, 0, 0, 0, 0], dtype=int16)).raw
+E        +    and   b'HLT\x01\x01\x04\x00\x01\x00\x00\x00\x00\x00\x00\x008\x04\x80\x07\xc0? \x05\x00_\xa1\xfd\xaa\xbakg\xf0\xa4$\x1d=\xb9S...0\x0e\x00\x07\x00DDDDDDD\xeb\xe8\'\x8c\x05\x00\x0e\x01\x00\x00\x00@\x00 \x00TwTwTwTwTwTwTwTwTwTwTwTwTwTwTwTwb0\x8e\xe7' = EncodedFrame(frame_id=1, raw=b'HLT\x01\x01\x04\x00\x01\x00\x00\x00\x00\x00\x00\x008\x04\x80\x07\xc0? \x05\x00_\xa1\xfd... 0, 0,\n       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,\n       0, 0, 0, 0, 0, 0], dtype=int16)).raw
+
+tests/hla_tok/temporal/test_stream.py:74: AssertionError
+=========================== short test summary info ============================
+FAILED tests/hla_tok/temporal/test_stream.py::test_independent_budgets_share_wire_and_integer_prefix
+1 failed in 1.24s

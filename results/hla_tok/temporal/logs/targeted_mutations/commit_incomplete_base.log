@@ -1,0 +1,20 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_incremental_reordering_duplicate_overlap_and_crc _____________
+
+profile = Profile(profile_id=1, scan=array([   0,   32,   64, ..., 8610, 8611, 8612],
+      shape=(1350,), dtype=int32), base_co...ctor='copy', refresh=32, scene_threshold=None, linear_bound_steps=2, base_cap=None, base_records=5, max_base_bytes=302)
+
+    def test_incremental_reordering_duplicate_overlap_and_crc(profile):
+        frame = encode_frame(target(6), 0, None, profile, 1700)
+        chunks = list(records(frame.raw))
+        receiver = TemporalReceiver(profile)
+        receiver.begin_frame(frame.raw[:HEADER_BYTES])
+>       with pytest.raises(ValueError, match="incomplete"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/hla_tok/temporal/test_stream.py:95: Failed
+=========================== short test summary info ============================
+FAILED tests/hla_tok/temporal/test_stream.py::test_incremental_reordering_duplicate_overlap_and_crc
+1 failed in 1.23s

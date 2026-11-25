@@ -1,0 +1,66 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+___ test_independent_history_over_70_frames_is_enhancement_independent[copy] ___
+
+profile = Profile(profile_id=1, scan=array([   0,   32,   64, ..., 8610, 8611, 8612],
+      shape=(1350,), dtype=int32), base_co...ctor='copy', refresh=16, scene_threshold=None, linear_bound_steps=2, base_cap=None, base_records=5, max_base_bytes=302)
+predictor = 'copy'
+
+    @pytest.mark.parametrize("predictor", ["copy", "linear"])
+    def test_independent_history_over_70_frames_is_enhancement_independent(profile, predictor):
+        profile = profile.with_predictor(predictor, refresh=16)
+        stable = TemporalReceiver(profile)
+        changing = TemporalReceiver(profile)
+        full_reference = short_reference = None
+        rng = Random(45)
+        for frame_id in range(70):
+            rgb_tokens = target((frame_id // 7) % 9)
+            full = encode_frame(rgb_tokens, frame_id, full_reference, profile, 1600)
+            short = encode_frame(rgb_tokens, frame_id, short_reference, profile, rng.choice((320, 400, 650, 1600)))
+            assert full.raw.startswith(short.raw)
+            if frame_id % 6 < 3:
+                short = replace(short, raw=short.raw[:short.base_bytes])
+            received(stable, full)
+            received(changing, short)
+            assert stable.reference is not None and changing.reference is not None
+>           assert stable.reference.digest == changing.reference.digest
+E           AssertionError: assert b'\x00\x00\x0...0\x00\x00\x00' == b'\x93\x868$\...x04\x9e?\xb4r'
+E
+E             At index 0 diff: b'\x00' != b'\x93'
+E             Use -v to get more diff
+
+tests/hla_tok/temporal/test_stream.py:194: AssertionError
+__ test_independent_history_over_70_frames_is_enhancement_independent[linear] __
+
+profile = Profile(profile_id=1, scan=array([   0,   32,   64, ..., 8610, 8611, 8612],
+      shape=(1350,), dtype=int32), base_co...or='linear', refresh=16, scene_threshold=None, linear_bound_steps=2, base_cap=None, base_records=5, max_base_bytes=302)
+predictor = 'linear'
+
+    @pytest.mark.parametrize("predictor", ["copy", "linear"])
+    def test_independent_history_over_70_frames_is_enhancement_independent(profile, predictor):
+        profile = profile.with_predictor(predictor, refresh=16)
+        stable = TemporalReceiver(profile)
+        changing = TemporalReceiver(profile)
+        full_reference = short_reference = None
+        rng = Random(45)
+        for frame_id in range(70):
+            rgb_tokens = target((frame_id // 7) % 9)
+            full = encode_frame(rgb_tokens, frame_id, full_reference, profile, 1600)
+            short = encode_frame(rgb_tokens, frame_id, short_reference, profile, rng.choice((320, 400, 650, 1600)))
+            assert full.raw.startswith(short.raw)
+            if frame_id % 6 < 3:
+                short = replace(short, raw=short.raw[:short.base_bytes])
+            received(stable, full)
+            received(changing, short)
+            assert stable.reference is not None and changing.reference is not None
+>           assert stable.reference.digest == changing.reference.digest
+E           assert b'\x00\x00\x0...0\x00\x00\x00' == b";\xcdO\xfe\...\xd0\xfc),^'Z"
+E
+E             At index 0 diff: b'\x00' != b';'
+E             Use -v to get more diff
+
+tests/hla_tok/temporal/test_stream.py:194: AssertionError
+=========================== short test summary info ============================
+FAILED tests/hla_tok/temporal/test_stream.py::test_independent_history_over_70_frames_is_enhancement_independent[copy]
+FAILED tests/hla_tok/temporal/test_stream.py::test_independent_history_over_70_frames_is_enhancement_independent[linear]
+2 failed in 1.30s
