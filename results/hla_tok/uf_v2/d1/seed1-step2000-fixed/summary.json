@@ -1,0 +1,111 @@
+{
+  "method": "d1",
+  "precision": "native/display FP16; latent FP32",
+  "qp": [
+    0,
+    8
+  ],
+  "split": "validation",
+  "checkpoint_sha256": "afb6bcaa1c747f6ad4cdc457199d1b3e2a7b7590b82e8791a01a18263b5ee86a",
+  "rate_fps": 30,
+  "warmup": 4,
+  "static_cdf_file_sha256": null,
+  "raw_fallback": false,
+  "sensitivity_sha256": null,
+  "schedule": "fixed_scan",
+  "manifest_hashes": {
+    "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
+    "validation": "8cca166ca7d1f6faf45cd6660b7074657164d2afa2fd14dec92d76f0cee25405",
+    "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
+  },
+  "size_hw": [
+    1080,
+    1920
+  ],
+  "gpu": "NVIDIA H100 PCIe",
+  "torch": "2.9.1+cu130",
+  "mode": "full-max",
+  "quality": [
+    {
+      "budget_mbps": 5.0,
+      "planned": 174,
+      "decoded": 174,
+      "base_exceeded": 0,
+      "desync": 0,
+      "mse": 0.002385836563624399,
+      "lpips": 0.4029925216374726,
+      "dists": 0.23568249091334725,
+      "frames": 174,
+      "global_psnr": 26.22359310014862,
+      "mean_frame_psnr": 26.406225088631953,
+      "status": "PASS",
+      "actual_mbps": 4.991663448275863,
+      "actual_bpp": 0.08024150347665673,
+      "total_bytes": 3618956,
+      "max": 20833,
+      "unused_bytes": 34.40229885057471
+    },
+    {
+      "budget_mbps": 10.0,
+      "planned": 174,
+      "decoded": 174,
+      "base_exceeded": 0,
+      "desync": 0,
+      "mse": 0.002275912399904203,
+      "lpips": 0.38645062903905736,
+      "dists": 0.22574449887220888,
+      "frames": 174,
+      "global_psnr": 26.42844457993299,
+      "mean_frame_psnr": 26.61925705253839,
+      "status": "PASS",
+      "actual_mbps": 9.99097379310345,
+      "actual_bpp": 0.16060593160210018,
+      "total_bytes": 7243456,
+      "max": 41666,
+      "unused_bytes": 36.94252873563219
+    },
+    {
+      "budget_mbps": 20.0,
+      "planned": 174,
+      "decoded": 174,
+      "base_exceeded": 0,
+      "desync": 0,
+      "mse": 0.0020444810567102558,
+      "lpips": 0.3516678600304428,
+      "dists": 0.21252523448275423,
+      "frames": 174,
+      "global_psnr": 26.894169090784974,
+      "mean_frame_psnr": 27.09416301606506,
+      "status": "PASS",
+      "actual_mbps": 19.991284137931032,
+      "actual_bpp": 0.32136194923371647,
+      "total_bytes": 14493681,
+      "max": 83333,
+      "unused_bytes": 35.98275862068966
+    },
+    {
+      "budget_mbps": 40.0,
+      "planned": 174,
+      "decoded": 174,
+      "base_exceeded": 0,
+      "desync": 0,
+      "mse": 0.0017118177466340706,
+      "lpips": 0.3182053376717129,
+      "dists": 0.19884522892962928,
+      "frames": 174,
+      "global_psnr": 27.665424755493618,
+      "mean_frame_psnr": 27.877243981380868,
+      "status": "PASS",
+      "actual_mbps": 37.5102675862069,
+      "actual_bpp": 0.6029814105293032,
+      "total_bytes": 27194944,
+      "max": 166666,
+      "unused_bytes": 10373.218390804597
+    }
+  ],
+  "read_counts": {
+    "train": 0,
+    "validation": 174,
+    "test": 0
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "frames": 189,
+  "state_mismatches": 0,
+  "read_counts": {
+    "train": 0,
+    "validation": 189,
+    "test": 0
+  },
+  "independent_i_recoveries": 2,
+  "rejected_p": 38,
+  "long_lengths": [
+    99,
+    90
+  ],
+  "long_128_256": "NOT_AVAILABLE",
+  "max_base": 7566,
+  "model_tag": "335c20000f5b12ec"
+}
