@@ -116,7 +116,6 @@ def ablation(output: Path):
     _lines(a, [r for r in scalar_rows if r["projection"] != "identity"], "total_bpp",
            "global_psnr", TEAL, "Projection + quantization", style="", marker="o")
     a.set(xlabel="Total wire bits per pixel (log)", ylabel="K16320 global PSNR (dB)", xscale="log")
-    a.legend(loc="lower right")
     rows = csv_at(output / "equal_bits_ablation.csv")
     for name, color in zip(("Q32-4", "Q16-4", "Q8-4"), PALETTE):
         selected = [r for r in rows if r["higher_dimension"] == name]
@@ -126,7 +125,9 @@ def ablation(output: Path):
     b.set(xlabel="Received Tokens", ylabel="Higher-dimension PSNR gain (dB)", xscale="log",
           xticks=[510, 2040, 8160, 16320])
     b.set_xticklabels(["510", "2040", "8160", "16320"])
-    b.legend(loc="best")
+    pairs = [axis.get_legend_handles_labels() for axis in (a, b)]
+    handles, names = [sum((pair[i] for pair in pairs), []) for i in range(2)]
+    fig.legend(handles, names, ncols=3, loc="outside lower center")
     _tags((a, b))
     return fig
 
@@ -214,14 +215,14 @@ def latency(output: Path, main: str):
                height=.35, color=color, label=precision.upper())
     a.set(xlabel="Stage mean at K16320 (ms)", yticks=y, yticklabels=terms)
     a.invert_yaxis()
-    a.legend(loc="lower right")
     actual = csv_at(output / "throughput_benchmark.csv")
     for p, color, marker in (("bf16", TEAL, "o"), ("fp32", GRAY, "s")):
         data = [r for r in actual if r["asset"] == main and r["compute_dtype"] == p]
         _lines(b, data, "budget", "p95_ms", color, p.upper(), marker)
     b.axhline(33.33, color=GOLD, linestyle="--", label="30 FPS deadline")
     b.set(xlabel="Received Tokens", ylabel="Serial P95 (ms)", ylim=(0, None))
-    b.legend(loc="best")
+    handles, names = b.get_legend_handles_labels()
+    fig.legend(handles, names, ncols=len(names), loc="outside lower center")
     _tags((a, b))
     return fig
 

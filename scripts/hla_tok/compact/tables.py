@@ -3,7 +3,7 @@
 from pathlib import Path
 
 from hla_tok.compression.profiles import PROFILES_BY_LABEL
-from hla_tok.evaluation.io import write_csv
+from hla_tok.evaluation.io import write_csv, write_json
 from hla_tok.streaming.continuous import MAX_K
 from scripts.hla_tok.compact.decision import dominates, signed_quality
 from scripts.hla_tok.compact.inputs import CONFIG
@@ -130,6 +130,21 @@ def ablation(output: Path, config: dict) -> None:
     write_csv(output / "equal_bits_ablation.csv", equal_bits)
 
 
+def _raw_parity(output: Path) -> None:
+    def key(row: dict) -> tuple:
+        return row["video"], row["frame"], row["order"], row["budget"]
+
+    old = {key(r): r for r in csv_at(output / "projection_only_per_frame.csv")
+           if r["profile"] == "RAW32"}
+    pairs = [(r, old[key(r)]) for r in csv_at(output / "scalar_quantization_per_frame.csv")
+             if r["profile"] == "RAW32" and key(r) in old]
+    fields = ("mse", "psnr", "lpips", "dists")
+    maximum = {name: max(abs(float(a[name]) - float(b[name])) for a, b in pairs) for name in fields}
+    write_json(output / "raw_bf16_matrix_parity.json", {"matched_rows": len(pairs),
+                                                       "max_absolute_difference": maximum,
+                                                       "status": "PASS" if not any(maximum.values()) else "PARTIAL PASS"})
+
+
 def write_tables(output: Path) -> None:
     config = read_config(CONFIG)
     selection = json_at(output / "no_training_selection.json")
@@ -137,3 +152,4 @@ def write_tables(output: Path) -> None:
     write_csv(output / "equal_rate_comparison.csv", equal_rate(output, config))
     write_csv(output / "bandwidth_baseline_comparison.csv", bandwidth_comparison(output, config, selection, training))
     ablation(output, config)
+    _raw_parity(output)
