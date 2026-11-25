@@ -125,9 +125,9 @@ def ablation(output: Path):
     b.set(xlabel="Received Tokens", ylabel="Higher-dimension PSNR gain (dB)", xscale="log",
           xticks=[510, 2040, 8160, 16320])
     b.set_xticklabels(["510", "2040", "8160", "16320"])
-    pairs = [axis.get_legend_handles_labels() for axis in (a, b)]
-    handles, names = [sum((pair[i] for pair in pairs), []) for i in range(2)]
-    fig.legend(handles, names, ncols=3, loc="outside lower center")
+    first_handles, first_labels = a.get_legend_handles_labels()
+    second_handles, second_labels = b.get_legend_handles_labels()
+    fig.legend(first_handles + second_handles, first_labels + second_labels, ncols=3, loc="outside lower center")
     _tags((a, b))
     return fig
 
