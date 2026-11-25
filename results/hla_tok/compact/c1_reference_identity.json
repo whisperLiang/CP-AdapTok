@@ -1,0 +1,37 @@
+{
+  "published_c1_checkpoint": {
+    "path": "checkpoints/hla_tok/v3/quantized/seed1/C1/step_10000.pt",
+    "sha256": "6c3711b4f93b8f59b470577d13173481d7bdbf5323bcb08ec249cfe562711355",
+    "step": 10000,
+    "data_cursor": 10000,
+    "architecture": {
+      "architecture_version": "hla-tok.R2",
+      "anchor_table_sha256": "e0303c3e71a6db04a8f003dc087209d56ecaa4c62cac4ed346021ae045af211d",
+      "rank_causal": {
+        "enabled": false,
+        "layers": 0,
+        "rank_chunk": 32,
+        "heads": 4,
+        "ffn_ratio": 2,
+        "dropout": 0.0
+      }
+    },
+    "identity": {
+      "stage": "v3/quantized/seed1/C1",
+      "config_sha256": "2cb455c9ac742d5b9946d97c50f814210a079376f4c2d91c35365b209b58282c",
+      "dataset_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "git_commit": "c844c25be9c0879d5913bfa7e5eaf64b3ec9bcf6",
+      "implementation_sha256": "d30064ef10dd82e9a1b3d30b9eaffba113e3d88b6cd981deaac037b641af0832"
+    },
+    "sample_chain": "133b82405e024f206d2bcdce69a0b6b96847a69398c40c0a16e4b781869a6069",
+    "is_setup_audit": false,
+    "verified_path": "/home/whisperliang/.codex/worktrees/hla-tok-v3/CP-AdapTok/checkpoints/hla_tok/v3/quantized/seed1/C1/step_10000.pt",
+    "state_dict_sha256": "38f97759a4cf42b3cc51142845b2806a5af09eae12c3f993c1ab404ed5adf3b1",
+    "budget_updates": {
+      "16320": 10000
+    }
+  },
+  "total_wire_scope": "independent F13W evaluation envelope",
+  "historical_full_header_comparability": "NOT_COMPARABLE",
+  "new_header_bytes": 24
+}

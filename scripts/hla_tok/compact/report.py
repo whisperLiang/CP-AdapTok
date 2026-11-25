@@ -3,8 +3,11 @@
 from pathlib import Path
 from statistics import median
 
+from hla_tok.compression.profiles import PROFILES_BY_LABEL
 from hla_tok.evaluation.io import write_json
+from hla_tok.streaming.compact_wire import HEADER_BYTES
 from hla_tok.streaming.continuous import MAX_K
+from scripts.hla_tok.compact.benchmark import budgets_for
 from scripts.hla_tok.compact.decision import stage_targets
 from scripts.hla_tok.compact.inputs import CONFIG, CONTINUOUS, OUTPUT
 from scripts.hla_tok.compact.tables import write_tables
@@ -101,13 +104,42 @@ def _headlines(output: Path, selection: dict, training: dict) -> list[dict]:
     return rows
 
 
-def _runtime(output: Path, main: str) -> tuple[bool, list[dict]]:
+def _runtime(output: Path, main: str, config: dict, training: dict) -> tuple[bool, list[dict]]:
     measured = csv_at(output / "throughput_benchmark.csv")
-    expected = [r for r in measured if r["asset"] == main]
-    if not expected:
-        raise ValueError("no H100 data found for the recommended Profile")
-    ok = all(r["pass_30fps"] == r["pass_p95"] == "True" for r in expected)
+    specs = json_at(output / "compact_profile_manifest.json")
+    if training["adopted"]:
+        specs[main] = training["spec"]
+    manifest = json_at(output / "benchmark_manifest.json")
+    knobs = config["benchmark"]
+    plan = {(asset, precision, k) for asset in manifest["assets"] for precision in knobs["precision"]
+            for k in budgets_for(config, specs[asset])}
+    keys = {(row["asset"], row["compute_dtype"], int(row["budget"])) for row in measured}
+    if plan != keys or len(measured) != len(keys) or main not in manifest["assets"]:
+        raise ValueError("the H100 benchmark matrix is incomplete or contains duplicate conditions")
+    repeats = knobs["measured_frames"] * knobs["repeats"]
+    _check_runtime_ledgers(measured, knobs, repeats, len(manifest["representative_frames"]))
+    complete = csv_at(output / "validation_latency.csv")
+    observed = {(row["compute_dtype"], int(row["budget"])) for row in complete if int(row["frames"]) == 174}
+    if observed != {(d, k) for a, d, k in plan if a == main} or len(complete) != len(observed):
+        raise ValueError("full native Validation timing did not cover the selected Profile")
+    passed = sum(r["pass_30fps"] == r["pass_p95"] == "True" for r in measured)
+    ok = passed == len(measured)
+    write_json(output / "runtime_audit.json", {"status": "PASS" if ok else "FAIL", "conditions": len(measured),
+                                               "conditions_meeting_minimum": passed,
+                                               "repeated_frame_executions": repeats * len(measured),
+                                               "representative_frames": len(manifest["representative_frames"]),
+                                               "validation_frames": 174})
     return ok, measured
+
+
+def _check_runtime_ledgers(rows: list[dict], config: dict, repeats: int, sources: int) -> None:
+    for row in rows:
+        profile = PROFILES_BY_LABEL[row["profile"]]
+        planned_bytes = HEADER_BYTES + int(row["budget"]) * profile.bytes_per_token
+        if (int(row["packet_bytes"]) != planned_bytes or int(row["repeated_measurements"]) != repeats
+                or int(row["warmup_per_repeat"]) != config["warmup_frames"]
+                or int(row["independent_source_frames"]) != sources):
+            raise ValueError("an H100 benchmark packet or sample ledger differs")
 
 
 def _primary_table(output: Path, selection: dict, training: dict, runtime: list[dict]) -> str:
@@ -204,6 +236,8 @@ def conclusions(output: Path, selection: dict, training: dict, state: dict, targ
     original_gain = float(first8["best_compact_global_psnr"]) - float(first8["original_global_psnr"]) if compare else None
     original = f"在 5 Mbps 共同上限下，最佳 Compact 与 Original 相差 {original_gain:+.2f} dB。" if compare else "5 Mbps 缺少可比点。"
     saturation = selection["first_saturated_band_mbps"]
+    final_bands = {float(r["target_mbps"]): r for r in _headlines(output, selection, training)}
+    gain_tail = float(final_bands[40]["global_psnr"]) - float(final_bands[20]["global_psnr"])
     t1 = training.get("T1", {})
     t2 = training.get("T2", {})
     if "full_cohort_signed_gains_low" in training:
@@ -228,13 +262,14 @@ def conclusions(output: Path, selection: dict, training: dict, state: dict, targ
         f"7. 主 Profile 在 26,520 字节等 Payload 下与 C1 相差 {eq:+.2f} dB，联合门槛为 {state['Equal-Payload Rate–Distortion']}。",
         "8. " + original + "其余带宽点见表。Original 等待 16 帧输入，比较按窗口平均字节计。",
         "9. O1/O2 的 FP32 与 BF16 实测涵盖八档预算、50 个非预设长度及边界长度。见 [严格前缀](prefix_audit.json)。",
-        f"10. 免训练主 Profile 首次达到 K16320 的冻结带宽点为 {saturation if saturation is not None else '未达'} Mbps。",
+        f"10. 免训练主 Profile 在 {saturation if saturation is not None else '未达'} Mbps 档首次用尽 K16320。"
+        f"实际主线从 20 到 40 Mbps 的 PSNR 增益为 {gain_tail:+.3f} dB。",
         f"11. 主 Profile 在单卡 H100 实测 {min(float(r['steady_state_fps']) for r in hardware):.2f}–"
         f"{max(float(r['steady_state_fps']) for r in hardware):.2f} FPS，串行 P95 最高 "
         f"{max(float(r['p95_ms']) for r in hardware):.3f} ms。",
         f"12. {adapter_summary} [适配证据](training_selection.json)。",
-        "13. 本轮证据的训练范围是紧凑映射与 Lift。解冻 Tokenizer 的增益留待独立实验裁决。",
-        "14. 码流为逐帧无状态路径。时间冗余压缩的增益留待独立实验裁决。",
+        "13. 当前证据支持先改进同帧分量分配，解冻 Tokenizer 的增益尚未裁决。",
+        "14. 当前证据集中在单帧宽度与码率权衡，时间冗余压缩的增益尚未裁决。",
         f"15. 唯一推荐主线为 {recommend[0]}。{recommend[1]}。",
     ])
 
@@ -249,7 +284,7 @@ def run(output: Path) -> None:
     targets = training["targets"] if training["adopted"] else selection["targets"]
     config = read_config(CONFIG)
     integrity = json_at(output / "historical_assets_audit.json")
-    runtime_ok, runtime = _runtime(output, main)
+    runtime_ok, runtime = _runtime(output, main, config, training)
     state = _states(output, selection, targets, runtime_ok, integrity)
     recommend = _recommend(targets, training, runtime_ok, output, config)
     write_json(output / "final_verdict.json", {"experiment": "HLA-Tok-CP", "main_asset": main,
@@ -297,7 +332,7 @@ Original 的 K 表示每个空间 Tile 在整个 16 帧窗口内的 Token 数。
 
 ## 复现与验收
 
-[工程验收](engineering_audit.json) · [独立接收](wire_audit.json) · [因果性](causality_audit.json) · [Profile 设备成本](profile_deployment.csv) · [实际 H100 延迟](latency_breakdown.csv) · [完整逐帧延迟](validation_latency.csv) · [图表](figures/README.md) · [原生样例](samples/manifest.json) · [复现入口](../../../docs/hla_tok/compact/README.md)
+[工程验收](engineering_audit.json) · [独立接收](wire_audit.json) · [因果性](causality_audit.json) · [Profile 设备成本](profile_deployment.csv) · [H100 矩阵验收](runtime_audit.json) · [实际 H100 延迟](latency_breakdown.csv) · [完整逐帧延迟](validation_latency.csv) · [图表](figures/README.md) · [原生样例](samples/manifest.json) · [复现入口](../../../docs/hla_tok/compact/README.md)
 """
     (output / "final_report.md").write_text(text)
 

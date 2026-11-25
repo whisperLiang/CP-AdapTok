@@ -42,7 +42,12 @@ def _style() -> None:
 
 
 def _fig(cols: int, rows: int = 1, height: float = 2.35):
-    figure, axes = plt.subplots(rows, cols, figsize=(7.08, height), layout="constrained", squeeze=False)
+    layout = "constrained" if cols < 3 else None
+    figure, axes = plt.subplots(rows, cols, figsize=(7.08, height), layout=layout, squeeze=False)
+    if cols >= 3 and rows == 1:
+        figure.subplots_adjust(left=.085, right=.975, top=.9, bottom=.32, wspace=.46)
+    if cols >= 3 and rows > 1:
+        figure.subplots_adjust(left=.013, right=.987, top=.942, bottom=.018, wspace=.13, hspace=.25)
     return figure, axes.flatten()
 
 
@@ -115,7 +120,8 @@ def ablation(output: Path):
            "global_psnr", GOLD, "Quantization only", style="--", marker="^")
     _lines(a, [r for r in scalar_rows if r["projection"] != "identity"], "total_bpp",
            "global_psnr", TEAL, "Projection + quantization", style="", marker="o")
-    a.set(xlabel="Total wire bits per pixel (log)", ylabel="K16320 global PSNR (dB)", xscale="log")
+    a.set(xlabel="Total wire bits per pixel (log)", ylabel="K16320 global PSNR (dB)", xscale="log",
+          xticks=[0.0625, 0.125, 0.25, 0.5, 1, 2, 4])
     rows = csv_at(output / "equal_bits_ablation.csv")
     for name, color in zip(("Q32-4", "Q16-4", "Q8-4"), PALETTE):
         selected = [r for r in rows if r["higher_dimension"] == name]
@@ -161,15 +167,14 @@ def bandwidth(output: Path):
     fig, axes = _fig(3, height=2.52)
     rows = csv_at(output / "bandwidth_baseline_comparison.csv")
     data = [dict(row, x=i) for i, row in enumerate(rows)]
-    targets = [row["target_mbps"] for row in rows]
+    targets = ["\n" + row["target_mbps"] if i == 1 else row["target_mbps"] for i, row in enumerate(rows)]
     methods = (("c0", "C0 BF16", GRAY, "s", ":"), ("c1_f13w", "C1 F13W", GOLD, "D", ""),
                ("original", "Original AdapTok", PURPLE, "^", "--"), ("best_compact", "Best Compact", TEAL, "o", "-"))
     for axis, (metric, label) in zip(axes, METRICS, strict=True):
         for key, name, color, marker, style in methods:
             _lines(axis, data, "x", key + "_" + metric, color, name, marker, style)
         axis.set(xlabel="Cap (Mbps at 30 FPS)", ylabel=label, xticks=range(len(targets)), xticklabels=targets)
-        for tick in axis.get_xticklabels():
-            tick.set(rotation=40, rotation_mode="anchor", ha="right")
+        axis.tick_params(axis="x", labelsize=6.5)
     handles, names = axes[0].get_legend_handles_labels()
     fig.legend(handles, names, ncols=len(names), loc="outside lower center")
     _tags(axes)
@@ -193,7 +198,7 @@ def training_curves(output: Path, training: dict):
                 _lines(axis, data, "step", "global_psnr", color, group + (" wire" if key == "hard_wire" else " bypass"),
                        marker="o" if key == "hard_wire" else "s", style=style)
         axis.set(xlabel="Optimizer updates", ylabel="Global PSNR (dB)")
-        axis.set_title(asset.split("_seed")[0].replace("_rank", "").replace("_global", ""))
+        axis.set_title(asset.split("_seed")[0].replace("_rank", "").replace("_global", "").replace("_", " "))
     handles, names = axes[0].get_legend_handles_labels()
     fig.legend(handles, names, ncols=4, loc="outside lower center")
     _tags(axes)
