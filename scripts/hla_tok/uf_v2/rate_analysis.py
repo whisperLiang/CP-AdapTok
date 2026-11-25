@@ -161,18 +161,24 @@ def consolidated(results):
         "D1 / static": "d1/seed1-step2000-static",
         "D1 / perceptual": "d1/seed1-step2000-perceptual",
         "D1 / fixed": "d1/seed1-step2000-fixed",
+        "D1 / fixed static": "d1/seed1-step2000-fixed-static",
         "D1 / Seed 2": "d1/seed2-step2000-static",
         "D1 / joint 4000": "d1/joint-seed1-step4000-validation",
+        "D1 / L0 4000": "d1/l0-seed1-step4000-validation",
         "D1 / joint 6000": "d1/joint-seed1-step6000-validation",
         "D1 / joint 8000": "d1/joint-seed1-step8000-validation",
         "D1 / joint static": "d1/joint-seed1-final-static",
         "D1 / formal static": "d1/formal-seed1-final-static",
+        "D1 / formal static fast": "d1/formal-seed1-final-static-fast",
         "D1 / formal E0": "d1/formal-seed1-final-e0",
-
+        "D1 / formal E0 fast": "d1/formal-seed1-final-e0-fast",
+        "D1 / Seed 2 final E0": "d1/formal-seed2-final-e0",
     }
     for path in sorted((results / "d1").glob("formal-seed*-step*-validation")):
         stage = path.name.split("-")
         fresh[f"D1 / {stage[1]} {stage[2][4:]}"] = str(path.relative_to(results))
+    for step in (4000, 6000, 8000):
+        fresh[f"D1 / seed2 {step}"] = f"d1/joint-seed2-step{step}-validation"
     measured = {}
     for name, location in fresh.items():
         path = results / location / "summary.json"
@@ -180,7 +186,8 @@ def consolidated(results):
             record = read(path)
             curves[name] = [row for row in record["quality"] if row["status"] == "PASS"]
             measured[name] = {"summary": location + "/summary.json", "quality": record["quality"],
-                              "timing": record.get("timing"), "checkpoint_sha256": record["checkpoint_sha256"]}
+                              "timing": record.get("timing"), "checkpoint_sha256": record["checkpoint_sha256"],
+                              "model_tag": record.get("model_tag")}
             pairs = adjacency(path.with_name("quality.csv"))
             if pairs:
                 write_csv(results / location / "adjacent_frames.csv", pairs)

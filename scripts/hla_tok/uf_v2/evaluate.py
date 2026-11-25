@@ -263,6 +263,7 @@ def main():
               if options.checkpoint else None, "rate_fps": 30, "warmup": WARMUP,
               "static_cdf_file_sha256": sha256_file(options.entropy_table) if options.entropy_table else None,
               "raw_fallback": options.raw,
+              "model_tag": codec.tag.hex() if isinstance(codec, Unified) else None,
               "sensitivity_sha256": sha256_file(options.sensitivity) if options.sensitivity else None,
               "schedule": "fixed_scan" if options.fixed else "gain_per_byte", "manifest_hashes": reader.hashes,
               "size_hw": [1080, 1920], "gpu": torch.cuda.get_device_name(), "torch": torch.__version__,

@@ -17,8 +17,12 @@ def physical_summary(path: Path) -> dict[int, dict]:
     return rows
 
 
+def low_rd(row: dict) -> float:
+    return 10 * row["mse"] + 0.075 * row["lpips"] + 0.001 * row["actual_bpp"]
+
+
 def scalar(rows: dict[int, dict]) -> float:
-    return mean(10 * rows[b]["mse"] + 0.075 * rows[b]["lpips"] + 0.001 * rows[b]["actual_bpp"] for b in (5, 10))
+    return mean(low_rd(rows[b]) for b in (5, 10))
 
 
 def evaluate(evidence: list[Path]) -> dict:

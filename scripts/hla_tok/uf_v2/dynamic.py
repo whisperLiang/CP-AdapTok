@@ -9,7 +9,8 @@ from time import perf_counter
 import torch
 
 from hla_tok.evaluation.io import write_csv, write_json
-from hla_tok.uf.official import OfficialAssets
+from hla_tok.uf.entropy import EntropyTables
+from hla_tok.uf.official import OfficialAssets, sha256_file
 from hla_tok.uf.wire import WireError
 from scripts.hla_tok.temporal.inputs import source_frame
 from scripts.hla_tok.uf.inputs import inputs
@@ -17,6 +18,26 @@ from scripts.hla_tok.uf_v2.evaluate import allowance, decoder_for, encode, load_
 from scripts.hla_tok.v2.protocol import setup
 
 CYCLE = (5, 40, 10, 20, 5)
+
+
+def native_z_tag(endpoint):
+    digest = hashlib.sha256()
+    for net in (endpoint.intra, endpoint._video()):
+        for table in net.bit_estimator_z.get_cdf_info():
+            digest.update(table.tobytes())
+    return digest.hexdigest()
+
+
+def probability_evidence(codec, bases, table):
+    native = native_z_tag(codec.native)
+    if any(native_z_tag(receiver) != native for receiver in bases):
+        raise ValueError("independent encoder and decoder rebuilt different native z CDF tables")
+    if table is None:
+        enhanced = EntropyTables.from_scales(tuple(codec.model.scales().tolist()))
+        enhancement = hashlib.sha256(repr(enhanced.cdf).encode()).hexdigest()
+    else:
+        enhancement = sha256_file(table)
+    return {"encoder_and_decoder_native_z_sha256": native, "enhancement_probability_sha256": enhancement}
 
 
 def snapshot(endpoint):
@@ -96,6 +117,7 @@ def main():
     assets = OfficialAssets.verify(args.weights)
     codec = load_codec(args, assets)
     base, dynamic, missing = [decoder_for(codec, assets) for _ in range(3)]
+    probability = probability_evidence(codec, (base, dynamic, missing), args.entropy_table)
     rows, samples = [], []
     for clip in plans["long"]:
         codec.reset()
@@ -139,7 +161,8 @@ def main():
         "status": "PASS", "frames": len(rows), "state_mismatches": 0, "read_counts": reader.counts,
         "independent_i_recoveries": sum(row["loss_case"] == "independent_i_recovery" for row in rows),
         "rejected_p": sum(row["loss_case"] == "p_rejected" for row in rows), "long_lengths": [c.length for c in plans["long"]],
-        "long_128_256": "NOT_AVAILABLE", "max_base": max(row["base_bytes"] for row in rows), "model_tag": codec.tag.hex()})
+        "long_128_256": "NOT_AVAILABLE", "max_base": max(row["base_bytes"] for row in rows), "model_tag": codec.tag.hex(),
+        "checkpoint_sha256": sha256_file(args.checkpoint) if args.checkpoint else None, **probability})
 
 
 if __name__ == "__main__":
