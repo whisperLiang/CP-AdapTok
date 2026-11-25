@@ -1,7 +1,13 @@
 import torch
 
 from hla_tok import HLATok
-from hla_tok.streaming.continuous import ContinuousReceiver, RankOrder, encode_continuous, stream_frames, truncate
+from hla_tok.streaming.continuous import (
+    ContinuousReceiver,
+    RankOrder,
+    encode_continuous,
+    stream_frames,
+    truncate,
+)
 from scripts.hla_tok.continuous.dynamic import plans
 from scripts.hla_tok.v2.protocol import setup
 

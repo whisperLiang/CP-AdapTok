@@ -10,11 +10,12 @@ from torch import Tensor
 
 from hla_tok.evaluation.benchmark import transfer
 from hla_tok.evaluation.io import write_csv, write_json
+from hla_tok.evaluation.metrics import sha256_file
 from hla_tok.evaluation.reconstruction import save_native
 from hla_tok.streaming.continuous import ContinuousReceiver, RankOrder, encode_continuous, truncate
 from scripts.hla_tok.continuous.inputs import Inputs
 from scripts.hla_tok.continuous.quality import NativeQuality, summarize
-from scripts.hla_tok.v2.protocol import csv_at, json_at
+from scripts.hla_tok.v2.protocol import ROOT, csv_at, json_at
 
 
 @dataclass(frozen=True)
@@ -82,33 +83,46 @@ def _score_frame(inputs: Inputs, quality: NativeQuality, settings: list[Setting]
     return rows
 
 
-def _bind_matrix(inputs: Inputs, settings: list[Setting], folder: Path, name: str, engine: str) -> dict:
+def _bind_matrix(inputs: Inputs, settings: list[Setting], name: str) -> dict:
+    sources = ["models/local.py", "models/codec.py", "models/spatial.py", "progressive/geometry.py",
+               "streaming/continuous.py"]
+    if any(case.wire_dtype != "none" for case in settings):
+        sources.append("streaming/continuous_wire.py")
+    files = [ROOT / "hla_tok" / path for path in sources]
+    files.extend(Path(__file__).with_name(name) for name in ("matrix.py", "quality.py"))
+    files.append(ROOT / "cp_adaptok/metrics.py")
+    if any(case.wire_dtype != "none" for case in settings):
+        files.extend(Path(__file__).with_name(name) for name in ("receiver.py", "wire_eval.py"))
     binding = inputs.provenance() | {
-        "name": name, "engine": engine, "history": "stateless",
+        "name": name, "implementation": {str(path.relative_to(ROOT)): sha256_file(path) for path in files},
+        "torch": str(torch.__version__), "gpu": torch.cuda.get_device_name(), "history": "stateless",
         "compute_dtype": inputs.config["quality_compute_dtype"],
-        "settings": [case.fields() | {"native_ranks": case.order.ranks} for case in settings],
+        "settings": [case.fields() | {"native_ranks": list(case.order.ranks)} for case in settings],
     }
-    # Read back JSON normalization before comparing with a previous interrupted evaluation.
-    import json
-
-    return json.loads(json.dumps(binding))
+    return binding
 
 
 def _restore_rows(path: Path) -> list[dict]:
-    fields = {"budget": int, "frame": int, "mse": float, "psnr": float, "lpips": float, "dists": float}
-    return [{key: fields.get(key, str)(value) for key, value in row.items()} for row in csv_at(path)]
+    integers = {"budget", "frame", "payload_bytes", "header_bytes", "side_information_bytes", "total_bytes"}
+    floats = {"mse", "psnr", "lpips", "dists"}
+    cast = {field: int for field in integers} | dict.fromkeys(floats, float)
+    return [{key: cast.get(key, str)(value) for key, value in row.items()} for row in csv_at(path)]
+
+
+def _verify_matrix_rows(rows: list[dict], video: str, count: int, settings: list[Setting]) -> None:
+    expected = {(case.order.name.name, case.wire_dtype, case.budget, index)
+                for case in settings for index in range(count)}
+    observed = {(row["order"], row["wire_dtype"], row["budget"], row["frame"]) for row in rows}
+    if observed != expected or len(rows) != len(expected) or {row["video"] for row in rows} != {video}:
+        raise ValueError(f"invalid native matrix coverage for {video}")
 
 
 @torch.inference_mode()
 def evaluate_matrix(inputs: Inputs, quality: NativeQuality, settings: list[Setting], output: Path, name: str,
                     decode: Decode | None = None, *, samples: Path | None = None) -> list[dict]:
     """Resume only complete per-video tables with the same inputs, settings and revision."""
-    from scripts.hla_tok.continuous.assets import git
-    from scripts.hla_tok.v2.protocol import ROOT
-
     folder = output / "matrix" / name
-    engine = git(ROOT, "rev-parse", "HEAD")
-    binding = _bind_matrix(inputs, settings, folder, name, engine)
+    binding = _bind_matrix(inputs, settings, name)
     manifest = folder / "identity.json"
     if manifest.exists() and json_at(manifest) != binding:
         raise ValueError(f"matrix identity differs in {folder}")
@@ -127,8 +141,7 @@ def evaluate_matrix(inputs: Inputs, quality: NativeQuality, settings: list[Setti
                 if (index + 1) % 16 == 0:
                     print(f"{name} {video} {index + 1}/{count}", flush=True)
             write_csv(path, rows)
-        if len(rows) != count * len(settings) or {row["video"] for row in rows} != {video}:
-            raise ValueError(f"invalid frozen cohort rows in {path}")
+        _verify_matrix_rows(rows, video, count, settings)
         all_rows.extend(rows)
         print(f"{name} {video} {count}/{count}", flush=True)
     return all_rows

@@ -1,5 +1,9 @@
 """Frozen C0 inputs and audited inference-only model loading."""
 
+import argparse
+import fcntl
+from collections.abc import Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass
 from importlib.metadata import version
 from pathlib import Path
@@ -21,6 +25,21 @@ CONFIG_SHA256 = "72517a17fa778ac4f558c99bada80e4c9942fe7684e933266443d76d4a4be3c
 RESULTS = ROOT / "results/hla_tok/continuous"
 V3 = ROOT.parent.parent / "hla-tok-v3" / ROOT.name
 METRICS = ("global_psnr", "lpips", "dists")
+
+
+def run_arguments(description: str | None) -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument("--v3", type=Path, default=V3)
+    parser.add_argument("--output", type=Path, default=RESULTS)
+    return parser
+
+
+@contextmanager
+def locked_output(output: Path) -> Iterator[None]:
+    output.mkdir(parents=True, exist_ok=True)
+    with (output / ".continuous.lock").open("a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        yield
 
 
 def require_digest(path: Path, expected: str) -> str:

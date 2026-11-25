@@ -7,7 +7,13 @@ import torch
 from torch import Tensor
 
 from hla_tok.evaluation.io import write_csv, write_json
-from hla_tok.streaming.continuous import ContinuousReceiver, RankOrder, encode_continuous, stream_frames, truncate
+from hla_tok.streaming.continuous import (
+    ContinuousReceiver,
+    RankOrder,
+    encode_continuous,
+    stream_frames,
+    truncate,
+)
 from scripts.hla_tok.continuous.inputs import Inputs
 from scripts.hla_tok.continuous.matrix import compute, groups, validation_frames
 from scripts.hla_tok.continuous.ordering import load_orders
