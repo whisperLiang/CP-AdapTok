@@ -117,3 +117,36 @@ def test_header_record_crc_and_wire_fields():
             open_header(bytes(corrupt))
     with pytest.raises(ValueError):
         open_record(packet[:-1] + bytes([packet[-1] ^ 1]))
+
+
+def test_ordered_block_steps_other_than_two_round_to_nearest_integer():
+    delta = np.array([0, 3, 5, 8, -2, -8, 4, -4], dtype=np.int32)
+    step = np.array([3] * 6 + [7, 7], dtype=np.int32)
+    assert round_divide(delta, step).tolist() == [0, 1, 2, 3, -1, -3, 1, -1]
+
+
+@pytest.mark.parametrize("rank,region", [(-1, 0), (121, 0), (0, 135), (0, -1), (1.5, 3)])
+def test_invalid_native_positions_raise(rank, region):
+    with pytest.raises(ValueError, match="native"):
+        NativeLayout().index(rank, region)
+
+
+@pytest.mark.parametrize("value", [
+    FrameHeader(2**32 - 1, 0, 3, 1, bytes(32), bytes(32)),
+    FrameHeader(3, 2, 0, 1, bytes(32), bytes(32)),
+    FrameHeader(3, 3, 2, 1, bytes(32), bytes(32)),
+    FrameHeader(3, 2, 2, 0, bytes(32), bytes(32)),
+    FrameHeader(3, 2, 2, 1, bytes(31), bytes(32)),
+    FrameHeader(3, 2**32 - 1, 2, 1, bytes(32), b"a" * 32),
+])
+def test_invalid_headers_are_rejected_before_serialization(value):
+    with pytest.raises(ValueError):
+        value.serialize()
+
+
+@pytest.mark.parametrize("data,bits", [(np.arange(2), 4), (np.zeros((2, 2), dtype=np.int8), 4),
+                                     (np.zeros(257, dtype=np.int8), 8), (np.zeros(2, dtype=np.int8), 6),
+                                     (np.array([-9, 1], dtype=np.int8), 4)])
+def test_rejected_short_block_inputs(data, bits):
+    with pytest.raises(ValueError):
+        pack_block(data, bits, False)

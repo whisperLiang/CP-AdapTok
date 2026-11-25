@@ -9,7 +9,7 @@ import numpy as np
 from hla_tok.streaming.temporal_wire import HEADER_BYTES, RECORD_BYTES, Mode
 from hla_tok.temporal.layout import LAYOUT
 
-RANK_COMPONENT_SHAPE = (LAYOUT.mask.shape[0], LAYOUT.components)
+RANK_COMPONENT_SHAPE: tuple[int, int] = (int(LAYOUT.mask.shape[0]), LAYOUT.components)
 
 
 def _immutable(array: np.ndarray, dtype: str) -> np.ndarray:
@@ -66,6 +66,9 @@ class Profile:
             raise ValueError("invalid Profile ID or asset binding")
         if self.bits not in (4, 8) or self.block_size not in (64, 128, 256):
             raise ValueError("unsupported quantizer or short-block width")
+        self._check_predictor()
+
+    def _check_predictor(self) -> None:
         if self.predictor not in ("absolute", "copy", "linear") or self.refresh < 1:
             raise ValueError("invalid temporal predictor or refresh interval")
         if self.scene_threshold is not None and (not np.isfinite(self.scene_threshold) or self.scene_threshold <= 0):

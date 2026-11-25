@@ -61,7 +61,7 @@ def predict(profile: Profile, reference: BaseReferenceState | None, intra: bool)
     if profile.predictor != "linear" or not reference._previous:
         return previous
     older = np.frombuffer(reference._previous, dtype="<i2")[profile.scan_base_order]
-    bound = profile.linear_bound_steps * profile.steps_p
+    bound: np.ndarray = profile.linear_bound_steps * profile.steps_p
     delta = (previous.astype(np.int32) - older).clip(-bound, bound)
     return (previous.astype(np.int32) + delta).clip(LATTICE.min, LATTICE.max).astype("<i2")
 

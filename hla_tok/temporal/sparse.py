@@ -84,12 +84,15 @@ def pack_block(values: np.ndarray, bits: int, sparse: bool) -> Block:
     if bits == 4 and (values.min() < -8 or values.max() > 7):
         raise ValueError("symbol is outside INT4")
     mode, payload = next(Blocks(values[None], bits, sparse).payloads(1))
-    padding = 0
+    return Block(Mode(mode), payload, _padding(Mode(mode), values))
+
+
+def _padding(mode: Mode, values: np.ndarray) -> int:
     if mode == Mode.RAW4:
-        padding = (values.size % 2) * 4
+        return (values.size % 2) * 4
     if mode == Mode.BITMAP4:
-        padding = -values.size % 8 + (np.count_nonzero(values) % 2) * 4
-    return Block(Mode(mode), payload, padding)
+        return -values.size % 8 + (np.count_nonzero(values) % 2) * 4
+    return 0
 
 
 def unpack_block(mode: Mode, payload: bytes | memoryview, count: int) -> tuple[np.ndarray, int]:

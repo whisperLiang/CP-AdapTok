@@ -258,8 +258,8 @@ class _Frame:
         stop = self.profile.end(count)
         enhancement = slice(width, stop)
         display = np.zeros(NATIVE_COEFFICIENT_SHAPE, dtype="<i2")
-        display.flat[self.profile.scan[:width]] = base.coordinates[self.profile.scan_base_order]
-        display.flat[self.profile.scan[enhancement]] = reconstruct(
+        display.reshape(-1)[self.profile.scan[:width]] = base.coordinates[self.profile.scan_base_order]
+        display.reshape(-1)[self.profile.scan[enhancement]] = reconstruct(
             0, self.codes[enhancement], self.profile.steps_i[enhancement])
         support = base.support.copy()
         support[self.profile.scan_tokens[enhancement]] = True

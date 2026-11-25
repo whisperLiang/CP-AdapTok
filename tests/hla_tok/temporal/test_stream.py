@@ -274,3 +274,39 @@ def test_cpu_and_cuda_int16_lattice_sources_give_identical_state_and_wire(profil
     gpu_packets = list(encode_frames(zip(gpu, [1600] * len(gpu), strict=True), profile))
     assert [frame.raw for frame in cpu_packets] == [frame.raw for frame in gpu_packets]
     assert [frame.base.digest for frame in cpu_packets] == [frame.base.digest for frame in gpu_packets]
+
+
+@pytest.mark.parametrize("changes", [
+    {"profile_id": 0}, {"asset_binding": b""}, {"bits": 6}, {"block_size": 80}, {"predictor": "future"},
+    {"refresh": 0}, {"scene_threshold": -1}, {"scene_threshold": float("nan")}, {"linear_bound_steps": 20},
+    {"scan": np.array([-1, 2])}, {"scan": np.array([1, 1])}, {"scan": np.array([[1, 2]])},
+    {"scan": np.array([SIZE + 1, SIZE + 2])}, {"scan": np.array([1.0, 2.0])},
+    {"base_components": -1}, {"intra_steps": np.zeros((121, 32), dtype=np.int32)},
+    {"inter_steps": np.full((121, 32), 2.5)}, {"base_cap": 20},
+])
+def test_invalid_profile_contracts(profile, changes):
+    with pytest.raises(ValueError):
+        replace(profile, **changes)
+
+
+def test_bad_target_and_infeasible_header_budget_leave_reference_untouched(profile):
+    with pytest.raises(ValueError, match="int16"):
+        encode_frame(target().astype(np.int32), 0, None, profile, 1700)
+    with pytest.raises(BudgetTooSmall):
+        encode_frame(target(), 0, None, profile, HEADER_BYTES - 1)
+    with pytest.raises(BudgetTooSmall):
+        encode_frame(target(), 0, None, profile, 1700, payload_budget=-1)
+
+
+def test_contiguous_prefix_from_shuffled_partition_has_same_display_and_payload_ledger(profile):
+    native = np.zeros_like(target())
+    native[2:260:19, 1] = -6
+    frame = encode_frame(native, 0, None, profile, 1700)
+    data = list(records(frame.raw))
+    order = list(data)
+    Random(91).shuffle(order)
+    receiver = TemporalReceiver(profile)
+    receiver.receive_stream(frame.raw[:HEADER_BYTES] + b"".join(order))
+    assert receiver.prefix_records == len(data)
+    assert receiver.wire_ledger(0)["total_bytes"] == len(frame.raw)
+    assert np.array_equal(receiver.render_prefix(0).coordinates, received(TemporalReceiver(profile), frame).coordinates)

@@ -63,14 +63,14 @@ class NativeLayout:
     @staticmethod
     def _padded(support: np.ndarray) -> np.ndarray:
         result = np.zeros((len(NATIVE_RANKS), REGIONS), dtype=bool)
-        result.flat[:MAX_K] = support
+        result.reshape(-1)[:MAX_K] = support
         return result
 
     @lru_cache(maxsize=48)
     @torch.inference_mode(False)
     def _recovery_plan(self, support: bytes, device: torch.device) -> tuple[tuple[Tensor, Tensor, int], ...]:
         mask = self._padded(np.frombuffer(support, dtype=bool))
-        changes = np.flatnonzero(np.any(mask[:, 1:] != mask[:, :-1], axis=0)) + 1
+        changes: np.ndarray = np.flatnonzero(np.any(mask[:, 1:] != mask[:, :-1], axis=0)) + 1
         boundaries = (0, *changes.tolist(), REGIONS)
         groups = []
         for first, stop in zip(boundaries, boundaries[1:]):
