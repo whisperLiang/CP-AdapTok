@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "native_shape_hw": [
+    1080,
+    1920
+  ],
+  "algorithmic_lookahead_frames": 0,
+  "inputs_before_yield": 1,
+  "future_frame_changes": 1,
+  "present_wire_sha256": "8a986d782e4184b21dd9348622aab1d12c32dc3c411506af9868870ce99cc0fb",
+  "present_base_sha256": "5300504c40d9363fe3934c1ab2c931035d6ffff1879a5fe21a67818f34f1019b",
+  "boundaries": [
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 0
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 98
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 0
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 89
+    }
+  ]
+}

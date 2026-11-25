@@ -19,6 +19,7 @@ from hla_tok.streaming.temporal_wire import (
     record_bytes,
 )
 from hla_tok.temporal.layout import LAYOUT
+from hla_tok.temporal.native_wire import NativeWire
 from hla_tok.temporal.profile import Profile
 from hla_tok.temporal.quantization import quantize_symbols, reconstruct
 from hla_tok.temporal.sparse import Blocks, decode_rows, unpack_block
@@ -64,8 +65,10 @@ def _encoding_header(frame: int, reference: BaseReferenceState | None, profile: 
 
 
 class _PrefixWriter:
-    def __init__(self, profile: Profile, header: FrameHeader, budget: int, payload_budget: int | None):
+    def __init__(self, profile: Profile, header: FrameHeader, budget: int, payload_budget: int | None,
+                 wire: NativeWire | None):
         self.profile = profile
+        self.wire = wire
         self.parts = [header.serialize()]
         self.size = len(self.parts[0])
         self.payload_size = 0
@@ -98,11 +101,20 @@ class _PrefixWriter:
         if base and fit < stop - first:
             raise BudgetTooSmall("byte budget cannot carry the complete base")
         selected = fit * width
-        self.parts.extend(record_bytes(first + offset, profile.starts[first + offset], width, base, mode, payload)
-                          for offset, (mode, payload) in enumerate(blocks.payloads(fit)))
+        self._write_blocks(blocks, codes, fit, width, first, first_slot, base)
         self.sent = first_slot + selected
         self.clipped += int(np.count_nonzero(clipped[:selected]))
         return codes
+
+    def _write_blocks(self, blocks: Blocks, codes: np.ndarray, fit: int, width: int, first: int,
+                      first_slot: int, base: bool) -> None:
+        if not fit:
+            return
+        if self.wire is not None:
+            self.parts.append(self.wire.pack(codes, blocks.modes, blocks.lengths, fit, width, first, first_slot, base))
+            return
+        self.parts.extend(record_bytes(first + offset, self.profile.starts[first + offset], width, base, mode, payload)
+                          for offset, (mode, payload) in enumerate(blocks.payloads(fit)))
 
     def ranges(self, first: int, stop: int) -> Iterator[tuple[int, int]]:
         width = self.profile.block_size
@@ -116,8 +128,8 @@ class _PrefixWriter:
 
 
 def _prefix(target: np.ndarray, profile: Profile, header: FrameHeader, prediction: np.ndarray | int,
-            budget: int, payload_budget: int | None) -> tuple[bytes, int, np.ndarray, int, int]:
-    writer = _PrefixWriter(profile, header, budget, payload_budget)
+            budget: int, payload_budget: int | None, wire: NativeWire | None) -> tuple[bytes, int, np.ndarray, int, int]:
+    writer = _PrefixWriter(profile, header, budget, payload_budget, wire)
     steps = profile.steps_i if header.intra else profile.steps_p
     first_enhancement = profile.base_records
     base = np.concatenate([writer.write(first, stop, target, prediction, steps, True)
@@ -132,17 +144,24 @@ def _prefix(target: np.ndarray, profile: Profile, header: FrameHeader, predictio
     return b"".join(writer.parts), base_bytes, base, writer.clipped, writer.sent
 
 
+def _check_wire(profile: Profile, wire: NativeWire | None) -> None:
+    if wire is not None and not wire.matches(profile):
+        raise ValueError("native HLT backend is bound to another Profile")
+
+
 def encode_frame(target: np.ndarray, frame_id: int, reference: BaseReferenceState | None, profile: Profile,
-                 budget: int, *, payload_budget: int | None = None, force_intra: bool = False) -> EncodedFrame:
+                 budget: int, *, payload_budget: int | None = None, force_intra: bool = False,
+                 wire: NativeWire | None = None) -> EncodedFrame:
     """Encode each emitted Record at its final position, with a budget-independent base."""
     if target.dtype != np.dtype("<i2") or target.shape != NATIVE_COEFFICIENT_SHAPE:
         raise ValueError("expected signed int16 native lattice coordinates")
     if budget < HEADER_BYTES or (payload_budget is not None and payload_budget < 0):
         raise BudgetTooSmall("byte budget cannot carry an HLT header")
+    _check_wire(profile, wire)
     flat = target.reshape(-1)
     header = _encoding_header(frame_id, reference, profile, flat, force_intra)
     prediction = predict(profile, reference, header.intra)
-    raw, base_bytes, codes, clipped, sent = _prefix(flat, profile, header, prediction, budget, payload_budget)
+    raw, base_bytes, codes, clipped, sent = _prefix(flat, profile, header, prediction, budget, payload_budget, wire)
     state = commit(profile, header, reference, prediction, codes)
     return EncodedFrame(frame_id, raw, base_bytes, state, clipped, sent, prediction)
 
@@ -219,7 +238,19 @@ class _Frame:
                               padding=padding)
         self._advance()
 
-    def add_stream(self, raw: memoryview) -> None:
+    def add_stream(self, raw: memoryview, wire: NativeWire | None) -> None:
+        if wire is not None:
+            self.seen, ledger = wire.open(raw, self.codes)
+            self._account_native(ledger)
+        else:
+            self._add_python_stream(raw)
+        self._advance()
+
+    def _account_native(self, ledger: tuple[int, int, int, int, int]) -> None:
+        count, payload, base, bitmap, padding = ledger
+        self.ledger.add_batch(count=count, payload=payload, base_payload=base, bitmap=bitmap, padding=padding)
+
+    def _add_python_stream(self, raw: memoryview) -> None:
         records: dict[tuple[Mode, int], list[Record]] = defaultdict(list)
         offset = HEADER_BYTES
         while offset < len(raw):
@@ -229,7 +260,6 @@ class _Frame:
             records[(record.mode, record.count)].append(record)
         for (mode, count), batch in records.items():
             self._decode_batch(mode, count, batch)
-        self._advance()
 
     def _decode_batch(self, mode: Mode, count: int, batch: list[Record]) -> None:
         payloads = [record.payload for record in batch]
@@ -269,8 +299,10 @@ class _Frame:
 class TemporalReceiver:
     """The receiver owns no analysis network, source frames, or encoder cache."""
 
-    def __init__(self, profile: Profile):
+    def __init__(self, profile: Profile, *, wire: NativeWire | None = None):
+        _check_wire(profile, wire)
         self.profile = profile
+        self.wire = wire
         self.reference: BaseReferenceState | None = None
         self._active: _Frame | None = None
         self._last_seen = -1
@@ -325,7 +357,7 @@ class TemporalReceiver:
         old_last = self._last_seen
         frame_id = self.begin_frame(view[:HEADER_BYTES])
         try:
-            self._require_frame(frame_id).add_stream(view)
+            self._require_frame(frame_id).add_stream(view, self.wire)
         except ValueError:
             self._active = None
             self._last_seen = old_last

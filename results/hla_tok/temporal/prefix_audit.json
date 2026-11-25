@@ -1,0 +1,1783 @@
+{
+  "status": "PASS",
+  "independently_encoded_video_frames": 253,
+  "caps": [
+    20833,
+    41666,
+    83333,
+    166666
+  ],
+  "integer_wire_and_support_checks": [
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "base_sha256": "5300504c40d9363fe3934c1ab2c931035d6ffff1879a5fe21a67818f34f1019b",
+      "low_bytes": 20768,
+      "high_bytes": 166560
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 1,
+      "base_sha256": "0a3c7221d4200a8148480f7ca631e9aca026d84a6786fdf53f98685f9c204ecb",
+      "low_bytes": 20794,
+      "high_bytes": 166600
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 2,
+      "base_sha256": "13a172e2feb9eb1a7b7de863526cb05fd6ae2f5c05560636ad840a8eca56990b",
+      "low_bytes": 20808,
+      "high_bytes": 166651
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 3,
+      "base_sha256": "2be8dbf0b1f66d65c244b5d61e4d0f2cecad39da8ea4141c271ca7f71b42688c",
+      "low_bytes": 20787,
+      "high_bytes": 166539
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 4,
+      "base_sha256": "c74652187bb20368b87e552f2872fb4291625cac6422fb6d396cccdfbb619cf5",
+      "low_bytes": 20816,
+      "high_bytes": 166590
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 5,
+      "base_sha256": "22354594a32065e2367c12f78ae938989b8823836fdb3f92d674b2914063f68c",
+      "low_bytes": 20705,
+      "high_bytes": 166643
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 6,
+      "base_sha256": "634c4aa37edd95854eb0e75087b0a83161ec116da97f9693d10af4d295d71de9",
+      "low_bytes": 20693,
+      "high_bytes": 166562
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 7,
+      "base_sha256": "ef468884f2c37694d15a21be48104d1844afb4bdce40ec5f35f3e06d5ff4e19e",
+      "low_bytes": 20730,
+      "high_bytes": 166647
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 8,
+      "base_sha256": "de0d8d89095aeb3978e521faa22133e792913b93acd646772a8985409c5dbad3",
+      "low_bytes": 20695,
+      "high_bytes": 166534
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 9,
+      "base_sha256": "57abac47ef04b0cfcc7a7c7643f506df93028ea2510cccc54d0113a8de2be70f",
+      "low_bytes": 20731,
+      "high_bytes": 166538
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 10,
+      "base_sha256": "dbe604c6d4c45bec06280eb836d5c85d38503808bb3908f00178f994fc2928c0",
+      "low_bytes": 20747,
+      "high_bytes": 166649
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 11,
+      "base_sha256": "8e87e4696edba177dbc1d15084fa1bec8033b8254862826f69908f90e44d1e58",
+      "low_bytes": 20698,
+      "high_bytes": 166538
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 12,
+      "base_sha256": "7cd21b294dbdea92a9b1fb5494137e1e7eefaa11137f0c776de40e0a9db7e62d",
+      "low_bytes": 20753,
+      "high_bytes": 166603
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 13,
+      "base_sha256": "de81d0b11895546b42aacd43de41c1ee2e7b0fcc37f42be5010e6e8022b9da5d",
+      "low_bytes": 20832,
+      "high_bytes": 166634
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 14,
+      "base_sha256": "a321c65ec88ca7e4f1bc9bda9cb9c23c49557b30971079a55a00d906875e4c5b",
+      "low_bytes": 20829,
+      "high_bytes": 166569
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 15,
+      "base_sha256": "49e3380096efeaf04f73cd67f9b1404683e1f8c42d51eb1b1d05c3b3947f8004",
+      "low_bytes": 20707,
+      "high_bytes": 166594
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 16,
+      "base_sha256": "3fdc5a34ba6af561ec4fa24f1a24ec44abf1e9d7506d3102dae1f1a16e9e266e",
+      "low_bytes": 20793,
+      "high_bytes": 166606
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 17,
+      "base_sha256": "d289c97636a548a81ffd9a96134b9ac02ebaaace767fafac5bdc698644c1df06",
+      "low_bytes": 20720,
+      "high_bytes": 166589
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 18,
+      "base_sha256": "1d6ea18973bd6d3e10e1ccabf09c2d1f99baddc1dd26090677874e965b4a999d",
+      "low_bytes": 20754,
+      "high_bytes": 166560
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 19,
+      "base_sha256": "409895e7e6b9697c83d2be40c2a8cbe993fc162c680305b093f54f840da35432",
+      "low_bytes": 20801,
+      "high_bytes": 166536
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 20,
+      "base_sha256": "7d56280671609cf159ced2fbdeb2dc90d9289f561130f2b64baabb17f95bf451",
+      "low_bytes": 20813,
+      "high_bytes": 166542
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 21,
+      "base_sha256": "43f7b26f11904bc170f935b575a3655d8db0a1f7bb5886c4c6b0c5e728d5da7e",
+      "low_bytes": 20776,
+      "high_bytes": 166566
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 22,
+      "base_sha256": "2a17d28a463206f2bd15f8f22ce492d9a9f3aeda9cc15b3c9f4da40c7fc983ee",
+      "low_bytes": 20806,
+      "high_bytes": 166566
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 23,
+      "base_sha256": "90a91ada7f014d6d5239d0dabcb78d5740dbb73ae0401f987c245e7be572bf95",
+      "low_bytes": 20699,
+      "high_bytes": 166595
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 24,
+      "base_sha256": "3c869722ad4297630d736159c315a6fb7468a8738e8664baaef9276ce38e944d",
+      "low_bytes": 20807,
+      "high_bytes": 166594
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 25,
+      "base_sha256": "58561bc53a7123891e4a25c6ca931dc3a4a5f5a65f56b519a05b01acce7d5567",
+      "low_bytes": 20775,
+      "high_bytes": 166589
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 26,
+      "base_sha256": "69d819ceb4e1ea9ec8ae6016cb3179a01e731713d19431e6878ca0ba98bfd4e2",
+      "low_bytes": 20731,
+      "high_bytes": 166589
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 27,
+      "base_sha256": "3320a442e29993c436800cf3df7a6fe65e6267ef8f5bd127a6cf14840722dd47",
+      "low_bytes": 20742,
+      "high_bytes": 166658
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 28,
+      "base_sha256": "71fc74a2b4115440d18b576a9b8a0c6e3e33cf94935bc8eb6df9820b56fe4e7a",
+      "low_bytes": 20715,
+      "high_bytes": 166615
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 29,
+      "base_sha256": "2334c6f53fef3b44da77d68332602cf5106877f6b187fde2db4a2a0e7c3446ba",
+      "low_bytes": 20710,
+      "high_bytes": 166578
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 30,
+      "base_sha256": "9d429d8011426e33695a031e34fb9ec45270bd8eacf58cd1abaa5aaa2e5363a4",
+      "low_bytes": 20770,
+      "high_bytes": 166620
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 31,
+      "base_sha256": "be973d5af453bb629a6b6addfbc11c6eacc110eaafcc08245c74574cc936c10f",
+      "low_bytes": 20739,
+      "high_bytes": 166601
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 32,
+      "base_sha256": "98df67268b9a7361a16f02e88773622cc0e737b8e89ee7296b1ea32b5fd8c983",
+      "low_bytes": 20705,
+      "high_bytes": 166607
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 33,
+      "base_sha256": "6feafe80ce9188eff00416f66b397ccd1ab79553aa14d0a03374c4e6723bd7cd",
+      "low_bytes": 20736,
+      "high_bytes": 166569
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 34,
+      "base_sha256": "b96c8d10c4d0b3bc03e142d736387d18a1dfce199f5e196b1b610974cc2fe4da",
+      "low_bytes": 20771,
+      "high_bytes": 166533
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 35,
+      "base_sha256": "41444d52d6dda315550708e8462b73e5fac8eb5843d711e3fe4c5965a6b2bbfc",
+      "low_bytes": 20777,
+      "high_bytes": 166542
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 36,
+      "base_sha256": "39f12309af052ea370285079f7eaf0a1f79716d5831650ebe1ddbd8b838f4f44",
+      "low_bytes": 20787,
+      "high_bytes": 166615
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 37,
+      "base_sha256": "98e3bf12bfa98c8a85b0c36c44a5b212c43bdf1e7033417971d26581d8f0236b",
+      "low_bytes": 20816,
+      "high_bytes": 166619
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 38,
+      "base_sha256": "b84163b2e36932a9d54f08a0d2edda899afa9498db959e716449f1ecb59b9561",
+      "low_bytes": 20831,
+      "high_bytes": 166657
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 39,
+      "base_sha256": "1aff06e3583f373668a522c1433dc8c7191ab86b7c5d3c556cd5e2c71ab9a371",
+      "low_bytes": 20728,
+      "high_bytes": 166541
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 40,
+      "base_sha256": "66bece8b81ccef172c440f3d577e250ea8a3ea42fedea48f1845bb7f2bb5a2be",
+      "low_bytes": 20733,
+      "high_bytes": 166614
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 41,
+      "base_sha256": "cac34b63a383b972a923aacefce80a4a8f43145cbd6791d451b5500651dcfbd5",
+      "low_bytes": 20763,
+      "high_bytes": 166540
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 42,
+      "base_sha256": "ec41751ecb9e3ffcc388025625aaa4c4f00f5722e1a9b67fc7f3433638c201a0",
+      "low_bytes": 20701,
+      "high_bytes": 166586
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 43,
+      "base_sha256": "289dadd433dd2802dc47e203a13b39062fae77a9b6ac3208defdf284f4c026f5",
+      "low_bytes": 20764,
+      "high_bytes": 166640
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 44,
+      "base_sha256": "b4344a0cc91e6eac69efc25e6766021e016f3e53836d316eb591b7337b4e21bd",
+      "low_bytes": 20763,
+      "high_bytes": 166642
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 45,
+      "base_sha256": "36c328153e61e36b2d754393203ef1fa655b302166a3630a3a97c32a3660983c",
+      "low_bytes": 20778,
+      "high_bytes": 166546
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 46,
+      "base_sha256": "de8e2b007c8f2dc89a48dee2b8f37cbc3c4e34986e34af0877eeb3fa291cc1d0",
+      "low_bytes": 20831,
+      "high_bytes": 166525
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 47,
+      "base_sha256": "b611316a73d0649fec69ee8da4f58eeae743112f87a65ed87819ff052f5ecfcc",
+      "low_bytes": 20782,
+      "high_bytes": 166663
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 48,
+      "base_sha256": "7fcd7dbda87dec42d6760d014d7309f2e179f7b46e32b345eeef37a356df283b",
+      "low_bytes": 20765,
+      "high_bytes": 166540
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 49,
+      "base_sha256": "546104cfe252003917446463364d000c03b225b4e3fc1d03911cc338224a4b93",
+      "low_bytes": 20822,
+      "high_bytes": 166588
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 50,
+      "base_sha256": "a6a17f1826404c2b55758828a4c19aa7cb16a48b013a59376732c0f72187157c",
+      "low_bytes": 20787,
+      "high_bytes": 166615
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 51,
+      "base_sha256": "a1ba3fa6f7ba8c3f746a99ec8776359cd52374479b0d37551a9a4903ad4c003f",
+      "low_bytes": 20811,
+      "high_bytes": 166554
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 52,
+      "base_sha256": "ba6008baa9a2c9be9ed6dbb6802e73c3dbdd9bf97ce0e86eb0e5f17f174d779f",
+      "low_bytes": 20716,
+      "high_bytes": 166620
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 53,
+      "base_sha256": "f325bdca9fe963cb39638b1b3034b0fe3ffcb4b0d44abdc6d0a2d2b0b7aa9e3d",
+      "low_bytes": 20764,
+      "high_bytes": 166537
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 54,
+      "base_sha256": "f62d39efe15f208a95a5f5aa44a8a6de9b870df01fdf59be1c12a2a2b8a7c48a",
+      "low_bytes": 20764,
+      "high_bytes": 166578
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 55,
+      "base_sha256": "68a02772850adfe0b506a7f80ae8a938daf9792add71d46f2565fec57d53313d",
+      "low_bytes": 20703,
+      "high_bytes": 166590
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 56,
+      "base_sha256": "d5fbbce95f4018302e44312af86207d8b1bd72086661b9ef143238f79e4cab36",
+      "low_bytes": 20774,
+      "high_bytes": 166613
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 57,
+      "base_sha256": "faccea03e08f4aeb37905f722fda30a0f0d68689f6d5f41b8a6abcf722fb8d4d",
+      "low_bytes": 20811,
+      "high_bytes": 166526
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 58,
+      "base_sha256": "9b1be1e59652c013be6da5e5699853654e550f7f644cb36085e01a911244db0c",
+      "low_bytes": 20807,
+      "high_bytes": 166622
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 59,
+      "base_sha256": "4b01d81dc798f38589c384b63afbd3b4ee6915f07b2f43d547c830ef4a0beaf6",
+      "low_bytes": 20699,
+      "high_bytes": 166578
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 60,
+      "base_sha256": "c00969a0d17c98e1ce843614443e8d59c0cd7f68be0de9623266bf130408993f",
+      "low_bytes": 20806,
+      "high_bytes": 166600
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 61,
+      "base_sha256": "118356ac9fd5d24f8a7a9a75383dccbaddad8fa74453e88c82d46e8b9bed7fc3",
+      "low_bytes": 20758,
+      "high_bytes": 166589
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 62,
+      "base_sha256": "31362414047bd6145632176cca5c5f7cd0640256b334928d9be18899a2d1e91b",
+      "low_bytes": 20821,
+      "high_bytes": 166653
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63,
+      "base_sha256": "bb834ee243b8754af4f375df4fc3aceccf9a600204e952fe00868d4a948308d5",
+      "low_bytes": 20803,
+      "high_bytes": 166635
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 0,
+      "base_sha256": "51e2878a27c00678f2b29aedd29a68faf31d5136737b30bf1986b77d25b6c998",
+      "low_bytes": 20832,
+      "high_bytes": 166574
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 1,
+      "base_sha256": "6c9431ae6a5da1f7f24b00480fa4603bab03948e0e4c07e15e06c6e348492392",
+      "low_bytes": 20790,
+      "high_bytes": 166645
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 2,
+      "base_sha256": "da794486e0d9d7896e4718f541b12b482efbc145d43f5d49f5ffdd47a0c66c90",
+      "low_bytes": 20808,
+      "high_bytes": 166553
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 3,
+      "base_sha256": "cf985a53cdca2bbeba03d81d426077d88cc9cc8b23ed8c3faccbc8727463ea7e",
+      "low_bytes": 20730,
+      "high_bytes": 166568
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 4,
+      "base_sha256": "97f89eb19732d8a56943ed99491b85852ffeb821e3a516b3c37f723f53ce512f",
+      "low_bytes": 20700,
+      "high_bytes": 166653
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 5,
+      "base_sha256": "c950a34357a655006caca398f60bcd6bd3bc10bc9fefd516431978e70f0bfdab",
+      "low_bytes": 20824,
+      "high_bytes": 166584
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 6,
+      "base_sha256": "413f78cf3a66c67a878cc8ecf26afcc7c53c909207e9f045d3bb1270ddd7dc85",
+      "low_bytes": 20781,
+      "high_bytes": 166652
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 7,
+      "base_sha256": "208a22ac391fe92659206c833654b5d862bcc86590c691f93dd8db5fa9652df7",
+      "low_bytes": 20750,
+      "high_bytes": 166604
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 8,
+      "base_sha256": "2623c1b205e10a986e1d7c68d1d5ac7b2645efcd7d7f3168159a2732ccefb152",
+      "low_bytes": 20718,
+      "high_bytes": 166534
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 9,
+      "base_sha256": "491e79681b8338b5a13a35a5e984c18d44da76ac4f4972c553db7cbd7acbe61c",
+      "low_bytes": 20784,
+      "high_bytes": 166585
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 10,
+      "base_sha256": "18baf392defc8bd477126896645368bab16129a186eed0fc4506eb2c8c6ff225",
+      "low_bytes": 20749,
+      "high_bytes": 166605
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 11,
+      "base_sha256": "13e17f73b71df1486d39c99677b27d82000e6371f0c506533b1dd5daec39c7c5",
+      "low_bytes": 20815,
+      "high_bytes": 166568
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 12,
+      "base_sha256": "eaa55d95ef473132892a859a83214131a992abdbbcaafe839e2fa8d833888337",
+      "low_bytes": 20742,
+      "high_bytes": 166597
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 13,
+      "base_sha256": "3418beca7ab6074d4d52464630848d04373bf65dc457275f16eb3fef624b2890",
+      "low_bytes": 20768,
+      "high_bytes": 166601
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 14,
+      "base_sha256": "94c33283cd52c6ff093c9bddd04f721d11b43f3abee51271ac2f5822a33e9540",
+      "low_bytes": 20755,
+      "high_bytes": 166586
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 15,
+      "base_sha256": "427da30ed19fd3eca34248442e9036e9add8a473bf8df97c42af510c64909b6e",
+      "low_bytes": 20769,
+      "high_bytes": 166561
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 16,
+      "base_sha256": "1ef0ed6630a3f2a3f06f95676dfaa797ec2c92f4aab00db0f3b5bc6e12de215f",
+      "low_bytes": 20786,
+      "high_bytes": 166659
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 17,
+      "base_sha256": "7c60818b001e184a585751e4fdd0e26a8782cf8a173f36e6d075f83cbe0c16e9",
+      "low_bytes": 20704,
+      "high_bytes": 166581
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 18,
+      "base_sha256": "95fc603dcce5a86d6a6a82c660e9a803810656e041a68940264a3a0c41703d51",
+      "low_bytes": 20801,
+      "high_bytes": 166575
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 19,
+      "base_sha256": "6c3f04c2ef5d0ccbf3fff245c34228f05636b6af19ea2ea485c9bee1aef97b34",
+      "low_bytes": 20707,
+      "high_bytes": 166586
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 20,
+      "base_sha256": "c188ff8832c9a5676498ec54500a3927eb7ad837c30c779bf9ff70fef6c9c0e8",
+      "low_bytes": 20733,
+      "high_bytes": 166535
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 21,
+      "base_sha256": "331ab4cd57fb6789c42fce0dacf1c2279ba0199cbe2db22bf4d60e2abc93b03d",
+      "low_bytes": 20796,
+      "high_bytes": 166619
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 22,
+      "base_sha256": "a0cafd7090f80fdfb8a499e9c30c64aa1717512d46af85bdac724ad828038288",
+      "low_bytes": 20786,
+      "high_bytes": 166629
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 23,
+      "base_sha256": "34978e88bc2f5c4e8ecfe1d3a9c61f14c4942b707563a92b018c9203e737c3d4",
+      "low_bytes": 20810,
+      "high_bytes": 166528
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 24,
+      "base_sha256": "173fa353fe6adc7b392362ad5ce233d55e51e9977aae5f1a750c88323cc3bac3",
+      "low_bytes": 20707,
+      "high_bytes": 166527
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 25,
+      "base_sha256": "60c3271b0470b6e0243a4cd366a31ac1386d17bdb957e16749761425bf898480",
+      "low_bytes": 20827,
+      "high_bytes": 166610
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 26,
+      "base_sha256": "36f565c158d1b1b4a9d0be83a91bec08abbc2932e551631c67241fbb16739cd1",
+      "low_bytes": 20734,
+      "high_bytes": 166610
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 27,
+      "base_sha256": "0f3087de82eaa7cb31bbb416fded396ea0ca42e99ecbc596b06ac83b3b0f8476",
+      "low_bytes": 20779,
+      "high_bytes": 166639
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 28,
+      "base_sha256": "79d8524a51ec137a68e4eb812f8d0eb7b322649f080007e8f3eb13ad449bc5a9",
+      "low_bytes": 20819,
+      "high_bytes": 166609
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 29,
+      "base_sha256": "f2621904bee92508a0c2315ae868572406414b841d790eb4c4ed3f1130f83abe",
+      "low_bytes": 20712,
+      "high_bytes": 166567
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 30,
+      "base_sha256": "79e1b181ec83638869557f27139987bf9bed7512533ce3238d7a6417128c00da",
+      "low_bytes": 20807,
+      "high_bytes": 166666
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 31,
+      "base_sha256": "7f9a7c2b5d1c66b94742ba6a0b5057842b5a5d4b05b829395a03d179d1088fad",
+      "low_bytes": 20731,
+      "high_bytes": 166617
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 32,
+      "base_sha256": "23a059ccba6dc9acb199d09b097799133d9a3d5c5ff452139da4a301cedf2f1f",
+      "low_bytes": 20767,
+      "high_bytes": 166535
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 33,
+      "base_sha256": "5385b8c14659bd6a3e407d14e0d2035fd9492b720be2c4cc334b2365f93ee45d",
+      "low_bytes": 20820,
+      "high_bytes": 166562
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 34,
+      "base_sha256": "5b37dbc1ae1f48e3be8eb390d5db19a7a956293ca2b6de6a53183cc9961f6974",
+      "low_bytes": 20746,
+      "high_bytes": 166655
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 35,
+      "base_sha256": "1aea0b6831b52f3ac332c2d1f345bc090bbe85f95dd56d07feb60a0dde4b046e",
+      "low_bytes": 20780,
+      "high_bytes": 166537
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 36,
+      "base_sha256": "db967348e4acb5dbc958b652d647c4fc59bf3a96f5dfce682b24cfe8e35e18b8",
+      "low_bytes": 20751,
+      "high_bytes": 166657
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 37,
+      "base_sha256": "98671a1e1f3ac212c8c1a7af80336cfbf07445e8f6f83e7b7e81ed56952f67d2",
+      "low_bytes": 20694,
+      "high_bytes": 166546
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 38,
+      "base_sha256": "3c9fc3c94520de493b9b3215a9bd64b5d81d12d830b21c230e37057e575e1cc7",
+      "low_bytes": 20705,
+      "high_bytes": 166543
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 39,
+      "base_sha256": "b55dc1c574e5a284e493147f1ddcd428274104cdac98a08c47195bd7434dc185",
+      "low_bytes": 20717,
+      "high_bytes": 166586
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 40,
+      "base_sha256": "ae8f79b4809caaa5bda3eea2d4e7fbe8754a8acfdbdfd1f619ee5e97951c37e3",
+      "low_bytes": 20802,
+      "high_bytes": 166528
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 41,
+      "base_sha256": "225cd444be9c6f3b9fe60ad2905835bca3ddf96afa2ec13799aa556bc87e0165",
+      "low_bytes": 20776,
+      "high_bytes": 166655
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 42,
+      "base_sha256": "0858a70a93e49d97fa799b7d592b1238eebc67029686edd347639209a7335ec9",
+      "low_bytes": 20714,
+      "high_bytes": 166634
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 43,
+      "base_sha256": "816fc706e131c689794358d7c8e14eff2ded90f124f7339d98ecc046fedfbec6",
+      "low_bytes": 20825,
+      "high_bytes": 166562
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 44,
+      "base_sha256": "7b4cd4070e304a96db8901b8565c02f59917cae706023ab5dfc3f9b01b16fb6f",
+      "low_bytes": 20734,
+      "high_bytes": 166629
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 45,
+      "base_sha256": "4c37e7efaf67d74219d050c0d68d585b96edfcc9b0a96802a62244ea376997de",
+      "low_bytes": 20744,
+      "high_bytes": 166600
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 46,
+      "base_sha256": "a7d4b8753f390ce60370ed95743193b3c3a24a7ab0f87e5e7034ba2450b2e067",
+      "low_bytes": 20741,
+      "high_bytes": 166525
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 47,
+      "base_sha256": "211d31032ed3199ab14550a16de75f1b76c67c5df39cc61b9255b2514f082057",
+      "low_bytes": 20724,
+      "high_bytes": 166600
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 48,
+      "base_sha256": "223b45fb6dcfe37190350634753b79ac953326d5be6d25e40ffab6266038bb59",
+      "low_bytes": 20707,
+      "high_bytes": 166597
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 49,
+      "base_sha256": "e891cd0d9034be511da36464675df2e21747b8c0d15f11dd293d54f3f7dee7f4",
+      "low_bytes": 20806,
+      "high_bytes": 166566
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 50,
+      "base_sha256": "04ba59121a8adb556a1cdf6293e13fdd60f9540ae73dc460a1e60ba771d1debf",
+      "low_bytes": 20766,
+      "high_bytes": 166633
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 51,
+      "base_sha256": "a194e0a06ac38fe97eb3332a05db2fc11c06f2448742bec65eef7337c9cf3419",
+      "low_bytes": 20796,
+      "high_bytes": 166595
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 52,
+      "base_sha256": "730893ea36babe1661a73e68ce207de67fef2d658d9d97b4b7b5cc97755e44c9",
+      "low_bytes": 20752,
+      "high_bytes": 166633
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 53,
+      "base_sha256": "e46df42a949b68f2ad59c4687e042c765ad14b235adeb42fd32c10334f7124b3",
+      "low_bytes": 20705,
+      "high_bytes": 166550
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 54,
+      "base_sha256": "c2de620719a6f28641207836c9b72fb117171f984cfbfb97d4dcb3382fcf3f34",
+      "low_bytes": 20810,
+      "high_bytes": 166548
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 55,
+      "base_sha256": "ff521dd96254fe2d7618beaa388fef39f7b9a4bc66e0299d843269a758137ca8",
+      "low_bytes": 20753,
+      "high_bytes": 166620
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 56,
+      "base_sha256": "efd80950b3093f8be88728e7d9e3c5061ff549614a1deefa7321b5533ac89dd7",
+      "low_bytes": 20749,
+      "high_bytes": 166590
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 57,
+      "base_sha256": "6fbad2d8ab33ee551992bc78a130acf855dc353adfe897b46e004646d68dd589",
+      "low_bytes": 20754,
+      "high_bytes": 166619
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 58,
+      "base_sha256": "b0ea12260633062f0c8be99bdc3214ede73cd30725d1d825d6cf5f082f556092",
+      "low_bytes": 20755,
+      "high_bytes": 166570
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 59,
+      "base_sha256": "986c33dbf07b23767a647727614ac2f00cb4a4f99fec6bf28b18710404d3c1bf",
+      "low_bytes": 20691,
+      "high_bytes": 166603
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 60,
+      "base_sha256": "09e21b0b349147ffc354150b0053249fa7fa25381b4480562c41a040f94fd623",
+      "low_bytes": 20755,
+      "high_bytes": 166553
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 61,
+      "base_sha256": "0f453945f9cb8f4061f6afdebe92766f3aaae30167632e56a8a3e3966bb34f01",
+      "low_bytes": 20802,
+      "high_bytes": 166565
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 62,
+      "base_sha256": "23eba888d3de8f92163d47fff5575e19677a7cb36926b17acf6a0a7e9b35dcbf",
+      "low_bytes": 20796,
+      "high_bytes": 166552
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 63,
+      "base_sha256": "ddbfd0908c649bfbdbcbc99604bb5a67abcc63c5108d0fd00b42f05e20502cfa",
+      "low_bytes": 20807,
+      "high_bytes": 166643
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 64,
+      "base_sha256": "de0a7ca2d25854d0e1b623f3f794d9dabc219713c42a2d49c653cdd70bf6358a",
+      "low_bytes": 20717,
+      "high_bytes": 166537
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 65,
+      "base_sha256": "e3d2a94202f8b74a39c17a0621ce16a7ca88e7e1797929b2c292c9750a1efbad",
+      "low_bytes": 20825,
+      "high_bytes": 166633
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 66,
+      "base_sha256": "c6827caa9a531e5df5426cc0bd3b340632808b7cc3e930966e9fb8123f09cf90",
+      "low_bytes": 20700,
+      "high_bytes": 166559
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 67,
+      "base_sha256": "5d6ca71d57051be7f245b3a9805813e81ca24d0d0e37f5757a395c7bdd6709e5",
+      "low_bytes": 20786,
+      "high_bytes": 166618
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 68,
+      "base_sha256": "21c89c86e6917fdab02d0ebf1330cefecf5c47ea1a10ded0e5fcc176fb1222fa",
+      "low_bytes": 20700,
+      "high_bytes": 166635
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 69,
+      "base_sha256": "9fe6340efa306b100a912cd50cf5f0b122838494a9c955714dbd23b6a26ec00d",
+      "low_bytes": 20696,
+      "high_bytes": 166615
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 70,
+      "base_sha256": "5979caec7a506ca9ae341ae8a97b43f9e52dc627a64ad77d194695680dc9d41c",
+      "low_bytes": 20740,
+      "high_bytes": 166592
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 71,
+      "base_sha256": "483c927807d2ef7077d9fd0f0cfb5e487cf7413667e4790df516e9d5e767c731",
+      "low_bytes": 20831,
+      "high_bytes": 166653
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 72,
+      "base_sha256": "f81fa044d0e5217209161038e3841fdc003ad4e65859124bf295eb28c8891845",
+      "low_bytes": 20821,
+      "high_bytes": 166547
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 73,
+      "base_sha256": "d58482797012c30337855397abfed6f796b0c7667a2fa4eaecb71d5d6c862bbf",
+      "low_bytes": 20812,
+      "high_bytes": 166629
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 74,
+      "base_sha256": "6690f421fd2c49c5d5dfd6a6e0639180f5d953bfec1f30f75eef7f79bb5678b3",
+      "low_bytes": 20735,
+      "high_bytes": 166658
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 75,
+      "base_sha256": "0020bdaa7425bbb252d2f14f3b23fc2cabf7e0c97d29ce755adce443c424fb0f",
+      "low_bytes": 20822,
+      "high_bytes": 166588
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 76,
+      "base_sha256": "da48ccd4c5520dbdae88d8fb5ad67e2ec5669ab83bb55f4cb2ea278bbf16a391",
+      "low_bytes": 20774,
+      "high_bytes": 166645
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 77,
+      "base_sha256": "62576d91cad41845904289d0163d5d5686b0b2c122ce6ee6134c8e2291b9a9c3",
+      "low_bytes": 20718,
+      "high_bytes": 166539
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 78,
+      "base_sha256": "55605e96c88125f4bf798535becc7f25d7361e0c6f5eecb9ecc47680fbf53689",
+      "low_bytes": 20829,
+      "high_bytes": 166633
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 79,
+      "base_sha256": "efc224fa6edebf7abcaa3c202185ac2b568768d0a5f4dd48867446cfd7ddcf16",
+      "low_bytes": 20788,
+      "high_bytes": 166549
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 80,
+      "base_sha256": "2b727049a0205d8e7905b8486f4955398ee28064ba9248a95465b1f9d34050a1",
+      "low_bytes": 20737,
+      "high_bytes": 166539
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 81,
+      "base_sha256": "5f7eb190079d71d5ddbea4d199f8a9be3047fc8a2dcb31400076d274e61a9348",
+      "low_bytes": 20745,
+      "high_bytes": 166596
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 82,
+      "base_sha256": "f4efcbbad6090becb2cc8d5cc5242416b9ab1dc8a5f7e8a46db3280329b5a8e1",
+      "low_bytes": 20798,
+      "high_bytes": 166657
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 83,
+      "base_sha256": "c75b7e95a784969de48e570835efc73368446142f789ae63296353240fa951af",
+      "low_bytes": 20782,
+      "high_bytes": 166548
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 84,
+      "base_sha256": "63651d881468baff57022c42e41ffada0bf190c521b6a89e2e46912c387b6711",
+      "low_bytes": 20796,
+      "high_bytes": 166652
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 85,
+      "base_sha256": "5fccba3b8255f9d4989c1ac2f71aa37c06708f82b292e736b3c91e7376d56c5b",
+      "low_bytes": 20698,
+      "high_bytes": 166651
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 86,
+      "base_sha256": "fb02597f5855263a07c7779945a9ed677d2a8e970f02b35026468ed73b330aab",
+      "low_bytes": 20715,
+      "high_bytes": 166583
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 87,
+      "base_sha256": "d683974ec5b24d3237c076186bdfc5836e1f14e01eddc931aca0cbecccdb23a0",
+      "low_bytes": 20748,
+      "high_bytes": 166604
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 88,
+      "base_sha256": "9fbc555ce5c95020af615cd282c8d0b28710188cab41285fe45e7fc59b6134ec",
+      "low_bytes": 20742,
+      "high_bytes": 166537
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 89,
+      "base_sha256": "e210fbfe3e1643babfcb4a3a5d6e3a9808efd0d2093dfc3b9e1748b240394299",
+      "low_bytes": 20712,
+      "high_bytes": 166560
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 90,
+      "base_sha256": "b38561e5ea081e4e917bb54e764779c68de20c10a8fa2ae4bcfd200d4c5c1f9f",
+      "low_bytes": 20764,
+      "high_bytes": 166649
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 91,
+      "base_sha256": "1ff505999b24de14fdc46aff475cceff00473cef34ad6aff3002745bfd93e2fa",
+      "low_bytes": 20730,
+      "high_bytes": 166526
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 92,
+      "base_sha256": "89c861288200198e858351f819f5d0085a6f6c3e03cd9d54083604e5948d29f8",
+      "low_bytes": 20741,
+      "high_bytes": 166533
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 93,
+      "base_sha256": "ceeddeeefccb358880ddba1bfb5a39b0748b2388fef85a54e507db19f313cc07",
+      "low_bytes": 20698,
+      "high_bytes": 166577
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 94,
+      "base_sha256": "2d9c2fd1b1622ba7b9faee39e8681a85d72ba9d2c0bb2c134ec4dfb1bbfedc65",
+      "low_bytes": 20833,
+      "high_bytes": 166572
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 95,
+      "base_sha256": "ab804c14d28f3d7f906db39f7efab221954d23f47fba997a1b0d17148038d664",
+      "low_bytes": 20713,
+      "high_bytes": 166609
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 96,
+      "base_sha256": "201caed7826ef00837dc91283e25cdc8b7eaee8e2322b3abe4f4fd6bee96a6e9",
+      "low_bytes": 20772,
+      "high_bytes": 166560
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 97,
+      "base_sha256": "eb9069750e40556051dd28f0165808c4aec157e814a816d49a1379a7786c04c7",
+      "low_bytes": 20791,
+      "high_bytes": 166586
+    },
+    {
+      "video": "DAVIS2017:soapbox",
+      "frame": 98,
+      "base_sha256": "4993a477d68a027b0010fa6c781bbf0b37b6a5474e8c05bfb30f274a45a9e17e",
+      "low_bytes": 20805,
+      "high_bytes": 166596
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 0,
+      "base_sha256": "885c26cdfa32abbd398e7b77d9e5c426a0ea88aaf735c0f3aeb0cec95b43943e",
+      "low_bytes": 20707,
+      "high_bytes": 166592
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 1,
+      "base_sha256": "5afd15858ed8e979ddcb55a97e2a6f3dc56f42d6868c0e1a9a0c637b3372c95a",
+      "low_bytes": 20794,
+      "high_bytes": 166529
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 2,
+      "base_sha256": "6d8a89261bdcceaf58a0acc2525bcb101076c5769cfc1fff6a5ef2f23020d691",
+      "low_bytes": 20828,
+      "high_bytes": 166595
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 3,
+      "base_sha256": "faf7c2a4655c06a1b898919e14867778674c62347b6f8c0e25caa39a64b3e116",
+      "low_bytes": 20785,
+      "high_bytes": 166635
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 4,
+      "base_sha256": "53fd5ed6d23a044f035f4f9d2e5184dab0aeefa4a762637d799f6d9f57e9a3f8",
+      "low_bytes": 20693,
+      "high_bytes": 166623
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 5,
+      "base_sha256": "cf00b2de44a4843c430c49fa9badf9f6cf2691cb06ad58259b69be5ee1d9ea92",
+      "low_bytes": 20717,
+      "high_bytes": 166550
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 6,
+      "base_sha256": "ac05272cf7b58a6eaa569dbfa89607f96cb79b0cd999e1c58e77956d216d6093",
+      "low_bytes": 20710,
+      "high_bytes": 166661
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 7,
+      "base_sha256": "00b33cc49743a0f135ed52ab47517987db4d9d61cb87eae938e788059f9f978c",
+      "low_bytes": 20780,
+      "high_bytes": 166531
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 8,
+      "base_sha256": "21ec1eabafc6da1ea21117b2fda7be4da2b1bbb00c17f7af8fcd810b00bd31fd",
+      "low_bytes": 20813,
+      "high_bytes": 166614
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 9,
+      "base_sha256": "0ac35566309662863d028f094e2b2adca006897e4ce3e78fbd68d732cdc23ea8",
+      "low_bytes": 20738,
+      "high_bytes": 166639
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 10,
+      "base_sha256": "dac736da813e5904d94a5e5c7af95c7340dd2f52acacad6dc3a960ab750a67e4",
+      "low_bytes": 20697,
+      "high_bytes": 166581
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 11,
+      "base_sha256": "77f4d48f0ff24fdb4434dc24894f9ead83c6cb999c810c2cc4e5181b5f5f161a",
+      "low_bytes": 20760,
+      "high_bytes": 166583
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 12,
+      "base_sha256": "571a6e7ef515cdffdb8a686e7706cde172811b2f40ea3081f5d45811b41dda4a",
+      "low_bytes": 20717,
+      "high_bytes": 166532
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 13,
+      "base_sha256": "15afd72d4065cd8db5f671ce4de0301bbb7a8d7e4e5cb23a950c9f4d3e9bdde4",
+      "low_bytes": 20708,
+      "high_bytes": 166550
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 14,
+      "base_sha256": "7c61b0f4f90e1c8f3c9623697ee6c5d3840cba29185d27a9a678b5a4c20ad289",
+      "low_bytes": 20709,
+      "high_bytes": 166579
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 15,
+      "base_sha256": "694128947af92018b3c990fc0e0b3b5ba2d87081fd641bd61c729a83c1cb3200",
+      "low_bytes": 20709,
+      "high_bytes": 166572
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 16,
+      "base_sha256": "04888d40ae02a7a2025fa7126a20f8086bef0dec75d721cee5a454dd9bcbe02a",
+      "low_bytes": 20742,
+      "high_bytes": 166628
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 17,
+      "base_sha256": "c8ce6c6ad50ecb1a19d10be26c85d152b3f8bf15ef75670a19100e0438d20258",
+      "low_bytes": 20757,
+      "high_bytes": 166524
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 18,
+      "base_sha256": "464233a9547e9ef79595344881b669928eb51e5ec81717b4d65b54ba20ee4349",
+      "low_bytes": 20775,
+      "high_bytes": 166639
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 19,
+      "base_sha256": "e7a1b4103829399d6c8e5b87ded2cf0e96c283e29d350b877ad58e2641c669ff",
+      "low_bytes": 20704,
+      "high_bytes": 166549
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 20,
+      "base_sha256": "95112dafd8009d00f15511ecd7ebf17e8af98a4395ac3fab1709dd5f59846433",
+      "low_bytes": 20757,
+      "high_bytes": 166600
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 21,
+      "base_sha256": "c4b5e9eb2a7905147304c8e7dc246d1a6cdb11d1285a9f6daa1c8b644b3db591",
+      "low_bytes": 20761,
+      "high_bytes": 166588
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 22,
+      "base_sha256": "4061eef056bf8ff0459aff032dfe17509a51e043ef9afc31b9b067305c98f30f",
+      "low_bytes": 20819,
+      "high_bytes": 166586
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 23,
+      "base_sha256": "e87785801df1f537c865548ebd0c84f217c343b21529a3ba79ee2e3066f60404",
+      "low_bytes": 20793,
+      "high_bytes": 166565
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 24,
+      "base_sha256": "0306363ddc3a233b64e79486070e199c2bbfd1066243c216d2c12a798c64b4f6",
+      "low_bytes": 20719,
+      "high_bytes": 166661
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 25,
+      "base_sha256": "23d0cb356c59b76df47b1523ee4797379b34566d7532a450dcfb29e03b199f08",
+      "low_bytes": 20721,
+      "high_bytes": 166618
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 26,
+      "base_sha256": "291c3f9a39e13a4c04263a68cffc92fd146f1213b03bb1f7359d6e86b4b93fd5",
+      "low_bytes": 20804,
+      "high_bytes": 166558
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 27,
+      "base_sha256": "86118437c5e5801e4ac3f4e9d0ab18a10892df17d47a1f55d70f4e71e7f82457",
+      "low_bytes": 20826,
+      "high_bytes": 166570
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 28,
+      "base_sha256": "6445f09c6a3f6d7609a77804864961ebf9605eed827dc745fea3943aa25b5fc1",
+      "low_bytes": 20729,
+      "high_bytes": 166551
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 29,
+      "base_sha256": "5f4ad9bcb5a85611a8cbca8fc4e46316c765e3d5be5564c2db27185a3cf7df02",
+      "low_bytes": 20774,
+      "high_bytes": 166576
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 30,
+      "base_sha256": "904a4bfedd956604232346e44c7cc4c9be61ac9c35d5bf32efa5529198ee6b16",
+      "low_bytes": 20810,
+      "high_bytes": 166631
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 31,
+      "base_sha256": "2ce230aeb31c321695792e54094c0791c4597c04baa578b9a03187f6398cb1ff",
+      "low_bytes": 20712,
+      "high_bytes": 166623
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 32,
+      "base_sha256": "743fbbca266513aaf21b4e78eaa5cd940a40c66b90e03b7c362c7055ad46e323",
+      "low_bytes": 20706,
+      "high_bytes": 166639
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 33,
+      "base_sha256": "c31ec3e703c744c6b212f1f35a8ac1e4e12f982308ce2cdffe5530470b0d989d",
+      "low_bytes": 20817,
+      "high_bytes": 166592
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 34,
+      "base_sha256": "05e9d44dfcdbe6faea4e1397f85dfe050d31f555db2886c5ccdb03588972e4e9",
+      "low_bytes": 20812,
+      "high_bytes": 166532
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 35,
+      "base_sha256": "e28ceb497b5109a6c1917eaa4fd6efd069fa5325e4a4d8b7e03a00f25a35b349",
+      "low_bytes": 20752,
+      "high_bytes": 166628
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 36,
+      "base_sha256": "d499ef659b66ad4ad818e69fb7fcc5d638a538fdad567d2bd666cf25a92dc2d6",
+      "low_bytes": 20830,
+      "high_bytes": 166651
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 37,
+      "base_sha256": "acd2ffd26218b013396c651ce1f01fd475326ec07622292d580f1f98d0fb0aa9",
+      "low_bytes": 20702,
+      "high_bytes": 166582
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 38,
+      "base_sha256": "1635d071e1c89cfb6635a571a4cb49ebe71c00ab9b4c4dadce37d86be2f2a573",
+      "low_bytes": 20786,
+      "high_bytes": 166564
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 39,
+      "base_sha256": "91c5e8210f4eeb0fb6fcef499759e8526b821ee63a9d38b88acf9c13ac504d49",
+      "low_bytes": 20794,
+      "high_bytes": 166553
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 40,
+      "base_sha256": "0b830da2bd7a18b48cb7d26752f6094ce9b206b37b6c11e5291a3ecf760e75e5",
+      "low_bytes": 20823,
+      "high_bytes": 166622
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 41,
+      "base_sha256": "2fbcee2e08539279cdc0574e6901a1619fa2a37217bafffde3230d923c51f0a8",
+      "low_bytes": 20826,
+      "high_bytes": 166625
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 42,
+      "base_sha256": "957164e2926919ce696bbb3261d6a179a98d48e3c306d647ccbe1ddefe3a8598",
+      "low_bytes": 20730,
+      "high_bytes": 166557
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 43,
+      "base_sha256": "b3b6130ef3fe3a53c7372c466083de0320b10b18cddd17314f086d07153a4c94",
+      "low_bytes": 20776,
+      "high_bytes": 166571
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 44,
+      "base_sha256": "93f9f5d463d9af8f22d47748339f2b981f6b4e4bd84d8a6fc7b4aaa826fe2afb",
+      "low_bytes": 20695,
+      "high_bytes": 166531
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 45,
+      "base_sha256": "ec793dcfb9f809c5d1f31a8fe5d21518b5d231b523cf6ff95191491ba8192b55",
+      "low_bytes": 20760,
+      "high_bytes": 166586
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 46,
+      "base_sha256": "8fb5c01159aeaa17e965986a1659226420195b41172c36ad7b1b33ccaa6b7086",
+      "low_bytes": 20827,
+      "high_bytes": 166622
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 47,
+      "base_sha256": "851138ca349286c1f1ab9d7faab420d23dbbfa90af16671324129c69ad585892",
+      "low_bytes": 20827,
+      "high_bytes": 166583
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 48,
+      "base_sha256": "9a357d9f620e84b9c2f7411732068a73034253dcb0d81c1a96b289b416b9ce7e",
+      "low_bytes": 20725,
+      "high_bytes": 166622
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 49,
+      "base_sha256": "cdb7e3aa7f833a8340935d97d9164354c82e87da4ba531ac2514c978bebfa961",
+      "low_bytes": 20738,
+      "high_bytes": 166557
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 50,
+      "base_sha256": "7ffdc1ac64ca7f1be860d78f717dddea62501175d224f3138ca7282faca40bf1",
+      "low_bytes": 20826,
+      "high_bytes": 166598
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 51,
+      "base_sha256": "0ca166fe0a0c3d1fccbb86ca84258ca9cf9c11f6cb1f8cd075410b34cd1c1dcb",
+      "low_bytes": 20781,
+      "high_bytes": 166527
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 52,
+      "base_sha256": "01031c7d531e5f3deeded1fb86b0bbafe999c6105f2e9a1b6ba28363dbf4b80e",
+      "low_bytes": 20773,
+      "high_bytes": 166606
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 53,
+      "base_sha256": "1e9090d0050d574a46e37fc488a3ed0a6c1230e05b238d67f992ad19844a95ab",
+      "low_bytes": 20803,
+      "high_bytes": 166594
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 54,
+      "base_sha256": "cca7897d93f81046ea16fa12bae544baeb909e210330162855bc7a6ec0e5383c",
+      "low_bytes": 20755,
+      "high_bytes": 166642
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 55,
+      "base_sha256": "271ed9ae42e8b5a7f0bd483708829af452e7969db9324902e0dd8abef66e7469",
+      "low_bytes": 20773,
+      "high_bytes": 166526
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 56,
+      "base_sha256": "2ac4367a02b7721da1d818344476b4eccdcb2946d2091e6fcc805e73d8e9a54d",
+      "low_bytes": 20705,
+      "high_bytes": 166583
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 57,
+      "base_sha256": "c860b523ddd31a9f1e408de661ca7f0f5576042e22f509783986180ad258b049",
+      "low_bytes": 20807,
+      "high_bytes": 166594
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 58,
+      "base_sha256": "30fc7dce6146db4faaf71130f1cba84afabf6e94dd41bf1c9ad8b09d260f0d83",
+      "low_bytes": 20828,
+      "high_bytes": 166530
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 59,
+      "base_sha256": "0f422fab0fd033237631f954169aba095f4f8765991ad0eeab51e18f0c565296",
+      "low_bytes": 20716,
+      "high_bytes": 166551
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 60,
+      "base_sha256": "0d82c41db03133bf3ed6822528efe6ea547824761410080fa24b85e9e48719bd",
+      "low_bytes": 20771,
+      "high_bytes": 166665
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 61,
+      "base_sha256": "362ecec10904fff0ccf407b57aab7d4d278f92966251f9aabb1f8779d295831d",
+      "low_bytes": 20704,
+      "high_bytes": 166603
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 62,
+      "base_sha256": "16b3dbca41ff1f4b67ef2be1a76f1eaa708c2a08f07c03829ad810d170a67a3f",
+      "low_bytes": 20770,
+      "high_bytes": 166644
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 63,
+      "base_sha256": "cceee426e8bae4611bb0a1da09a47d64c9e363e80e6dfea8340f9a8ed0acc669",
+      "low_bytes": 20826,
+      "high_bytes": 166645
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 64,
+      "base_sha256": "dd104d8da1d08d36d509e6692243fc1a6bd38d26eb4fe4055356a8f466830024",
+      "low_bytes": 20826,
+      "high_bytes": 166652
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 65,
+      "base_sha256": "a70aaaa72520f0d3d41681fb1f7c56bb5d7e9b7fabfa0247de74168c15789e11",
+      "low_bytes": 20752,
+      "high_bytes": 166577
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 66,
+      "base_sha256": "92ad81118a9c18096f7425109df76887ae0ade642a62962cda59521ca21dd9f2",
+      "low_bytes": 20825,
+      "high_bytes": 166629
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 67,
+      "base_sha256": "1cf78ef6b20ae3070397b0b86359dacc7c38a0d255d9a8972fecb45f4f4763ab",
+      "low_bytes": 20719,
+      "high_bytes": 166650
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 68,
+      "base_sha256": "55038c135914d06bbaf2b87114f8a80dabb1616979f7373303c32fbe2a573e4e",
+      "low_bytes": 20788,
+      "high_bytes": 166580
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 69,
+      "base_sha256": "98f8865f6ab93fe9fc93618ed5b88b364c2fd50bcaaf81d004e5002c7cbe73ec",
+      "low_bytes": 20720,
+      "high_bytes": 166611
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 70,
+      "base_sha256": "7b3fcfe8261f0a2e67aa78b5f5c4e88edb38c381b61c5a5cbd44a87faafe1683",
+      "low_bytes": 20706,
+      "high_bytes": 166587
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 71,
+      "base_sha256": "733856081841d0962a9491975c132206223d261796469ecdf378d33a6d45a72a",
+      "low_bytes": 20769,
+      "high_bytes": 166617
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 72,
+      "base_sha256": "e0fb950c18c6bfbf175919695db33a342a074f6d5998b8bf50bfae93429b9980",
+      "low_bytes": 20705,
+      "high_bytes": 166583
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 73,
+      "base_sha256": "67eec487e641a001fa2cbc067662057c251d9608c66778b9314e028234923127",
+      "low_bytes": 20769,
+      "high_bytes": 166605
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 74,
+      "base_sha256": "fdb59b013d77238f3ca1b045f1f9e763fc5568d37be6b1b2ceefc74841fcfd0f",
+      "low_bytes": 20696,
+      "high_bytes": 166600
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 75,
+      "base_sha256": "59422f479956fbd277e97412ef3edcd92fbc54da65e521fd6763687a653d4664",
+      "low_bytes": 20796,
+      "high_bytes": 166634
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 76,
+      "base_sha256": "a514111116f0d75c4acfdb6a99e30dd15371a7ee59a4d919438a6730e5619a14",
+      "low_bytes": 20819,
+      "high_bytes": 166625
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 77,
+      "base_sha256": "22ac99beb0fe935ca6d53278698f4ad3a532240541732b7fbbe2f3019d075a03",
+      "low_bytes": 20725,
+      "high_bytes": 166619
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 78,
+      "base_sha256": "96f16de8c11f1c8f42b79afe14b7580a9f9dabc3239b7904d5dadf827153ed82",
+      "low_bytes": 20811,
+      "high_bytes": 166528
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 79,
+      "base_sha256": "c75dfe1bfd338fba9cfeb9bc8e31a7f9374d29b3d831e58377a913ecf75d66d6",
+      "low_bytes": 20806,
+      "high_bytes": 166607
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 80,
+      "base_sha256": "a0bc5481ea7a3c7cf97259569516bac0596f9318684d9f0254b6bbd1273e11a0",
+      "low_bytes": 20701,
+      "high_bytes": 166629
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 81,
+      "base_sha256": "5ccc94c83fcdf90cac71daa45f0cb39d737c9398f869d509bf0cd2215b39fe0f",
+      "low_bytes": 20831,
+      "high_bytes": 166641
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 82,
+      "base_sha256": "99df2ddf5fcf4bf421c7e79459ec745f99eb340ddbe4ff4dcdda8528a79a0354",
+      "low_bytes": 20822,
+      "high_bytes": 166634
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 83,
+      "base_sha256": "0f5361866b19e2cc4937b15fd542c18557eba20b672b7dd5e243e1ebb8486568",
+      "low_bytes": 20750,
+      "high_bytes": 166543
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 84,
+      "base_sha256": "58f0f3c856544485c101c7b9d32e95fb614b0af1e5c246d044894cc7ee32717e",
+      "low_bytes": 20710,
+      "high_bytes": 166619
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 85,
+      "base_sha256": "c703374794b0ff6b1182908af50767116e25e070888fb3a433694f1bf9112516",
+      "low_bytes": 20816,
+      "high_bytes": 166586
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 86,
+      "base_sha256": "a941b46754c0af5bd47bf08319c71a51fdc81b3a5ecb3bb6534c5ff2647b43be",
+      "low_bytes": 20821,
+      "high_bytes": 166594
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 87,
+      "base_sha256": "4647d3653c8efc5d1f7694383c6cc176d2b39f57d1687f3b8481d9772c9c5100",
+      "low_bytes": 20774,
+      "high_bytes": 166652
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 88,
+      "base_sha256": "5f3fae24461d861f4fd354e4f285d11da6eb467ea9aeab32c5017f03ce2e7ce7",
+      "low_bytes": 20734,
+      "high_bytes": 166568
+    },
+    {
+      "video": "DAVIS2017:dance-twirl",
+      "frame": 89,
+      "base_sha256": "5db3bf1de5f9d52e820a4e46dff1d2a706cd2c486f980e7f14dec6a5e085ef16",
+      "low_bytes": 20827,
+      "high_bytes": 166595
+    }
+  ]
+}

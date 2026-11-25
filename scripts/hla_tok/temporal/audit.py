@@ -25,7 +25,7 @@ def history(output: Path) -> None:
     new_pointers = _git("submodule", "status", "--recursive").splitlines()
     submodule = [line.split()[:2] for line in new_pointers] == [line.split()[:2] for line in before["submodules"]]
     stage_names = ["baseline_inputs", "calibration_inputs", "diagnostic_inputs", "matrix_inputs", "dynamic_inputs",
-                   "runtime_inputs"]
+                   "runtime_inputs", "runtime_inputs_native", "matched_support_inputs"]
     audits = {name: json_at(output / f"{name}.json") for name in stage_names if (output / f"{name}.json").exists()}
     baseline = json_at(output / "baseline_reproduction.json")["c0"]
     audits["c0_native_replay"] = baseline
