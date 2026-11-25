@@ -22,7 +22,7 @@ def summarize(path):
     for event in events:
         by_category[event.get("cat")].append(event)
     kernels = by_category["kernel"]
-    transfers = defaultdict(lambda: {"count": 0, "bytes": 0})
+    transfers: dict[str, dict[str, int]] = defaultdict(lambda: {"count": 0, "bytes": 0})
     for event in by_category["gpu_memcpy"]:
         row = transfers[event["name"]]
         row["count"] += 1

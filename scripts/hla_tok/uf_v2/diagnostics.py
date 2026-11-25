@@ -167,7 +167,8 @@ def main():
     scales = tuple(model.scales().tolist())
     banks = BatchRecords(scales, RULE), BatchRecords(scales, Segmentation(8, 8, ranked=False)), OracleRecords(scales, RULE)
     anchors = [load_anchor(path) for path in args.anchor]
-    rows, images = [], []
+    rows: list[dict] = []
+    images: list[dict] = []
     indices = (0, 1, 5, 11)
     for clip in plans["validation"]:
         native.reset()

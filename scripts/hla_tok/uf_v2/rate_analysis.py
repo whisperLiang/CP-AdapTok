@@ -13,7 +13,7 @@ from scipy.interpolate import PchipInterpolator
 from hla_tok.evaluation.io import write_csv, write_json
 from scripts.hla_tok.v2.protocol import csv_at
 
-TARGETS = {"global_psnr": (1, [25, 26, 28, 30]), "lpips": (-1, [0.45, 0.30, 0.28978]),
+TARGETS: dict[str, tuple[int, list[float]]] = {"global_psnr": (1, [25, 26, 28, 30]), "lpips": (-1, [0.45, 0.30, 0.28978]),
            "dists": (-1, [0.15, 0.20, 0.24])}
 BASELINE = "Original AdapTok"
 
@@ -24,7 +24,8 @@ def read(path: Path):
 
 def frontier(rows, metric):
     direction = TARGETS[metric][0]
-    points, best = [], float("-inf")
+    points: list[tuple[float, float]] = []
+    best = float("-inf")
     for row in sorted(rows, key=lambda item: (item["actual_mbps"], -direction * item[metric])):
         rate, quality = row["actual_mbps"], direction * row[metric]
         if rate > 0 and quality > best and (not points or rate > points[-1][1]):
@@ -72,6 +73,16 @@ def at_rate(rows, metric, rate):
     return float(np.interp(log(rate), np.log(rates), quality))
 
 
+def archive_target(metric, target, original):
+    # The named Original LPIPS target was rounded from its measured endpoint.
+    # Use the stored endpoint across all curves and keep the reported name.
+    if metric == "lpips" and target == 0.28978 and original:
+        endpoint = max(row["lpips"] for row in original)
+        if round(endpoint, 5) == target:
+            return endpoint
+    return target
+
+
 def compare(curves):
     equal, bd, penalties = [], [], []
     original = curves[BASELINE]
@@ -80,9 +91,10 @@ def compare(curves):
             points, reference = frontier(rows, metric), frontier(original, metric)
             span = common(points, reference, metric)
             for target in targets:
-                candidate = at_quality(points, metric, target)
-                original_rate = at_quality(reference, metric, target)
-                equal.append({"method": name, "metric": metric, "target": target,
+                evaluated_target = archive_target(metric, target, original)
+                candidate = at_quality(points, metric, evaluated_target)
+                original_rate = at_quality(reference, metric, evaluated_target)
+                equal.append({"method": name, "metric": metric, "target": target, "evaluated_target": evaluated_target,
                               "candidate_actual_mbps": candidate, "original_actual_mbps": original_rate,
                               "status": "PASS" if candidate is not None and original_rate is not None
                               else "OUT_OF_RANGE", "common_range": span["range"] if span else None})
@@ -103,7 +115,7 @@ def compare(curves):
 
 def adjacency(path):
     rows = csv_at(path)
-    groups = defaultdict(dict)
+    groups: dict[tuple[str, int], dict[float, dict]] = defaultdict(dict)
     for row in rows:
         if row["status"] == "PASS":
             groups[row["video"], int(row["index"])][float(row["budget_mbps"])] = row
@@ -118,7 +130,7 @@ def adjacency(path):
 
 
 def violations(rows):
-    groups = defaultdict(list)
+    groups: dict[tuple[int, int, str], list[dict]] = defaultdict(list)
     for row in rows:
         groups[(row["low"], row["high"], "all")].append(row)
         groups[(row["low"], row["high"], row["video"])].append(row)
@@ -148,7 +160,19 @@ def consolidated(results):
         "D1 / 2000": "d1/seed1-step2000-validation",
         "D1 / static": "d1/seed1-step2000-static",
         "D1 / perceptual": "d1/seed1-step2000-perceptual",
+        "D1 / fixed": "d1/seed1-step2000-fixed",
+        "D1 / Seed 2": "d1/seed2-step2000-static",
+        "D1 / joint 4000": "d1/joint-seed1-step4000-validation",
+        "D1 / joint 6000": "d1/joint-seed1-step6000-validation",
+        "D1 / joint 8000": "d1/joint-seed1-step8000-validation",
+        "D1 / joint static": "d1/joint-seed1-final-static",
+        "D1 / formal static": "d1/formal-seed1-final-static",
+        "D1 / formal E0": "d1/formal-seed1-final-e0",
+
     }
+    for path in sorted((results / "d1").glob("formal-seed*-step*-validation")):
+        stage = path.name.split("-")
+        fresh[f"D1 / {stage[1]} {stage[2][4:]}"] = str(path.relative_to(results))
     measured = {}
     for name, location in fresh.items():
         path = results / location / "summary.json"
