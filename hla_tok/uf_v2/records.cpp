@@ -242,7 +242,6 @@ static void read_raw(std::string_view payload, int8_t* values, int count) {
 }
 
 using Entry = std::tuple<double, int, int>;
-using Record = std::tuple<int, int, int, std::string>;
 
 static std::vector<Entry> order_records(const double* scores, const uint8_t* active, int groups, bool ranked) {
     std::vector<Entry> result;
@@ -300,20 +299,6 @@ public:
             pack_batches(layout, values.data(), cdfs.data(), order, cap, fallback, bytes, ends);
         }
         return py::make_tuple(py::bytes(bytes), ends);
-    }
-
-    int restore(const Layout& layout, const std::vector<Record>& records, Array<int16_t>& canvas) const {
-        check_canvas(layout, canvas);
-        std::vector<Packet> packets;
-        packets.reserve(records.size());
-        for (const auto& [group, level, mode, payload] : records) {
-            if (group < 0 || group >= static_cast<int>(layout.regions.size()) || level < 0 || level > 1
-                || mode < 0 || mode >= 256 || (mode & 127) >= static_cast<int>(tables.size()))
-                throw std::invalid_argument("invalid record group, level or table");
-            packets.push_back({group, level, mode, payload});
-        }
-        py::gil_scoped_release release;
-        return restore_packets(layout, packets, canvas.mutable_data());
     }
 
     std::tuple<int, int, int> receive(const Layout& layout, const py::buffer& input, Array<int16_t>& canvas,
@@ -486,6 +471,5 @@ PYBIND11_MODULE(hla_uf_v2_records, module) {
     py::class_<Records>(module, "Records")
         .def(py::init<const std::vector<std::vector<int>>&>())
         .def("pack", &Records::pack)
-        .def("restore", &Records::restore)
         .def("receive", &Records::receive);
 }

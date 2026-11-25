@@ -48,3 +48,4 @@ if [[ -n "${UF_NATIVE_BUILD_CACHE:-}" ]]; then
 else
   (cd "$src"; "$python_bin" setup.py build_ext --build-lib "$probe/site")
 fi
+ln -sfn "$(basename "$probe")/site" "$root/.build/uf_v2/native"

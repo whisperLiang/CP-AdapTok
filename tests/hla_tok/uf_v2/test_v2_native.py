@@ -62,6 +62,7 @@ def test_native_d1_caches_current_features_and_never_updates_reference_with_disp
         shown = display.render()
         assert torch.isfinite(shown).all()
         assert not torch.equal(shown, zero)
+        assert torch.equal(zero, display.base)
         if i:
             after = enhanced_endpoint.video.proxy.uf_state_snapshot()
             expected = base_endpoint.video.proxy.uf_state_snapshot()
@@ -107,3 +108,31 @@ def test_native_future_change_loss_recovery_and_family_isolation(codec_and_frame
     other = Unified(codec.assets, codec.model, (0, 0), codec.refiner, base_cap=4096, family_id="lite")
     with pytest.raises(WireError, match="model"):
         ingest(other, other.new_decoder(), left[3], left[3].base_end)
+
+
+@torch.no_grad()
+def test_adjusted_native_cdf_and_base_match_after_proxy_reload(codec_and_frames):
+    import numpy as np
+
+    from hla_tok.uf_v2.native_weights import NativeAdjustments
+
+    codec, images = codec_and_frames
+    delta = NativeAdjustments().cuda()
+    delta.encoder_logits.fill_(0.05)
+    delta.hyper_logits[4] = 1.0
+    delta.reconstruction_logits.fill_(0.03)
+    adjusted = Unified(codec.assets, codec.model, (0, 8), codec.refiner, adjustments=delta)
+    endpoint = adjusted.new_decoder()
+    candidate_table = adjusted.native.video.bit_estimator_z.get_cdf_info()
+    decoder_table = endpoint.video.bit_estimator_z.get_cdf_info()
+    for expected, observed in zip(candidate_table, decoder_table, strict=True):
+        np.testing.assert_array_equal(observed, expected)
+    assert not np.array_equal(candidate_table[0], codec.native.video.bit_estimator_z.get_cdf_info()[0])
+    for i, rgb in enumerate(images[:3]):
+        encoded = adjusted.encode(rgb, i, i == 0, reset=i == 1)
+        receiver = ingest(adjusted, endpoint, encoded.family, BUDGETS[5])
+        assert adjusted.matches(encoded, endpoint, receiver)
+        assert torch.isfinite(receiver.render()).all()
+        if i == 1:
+            with pytest.raises(WireError, match="DESYNC"):
+                ingest(adjusted, adjusted.new_decoder(), encoded.family, BUDGETS[5])

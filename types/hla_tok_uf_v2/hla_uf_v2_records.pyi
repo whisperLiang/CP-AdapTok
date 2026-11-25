@@ -15,9 +15,6 @@ class Records:
         self, layout: Layout, values: NDArray[np.int8], scores: NDArray[np.float64],
         active: NDArray[np.uint8], cdfs: NDArray[np.uint8], ranked: bool, cap: int, fallback: bool,
     ) -> tuple[bytes, list[int]]: ...
-    def restore(
-        self, layout: Layout, records: Sequence[tuple[int, int, int, bytes]], canvas: NDArray[np.int16],
-    ) -> int: ...
     def receive(
         self, layout: Layout, buffer: bytearray, canvas: NDArray[np.int16], levels: NDArray[np.uint8],
         bands: int, raw: bool,

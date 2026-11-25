@@ -28,6 +28,7 @@ from hla_tok.uf.wire import (
     PrefixFamily,
     WireError,
     pack_base,
+    pack_enhancement,
 )
 
 if TYPE_CHECKING:
@@ -49,7 +50,7 @@ class BatchRecords:
                  sensitivity: dict[bool, NDArray[np.float64]] | None = None):
         from hla_uf_v2_records import Records
 
-        self.scales = np.asarray(scales, dtype=np.float64)[:, None]
+        self.scales: NDArray[np.float64] = np.asarray(scales, dtype=np.float64)[:, None]
         self.segmentation = segmentation
         self.static, self.raw, self.sensitivity = tables, raw, sensitivity
         legacy = EntropyTables.from_scales(scales)
@@ -113,10 +114,10 @@ class BatchCanvas:
     def __init__(self, bank: BatchRecords, shape: tuple[int, int, int], intra: bool):
         self.bank, self.intra = bank, intra
         self.geometry = bank.geometry(shape)
-        self.symbols = np.zeros(shape, dtype=np.int16)
+        self.symbols: NDArray[np.int16] = np.zeros(shape, dtype=np.int16)
         self.records = 0
         self.symbol_count = 0
-        self.levels = np.zeros(len(self.geometry.groups), dtype=np.uint8)
+        self.levels: NDArray[np.uint8] = np.zeros(len(self.geometry.groups), dtype=np.uint8)
 
     def decode(self, buffer: bytearray) -> tuple[int, int]:
         bands = self.geometry.groups.grid[0] if self.bank.static else 0
@@ -126,27 +127,11 @@ class BatchCanvas:
         self.records += records
         return consumed, records
 
-    def _descriptor(self, record: Enhancement) -> tuple[int, int, int, bytes]:
-        if record.group >= len(self.geometry.groups):
-            raise WireError("group id outside latent layout")
-        index = record.cdf & (RAW_FLAG - 1)
-        if record.cdf & RAW_FLAG and not self.bank.raw:
-            raise WireError("raw mode is unavailable in this family")
-        if self.bank.static:
-            bands = self.geometry.groups.grid[0]
-            valid = index == record.level * bands + record.group % bands
-        else:
-            valid = index // len(MULTIPLIERS) == record.level
-        if not valid:
-            raise WireError("CDF does not match enhancement record")
-        return record.group, record.level, record.cdf, record.payload
-
     def apply_batch(self, records: Sequence[Enhancement]) -> None:
-        if records:
-            descriptors = [self._descriptor(record) for record in records]
-            count = self.bank.banks[self.intra].restore(self.geometry.native, descriptors, self.symbols)
-            self.symbol_count += count
-            self.records += len(records)
+        encoded = bytearray(b"".join(pack_enhancement(record) for record in records))
+        consumed, decoded = self.decode(encoded)
+        if consumed != len(encoded) or decoded != len(records):
+            raise WireError("batch did not contain complete enhancement records")
 
     def delta(self, step: Tensor) -> Tensor:
         return torch.from_numpy(self.symbols).to(step.device, dtype=torch.float32)[None] * (step * 0.5)
@@ -168,6 +153,7 @@ class BatchReceiver:
         self.received = 0
         self.frame: Display | None = None
         self.failed = False
+        self.closed = False
 
     @property
     def base(self) -> Tensor | None:
@@ -183,6 +169,8 @@ class BatchReceiver:
 
     def feed(self, chunk: bytes) -> None:
         self._check()
+        if self.closed:
+            raise WireError("access unit already closed by transport")
         self.received += len(chunk)
         if self.received > MAX_FRAME_BYTES:
             self.failed = True
@@ -235,6 +223,11 @@ class BatchReceiver:
         self._check()
         if self.frame is None or self.buffer:
             raise WireError("incomplete application frame")
+
+    def close(self) -> None:
+        """Signal the end of an access unit after all complete records are decoded."""
+        self.finish()
+        self.closed = True
 
     def render(self) -> Tensor:
         self._check()

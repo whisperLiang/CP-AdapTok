@@ -48,3 +48,14 @@ def test_raw_fallback_includes_metadata_and_round_trips(tmp_path):
     canvas = raw.canvas(tuple(source.shape[1:]), True)
     canvas.apply_batch([record])
     np.testing.assert_array_equal(canvas.symbols, source[0].astype(np.int16) * 2)
+
+
+def test_integer_table_exact_largest_remainder():
+    counts = np.array([[1, 3, 5, 11, 8, 2] * 3], dtype=np.int64)
+    weight = [int(v) + 1 for v in counts[0]]
+    expected = [(PRECISION - ALPHABET) * v // sum(weight) + 1 for v in weight]
+    remain = [(PRECISION - ALPHABET) * v % sum(weight) for v in weight]
+    order = sorted(range(ALPHABET), key=lambda index: (-remain[index], index))
+    for index in order[:PRECISION - sum(expected)]:
+        expected[index] += 1
+    np.testing.assert_array_equal(np.diff(integer_cdf(counts))[0], expected)

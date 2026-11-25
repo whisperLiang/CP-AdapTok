@@ -6,7 +6,7 @@ import torch
 
 from hla_tok.uf.anchor import Segmentation
 from hla_tok.uf.base import BaseFrame, FrameInfo
-from hla_tok.uf.wire import Enhancement, WireError, pack_enhancement
+from hla_tok.uf.wire import FrameParser, WireError, pack_base
 from hla_tok.uf_v2.records import BatchReceiver, BatchRecords, Display
 
 
@@ -62,7 +62,8 @@ def test_bad_record_does_not_allow_render(stream, fault):
     elif fault == "duplicate":
         first *= 2
     elif fault == "dependency":
-        first = pack_enhancement(Enhancement(0, 1, 4, b"1234"))
+        candidates = [family.raw[start:stop] for start, stop in zip(family.ends, family.ends[1:])]
+        first = next(packet for packet in candidates if packet[4] == 1)
     else:
         first[6:8] = b"\x00\x00"
     receiver.feed(first)
@@ -80,10 +81,60 @@ def test_incomplete_base_and_model_tag(stream):
     assert receiver.decode_available() == 0
     with pytest.raises(WireError):
         receiver.finish()
-    invalid = bytearray(family.raw[:family.base_end])
-    invalid[4] ^= 1
+    original = FrameParser(b"testwire")
+    original.feed(family.raw[:family.base_end])
+    [base] = original.available()
     receiver = make()
-    receiver.feed(invalid)
+    receiver.feed(pack_base(base, b"wrongfam"))
     with pytest.raises(WireError):
         receiver.decode_available()
     assert not calls
+
+
+def test_exact_receiver_cap_is_accepted(monkeypatch, stream):
+    import hla_tok.uf_v2.records as module
+
+    family, make, _ = stream
+    monkeypatch.setattr(module, "MAX_FRAME_BYTES", len(family.raw))
+    receiver = make()
+    receiver.feed(family.raw)
+    assert receiver.decode_available() == len(family.ends)
+    receiver.finish()
+    with pytest.raises(WireError, match="length"):
+        receiver.feed(b"x")
+
+
+def test_finish_refuses_truncated_enhancement_and_zero_path_does_not_run_head(stream):
+    family, make, _ = stream
+    receiver = make()
+    receiver.feed(family.raw[:family.ends[1] - 1])
+    assert receiver.decode_available() == 1
+    assert receiver.render() is receiver.base
+    with pytest.raises(WireError, match="incomplete"):
+        receiver.finish()
+    receiver.feed(family.raw[family.ends[1] - 1:family.ends[1]])
+    assert receiver.decode_available() == 1
+    assert receiver.render() is not receiver.base
+    receiver.finish()
+
+
+def test_base_cannot_commit_twice(stream):
+    family, make, calls = stream
+    receiver = make()
+    receiver.feed(family.raw[:family.base_end])
+    assert receiver.decode_available() == 1
+    with pytest.raises(WireError, match="already committed"):
+        receiver.commit_base(calls[0])
+    assert len(calls) == 1
+
+
+def test_transport_close_keeps_final_render_and_does_not_allow_append(stream):
+    family, make, _ = stream
+    receiver = make()
+    receiver.feed(family.raw)
+    assert receiver.decode_available() == len(family.ends)
+    expected = receiver.render()
+    receiver.close()
+    assert torch.equal(expected, receiver.render())
+    with pytest.raises(WireError, match="closed by transport"):
+        receiver.feed(b"more")

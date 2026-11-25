@@ -76,7 +76,9 @@ class SharedDecoder(NativeDecoder):
     def shared_base(self, frame: BaseFrame) -> SharedBase:
         rgb = self.decode(frame)
         assert self.last_net is not None
-        scale, feature, *context = self.last_net.proxy.ufv2_display_snapshot()
+        with torch.cuda.stream(self.stream):
+            scale, feature, *context = self.last_net.proxy.ufv2_display_snapshot()
+        torch.cuda.current_stream().wait_stream(self.stream)
         return SharedBase(frame.info, rgb, scale, feature, context[0] if context else None)
 
     def display(self, base: SharedBase, model: SharedRefinement, delta: Tensor) -> Tensor:

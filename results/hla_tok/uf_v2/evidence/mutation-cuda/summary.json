@@ -1,0 +1,31 @@
+{
+  "cases": [
+    {
+      "name": "use next frame context for an earlier display",
+      "module": "hla_tok.uf_v2.decoder",
+      "original": "base.context)",
+      "replacement": "(None if intra else self._video().proxy.ufv2_display_snapshot()[2]))",
+      "test": "test_v2_native.py::test_native_d1_caches_current_features_and_never_updates_reference_with_display",
+      "gpu": true,
+      "result": "KILLED",
+      "returncode": 1,
+      "log": "case-15.log"
+    },
+    {
+      "name": "replace Base with enhancement output",
+      "module": "hla_tok.uf_v2.decoder",
+      "original": "return restore_rgb(pixels.float(), *base.info.dimensions)",
+      "replacement": "return base.rgb.copy_(restore_rgb(pixels.float(), *base.info.dimensions))",
+      "test": "test_v2_native.py::test_native_d1_caches_current_features_and_never_updates_reference_with_display",
+      "gpu": true,
+      "result": "KILLED",
+      "returncode": 1,
+      "log": "case-16.log"
+    }
+  ],
+  "counts": {
+    "KILLED": 2,
+    "SURVIVED": 0,
+    "ERROR": 0
+  }
+}

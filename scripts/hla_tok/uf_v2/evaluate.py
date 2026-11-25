@@ -57,8 +57,8 @@ def load_codec(options, assets):
     if options.sensitivity:
         data = json.loads(options.sensitivity.read_text())
         weights = {True: np.asarray(data["I"]), False: np.asarray(data["P"])}
-    bank = BatchRecords(tuple(model.scales().tolist()), segmentation, table, options.raw, weights)
-    bank = bank if table or weights else None
+    bank = BatchRecords(tuple(model.scales().tolist()), segmentation, table, options.raw, weights) if (
+        table or weights) else None
     if method != "d1":
         return Unified(assets, model, QPS, bank=bank, segmentation=segmentation)
     refiner = SharedRefinement().cuda().half().to(memory_format=torch.channels_last).eval()
