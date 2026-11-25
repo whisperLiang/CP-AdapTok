@@ -1,0 +1,20 @@
+--- a/dmc_ld_proxy.cpp
++++ b/dmc_ld_proxy.cpp
+@@ -705,6 +705,7 @@
+     m_H8 = H8;
+     m_W8 = W8;
+     clear_cuda_graph();
++    g_tensor_pool.clear(0, 0);
+     g_tensor_pool.clear(H8, W8);
+ 
+     auto options = frame.options().memory_format(at::MemoryFormat::ChannelsLast);
+--- a/dmci_proxy.cpp
++++ b/dmci_proxy.cpp
+@@ -713,6 +713,7 @@
+     m_H8 = H8;
+     m_W8 = W8;
+     clear_cuda_graph();
++    g_tensor_pool.clear(0, 0);
+     g_tensor_pool.clear(H8, W8);
+ 
+     auto options = at::TensorOptions().device(m_device).dtype(m_dtype).memory_format(
