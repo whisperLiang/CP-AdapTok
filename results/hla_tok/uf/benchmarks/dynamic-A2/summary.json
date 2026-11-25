@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "frame_count": 189,
+  "lengths": [
+    99,
+    90
+  ],
+  "base_max_bytes": {
+    "I": 7566,
+    "P": 4452
+  },
+  "base_exceeded": 0,
+  "packet_exceeded": 0,
+  "state_mismatches": 0,
+  "read_counts": {
+    "train": 0,
+    "validation": 189,
+    "test": 0
+  },
+  "native_128_256": "NOT_AVAILABLE",
+  "codec_only": true
+}

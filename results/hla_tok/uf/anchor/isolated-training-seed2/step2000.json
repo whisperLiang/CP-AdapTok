@@ -1,0 +1,108 @@
+{
+  "start_step": 500,
+  "optimizer_steps": 2000,
+  "new_steps": 1500,
+  "training_seconds": 63.02055985099287,
+  "checkpoint": "checkpoints/hla_tok/uf/isolated/anchor-seed2-step2000.pt",
+  "checkpoint_sha256": "300011f00178b5a12bd100d25e156264895946c2d9f912f469939a9a04db0f20",
+  "read_counts": {
+    "train": 256,
+    "validation": 0,
+    "test": 0
+  },
+  "configuration": {
+    "seed": 2,
+    "base_qp": [
+      0,
+      8
+    ],
+    "optimizer": "AdamW",
+    "lr": 0.0001,
+    "weight_decay": 0.0001,
+    "unroll": {
+      "A1": 4,
+      "A2": 8
+    },
+    "crop": 256,
+    "gradient_accumulation": 2,
+    "budget_weights": [
+      0.35,
+      0.3,
+      0.2,
+      0.15
+    ],
+    "rate_weights": [
+      0.00035,
+      0.00028,
+      0.00018,
+      0.0001
+    ],
+    "lpips_weight": 0.03,
+    "base_weight": 0.1,
+    "monotonic_weight": 0.1,
+    "crop_plan": [
+      {
+        "video": "DAVIS2017:rhino",
+        "start": 23,
+        "frames": 32,
+        "top": 56,
+        "left": 184
+      },
+      {
+        "video": "DAVIS2017:flamingo",
+        "start": 24,
+        "frames": 32,
+        "top": 80,
+        "left": 736
+      },
+      {
+        "video": "DAVIS2017:bmx-bumps",
+        "start": 0,
+        "frames": 32,
+        "top": 168,
+        "left": 1504
+      },
+      {
+        "video": "DAVIS2017:planes-water",
+        "start": 5,
+        "frames": 32,
+        "top": 824,
+        "left": 1368
+      },
+      {
+        "video": "DAVIS2017:paragliding",
+        "start": 31,
+        "frames": 32,
+        "top": 312,
+        "left": 512
+      },
+      {
+        "video": "DAVIS2017:lucia",
+        "start": 11,
+        "frames": 32,
+        "top": 616,
+        "left": 432
+      },
+      {
+        "video": "DAVIS2017:koala",
+        "start": 23,
+        "frames": 32,
+        "top": 616,
+        "left": 72
+      },
+      {
+        "video": "DAVIS2017:dancing",
+        "start": 5,
+        "frames": 32,
+        "top": 592,
+        "left": 1392
+      }
+    ],
+    "upstream": {
+      "commit": "cbdae87a5445114cdc7f48816da63ea80bdeac40",
+      "intra_sha256": "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302",
+      "ld_sha256": "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799"
+    }
+  },
+  "best_of_test": false
+}
