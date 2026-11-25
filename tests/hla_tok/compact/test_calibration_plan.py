@@ -27,3 +27,17 @@ def test_small_cohort_uses_every_legal_frame():
     plan = train_plan({str(i): source(i) for i in range(3)}, config)
     assert len(plan["fit"]) + len(plan["holdout"]) == 15
     assert plan["fit"] and plan["holdout"]
+
+
+def test_train_plan_reads_only_train_catalog(monkeypatch):
+    from scripts.hla_tok.compact import inputs
+
+    class Reader:
+        hashes = {"train": "mock-sha"}
+
+        def catalog(self, split):
+            assert split == "train"
+            return {"a": source(0), "b": source(1)}
+
+    monkeypatch.setattr(inputs, "frozen_data", lambda: (Reader(), {}, {}))
+    assert inputs.frozen_plan()["split"] == "train"

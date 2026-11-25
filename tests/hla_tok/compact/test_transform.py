@@ -55,3 +55,25 @@ def test_reversed_order_keeps_partial_native_rank():
     assert ranks[:120].eq(120).all()
     assert ranks[120:120 + REGIONS].eq(119).all()
     assert ranks[-REGIONS:].eq(0).all()
+
+
+@pytest.mark.gpu
+def test_static_integer_payload_fingerprint_agrees_across_devices():
+    from hla_tok.compression.packing import pack_signed
+
+    values = torch.tensor([[[-9., -.5], [0.5, 7.5], [2., -3.]]])
+    ranks = torch.tensor([0, 1, 0])
+    scales = torch.tensor([[1., .5], [.25, 2.]])
+    scalar = StaticScalar(scales, bits=6)
+    cpu = scalar.encode(values, ranks)
+    gpu = scalar.cuda().encode(values.cuda(), ranks.cuda()).cpu()
+    assert torch.equal(cpu, gpu)
+    assert pack_signed(cpu[0], 6) == pack_signed(gpu[0], 6)
+
+
+def test_transform_rejects_inconsistent_frame_or_rank_ids():
+    t = CompactTransform()
+    with pytest.raises(ValueError, match="nonempty vectors"):
+        t.encode(torch.zeros(2, 32), torch.arange(2))
+    with pytest.raises(ValueError, match="int64 Rank ID"):
+        t.encode(torch.zeros(1, 2, 32), torch.arange(2, dtype=torch.int32))

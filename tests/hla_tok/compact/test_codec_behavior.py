@@ -77,3 +77,15 @@ def test_bf16_wire_is_widened_for_fp32_receiver():
     z = codec.lift(codec.dequantize(coded))
     assert z.dtype == torch.float32
     assert torch.equal(z[..., :4], chosen.float())
+
+
+def test_profile_rejects_incompatible_dimensions_scales_and_hashes():
+    tr = CompactTransform.from_pca(torch.zeros(1, 32), torch.eye(32)[None, :, :4])
+    order = RankOrder.reversed()
+    with pytest.raises(ValueError, match="match registered Profile"):
+        CompactCodec(Profile.RAW32, tr, None, order, "aa" * 32, "bb" * 32, "cpu")
+    wrong_width = StaticScalar(torch.ones(1, 3), 4)
+    with pytest.raises(ValueError, match="Rank table"):
+        CompactCodec(Profile.Q4_4, tr, wrong_width, order, "aa" * 32, "bb" * 32, "cpu")
+    with pytest.raises(ValueError, match="SHA-256"):
+        CompactCodec(Profile.PCA4, tr, None, order, "aa" * 31, "bb" * 32, "cpu")
