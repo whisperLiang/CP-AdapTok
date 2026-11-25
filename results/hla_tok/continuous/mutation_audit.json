@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "mutation": "wrong_rank_order",
+      "killed": true
+    },
+    {
+      "mutation": "wrong_token_offset",
+      "killed": true
+    },
+    {
+      "mutation": "header_dropped_from_total_bpp",
+      "killed": true
+    },
+    {
+      "mutation": "bf16_sent_as_float32",
+      "killed": true
+    },
+    {
+      "mutation": "resend_prefix_in_extension",
+      "killed": true
+    },
+    {
+      "mutation": "read_future_before_output",
+      "killed": true
+    },
+    {
+      "mutation": "budget_history_bleeds_into_next_frame",
+      "killed": true
+    },
+    {
+      "mutation": "unreceived_tail_enters_recovery",
+      "killed": true
+    },
+    {
+      "mutation": "changed_model_weights_ignored",
+      "killed": true
+    },
+    {
+      "mutation": "read_sealed_alias",
+      "killed": true
+    }
+  ]
+}

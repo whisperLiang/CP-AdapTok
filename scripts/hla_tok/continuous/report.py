@@ -265,7 +265,7 @@ def _final(output: Path, order: str, progressive: dict, wire, comparison, bands,
            "证据支持 Scenario B 的静态重排收益和 Scenario D 的浮点表示带宽瓶颈。"
            f"下一步主线是在 C0 + {order} 上做连续表示传输效率实验，保持同一验证队列、逐帧时间口径和"
            "真实总码流预算。当前结果无需启动 Nested Tail Dropout 来获得严格前缀或渐进重建。"
-           "是否进一步训练取决于可行码率范围内的画质收益。V3 的 Fixed13 失败记录继续有效。",
+           "是否进一步训练取决于可行码率范围内的画质收益。现阶段沿用连续路线即可，V3 的 Fixed13 失败记录继续有效。",
            " [七张图及来源](figures/README.md) · [原生 PNG 与裁块](samples/README.md)"
            " · [工程验收](engineering_audit.json) · [复现入口](../../../docs/hla_tok/continuous/README.md)")
 

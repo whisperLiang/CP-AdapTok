@@ -9,10 +9,12 @@
 - 发送端 query memory 按帧创建，R2 的 Rank KV history 禁用。接收端只有合成权重，跨帧状态为空。时间块为一帧，未来前视为 0 帧，首帧可以在其输入可用后处理。
 - C0 固定训练预算按裁剪几何缩放。原生目标只有 K16320，裁块阶段的较短序列来自较少区域。C0 没有同几何预算采样、Tail Dropout 或 Nested Dropout。V3 的预算采样位于未执行的 Phase D。
 
-## 架构基础和待实测项
+## 可复用的架构基础
 
 - 原生连续调用可接受各整数预算，甚至允许超过本轮上限。本轮合法范围明确限制为 1 至 16320。原 V3 八档为 4096、6144、8192、12288、16320、24512、32640、65280，后三档超过本轮上限，因此使用冻结的备用八档。
 - 现有 R2 查询块用当前帧同一组 Key/Value。不同预算计算重叠的固定尺寸查询块，具有连续前缀的实现基础。原生预算相关路径和公开一次编码截断路径分别实测。
+## Phase 0 时已实现、尚待实测的能力
+
 - FP32 和 CUDA BF16 autocast 可走既有连续调用。FP16 作为独立传输格式转换，恢复端在冻结的 FP32 或 BF16 计算上下文执行。纯 FP16 模型计算未纳入本轮。
 - 任意 Rank 重排需要将原始 Rank embedding 随接收向量恢复。最大预算末尾包含不完整 Rank，排序必须保留该 Rank 的 120 个原始区域及每区域向量身份，以免引入原本不在 K16320 中的向量。
 
@@ -21,3 +23,5 @@
 V3 没有连续浮点字节协议、带完整性校验的增强分段或预共享的静态 Rank 排序。自然连续前缀只需已知几何、Rank-major 与模型权重。新增传输接口以真实浮点字节和独立的合成端验证这些契约。
 
 源码见 [codec.py](../../../hla_tok/models/codec.py)、[local.py](../../../hla_tok/models/local.py)、[spatial.py](../../../hla_tok/models/spatial.py)、[geometry.py](../../../hla_tok/progressive/geometry.py) 和 [V3 训练入口](../../../scripts/hla_tok/v3/training.py)。
+
+Phase 1 与 Phase 2 实测已完成。 [连续前缀](prefix_audit.json) · [字节往返与分段](wire_roundtrip_audit.json)

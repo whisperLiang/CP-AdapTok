@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "per_run": {
+    "reproduction": {
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    "native_run": {
+      "train": 0,
+      "validation": 183,
+      "test": 0
+    },
+    "ordered_run": {
+      "train": 12,
+      "validation": 213,
+      "test": 0
+    },
+    "dynamic_run": {
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    "wire-checks_run": {
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    "wire_run": {
+      "train": 0,
+      "validation": 523,
+      "test": 0
+    },
+    "benchmark_run": {
+      "train": 0,
+      "validation": 9,
+      "test": 0
+    },
+    "samples_run": {
+      "train": 0,
+      "validation": 1,
+      "test": 0
+    }
+  },
+  "pixel_reads": {
+    "train": 12,
+    "validation": 1286,
+    "test": 0
+  },
+  "test_pixel_reads": 0,
+  "training_steps": 0,
+  "state_dict_sha256": "18c1000f74a0730ae7382731ff89746f8654d0455d6a5669ac896755f1b4190e",
+  "checkpoint_sha256": "40beff895ff615c1f73cae18f9c025557ff2d35516a04f51be916a77a2e16249"
+}

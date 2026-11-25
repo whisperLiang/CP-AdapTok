@@ -1,0 +1,62 @@
+{
+  "status": "PASS",
+  "backend": "Matplotlib",
+  "visual_review": "Seven complete figures inspected after PDF export",
+  "figure_source": "PASS with raster-only submission notices",
+  "raster_previews_dpi": 300,
+  "vector_outputs": [
+    "PDF",
+    "SVG"
+  ],
+  "figures": [
+    {
+      "name": "01_budget_distortion",
+      "pdf_sha256": "d3502b806ce7238865baa2bbfa4335ba8d52c60ed8ca7cc8801a8a963176a0a9",
+      "alignment": "PASS",
+      "collision": "PASS",
+      "minimum_glyph_pt": 6.0
+    },
+    {
+      "name": "02_rate_distortion",
+      "pdf_sha256": "55d54824ce46fa82f01d974713337495f9746c14c67a692001a0970681bbe5fb",
+      "alignment": "PASS",
+      "collision": "PASS",
+      "minimum_glyph_pt": 6.0
+    },
+    {
+      "name": "03_rank_importance",
+      "pdf_sha256": "2750af056301a5ea6da35ceb4fd621dc1d59eb4a5ce6a654a09ce7fe8ae73368",
+      "alignment": "PASS",
+      "collision": "PASS",
+      "minimum_glyph_pt": 6.0
+    },
+    {
+      "name": "04_temporal_stability",
+      "pdf_sha256": "22d4f3d6a812de6ecc43ae5ddca523084232b9a2dcaba4bb453c807f98dea8a2",
+      "alignment": "PASS",
+      "collision": "PASS",
+      "minimum_glyph_pt": 6.0
+    },
+    {
+      "name": "05_dynamic_budget",
+      "pdf_sha256": "4234bf82d0bffe930292871101be664f8504270204802004a6a7672a09b0d716",
+      "alignment": "PASS",
+      "collision": "PASS",
+      "minimum_glyph_pt": 6.0
+    },
+    {
+      "name": "06_latency_breakdown",
+      "pdf_sha256": "c931afabe17a36bbdf737310d39219b8df947a631285bcfa569b5665acbbaf30",
+      "alignment": "PASS",
+      "collision": "PASS",
+      "minimum_glyph_pt": 6.0
+    },
+    {
+      "name": "07_bandwidth_quality",
+      "pdf_sha256": "900e024aafb1548c79eebf7196f15da5b82297817e39b3b08243116b0f794e17",
+      "alignment": "PASS",
+      "collision": "PASS",
+      "minimum_glyph_pt": 6.0
+    }
+  ]
+}
