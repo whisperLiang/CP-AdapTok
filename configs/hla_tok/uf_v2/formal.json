@@ -1,0 +1,14 @@
+{
+  "initial_step": 8000,
+  "maximum_step": 20000,
+  "evaluation_interval": 2000,
+  "unroll": 16,
+  "low_rate_composite": "mean of 10*RGB MSE + 0.075*LPIPS + 0.001*actual bpp at hard 5 and 10 Mbps",
+  "continuation": "validate every 2,000 steps; stop after two validation nodes without a better low-rate composite or clear high-rate regression",
+  "fixed_schedule": "P2 optimizer learning rates and all learned modules; no loss retuning or validation calibration",
+  "major_high_rate_regression_vs_best": {
+    "global_psnr_drop_db": 0.35,
+    "lpips_rise": 0.015
+  },
+  "seed2_gate": "complete Seed 1 engineering closure, formal gain at both 5/10 Mbps over step 8000, and no formal stop condition"
+}
