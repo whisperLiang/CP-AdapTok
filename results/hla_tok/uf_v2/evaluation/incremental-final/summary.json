@@ -1,0 +1,51 @@
+{
+  "frames": [
+    {
+      "index": 0,
+      "base_available_ms": 73.05354600248393,
+      "total_one_record_ingest_ms": 78.08380799542647,
+      "total_multi_render_ms": 21.372839008108713,
+      "one_render_ms": 377.4539250007365,
+      "incremental_exact": true
+    },
+    {
+      "index": 1,
+      "base_available_ms": 56.9041120033944,
+      "total_one_record_ingest_ms": 44.271160251810215,
+      "total_multi_render_ms": 16.793236980447546,
+      "one_render_ms": 199.7337289940333,
+      "incremental_exact": true
+    },
+    {
+      "index": 2,
+      "base_available_ms": 4.262215996277519,
+      "total_one_record_ingest_ms": 49.05485498602502,
+      "total_multi_render_ms": 16.099694999866188,
+      "one_render_ms": 3.9951649960130453,
+      "incremental_exact": true
+    },
+    {
+      "index": 3,
+      "base_available_ms": 4.310071002691984,
+      "total_one_record_ingest_ms": 49.51595325837843,
+      "total_multi_render_ms": 16.095431012217887,
+      "one_render_ms": 4.02895400475245,
+      "incremental_exact": true
+    }
+  ],
+  "read_counts": {
+    "train": 0,
+    "validation": 4,
+    "test": 0
+  },
+  "one_record_ingest": {
+    "ms_mean": 0.011715849630993272,
+    "ms_max": 0.2450969914207235,
+    "ms_p50": 0.010908013791777194,
+    "ms_p95": 0.01860839838627726,
+    "ms_p99": 0.032629400375298746
+  },
+  "records": 18857,
+  "model_tag": "ccfa256b73616e2f",
+  "note": "record ingest combines wire parser, entropy decoding and integer canvas update"
+}

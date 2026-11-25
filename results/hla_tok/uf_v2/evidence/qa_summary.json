@@ -1,0 +1,29 @@
+{
+  "cpu_repo": {
+    "passed": 462,
+    "failed": 0,
+    "skipped": 1,
+    "deselected": 30
+  },
+  "uf_cuda": {
+    "passed": 75,
+    "failed": 0,
+    "skipped": 0,
+    "deselected": 0
+  },
+  "targeted_mutations": {
+    "cpu": 16,
+    "cuda": 3,
+    "survived": 0,
+    "errors": 0
+  },
+  "ub_mutator_sampled": 6,
+  "ub_mutator_killed": 6,
+  "crapper_scope": "hla_tok/uf_v2 Python runtime",
+  "crapper_max": 7.0,
+  "dryer_similarity_threshold": 0.8,
+  "dryer_runtime_matches": 0,
+  "dryer_experiment_scripts_matches": 1,
+  "ruff": "All checks passed!",
+  "mypy": "Success: no issues found in 32 source files"
+}

@@ -1,0 +1,36 @@
+{
+  "rows": [
+    {
+      "sample": "soapbox-1.huf",
+      "sha256": "7bb4a3406f61cf175e6b3170c97b8effa782f15e5d18df5405f169b9f57f9c0c",
+      "records_per_repeat": 3321,
+      "passes": 5,
+      "warmup_passes": 1,
+      "integer_update": {
+        "ns_mean": 764.4629328515507,
+        "ns_max": 29074.0,
+        "ns_p50": 582.0,
+        "ns_p95": 986.0,
+        "ns_p99": 4099.3199999998105
+      },
+      "integer_exact": true
+    },
+    {
+      "sample": "dance-twirl-1.huf",
+      "sha256": "024ceca38f1953614b6b64ee49c1a3a65d0165da128fa6ece5c85d64bed6296c",
+      "records_per_repeat": 3571,
+      "passes": 5,
+      "warmup_passes": 1,
+      "integer_update": {
+        "ns_mean": 666.7856062727527,
+        "ns_max": 25388.0,
+        "ns_p50": 572.0,
+        "ns_p95": 897.0,
+        "ns_p99": 1115.4599999999991
+      },
+      "integer_exact": true
+    }
+  ],
+  "scope": "native integer add only, steady_clock instrumentation in C++",
+  "checkpoint_sha256": "13ce52d63722d5fa01d0f780a5113ba36630921d55dd9738c55f4584ec3334d9"
+}

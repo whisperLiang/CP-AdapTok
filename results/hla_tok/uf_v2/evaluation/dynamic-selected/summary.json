@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "frames": 189,
+  "state_mismatches": 0,
+  "read_counts": {
+    "train": 0,
+    "validation": 189,
+    "test": 0
+  },
+  "independent_i_recoveries": 2,
+  "rejected_p": 38,
+  "long_lengths": [
+    99,
+    90
+  ],
+  "long_128_256": "NOT_AVAILABLE",
+  "max_base": 7566,
+  "model_tag": "162c847efecd70c7",
+  "checkpoint_sha256": "13ce52d63722d5fa01d0f780a5113ba36630921d55dd9738c55f4584ec3334d9",
+  "encoder_and_decoder_native_z_sha256": "ac8c462dfaaf5be03c707da1340edae8cb30c6e81bdc02b2dface002b8d7a943",
+  "enhancement_probability_sha256": "002e45addb7f58456e2472c5998eae0b595ba97bc3d58948a93c7a941bcc2ee2"
+}

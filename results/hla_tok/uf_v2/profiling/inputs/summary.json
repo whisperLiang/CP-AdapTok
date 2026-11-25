@@ -1,0 +1,33 @@
+{
+  "frames": 174,
+  "read_counts": {
+    "train": 0,
+    "validation": 174,
+    "test": 0
+  },
+  "network": "NOT_RUN",
+  "scope": "Validation CPU input, operating system cache unspecified; audited read includes path and SHA-256",
+  "statistics": {
+    "audited_read_ms": {
+      "audited_read_ms_mean": 0.8341088392918973,
+      "audited_read_ms_max": 0.9706720011308789,
+      "audited_read_ms_p50": 0.838025996927172,
+      "audited_read_ms_p95": 0.9028762964589987,
+      "audited_read_ms_p99": 0.9354077876196247
+    },
+    "image_decode_and_wrap_ms": {
+      "image_decode_and_wrap_ms_mean": 10.604588529489796,
+      "image_decode_and_wrap_ms_max": 23.472597007639706,
+      "image_decode_and_wrap_ms_p50": 10.711998998885974,
+      "image_decode_and_wrap_ms_p95": 11.364228999445913,
+      "image_decode_and_wrap_ms_p99": 12.583694801578563
+    },
+    "total_ms": {
+      "total_ms_mean": 11.438697368781693,
+      "total_ms_max": 24.327582999831066,
+      "total_ms_p50": 11.5442339956644,
+      "total_ms_p95": 12.243399245926412,
+      "total_ms_p99": 13.44448802628907
+    }
+  }
+}
