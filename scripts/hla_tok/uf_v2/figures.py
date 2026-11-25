@@ -258,7 +258,7 @@ def images_and_diagnostics(figs, root, selected):
 
 
 def training(figs, root):
-    fig, ax = plt.subplots(figsize=(FIG_WIDTH_IN, 3.25), layout="constrained")
+    fig, (ax, validation) = plt.subplots(1, 2, figsize=(FIG_WIDTH_IN, 3.25), layout="constrained")
     for seed, linestyle in ((1, "-"), (2, "--")):
         p1 = root / f"training/seed{seed}"
         logs = [p1 / "steps-1-500.csv", p1 / "steps-501-2000.csv"]
@@ -272,8 +272,20 @@ def training(figs, root):
                 ax.plot([int(group[-1]["step"]) for group in bins],
                         [np.mean([float(r["lpips"]) for r in group]) for group in bins],
                         c=PALETTE[col], ls=linestyle, label=f"{label}, seed {seed}", lw=1)
+        validation_rows = {}
+        for stage in ("joint", "formal"):
+            trace = read(root / f"training/{stage}-seed{seed}/continuation.json")
+            if trace:
+                for row in trace["records"]:
+                    step = int(Path(row["path"]).parent.name.split("-step")[-1].split("-")[0])
+                    validation_rows[step] = row["low_rd"]
+        nodes = sorted(validation_rows)
+        validation.plot(nodes, [validation_rows[n] for n in nodes], c=PALETTE[seed - 1],
+                        ls=linestyle, label=f"Seed {seed}", marker="o", ms=3, lw=1)
     ax.set(xlabel="Cumulative optimizer steps", ylabel="Train crop LPIPS-Alex")
     ax.legend(fontsize=7)
+    validation.set(xlabel="Cumulative optimizer steps", ylabel="Validation low-rate RD objective")
+    validation.legend(fontsize=7)
     figs.save(fig, "fig17_training")
 
 

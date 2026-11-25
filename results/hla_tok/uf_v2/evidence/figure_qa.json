@@ -1,0 +1,149 @@
+{
+  "formats": [
+    "PDF",
+    "SVG",
+    "TIFF 600 dpi"
+  ],
+  "figures": [
+    {
+      "name": "fig01_architecture",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 6.7,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig02_decoders",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 6.7,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig03_d0_hotspots",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 8.0,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig04_anchor_latency",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 7.0,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig05_d0_d1_speed",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 6.7,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig06_psnr_rd",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 6.75,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig07_lpips_rd",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 6.75,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig08_dists_rd",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 6.75,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig09_equal_psnr",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 5.6,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig10_equal_lpips",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 5.6,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig11_base_bytes",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 6.75,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig12_cc_s_savings",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 7.0,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig13_application_byte_breakdown",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 6.75,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig14_perceptual_diagnostics",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 8.0,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig15_native_comparison",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 7.5,
+      "panel_alignment": "PASS"
+    },
+    {
+      "name": "fig16_native_crop",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 7.5,
+      "panel_alignment": "PASS"
+    },
+    {
+      "name": "fig17_training",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 7.0,
+      "panel_alignment": "PASS"
+    },
+    {
+      "name": "fig18_perceptual_ordering",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 7.0,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig19_causal_reference",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 7.0,
+      "panel_alignment": "NOT APPLICABLE"
+    },
+    {
+      "name": "fig20_quality_rate_throughput",
+      "collision": "PASS",
+      "pdf_text": "PASS",
+      "minimum_font_pt": 5.6,
+      "panel_alignment": "NOT APPLICABLE"
+    }
+  ]
+}

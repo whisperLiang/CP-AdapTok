@@ -4,6 +4,6 @@ P1a/P1b 用冻结官方 I/P CUDA Proxy 从 Train 拟合窗生成独立真实 Bas
 
 P2 使用 8 帧窗口，在每个节点使用该 checkpoint 一次生成新一轮原生闭环训练缓存。节点内缓存原生参考和物理选择且停止历史梯度。对固定选择使用直通量化，率代理含官方 Gaussian y、可微 z 概率、Laplace 增强与记录头/终止密度。训练的 z 概率使用 FP32。P 的编码末端和共享重建末端使用有界通道增益，部署折入原生卷积。原生 P 超先验在固定 QP 做有界概率偏置并重建 CDF。Base 固定有条件概率和全空间支持。Intra 只训练 D1 与增强量化，默认 Base 等价仍按各候选自己的原生权重核验。
 
-联合训练使用 RGB MSE、LPIPS、可微率、Base loss 和软单调项。Q9 的高频替换证据支持增加固定 0.05 的 luma 高频权重。独立 L0/L1 等预算训练对照为 `NOT_RUN`，因此联合结果不能单独归因于高频项。统计记录估计 bpp 和缓存真实 bpp。逐阶段配置见 [P1](../../../configs/hla_tok/uf_v2/pilot.json)、[P2](../../../configs/hla_tok/uf_v2/joint.json) 和 [P3](../../../configs/hla_tok/uf_v2/formal.json)。
+联合训练使用 RGB MSE、LPIPS、可微率、Base loss 和软单调项。Q9 的结果支持检验固定 0.05 的 luma 高频权重。从同一 Seed 1 的 2,000 步 checkpoint 训练两组各 2,000 步的控制实验，只改变高频系数。完整 174 帧验证中，L1 在四档的 PSNR 增加 0.005–0.010 dB，LPIPS 增加 0.0005–0.0009，DISTS 有升有降。独立 L0 耗时 0.02610 GPU h。正式两种子沿用锁定的 L1。统计记录估计 bpp 和缓存真实 bpp。逐阶段配置见 [P1](../../../configs/hla_tok/uf_v2/pilot.json)、[P2](../../../configs/hla_tok/uf_v2/joint.json) 和 [P3](../../../configs/hla_tok/uf_v2/formal.json)。
 
 P3 从累计 8,000 步的节点续训，保持联合损失与优化器组，16 帧窗口。每 2,000 步用同一 174 帧验证实际应用前缀。比较 5/10 Mbps 的平均综合值 `10 × MSE + 0.075 × LPIPS + 0.001 × 物理 bpp`。出现两个连续节点未改善或发生预定义严重的高档回退时停止扩大训练。学习率为固定值，checkpoint 包含运行 RNG 和下个全局数据位置，不需要单独 scheduler。P1→P2 因新增优化器参数组重新创建 AdamW，后续 P2→P3 以及节点间恢复组内优化器状态。

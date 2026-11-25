@@ -125,6 +125,10 @@ PYTHONPATH=".build/uf_v2/records-profile:$PYTHONPATH" "$PYTHON_BIN" -m scripts.h
 报告图从已核对的实际 CSV、JSON 和本地原生样例生成。附带可编辑 PDF、SVG 和 600 dpi TIFF。重新生成时模型名称取自 `final_verdict.json`。
 
 ```bash
+BEST=$("$PYTHON_BIN" -c 'import json,sys; print(json.load(open(sys.argv[1]))["checkpoint"]["checkpoint"])' "$OUT/final_verdict.json")
+"$PYTHON_BIN" -m scripts.hla_tok.uf_v2.evaluate --method d1 \
+  --weights "$UF_OFFICIAL_WEIGHTS" --checkpoint "$BEST" --repetitions 3 \
+  --quality 0 0.5 1 1.395 2 3 3.594 4 5 10 20 40 --output "$REPLAY/selected"
 SELECTED=$("$PYTHON_BIN" -c 'import json,sys; print(json.load(open(sys.argv[1]))["selected_research_endpoint"])' "$OUT/final_verdict.json")
 FIGURE_SKILL=/home/whisperliang/.codex/skills/nature-figure/scripts
 PYTHONPATH="$FIGURE_SKILL:$PYTHONPATH" "$PYTHON_BIN" -m scripts.hla_tok.uf_v2.figures \

@@ -56,7 +56,8 @@ def comparable_equal(records, name, metric, target):
     match = next(row for row in records if row["method"] == name and row["metric"] == metric and row["target"] == target)
     if match["status"] != "PASS":
         return match["status"], match
-    return ("PASS" if match["candidate_actual_mbps"] < match["original_actual_mbps"] else "FAIL"), match
+    status = "PASS" if match["candidate_actual_mbps"] < match["original_actual_mbps"] else "FAIL"
+    return status, match | {"interpolation_status": match["status"], "status": status}
 
 
 def audit_reads(out):
@@ -107,11 +108,12 @@ def native_gates(closure, append, stream_tag, required_base):
     }
 
 
-def training_status(out):
-    ledger = read(out / "training/optimizer_ledger.json")["optimizer_updates"]
-    if ledger == {"1": 20000, "2": 20000}:
-        return "PASS", ledger
-    return "PARTIAL_PASS", ledger
+def trained_endpoint(out, digest):
+    ledger = read(out / "training/optimizer_ledger.json")
+    model = next(row for row in ledger["nodes"] if row["sha256"] == digest)
+    updates = ledger["optimizer_updates"]
+    status = "PASS" if updates == {"1": 20000, "2": 20000} else "PARTIAL_PASS"
+    return status, updates, {key: model[key] for key in ("seed", "cumulative", "checkpoint", "sha256")}
 
 
 def assemble(out, selected_name):
@@ -130,7 +132,7 @@ def assemble(out, selected_name):
     states = read(out / "evaluation" / closure / "summary.json")
     increments = read(out / "evaluation" / append / "summary.json")
     native = native_gates(states, increments, stream, protocol["base"]["bytes_max"])
-    training, updates = training_status(out)
+    training, updates, checkpoint = trained_endpoint(out, selected["checkpoint_sha256"])
     dims = {
         "BASELINE": "PARTIAL_PASS", "PROFILING": "PARTIAL_PASS", "ANCHOR_FAST": "PASS", "D1_DECODER": "PASS",
         "UNIFIED_LATENT": "PASS", "STATIC_ENTROPY": "PASS", "BASE_LITE": lite["status"],
@@ -148,7 +150,7 @@ def assemble(out, selected_name):
                "dimensions": dims, "selected_research_endpoint": selected_name,
                "selected_model": selected, "validation_candidates": candidates, "frozen_thresholds": cutoffs,
                "observed_at_least_25db_under_3_594": reaches, "original_reference": BASELINE,
-               "optimizer_updates": updates, "model_tag": stream, "sample_folder": samples,
+               "optimizer_updates": updates, "checkpoint": checkpoint, "model_tag": stream, "sample_folder": samples,
                "causal_evidence": closure, "incremental_evidence": append,
                "test_pixel_reads": 0, "deployable_model": None,
                "test_reason": ("requires a formal freeze" if admitted else "Validation admission targets remain unmet")}

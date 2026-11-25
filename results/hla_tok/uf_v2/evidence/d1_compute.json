@@ -1,0 +1,463 @@
+{
+  "scope": "addition of D1 refinement Conv2d operators for one padded native display",
+  "notes": "subtracts no native cost; activation, shuffle, memory copies and official RGB head excluded",
+  "parameters_both_branches": 114112,
+  "branches": {
+    "I": {
+      "output_shape": [
+        1,
+        384,
+        136,
+        240
+      ],
+      "parameters": 65248,
+      "conv_macs": 1312911360,
+      "layers": {
+        "up": {
+          "input_shape": [
+            1,
+            256,
+            68,
+            120
+          ],
+          "output_shape": [
+            1,
+            128,
+            68,
+            120
+          ],
+          "groups": 1,
+          "conv_macs": 267386880
+        },
+        "base": {
+          "input_shape": [
+            1,
+            384,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 401080320
+        },
+        "local.0.dc.0": {
+          "input_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 16711680
+        },
+        "local.0.dc.2": {
+          "input_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "groups": 16,
+          "conv_macs": 4700160
+        },
+        "local.0.dc.3": {
+          "input_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 16711680
+        },
+        "local.0.ffn.0": {
+          "input_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            64,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 66846720
+        },
+        "local.0.ffn.2": {
+          "input_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 16711680
+        },
+        "local.1.dc.0": {
+          "input_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 16711680
+        },
+        "local.1.dc.2": {
+          "input_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "groups": 16,
+          "conv_macs": 4700160
+        },
+        "local.1.dc.3": {
+          "input_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 16711680
+        },
+        "local.1.ffn.0": {
+          "input_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            64,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 66846720
+        },
+        "local.1.ffn.2": {
+          "input_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 16711680
+        },
+        "out": {
+          "input_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            384,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 401080320
+        }
+      }
+    },
+    "P": {
+      "output_shape": [
+        1,
+        256,
+        136,
+        240
+      ],
+      "parameters": 48864,
+      "conv_macs": 1179217920,
+      "layers": {
+        "up": {
+          "input_shape": [
+            1,
+            128,
+            68,
+            120
+          ],
+          "output_shape": [
+            1,
+            128,
+            68,
+            120
+          ],
+          "groups": 1,
+          "conv_macs": 133693440
+        },
+        "base": {
+          "input_shape": [
+            1,
+            256,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 267386880
+        },
+        "context": {
+          "input_shape": [
+            1,
+            256,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 267386880
+        },
+        "local.0.dc.0": {
+          "input_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 16711680
+        },
+        "local.0.dc.2": {
+          "input_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "groups": 16,
+          "conv_macs": 4700160
+        },
+        "local.0.dc.3": {
+          "input_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 16711680
+        },
+        "local.0.ffn.0": {
+          "input_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            64,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 66846720
+        },
+        "local.0.ffn.2": {
+          "input_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 16711680
+        },
+        "local.1.dc.0": {
+          "input_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 16711680
+        },
+        "local.1.dc.2": {
+          "input_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "groups": 16,
+          "conv_macs": 4700160
+        },
+        "local.1.dc.3": {
+          "input_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 16711680
+        },
+        "local.1.ffn.0": {
+          "input_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            64,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 66846720
+        },
+        "local.1.ffn.2": {
+          "input_shape": [
+            1,
+            16,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 16711680
+        },
+        "out": {
+          "input_shape": [
+            1,
+            32,
+            136,
+            240
+          ],
+          "output_shape": [
+            1,
+            256,
+            136,
+            240
+          ],
+          "groups": 1,
+          "conv_macs": 267386880
+        }
+      }
+    }
+  }
+}

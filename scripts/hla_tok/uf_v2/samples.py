@@ -8,6 +8,7 @@ import torch
 from hla_tok.evaluation.io import write_json
 from hla_tok.uf.anchor import BUDGETS
 from hla_tok.uf.official import OfficialAssets, sha256_file
+from hla_tok.uf_v2.runtime import Unified
 from scripts.hla_tok.temporal.inputs import source_frame
 from scripts.hla_tok.uf.inputs import inputs
 from scripts.hla_tok.uf_v2.diagnostics import save_image
@@ -51,6 +52,7 @@ def main():
             "application_bytes": stats["bytes"], "bitstream_sha256": sha256_file(path),
             "bitstream": path.name, "full_family_bytes": len(family.raw),
             "checkpoint_sha256": sha256_file(options.checkpoint) if options.checkpoint else None,
+            "model_tag": codec.tag.hex() if isinstance(codec, Unified) else codec.codec.tag.hex(),
         })
     write_json(args.output / "manifest.json", {
         "video": clip.video, "index": 5, "cap_bytes": BUDGETS[5], "crop_xyxy": [730, 390, 1114, 606],

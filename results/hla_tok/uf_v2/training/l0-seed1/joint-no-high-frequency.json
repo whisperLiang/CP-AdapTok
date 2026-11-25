@@ -1,0 +1,44 @@
+{
+  "stage": "P2 bounded native adaptation",
+  "nodes": [
+    4000,
+    6000,
+    8000
+  ],
+  "unroll": 8,
+  "budgets": [
+    0,
+    5,
+    10,
+    20,
+    40
+  ],
+  "crop_hw": [
+    128,
+    192
+  ],
+  "guard_latent_cells": 4,
+  "learning_rates": {
+    "refiner": 0.0001,
+    "quantizer": 0.0001,
+    "native": 1e-05
+  },
+  "weight_decay": 0.01,
+  "clip_grad": 1.0,
+  "weights": {
+    "rgb_mse": 10.0,
+    "lpips": 0.075,
+    "high_frequency": 0.0,
+    "rate": 0.001,
+    "base": 0.1,
+    "monotonic": 0.25
+  },
+  "rate_proxy": "Gaussian native y, fitted official z estimator, Laplace enhancement and actual segment metadata density",
+  "entropy": "E0 conditional rANS at each real recache node",
+  "gradient_boundary": "detached exact native Base-only closed loop at each node, fixed selection within a node",
+  "first_100_updates": "refiner and quantizer",
+  "next_500_updates": "also unfreeze reparameterized P encoder tail",
+  "remaining_updates": "also unfreeze P hyperprior bias and final shared reconstruction gain",
+  "expansion": "stop after two successive full Validation nodes without low-rate gain or on severe regression",
+  "comparison": "evaluate each node on the identical frozen 174-frame cohort and all four hard caps"
+}

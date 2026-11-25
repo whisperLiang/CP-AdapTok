@@ -1,0 +1,559 @@
+{
+  "status": "NOT_RUN",
+  "test_pixel_reads": 0,
+  "runs": [
+    {
+      "file": "anchor_fast/fp32/summary.json",
+      "train": 0,
+      "validation": 522,
+      "test": 0
+    },
+    {
+      "file": "anchor_fast/on-demand/summary.json",
+      "train": 0,
+      "validation": 102,
+      "test": 0
+    },
+    {
+      "file": "anchor_fast/validation/summary.json",
+      "train": 0,
+      "validation": 696,
+      "test": 0
+    },
+    {
+      "file": "d1/d0-matched-smoke/summary.json",
+      "train": 0,
+      "validation": 136,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed1-final-e0/summary.json",
+      "train": 0,
+      "validation": 696,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed1-final-e0-fast/summary.json",
+      "train": 0,
+      "validation": 696,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed1-final-static/summary.json",
+      "train": 0,
+      "validation": 696,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed1-final-static-fast/summary.json",
+      "train": 0,
+      "validation": 696,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed1-step10000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed1-step12000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed1-step14000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed1-step16000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed1-step18000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed1-step20000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed2-final-e0/summary.json",
+      "train": 0,
+      "validation": 696,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed2-step10000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed2-step12000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed2-step14000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed2-step16000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed2-step18000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/formal-seed2-step20000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/joint-seed1-final-static/summary.json",
+      "train": 0,
+      "validation": 696,
+      "test": 0
+    },
+    {
+      "file": "d1/joint-seed1-step4000-validation/summary.json",
+      "train": 0,
+      "validation": 696,
+      "test": 0
+    },
+    {
+      "file": "d1/joint-seed1-step6000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/joint-seed1-step8000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/joint-seed2-step4000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/joint-seed2-step6000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/joint-seed2-step8000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/l0-seed1-step4000-validation/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/on-demand/summary.json",
+      "train": 0,
+      "validation": 102,
+      "test": 0
+    },
+    {
+      "file": "d1/seed1-step2000-fixed/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/seed1-step2000-fixed-static/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/seed1-step2000-perceptual/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/seed1-step2000-static/summary.json",
+      "train": 0,
+      "validation": 696,
+      "test": 0
+    },
+    {
+      "file": "d1/seed1-step2000-validation/summary.json",
+      "train": 0,
+      "validation": 696,
+      "test": 0
+    },
+    {
+      "file": "d1/seed1-step500-calibration/summary.json",
+      "train": 128,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "d1/seed1-step500-validation/summary.json",
+      "train": 0,
+      "validation": 696,
+      "test": 0
+    },
+    {
+      "file": "d1/seed2-step2000-static/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "d1/selected-on-demand/summary.json",
+      "train": 0,
+      "validation": 102,
+      "test": 0
+    },
+    {
+      "file": "d1/selected-on-demand-seed2/summary.json",
+      "train": 0,
+      "validation": 102,
+      "test": 0
+    },
+    {
+      "file": "d1/zero-parallel/summary.json",
+      "train": 0,
+      "validation": 102,
+      "test": 0
+    },
+    {
+      "file": "d1/zero-smoke/summary.json",
+      "train": 0,
+      "validation": 136,
+      "test": 0
+    },
+    {
+      "file": "diagnostics/base-calibration/summary.json",
+      "train": 264,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "diagnostics/base-lite-extended/summary.json",
+      "train": 640,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "diagnostics/base-validation/summary.json",
+      "train": 0,
+      "validation": 356,
+      "test": 0
+    },
+    {
+      "file": "diagnostics/perceptual/summary.json",
+      "train": 0,
+      "validation": 36,
+      "test": 0
+    },
+    {
+      "file": "entropy/summary.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "evaluation/dynamic-final/summary.json",
+      "train": 0,
+      "validation": 189,
+      "test": 0
+    },
+    {
+      "file": "evaluation/dynamic-seed1/summary.json",
+      "train": 0,
+      "validation": 189,
+      "test": 0
+    },
+    {
+      "file": "evaluation/dynamic-seed2-final/summary.json",
+      "train": 0,
+      "validation": 189,
+      "test": 0
+    },
+    {
+      "file": "evaluation/dynamic-selected/summary.json",
+      "train": 0,
+      "validation": 189,
+      "test": 0
+    },
+    {
+      "file": "evaluation/dynamic-static/summary.json",
+      "train": 0,
+      "validation": 189,
+      "test": 0
+    },
+    {
+      "file": "evaluation/incremental-final/summary.json",
+      "train": 0,
+      "validation": 4,
+      "test": 0
+    },
+    {
+      "file": "evaluation/incremental-seed2-final/summary.json",
+      "train": 0,
+      "validation": 4,
+      "test": 0
+    },
+    {
+      "file": "evaluation/incremental-selected/summary.json",
+      "train": 0,
+      "validation": 4,
+      "test": 0
+    },
+    {
+      "file": "evidence/full-parity.json",
+      "train": 0,
+      "validation": 68,
+      "test": 0
+    },
+    {
+      "file": "evidence/paired-d0-d1.json",
+      "train": 0,
+      "validation": 242,
+      "test": 0
+    },
+    {
+      "file": "evidence/short-parity.json",
+      "train": 0,
+      "validation": 10,
+      "test": 0
+    },
+    {
+      "file": "profiling/inputs/summary.json",
+      "train": 0,
+      "validation": 174,
+      "test": 0
+    },
+    {
+      "file": "profiling/legacy.json",
+      "train": 0,
+      "validation": 14,
+      "test": 0
+    },
+    {
+      "file": "samples/native/manifest.json",
+      "train": 0,
+      "validation": 6,
+      "test": 0
+    },
+    {
+      "file": "samples/native-final/manifest.json",
+      "train": 0,
+      "validation": 6,
+      "test": 0
+    },
+    {
+      "file": "samples/native-seed2-final/manifest.json",
+      "train": 0,
+      "validation": 6,
+      "test": 0
+    },
+    {
+      "file": "samples/native-selected/manifest.json",
+      "train": 0,
+      "validation": 6,
+      "test": 0
+    },
+    {
+      "file": "training/formal-seed1/step-10000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/formal-seed1/step-12000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/formal-seed1/step-14000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/formal-seed1/step-16000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/formal-seed1/step-18000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/formal-seed1/step-20000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/formal-seed2/step-10000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/formal-seed2/step-12000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/formal-seed2/step-14000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/formal-seed2/step-16000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/formal-seed2/step-18000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/formal-seed2/step-20000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/joint-seed1/step-4000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/joint-seed1/step-6000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/joint-seed1/step-8000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/joint-seed2/step-4000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/joint-seed2/step-6000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/joint-seed2/step-8000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/joint-smoke/step-2001.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/l0-seed1/step-4000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/seed1/step-1000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/seed1/step-1500.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/seed1/step-2000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/seed1/step-500.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/seed2/step-1000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/seed2/step-1500.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/seed2/step-2000.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    },
+    {
+      "file": "training/seed2/step-500.json",
+      "train": 256,
+      "validation": 0,
+      "test": 0
+    }
+  ],
+  "guard": "AuditedFrames denies Test pixel reads and colliding identities; metadata-only manifest hash"
+}
