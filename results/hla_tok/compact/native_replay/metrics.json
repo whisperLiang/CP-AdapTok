@@ -1,0 +1,24 @@
+[
+  {
+    "mode": "continuous",
+    "budget": 16320,
+    "matched_174": true,
+    "mse": 0.0006237553059210099,
+    "lpips": 0.0945722502281611,
+    "lpips_vgg": 0.19594348521753288,
+    "dists": 0.05878679471454401,
+    "ms-ssim": 0.976938781724579,
+    "boundary_mse": 0.0006675144220140679,
+    "interior_mse": 0.0006210643745801242,
+    "boundary_minus_interior_mse": 4.645004743394367e-05,
+    "frames": 174,
+    "global_psnr": 32.0498574706408,
+    "mean_frame_psnr": 33.00979877705906,
+    "boundary_psnr": 31.755393466922786,
+    "interior_psnr": 32.06863381987758,
+    "effective_rank": 6.112598611020494,
+    "stable_rank": 3.188567852151805,
+    "centered_variance": 0.9976185248500999,
+    "common_energy_fraction": 0.38408171873668145
+  }
+]

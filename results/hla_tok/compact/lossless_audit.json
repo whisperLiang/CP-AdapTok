@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "split": "train",
+  "independent_blocks": true,
+  "incremental_transmission": "only send new complete blocks; final partial block is legal",
+  "raw_rate_scope": "unframed BF16 reference",
+  "block_header_bytes": 12,
+  "test_pixel_reads": 0
+}

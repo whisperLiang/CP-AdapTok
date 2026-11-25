@@ -1,0 +1,12 @@
+........................................................................ [ 23%]
+.......................................................................s [ 46%]
+........................................................................ [ 69%]
+........................................................................ [ 92%]
+.........................                                                [100%]
+=============================== warnings summary ===============================
+tests/hla_tok/v3/test_native_validation_outputs.py::test_quantized_validation_reports_bytes_only_for_the_independent_receiver_path
+  /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/amp/autocast_mode.py:270: UserWarning: User provided device_type of 'cuda', but CUDA is not available. Disabling
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+312 passed, 1 skipped, 20 deselected, 1 warning in 58.58s

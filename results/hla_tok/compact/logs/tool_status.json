@@ -1,0 +1,7 @@
+{
+  "ruff": {"status": "PASS", "scope": "hla_tok, scripts/hla_tok, tests/hla_tok"},
+  "mypy": {"status": "PASS", "modules": 116},
+  "crapper": {"status": "PASS", "production_max_crap": 9.6, "threshold": 10.0, "source": "combined CPU and CUDA LCOV"},
+  "dryer": {"status": "PASS", "similarity_threshold": 0.8, "duplicate_candidates": 0, "scope": "new production modules"},
+  "mutator": {"status": "PASS", "killed": 1, "survived": 0, "scope": "INT6 packing site"}
+}
