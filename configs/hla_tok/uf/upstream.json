@@ -1,0 +1,24 @@
+{
+  "repository": "https://github.com/microsoft/DCVC.git",
+  "commit": "cbdae87a5445114cdc7f48816da63ea80bdeac40",
+  "frame_delay": 1,
+  "skip_threshold": 0,
+  "cutlass_tag": "v4.4.1",
+  "license": "MIT; individual source notices also apply",
+  "primary_share": "https://1drv.ms/f/c/2866592d5c55df8c/IgAalzb_985lQ79GkXyW2P5OASPpZHHcrcGWEVQxO-mQCVg?e=qyvMN6",
+  "backup_share": "https://1drv.ms/f/c/2866592d5c55df8c/EozfVVwtWWYggCitBAAAAAABbT4z2Z10fMXISnan72UtSA?e=BID7DA",
+  "weights": {
+    "intra": {
+      "filename": "cvpr2026_image.pth.tar",
+      "sha256": "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302",
+      "bytes": 168845375,
+      "upstream_quickxorhash": "djlEVMhDjexrJb/on44uFwIjRik="
+    },
+    "ld": {
+      "filename": "cvpr2026_video_ld.pth.tar",
+      "sha256": "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799",
+      "bytes": 38724071,
+      "upstream_quickxorhash": "JCP2tLHKkC9NEEacsZDf2wUjLmo="
+    }
+  }
+}
