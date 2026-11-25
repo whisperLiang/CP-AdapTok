@@ -1,0 +1,50 @@
+FF.                                                                      [100%]
+=================================== FAILURES ===================================
+_________ test_signed_words_have_canonical_wire_bytes[4-values0-\xf8p] _________
+
+bits = 4, values = [-8, -1, 0, 7], expected = b'\xf8p'
+
+    @pytest.mark.parametrize(
+        ("bits", "values", "expected"),
+        [(4, [-8, -1, 0, 7], b"\xf8\x70"),
+         (6, [-32, -1, 0, 31], b"\xe0\x0f\x7c"),
+         (8, [-128, -1, 0, 127], b"\x80\xff\x00\x7f")],
+    )
+    def test_signed_words_have_canonical_wire_bytes(bits, values, expected):
+        q = torch.tensor(values, dtype=torch.int8).repeat(2, 1)
+        payload = pack_signed(q, bits)
+        assert payload == expected * 2
+>       assert torch.equal(unpack_signed(payload, bits, len(values)), q)
+E       AssertionError: assert False
+E        +  where False = <built-in method equal of type object at 0x728e63bd6c20>(tensor([[ 0,  7, -8, -1],\n        [ 0,  7, -8, -1]], dtype=torch.int8), tensor([[-8, -1,  0,  7],\n        [-8, -1,  0,  7]], dtype=torch.int8))
+E        +    where <built-in method equal of type object at 0x728e63bd6c20> = torch.equal
+E        +    and   tensor([[ 0,  7, -8, -1],\n        [ 0,  7, -8, -1]], dtype=torch.int8) = unpack_signed(b'\xf8p\xf8p', 4, 4)
+E        +      where 4 = len([-8, -1, 0, 7])
+
+tests/hla_tok/compact/test_compact_wire.py:29: AssertionError
+_______ test_signed_words_have_canonical_wire_bytes[6-values1-\xe0\x0f|] _______
+
+bits = 6, values = [-32, -1, 0, 31], expected = b'\xe0\x0f|'
+
+    @pytest.mark.parametrize(
+        ("bits", "values", "expected"),
+        [(4, [-8, -1, 0, 7], b"\xf8\x70"),
+         (6, [-32, -1, 0, 31], b"\xe0\x0f\x7c"),
+         (8, [-128, -1, 0, 127], b"\x80\xff\x00\x7f")],
+    )
+    def test_signed_words_have_canonical_wire_bytes(bits, values, expected):
+        q = torch.tensor(values, dtype=torch.int8).repeat(2, 1)
+        payload = pack_signed(q, bits)
+        assert payload == expected * 2
+>       assert torch.equal(unpack_signed(payload, bits, len(values)), q)
+E       AssertionError: assert False
+E        +  where False = <built-in method equal of type object at 0x728e63bd6c20>(tensor([[  0,  31, -32,  -1],\n        [  0,  31, -32,  -1]], dtype=torch.int8), tensor([[-32,  -1,   0,  31],\n        [-32,  -1,   0,  31]], dtype=torch.int8))
+E        +    where <built-in method equal of type object at 0x728e63bd6c20> = torch.equal
+E        +    and   tensor([[  0,  31, -32,  -1],\n        [  0,  31, -32,  -1]], dtype=torch.int8) = unpack_signed(b'\xe0\x0f|\xe0\x0f|', 6, 4)
+E        +      where 4 = len([-32, -1, 0, 31])
+
+tests/hla_tok/compact/test_compact_wire.py:29: AssertionError
+=========================== short test summary info ============================
+FAILED tests/hla_tok/compact/test_compact_wire.py::test_signed_words_have_canonical_wire_bytes[4-values0-\xf8p]
+FAILED tests/hla_tok/compact/test_compact_wire.py::test_signed_words_have_canonical_wire_bytes[6-values1-\xe0\x0f|]
+2 failed, 1 passed in 1.31s

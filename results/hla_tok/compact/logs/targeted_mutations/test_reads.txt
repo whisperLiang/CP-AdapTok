@@ -1,0 +1,41 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________________ test_train_plan_reads_only_train_catalog ___________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x71c5e5f07e30>
+
+    def test_train_plan_reads_only_train_catalog(monkeypatch):
+        from scripts.hla_tok.compact import inputs
+    
+        class Reader:
+            hashes = {"train": "mock-sha"}
+    
+            def catalog(self, split):
+                assert split == "train"
+                return {"a": source(0), "b": source(1)}
+    
+        monkeypatch.setattr(inputs, "frozen_data", lambda: (Reader(), {}, {}))
+>       assert inputs.frozen_plan()["split"] == "train"
+               ^^^^^^^^^^^^^^^^^^^^
+
+tests/hla_tok/compact/test_calibration_plan.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/hla_tok/compact/inputs.py:62: in frozen_plan
+    return train_plan(reader.catalog("test"), config["calibration"]) | {
+                      ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_calibration_plan.test_train_plan_reads_only_train_catalog.<locals>.Reader object at 0x71c5e5f07bc0>
+split = 'test'
+
+    def catalog(self, split):
+>       assert split == "train"
+E       AssertionError: assert 'test' == 'train'
+E         
+E         - train
+E         + test
+
+tests/hla_tok/compact/test_calibration_plan.py:39: AssertionError
+=========================== short test summary info ============================
+FAILED tests/hla_tok/compact/test_calibration_plan.py::test_train_plan_reads_only_train_catalog
+1 failed in 1.46s

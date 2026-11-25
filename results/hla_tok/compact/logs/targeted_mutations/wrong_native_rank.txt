@@ -1,0 +1,24 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____ test_rank_aware_projection_uses_original_rank_for_an_arbitrary_subset _____
+
+    def test_rank_aware_projection_uses_original_rank_for_an_arbitrary_subset():
+        center = torch.tensor([[0.0] * 32, [16.0] * 32, [-8.0] * 32])
+        basis = torch.eye(32)[:, :4].repeat(3, 1, 1)
+        basis[2] *= -1
+        transform = CompactTransform.from_pca(center, basis)
+        ranks = torch.tensor([2, 0, 2, 1])
+        source = center[ranks][None].expand(2, -1, -1) + 2
+        encoded = transform.encode(source, ranks)
+        expected = torch.tensor([[-2.0] * 4, [2.0] * 4, [-2.0] * 4, [2.0] * 4])
+>       assert torch.equal(encoded, expected.expand(2, -1, -1))
+E       assert False
+E        +  where False = <built-in method equal of type object at 0x7e61be3d6c20>(tensor([[[ 2.,  2.,  2.,  2.],\n         [-2., -2., -2., -2.],\n         [ 2.,  2.,  2.,  2.],\n         [-2., -2., -2., ...  [[ 2.,  2.,  2.,  2.],\n         [-2., -2., -2., -2.],\n         [ 2.,  2.,  2.,  2.],\n         [-2., -2., -2., -2.]]]), tensor([[[-2., -2., -2., -2.],\n         [ 2.,  2.,  2.,  2.],\n         [-2., -2., -2., -2.],\n         [ 2.,  2.,  2., ...  [[-2., -2., -2., -2.],\n         [ 2.,  2.,  2.,  2.],\n         [-2., -2., -2., -2.],\n         [ 2.,  2.,  2.,  2.]]]))
+E        +    where <built-in method equal of type object at 0x7e61be3d6c20> = torch.equal
+E        +    and   tensor([[[-2., -2., -2., -2.],\n         [ 2.,  2.,  2.,  2.],\n         [-2., -2., -2., -2.],\n         [ 2.,  2.,  2., ...  [[-2., -2., -2., -2.],\n         [ 2.,  2.,  2.,  2.],\n         [-2., -2., -2., -2.],\n         [ 2.,  2.,  2.,  2.]]]) = <built-in method expand of Tensor object at 0x7e6076fed130>(2, -1, -1)
+E        +      where <built-in method expand of Tensor object at 0x7e6076fed130> = tensor([[-2., -2., -2., -2.],\n        [ 2.,  2.,  2.,  2.],\n        [-2., -2., -2., -2.],\n        [ 2.,  2.,  2.,  2.]]).expand
+
+tests/hla_tok/compact/test_transform.py:19: AssertionError
+=========================== short test summary info ============================
+FAILED tests/hla_tok/compact/test_transform.py::test_rank_aware_projection_uses_original_rank_for_an_arbitrary_subset
+1 failed in 1.32s

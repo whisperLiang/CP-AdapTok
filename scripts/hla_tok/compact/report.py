@@ -217,6 +217,9 @@ def conclusions(output: Path, selection: dict, training: dict, state: dict, targ
                 recommend: tuple, config: dict) -> str:
     global_row, ranks = _effective(output)
     projection = json_at(output / "projection_selection.json")
+    projection_names = {"rank": "Rank-aware PCA", "global": "Global PCA"}
+    selected_projections = "、".join(f"{d}D 选用 {projection_names[projection[str(d)]['projection']]}"
+                                    for d in (16, 8, 4))
     hardware = [r for r in csv_at(output / "throughput_benchmark.csv") if r["asset"] ==
                 (training["asset"] if training["adopted"] else selection["main_asset"])]
     quality = {r["target_mbps"]: r for r in csv_at(output / "bandwidth_baseline_comparison.csv")}
@@ -232,6 +235,10 @@ def conclusions(output: Path, selection: dict, training: dict, state: dict, targ
     pairs = "、".join(f"{r['higher_dimension']} 对 {r['lower_dimension']} 为 "
                      f"{float(r['higher_dimension_gain_global_psnr']):+.2f} dB" for r in ablations)
     eq = targets["equal_payload_gain_db"]
+    payload_rows = [row for row in csv_at(output / "compact_equal_caps.csv") if row["basis"] == "payload_only"]
+    if (output / "training_final_bandwidth.csv").is_file():
+        payload_rows.extend(row for row in csv_at(output / "training_final_bandwidth.csv") if row["basis"] == "payload_only")
+    best_payload = max(payload_rows, key=lambda row: float(row["global_psnr"]))
     compare = first8["original_status"] == "MEASURED"
     original_gain = float(first8["best_compact_global_psnr"]) - float(first8["original_global_psnr"]) if compare else None
     original = f"在 5 Mbps 共同上限下，最佳 Compact 与 Original 相差 {original_gain:+.2f} dB。" if compare else "5 Mbps 缺少可比点。"
@@ -254,12 +261,13 @@ def conclusions(output: Path, selection: dict, training: dict, state: dict, targ
         adapter_summary = f"轻量适配裁决为 {training['status']}。"
     return "\n".join([
         f"1. 全局熵有效维数 {float(global_row['effective_rank_entropy']):.2f}，各 Rank 中位数 {median(ranks):.2f}。",
-        f"2. 16D、8D、4D 的冻结排序分别选中 {projection['16']['projection']}、{projection['8']['projection']}、{projection['4']['projection']}。",
+        f"2. 冻结的逐指标排序得到 {selected_projections}。",
         "3. 纯投影损失和同 K 下额外标量损失分别见 [降维报告](projection_loss_report.md) 和 [分解表](projection_quantization_ablation.csv)。",
         f"4. K16320 的等字节高维低精度相对低维高精度结果为 {pairs}。感知差值和低预算见 [等比特消融](equal_bits_ablation.csv)。",
         f"5. 8D INT4 通过实际码流正确性。其联合画质{q84_status}冻结目标。实测 PSNR 为 {q84}。",
         "6. 5、10、20、40 Mbps 的三项质量见带宽表。",
-        f"7. 主 Profile 在 26,520 字节等 Payload 下与 C1 相差 {eq:+.2f} dB，联合门槛为 {state['Equal-Payload Rate–Distortion']}。",
+        f"7. 主 Profile 在 26,520 字节等 Payload 下与 C1 相差 {eq:+.2f} dB，联合门槛为 {state['Equal-Payload Rate–Distortion']}。"
+        f"全部实测紧凑候选中，最高 PSNR 点的三项质量为 {_metric_triplet(best_payload)}。",
         "8. " + original + "其余带宽点见表。Original 等待 16 帧输入，比较按窗口平均字节计。",
         "9. O1/O2 的 FP32 与 BF16 实测涵盖八档预算、50 个非预设长度及边界长度。见 [严格前缀](prefix_audit.json)。",
         f"10. 免训练主 Profile 在 {saturation if saturation is not None else '未达'} Mbps 档首次用尽 K16320。"

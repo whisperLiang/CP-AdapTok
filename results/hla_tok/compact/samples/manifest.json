@@ -1,0 +1,106 @@
+{
+  "video": "DAVIS2017:car-roundabout",
+  "frame": 32,
+  "images": [
+    {
+      "filename": "source.png",
+      "crop_filename": "source_crop.png",
+      "sha256": "1d5da2661c4415150302d2e52ed1d21f5ae0e37229343d059dadf0ad81b487c2",
+      "crop_sha256": "8ae5af6f6b4b174b687ae67b174af567616a050b468b4e1cc34a85685bf5401a",
+      "crop_xywh": [
+        768,
+        432,
+        384,
+        216
+      ]
+    },
+    {
+      "filename": "C0_BF16_K16320.png",
+      "crop_filename": "C0_BF16_K16320_crop.png",
+      "sha256": "a9b22ce1a073ef99f1dcd0ed8993b017fca0290054dc5693ae3ce9afce2159c8",
+      "crop_sha256": "ace68bf908442ec5582093ac85771e312ce9290f6ae57e62e5b440b32f555a17",
+      "crop_xywh": [
+        768,
+        432,
+        384,
+        216
+      ]
+    },
+    {
+      "filename": "C1_Fixed13.png",
+      "crop_filename": "C1_Fixed13_crop.png",
+      "sha256": "6a202bbd7b33e350476b04b9d8d34a8aa735a6f4051dc540be859470e34fcd8a",
+      "crop_sha256": "714f2a5e419b75709e939223c0164293dc40ba72940d1264f8971ec49ae00481",
+      "crop_xywh": [
+        768,
+        432,
+        384,
+        216
+      ]
+    },
+    {
+      "filename": "Original_AdapTok_K2048_per_tile.png",
+      "crop_filename": "Original_AdapTok_K2048_per_tile_crop.png",
+      "sha256": "358336540119ab43601c0bf4bcbac69194fbb7fb10c33707a4fb9bee1cadd6b9",
+      "crop_sha256": "e2a5d7097269bb0c1072a96aa7b0d391867a85ee15737e451d72f163ee68cf8a",
+      "crop_xywh": [
+        768,
+        432,
+        384,
+        216
+      ]
+    },
+    {
+      "filename": "C0_BF16_5Mbps.png",
+      "crop_filename": "C0_BF16_5Mbps_crop.png",
+      "sha256": "dfaed7f9f46edb4bc41926f25930ee42ff81ee142bf35a8cd420513fec3cacfb",
+      "crop_sha256": "68e633b371e77382534700a53830d3ef11d6992aec3f2131ec5049123018ba05",
+      "crop_xywh": [
+        768,
+        432,
+        384,
+        216
+      ]
+    },
+    {
+      "filename": "Compact_5Mbps.png",
+      "crop_filename": "Compact_5Mbps_crop.png",
+      "sha256": "7ddfa69614d0304f4c78c35e5cf07a0622e1176f7ed340282341702592f35758",
+      "crop_sha256": "da6748f4b77b60f54802c9815234806a84950ce27a5e07bdd63c3f158060f48a",
+      "crop_xywh": [
+        768,
+        432,
+        384,
+        216
+      ]
+    },
+    {
+      "filename": "Compact_EqualPayload.png",
+      "crop_filename": "Compact_EqualPayload_crop.png",
+      "sha256": "c6d3c8a4bac1414ad6e3628afb1f9b9534c2ec8d18b14826ffbd2dc8751d1f79",
+      "crop_sha256": "df9217aaff35b9f868c3db297abfd20e7f2483a0a5388db00a7fe62e8a2a8586",
+      "crop_xywh": [
+        768,
+        432,
+        384,
+        216
+      ]
+    },
+    {
+      "filename": "Compact_K16320.png",
+      "crop_filename": "Compact_K16320_crop.png",
+      "sha256": "28a1b0b967a964ff135d9f0b4a8cdd2250be6d3fa56757cebbf9f70937cf7930",
+      "crop_sha256": "622aee1dc4b5f36d04303d6157b12de2c3b04be803eeb1a24ccb2699796e8d00",
+      "crop_xywh": [
+        768,
+        432,
+        384,
+        216
+      ]
+    }
+  ],
+  "native_size_wh": [
+    1920,
+    1080
+  ]
+}

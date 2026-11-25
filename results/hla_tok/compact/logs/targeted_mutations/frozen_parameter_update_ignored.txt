@@ -1,0 +1,21 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________________ test_frozen_c0_attestation_detects_updates __________________
+
+    def test_frozen_c0_attestation_detects_updates():
+        from scripts.hla_tok.compact.adapter import assert_frozen
+        from scripts.hla_tok.continuous.inputs import model_digest
+    
+        model = torch.nn.Linear(2, 2).requires_grad_(False)
+        digest = model_digest(model)
+        assert assert_frozen(model, digest) == digest
+        with torch.no_grad():
+            model.weight.add_(.25)
+>       with pytest.raises(ValueError, match="state_dict"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/hla_tok/compact/test_training_contract.py:59: Failed
+=========================== short test summary info ============================
+FAILED tests/hla_tok/compact/test_training_contract.py::test_frozen_c0_attestation_detects_updates
+1 failed in 1.47s

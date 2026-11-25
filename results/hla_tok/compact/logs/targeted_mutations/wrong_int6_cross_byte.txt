@@ -1,0 +1,25 @@
+.F.                                                                      [100%]
+=================================== FAILURES ===================================
+_______ test_signed_words_have_canonical_wire_bytes[6-values1-\xe0\x0f|] _______
+
+bits = 6, values = [-32, -1, 0, 31], expected = b'\xe0\x0f|'
+
+    @pytest.mark.parametrize(
+        ("bits", "values", "expected"),
+        [(4, [-8, -1, 0, 7], b"\xf8\x70"),
+         (6, [-32, -1, 0, 31], b"\xe0\x0f\x7c"),
+         (8, [-128, -1, 0, 127], b"\x80\xff\x00\x7f")],
+    )
+    def test_signed_words_have_canonical_wire_bytes(bits, values, expected):
+        q = torch.tensor(values, dtype=torch.int8).repeat(2, 1)
+        payload = pack_signed(q, bits)
+>       assert payload == expected * 2
+E       AssertionError: assert b'\xe0\x07|\xe0\x07|' == b'\xe0\x0f|\xe0\x0f|'
+E         
+E         At index 1 diff: b'\x07' != b'\x0f'
+E         Use -v to get more diff
+
+tests/hla_tok/compact/test_compact_wire.py:28: AssertionError
+=========================== short test summary info ============================
+FAILED tests/hla_tok/compact/test_compact_wire.py::test_signed_words_have_canonical_wire_bytes[6-values1-\xe0\x0f|]
+1 failed, 2 passed in 1.25s

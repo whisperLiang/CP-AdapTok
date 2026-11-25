@@ -1,0 +1,27 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________________ test_physical_packet_sizes_and_identity ____________________
+
+frame = CompactFrame(identity=WireIdentity(profile=<Profile.Q8_6: (7, 'Q8-6', 8, 6)>, order=<Order.O2: 2>, signature=b'aaaaaaa...0f\x04\xc2@\x14\xc6\x81$\xca\xc24\xce\x03E\xd2DU\xd6\x85e\xda\xc6u\x9e8\x92\xa5y\xa2\xa9\xba\xb2\xad\xfb\xc2\xb1<\xd3')
+
+    def test_physical_packet_sizes_and_identity(frame):
+        packet = frame.serialize_range(0, 7)
+        assert len(packet) == HEADER_BYTES + 42
+        parsed = deserialize(packet)
+        assert parsed.identity == frame.identity
+        assert parsed.frame_id == 57 and parsed.count == 7
+        assert parsed.offset == 0
+        assert parsed.payload == frame.payload[:42]
+>       assert parsed.ledger() == {"payload_bytes": 42, "header_bytes": HEADER_BYTES, "padding_bytes": 0,
+                                   "side_information_bytes": 0, "total_bytes": HEADER_BYTES + 42}
+E       AssertionError: assert {'payload_byt...ytes': 0, ...} == {'payload_byt...ytes': 0, ...}
+E         
+E         Omitting 4 identical items, use -vv to show
+E         Differing items:
+E         {'total_bytes': 42} != {'total_bytes': 102}
+E         Use -v to get more diff
+
+tests/hla_tok/compact/test_compact_wire.py:57: AssertionError
+=========================== short test summary info ============================
+FAILED tests/hla_tok/compact/test_compact_wire.py::test_physical_packet_sizes_and_identity
+1 failed in 1.24s
