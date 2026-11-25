@@ -11,6 +11,7 @@ import numpy as np
 from scipy.interpolate import PchipInterpolator
 
 from hla_tok.evaluation.io import write_csv, write_json
+from scripts.hla_tok.uf_v2.evaluate import summarize_quality
 from scripts.hla_tok.v2.protocol import csv_at
 
 TARGETS: dict[str, tuple[int, list[float]]] = {"global_psnr": (1, [25, 26, 28, 30]), "lpips": (-1, [0.45, 0.30, 0.28978]),
@@ -113,8 +114,20 @@ def compare(curves):
     return equal, bd, penalties
 
 
-def adjacency(path):
-    rows = csv_at(path)
+def by_video(rows):
+    videos: dict[str, list[dict]] = defaultdict(list)
+    for row in rows:
+        values = {"budget_mbps": float(row["budget_mbps"]), "status": row["status"]}
+        if row["status"] == "PASS":
+            values |= {key: float(row[key]) for key in ("mse", "psnr", "lpips", "dists")}
+            values |= {key: int(row[key]) for key in ("bytes", "unused_bytes")}
+        videos[row["video"]].append(values)
+    budgets = sorted({float(row["budget_mbps"]) for row in rows})
+    return [{"video": video, **point} for video, measures in videos.items()
+            for point in summarize_quality(measures, budgets)]
+
+
+def adjacency(rows):
     groups: dict[tuple[str, int], dict[float, dict]] = defaultdict(dict)
     for row in rows:
         if row["status"] == "PASS":
@@ -188,7 +201,9 @@ def consolidated(results):
             measured[name] = {"summary": location + "/summary.json", "quality": record["quality"],
                               "timing": record.get("timing"), "checkpoint_sha256": record["checkpoint_sha256"],
                               "model_tag": record.get("model_tag")}
-            pairs = adjacency(path.with_name("quality.csv"))
+            measurements = csv_at(path.with_name("quality.csv"))
+            write_csv(results / location / "by_video.csv", by_video(measurements))
+            pairs = adjacency(measurements)
             if pairs:
                 write_csv(results / location / "adjacent_frames.csv", pairs)
                 write_csv(results / location / "adjacency.csv", violations(pairs))

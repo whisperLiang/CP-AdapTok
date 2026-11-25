@@ -17,7 +17,8 @@ from scripts.hla_tok.v2.protocol import csv_at
 
 mpl.use("Agg")
 mpl.rcParams.update({
-    "font.family": "DejaVu Sans",
+    "font.family": "sans-serif",
+    "font.sans-serif": ["Arial", "Liberation Sans", "DejaVu Sans"],
     "font.size": 8,
     "axes.spines.top": False,
     "axes.spines.right": False,
@@ -29,6 +30,8 @@ mpl.rcParams.update({
 })
 PALETTE = ("#274e69", "#2d8071", "#c56039", "#946d9b", "#69747c", "#924b43", "#69689b")
 BUDGETS = (5, 10, 20, 40)
+FIG_WIDTH_MM = 183
+FIG_WIDTH_IN = FIG_WIDTH_MM / 25.4
 
 
 class Figures:
@@ -45,15 +48,17 @@ class Figures:
             fig.canvas.draw()
             require_matplotlib_panel_alignment(fig, json_out=self.qa / f"{name}.layout.json",
                                                tolerance_pt=1.5, gutter_tolerance_pt=1.5, strict=True)
-        fig.savefig(self.output / f"{name}.pdf")
-        if self.qa is not None:
-            fig.savefig(self.qa / f"{name}.png", dpi=130)
+        fig.savefig(self.output / f"{name}.pdf", dpi=600)
+        fig.savefig(self.output / f"{name}.svg", dpi=600)
+        fig.savefig(self.output / f"{name}.tiff", dpi=600, pil_kwargs={"compression": "tiff_lzw"})
         plt.close(fig)
 
-    def lines(self, name, x, series, xlabel, ylabel, legend="best"):
-        fig, ax = plt.subplots(figsize=(5.4, 3.35), layout="constrained")
+    def lines(self, name, x, series, xlabel, ylabel, legend="best", ranges=None):
+        fig, ax = plt.subplots(figsize=(FIG_WIDTH_IN, 3.35), layout="constrained")
         for n, (label, ys) in enumerate(series.items()):
             ax.plot(x, ys, "o-", color=PALETTE[n % len(PALETTE)], lw=1.25, ms=3.8, label=label)
+            if ranges and label in ranges:
+                ax.errorbar(x, ys, yerr=ranges[label], fmt="none", color=PALETTE[n % len(PALETTE)], capsize=2)
         ax.set(xlabel=xlabel, ylabel=ylabel)
         ax.set_xticks(x)
         ax.grid(axis="y", lw=0.35, color="#cbd2d9", alpha=.6)
@@ -64,7 +69,7 @@ class Figures:
         self.save(fig, name)
 
     def bars(self, name, labels, series, xlabel, threshold=None):
-        fig, ax = plt.subplots(figsize=(5.9, max(2.8, 1.4 + .32 * len(labels))), layout="constrained")
+        fig, ax = plt.subplots(figsize=(FIG_WIDTH_IN, max(2.8, 1.4 + .32 * len(labels))), layout="constrained")
         center = np.arange(len(labels))
         width = .75 / max(1, len(series))
         for n, (method, values) in enumerate(series.items()):
@@ -85,7 +90,7 @@ def read(path):
 
 
 def layout_plot(figs, name, rows):
-    fig, ax = plt.subplots(figsize=(7.0, 0.72 + .76 * len(rows)), layout="constrained")
+    fig, ax = plt.subplots(figsize=(FIG_WIDTH_IN, 0.72 + .76 * len(rows)), layout="constrained")
     ax.set(xlim=(0, 1), ylim=(0, len(rows)))
     ax.set_axis_off()
     for index, (label, boxes) in enumerate(rows):
@@ -136,11 +141,16 @@ def profiler(figs, results, report, final):
     d0 = [r["serial_fps"] for r in report["curves"]["UF-Progressive D0"] if r["budget_mbps"] in BUDGETS]
     speed = final["timing"]
     smoke = read(results / "d1/zero-parallel/summary.json")["timing"]
+    d1 = "Selected D1, range over 3 repeats"
+    fps = [speed[str(b)]["pooled"]["fps"] for b in BUDGETS]
+    repeats = [[r["fps"] for r in speed[str(b)]["repetitions"]] for b in BUDGETS]
+    bounds = [[center - min(values) for center, values in zip(fps, repeats, strict=True)],
+              [max(values) - center for center, values in zip(fps, repeats, strict=True)]]
     figs.lines("fig05_d0_d1_speed", BUDGETS, {
         "Legacy D0 (174 frames)": d0,
         "D1 step 0 (34 frames)": [smoke[str(b)]["pooled"]["fps"] for b in BUDGETS],
-        "Selected D1 (174 frames)": [speed[str(b)]["pooled"]["fps"] for b in BUDGETS],
-    }, "Frame cap (Mbps)", "End-to-end FPS", legend="outside")
+        d1: fps,
+    }, "Frame cap (Mbps)", "End-to-end FPS", legend="outside", ranges={d1: bounds})
 
 
 def rate_distortion(figs, report, selected):
@@ -149,7 +159,7 @@ def rate_distortion(figs, report, selected):
                "dists": ("fig08_dists_rd", "DISTS")}
     curated = ("Original AdapTok", "Official UF-LD", "HLA-Tok-T", "CC-N", "Anchor-Fast", selected)
     for metric, (name, ylabel) in metrics.items():
-        fig, ax = plt.subplots(figsize=(5.8, 3.55), layout="constrained")
+        fig, ax = plt.subplots(figsize=(FIG_WIDTH_IN, 3.55), layout="constrained")
         for index, method in enumerate(curated):
             points = sorted(report["curves"][method], key=lambda row: row["actual_mbps"])
             ax.plot([r["actual_mbps"] for r in points], [r[metric] for r in points],
@@ -169,7 +179,7 @@ def equal_rate(figs, report, selected):
     for index, (metric, targets, label) in enumerate([
         ("global_psnr", (25, 28, 30), "PSNR (dB)"), ("lpips", (.28978,), "LPIPS-Alex")
     ]):
-        fig, ax = plt.subplots(figsize=(5.4, 3.35), layout="constrained")
+        fig, ax = plt.subplots(figsize=(FIG_WIDTH_IN, 3.35), layout="constrained")
         for column, method in enumerate(to_display):
             rates = [by_key.get((method, metric, target)) for target in targets]
             offset = (column - 2) * .11
@@ -186,7 +196,7 @@ def equal_rate(figs, report, selected):
 
 
 def base_and_bytes(figs, root, final):
-    fig, ax = plt.subplots(figsize=(5.6, 3.45), layout="constrained")
+    fig, ax = plt.subplots(figsize=(FIG_WIDTH_IN, 3.45), layout="constrained")
     labels = []
     for label in ("base-standard", "base-lite"):
         rows = csv_at(root / "diagnostics/base-validation" / f"{label}.csv")
@@ -207,7 +217,7 @@ def base_and_bytes(figs, root, final):
                "Matched E0 prefix cap (Mbps)", "Application bytes saved (%)")
     path = root / final["summary"]
     rows = csv_at(path.with_name("quality.csv"))
-    fig, ax = plt.subplots(figsize=(5.5, 3.25), layout="constrained")
+    fig, ax = plt.subplots(figsize=(FIG_WIDTH_IN, 3.25), layout="constrained")
     bottoms = np.zeros(len(BUDGETS))
     for i, (column, label) in enumerate((
         ("native_joint_y_z_bytes", "Native joint y/z"), ("base_header_bytes", "Base header and CRC"),
@@ -238,7 +248,7 @@ def images_and_diagnostics(figs, root, selected):
     sample_names = ("Input", "Anchor-Fast", "D0", "D1")
     x0, y0, x1, y1 = manifest["crop_xyxy"]
     for crop in (False, True):
-        fig, axes = plt.subplots(2, 2, figsize=(6.65, 4.15), layout="constrained")
+        fig, axes = plt.subplots(2, 2, figsize=(FIG_WIDTH_IN, 4.42), layout="constrained")
         for ax, row, name in zip(axes.flat, manifest["samples"], sample_names, strict=True):
             image = plt.imread(samples / row["file"])
             ax.imshow(image[y0:y1, x0:x1] if crop else image, interpolation="nearest")
@@ -248,7 +258,7 @@ def images_and_diagnostics(figs, root, selected):
 
 
 def training(figs, root):
-    fig, ax = plt.subplots(figsize=(5.7, 3.25), layout="constrained")
+    fig, ax = plt.subplots(figsize=(FIG_WIDTH_IN, 3.25), layout="constrained")
     for seed, linestyle in ((1, "-"), (2, "--")):
         p1 = root / f"training/seed{seed}"
         logs = [p1 / "steps-1-500.csv", p1 / "steps-501-2000.csv"]
@@ -286,7 +296,7 @@ def ablation(figs, root):
 
 def dynamic_and_pareto(figs, root, report, final, selected):
     dynamic = csv_at(root / "evaluation" / FINAL_EVIDENCE[selected][0] / "frames.csv")
-    fig, ax = plt.subplots(figsize=(6.2, 3.2), layout="constrained")
+    fig, ax = plt.subplots(figsize=(FIG_WIDTH_IN, 3.2), layout="constrained")
     for n, video in enumerate(dict.fromkeys(r["video"] for r in dynamic)):
         rows = [r for r in dynamic if r["video"] == video]
         mismatch = list(accumulate(r["base_state_equal"] != "True" for r in rows))
@@ -297,7 +307,7 @@ def dynamic_and_pareto(figs, root, report, final, selected):
     ax.legend(loc="upper left", fontsize=7)
     figs.save(fig, "fig19_causal_reference")
 
-    fig, ax = plt.subplots(figsize=(5.6, 3.75), layout="constrained")
+    fig, ax = plt.subplots(figsize=(FIG_WIDTH_IN, 3.75), layout="constrained")
     for n, method in enumerate(("Anchor-Fast", selected)):
         method_data = report["measured"][method] if method != selected else final
         samples = [r for r in method_data["quality"] if r["budget_mbps"] in BUDGETS]

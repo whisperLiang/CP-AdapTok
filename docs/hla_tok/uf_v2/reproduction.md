@@ -108,3 +108,25 @@ UFV2_PROFILE_CANVAS=1 UFV2_RECORD_BUILD_DIR=.build/uf_v2/records-profile bash sc
 PYTHONPATH=".build/uf_v2/records-profile:$PYTHONPATH" "$PYTHON_BIN" -m scripts.hla_tok.uf_v2.canvas_profile \
   --samples "$REPLAY/dynamic-e0/samples" --checkpoint "$BEST1" --output "$REPLAY/incremental-canvas.json"
 ```
+
+固定扫描的 E1 对照和高频训练对照各保留自己的 checkpoint 与验证目录。
+
+```bash
+"$PYTHON_BIN" -m scripts.hla_tok.uf_v2.evaluate --weights "$UF_OFFICIAL_WEIGHTS" --method d1 --fixed \
+  --checkpoint "$CKPT/d1-seed1-step2000.pt" --entropy-table "$OUT/entropy/static_cdf.json" \
+  --repetitions 0 --quality 5 10 20 40 --output "$REPLAY/fixed-static"
+"$PYTHON_BIN" -m scripts.hla_tok.uf_v2.high_frequency_control --weights "$UF_OFFICIAL_WEIGHTS" \
+  --resume "$CKPT/d1-seed1-step2000.pt" --checkpoints "$RCK/l0" --output "$REPLAY/l0-training"
+"$PYTHON_BIN" -m scripts.hla_tok.uf_v2.evaluate --weights "$UF_OFFICIAL_WEIGHTS" --method d1 \
+  --checkpoint "$RCK/l0/d1-joint-seed1-step4000.pt" --repetitions 0 --quality 5 10 20 40 --output "$REPLAY/l0"
+"$PYTHON_BIN" -m scripts.hla_tok.uf_v2.input_timing --output "$REPLAY/inputs"
+```
+
+报告图从已核对的实际 CSV、JSON 和本地原生样例生成。附带可编辑 PDF、SVG 和 600 dpi TIFF。重新生成时模型名称取自 `final_verdict.json`。
+
+```bash
+SELECTED=$("$PYTHON_BIN" -c 'import json,sys; print(json.load(open(sys.argv[1]))["selected_research_endpoint"])' "$OUT/final_verdict.json")
+FIGURE_SKILL=/home/whisperliang/.codex/skills/nature-figure/scripts
+PYTHONPATH="$FIGURE_SKILL:$PYTHONPATH" "$PYTHON_BIN" -m scripts.hla_tok.uf_v2.figures \
+  "$OUT" --selected "$SELECTED" --qa .build/uf_v2/replay-figure-qa
+```

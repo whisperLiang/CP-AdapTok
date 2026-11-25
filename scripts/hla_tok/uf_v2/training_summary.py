@@ -18,6 +18,21 @@ NODES = {
 }
 
 
+def verify_resume_state(state: dict, row: dict, step: int) -> int:
+    joint = "native_adjustments" in state
+    proposed_position = state.get("next_data_position", state["step"])
+    if state["signature"] != row["signature"] or proposed_position != step:
+        raise ValueError("saved source, data signature or resume position differs")
+    expected = step - 2000 if joint else step
+    updates = max(int(value["step"]) for value in state["optimizer"]["state"].values())
+    if updates != expected:
+        raise ValueError("optimizer moments did not carry the full stage update count")
+    keys = ("rng", "cuda_rng") if joint else ("cpu_rng_state", "cuda_rng_state")
+    if any(state[key].dtype != torch.uint8 or state[key].numel() == 0 for key in keys):
+        raise ValueError("checkpoint lacks a usable CPU or CUDA generator state")
+    return updates
+
+
 def record(folder: Path, path: Path) -> dict:
     row = json.loads(path.read_text())
     checkpoint = Path(row["checkpoint"])
@@ -29,9 +44,7 @@ def record(folder: Path, path: Path) -> dict:
     logged = row.get("actual_optimizer_steps", row.get("optimizer_steps"))
     if step != logged:
         raise ValueError(f"checkpoint and optimizer step evidence differ: {checkpoint}")
-    optimizer_steps = [int(value["step"]) for value in state["optimizer"]["state"].values()]
-    if max(optimizer_steps) < 1:
-        raise ValueError("checkpoint contains no effective optimizer step")
+    optimizer_steps = verify_resume_state(state, row, step)
     added = row.get("added", row.get("added_steps"))
     logs = csv_at(folder / f"steps-{step - added + 1}-{step}.csv")
     recorded = [int(r["step"]) for r in logs]
@@ -42,7 +55,7 @@ def record(folder: Path, path: Path) -> dict:
         "unroll": row.get("unroll", (row.get("stages") or {}).get("unroll")), "gpu_hours": row["gpu_hours"],
         "frames": row["train_frame_instances"], "cache_seconds": row["cache_seconds"],
         "peak_bytes": row["peak_allocated_bytes"], "checkpoint": str(checkpoint), "sha256": observed,
-        "max_parameter_updates_in_optimizer": max(optimizer_steps), "total_test_reads": row["read_counts"]["test"],
+        "max_parameter_updates_in_optimizer": optimizer_steps, "total_test_reads": row["read_counts"]["test"],
         "latest_gradient_norm": float(logs[-1]["gradient_norm"]), "mean_step_s": mean(float(r["step_s"]) for r in logs),
     }
     if "estimated_bpp" in logs[0]:

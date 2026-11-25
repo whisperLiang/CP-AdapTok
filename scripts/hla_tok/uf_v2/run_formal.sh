@@ -13,6 +13,16 @@ esac
 
 baseline="$output/d1/joint-seed$seed-step8000-validation/summary.json"
 test -s "$baseline"
+p2_results=()
+for step in 4000 6000 8000; do
+  p2_results+=("$output/d1/joint-seed$seed-step$step-validation/summary.json")
+done
+p2_decision=$("$python_bin" -m scripts.hla_tok.uf_v2.continuation "${p2_results[@]}" \
+  --output "$output/training/joint-seed$seed/continuation.json")
+if [[ "$p2_decision" != CONTINUE ]]; then
+  printf 'P2 %s\n' "$p2_decision"
+  exit 0
+fi
 nodes=("$baseline")
 previous=8000
 mkdir -p .build/uf_v2
