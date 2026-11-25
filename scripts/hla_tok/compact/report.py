@@ -5,10 +5,12 @@ from statistics import median
 
 from hla_tok.evaluation.io import write_json
 from hla_tok.streaming.continuous import MAX_K
-from scripts.hla_tok.compact.inputs import CONTINUOUS, OUTPUT
+from scripts.hla_tok.compact.decision import stage_targets
+from scripts.hla_tok.compact.inputs import CONFIG, CONTINUOUS, OUTPUT
 from scripts.hla_tok.compact.tables import write_tables
 from scripts.hla_tok.continuous.inputs import run_arguments
 from scripts.hla_tok.v2.protocol import csv_at, json_at
+from scripts.hla_tok.v3.protocol import read_config
 
 VERDICT_KEYS = (
     "Experiment Completion",
@@ -31,10 +33,6 @@ def _fmt(row: dict, field: str, decimals: int = 2) -> str:
 def _metric_triplet(row: dict, prefix: str = "") -> str:
     return " / ".join(_fmt(row, prefix + field, precision)
                       for field, precision in (("global_psnr", 2), ("lpips", 4), ("dists", 4)))
-
-
-def _header(file: str) -> str:
-    return f"[{file}]({file})"
 
 
 def _effective(output: Path) -> tuple[dict, list[float]]:
@@ -164,7 +162,7 @@ def _states(output: Path, selection: dict, targets: dict, runtime_ok: bool, inte
     return dict(zip(VERDICT_KEYS, values, strict=True))
 
 
-def _recommend(targets: dict, training: dict, runtime_ok: bool, output: Path) -> tuple[str, str]:
+def _recommend(targets: dict, training: dict, runtime_ok: bool, output: Path, config: dict) -> tuple[str, str]:
     if targets["equal_payload_pass"] and targets["all_practical_pass"] and runtime_ok:
         return (("B", "采用通过门槛的轻量适配 Profile") if training["adopted"]
                 else ("A", "保留最优免训练 Profile"))
@@ -174,12 +172,13 @@ def _recommend(targets: dict, training: dict, runtime_ok: bool, output: Path) ->
     pure = csv_at(output / "projection_maximum_rd.csv")
     p8 = float(next(r["global_psnr"] for r in pure if r["asset"] == "PCA8-BF16_rank"))
     p16 = float(next(r["global_psnr"] for r in pure if r["asset"] == "PCA16-BF16_rank"))
-    if p16 - p8 >= 1.0:
+    if p8 < config["stage_psnr_targets"][20] <= p16:
         return "C", "保留 Rank-aware 表示，优先用同帧实际比特预算重新分配分量，避免继续将所有 Rank 统一压到 4D"
     return "E", "优先研究同帧的实际比特预算信息分配"
 
 
-def conclusions(output: Path, selection: dict, training: dict, state: dict, targets: dict, recommend: tuple) -> str:
+def conclusions(output: Path, selection: dict, training: dict, state: dict, targets: dict,
+                recommend: tuple, config: dict) -> str:
     global_row, ranks = _effective(output)
     projection = json_at(output / "projection_selection.json")
     hardware = [r for r in csv_at(output / "throughput_benchmark.csv") if r["asset"] ==
@@ -188,7 +187,14 @@ def conclusions(output: Path, selection: dict, training: dict, state: dict, targ
     first8 = quality["5"]
     best = [r for r in csv_at(output / "bandwidth_constrained_quality.csv")
             if r["profile"] == "Q8-4" and r["order"] == selection["order"]]
-    q84 = ", ".join(f"{r['target_mbps']} Mbps {float(r['global_psnr']):.2f}" for r in best)
+    q84 = "、".join(f"{r['target_mbps']} Mbps 下 {float(r['global_psnr']):.2f} dB" for r in best)
+    equal8, = [r for r in csv_at(output / "compact_equal_caps.csv")
+               if r["profile"] == "Q8-4" and r["order"] == selection["order"] and r["basis"] == "payload_only"]
+    checks8 = stage_targets(best, equal8, config)
+    q84_status = "达到" if checks8["equal_payload_pass"] and checks8["all_practical_pass"] else "低于"
+    ablations = [r for r in csv_at(output / "equal_bits_ablation.csv") if int(r["budget"]) == MAX_K]
+    pairs = "、".join(f"{r['higher_dimension']} 对 {r['lower_dimension']} 为 "
+                     f"{float(r['higher_dimension_gain_global_psnr']):+.2f} dB" for r in ablations)
     eq = targets["equal_payload_gain_db"]
     compare = first8["original_status"] == "MEASURED"
     original_gain = float(first8["best_compact_global_psnr"]) - float(first8["original_global_psnr"]) if compare else None
@@ -198,8 +204,8 @@ def conclusions(output: Path, selection: dict, training: dict, state: dict, targ
         f"1. 全局熵有效维数 {float(global_row['effective_rank_entropy']):.2f}，各 Rank 中位数 {median(ranks):.2f}。",
         f"2. 16D、8D、4D 的冻结排序分别选中 {projection['16']['projection']}、{projection['8']['projection']}、{projection['4']['projection']}。",
         "3. 纯投影损失和同 K 下额外标量损失分别见 [降维报告](projection_loss_report.md) 和 [分解表](projection_quantization_ablation.csv)。",
-        "4. 三组物理等比特宽度比较见 [等比特消融](equal_bits_ablation.csv)。",
-        f"5. 8D INT4 的实测 PSNR 为 {q84} dB。部署门槛采用表中三项质量与实际字节。",
+        f"4. K16320 的等字节高维低精度相对低维高精度结果为 {pairs}。感知差值和低预算见 [等比特消融](equal_bits_ablation.csv)。",
+        f"5. 8D INT4 通过实际码流正确性。其联合画质{q84_status}冻结目标。实测 PSNR 为 {q84}。",
         "6. 5、10、20、40 Mbps 的三项质量见带宽表。",
         f"7. 主 Profile 在 26,520 字节等 Payload 下与 C1 相差 {eq:+.2f} dB，联合门槛为 {state['Equal-Payload Rate–Distortion']}。",
         "8. " + original + "其余带宽点见表。Original 等待 16 帧输入，比较按窗口平均字节计。",
@@ -223,10 +229,11 @@ def run(output: Path) -> None:
     training = json_at(output / "training_selection.json")
     main = training["asset"] if training["adopted"] else selection["main_asset"]
     targets = training["targets"] if training["adopted"] else selection["targets"]
+    config = read_config(CONFIG)
     integrity = json_at(output / "historical_assets_audit.json")
     runtime_ok, runtime = _runtime(output, main)
     state = _states(output, selection, targets, runtime_ok, integrity)
-    recommend = _recommend(targets, training, runtime_ok, output)
+    recommend = _recommend(targets, training, runtime_ok, output, config)
     write_json(output / "final_verdict.json", {"experiment": "HLA-Tok-CP", "main_asset": main,
                                               "status": state, "targets": targets, "application_admission": "NOT_DECIDED",
                                               "historical_v3_fixed13": "FAIL", "test_pixel_reads": integrity["test_pixel_reads"],
@@ -266,7 +273,7 @@ Original 的 K 表示每个空间 Tile 在整个 16 帧窗口内的 Token 数。
 
 ## 表示与适配
 
-{conclusions(output, selection, training, state, targets, recommend)}
+{conclusions(output, selection, training, state, targets, recommend, config)}
 
 [Train 特征谱和 RGB 消融](feature_redundancy_report.md) · [纯降维](projection_loss_report.md) · [静态尺度](scalar_calibration.csv) · [无损诊断](lossless_diagnostics.csv) · [适配](training_selection.json)
 
