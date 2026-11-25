@@ -1,0 +1,42 @@
+{
+  "same_symbol": {
+    "5": {
+      "e0": 2662143,
+      "e1": 1484529,
+      "e2": 1484529,
+      "e1_savings_fraction": 0.4423556510675798,
+      "e2_savings_fraction": 0.4423556510675798
+    },
+    "10": {
+      "e0": 5328976,
+      "e1": 3127777,
+      "e2": 3127777,
+      "e1_savings_fraction": 0.4130622843863436,
+      "e2_savings_fraction": 0.4130622843863436
+    },
+    "20": {
+      "e0": 10637835,
+      "e1": 6066010,
+      "e2": 6066010,
+      "e1_savings_fraction": 0.42977024930354724,
+      "e2_savings_fraction": 0.42977024930354724
+    },
+    "40": {
+      "e0": 18041803,
+      "e1": 9338216,
+      "e2": 9338216,
+      "e1_savings_fraction": 0.4824122622334365,
+      "e2_savings_fraction": 0.4824122622334365
+    }
+  },
+  "matched_frames": 128,
+  "read_counts": {
+    "train": 256,
+    "validation": 0,
+    "test": 0
+  },
+  "static_cdf_hash": "b7cccc1cb5156297c913ad162007c4f165ff2df10671d7533395d24aa5dd1325",
+  "sensitivity_file_sha256": "0285db586404e973fcf05388af271afb4cb1f20b0a10f787a3a1ad6b0b032843",
+  "all_records_e1_e2_pack_ms_not_compared_to_max_budget": true,
+  "split": "Train holdout"
+}
