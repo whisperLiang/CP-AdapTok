@@ -11,7 +11,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.ticker import StrMethodFormatter
+from matplotlib.ticker import FixedFormatter, NullFormatter, StrMethodFormatter
 from PIL import Image
 
 from hla_tok.evaluation.io import write_json
@@ -261,8 +261,10 @@ def image_plate(output: Path, config: dict):
 def _export(fig, folder: Path, name: str, tools: Path | None) -> None:
     for axis in fig.axes:
         for scale, ticks in ((axis.get_xscale(), axis.xaxis), (axis.get_yscale(), axis.yaxis)):
-            if scale == "log" and not isinstance(ticks.get_major_formatter(), matplotlib.ticker.FixedFormatter):
-                ticks.set_major_formatter(StrMethodFormatter("{x:g}"))
+            if scale == "log":
+                ticks.set_minor_formatter(NullFormatter())
+                if not isinstance(ticks.get_major_formatter(), FixedFormatter):
+                    ticks.set_major_formatter(StrMethodFormatter("{x:g}"))
     if tools is not None and len(fig.axes) > 1:
         sys.path.insert(0, str(tools))
         from audit_panel_alignment import require_matplotlib_panel_alignment

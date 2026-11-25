@@ -87,7 +87,10 @@ class Training:
         self.name = self.folder.name
         self.training = config["training"]
         self.identity = _identity(spec, stage, seed, output, inputs)
-        self.order = compact_orders()[config["quantization"]["comparison_primary_order"]]
+        order_name = config["quantization"]["comparison_primary_order"]
+        self.order = compact_orders()[order_name]
+        # Inference-mode index tensors must stay out of the differentiable Rank plan.
+        self.validation_order = compact_orders()[order_name]
         profile = PROFILES_BY_LABEL[spec["profile"]]
         self.codec, _ = load_asset(output / "profiles" / spec["filename"], spec, profile, self.order,
                                   inputs.checkpoint["state_dict_sha256"])
@@ -143,7 +146,7 @@ class Training:
     @torch.inference_mode()
     def validate(self, step: int, spec: dict) -> list[dict]:
         checked = self.checked_state()
-        codec, _ = load_asset(self.output / "profiles" / spec["filename"], spec, self.codec.profile, self.order, checked)
+        codec, _ = load_asset(self.output / "profiles" / spec["filename"], spec, self.codec.profile, self.validation_order, checked)
         receiver = ContinuousReceiver.from_model(self.inputs.model)
         budgets = sorted({*self.low, MAX_K})
         result: list[dict] = []
@@ -157,7 +160,7 @@ class Training:
     def _decode_probe(self, codec, receiver, native, frame, budgets):
         precision = self.config["compute_dtype"]
         with compute(precision):
-            ordered = self.order.apply(native)
+            ordered = codec.order.apply(native)
             u = codec.transform.encode(ordered, codec.ranks)
             full = codec.frame(codec.encode_codes(u), frame)
             pairs = []
@@ -170,7 +173,7 @@ class Training:
                 actual = codec.decode(receiver, packet)
                 quantized = codec.lift(codec.dequantize(codec.prefix_codes(packet).cuda()))
                 latent = float((quantized.float() - ordered[:, :k].float()).square().mean())
-                bypass = receiver.decode(codec.lift(u[:, :k]), self.order)
+                bypass = receiver.decode(codec.lift(u[:, :k]), codec.order)
                 pairs.extend([(actual, {"budget": k, "path": "hard_wire", "latent_mse": latent} | byte_row),
                               (bypass, {"budget": k, "path": "continuous_bypass", "latent_mse": ""})])
         return pairs
