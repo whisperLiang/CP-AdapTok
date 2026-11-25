@@ -15,6 +15,7 @@ from hla_tok.uf.latent import LATENT_UNIT, UnifiedCodec, UnifiedRefinement, norm
 from hla_tok.uf.official import NativeDecoder, NativeEncoder, OfficialAssets
 from hla_tok.uf.wire import APP_BASE_OVERHEAD, BaseBudgetExceeded, PrefixFamily, WireError
 from hla_tok.uf_v2.decoder import SharedDecoder, SharedRefinement
+from hla_tok.uf_v2.native_weights import LiteProfile, NativeAdjustments, install_adjustments
 from hla_tok.uf_v2.records import BatchReceiver, BatchRecords, Display, quantized_symbols
 
 BASE_STANDARD_QP = (0, 8)
@@ -107,28 +108,45 @@ class AnchorFast:
 class Unified:
     def __init__(self, assets: OfficialAssets, model: UnifiedRefinement, qp: tuple[int, int],
                  refiner: SharedRefinement | None = None, bank: BatchRecords | None = None,
-                 segmentation: Segmentation = Segmentation(8, 8), base_cap: int = BASE_STANDARD_CAP, family_id: str = "standard"):
+                 segmentation: Segmentation = Segmentation(8, 8), base_cap: int = BASE_STANDARD_CAP, family_id: str = "standard",
+                 adjustments: NativeAdjustments | None = None, lite: LiteProfile | None = None):
         self.assets, self.native, self.qp, self.base_cap = assets, Analysis(assets), qp, base_cap
-        self.model, self.refiner = model, refiner
+        self.model, self.refiner, self.adjustments, self.lite = model, refiner, adjustments, lite
+        self._install(self.native)
         self.steps = {intra: model.quantizer(intra).step().detach() for intra in (True, False)}
         legacy = UnifiedCodec(model, segmentation)
         self.bank = bank or BatchRecords(legacy.bank.scales, segmentation)
-        canonical = (qp, base_cap, family_id) == (BASE_STANDARD_QP, BASE_STANDARD_CAP, "standard")
-        if refiner is None and bank is None and canonical:
-            self.tag = legacy.tag
-        else:
-            weights = self.bank.sensitivity
-            digest = sha256(b"".join(weights[i].astype("<f8").tobytes() for i in (True, False))).hexdigest() if (
-                weights is not None) else None
-            self.tag = stream_tag(refiner if refiner is not None else model,
-                                  f"uf-v2/{family_id}/{qp}/{base_cap}/{legacy.tag.hex()}/{self.bank.segmentation}/"
-                                  f"{self.bank.static}/{self.bank.raw}/{digest}")
+        self.tag = self._tag(legacy.tag, bank is None, family_id)
+
+    def _tag(self, legacy_tag: bytes, legacy_bank: bool, family_id: str) -> bytes:
+        identity = (self.qp, self.base_cap, family_id)
+        native_options = (self.refiner, self.adjustments, self.lite)
+        if legacy_bank and (identity, native_options) == ((BASE_STANDARD_QP, BASE_STANDARD_CAP, "standard"),
+                                                          (None, None, None)):
+            return legacy_tag
+        weights = self.bank.sensitivity
+        digest = sha256(b"".join(weights[i].astype("<f8").tobytes() for i in (True, False))).hexdigest() if (
+            weights is not None) else None
+        suffix = f"/{self.adjustments.digest()}" if self.adjustments is not None else ""
+        if self.lite is not None:
+            suffix += f"/{self.lite.identity()}"
+        model = self.model if self.refiner is None else self.refiner
+        return stream_tag(model, f"uf-v2/{family_id}/{self.qp}/{self.base_cap}/{legacy_tag.hex()}/"
+                                 f"{self.bank.segmentation}/{self.bank.static}/{self.bank.raw}/{digest}{suffix}")
+
+    def _install(self, endpoint: NativeDecoder | NativeEncoder) -> None:
+        if self.adjustments is not None:
+            install_adjustments(endpoint, self.adjustments, self.qp[1])
+        if self.lite is not None:
+            self.lite.install(endpoint)
 
     def reset(self) -> None:
         self.native.reset()
 
     def new_decoder(self) -> NativeDecoder:
-        return SharedDecoder(self.assets) if self.refiner is not None else NativeDecoder(self.assets)
+        endpoint = SharedDecoder(self.assets) if self.refiner is not None else NativeDecoder(self.assets)
+        self._install(endpoint)
+        return endpoint
 
     def receiver(self, decoder: NativeDecoder) -> BatchReceiver:
         return BatchReceiver(self.tag, lambda frame: self.prepare(decoder, frame))
@@ -165,6 +183,8 @@ class Unified:
     @torch.no_grad()
     def prepare(self, decoder: NativeDecoder, frame: BaseFrame) -> Display:
         check_base(frame, decoder, self.base_cap)
+        if frame.info.qp != self.qp[0 if frame.info.intra else 1]:
+            raise WireError("base QP differs from prefix family")
         return self._display(decoder, frame)
 
     @torch.no_grad()
