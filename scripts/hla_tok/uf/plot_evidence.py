@@ -5,6 +5,7 @@ from pathlib import Path
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter, LogLocator, NullFormatter
 
 from scripts.hla_tok.v2.protocol import json_at
 
@@ -25,15 +26,20 @@ def plot(curves: dict, metric: str, ylabel: str, target: Path) -> None:
         for method, (label, color, marker, line) in STYLE.items():
             rows = sorted(curves.get(method, []), key=lambda row: row["actual_mbps"])
             if rows:
+                if any(not 0 < row["actual_mbps"] for row in rows):
+                    raise ValueError(f"{method} contains a non-positive actual rate")
                 axis.plot([row["actual_mbps"] for row in rows], [row[metric] for row in rows],
                           label=label, color=color, marker=marker, linestyle=line, markersize=4, linewidth=1.1)
         axis.set_xscale("log")
+        axis.xaxis.set_major_locator(LogLocator(subs=(1, 2, 5)))
+        axis.xaxis.set_major_formatter(FuncFormatter(lambda rate, _: f"{rate:g}"))
+        axis.xaxis.set_minor_formatter(NullFormatter())
         axis.set_xlabel("Actual application data rate at 30 FPS (Mbps)")
         axis.set_ylabel(ylabel)
         axis.legend(loc="lower left" if metric == "lpips" else "upper left", ncol=2, frameon=False,
                     bbox_to_anchor=(0, 1.01), borderaxespad=0)
-        for extension in ("pdf", "svg", "png"):
-            figure.savefig(target.with_suffix(f".{extension}"), dpi=300)
+        for extension in (".pdf", ".svg", ".png"):
+            figure.savefig(target.with_suffix(extension), dpi=600)
         plt.close(figure)
 
 

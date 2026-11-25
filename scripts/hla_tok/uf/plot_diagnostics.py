@@ -1,6 +1,7 @@
 """Make diagnostic figures from frozen UF measurements and manifested samples."""
 
 import argparse
+from collections.abc import Iterable
 from pathlib import Path
 from statistics import mean
 
@@ -8,6 +9,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
+from matplotlib.ticker import FuncFormatter, LogLocator, NullFormatter
 from PIL import Image
 
 from hla_tok.uf.official import sha256_file
@@ -23,13 +25,38 @@ def _axis() -> tuple[Figure, Axes]:
 
 
 def _save(figure: Figure, path: Path, raster: bool = False) -> None:
-    for extension in (("png",) if raster else ("pdf", "svg", "png")):
-        figure.savefig(path.with_suffix(f".{extension}"), dpi=270 if raster else 300)
+    for extension in ((".png",) if raster else (".pdf", ".svg", ".png")):
+        figure.savefig(path.with_suffix(extension), dpi=600)
     plt.close(figure)
 
 
 def _legend(axis: Axes, columns: int = 2) -> None:
     axis.legend(loc="lower left", bbox_to_anchor=(0, 1.01), ncol=columns, frameon=False, borderaxespad=0)
+
+
+def _log_rate(axis: Axes, rates: Iterable[float]) -> None:
+    if any(not 0 < rate for rate in rates):
+        raise ValueError("log axis requires strictly positive rates")
+    axis.set_xscale("log")
+    axis.xaxis.set_major_locator(LogLocator(subs=(1, 2, 5)))
+    axis.xaxis.set_major_formatter(FuncFormatter(lambda rate, _: f"{rate:g}"))
+    axis.xaxis.set_minor_formatter(NullFormatter())
+
+
+def require_matplotlib_panel_alignment(figure: Figure, panels: list[list[Axes]]) -> None:
+    figure.canvas.draw()
+    coordinates = [[axis.get_position() for axis in row] for row in panels]
+    for row in coordinates:
+        for field in ("y0", "y1", "width"):
+            values = [getattr(box, field) for box in row]
+            extent = figure.get_figwidth() if field == "width" else figure.get_figheight()
+            if (max(values) - min(values)) * extent * 72 > 1.5:
+                raise ValueError(f"rendered panel row is misaligned: {field}")
+    for column in zip(*coordinates, strict=True):
+        for field in ("x0", "x1"):
+            values = [getattr(box, field) for box in column]
+            if (max(values) - min(values)) * figure.get_figwidth() * 72 > 1.5:
+                raise ValueError(f"rendered panel column is misaligned: {field}")
 
 
 def architecture(path: Path) -> None:
@@ -46,12 +73,15 @@ def architecture(path: Path) -> None:
              ("Base y + z\nshared rANS", "HUF1 prefix\nreceiver"),
              ("Anchor RGB / D0 latent\nrefinement rANS", "HUF1 prefix\nreceiver"),
              ("HUF1 prefix\nreceiver", "Display t"), ("HUF1 prefix\nreceiver", "Base-only state\nfor frame t+1"))
+    boxes = {label: axis.text(*position, label, ha="center", va="center",
+                             bbox={"boxstyle": "round,pad=0.4", "facecolor": "#f4f7f8", "edgecolor": COLORS[0]})
+             for label, position in nodes.items()}
+    figure.canvas.draw()
     for source, target in links:
-        axis.annotate("", xy=nodes[target], xytext=nodes[source],
-                      arrowprops={"arrowstyle": "->", "color": COLORS[0], "shrinkA": 24, "shrinkB": 22})
-    for label, position in nodes.items():
-        axis.text(*position, label, ha="center", va="center",
-                  bbox={"boxstyle": "round,pad=0.4", "facecolor": "#f4f7f8", "edgecolor": COLORS[0]})
+        axis.annotate("", xy=nodes[target], xytext=nodes[source], arrowprops={
+            "arrowstyle": "->", "color": COLORS[0], "shrinkA": 2, "shrinkB": 2,
+            "patchA": boxes[source].get_bbox_patch(), "patchB": boxes[target].get_bbox_patch(),
+        })
     axis.text(0.52, 0.08, "Enhancement never writes the recurrent native state", ha="center", color=COLORS[2])
     _save(figure, path)
 
@@ -59,10 +89,14 @@ def architecture(path: Path) -> None:
 def equal_quality(rows: list[dict], path: Path) -> None:
     points = [row for row in rows if row["metric"] == "lpips" and row["status"] == "PASS"]
     figure, axis = _axis()
+    rates = []
     for key, label, color in (("reference_mbps", "Original AdapTok", COLORS[0]),
                               ("candidate_mbps", "Anchor A2 interpolated", COLORS[2])):
-        axis.plot([row[key] for row in points], [row["target_quality"] for row in points], "o-", label=label, color=color)
-    axis.set(xscale="log", xlabel="Actual application rate (Mbps)", ylabel="Matched LPIPS-Alex")
+        measured = [float(row[key]) for row in points]
+        rates.extend(measured)
+        axis.plot(measured, [row["target_quality"] for row in points], "o-", label=label, color=color)
+    _log_rate(axis, rates)
+    axis.set(xlabel="Actual application rate (Mbps)", ylabel="Matched LPIPS-Alex")
     _legend(axis)
     _save(figure, path)
 
@@ -97,9 +131,10 @@ def images(dynamic: Path, output: Path) -> None:
         figure, axes = plt.subplots(2, 3, figsize=(7.15, 3.12), layout="constrained")
         for image, label, axis in zip(panels, labels, axes.flat, strict=True):
             shown = image.resize((600, 338)) if crop is None else image.crop(crop)
-            axis.imshow(shown)
+            axis.imshow(shown, interpolation="nearest")
             axis.set_title(label, loc="left", pad=3)
             axis.axis("off")
+        require_matplotlib_panel_alignment(figure, [list(row) for row in axes])
         _save(figure, output / name, raster=True)
 
 
@@ -115,6 +150,7 @@ def dynamic_quality(rows: list[dict], path: Path) -> None:
     _legend(quality)
     cap.step(frames, [int(row["budget_mbps"]) for row in selected], where="post", color=COLORS[3], linewidth=0.8)
     cap.set(xlabel=f"Frame in {video.split(':')[-1]}", ylabel="Cap (Mbps)", yticks=BUDGETS)
+    require_matplotlib_panel_alignment(figure, [[quality], [cap]])
     _save(figure, path)
 
 
@@ -149,11 +185,14 @@ def training(path: Path, output: Path) -> None:
 
 def display_ablation(entries: dict[str, list[dict]], output: Path) -> None:
     figure, axis = _axis()
+    rates = []
     for (name, rows), color in zip(entries.items(), COLORS, strict=False):
         points = [row for row in rows if row["budget_mbps"] in BUDGETS]
-        axis.plot([row["actual_mbps"] for row in points], [row["lpips"] for row in points], "o-",
-                  color=color, label=name, markersize=4, linewidth=1)
-    axis.set(xscale="log", xlabel="Actual application rate (Mbps)", ylabel="LPIPS-Alex (untrained D0)")
+        measured = [float(row["actual_mbps"]) for row in points]
+        rates.extend(measured)
+        axis.plot(measured, [row["lpips"] for row in points], "o-", color=color, label=name, markersize=4, linewidth=1)
+    _log_rate(axis, rates)
+    axis.set(xlabel="Actual application rate (Mbps)", ylabel="LPIPS-Alex (untrained D0)")
     _legend(axis)
     _save(figure, output)
 

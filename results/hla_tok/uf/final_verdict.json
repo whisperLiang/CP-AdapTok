@@ -1,0 +1,50 @@
+{
+  "overall": "PARTIAL_PASS",
+  "verdicts": {
+    "OFFICIAL_BASELINE": "PARTIAL_PASS",
+    "ANCHOR": "PARTIAL_PASS",
+    "PROGRESSIVE": "PARTIAL_PASS",
+    "RATE_DISTORTION": "FAIL",
+    "CAUSALITY": "PASS",
+    "STRICT_PREFIX": "PASS",
+    "INCREMENTAL": "PASS",
+    "BASE_BUDGET": "PASS",
+    "REALTIME": "FAIL",
+    "TRAINING": "PARTIAL_PASS",
+    "TEST": "NOT_RUN"
+  },
+  "scope": {
+    "hardware": "NVIDIA H100 PCIe",
+    "raster": [1920, 1080],
+    "application_only": true,
+    "official_ld_and_intra": "PASS",
+    "official_rt": "NOT_AVAILABLE",
+    "b0_and_b1": "PARTIAL_PASS",
+    "b0_and_b1_evidence": "Read-only byte ledger audit; not rerun",
+    "validation_frames": 174,
+    "dynamic_validation_lengths": [99, 90],
+    "dynamic_reference_mismatches": 0,
+    "native_128_256": "NOT_AVAILABLE",
+    "base_cap_bytes": 9212,
+    "observed_I_max_bytes": 8563,
+    "observed_P_max_bytes": 6846,
+    "observed_caps_apply_to": "Locked I=0/P=8 on the measured Calibration, Validation, and dynamic long clips",
+    "anchor_optimizer_steps": {"seed_1": 2000, "seed_2": 2000},
+    "unified_d0_optimizer_steps": 0,
+    "d1": "NOT_RUN",
+    "p1": "NOT_RUN",
+    "p2": "NOT_RUN",
+    "p3": "NOT_RUN",
+    "equal_psnr_original": "OUT_OF_RANGE",
+    "test_pixel_read_count": 0,
+    "remote_pushed": false
+  },
+  "evidence": {
+    "official": "baseline/isolated/validation.json",
+    "anchor": "anchor/A2-validation-bf16/summary.json",
+    "unified": "progressive/D0-validation/summary.json",
+    "bandwidth": "benchmarks/dynamic-A2/summary.json",
+    "checkpoint_ledger": "evidence/checkpoint_ledger.csv",
+    "test_audit": "evidence/test_audit.json"
+  }
+}
