@@ -1,0 +1,756 @@
+{
+  "protocol_sha256": "72517a17fa778ac4f558c99bada80e4c9942fe7684e933266443d76d4a4be3cd",
+  "cohort_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+  "data_manifest_sha256": {
+    "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
+    "validation": "8cca166ca7d1f6faf45cd6660b7074657164d2afa2fd14dec92d76f0cee25405",
+    "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
+  },
+  "metric_weight_sha256": {
+    "imagenet_alexnet": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02",
+    "imagenet_vgg16": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0",
+    "lpips_alex_v01": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+    "dists": "f5e65c96230b7f6ca995691647d482237e4cab8a50c5c4a5784f219ef0748218",
+    "lpips_vgg_v01": "a78928a0af1e5f0fcb1f3b9e8f8c3a2a5a3de244d830ad5c1feddc79b8432868"
+  },
+  "checkpoint_sha256": "40beff895ff615c1f73cae18f9c025557ff2d35516a04f51be916a77a2e16249",
+  "model_state_sha256": "18c1000f74a0730ae7382731ff89746f8654d0455d6a5669ac896755f1b4190e",
+  "cohort": {
+    "DAVIS2017:blackswan": 50,
+    "DAVIS2017:car-roundabout": 64,
+    "DAVIS2017:dog": 60
+  },
+  "training_steps": 0,
+  "status": "PASS",
+  "native_budget_encoder": "NOT_APPLICABLE",
+  "public_max_then_truncate": "PASS",
+  "formal_pairs_per_source_and_precision": 28,
+  "legal_history_states": "NOT_APPLICABLE",
+  "deterministic_algorithms": true,
+  "nonpresets_checked_against_independently_encoded_maximum": false,
+  "rank_chunk_count_at_maximum": 4,
+  "maximal_encode_per_public_frame": true,
+  "budgets": {
+    "formal": [
+      510,
+      1020,
+      2040,
+      4080,
+      6120,
+      8160,
+      12240,
+      16320
+    ],
+    "boundary": [
+      1,
+      2,
+      134,
+      135,
+      136,
+      4319,
+      4320,
+      4321,
+      16319,
+      16320
+    ],
+    "nonpreset": [
+      20,
+      231,
+      756,
+      1064,
+      2350,
+      2701,
+      2722,
+      2942,
+      3066,
+      3852,
+      4264,
+      4627,
+      4797,
+      5314,
+      5377,
+      5515,
+      5741,
+      5940,
+      6027,
+      6153,
+      6405,
+      7139,
+      7291,
+      7503,
+      8503,
+      8613,
+      9210,
+      9457,
+      9478,
+      10101,
+      10546,
+      10721,
+      10891,
+      11380,
+      11759,
+      11918,
+      12322,
+      12353,
+      12620,
+      13053,
+      13752,
+      13854,
+      13962,
+      14262,
+      14437,
+      14881,
+      15299,
+      15581,
+      16051,
+      16072
+    ],
+    "all": [
+      1,
+      2,
+      20,
+      134,
+      135,
+      136,
+      231,
+      510,
+      756,
+      1020,
+      1064,
+      2040,
+      2350,
+      2701,
+      2722,
+      2942,
+      3066,
+      3852,
+      4080,
+      4264,
+      4319,
+      4320,
+      4321,
+      4627,
+      4797,
+      5314,
+      5377,
+      5515,
+      5741,
+      5940,
+      6027,
+      6120,
+      6153,
+      6405,
+      7139,
+      7291,
+      7503,
+      8160,
+      8503,
+      8613,
+      9210,
+      9457,
+      9478,
+      10101,
+      10546,
+      10721,
+      10891,
+      11380,
+      11759,
+      11918,
+      12240,
+      12322,
+      12353,
+      12620,
+      13053,
+      13752,
+      13854,
+      13962,
+      14262,
+      14437,
+      14881,
+      15299,
+      15581,
+      16051,
+      16072,
+      16319,
+      16320
+    ]
+  },
+  "rows": [
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:blackswan",
+      "frame": 25,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:blackswan",
+      "frame": 25,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:blackswan",
+      "frame": 25,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:blackswan",
+      "frame": 25,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:blackswan",
+      "frame": 49,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:blackswan",
+      "frame": 49,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:blackswan",
+      "frame": 49,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:blackswan",
+      "frame": 49,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 32,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 32,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 32,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 32,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:dog",
+      "frame": 30,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:dog",
+      "frame": 30,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:dog",
+      "frame": 30,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:dog",
+      "frame": 30,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:dog",
+      "frame": 59,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.float32",
+      "video": "DAVIS2017:dog",
+      "frame": 59,
+      "compute_dtype": "fp32"
+    },
+    {
+      "order": "O1",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:dog",
+      "frame": 59,
+      "compute_dtype": "bf16"
+    },
+    {
+      "order": "O2",
+      "maximum_token_tensor_equal": true,
+      "maximum_rgb_bit_exact": true,
+      "public_all_prefixes_exact": true,
+      "public_formal_pair_failures": [],
+      "tensor_shape": [
+        1,
+        16320,
+        32
+      ],
+      "tensor_dtype": "torch.bfloat16",
+      "video": "DAVIS2017:dog",
+      "frame": 59,
+      "compute_dtype": "bf16"
+    }
+  ]
+}

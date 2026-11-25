@@ -1,0 +1,1741 @@
+{
+  "protocol_sha256": "72517a17fa778ac4f558c99bada80e4c9942fe7684e933266443d76d4a4be3cd",
+  "cohort_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+  "data_manifest_sha256": {
+    "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
+    "validation": "8cca166ca7d1f6faf45cd6660b7074657164d2afa2fd14dec92d76f0cee25405",
+    "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
+  },
+  "metric_weight_sha256": {
+    "imagenet_alexnet": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02",
+    "imagenet_vgg16": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0",
+    "lpips_alex_v01": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+    "dists": "f5e65c96230b7f6ca995691647d482237e4cab8a50c5c4a5784f219ef0748218",
+    "lpips_vgg_v01": "a78928a0af1e5f0fcb1f3b9e8f8c3a2a5a3de244d830ad5c1feddc79b8432868"
+  },
+  "checkpoint_sha256": "40beff895ff615c1f73cae18f9c025557ff2d35516a04f51be916a77a2e16249",
+  "model_state_sha256": "18c1000f74a0730ae7382731ff89746f8654d0455d6a5669ac896755f1b4190e",
+  "cohort": {
+    "DAVIS2017:blackswan": 50,
+    "DAVIS2017:car-roundabout": 64,
+    "DAVIS2017:dog": 60
+  },
+  "training_steps": 0,
+  "status": "PASS",
+  "temporal_state": "NOT_APPLICABLE",
+  "comparisons": [
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "order": "O0",
+      "budget": 510,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "order": "O0",
+      "budget": 1020,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "order": "O0",
+      "budget": 2040,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "order": "O0",
+      "budget": 4080,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "order": "O0",
+      "budget": 6120,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "order": "O0",
+      "budget": 8160,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "order": "O0",
+      "budget": 12240,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 0,
+      "order": "O0",
+      "budget": 16320,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 25,
+      "order": "O0",
+      "budget": 510,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 25,
+      "order": "O0",
+      "budget": 1020,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 25,
+      "order": "O0",
+      "budget": 2040,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 25,
+      "order": "O0",
+      "budget": 4080,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 25,
+      "order": "O0",
+      "budget": 6120,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 25,
+      "order": "O0",
+      "budget": 8160,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 25,
+      "order": "O0",
+      "budget": 12240,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 25,
+      "order": "O0",
+      "budget": 16320,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 49,
+      "order": "O0",
+      "budget": 510,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 49,
+      "order": "O0",
+      "budget": 1020,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 49,
+      "order": "O0",
+      "budget": 2040,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 49,
+      "order": "O0",
+      "budget": 4080,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 49,
+      "order": "O0",
+      "budget": 6120,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 49,
+      "order": "O0",
+      "budget": 8160,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 49,
+      "order": "O0",
+      "budget": 12240,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "frame": 49,
+      "order": "O0",
+      "budget": 16320,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "order": "O0",
+      "budget": 510,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "order": "O0",
+      "budget": 1020,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "order": "O0",
+      "budget": 2040,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "order": "O0",
+      "budget": 4080,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "order": "O0",
+      "budget": 6120,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "order": "O0",
+      "budget": 8160,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "order": "O0",
+      "budget": 12240,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "order": "O0",
+      "budget": 16320,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 32,
+      "order": "O0",
+      "budget": 510,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 32,
+      "order": "O0",
+      "budget": 1020,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 32,
+      "order": "O0",
+      "budget": 2040,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 32,
+      "order": "O0",
+      "budget": 4080,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 32,
+      "order": "O0",
+      "budget": 6120,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 32,
+      "order": "O0",
+      "budget": 8160,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 32,
+      "order": "O0",
+      "budget": 12240,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 32,
+      "order": "O0",
+      "budget": 16320,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63,
+      "order": "O0",
+      "budget": 510,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63,
+      "order": "O0",
+      "budget": 1020,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63,
+      "order": "O0",
+      "budget": 2040,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63,
+      "order": "O0",
+      "budget": 4080,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63,
+      "order": "O0",
+      "budget": 6120,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63,
+      "order": "O0",
+      "budget": 8160,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63,
+      "order": "O0",
+      "budget": 12240,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "frame": 63,
+      "order": "O0",
+      "budget": 16320,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "order": "O0",
+      "budget": 510,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "order": "O0",
+      "budget": 1020,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "order": "O0",
+      "budget": 2040,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "order": "O0",
+      "budget": 4080,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "order": "O0",
+      "budget": 6120,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "order": "O0",
+      "budget": 8160,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "order": "O0",
+      "budget": 12240,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 0,
+      "order": "O0",
+      "budget": 16320,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 30,
+      "order": "O0",
+      "budget": 510,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 30,
+      "order": "O0",
+      "budget": 1020,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 30,
+      "order": "O0",
+      "budget": 2040,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 30,
+      "order": "O0",
+      "budget": 4080,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 30,
+      "order": "O0",
+      "budget": 6120,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 30,
+      "order": "O0",
+      "budget": 8160,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 30,
+      "order": "O0",
+      "budget": 12240,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 30,
+      "order": "O0",
+      "budget": 16320,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 59,
+      "order": "O0",
+      "budget": 510,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 59,
+      "order": "O0",
+      "budget": 1020,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 59,
+      "order": "O0",
+      "budget": 2040,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 59,
+      "order": "O0",
+      "budget": 4080,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 59,
+      "order": "O0",
+      "budget": 6120,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 59,
+      "order": "O0",
+      "budget": 8160,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 59,
+      "order": "O0",
+      "budget": 12240,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "frame": 59,
+      "order": "O0",
+      "budget": 16320,
+      "rgb_bit_exact": true,
+      "nonfinite": false
+    }
+  ],
+  "sender_state": null,
+  "receiver_state": null,
+  "state_norm": null,
+  "state_drift": "NOT_APPLICABLE",
+  "earlier_budget_affects_encoding": false,
+  "requires_feedback": false,
+  "scope": "FIXED and CLOSED collapse to the same stateless full-cohort evaluation",
+  "clips": [
+    {
+      "order": "O0",
+      "budget": 510,
+      "video": "DAVIS2017:blackswan",
+      "full": {
+        "mse": 0.022348666526377202,
+        "lpips": 0.6046447443962097,
+        "dists": 0.3420321404933929,
+        "frames": 50,
+        "global_psnr": 16.507483847250167,
+        "mean_frame_psnr": 16.51639052409141
+      },
+      "early": {
+        "mse": 0.020545571576803923,
+        "lpips": 0.615124050527811,
+        "dists": 0.3456457853317261,
+        "frames": 16,
+        "global_psnr": 16.87281772182641,
+        "mean_frame_psnr": 16.875146867987905
+      },
+      "middle": {
+        "mse": 0.02298719687935184,
+        "lpips": 0.5982944719931659,
+        "dists": 0.3419274547520806,
+        "frames": 17,
+        "global_psnr": 16.3851398453985,
+        "mean_frame_psnr": 16.386593478597575
+      },
+      "late": {
+        "mse": 0.023407166714177412,
+        "lpips": 0.6011321404400993,
+        "dists": 0.33873574873980355,
+        "frames": 17,
+        "global_psnr": 16.30651151654347,
+        "mean_frame_psnr": 16.308534540035605
+      },
+      "late_minus_early": {
+        "global_psnr": -0.5663062052829417,
+        "lpips": 0.013991910087711723,
+        "dists": 0.006910036591922519
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 1020,
+      "video": "DAVIS2017:blackswan",
+      "full": {
+        "mse": 0.018952043429017067,
+        "lpips": 0.5853601372241974,
+        "dists": 0.3215313792228699,
+        "frames": 50,
+        "global_psnr": 17.223439570889607,
+        "mean_frame_psnr": 17.229973595791236
+      },
+      "early": {
+        "mse": 0.01780923316255212,
+        "lpips": 0.5977165065705776,
+        "dists": 0.32631194591522217,
+        "frames": 16,
+        "global_psnr": 17.49354780168535,
+        "mean_frame_psnr": 17.495754082642282
+      },
+      "middle": {
+        "mse": 0.019061422523330238,
+        "lpips": 0.5791477455812342,
+        "dists": 0.31840451324687286,
+        "frames": 17,
+        "global_psnr": 17.19844691789002,
+        "mean_frame_psnr": 17.200166370364887
+      },
+      "late": {
+        "mse": 0.019918250467847374,
+        "lpips": 0.5799430047764498,
+        "dists": 0.3201588883119471,
+        "frames": 17,
+        "global_psnr": 17.00748810768149,
+        "mean_frame_psnr": 17.0096344806519
+      },
+      "late_minus_early": {
+        "global_psnr": -0.48605969400385973,
+        "lpips": 0.017773501794127844,
+        "dists": 0.006153057603275058
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 2040,
+      "video": "DAVIS2017:blackswan",
+      "full": {
+        "mse": 0.014897948484867812,
+        "lpips": 0.5545020115375519,
+        "dists": 0.2989109551906586,
+        "frames": 50,
+        "global_psnr": 18.268735317919788,
+        "mean_frame_psnr": 18.27528785056012
+      },
+      "early": {
+        "mse": 0.014309167338069528,
+        "lpips": 0.5634531565010548,
+        "dists": 0.3037726394832134,
+        "frames": 16,
+        "global_psnr": 18.44385637449377,
+        "mean_frame_psnr": 18.446065386618162
+      },
+      "middle": {
+        "mse": 0.014559209182420197,
+        "lpips": 0.5508816908387577,
+        "dists": 0.2958568264456356,
+        "frames": 17,
+        "global_psnr": 18.368622141052974,
+        "mean_frame_psnr": 18.370928731478006
+      },
+      "late": {
+        "mse": 0.015790834749007925,
+        "lpips": 0.5496977252118728,
+        "dists": 0.29738938107210044,
+        "frames": 17,
+        "global_psnr": 18.015949113276374,
+        "mean_frame_psnr": 18.018915170999367
+      },
+      "late_minus_early": {
+        "global_psnr": -0.42790726121739553,
+        "lpips": 0.013755431289181996,
+        "dists": 0.00638325841111298
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 4080,
+      "video": "DAVIS2017:blackswan",
+      "full": {
+        "mse": 0.011826908756047487,
+        "lpips": 0.4992243814468384,
+        "dists": 0.275375120639801,
+        "frames": 50,
+        "global_psnr": 19.271287537341994,
+        "mean_frame_psnr": 19.27664129975499
+      },
+      "early": {
+        "mse": 0.01150289608631283,
+        "lpips": 0.5063560139387846,
+        "dists": 0.28275295719504356,
+        "frames": 16,
+        "global_psnr": 19.39192803476043,
+        "mean_frame_psnr": 19.394303374873076
+      },
+      "middle": {
+        "mse": 0.011527395588071906,
+        "lpips": 0.49648842390845804,
+        "dists": 0.2735282954047708,
+        "frames": 17,
+        "global_psnr": 19.382688028088,
+        "mean_frame_psnr": 19.38583878745729
+      },
+      "late": {
+        "mse": 0.012431375024949802,
+        "lpips": 0.4952482142869164,
+        "dists": 0.27027809970519123,
+        "frames": 17,
+        "global_psnr": 19.054808317186982,
+        "mean_frame_psnr": 19.05670303547096
+      },
+      "late_minus_early": {
+        "global_psnr": -0.3371197175734473,
+        "lpips": 0.0111077996518682,
+        "dists": 0.012474857489852331
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 6120,
+      "video": "DAVIS2017:blackswan",
+      "full": {
+        "mse": 0.010819075219333172,
+        "lpips": 0.4827545964717865,
+        "dists": 0.2702333748340607,
+        "frames": 50,
+        "global_psnr": 19.65809859775198,
+        "mean_frame_psnr": 19.663333111247592
+      },
+      "early": {
+        "mse": 0.010462006146553904,
+        "lpips": 0.4897318761795759,
+        "dists": 0.2768585979938507,
+        "frames": 16,
+        "global_psnr": 19.803850291552987,
+        "mean_frame_psnr": 19.805370692874014
+      },
+      "middle": {
+        "mse": 0.010569128810482867,
+        "lpips": 0.4795604821513681,
+        "dists": 0.26872398222194,
+        "frames": 17,
+        "global_psnr": 19.759608091346685,
+        "mean_frame_psnr": 19.762199777812217
+      },
+      "late": {
+        "mse": 0.011405086637858082,
+        "lpips": 0.47938185930252075,
+        "dists": 0.2655072632957907,
+        "frames": 17,
+        "global_psnr": 19.429014112903772,
+        "mean_frame_psnr": 19.43078401491692
+      },
+      "late_minus_early": {
+        "global_psnr": -0.3748361786492147,
+        "lpips": 0.010350016877055168,
+        "dists": 0.01135133469805999
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 8160,
+      "video": "DAVIS2017:blackswan",
+      "full": {
+        "mse": 0.010584180131554604,
+        "lpips": 0.45447564840316773,
+        "dists": 0.2574642872810364,
+        "frames": 50,
+        "global_psnr": 19.753427775247808,
+        "mean_frame_psnr": 19.759931110761293
+      },
+      "early": {
+        "mse": 0.010177150543313473,
+        "lpips": 0.4587855860590935,
+        "dists": 0.25960586592555046,
+        "frames": 16,
+        "global_psnr": 19.9237380122724,
+        "mean_frame_psnr": 19.925288983674463
+      },
+      "middle": {
+        "mse": 0.010304277981905377,
+        "lpips": 0.4535194793168236,
+        "dists": 0.25725866766536937,
+        "frames": 17,
+        "global_psnr": 19.86982433720761,
+        "mean_frame_psnr": 19.872453993618084
+      },
+      "late": {
+        "mse": 0.011247168952489601,
+        "lpips": 0.4513754055780523,
+        "dists": 0.2556543034665725,
+        "frames": 17,
+        "global_psnr": 19.489567809339338,
+        "mean_frame_psnr": 19.491777288692113
+      },
+      "late_minus_early": {
+        "global_psnr": -0.4341702029330605,
+        "lpips": 0.007410180481041195,
+        "dists": 0.003951562458977986
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 12240,
+      "video": "DAVIS2017:blackswan",
+      "full": {
+        "mse": 0.005480494974181056,
+        "lpips": 0.3066355633735657,
+        "dists": 0.18131962656974793,
+        "frames": 50,
+        "global_psnr": 22.611802161784233,
+        "mean_frame_psnr": 22.617824736900538
+      },
+      "early": {
+        "mse": 0.005314895621268079,
+        "lpips": 0.3123891707509756,
+        "dists": 0.18502109870314598,
+        "frames": 16,
+        "global_psnr": 22.74505260125148,
+        "mean_frame_psnr": 22.750233202852097
+      },
+      "middle": {
+        "mse": 0.00536726730163483,
+        "lpips": 0.30507612579009113,
+        "dists": 0.1766126927207498,
+        "frames": 17,
+        "global_psnr": 22.70246775360579,
+        "mean_frame_psnr": 22.7054620369479
+      },
+      "late": {
+        "mse": 0.005749580861233613,
+        "lpips": 0.3027798410724191,
+        "dists": 0.18254282194025376,
+        "frames": 17,
+        "global_psnr": 22.403638137952605,
+        "mean_frame_psnr": 22.40556770419289
+      },
+      "late_minus_early": {
+        "global_psnr": -0.34141446329887515,
+        "lpips": 0.009609329678556489,
+        "dists": 0.002478276762892223
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 16320,
+      "video": "DAVIS2017:blackswan",
+      "full": {
+        "mse": 0.00043540702550671996,
+        "lpips": 0.08781791418790817,
+        "dists": 0.060050690174102785,
+        "frames": 50,
+        "global_psnr": 33.611045676831075,
+        "mean_frame_psnr": 33.639597030317496
+      },
+      "early": {
+        "mse": 0.0004346518107922748,
+        "lpips": 0.08842428913339972,
+        "dists": 0.06010732799768448,
+        "frames": 16,
+        "global_psnr": 33.61858506731419,
+        "mean_frame_psnr": 33.65390211869835
+      },
+      "middle": {
+        "mse": 0.00039792781599852094,
+        "lpips": 0.0841125578564756,
+        "dists": 0.05781410020940444,
+        "frames": 17,
+        "global_psnr": 34.001957016868964,
+        "mean_frame_psnr": 34.01375944205598
+      },
+      "late": {
+        "mse": 0.00047359702533439677,
+        "lpips": 0.09095256468828987,
+        "dists": 0.06223397395190071,
+        "frames": 17,
+        "global_psnr": 33.24591034082675,
+        "mean_frame_psnr": 33.251971005985276
+      },
+      "late_minus_early": {
+        "global_psnr": -0.37267472648744615,
+        "lpips": -0.002528275554890144,
+        "dists": -0.0021266459542162303
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 510,
+      "video": "DAVIS2017:car-roundabout",
+      "full": {
+        "mse": 0.04372540977783501,
+        "lpips": 0.6147552588954568,
+        "dists": 0.3477875031530857,
+        "frames": 64,
+        "global_psnr": 13.592661117882534,
+        "mean_frame_psnr": 13.600829107032904
+      },
+      "early": {
+        "mse": 0.04178765043616295,
+        "lpips": 0.6077982868467059,
+        "dists": 0.3495722526595706,
+        "frames": 21,
+        "global_psnr": 13.789520469299681,
+        "mean_frame_psnr": 13.7915079724331
+      },
+      "middle": {
+        "mse": 0.04231662356427738,
+        "lpips": 0.6139344885235741,
+        "dists": 0.3504315586317153,
+        "frames": 21,
+        "global_psnr": 13.734889918684727,
+        "mean_frame_psnr": 13.737317214823966
+      },
+      "late": {
+        "mse": 0.04691983962600881,
+        "lpips": 0.622179467569698,
+        "dists": 0.3435600074854764,
+        "frames": 22,
+        "global_psnr": 13.286434809908316,
+        "mean_frame_psnr": 13.288533359895792
+      },
+      "late_minus_early": {
+        "global_psnr": -0.5030856593913651,
+        "lpips": -0.014381180722992104,
+        "dists": 0.006012245174094211
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 1020,
+      "video": "DAVIS2017:car-roundabout",
+      "full": {
+        "mse": 0.04077743709785864,
+        "lpips": 0.6036470886319876,
+        "dists": 0.34164923802018166,
+        "frames": 64,
+        "global_psnr": 13.895800735366723,
+        "mean_frame_psnr": 13.903522997685847
+      },
+      "early": {
+        "mse": 0.039032810855479466,
+        "lpips": 0.5962177231198266,
+        "dists": 0.34338548353740145,
+        "frames": 21,
+        "global_psnr": 14.08570172903512,
+        "mean_frame_psnr": 14.086970604534956
+      },
+      "middle": {
+        "mse": 0.039422249155385156,
+        "lpips": 0.6033235107149396,
+        "dists": 0.3434141590481713,
+        "frames": 21,
+        "global_psnr": 14.042586015708412,
+        "mean_frame_psnr": 14.044859114276537
+      },
+      "late": {
+        "mse": 0.04373635063794526,
+        "lpips": 0.611047625541687,
+        "dists": 0.3383072154088454,
+        "frames": 22,
+        "global_psnr": 13.591574573277132,
+        "mean_frame_psnr": 13.59350217076604
+      },
+      "late_minus_early": {
+        "global_psnr": -0.4941271557579885,
+        "lpips": -0.014829902421860441,
+        "dists": 0.005078268128556052
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 2040,
+      "video": "DAVIS2017:car-roundabout",
+      "full": {
+        "mse": 0.035387388605158776,
+        "lpips": 0.5754913808777928,
+        "dists": 0.33421426080167294,
+        "frames": 64,
+        "global_psnr": 14.51151484726551,
+        "mean_frame_psnr": 14.52446244769946
+      },
+      "early": {
+        "mse": 0.03374722972512245,
+        "lpips": 0.5711535215377808,
+        "dists": 0.3374488580794561,
+        "frames": 21,
+        "global_psnr": 14.717618721506616,
+        "mean_frame_psnr": 14.719688694128445
+      },
+      "middle": {
+        "mse": 0.033691657795792536,
+        "lpips": 0.577157662028358,
+        "dists": 0.3356413301967439,
+        "frames": 21,
+        "global_psnr": 14.72477619061876,
+        "mean_frame_psnr": 14.732813065829228
+      },
+      "late": {
+        "mse": 0.038571646945043045,
+        "lpips": 0.5780415236949921,
+        "dists": 0.32976448806849396,
+        "frames": 22,
+        "global_psnr": 14.137318170874508,
+        "mean_frame_psnr": 14.139229986075195
+      },
+      "late_minus_early": {
+        "global_psnr": -0.5803005506321082,
+        "lpips": -0.006888002157211304,
+        "dists": 0.0076843700109621715
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 4080,
+      "video": "DAVIS2017:car-roundabout",
+      "full": {
+        "mse": 0.02780223693116568,
+        "lpips": 0.5299559673294425,
+        "dists": 0.30465472489595413,
+        "frames": 64,
+        "global_psnr": 15.559202599172355,
+        "mean_frame_psnr": 15.574934555875918
+      },
+      "early": {
+        "mse": 0.02597232118603729,
+        "lpips": 0.5264245328449068,
+        "dists": 0.3038107809566316,
+        "frames": 21,
+        "global_psnr": 15.854892350746104,
+        "mean_frame_psnr": 15.857116547880103
+      },
+      "middle": {
+        "mse": 0.02664158617456754,
+        "lpips": 0.5298910992486137,
+        "dists": 0.3041947569165911,
+        "frames": 21,
+        "global_psnr": 15.744399219058323,
+        "mean_frame_psnr": 15.751940214459825
+      },
+      "late": {
+        "mse": 0.03065686859190464,
+        "lpips": 0.5333888015963815,
+        "dists": 0.30589936809106305,
+        "frames": 22,
+        "global_psnr": 15.134722076913441,
+        "mean_frame_psnr": 15.13661907122365
+      },
+      "late_minus_early": {
+        "global_psnr": -0.7201702738326627,
+        "lpips": -0.0069642687514747115,
+        "dists": -0.002088587134431441
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 6120,
+      "video": "DAVIS2017:car-roundabout",
+      "full": {
+        "mse": 0.025298432999989018,
+        "lpips": 0.5148124461993575,
+        "dists": 0.30069167632609606,
+        "frames": 64,
+        "global_psnr": 15.969063784500312,
+        "mean_frame_psnr": 15.981272019377748
+      },
+      "early": {
+        "mse": 0.023954126274301893,
+        "lpips": 0.5109036224228996,
+        "dists": 0.29868522995994207,
+        "frames": 21,
+        "global_psnr": 16.206196653889954,
+        "mean_frame_psnr": 16.208671945420544
+      },
+      "middle": {
+        "mse": 0.024243160904872985,
+        "lpips": 0.5158664499010358,
+        "dists": 0.30049523285457064,
+        "frames": 21,
+        "global_psnr": 16.154107560384453,
+        "mean_frame_psnr": 16.159154707949646
+      },
+      "late": {
+        "mse": 0.027588940056210213,
+        "lpips": 0.5175375017252836,
+        "dists": 0.30279443480751733,
+        "frames": 22,
+        "global_psnr": 15.592649844277236,
+        "mean_frame_psnr": 15.594411341790995
+      },
+      "late_minus_early": {
+        "global_psnr": -0.6135468096127177,
+        "lpips": -0.006633879302384016,
+        "dists": -0.004109204847575265
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 8160,
+      "video": "DAVIS2017:car-roundabout",
+      "full": {
+        "mse": 0.023901818523881957,
+        "lpips": 0.4890698022209108,
+        "dists": 0.2903107739984989,
+        "frames": 64,
+        "global_psnr": 16.215690553346185,
+        "mean_frame_psnr": 16.229267619617602
+      },
+      "early": {
+        "mse": 0.02264171235618137,
+        "lpips": 0.48250206737291246,
+        "dists": 0.28625640982673284,
+        "frames": 21,
+        "global_psnr": 16.450907312506057,
+        "mean_frame_psnr": 16.454010999200886
+      },
+      "middle": {
+        "mse": 0.022753493682969184,
+        "lpips": 0.4898155501910618,
+        "dists": 0.2925277352333069,
+        "frames": 21,
+        "global_psnr": 16.42951910182991,
+        "mean_frame_psnr": 16.435707276445783
+      },
+      "late": {
+        "mse": 0.026200775395740162,
+        "lpips": 0.4946271533315832,
+        "dists": 0.29206465862014075,
+        "frames": 22,
+        "global_psnr": 15.816858558135278,
+        "mean_frame_psnr": 15.817683812133934
+      },
+      "late_minus_early": {
+        "global_psnr": -0.6340487543707791,
+        "lpips": -0.012125085958670734,
+        "dists": -0.005808248793407911
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 12240,
+      "video": "DAVIS2017:car-roundabout",
+      "full": {
+        "mse": 0.011445772339357063,
+        "lpips": 0.3540586526505649,
+        "dists": 0.21835466288030148,
+        "frames": 64,
+        "global_psnr": 19.413548966195105,
+        "mean_frame_psnr": 19.430721938978962
+      },
+      "early": {
+        "mse": 0.011107871796758402,
+        "lpips": 0.345634400844574,
+        "dists": 0.21131473495846703,
+        "frames": 21,
+        "global_psnr": 19.54369141370618,
+        "mean_frame_psnr": 19.545895925514678
+      },
+      "middle": {
+        "mse": 0.010503630020788737,
+        "lpips": 0.3572063247362773,
+        "dists": 0.2213204644975208,
+        "frames": 21,
+        "global_psnr": 19.786605842110113,
+        "mean_frame_psnr": 19.792886056909282
+      },
+      "late": {
+        "mse": 0.012667631434107368,
+        "lpips": 0.3590953878381036,
+        "dists": 0.2222436016256159,
+        "frames": 22,
+        "global_psnr": 18.973045809538938,
+        "mean_frame_psnr": 18.97508102107956
+      },
+      "late_minus_early": {
+        "global_psnr": -0.5706456041672432,
+        "lpips": -0.0134609869935296,
+        "dists": -0.010928866667148873
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 16320,
+      "video": "DAVIS2017:car-roundabout",
+      "full": {
+        "mse": 0.0010865752747122315,
+        "lpips": 0.10381140746176243,
+        "dists": 0.06247195694595575,
+        "frames": 64,
+        "global_psnr": 29.639401816676706,
+        "mean_frame_psnr": 29.67903900687201
+      },
+      "early": {
+        "mse": 0.0009880833510708595,
+        "lpips": 0.10092094682511829,
+        "dists": 0.0588999731200082,
+        "frames": 21,
+        "global_psnr": 30.052064183847516,
+        "mean_frame_psnr": 30.05380283416993
+      },
+      "middle": {
+        "mse": 0.0009888819019709314,
+        "lpips": 0.10016650174345289,
+        "dists": 0.06303501412982032,
+        "frames": 21,
+        "global_psnr": 30.04855571279323,
+        "mean_frame_psnr": 30.05862771199214
+      },
+      "late": {
+        "mse": 0.0012738430576229637,
+        "lpips": 0.11004971170967276,
+        "dists": 0.06534411419521678,
+        "frames": 22,
+        "global_psnr": 28.948840754597658,
+        "mean_frame_psnr": 28.958975225927507
+      },
+      "late_minus_early": {
+        "global_psnr": -1.1032234292498586,
+        "lpips": -0.009128764884554469,
+        "dists": -0.006444141075208583
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 510,
+      "video": "DAVIS2017:dog",
+      "full": {
+        "mse": 0.013756129083534081,
+        "lpips": 0.520730326573054,
+        "dists": 0.34936536351839703,
+        "frames": 60,
+        "global_psnr": 18.615037575371765,
+        "mean_frame_psnr": 18.668937996001464
+      },
+      "early": {
+        "mse": 0.015613904921337962,
+        "lpips": 0.5283108428120613,
+        "dists": 0.3370744794607162,
+        "frames": 20,
+        "global_psnr": 18.064884695380016,
+        "mean_frame_psnr": 18.073541909805268
+      },
+      "middle": {
+        "mse": 0.012424435047432781,
+        "lpips": 0.5279829800128937,
+        "dists": 0.35482228696346285,
+        "frames": 20,
+        "global_psnr": 19.05723349987845,
+        "mean_frame_psnr": 19.090969101239093
+      },
+      "late": {
+        "mse": 0.013230047281831503,
+        "lpips": 0.505897156894207,
+        "dists": 0.35619932413101196,
+        "frames": 20,
+        "global_psnr": 18.784386037186348,
+        "mean_frame_psnr": 18.84230297696003
+      },
+      "late_minus_early": {
+        "global_psnr": 0.7195013418063319,
+        "lpips": 0.02241368591785431,
+        "dists": -0.019124844670295738
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 1020,
+      "video": "DAVIS2017:dog",
+      "full": {
+        "mse": 0.0120211367495358,
+        "lpips": 0.4922545219461123,
+        "dists": 0.3185460944970449,
+        "frames": 60,
+        "global_psnr": 19.20054462390854,
+        "mean_frame_psnr": 19.262778194772213
+      },
+      "early": {
+        "mse": 0.013586335862055422,
+        "lpips": 0.5010499998927116,
+        "dists": 0.30584867894649503,
+        "frames": 20,
+        "global_psnr": 18.668976536026136,
+        "mean_frame_psnr": 18.68450785282345
+      },
+      "middle": {
+        "mse": 0.011017208499833942,
+        "lpips": 0.4967516288161278,
+        "dists": 0.32648508846759794,
+        "frames": 20,
+        "global_psnr": 19.57928431499992,
+        "mean_frame_psnr": 19.6202929394858
+      },
+      "late": {
+        "mse": 0.011459865886718035,
+        "lpips": 0.47896193712949753,
+        "dists": 0.32330451607704164,
+        "frames": 20,
+        "global_psnr": 19.408204648292852,
+        "mean_frame_psnr": 19.483533792007393
+      },
+      "late_minus_early": {
+        "global_psnr": 0.7392281122667157,
+        "lpips": 0.022088062763214067,
+        "dists": -0.017455837130546603
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 2040,
+      "video": "DAVIS2017:dog",
+      "full": {
+        "mse": 0.009367499904086193,
+        "lpips": 0.4691470627983411,
+        "dists": 0.29998554388682047,
+        "frames": 60,
+        "global_psnr": 20.283763026809044,
+        "mean_frame_psnr": 20.358025557853463
+      },
+      "early": {
+        "mse": 0.010292123723775148,
+        "lpips": 0.4787960767745972,
+        "dists": 0.2860062509775162,
+        "frames": 20,
+        "global_psnr": 19.874950016853735,
+        "mean_frame_psnr": 19.900468817323166
+      },
+      "middle": {
+        "mse": 0.008965102885849775,
+        "lpips": 0.4735663414001465,
+        "dists": 0.30781649947166445,
+        "frames": 20,
+        "global_psnr": 20.474447219968987,
+        "mean_frame_psnr": 20.5388904054076
+      },
+      "late": {
+        "mse": 0.008845273102633656,
+        "lpips": 0.4550787702202797,
+        "dists": 0.3061338812112808,
+        "frames": 20,
+        "global_psnr": 20.532887534681365,
+        "mean_frame_psnr": 20.63471745082962
+      },
+      "late_minus_early": {
+        "global_psnr": 0.6579375178276301,
+        "lpips": 0.023717306554317474,
+        "dists": -0.020127630233764626
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 4080,
+      "video": "DAVIS2017:dog",
+      "full": {
+        "mse": 0.007639893524659176,
+        "lpips": 0.4315433477361997,
+        "dists": 0.2766890396674474,
+        "frames": 60,
+        "global_psnr": 21.16912694038866,
+        "mean_frame_psnr": 21.273843309189807
+      },
+      "early": {
+        "mse": 0.00841094001661986,
+        "lpips": 0.4413486018776894,
+        "dists": 0.26627659499645234,
+        "frames": 20,
+        "global_psnr": 20.751554642238315,
+        "mean_frame_psnr": 20.789277246540838
+      },
+      "middle": {
+        "mse": 0.007371512264944613,
+        "lpips": 0.4373256668448448,
+        "dists": 0.28244788348674776,
+        "frames": 20,
+        "global_psnr": 21.324434075347018,
+        "mean_frame_psnr": 21.419277818580515
+      },
+      "late": {
+        "mse": 0.007137228292413056,
+        "lpips": 0.4159557744860649,
+        "dists": 0.28134264051914215,
+        "frames": 20,
+        "global_psnr": 21.46470411614995,
+        "mean_frame_psnr": 21.61297486244807
+      },
+      "late_minus_early": {
+        "global_psnr": 0.7131494739116349,
+        "lpips": 0.025392827391624462,
+        "dists": -0.015066045522689808
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 6120,
+      "video": "DAVIS2017:dog",
+      "full": {
+        "mse": 0.006983567855786532,
+        "lpips": 0.4162013292312622,
+        "dists": 0.26855110228061674,
+        "frames": 60,
+        "global_psnr": 21.55922642677908,
+        "mean_frame_psnr": 21.67473670087855
+      },
+      "early": {
+        "mse": 0.007678143330849707,
+        "lpips": 0.42673370242118835,
+        "dists": 0.25935413539409635,
+        "frames": 20,
+        "global_psnr": 21.147437850010952,
+        "mean_frame_psnr": 21.19041355084692
+      },
+      "middle": {
+        "mse": 0.0067704393528401855,
+        "lpips": 0.42082327157258986,
+        "dists": 0.2734732359647751,
+        "frames": 20,
+        "global_psnr": 21.69383147810732,
+        "mean_frame_psnr": 21.801004937858668
+      },
+      "late": {
+        "mse": 0.006502120883669704,
+        "lpips": 0.4010470137000084,
+        "dists": 0.27282593548297884,
+        "frames": 20,
+        "global_psnr": 21.86944960613087,
+        "mean_frame_psnr": 22.03279161393007
+      },
+      "late_minus_early": {
+        "global_psnr": 0.7220117561199189,
+        "lpips": 0.025686688721179962,
+        "dists": -0.01347180008888249
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 8160,
+      "video": "DAVIS2017:dog",
+      "full": {
+        "mse": 0.006803887783704946,
+        "lpips": 0.40040587186813353,
+        "dists": 0.2515435645977656,
+        "frames": 60,
+        "global_psnr": 21.672428578048553,
+        "mean_frame_psnr": 21.798598990234243
+      },
+      "early": {
+        "mse": 0.007429811567999422,
+        "lpips": 0.4089661106467247,
+        "dists": 0.24484911262989045,
+        "frames": 20,
+        "global_psnr": 21.290222005080366,
+        "mean_frame_psnr": 21.339835700012763
+      },
+      "middle": {
+        "mse": 0.006626085808966309,
+        "lpips": 0.40368276089429855,
+        "dists": 0.25275900065898893,
+        "frames": 20,
+        "global_psnr": 21.78742944228393,
+        "mean_frame_psnr": 21.907187332170512
+      },
+      "late": {
+        "mse": 0.006355765974149108,
+        "lpips": 0.3885687440633774,
+        "dists": 0.2570225805044174,
+        "frames": 20,
+        "global_psnr": 21.968321023404943,
+        "mean_frame_psnr": 22.14877393851945
+      },
+      "late_minus_early": {
+        "global_psnr": 0.678099018324577,
+        "lpips": 0.020397366583347343,
+        "dists": -0.012173467874526944
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 12240,
+      "video": "DAVIS2017:dog",
+      "full": {
+        "mse": 0.0035819982236716895,
+        "lpips": 0.27667929157614707,
+        "dists": 0.18563877840836843,
+        "frames": 60,
+        "global_psnr": 24.458746338554334,
+        "mean_frame_psnr": 24.63546358820241
+      },
+      "early": {
+        "mse": 0.003940279129892588,
+        "lpips": 0.28331341594457626,
+        "dists": 0.1792204797267914,
+        "frames": 20,
+        "global_psnr": 24.044730116063544,
+        "mean_frame_psnr": 24.12238876037776
+      },
+      "middle": {
+        "mse": 0.0035371785110328347,
+        "lpips": 0.2802343249320984,
+        "dists": 0.18955729007720948,
+        "frames": 20,
+        "global_psnr": 24.51343022062483,
+        "mean_frame_psnr": 24.684442644364232
+      },
+      "late": {
+        "mse": 0.0032685370300896467,
+        "lpips": 0.26649013385176656,
+        "dists": 0.18813856542110444,
+        "frames": 20,
+        "global_psnr": 24.856465904372406,
+        "mean_frame_psnr": 25.09955935986524
+      },
+      "late_minus_early": {
+        "global_psnr": 0.8117357883088623,
+        "lpips": 0.0168232820928097,
+        "dists": -0.008918085694313044
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    },
+    {
+      "order": "O0",
+      "budget": 16320,
+      "video": "DAVIS2017:dog",
+      "full": {
+        "mse": 0.0002870375728889485,
+        "lpips": 0.09034576254586378,
+        "dists": 0.053802708784739174,
+        "frames": 60,
+        "global_psnr": 35.420612508955934,
+        "mean_frame_psnr": 36.03777732087656
+      },
+      "early": {
+        "mse": 0.00029830279017915016,
+        "lpips": 0.08698704577982426,
+        "dists": 0.045064869523048404,
+        "frames": 20,
+        "global_psnr": 35.25342684439676,
+        "mean_frame_psnr": 35.493447905687965
+      },
+      "middle": {
+        "mse": 0.0002950887119368417,
+        "lpips": 0.10244490429759026,
+        "dists": 0.059258490800857544,
+        "frames": 20,
+        "global_psnr": 35.300474033001244,
+        "mean_frame_psnr": 35.81427773379022
+      },
+      "late": {
+        "mse": 0.0002677212165508536,
+        "lpips": 0.08160533756017685,
+        "dists": 0.05708476603031158,
+        "frames": 20,
+        "global_psnr": 35.72317210188326,
+        "mean_frame_psnr": 36.805606323151494
+      },
+      "late_minus_early": {
+        "global_psnr": 0.469745257486494,
+        "lpips": 0.00538170821964741,
+        "dists": -0.012019896507263178
+      },
+      "closed_minus_fixed": {
+        "global_psnr": 0.0,
+        "lpips": 0.0,
+        "dists": 0.0
+      }
+    }
+  ]
+}
