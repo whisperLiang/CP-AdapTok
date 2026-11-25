@@ -177,7 +177,7 @@
   "T36": {
     "test": "断点续训",
     "status": "PASS",
-    "evidence": "P1 and P2 real optimizer checkpoint resume"
+    "evidence": "Both seeds resumed through P1/P2/P3; verified effective AdamW counts, source signatures, CPU/CUDA RNG and data position at every retained node."
   },
   "T37": {
     "test": "历史资产",

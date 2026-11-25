@@ -1,0 +1,23 @@
+{
+  "status": "CONTINUE",
+  "records": [
+    {
+      "path": "results/hla_tok/uf_v2/d1/joint-seed2-step4000-validation/summary.json",
+      "low_rd": 0.04419228496478164,
+      "improved": true
+    },
+    {
+      "path": "results/hla_tok/uf_v2/d1/joint-seed2-step6000-validation/summary.json",
+      "low_rd": 0.04293587036901214,
+      "improved": true,
+      "major_high_rate_regression": false
+    },
+    {
+      "path": "results/hla_tok/uf_v2/d1/joint-seed2-step8000-validation/summary.json",
+      "low_rd": 0.04184094329374878,
+      "improved": true,
+      "major_high_rate_regression": false
+    }
+  ],
+  "consecutive_no_gain": 0
+}

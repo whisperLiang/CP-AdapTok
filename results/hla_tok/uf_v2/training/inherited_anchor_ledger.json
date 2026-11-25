@@ -1,0 +1,77 @@
+{
+  "model": "historical A2",
+  "fresh_updates_this_experiment": 0,
+  "seeds": {
+    "1": {
+      "nodes": [
+        {
+          "source": "/home/whisperliang/.codex/worktrees/hla-tok-uf/CP-AdapTok/results/hla_tok/uf/anchor/isolated-training-seed1/step500.json",
+          "source_sha256": "6ae550afdc09f42af557fd5fb8f2dd9455e4f10794e010a768f0ddba66d609c1",
+          "start_step": 0,
+          "optimizer_steps": 500,
+          "new_steps": 500,
+          "training_seconds": 14.560224068001844,
+          "checkpoint": "checkpoints/hla_tok/uf/isolated/anchor-seed1-step500.pt",
+          "checkpoint_sha256": "009d48c93560bfb1c70d338f4b4692163692594223a3d15ac82bc5df6cf85c18",
+          "read_counts": {
+            "train": 256,
+            "validation": 0,
+            "test": 0
+          }
+        },
+        {
+          "source": "/home/whisperliang/.codex/worktrees/hla-tok-uf/CP-AdapTok/results/hla_tok/uf/anchor/isolated-training-seed1/step2000.json",
+          "source_sha256": "00505ec536a620ecee272d4968198917ecaf49a9cbdafbe35298b49ef583d398",
+          "start_step": 500,
+          "optimizer_steps": 2000,
+          "new_steps": 1500,
+          "training_seconds": 64.12144467199687,
+          "checkpoint": "checkpoints/hla_tok/uf/isolated/anchor-seed1-step2000.pt",
+          "checkpoint_sha256": "24f80cffbf42a882784c18d557000a65cf1063ede97dc8b054d2eb717764648d",
+          "read_counts": {
+            "train": 256,
+            "validation": 0,
+            "test": 0
+          }
+        }
+      ],
+      "training_seconds": 78.68166873999871
+    },
+    "2": {
+      "nodes": [
+        {
+          "source": "/home/whisperliang/.codex/worktrees/hla-tok-uf/CP-AdapTok/results/hla_tok/uf/anchor/isolated-training-seed2/step500.json",
+          "source_sha256": "b09eb90efb6a87e95e222c80a9973063cb04b81bd20b347671dfb5c27cf4c237",
+          "start_step": 0,
+          "optimizer_steps": 500,
+          "new_steps": 500,
+          "training_seconds": 15.853567446989473,
+          "checkpoint": "checkpoints/hla_tok/uf/isolated/anchor-seed2-step500.pt",
+          "checkpoint_sha256": "9212536c6c2079061c4b0ed1ba3bd580425177f41402585f4efeff681cb9a6ca",
+          "read_counts": {
+            "train": 256,
+            "validation": 0,
+            "test": 0
+          }
+        },
+        {
+          "source": "/home/whisperliang/.codex/worktrees/hla-tok-uf/CP-AdapTok/results/hla_tok/uf/anchor/isolated-training-seed2/step2000.json",
+          "source_sha256": "9ec08e07c3257e3ce41867cc0226c3cc2e548bfb60b1306598aa5172232061dc",
+          "start_step": 500,
+          "optimizer_steps": 2000,
+          "new_steps": 1500,
+          "training_seconds": 63.02055985099287,
+          "checkpoint": "checkpoints/hla_tok/uf/isolated/anchor-seed2-step2000.pt",
+          "checkpoint_sha256": "300011f00178b5a12bd100d25e156264895946c2d9f912f469939a9a04db0f20",
+          "read_counts": {
+            "train": 256,
+            "validation": 0,
+            "test": 0
+          }
+        }
+      ],
+      "training_seconds": 78.87412729798234
+    }
+  },
+  "official_UF_LD_pretraining_gpu_hours": "NOT_AVAILABLE"
+}

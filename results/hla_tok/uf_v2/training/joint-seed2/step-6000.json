@@ -1,0 +1,40 @@
+{
+  "checkpoint": "checkpoints/hla_tok/uf_v2/d1-joint-seed2-step6000.pt",
+  "checkpoint_sha256": "f6e88507ce5c4a257c7f0276c689b2815e65962e845a3ffab81eecabf4b00b0d",
+  "optimizer_steps": 6000,
+  "added_steps": 2000,
+  "seed": 2,
+  "unroll": 8,
+  "rate_proxy": "Gaussian native y, fitted official z estimator, Laplace enhancement and actual segment metadata density",
+  "cache_native_z_cdf_sha256": "4e2157f93a5723cb0c7e7ca941492bc5952ee09dfcfa3a12d73723d15cca6b2c",
+  "read_counts": {
+    "train": 256,
+    "validation": 0,
+    "test": 0
+  },
+  "cache_seconds": 16.74735614299425,
+  "gpu_hours": 0.025922659512499297,
+  "peak_allocated_bytes": 14937282048,
+  "train_frame_instances": 16000,
+  "resume": "checkpoints/hla_tok/uf_v2/d1-joint-seed2-step4000.pt",
+  "mean_step_s": 0.038176987897728394,
+  "signature": {
+    "config": "cc4fc0a1f1447f024e114da8518e66baf05009ea1f63eeb4a1348927fdb85a20",
+    "source": "a08ec2a0a1b94221c3efd11306d0003449afe5b93ef57bfa1823f2e03c3870dc",
+    "seed": 2,
+    "manifests": {
+      "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
+      "validation": "8cca166ca7d1f6faf45cd6660b7074657164d2afa2fd14dec92d76f0cee25405",
+      "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
+    },
+    "weights": [
+      "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302",
+      "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799"
+    ]
+  },
+  "native_adjustment_sha256": "0ca53ebce4bb73712bd0cba0b65e4a263b3261c93a39600434783dd0d8b85866",
+  "qps": [
+    0,
+    8
+  ]
+}
