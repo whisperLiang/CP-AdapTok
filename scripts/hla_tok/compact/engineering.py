@@ -51,11 +51,12 @@ def historical(v3: Path, continuous: Path, output: Path, *, before: bool) -> Non
         write_json(path, report)
         return
     config = read_config(CONFIG)
-    counts = {stage: json_at(output / f"{stage}.json")["test_pixel_reads"] for stage in SEALED}
+    training = json_at(output / "training_selection.json")
+    stages = SEALED + (("trained_checks_inputs",) if training["adopted"] else ())
+    counts = {stage: json_at(output / f"{stage}.json")["test_pixel_reads"] for stage in stages}
     if report != json_at(path) or not _same_historical_source(config["base_commit"]) or any(counts.values()):
         raise ValueError("historical or Test sentinel differs")
     profiles = json_at(output / "compact_profile_manifest.json")
-    training = json_at(output / "training_selection.json")
     if training["adopted"]:
         profiles[training["asset"]] = training["spec"]
     observed = {key: sha256_file(output / "profiles" / asset["filename"]) for key, asset in profiles.items()}
@@ -63,7 +64,7 @@ def historical(v3: Path, continuous: Path, output: Path, *, before: bool) -> Non
         raise ValueError("published Compact Profile assets differ")
     c0 = json_at(output / "checkpoint_manifest.json")
     if any(json_at(output / f"{name}.json")["state_dict_after_sha256"] != c0["state_dict_sha256"]
-           for name in SEALED if name.endswith("_inputs")):
+           for name in stages if name.endswith("_inputs")):
         raise ValueError("C0 model weights changed")
     write_json(output / "historical_assets_audit.json", {
         "status": "PASS", "historical": report, "test_pixel_reads": sum(counts.values()), "test_reads_by_stage": counts,

@@ -23,6 +23,7 @@ export PYTHONPATH="$COMPACT_DEPS"
 for stage in audit projection lossless evaluate checks decision train; do
   "$COMPACT_PYTHON" -m "scripts.hla_tok.compact.$stage" --v3 "$COMPACT_V3" --output "$COMPACT_RUN" || exit
 done
+"$COMPACT_PYTHON" -m scripts.hla_tok.compact.checks --trained --v3 "$COMPACT_V3" --output "$COMPACT_RUN"
 "$COMPACT_PYTHON" -m scripts.hla_tok.compact.references frame --v3 "$COMPACT_V3" --output "$COMPACT_RUN"
 "$COMPACT_PYTHON" -m scripts.hla_tok.compact.references original --v3 "$COMPACT_V3" --output "$COMPACT_RUN" \
   --official-checkpoint "$COMPACT_OFFICIAL"

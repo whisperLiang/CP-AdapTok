@@ -150,7 +150,10 @@ def _states(output: Path, selection: dict, targets: dict, runtime_ok: bool, inte
     evidence = [json_at(output / file)["status"] == "PASS" for file in (
         "reproduction.json", "representation_audit.json", "wire_audit.json", "prefix_audit.json",
         "causality_audit.json", "lossless_audit.json", "targeted_mutations.json")]
-    correct = all(evidence) and integrity["test_pixel_reads"] == 0
+    trained = output / "trained_correctness"
+    adapted = [json_at(trained / f"{name}_audit.json")["status"] == "PASS"
+               for name in ("wire", "prefix", "causality")] if trained.is_dir() else []
+    correct = all(evidence + adapted) and integrity["test_pixel_reads"] == 0
     eq = targets["equal_payload_pass"]
     practical = targets["all_practical_pass"]
     bands = sum(row["pass"] for row in targets["practical"].values())

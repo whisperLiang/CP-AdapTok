@@ -138,7 +138,8 @@ def _case(inputs: Inputs, codec: CompactCodec, receiver: ContinuousReceiver, fra
 
 
 @torch.inference_mode()
-def audit(inputs: Inputs, config: dict, output: Path, assets: dict) -> None:
+def audit(inputs: Inputs, config: dict, output: Path, assets: dict, *, evidence: Path | None = None) -> None:
+    evidence = output if evidence is None else evidence
     torch.use_deterministic_algorithms(True)
     frames = [s for _, _, s in validation_frames(inputs, representative(inputs.cohort))]
     receiver = ContinuousReceiver.from_model(inputs.model)
@@ -159,17 +160,17 @@ def audit(inputs: Inputs, config: dict, output: Path, assets: dict) -> None:
                                       orders[order], inputs.checkpoint["state_dict_sha256"])
                 for precision in ("fp32", "bf16"):
                     keys = {"profile_asset": asset, "order": order, "compute_dtype": precision}
-                    packets, rgb, evidence = _case(inputs, codec, receiver, frames, budgets, precision)
+                    packets, rgb, timing_scope = _case(inputs, codec, receiver, frames, budgets, precision)
                     _record_job(root, request, output, spec, keys, packets)
                     expected["_".join(keys.values())] = rgb
                     rows.append(keys | {"cases": len(budgets), "physical_bytes_prefix": True, "code_prefix": True,
                                         "unused_token_perturbation": "PASS", "incremental": "PASS"})
-                    causal.append(keys | evidence)
+                    causal.append(keys | timing_scope)
             print(f"Compact streaming checks passed for {asset}", flush=True)
         independent = _independent(root, request, expected)
-    write_json(output / "prefix_audit.json", {"status": "PASS", "plan": plan, "results": rows})
-    write_json(output / "causality_audit.json", {"status": "PASS", "results": causal})
-    write_json(output / "wire_audit.json", {"status": "PASS", "independent_process": independent,
+    write_json(evidence / "prefix_audit.json", {"status": "PASS", "plan": plan, "results": rows})
+    write_json(evidence / "causality_audit.json", {"status": "PASS", "results": causal})
+    write_json(evidence / "wire_audit.json", {"status": "PASS", "independent_process": independent,
                                            "header_bytes": HEADER_BYTES, "padding_bytes": 0,
                                            "diagnostics_test_reads": inputs.reader.counts["test"]})
 
@@ -177,11 +178,20 @@ def audit(inputs: Inputs, config: dict, output: Path, assets: dict) -> None:
 def main() -> None:
     parser = run_arguments(__doc__)
     parser.set_defaults(output=OUTPUT)
+    parser.add_argument("--trained", action="store_true")
     args = parser.parse_args()
     with locked_output(args.output):
         inputs, config = compact_inputs(args.v3, args.output)
-        audit(inputs, config, args.output, json_at(args.output / "compact_profile_manifest.json"))
-        inputs.finish(args.output / "checks_inputs.json")
+        assets = json_at(args.output / "compact_profile_manifest.json")
+        if args.trained:
+            trained = json_at(args.output / "training_selection.json")
+            if trained["adopted"]:
+                audit(inputs, config, args.output, {trained["asset"]: trained["spec"]},
+                      evidence=args.output / "trained_correctness")
+                inputs.finish(args.output / "trained_checks_inputs.json")
+        else:
+            audit(inputs, config, args.output, assets)
+            inputs.finish(args.output / "checks_inputs.json")
 
 
 if __name__ == "__main__":
