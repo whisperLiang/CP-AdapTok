@@ -1,0 +1,71 @@
+{
+  "anchor.trace.json": {
+    "scope": "kineto observed events only; the pinned native proxy CUDA graph may be opaque",
+    "kernels": 1040,
+    "kernel_sum_ms": 15.856121,
+    "kernel_union_ms": 15.274591796875,
+    "gpu_activity_union_ms": 16.24113671875,
+    "transfers": {
+      "Memcpy DtoH (Device -> Pinned)": {
+        "count": 6,
+        "bytes": 24
+      },
+      "Memcpy DtoH (Device -> Pageable)": {
+        "count": 10,
+        "bytes": 14707200
+      },
+      "Memcpy HtoD (Pageable -> Device)": {
+        "count": 10,
+        "bytes": 7549440
+      }
+    },
+    "observed_sync_count": 27,
+    "torch_alloc_count": 254,
+    "torch_alloc_bytes": 1730915364,
+    "frame_window_ms": 68.866720703125,
+    "frames": 2
+  },
+  "d0.trace.json": {
+    "scope": "kineto observed events only; the pinned native proxy CUDA graph may be opaque",
+    "kernels": 1046,
+    "kernel_sum_ms": 17.624404,
+    "kernel_union_ms": 17.2294189453125,
+    "gpu_activity_union_ms": 20.222986328125,
+    "transfers": {
+      "Memcpy DtoH (Device -> Pinned)": {
+        "count": 4,
+        "bytes": 16
+      },
+      "Memcpy DtoH (Device -> Pageable)": {
+        "count": 8,
+        "bytes": 23109120
+      },
+      "Memcpy DtoD (Device -> Device)": {
+        "count": 8,
+        "bytes": 12794880
+      },
+      "Memcpy HtoD (Pageable -> Device)": {
+        "count": 6,
+        "bytes": 10575360
+      }
+    },
+    "observed_sync_count": 25,
+    "torch_alloc_count": 516,
+    "torch_alloc_bytes": 5338478372,
+    "frame_window_ms": 325.0313544921875,
+    "frames": 2
+  },
+  "ld.trace.json": {
+    "scope": "kineto observed events only; the pinned native proxy CUDA graph may be opaque",
+    "kernels": 0,
+    "kernel_sum_ms": 0.0,
+    "kernel_union_ms": 0.0,
+    "gpu_activity_union_ms": 0.0,
+    "transfers": {},
+    "observed_sync_count": 0,
+    "torch_alloc_count": 106,
+    "torch_alloc_bytes": 901447968,
+    "frame_window_ms": 23.317203125,
+    "frames": 2
+  }
+}
