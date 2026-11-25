@@ -139,12 +139,13 @@ class LocalTokenDecoder(nn.Module):
         self.spatial = nn.Parameter(torch.randn(SPATIAL_QUERIES, DIM) * 0.02)
         self.layers = nn.ModuleList(CrossBlock() for _ in range(2))
 
-    def forward(self, local: Tensor) -> Tensor:
+    def forward(self, local: Tensor, ranks: Tensor | None = None) -> Tensor:
         batch, regions, length, _ = local.shape
         if length == 0:
             return self.spatial.to(local.dtype).expand(batch, regions, -1, -1)
         values = self.input(local.flatten(0, 1))
-        context = values + self.rank[:length].to(values.dtype)
+        positions = self.rank[:length] if ranks is None else self.rank.index_select(0, ranks)
+        context = values + positions.to(values.dtype)
         x = self.spatial.to(values.dtype).expand(batch * regions, -1, -1)
         for layer in self.layers:
             x = layer(x, layer.prepare(context))

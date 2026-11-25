@@ -1,5 +1,6 @@
 """Frame-local HLA-Tok analysis and synthesis from discrete prefixes."""
 
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from enum import Enum
 
@@ -63,6 +64,22 @@ class TrainingTokens:
     commitment_loss: Tensor
 
 
+def recover_groups(decoder: LocalTokenDecoder, groups: Iterable[tuple[Tensor, Tensor | None]],
+                   geometry: Geometry) -> Tensor:
+    """Synthesize spatial grids from rasters of regions with equal received Rank sets."""
+    with record_function("hla/local_decoder"):
+        local = [decoder(group) if ranks is None else decoder(group, ranks) for group, ranks in groups]
+        return merge_regions(torch.cat(local, dim=1), geometry)
+
+
+def recover_grid(decoder: LocalTokenDecoder, values: Tensor, geometry: Geometry,
+                 ranks: Tensor | None = None) -> Tensor:
+    """Recover native spatial features from a Rank-major prefix."""
+    groups = group_prefix(values, geometry.num_regions)
+    return recover_groups(decoder, ((group, None if ranks is None else ranks[:group.shape[2]])
+                                    for group in groups), geometry)
+
+
 class PrefixDecoding:
     architecture: Architecture
     quantizer: VectorQuantizer
@@ -78,9 +95,7 @@ class PrefixDecoding:
             raise ValueError("budget exceeds the selected architecture's spatial capacity")
 
     def _decode_features(self, values: Tensor, geometry: Geometry) -> Tensor:
-        with record_function("hla/local_decoder"):
-            local = [self.local_decoder(group) for group in group_prefix(values, geometry.num_regions)]
-            return merge_regions(torch.cat(local, dim=1), geometry)
+        return recover_grid(self.local_decoder, values, geometry)
 
     def _decode(self, values: Tensor, geometry: Geometry) -> Tensor:
         return self.rgb_decoder(self._decode_features(values, geometry), geometry)
