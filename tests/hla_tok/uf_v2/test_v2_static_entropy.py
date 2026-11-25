@@ -59,3 +59,13 @@ def test_integer_table_exact_largest_remainder():
     for index in order[:PRECISION - sum(expected)]:
         expected[index] += 1
     np.testing.assert_array_equal(np.diff(integer_cdf(counts))[0], expected)
+
+
+def test_invalid_histograms_are_rejected_before_cdf_generation():
+    import pytest
+
+    valid = np.zeros((1, ALPHABET), np.int64)
+    values = (valid[0], valid[:, :-1], valid.astype(np.float64), valid - 1, valid + 10**12 + 1)
+    for counts in values:
+        with pytest.raises(ValueError, match="histogram"):
+            integer_cdf(counts)

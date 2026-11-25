@@ -128,6 +128,29 @@ def test_base_cannot_commit_twice(stream):
     assert len(calls) == 1
 
 
+def test_parsed_enhancements_use_same_receiver_contract(stream):
+    family, make, _ = stream
+    parser = FrameParser(b"testwire")
+    parser.feed(family.raw)
+    base, *enhancements = parser.available()
+    receiver = make()
+    with pytest.raises(WireError, match="requires a complete base"):
+        receiver.apply_enhancement(enhancements[0])
+    receiver.commit_base(base)
+    for record in enhancements:
+        receiver.apply_enhancement(record)
+    complete = make()
+    complete.feed(family.raw)
+    assert complete.decode_available() == len(family.ends)
+    assert receiver.symbol_count == complete.symbol_count
+    assert receiver.received == complete.received == len(family.raw)
+    assert torch.equal(receiver.render(), complete.render())
+    with pytest.raises(WireError, match="duplicate"):
+        receiver.apply_enhancement(enhancements[0])
+    with pytest.raises(WireError, match="rejected"):
+        receiver.render()
+
+
 def test_transport_close_keeps_final_render_and_does_not_allow_append(stream):
     family, make, _ = stream
     receiver = make()
@@ -138,3 +161,21 @@ def test_transport_close_keeps_final_render_and_does_not_allow_append(stream):
     assert torch.equal(expected, receiver.render())
     with pytest.raises(WireError, match="closed by transport"):
         receiver.feed(b"more")
+
+
+def test_lost_base_invalidates_predicted_reference_until_independent_i():
+    from hla_tok.uf.base import ReferenceOrder
+
+    reference = ReferenceOrder()
+
+    def info(i, intra=False):
+        return FrameInfo(i, 1080, 1920, 0, intra, 1, False)
+
+    reference.commit(info(0, True))
+    with pytest.raises(ValueError, match="DESYNC"):
+        reference.commit(info(2))
+    with pytest.raises(ValueError, match="DESYNC"):
+        reference.commit(info(1))
+    reference.commit(info(3, True))
+    reference.commit(info(4))
+    assert reference.last.index == 4

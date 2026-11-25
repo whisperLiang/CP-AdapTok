@@ -18,6 +18,11 @@
 #include <pybind11/stl.h>
 #include <zlib.h>
 
+#ifdef UFV2_PROFILE_CANVAS
+#include <chrono>
+static thread_local int64_t canvas_update_ns = 0;
+#endif
+
 namespace py = pybind11;
 template<class T> using Array = py::array_t<T, py::array::c_style>;
 constexpr uint32_t precision = 1 << 16;
@@ -67,7 +72,8 @@ public:
         {
             py::gil_scoped_release release;
             int invalid = 0;
-            #pragma omp parallel for if (plane >= 65536) num_threads(4) reduction(|:invalid)
+            const int workers = plane >= (1 << 20) ? 8 : 4;
+            #pragma omp parallel for if (plane >= 65536) num_threads(workers) reduction(|:invalid)
             for (int index = 0; index < 2 * groups; ++index) {
                 const int level = index / groups;
                 const Region& region = regions[index % groups];
@@ -353,7 +359,8 @@ private:
         if (packets.empty()) return 0;
         int symbols = 0, invalid = 0;
         // Group ownership preserves coarse/fine ordering without shared writes.
-        #pragma omp parallel if(packets.size() >= 128) num_threads(4) reduction(+:symbols) reduction(|:invalid)
+        const int requested = packets.size() >= 1024 ? 8 : 4;
+        #pragma omp parallel if(packets.size() >= 128) num_threads(requested) reduction(+:symbols) reduction(|:invalid)
         {
             const auto worker = static_cast<unsigned>(omp_get_thread_num());
             const auto workers = static_cast<unsigned>(omp_get_num_threads());
@@ -383,10 +390,17 @@ private:
         }
         const int multiplier = 2 >> packet.level;
         int offset = 0;
+#ifdef UFV2_PROFILE_CANVAS
+        const auto update_start = std::chrono::steady_clock::now();
+#endif
         layout.rows(region, [&](int start, int length) {
             for (int x = start; x < start + length; ++x)
                 target[x] += values[offset++] * multiplier;
         });
+#ifdef UFV2_PROFILE_CANVAS
+        canvas_update_ns += std::chrono::duration_cast<std::chrono::nanoseconds>(
+            std::chrono::steady_clock::now() - update_start).count();
+#endif
         return count;
     }
 
@@ -395,13 +409,14 @@ private:
                       std::string& bytes, std::vector<int>& ends) const {
         const int groups = layout.regions.size();
         const int scratch_size = 4 * layout.stride + 4;
-        constexpr int batch = 128;
+        constexpr int batch = 512;
         std::array<std::string, batch> payloads;
         std::array<int, batch> modes;
         const int records = order.size();
         for (int start = 0; start < records; start += batch) {
             const int count = std::min(batch, records - start);
-            #pragma omp parallel if (count * layout.stride >= 32768) num_threads(4)
+            const int workers = count * layout.stride >= 262144 ? 8 : 4;
+            #pragma omp parallel if (count * layout.stride >= 32768) num_threads(workers)
             {
                 std::vector<uint8_t> scratch(scratch_size);
                 auto* tail = scratch.data() + scratch_size;
@@ -459,6 +474,13 @@ private:
 };
 
 PYBIND11_MODULE(hla_uf_v2_records, module) {
+#ifdef UFV2_PROFILE_CANVAS
+    module.def("take_canvas_update_ns", []() {
+        const auto elapsed = canvas_update_ns;
+        canvas_update_ns = 0;
+        return elapsed;
+    });
+#endif
     py::class_<Layout>(module, "Layout")
         .def(py::init<int, int, int, int, int>())
         .def("gather", &Layout::gather)

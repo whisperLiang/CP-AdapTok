@@ -119,7 +119,7 @@ def test_adjusted_native_cdf_and_base_match_after_proxy_reload(codec_and_frames)
     codec, images = codec_and_frames
     delta = NativeAdjustments().cuda()
     delta.encoder_logits.fill_(0.05)
-    delta.hyper_logits[4] = 1.0
+    delta.hyper_logits[19] = 5.0
     delta.reconstruction_logits.fill_(0.03)
     adjusted = Unified(codec.assets, codec.model, (0, 8), codec.refiner, adjustments=delta)
     endpoint = adjusted.new_decoder()
@@ -136,3 +136,39 @@ def test_adjusted_native_cdf_and_base_match_after_proxy_reload(codec_and_frames)
         if i == 1:
             with pytest.raises(WireError, match="DESYNC"):
                 ingest(adjusted, adjusted.new_decoder(), encoded.family, BUDGETS[5])
+
+
+@torch.no_grad()
+def test_a_codec_with_no_encoded_tensors_receives_same_display(codec_and_frames):
+    codec, images = codec_and_frames
+    codec.reset()
+    isolated = Unified(codec.assets, codec.model, codec.qp, codec.refiner)
+    participating, receiver_only = codec.new_decoder(), isolated.new_decoder()
+    for i, rgb in enumerate(images[:2]):
+        encoded = codec.encode(rgb, i, i == 0)
+        expected = ingest(codec, participating, encoded.family, BUDGETS[5]).render()
+        observed = ingest(isolated, receiver_only, encoded.family, BUDGETS[5]).render()
+        assert torch.equal(observed, expected)
+
+
+@torch.no_grad()
+def test_legacy_d0_and_lite_quantization_have_distinct_family_and_real_native_base(codec_and_frames):
+    from hla_tok.uf_v2.native_weights import LiteProfile
+
+    exemplar, images = codec_and_frames
+    codec = Unified(exemplar.assets, exemplar.model, (0, 8))
+    native = codec.new_decoder()
+    assert codec.tag != exemplar.tag
+    for i, rgb in enumerate(images[:2]):
+        encoded = codec.encode(rgb, i, i == 0)
+        receiver = ingest(codec, native, encoded.family, BUDGETS[5])
+        assert codec.matches(encoded, native, receiver)
+        assert torch.isfinite(receiver.render()).all()
+    lite = LiteProfile(1.4, .85)
+    lite_codec = Unified(exemplar.assets, exemplar.model, (0, 0), base_cap=4096, family_id="lite", lite=lite)
+    lite_decoder = lite_codec.new_decoder()
+    assert lite_codec.tag not in (codec.tag, exemplar.tag)
+    base = lite_codec.native.encode(images[0], 0, 0, True)
+    assert lite_decoder.decode(base).shape == (1, 3, 1080, 1920)
+    with pytest.raises(ValueError, match="first frame"):
+        lite.install(lite_decoder)

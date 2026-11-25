@@ -1,0 +1,10 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______ test_lost_base_invalidates_predicted_reference_until_independent_i ______
+tests/hla_tok/uf_v2/test_v2_stream.py:152: in test_lost_base_invalidates_predicted_reference_until_independent_i
+    with pytest.raises(ValueError, match="DESYNC"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+=========================== short test summary info ============================
+FAILED tests/hla_tok/uf_v2/test_v2_stream.py::test_lost_base_invalidates_predicted_reference_until_independent_i
+1 failed in 0.04s

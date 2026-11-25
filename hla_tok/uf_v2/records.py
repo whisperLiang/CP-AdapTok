@@ -182,6 +182,15 @@ class BatchReceiver:
         if self.frame is not None:
             raise WireError("base was already committed")
         self.frame = self.decode(record)
+        self.received = max(self.received, APP_BASE_OVERHEAD + len(record.payload))
+
+    def apply_enhancement(self, record: Enhancement) -> None:
+        """Apply a parsed record at a complete-record boundary."""
+        if self.frame is None:
+            raise WireError("enhancement requires a complete base")
+        self.finish()
+        self.feed(pack_enhancement(record))
+        self.decode_available()
 
     def _receive_base(self) -> int:
         if len(self.buffer) < APP_BASE_OVERHEAD:

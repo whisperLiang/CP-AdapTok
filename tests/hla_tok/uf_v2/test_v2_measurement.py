@@ -79,3 +79,13 @@ def test_end_to_end_clock_includes_full_max_generation(monkeypatch):
     assert set(caps) == {evaluate.MAX_APPLICATION_BYTES}
     assert len(rows) == 5
     assert [row["total_ms"] for row in rows] == pytest.approx([30] * 5)
+
+
+def test_reported_lpips_target_uses_the_archived_endpoint_without_extrapolation():
+    from scripts.hla_tok.uf_v2.rate_analysis import archive_target
+
+    original = [{"lpips": 0.2897786209466814}, {"lpips": 0.221}]
+    query = archive_target("lpips", 0.28978, original)
+    assert query == original[0]["lpips"]
+    assert at_quality([(-query, 1.395), (-0.221, 2.4)], "lpips", query) == pytest.approx(1.395)
+    assert archive_target("lpips", 0.28978, [{"lpips": .28}]) == 0.28978

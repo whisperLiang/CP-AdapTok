@@ -153,10 +153,32 @@
       "result": "KILLED",
       "returncode": 1,
       "log": "case-14.log"
+    },
+    {
+      "name": "rewrite previously accepted integers",
+      "module": "hla_tok.uf_v2.records",
+      "original": "self.symbol_count += symbols",
+      "replacement": "self.symbols.flat[0] += self.records\n        self.symbol_count += symbols",
+      "test": "test_v2_stream.py::test_fragments_decode_once_and_preserve_base",
+      "gpu": false,
+      "result": "KILLED",
+      "returncode": 1,
+      "log": "case-16.log"
+    },
+    {
+      "name": "continue P after a lost Base",
+      "module": "hla_tok.uf.base",
+      "original": "if self.desync or prior is None or (info.index, info.dimensions) != (prior.index + 1, prior.dimensions):",
+      "replacement": "if False:",
+      "test": "test_v2_stream.py::test_lost_base_invalidates_predicted_reference_until_independent_i",
+      "gpu": false,
+      "result": "KILLED",
+      "returncode": 1,
+      "log": "case-17.log"
     }
   ],
   "counts": {
-    "KILLED": 14,
+    "KILLED": 16,
     "SURVIVED": 0,
     "ERROR": 0
   }

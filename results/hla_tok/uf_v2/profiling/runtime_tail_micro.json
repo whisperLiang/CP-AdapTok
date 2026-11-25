@@ -1,0 +1,37 @@
+{
+  "legacy_128_segments_4_threads": [
+    {
+      "sample": "dance-twirl-1.huf",
+      "records": 4004,
+      "symbols": 1951744,
+      "median_ingest_ms": 7.190733995230403,
+      "integer_sha256": "94ba3a53c41c4df8cceac81d70fb498a5c2c043857fd8add62a601cce956c386"
+    },
+    {
+      "sample": "soapbox-1.huf",
+      "records": 4084,
+      "symbols": 1983488,
+      "median_ingest_ms": 7.292840498848818,
+      "integer_sha256": "74985427cb9c9a792e0764f211a6402ddeffdd0a82ee2142d9a52f20a0b96598"
+    }
+  ],
+  "tuned_512_segments_4_or_8_threads": [
+    {
+      "sample": "dance-twirl-1.huf",
+      "records": 4004,
+      "symbols": 1951744,
+      "median_ingest_ms": 3.5154244978912175,
+      "integer_sha256": "94ba3a53c41c4df8cceac81d70fb498a5c2c043857fd8add62a601cce956c386"
+    },
+    {
+      "sample": "soapbox-1.huf",
+      "records": 4084,
+      "symbols": 1983488,
+      "median_ingest_ms": 3.5961699977633543,
+      "integer_sha256": "74985427cb9c9a792e0764f211a6402ddeffdd0a82ee2142d9a52f20a0b96598"
+    }
+  ],
+  "warmup": 5,
+  "timed_repeats": 20,
+  "scope": "CPU stage on actual full HUF1 P access units"
+}
