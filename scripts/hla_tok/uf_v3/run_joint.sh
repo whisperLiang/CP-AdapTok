@@ -45,6 +45,28 @@ latest="$checkpoints/r0-P2-seed1-step2000.pt"
 if [[ "$(status "$out/pilot/P2/gate.json")" != "PASS" ]]; then
   fit_node probe 2064 "$latest"
   latest="$checkpoints/r0-probe-seed1-step2064.pt"
+  if [[ ! -s "$out/diagnostics/base_probe/summary.json" ]]; then
+    "$python_bin" -m scripts.hla_tok.uf_v3.base_probe --weights "$weights" --output "$out/diagnostics/base_probe" \
+      --checkpoints "$checkpoints/r0-P2-seed1-step2000.pt" "$latest"
+  fi
+  late_status="$("$python_bin" -c 'import json,sys; print(json.load(open(sys.argv[1]))["candidates"]["r0-probe-seed1-step2064"]["status"])' \
+    "$out/diagnostics/base_probe/summary.json")"
+  if [[ "$late_status" == "FAIL" ]]; then
+    fit_node probe 2001 "$checkpoints/r0-P2-seed1-step2000.pt"
+    early="$checkpoints/r0-probe-seed1-step2001.pt"
+    if [[ ! -s "$out/diagnostics/base_probe_first/summary.json" ]]; then
+      "$python_bin" -m scripts.hla_tok.uf_v3.base_probe --weights "$weights" --checkpoints "$early" \
+        --output "$out/diagnostics/base_probe_first"
+    fi
+    early_status="$("$python_bin" -c 'import json,sys; print(json.load(open(sys.argv[1]))["candidates"]["r0-probe-seed1-step2001"]["status"])' \
+      "$out/diagnostics/base_probe_first/summary.json")"
+    if [[ "$early_status" == "PASS" && ! -s "$out/diagnostics/base_probe_first_validation/summary.json" ]]; then
+      "$python_bin" -m scripts.hla_tok.uf_v3.base_probe --weights "$weights" --checkpoints "$early" \
+        --split validation --output "$out/diagnostics/base_probe_first_validation"
+    fi
+    "$python_bin" -m scripts.hla_tok.uf_v3.recover "$out" "$checkpoints"
+    exit 0
+  fi
   evaluate "$out/pilot/probe" "$latest" --split calibration --limit 12
   "$python_bin" -m scripts.hla_tok.uf_v3.pilot_gate --candidate "$out/pilot/probe" \
     --reference "$out/diagnostics/calibration" --output "$out/pilot/probe/gate.json"

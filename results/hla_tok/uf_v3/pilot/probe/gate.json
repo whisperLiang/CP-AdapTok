@@ -1,0 +1,40 @@
+{
+  "status": "FAIL",
+  "reason": "BASE_BUDGET_EXCEEDED",
+  "physical_base": {
+    "by_type": {
+      "I": {
+        "bytes_mean": 6307.5,
+        "bytes_max": 8561.0,
+        "bytes_p50": 6493.0,
+        "bytes_p95": 8531.45,
+        "bytes_p99": 8555.09,
+        "frames": 4,
+        "over": 0
+      },
+      "P": {
+        "bytes_mean": 2683.185483870968,
+        "bytes_max": 19403.0,
+        "bytes_p50": 2174.5,
+        "bytes_p95": 5042.25,
+        "bytes_p99": 13077.99999999997,
+        "frames": 124,
+        "over": 2
+      }
+    },
+    "worst": {
+      "video": "DAVIS2017:mallard-fly",
+      "index": 1,
+      "type": "P",
+      "bytes": 19403,
+      "native_y_z_bytes": 19373,
+      "over_cap": true
+    },
+    "maximum": 19403,
+    "over_cap": 2,
+    "status": "FAIL",
+    "sha256": "455e6a0e048b4c60f708e89d5c06868e71ae54dbc9e2af9ae87ebe71bb8e71a7"
+  },
+  "strict_quality_and_runtime": "NOT_RUN",
+  "seed2": "NOT_RUN"
+}

@@ -22,3 +22,11 @@ P Decoder 的码率梯度来自 Base-only 递推影响后续 P 帧的条件分�
 联合段实际 GPU 事件区间 42.84 s，含等待及教师计算。全段墙钟 55.98 s，教师计算墙钟 11.27 s，峰值分配约 15.31 GiB。探针累计 256 帧次，其中完整原生 4 帧次。该段用于验证真实联合链路及低、高档物理趋势，完整原生分辨率正式训练的达成量需单列。
 
 [固定配置](../../../configs/hla_tok/uf_v3/joint.json) · [P2 账本](../../../results/hla_tok/uf_v3/training/P2-2000/summary.json) · [联合探针账本](../../../results/hla_tok/uf_v3/training/probe-2064/summary.json) · [P2 物理门控](../../../results/hla_tok/uf_v3/pilot/P2/gate.json)
+
+## 严格 Base 门槛和单步恢复
+
+累计 2,064 步权重在生产编码入口首次因 14,757 B 的 Base 被拒绝。完整 128 帧 Calibration 归因显示两次超限均发生在 P。最坏 P 从 P2 的 6,851 B 增至 19,403 B，P 中位数从 1,113 B 增至 2,175 B。I 峰值在两个节点分别为 8,563 B 和 8,561 B。诊断仅记录实际原生 payload，不把超限编码当成可传输前缀。
+
+定向恢复从 2,000 步同一 checkpoint 重放首次原生联合更新，原先和重放的总损失均为 0.01518846396356821。两个联合节点采用相同架构、冻结参数选择、训练数据及量化方式。累计 2,001 步 checkpoint 通过严格 Base 预算，Calibration 峰值 8,558 B，174 帧 Validation 峰值 7,614 B。研究端点采用这一个直接保存的训练权重。64 步模型为失败对照，至少需要保持物理 Base 上限才能继续更长训练。P3、P4 及 V3 Seed 2 停在门控前。
+
+[逐帧 P 帧溢出证据](../../../results/hla_tok/uf_v3/diagnostics/base_probe/summary.json) · [恢复门控](../../../results/hla_tok/uf_v3/diagnostics/base_recovery.json)
