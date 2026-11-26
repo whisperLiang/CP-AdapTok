@@ -1,0 +1,60 @@
+{
+  "video": "DAVIS2017:car-turn",
+  "index": 5,
+  "images": [
+    {
+      "scenario": "source",
+      "file": "source.png",
+      "sha256": "1e2daebc04b5ab064ea186a9c41b18ba2c494fa21a593a7f639c00832961b704",
+      "dimensions_hw": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "scenario": "C0",
+      "file": "C0.png",
+      "sha256": "60d7d5044b1dff8dce9ceeaefb7419cea0bdcd8900c8d1dbce512d4ae24cfb79",
+      "dimensions_hw": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "scenario": "C1",
+      "file": "C1.png",
+      "sha256": "fcf05a45221c211f8a7fc84d345f86553ef43289ab23ddab8f8d78ca7f30b2f1",
+      "dimensions_hw": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "scenario": "C2_40",
+      "file": "C2_40.png",
+      "sha256": "54bf3bdd0e0cfa6d50ad8b70b8aa7e64e872fbf51e64da8943264e820e27e59b",
+      "dimensions_hw": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "scenario": "C3_40",
+      "file": "C3_40.png",
+      "sha256": "f80d6960a61dd285107d42e7fe0d55809c73774290f133e2480f180c7224ba05",
+      "dimensions_hw": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "scenario": "C3_ALL_VALID_RECORDS",
+      "file": "C3_ALL_VALID_RECORDS.png",
+      "sha256": "f80d6960a61dd285107d42e7fe0d55809c73774290f133e2480f180c7224ba05",
+      "dimensions_hw": [
+        1080,
+        1920
+      ]
+    }
+  ]
+}
