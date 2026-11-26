@@ -338,7 +338,7 @@ def main():
             curves = aggregate_curves(rows)
             write_json(args.work / "fixed.json", {"curves": curves, "units": rows, "pixel_reads": counts})
             with (args.work / "rate_distortion.csv").open("w", newline="") as handle:
-                writer = csv.DictWriter(handle, list(curves[0]))
+                writer = csv.DictWriter(handle, list(curves[0]), lineterminator="\n")
                 writer.writeheader()
                 writer.writerows(curves)
             return

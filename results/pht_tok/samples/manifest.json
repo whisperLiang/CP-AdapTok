@@ -1,0 +1,93 @@
+{
+  "source": "DAVIS2017:car-turn",
+  "split": "Train Calibration",
+  "qp": 32,
+  "k_ref": 2,
+  "source_original_indices": [
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37
+  ],
+  "display_source_index": 30,
+  "resolution": [
+    1080,
+    1920
+  ],
+  "crop_box_left_top_right_bottom": [
+    720,
+    368,
+    1200,
+    638
+  ],
+  "crop_encoding": "lossless PNG from the directly reconstructed RGB8 image",
+  "full_image_encoding": "JPEG quality 94",
+  "streams": {
+    "mask": {
+      "header_bytes": 36,
+      "layer_header_bytes": 40,
+      "payload_bytes": [
+        2003,
+        10205,
+        7495,
+        5906,
+        4968
+      ],
+      "checksum_bytes_in_headers": 24,
+      "physical_bytes": 30653,
+      "boundaries": [
+        12260,
+        19763,
+        25677,
+        30653
+      ]
+    },
+    "precision": {
+      "header_bytes": 36,
+      "layer_header_bytes": 40,
+      "payload_bytes": [
+        2003,
+        13252,
+        235,
+        1977,
+        13133
+      ],
+      "checksum_bytes_in_headers": 24,
+      "physical_bytes": 30676,
+      "boundaries": [
+        15307,
+        15550,
+        17535,
+        30676
+      ]
+    }
+  },
+  "pixel_reads": {
+    "train": 128,
+    "validation": 0,
+    "test": 0
+  },
+  "sha256": {
+    "precision.pht": "e2f146aa53c1cd36d66b7be235779c922f344b74abb3bb1c90e8e746b4df1d04",
+    "anchor.pht": "415e80b1cabb7504d41b95a0fffd1c6261450cd69d77e04565a540d9886935ea",
+    "mask-4.jpg": "de02d8764c78af468a7431977e8d83f365467212e22e1c71268ee6ebddd1fd18",
+    "precision-1.jpg": "0646c13fd6c2f0eff04dd959c3aa68f948d88ac4d23dd5c58f427bdeef5f37e8",
+    "precision-1-crop.png": "986d473525e8150b9d448223158da00f9f12bd8e2aaed7fdcf6ace6eb7768106",
+    "precision-4-crop.png": "21dd5012184e3f29523d1426519b44e1109c841f8553007aa6c1572fc58ab784",
+    "mask-2.jpg": "b6b2a196fad9fa254542b71aa2112ab3993fe160ab36131b1b6ec7b68841d385",
+    "mask.pht": "71fdaada1e5f51c4e071d78adbc0a95ca2fa88994c3c75e29b7a63e297900729",
+    "mask-3-crop.png": "fe91a79919de585c8828a2d5ca364fa6a17036c8ada5b7bafcfc8cbfbd93aa34",
+    "mask-1-crop.png": "d1e221de4619e41ea9378d225e1421265c4d47fcc0e7f65285a4df1ae4e57fe8",
+    "mask-3.jpg": "a0deb1a5f7e18cec8432cf3cf9c72d7db964c463ef44a15e16bab3fafde25abb",
+    "mask-2-crop.png": "d12a9f8b75145556715af4175d0654a666656763cb1ddac3d417622c0a631374",
+    "mask-1.jpg": "c10a850b8b0025ccca3d025542b9610eca2d5e921e1611bf92936f59363ebe4c",
+    "source-crop.png": "7bd0833efe75ac7e7b75565956d7bf7c52fa21125a77ce4d6aca3c6af4ccf388",
+    "mask-4-crop.png": "21dd5012184e3f29523d1426519b44e1109c841f8553007aa6c1572fc58ab784",
+    "precision-4.jpg": "de02d8764c78af468a7431977e8d83f365467212e22e1c71268ee6ebddd1fd18"
+  }
+}

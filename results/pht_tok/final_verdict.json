@@ -1,0 +1,30 @@
+{
+  "OFFICIAL_REPRODUCTION": "PASS",
+  "FULL_EQUIVALENCE": "PASS",
+  "PROGRESSIVE_CONTRACT": "PASS",
+  "STATIC_RD": "FAIL",
+  "CLOSED_REFERENCE": "PASS",
+  "REALTIME_PERFORMANCE": "PARTIAL_PASS",
+  "DYNAMIC_STREAMING": "FAIL",
+  "VALIDATION": "PARTIAL_PASS",
+  "TEST": "NOT_RUN",
+  "OVERALL": "PARTIAL_PASS",
+  "research_admission": "FAIL",
+  "test_pixel_reads": 0,
+  "test_admission": "NOT_ADMITTED",
+  "candidate": {"mode": "P1 native masks", "reference": "R1", "reference_prefix": 2, "fixed_qp": 32},
+  "engineering": {
+    "fixed_reference_exact_chunks": 80,
+    "raw_physical_progressive_full_records": 160,
+    "minimum_continuous_P_chunks_per_closed_run": 16,
+    "maximum_p1_aggregate_full_overhead_percent": 1.9865827656144308
+  },
+  "study_scope": {
+    "R0": "Oracle diagnostic only",
+    "P3": "NOT_RUN",
+    "R2": "NOT_RUN",
+    "training": "NOT_RUN",
+    "dynamic": "packet-level trace simulation driven by actual H100 streams",
+    "validation": "174 frames, one frozen run"
+  }
+}

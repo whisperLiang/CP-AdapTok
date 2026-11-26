@@ -1,0 +1,1352 @@
+{
+  "method": "Radon plus measured line coverage, pairwise AST sequence similarity for substantive functions",
+  "ub_mode_tools": "no Crapper, Dryer or Mutator executables or Java runtime on this host",
+  "production_function_crap_estimate": [
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "start_mask_encoding",
+      "line": 35,
+      "cc": 5,
+      "line_coverage": 1.0,
+      "crap_estimate": 5.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "__init__",
+      "line": 13,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "precision",
+      "line": 30,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "start_mask_encoding",
+      "line": 35,
+      "cc": 5,
+      "line_coverage": 1.0,
+      "crap_estimate": 5.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "finish_mask_encoding",
+      "line": 50,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "encode_z",
+      "line": 54,
+      "cc": 1,
+      "line_coverage": 0.2,
+      "crap_estimate": 1.512
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "decode_y",
+      "line": 60,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "decode_z",
+      "line": 63,
+      "cc": 1,
+      "line_coverage": 0.75,
+      "crap_estimate": 1.015625
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "finish_mask_encoding",
+      "line": 50,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "__init__",
+      "line": 70,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "encode",
+      "line": 75,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "decode",
+      "line": 86,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "preview",
+      "line": 96,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "decode",
+      "line": 86,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "precision",
+      "line": 30,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "__init__",
+      "line": 70,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "encode",
+      "line": 75,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "__init__",
+      "line": 13,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "encode_z",
+      "line": 54,
+      "cc": 1,
+      "line_coverage": 0.2,
+      "crap_estimate": 1.512
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "decode_y",
+      "line": 60,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "decode_z",
+      "line": 63,
+      "cc": 1,
+      "line_coverage": 0.75,
+      "crap_estimate": 1.015625
+    },
+    {
+      "path": "pht_tok/entropy.py",
+      "function": "preview",
+      "line": 96,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "encode_chunk",
+      "line": 67,
+      "cc": 5,
+      "line_coverage": 0.7777777777777778,
+      "crap_estimate": 5.274348422496571
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "start_decoding",
+      "line": 77,
+      "cc": 4,
+      "line_coverage": 0.875,
+      "crap_estimate": 4.03125
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "__init__",
+      "line": 35,
+      "cc": 2,
+      "line_coverage": 0.8,
+      "crap_estimate": 2.032
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "proxy",
+      "line": 42,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "initialize",
+      "line": 45,
+      "cc": 2,
+      "line_coverage": 0.8333333333333334,
+      "crap_estimate": 2.0185185185185186
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "snapshot_reference",
+      "line": 53,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "commit_reference",
+      "line": 56,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "_prepare",
+      "line": 59,
+      "cc": 3,
+      "line_coverage": 0.7142857142857143,
+      "crap_estimate": 3.2099125364431487
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "encode_chunk",
+      "line": 67,
+      "cc": 5,
+      "line_coverage": 0.7777777777777778,
+      "crap_estimate": 5.274348422496571
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "start_decoding",
+      "line": 77,
+      "cc": 4,
+      "line_coverage": 0.875,
+      "crap_estimate": 4.03125
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "masks",
+      "line": 86,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "apply_group",
+      "line": 89,
+      "cc": 2,
+      "line_coverage": 0.75,
+      "crap_estimate": 2.0625
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "reconstruct",
+      "line": 94,
+      "cc": 2,
+      "line_coverage": 0.75,
+      "crap_estimate": 2.0625
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "display_feature",
+      "line": 99,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "_prepare",
+      "line": 59,
+      "cc": 3,
+      "line_coverage": 0.7142857142857143,
+      "crap_estimate": 3.2099125364431487
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "digest",
+      "line": 20,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "__init__",
+      "line": 35,
+      "cc": 2,
+      "line_coverage": 0.8,
+      "crap_estimate": 2.032
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "initialize",
+      "line": 45,
+      "cc": 2,
+      "line_coverage": 0.8333333333333334,
+      "crap_estimate": 2.0185185185185186
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "apply_group",
+      "line": 89,
+      "cc": 2,
+      "line_coverage": 0.75,
+      "crap_estimate": 2.0625
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "reconstruct",
+      "line": 94,
+      "cc": 2,
+      "line_coverage": 0.75,
+      "crap_estimate": 2.0625
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "digest",
+      "line": 20,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "proxy",
+      "line": 42,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "snapshot_reference",
+      "line": 53,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "commit_reference",
+      "line": 56,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "masks",
+      "line": 86,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/official_adapter.py",
+      "function": "display_feature",
+      "line": 99,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "encode_intra",
+      "line": 100,
+      "cc": 8,
+      "line_coverage": 0.8571428571428571,
+      "crap_estimate": 8.1865889212828
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "encode_chunk_once",
+      "line": 118,
+      "cc": 7,
+      "line_coverage": 0.8333333333333334,
+      "crap_estimate": 7.226851851851852
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "check_header",
+      "line": 319,
+      "cc": 7,
+      "line_coverage": 0.75,
+      "crap_estimate": 7.765625
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "assemble",
+      "line": 36,
+      "cc": 6,
+      "line_coverage": 0.8,
+      "crap_estimate": 6.288
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "encode_intra",
+      "line": 100,
+      "cc": 8,
+      "line_coverage": 0.8571428571428571,
+      "crap_estimate": 8.1865889212828
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "encode_chunk_once",
+      "line": 118,
+      "cc": 7,
+      "line_coverage": 0.8333333333333334,
+      "crap_estimate": 7.226851851851852
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_mask_payloads",
+      "line": 135,
+      "cc": 4,
+      "line_coverage": 1.0,
+      "crap_estimate": 4.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_precision_payloads",
+      "line": 148,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_decode",
+      "line": 219,
+      "cc": 5,
+      "line_coverage": 1.0,
+      "crap_estimate": 5.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "reconstruct",
+      "line": 289,
+      "cc": 5,
+      "line_coverage": 0.9,
+      "crap_estimate": 5.025
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "install",
+      "line": 85,
+      "cc": 4,
+      "line_coverage": 1.0,
+      "crap_estimate": 4.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_mask_payloads",
+      "line": 135,
+      "cc": 4,
+      "line_coverage": 1.0,
+      "crap_estimate": 4.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "__init__",
+      "line": 178,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "header",
+      "line": 194,
+      "cc": 2,
+      "line_coverage": 0.75,
+      "crap_estimate": 2.0625
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_active",
+      "line": 199,
+      "cc": 3,
+      "line_coverage": 0.6666666666666666,
+      "crap_estimate": 3.3333333333333335
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "append_bytes",
+      "line": 203,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "decode_new_layers",
+      "line": 208,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_decode",
+      "line": 219,
+      "cc": 5,
+      "line_coverage": 1.0,
+      "crap_estimate": 5.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_decode_hyper",
+      "line": 238,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_decode_enhancement",
+      "line": 250,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_render",
+      "line": 266,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "commit_reference",
+      "line": 277,
+      "cc": 4,
+      "line_coverage": 0.8,
+      "crap_estimate": 4.128
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "reconstruct",
+      "line": 289,
+      "cc": 5,
+      "line_coverage": 0.9,
+      "crap_estimate": 5.025
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "residuals",
+      "line": 301,
+      "cc": 2,
+      "line_coverage": 0.3333333333333333,
+      "crap_estimate": 3.1851851851851856
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "commit_reference",
+      "line": 277,
+      "cc": 4,
+      "line_coverage": 0.8,
+      "crap_estimate": 4.128
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "begin_chunk",
+      "line": 309,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "decode_prefix",
+      "line": 313,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "check_header",
+      "line": 319,
+      "cc": 7,
+      "line_coverage": 0.75,
+      "crap_estimate": 7.765625
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "decode_intra",
+      "line": 329,
+      "cc": 4,
+      "line_coverage": 0.9166666666666666,
+      "crap_estimate": 4.0092592592592595
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "decode_intra",
+      "line": 329,
+      "cc": 4,
+      "line_coverage": 0.9166666666666666,
+      "crap_estimate": 4.0092592592592595
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "model_identifier",
+      "line": 67,
+      "cc": 3,
+      "line_coverage": 0.14285714285714285,
+      "crap_estimate": 8.667638483965016
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "__init__",
+      "line": 77,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "install",
+      "line": 85,
+      "cc": 4,
+      "line_coverage": 1.0,
+      "crap_estimate": 4.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "commit",
+      "line": 93,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_active",
+      "line": 199,
+      "cc": 3,
+      "line_coverage": 0.6666666666666666,
+      "crap_estimate": 3.3333333333333335
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "decode_new_layers",
+      "line": 208,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_decode_hyper",
+      "line": 238,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_decode_enhancement",
+      "line": 250,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_render",
+      "line": 266,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "render_precision",
+      "line": 171,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "__init__",
+      "line": 47,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "active",
+      "line": 55,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "to_spatial",
+      "line": 58,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "scatter",
+      "line": 61,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "__init__",
+      "line": 47,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "active",
+      "line": 55,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "_precision_payloads",
+      "line": 148,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "header",
+      "line": 194,
+      "cc": 2,
+      "line_coverage": 0.75,
+      "crap_estimate": 2.0625
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "residuals",
+      "line": 301,
+      "cc": 2,
+      "line_coverage": 0.3333333333333333,
+      "crap_estimate": 3.1851851851851856
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "flat_nhwc",
+      "line": 32,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "encode_precision",
+      "line": 161,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "to_spatial",
+      "line": 58,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "scatter",
+      "line": 61,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "__init__",
+      "line": 77,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "commit",
+      "line": 93,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "__init__",
+      "line": 178,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "append_bytes",
+      "line": 203,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "begin_chunk",
+      "line": 309,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/codec.py",
+      "function": "decode_prefix",
+      "line": 313,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "__post_init__",
+      "line": 57,
+      "cc": 8,
+      "line_coverage": 1.0,
+      "crap_estimate": 8.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "__post_init__",
+      "line": 57,
+      "cc": 8,
+      "line_coverage": 1.0,
+      "crap_estimate": 8.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "finish",
+      "line": 66,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "_prefix_arrival",
+      "line": 145,
+      "cc": 6,
+      "line_coverage": 1.0,
+      "crap_estimate": 6.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "send",
+      "line": 119,
+      "cc": 5,
+      "line_coverage": 1.0,
+      "crap_estimate": 5.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "received_by",
+      "line": 101,
+      "cc": 4,
+      "line_coverage": 1.0,
+      "crap_estimate": 4.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "__init__",
+      "line": 110,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "send",
+      "line": 119,
+      "cc": 5,
+      "line_coverage": 1.0,
+      "crap_estimate": 5.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "_send_packet",
+      "line": 137,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "_prefix_arrival",
+      "line": 145,
+      "cc": 6,
+      "line_coverage": 1.0,
+      "crap_estimate": 6.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "network_sizes",
+      "line": 12,
+      "cc": 3,
+      "line_coverage": 0.9,
+      "crap_estimate": 3.009
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "goodput_at",
+      "line": 40,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "_valid_rate",
+      "line": 49,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "finish",
+      "line": 66,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "bytes_sent",
+      "line": 94,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "bytes_received",
+      "line": 98,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "received_by",
+      "line": 101,
+      "cc": 4,
+      "line_coverage": 1.0,
+      "crap_estimate": 4.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "stage_by",
+      "line": 105,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "stage_by",
+      "line": 105,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "select_prefix",
+      "line": 24,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "bytes_sent",
+      "line": 94,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "_send_packet",
+      "line": 137,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "bytes_received",
+      "line": 98,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/streaming.py",
+      "function": "__init__",
+      "line": 110,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "_read_records",
+      "line": 148,
+      "cc": 8,
+      "line_coverage": 1.0,
+      "crap_estimate": 8.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "_check_dependency",
+      "line": 50,
+      "cc": 7,
+      "line_coverage": 0.7142857142857143,
+      "crap_estimate": 8.142857142857142
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "pack",
+      "line": 95,
+      "cc": 6,
+      "line_coverage": 0.8461538461538461,
+      "crap_estimate": 6.131087847064179
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "__post_init__",
+      "line": 41,
+      "cc": 5,
+      "line_coverage": 0.7142857142857143,
+      "crap_estimate": 5.5830903790087465
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "_check_dependency",
+      "line": 50,
+      "cc": 7,
+      "line_coverage": 0.7142857142857143,
+      "crap_estimate": 8.142857142857142
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "record_count",
+      "line": 61,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "pack",
+      "line": 64,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "unpack",
+      "line": 71,
+      "cc": 4,
+      "line_coverage": 0.7272727272727273,
+      "crap_estimate": 4.324567993989482
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "__post_init__",
+      "line": 41,
+      "cc": 5,
+      "line_coverage": 0.7142857142857143,
+      "crap_estimate": 5.5830903790087465
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "unpack",
+      "line": 71,
+      "cc": 4,
+      "line_coverage": 0.7272727272727273,
+      "crap_estimate": 4.324567993989482
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "pack",
+      "line": 95,
+      "cc": 6,
+      "line_coverage": 0.8461538461538461,
+      "crap_estimate": 6.131087847064179
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "truncate_to_budget",
+      "line": 109,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "ledger",
+      "line": 114,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "__init__",
+      "line": 124,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "at_boundary",
+      "line": 131,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "complete",
+      "line": 135,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "append_bytes",
+      "line": 138,
+      "cc": 3,
+      "line_coverage": 0.8888888888888888,
+      "crap_estimate": 3.0123456790123457
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "_read_records",
+      "line": 148,
+      "cc": 8,
+      "line_coverage": 1.0,
+      "crap_estimate": 8.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "_payload_at",
+      "line": 168,
+      "cc": 4,
+      "line_coverage": 0.9090909090909091,
+      "crap_estimate": 4.012021036814425
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "_payload_at",
+      "line": 168,
+      "cc": 4,
+      "line_coverage": 0.9090909090909091,
+      "crap_estimate": 4.012021036814425
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "at_boundary",
+      "line": 131,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "append_bytes",
+      "line": 138,
+      "cc": 3,
+      "line_coverage": 0.8888888888888888,
+      "crap_estimate": 3.0123456790123457
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "record_count",
+      "line": 61,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "truncate_to_budget",
+      "line": 109,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "complete",
+      "line": 135,
+      "cc": 2,
+      "line_coverage": 1.0,
+      "crap_estimate": 2.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "pack",
+      "line": 64,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "ledger",
+      "line": 114,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/bitstream.py",
+      "function": "__init__",
+      "line": 124,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/precision.py",
+      "function": "_signed_weights",
+      "line": 21,
+      "cc": 5,
+      "line_coverage": 0.9375,
+      "crap_estimate": 5.006103515625
+    },
+    {
+      "path": "pht_tok/precision.py",
+      "function": "from_original",
+      "line": 55,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/precision.py",
+      "function": "from_original",
+      "line": 55,
+      "cc": 3,
+      "line_coverage": 1.0,
+      "crap_estimate": 3.0
+    },
+    {
+      "path": "pht_tok/precision.py",
+      "function": "permitted_symbols",
+      "line": 12,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/precision.py",
+      "function": "representative",
+      "line": 16,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/precision.py",
+      "function": "_quantized",
+      "line": 39,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    },
+    {
+      "path": "pht_tok/precision.py",
+      "function": "refinement_context",
+      "line": 64,
+      "cc": 1,
+      "line_coverage": 1.0,
+      "crap_estimate": 1.0
+    }
+  ],
+  "estimated_max": 8.667638483965016,
+  "ast_pairs_above_0_8": [],
+  "combined_source_coverage": {
+    "covered_lines": 676,
+    "num_statements": 724,
+    "percent_covered": 90.0,
+    "percent_covered_display": "90",
+    "missing_lines": 48,
+    "excluded_lines": 0,
+    "percent_statements_covered": 93.37016574585635,
+    "percent_statements_covered_display": "93",
+    "num_branches": 166,
+    "num_partial_branches": 37,
+    "covered_branches": 125,
+    "missing_branches": 41,
+    "percent_branches_covered": 75.3012048192771,
+    "percent_branches_covered_display": "75"
+  }
+}

@@ -33,7 +33,7 @@
     "basis": "Official replay must be deterministic. Select the practical tolerance of 0.002 used for adjacent perceptual budgets in the archived engineering protocol, distinct from the previous Core quality rule."
   },
   "calibration": "Four frozen Train-only DAVIS 1080p clips, 128 frames total",
-  "validation": "Frozen project cohort, serviceable only after development gates",
+  "validation": "One read-only replay of the frozen candidate on the project cohort after development",
   "test": "Sealed, no pixel reads",
   "network": {
     "static_mbps": [0.1, 0.25, 0.5, 1, 2, 5, 10, 20, 40],

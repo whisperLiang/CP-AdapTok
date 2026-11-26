@@ -1,0 +1,1415 @@
+{
+  "source": "128 Calibration frames, four sequences, Train pixels only",
+  "curves": [
+    {
+      "method": "MASK",
+      "qp": 0,
+      "stage": 1,
+      "frames": 128,
+      "bytes": 57727,
+      "bpp": 0.001739938994984568,
+      "mbps": 0.108238125,
+      "global_psnr": 22.929260821983632,
+      "mse": 0.0050941756758220436,
+      "psnr": 23.243884071707726,
+      "lpips": 0.5708112318534404,
+      "dists": 0.3768892288208008,
+      "ms-ssim": 0.657347199972719
+    },
+    {
+      "method": "MASK",
+      "qp": 0,
+      "stage": 2,
+      "frames": 128,
+      "bytes": 69273,
+      "bpp": 0.002087944878472222,
+      "mbps": 0.129886875,
+      "global_psnr": 23.44141005195681,
+      "mse": 0.004527505585883773,
+      "psnr": 23.745034590363503,
+      "lpips": 0.557540985988453,
+      "dists": 0.35799791011959314,
+      "ms-ssim": 0.6772337197326124
+    },
+    {
+      "method": "MASK",
+      "qp": 0,
+      "stage": 3,
+      "frames": 128,
+      "bytes": 74604,
+      "bpp": 0.0022486255787037036,
+      "mbps": 0.1398825,
+      "global_psnr": 23.564517680524062,
+      "mse": 0.004400968214667955,
+      "psnr": 23.869449451565742,
+      "lpips": 0.5530824132729322,
+      "dists": 0.3503441819921136,
+      "ms-ssim": 0.6822779362555593
+    },
+    {
+      "method": "MASK",
+      "qp": 0,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 78444,
+      "bpp": 0.0023643663194444445,
+      "mbps": 0.1470825,
+      "global_psnr": 23.644260517893088,
+      "mse": 0.004320897341585805,
+      "psnr": 23.94850744307041,
+      "lpips": 0.550548970233649,
+      "dists": 0.3452067510224879,
+      "ms-ssim": 0.685489458264783
+    },
+    {
+      "method": "MASK",
+      "qp": 16,
+      "stage": 1,
+      "frames": 128,
+      "bytes": 157039,
+      "bpp": 0.004733283902391975,
+      "mbps": 0.294448125,
+      "global_psnr": 24.359889115545595,
+      "mse": 0.003664469306841056,
+      "psnr": 24.73845501244068,
+      "lpips": 0.48847953509539366,
+      "dists": 0.30681164748966694,
+      "ms-ssim": 0.7332844147458673
+    },
+    {
+      "method": "MASK",
+      "qp": 16,
+      "stage": 2,
+      "frames": 128,
+      "bytes": 199954,
+      "bpp": 0.006026777102623457,
+      "mbps": 0.37491375,
+      "global_psnr": 25.33468620733315,
+      "mse": 0.002927732402440597,
+      "psnr": 25.683332577347755,
+      "lpips": 0.46486608881969005,
+      "dists": 0.28202172880992293,
+      "ms-ssim": 0.7680551600642502
+    },
+    {
+      "method": "MASK",
+      "qp": 16,
+      "stage": 3,
+      "frames": 128,
+      "bytes": 226002,
+      "bpp": 0.006811885127314815,
+      "mbps": 0.42375375,
+      "global_psnr": 25.66994728221068,
+      "mse": 0.00271022453034675,
+      "psnr": 26.02085654437542,
+      "lpips": 0.45469429180957377,
+      "dists": 0.2697449615225196,
+      "ms-ssim": 0.7799024120904505
+    },
+    {
+      "method": "MASK",
+      "qp": 16,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 246810,
+      "bpp": 0.007439055266203704,
+      "mbps": 0.46276875,
+      "global_psnr": 25.925626146638294,
+      "mse": 0.0025552734664415766,
+      "psnr": 26.274950340390205,
+      "lpips": 0.4474979374790564,
+      "dists": 0.26118238223716617,
+      "ms-ssim": 0.7885720427148044
+    },
+    {
+      "method": "MASK",
+      "qp": 32,
+      "stage": 1,
+      "frames": 128,
+      "bytes": 386439,
+      "bpp": 0.011647587528935185,
+      "mbps": 0.724573125,
+      "global_psnr": 25.430102064957715,
+      "mse": 0.002864110658720165,
+      "psnr": 25.89533606171608,
+      "lpips": 0.414191419549752,
+      "dists": 0.25679242378100753,
+      "ms-ssim": 0.7873251056298614
+    },
+    {
+      "method": "MASK",
+      "qp": 32,
+      "stage": 2,
+      "frames": 128,
+      "bytes": 531753,
+      "bpp": 0.016027470341435184,
+      "mbps": 0.997036875,
+      "global_psnr": 27.054695037786,
+      "mse": 0.0019702915565176227,
+      "psnr": 27.474282383918762,
+      "lpips": 0.3752676742733456,
+      "dists": 0.22582673747092485,
+      "ms-ssim": 0.838473754003644
+    },
+    {
+      "method": "MASK",
+      "qp": 32,
+      "stage": 3,
+      "frames": 128,
+      "bytes": 641026,
+      "bpp": 0.01932104793595679,
+      "mbps": 1.20192375,
+      "global_psnr": 27.82958187308692,
+      "mse": 0.0016483210797559877,
+      "psnr": 28.265345454216003,
+      "lpips": 0.35511172871338204,
+      "dists": 0.20935992943122983,
+      "ms-ssim": 0.8601633165962994
+    },
+    {
+      "method": "MASK",
+      "qp": 32,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 733295,
+      "bpp": 0.0221021110628858,
+      "mbps": 1.374928125,
+      "global_psnr": 28.472055554895675,
+      "mse": 0.0014216557453892165,
+      "psnr": 28.92057879269123,
+      "lpips": 0.3407173664891161,
+      "dists": 0.19882700312882662,
+      "ms-ssim": 0.8761132368817925
+    },
+    {
+      "method": "MASK",
+      "qp": 48,
+      "stage": 1,
+      "frames": 128,
+      "bytes": 893419,
+      "bpp": 0.026928379388503086,
+      "mbps": 1.675160625,
+      "global_psnr": 26.03275744297637,
+      "mse": 0.0024930113498271567,
+      "psnr": 26.605859264731407,
+      "lpips": 0.34834706486435607,
+      "dists": 0.2206352218054235,
+      "ms-ssim": 0.8191346223466098
+    },
+    {
+      "method": "MASK",
+      "qp": 48,
+      "stage": 2,
+      "frames": 128,
+      "bytes": 1337579,
+      "bpp": 0.040315725067515434,
+      "mbps": 2.507960625,
+      "global_psnr": 28.39549404195329,
+      "mse": 0.0014469402436247947,
+      "psnr": 28.935191810131073,
+      "lpips": 0.28961292561143637,
+      "dists": 0.18082342157140374,
+      "ms-ssim": 0.884971952997148
+    },
+    {
+      "method": "MASK",
+      "qp": 48,
+      "stage": 3,
+      "frames": 128,
+      "bytes": 1719490,
+      "bpp": 0.05182683497299383,
+      "mbps": 3.22404375,
+      "global_psnr": 29.889606498854356,
+      "mse": 0.0010257448616926013,
+      "psnr": 30.467228189110756,
+      "lpips": 0.25730949017452076,
+      "dists": 0.15834579057991505,
+      "ms-ssim": 0.9154362417757511
+    },
+    {
+      "method": "MASK",
+      "qp": 48,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 2059111,
+      "bpp": 0.062063289689429015,
+      "mbps": 3.860833125,
+      "global_psnr": 31.359802436368312,
+      "mse": 0.0007311723442740004,
+      "psnr": 31.96747635304928,
+      "lpips": 0.23512740520527586,
+      "dists": 0.14437989937141538,
+      "ms-ssim": 0.9370100884698331
+    },
+    {
+      "method": "MASK",
+      "qp": 63,
+      "stage": 1,
+      "frames": 128,
+      "bytes": 1734350,
+      "bpp": 0.052274727527006175,
+      "mbps": 3.25190625,
+      "global_psnr": 26.11214911510084,
+      "mse": 0.0024478516177168785,
+      "psnr": 26.799694642424583,
+      "lpips": 0.3134533859847579,
+      "dists": 0.20072436099871993,
+      "ms-ssim": 0.8283843342214823
+    },
+    {
+      "method": "MASK",
+      "qp": 63,
+      "stage": 2,
+      "frames": 128,
+      "bytes": 2718762,
+      "bpp": 0.0819457103587963,
+      "mbps": 5.09767875,
+      "global_psnr": 28.881828574049294,
+      "mse": 0.0012936510418057878,
+      "psnr": 29.587666645646095,
+      "lpips": 0.23992087502847426,
+      "dists": 0.15217544231563807,
+      "ms-ssim": 0.9025457627139986
+    },
+    {
+      "method": "MASK",
+      "qp": 63,
+      "stage": 3,
+      "frames": 128,
+      "bytes": 3616987,
+      "bpp": 0.10901894651813272,
+      "mbps": 6.781850625,
+      "global_psnr": 30.947694331719283,
+      "mse": 0.0008039528272547614,
+      "psnr": 31.733685225248337,
+      "lpips": 0.19935145301860757,
+      "dists": 0.12410376267507672,
+      "ms-ssim": 0.9382751183584332
+    },
+    {
+      "method": "MASK",
+      "qp": 63,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 4448317,
+      "bpp": 0.13407591266396604,
+      "mbps": 8.340594375,
+      "global_psnr": 33.41047235904879,
+      "mse": 0.0004559873179346141,
+      "psnr": 34.27746517956257,
+      "lpips": 0.17278006262495182,
+      "dists": 0.10680366074666381,
+      "ms-ssim": 0.9638013830408454
+    },
+    {
+      "method": "PRECISION",
+      "qp": 0,
+      "stage": 1,
+      "frames": 128,
+      "bytes": 57205,
+      "bpp": 0.0017242054880401234,
+      "mbps": 0.107259375,
+      "global_psnr": 22.375995984409723,
+      "mse": 0.005786292738321208,
+      "psnr": 22.74092085659504,
+      "lpips": 0.5754229237791151,
+      "dists": 0.3777146986685693,
+      "ms-ssim": 0.6477166393306106
+    },
+    {
+      "method": "PRECISION",
+      "qp": 0,
+      "stage": 2,
+      "frames": 128,
+      "bytes": 57399,
+      "bpp": 0.0017300528067129629,
+      "mbps": 0.107623125,
+      "global_psnr": 22.376278383132263,
+      "mse": 0.005785916498552979,
+      "psnr": 22.741111025214195,
+      "lpips": 0.5754215766210109,
+      "dists": 0.3777119489386678,
+      "ms-ssim": 0.6477205327246338
+    },
+    {
+      "method": "PRECISION",
+      "qp": 0,
+      "stage": 3,
+      "frames": 128,
+      "bytes": 58517,
+      "bpp": 0.0017637502411265431,
+      "mbps": 0.109719375,
+      "global_psnr": 22.55395131556486,
+      "mse": 0.00555398712231181,
+      "psnr": 22.90327313542366,
+      "lpips": 0.5735728775616735,
+      "dists": 0.37498592073097825,
+      "ms-ssim": 0.6512920898385346
+    },
+    {
+      "method": "PRECISION",
+      "qp": 0,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 78503,
+      "bpp": 0.0023661446277006173,
+      "mbps": 0.147193125,
+      "global_psnr": 23.644260517893088,
+      "mse": 0.004320897341585805,
+      "psnr": 23.94850744307041,
+      "lpips": 0.550548970233649,
+      "dists": 0.3452067510224879,
+      "ms-ssim": 0.685489458264783
+    },
+    {
+      "method": "PRECISION",
+      "qp": 16,
+      "stage": 1,
+      "frames": 128,
+      "bytes": 165126,
+      "bpp": 0.004977032696759259,
+      "mbps": 0.30961125,
+      "global_psnr": 23.34051049252848,
+      "mse": 0.004633924469544581,
+      "psnr": 23.848589405417442,
+      "lpips": 0.4904840972740203,
+      "dists": 0.30565675906836987,
+      "ms-ssim": 0.719367062440142
+    },
+    {
+      "method": "PRECISION",
+      "qp": 16,
+      "stage": 2,
+      "frames": 128,
+      "bytes": 165751,
+      "bpp": 0.004995870707947531,
+      "mbps": 0.310783125,
+      "global_psnr": 23.43890099101121,
+      "mse": 0.0045301220293367805,
+      "psnr": 23.932820692658424,
+      "lpips": 0.48989467753563076,
+      "dists": 0.3047515987418592,
+      "ms-ssim": 0.7209195063915104
+    },
+    {
+      "method": "PRECISION",
+      "qp": 16,
+      "stage": 3,
+      "frames": 128,
+      "bytes": 173470,
+      "bpp": 0.005228527681327161,
+      "mbps": 0.32525625,
+      "global_psnr": 24.123869204942487,
+      "mse": 0.003869127840061992,
+      "psnr": 24.51465232670307,
+      "lpips": 0.4831068986095488,
+      "dists": 0.2963660988025367,
+      "ms-ssim": 0.7356393057852983
+    },
+    {
+      "method": "PRECISION",
+      "qp": 16,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 246970,
+      "bpp": 0.007443877797067901,
+      "mbps": 0.46306875,
+      "global_psnr": 25.925626146638294,
+      "mse": 0.0025552734664415766,
+      "psnr": 26.274950340390205,
+      "lpips": 0.4474979374790564,
+      "dists": 0.26118238223716617,
+      "ms-ssim": 0.7885720427148044
+    },
+    {
+      "method": "PRECISION",
+      "qp": 32,
+      "stage": 1,
+      "frames": 128,
+      "bytes": 437035,
+      "bpp": 0.01317259235146605,
+      "mbps": 0.819440625,
+      "global_psnr": 23.786082955535548,
+      "mse": 0.0041820739156719355,
+      "psnr": 24.464248210191727,
+      "lpips": 0.4123530119541101,
+      "dists": 0.25907010678201914,
+      "ms-ssim": 0.7601976492442191
+    },
+    {
+      "method": "PRECISION",
+      "qp": 32,
+      "stage": 2,
+      "frames": 128,
+      "bytes": 442880,
+      "bpp": 0.013348765432098765,
+      "mbps": 0.8304,
+      "global_psnr": 24.371005876649225,
+      "mse": 0.0036551012540257943,
+      "psnr": 24.935090944170952,
+      "lpips": 0.40831307059852406,
+      "dists": 0.2530211969278753,
+      "ms-ssim": 0.7721332591027021
+    },
+    {
+      "method": "PRECISION",
+      "qp": 32,
+      "stage": 3,
+      "frames": 128,
+      "bytes": 485518,
+      "bpp": 0.014633909625771605,
+      "mbps": 0.91034625,
+      "global_psnr": 25.831617174565082,
+      "mse": 0.0026111888496416213,
+      "psnr": 26.247396036982536,
+      "lpips": 0.3923557296511717,
+      "dists": 0.23593972763046622,
+      "ms-ssim": 0.809508282225579
+    },
+    {
+      "method": "PRECISION",
+      "qp": 32,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 733700,
+      "bpp": 0.022114318094135804,
+      "mbps": 1.3756875,
+      "global_psnr": 28.472055554895675,
+      "mse": 0.0014216557453892165,
+      "psnr": 28.92057879269123,
+      "lpips": 0.3407173664891161,
+      "dists": 0.19882700312882662,
+      "ms-ssim": 0.8761132368817925
+    },
+    {
+      "method": "PRECISION",
+      "qp": 48,
+      "stage": 1,
+      "frames": 128,
+      "bytes": 1101422,
+      "bpp": 0.03319775993441358,
+      "mbps": 2.06516625,
+      "global_psnr": 24.221799421420723,
+      "mse": 0.0037828581628787106,
+      "psnr": 24.9618778526783,
+      "lpips": 0.343301524000708,
+      "dists": 0.23004085244610906,
+      "ms-ssim": 0.7773615438491106
+    },
+    {
+      "method": "PRECISION",
+      "qp": 48,
+      "stage": 2,
+      "frames": 128,
+      "bytes": 1141243,
+      "bpp": 0.034397997444058644,
+      "mbps": 2.139830625,
+      "global_psnr": 25.5764791671707,
+      "mse": 0.002769185719273537,
+      "psnr": 26.145611107349396,
+      "lpips": 0.3296920233988203,
+      "dists": 0.21188710303977132,
+      "ms-ssim": 0.8152857539243996
+    },
+    {
+      "method": "PRECISION",
+      "qp": 48,
+      "stage": 3,
+      "frames": 128,
+      "bytes": 1325857,
+      "bpp": 0.03996241440007716,
+      "mbps": 2.485981875,
+      "global_psnr": 27.8415352517556,
+      "mse": 0.0016437905326824875,
+      "psnr": 28.27613566815853,
+      "lpips": 0.2980439200764522,
+      "dists": 0.1828916659578681,
+      "ms-ssim": 0.8752765036188066
+    },
+    {
+      "method": "PRECISION",
+      "qp": 48,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 2059467,
+      "bpp": 0.06207401982060185,
+      "mbps": 3.861500625,
+      "global_psnr": 31.359802436368312,
+      "mse": 0.0007311723442740004,
+      "psnr": 31.96747635304928,
+      "lpips": 0.23512740520527586,
+      "dists": 0.14437989937141538,
+      "ms-ssim": 0.9370100884698331
+    },
+    {
+      "method": "PRECISION",
+      "qp": 63,
+      "stage": 1,
+      "frames": 128,
+      "bytes": 2195511,
+      "bpp": 0.06617449725115741,
+      "mbps": 4.116583125,
+      "global_psnr": 24.722627515669746,
+      "mse": 0.0033708330890931393,
+      "psnr": 25.45370553433895,
+      "lpips": 0.3209240620781202,
+      "dists": 0.2262406782247126,
+      "ms-ssim": 0.7862347401678562
+    },
+    {
+      "method": "PRECISION",
+      "qp": 63,
+      "stage": 2,
+      "frames": 128,
+      "bytes": 2354872,
+      "bpp": 0.07097776813271604,
+      "mbps": 4.415385,
+      "global_psnr": 26.73960878792351,
+      "mse": 0.002118551965622828,
+      "psnr": 27.321283116936684,
+      "lpips": 0.2859279316908214,
+      "dists": 0.1858095834031701,
+      "ms-ssim": 0.8510141633450985
+    },
+    {
+      "method": "PRECISION",
+      "qp": 63,
+      "stage": 3,
+      "frames": 128,
+      "bytes": 2921418,
+      "bpp": 0.08805392795138889,
+      "mbps": 5.47765875,
+      "global_psnr": 29.718190447110615,
+      "mse": 0.0010670406270492094,
+      "psnr": 30.194665357470512,
+      "lpips": 0.22876031845225953,
+      "dists": 0.1412466731853783,
+      "ms-ssim": 0.9190630619414151
+    },
+    {
+      "method": "PRECISION",
+      "qp": 63,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 4446141,
+      "bpp": 0.13401032624421297,
+      "mbps": 8.336514375,
+      "global_psnr": 33.41047235904879,
+      "mse": 0.0004559873179346141,
+      "psnr": 34.27746517956257,
+      "lpips": 0.17278006262495182,
+      "dists": 0.10680366074666381,
+      "ms-ssim": 0.9638013830408454
+    },
+    {
+      "method": "official",
+      "qp": 0,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 76916,
+      "bpp": 0.002318311149691358,
+      "mbps": 0.1442175,
+      "global_psnr": 23.644260517893088,
+      "mse": 0.004320897341585805,
+      "psnr": 23.94850744307041,
+      "lpips": 0.550548970233649,
+      "dists": 0.3452067510224879,
+      "ms-ssim": 0.685489458264783
+    },
+    {
+      "method": "official",
+      "qp": 16,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 245480,
+      "bpp": 0.007398967978395061,
+      "mbps": 0.460275,
+      "global_psnr": 25.925626146638294,
+      "mse": 0.0025552734664415766,
+      "psnr": 26.274950340390205,
+      "lpips": 0.4474979374790564,
+      "dists": 0.26118238223716617,
+      "ms-ssim": 0.7885720427148044
+    },
+    {
+      "method": "official",
+      "qp": 32,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 732341,
+      "bpp": 0.022073356722608024,
+      "mbps": 1.373139375,
+      "global_psnr": 28.472055554895675,
+      "mse": 0.0014216557453892165,
+      "psnr": 28.92057879269123,
+      "lpips": 0.3407173664891161,
+      "dists": 0.19882700312882662,
+      "ms-ssim": 0.8761132368817925
+    },
+    {
+      "method": "official",
+      "qp": 48,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 2058188,
+      "bpp": 0.06203546971450617,
+      "mbps": 3.8591025,
+      "global_psnr": 31.359802436368312,
+      "mse": 0.0007311723442740004,
+      "psnr": 31.96747635304928,
+      "lpips": 0.23512740520527586,
+      "dists": 0.14437989937141538,
+      "ms-ssim": 0.9370100884698331
+    },
+    {
+      "method": "official",
+      "qp": 63,
+      "stage": 4,
+      "frames": 128,
+      "bytes": 4447401,
+      "bpp": 0.13404830367476853,
+      "mbps": 8.338876875,
+      "global_psnr": 33.41047235904879,
+      "mse": 0.0004559873179346141,
+      "psnr": 34.27746517956257,
+      "lpips": 0.17278006262495182,
+      "dists": 0.10680366074666381,
+      "ms-ssim": 0.9638013830408454
+    }
+  ],
+  "mid_equal_quality_rate_penalty_percent": [
+    {
+      "method": "MASK",
+      "qp": 0,
+      "stage": 1,
+      "global_psnr": null,
+      "lpips": null,
+      "dists": null
+    },
+    {
+      "method": "MASK",
+      "qp": 0,
+      "stage": 2,
+      "global_psnr": null,
+      "lpips": null,
+      "dists": null
+    },
+    {
+      "method": "MASK",
+      "qp": 0,
+      "stage": 3,
+      "global_psnr": null,
+      "lpips": null,
+      "dists": null
+    },
+    {
+      "method": "MASK",
+      "qp": 0,
+      "stage": 4,
+      "global_psnr": null,
+      "lpips": null,
+      "dists": 1.9865657048574015
+    },
+    {
+      "method": "MASK",
+      "qp": 16,
+      "stage": 1,
+      "global_psnr": 39.962706082520796,
+      "lpips": -0.9302545265180595,
+      "dists": 21.947049352401258
+    },
+    {
+      "method": "MASK",
+      "qp": 16,
+      "stage": 2,
+      "global_psnr": 7.7524647175502,
+      "lpips": -2.5489441946268565,
+      "dists": 10.430749546593976
+    },
+    {
+      "method": "MASK",
+      "qp": 16,
+      "stage": 3,
+      "global_psnr": 3.93606319526707,
+      "lpips": -1.1153588803943015,
+      "dists": 4.108304272469643
+    },
+    {
+      "method": "MASK",
+      "qp": 16,
+      "stage": 4,
+      "global_psnr": 0.5417956291929871,
+      "lpips": 0.5418106264022393,
+      "dists": 0.5417640871045126
+    },
+    {
+      "method": "MASK",
+      "qp": 32,
+      "stage": 1,
+      "global_psnr": 99.15944890049819,
+      "lpips": 9.737922192377791,
+      "dists": 46.946474364044754
+    },
+    {
+      "method": "MASK",
+      "qp": 32,
+      "stage": 2,
+      "global_psnr": 30.180057456478405,
+      "lpips": 2.1835367115826676,
+      "dists": 19.44788042320862
+    },
+    {
+      "method": "MASK",
+      "qp": 32,
+      "stage": 3,
+      "global_psnr": 13.091892958389462,
+      "lpips": 0.8041414415742354,
+      "dists": 5.956894484786268
+    },
+    {
+      "method": "MASK",
+      "qp": 32,
+      "stage": 4,
+      "global_psnr": 0.13026955852095679,
+      "lpips": 0.13027263274234535,
+      "dists": 0.13021539035651397
+    },
+    {
+      "method": "MASK",
+      "qp": 48,
+      "stage": 1,
+      "global_psnr": 246.11471047822386,
+      "lpips": 31.419483630819343,
+      "dists": 82.1626909036864
+    },
+    {
+      "method": "MASK",
+      "qp": 48,
+      "stage": 2,
+      "global_psnr": 88.2144453198124,
+      "lpips": 11.244145268863992,
+      "dists": 29.167630388007094
+    },
+    {
+      "method": "MASK",
+      "qp": 48,
+      "stage": 3,
+      "global_psnr": 38.182202854172445,
+      "lpips": 4.686518106524051,
+      "dists": 8.786216033433302
+    },
+    {
+      "method": "MASK",
+      "qp": 48,
+      "stage": 4,
+      "global_psnr": 0.044846251584185204,
+      "lpips": 0.0448534568613157,
+      "dists": 0.04486356485056131
+    },
+    {
+      "method": "MASK",
+      "qp": 63,
+      "stage": 1,
+      "global_psnr": 547.4191514307239,
+      "lpips": 81.48914825169776,
+      "dists": 146.1216033619707
+    },
+    {
+      "method": "MASK",
+      "qp": 63,
+      "stage": 2,
+      "global_psnr": 216.86505808588504,
+      "lpips": 38.854821656705106,
+      "dists": 53.095493437501595
+    },
+    {
+      "method": "MASK",
+      "qp": 63,
+      "stage": 3,
+      "global_psnr": 102.01920964127002,
+      "lpips": 17.072053700083178,
+      "dists": 18.8627801432639
+    },
+    {
+      "method": "MASK",
+      "qp": 63,
+      "stage": 4,
+      "global_psnr": null,
+      "lpips": 0.02059948840409387,
+      "dists": null
+    },
+    {
+      "method": "PRECISION",
+      "qp": 0,
+      "stage": 1,
+      "global_psnr": null,
+      "lpips": null,
+      "dists": null
+    },
+    {
+      "method": "PRECISION",
+      "qp": 0,
+      "stage": 2,
+      "global_psnr": null,
+      "lpips": null,
+      "dists": null
+    },
+    {
+      "method": "PRECISION",
+      "qp": 0,
+      "stage": 3,
+      "global_psnr": null,
+      "lpips": null,
+      "dists": null
+    },
+    {
+      "method": "PRECISION",
+      "qp": 0,
+      "stage": 4,
+      "global_psnr": null,
+      "lpips": null,
+      "dists": 2.0632727490747405
+    },
+    {
+      "method": "PRECISION",
+      "qp": 16,
+      "stage": 1,
+      "global_psnr": null,
+      "lpips": 6.424895414103782,
+      "dists": 26.349549549843744
+    },
+    {
+      "method": "PRECISION",
+      "qp": 16,
+      "stage": 2,
+      "global_psnr": null,
+      "lpips": 6.157591505338611,
+      "dists": 25.37009710824012
+    },
+    {
+      "method": "PRECISION",
+      "qp": 16,
+      "stage": 3,
+      "global_psnr": 74.96416402958374,
+      "lpips": 2.950942004185153,
+      "dists": 17.507238834757043
+    },
+    {
+      "method": "PRECISION",
+      "qp": 16,
+      "stage": 4,
+      "global_psnr": 0.6069740551103653,
+      "lpips": 0.606989062041885,
+      "dists": 0.6069424925740474
+    },
+    {
+      "method": "PRECISION",
+      "qp": 32,
+      "stage": 1,
+      "global_psnr": 426.5570569920384,
+      "lpips": 21.737879509405445,
+      "dists": 72.2307145200308
+    },
+    {
+      "method": "PRECISION",
+      "qp": 32,
+      "stage": 2,
+      "global_psnr": 292.4778041577705,
+      "lpips": 18.286867675361783,
+      "dists": 57.25171139384826
+    },
+    {
+      "method": "PRECISION",
+      "qp": 32,
+      "stage": 3,
+      "global_psnr": 106.78705052822077,
+      "lpips": 10.487729013872515,
+      "dists": 29.57294356361193
+    },
+    {
+      "method": "PRECISION",
+      "qp": 32,
+      "stage": 4,
+      "global_psnr": 0.18557166636461453,
+      "lpips": 0.18557474228388937,
+      "dists": 0.18551746828299187
+    },
+    {
+      "method": "PRECISION",
+      "qp": 48,
+      "stage": 1,
+      "global_psnr": 953.9419902051684,
+      "lpips": 54.23002450938075,
+      "dists": 165.98630692028794
+    },
+    {
+      "method": "PRECISION",
+      "qp": 48,
+      "stage": 2,
+      "global_psnr": 448.73868940610635,
+      "lpips": 40.03588836026688,
+      "dists": 97.3325852121075
+    },
+    {
+      "method": "PRECISION",
+      "qp": 48,
+      "stage": 3,
+      "global_psnr": 132.7868653909406,
+      "lpips": 19.486002976516193,
+      "dists": 33.33970704711404
+    },
+    {
+      "method": "PRECISION",
+      "qp": 48,
+      "stage": 4,
+      "global_psnr": 0.06214301959017732,
+      "lpips": 0.06215022611300025,
+      "dists": 0.062160335849847925
+    },
+    {
+      "method": "PRECISION",
+      "qp": 63,
+      "stage": 1,
+      "global_psnr": 1509.29952933629,
+      "lpips": 146.93610472769873,
+      "dists": 396.8538145714383
+    },
+    {
+      "method": "PRECISION",
+      "qp": 63,
+      "stage": 2,
+      "global_psnr": 562.1527648731202,
+      "lpips": 89.15033616885731,
+      "dists": 150.7279371739328
+    },
+    {
+      "method": "PRECISION",
+      "qp": 63,
+      "stage": 3,
+      "global_psnr": 149.6597365523072,
+      "lpips": 32.60832782743081,
+      "dists": 33.95266912190282
+    },
+    {
+      "method": "PRECISION",
+      "qp": 63,
+      "stage": 4,
+      "global_psnr": null,
+      "lpips": -0.028327965391738985,
+      "dists": null
+    }
+  ],
+  "bd_rate_by_stage": {
+    "MASK": {
+      "1": {
+        "global_psnr": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            23.64426052429203,
+            26.11214911510084
+          ],
+          "delta_percent": 72.3624994585161
+        },
+        "lpips": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.3134533859847579,
+            0.5505489581264555
+          ],
+          "delta_percent": 11.534987752151082
+        },
+        "dists": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.20072436099871993,
+            0.34520676312968135
+          ],
+          "delta_percent": 43.5849530344963
+        }
+      },
+      "2": {
+        "global_psnr": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            23.64426052429203,
+            28.881828574049294
+          ],
+          "delta_percent": 27.823798994527422
+        },
+        "lpips": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.23992087502847426,
+            0.5505489581264555
+          ],
+          "delta_percent": 3.5444831473797462
+        },
+        "dists": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.15217544231563807,
+            0.34520676312968135
+          ],
+          "delta_percent": 17.443688636648265
+        }
+      },
+      "3": {
+        "global_psnr": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            23.64426052429203,
+            30.947694331719283
+          ],
+          "delta_percent": 16.770954227117524
+        },
+        "lpips": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.19935145301860757,
+            0.5505489581264555
+          ],
+          "delta_percent": 1.4935320860306525
+        },
+        "dists": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.12410376267507672,
+            0.34520676312968135
+          ],
+          "delta_percent": 6.054741314448831
+        }
+      },
+      "4": {
+        "global_psnr": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            23.64426052429203,
+            33.41047234822095
+          ],
+          "delta_percent": 0.5256555984115049
+        },
+        "lpips": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.17278006262495182,
+            0.5505489581264555
+          ],
+          "delta_percent": -0.062357957913073345
+        },
+        "dists": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.10680367657914758,
+            0.3452067510224879
+          ],
+          "delta_percent": -0.004845396461511233
+        }
+      }
+    },
+    "PRECISION": {
+      "1": {
+        "global_psnr": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            23.64426052429203,
+            24.722627515669746
+          ],
+          "delta_percent": 827.6313782102214
+        },
+        "lpips": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.3209240620781202,
+            0.5505489581264555
+          ],
+          "delta_percent": 21.358846493632118
+        },
+        "dists": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.2262406782247126,
+            0.34520676312968135
+          ],
+          "delta_percent": 49.675350640434516
+        }
+      },
+      "2": {
+        "global_psnr": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            23.64426052429203,
+            26.73960878792351
+          ],
+          "delta_percent": 376.40568797601134
+        },
+        "lpips": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.2859279316908214,
+            0.5505489581264555
+          ],
+          "delta_percent": 20.822255717571885
+        },
+        "dists": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.1858095834031701,
+            0.34520676312968135
+          ],
+          "delta_percent": 53.64657601391731
+        }
+      },
+      "3": {
+        "global_psnr": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            23.64426052429203,
+            29.718190447110615
+          ],
+          "delta_percent": 113.49061635451025
+        },
+        "lpips": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.22876031845225953,
+            0.5505489581264555
+          ],
+          "delta_percent": 11.652990211928639
+        },
+        "dists": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.1412466731853783,
+            0.34520676312968135
+          ],
+          "delta_percent": 25.440809991840762
+        }
+      },
+      "4": {
+        "global_psnr": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            23.64426052429203,
+            33.41047234822095
+          ],
+          "delta_percent": 0.567113928252399
+        },
+        "lpips": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.17278006262495182,
+            0.5505489581264555
+          ],
+          "delta_percent": -0.016845087297111816
+        },
+        "dists": {
+          "official_points": 64,
+          "candidate_points": 5,
+          "dominated_official": [],
+          "dominated_candidate": [],
+          "status": "MEASURED",
+          "quality_range": [
+            0.10680367657914758,
+            0.3452067510224879
+          ],
+          "delta_percent": 0.04308601596717247
+        }
+      }
+    }
+  },
+  "local_adjacent_regression": {
+    "MASK": {
+      "psnr": {
+        "fraction": 0.005376344086021506,
+        "comparisons": 1860
+      },
+      "lpips": {
+        "fraction": 0.012365591397849462,
+        "comparisons": 1860
+      },
+      "dists": {
+        "fraction": 0.011827956989247311,
+        "comparisons": 1860
+      }
+    },
+    "PRECISION": {
+      "psnr": {
+        "fraction": 0.004301075268817204,
+        "comparisons": 1860
+      },
+      "lpips": {
+        "fraction": 0.03978494623655914,
+        "comparisons": 1860
+      },
+      "dists": {
+        "fraction": 0.0543010752688172,
+        "comparisons": 1860
+      }
+    }
+  },
+  "full_overhead": [
+    {
+      "method": "MASK",
+      "qp": 0,
+      "official_bytes": 76916,
+      "progressive_bytes": 78444,
+      "extra_ratio": 0.019865827656144308
+    },
+    {
+      "method": "MASK",
+      "qp": 16,
+      "official_bytes": 245480,
+      "progressive_bytes": 246810,
+      "extra_ratio": 0.005417956656346812
+    },
+    {
+      "method": "MASK",
+      "qp": 32,
+      "official_bytes": 732341,
+      "progressive_bytes": 733295,
+      "extra_ratio": 0.0013026718427617823
+    },
+    {
+      "method": "MASK",
+      "qp": 48,
+      "official_bytes": 2058188,
+      "progressive_bytes": 2059111,
+      "extra_ratio": 0.000448452716661496
+    },
+    {
+      "method": "MASK",
+      "qp": 63,
+      "official_bytes": 4447401,
+      "progressive_bytes": 4448317,
+      "extra_ratio": 0.00020596298827113557
+    },
+    {
+      "method": "PRECISION",
+      "qp": 0,
+      "official_bytes": 76916,
+      "progressive_bytes": 78503,
+      "extra_ratio": 0.02063289822663683
+    },
+    {
+      "method": "PRECISION",
+      "qp": 16,
+      "official_bytes": 245480,
+      "progressive_bytes": 246970,
+      "extra_ratio": 0.006069740915756849
+    },
+    {
+      "method": "PRECISION",
+      "qp": 32,
+      "official_bytes": 732341,
+      "progressive_bytes": 733700,
+      "extra_ratio": 0.0018556929080850715
+    },
+    {
+      "method": "PRECISION",
+      "qp": 48,
+      "official_bytes": 2058188,
+      "progressive_bytes": 2059467,
+      "extra_ratio": 0.0006214203950269948
+    },
+    {
+      "method": "PRECISION",
+      "qp": 63,
+      "official_bytes": 4447401,
+      "progressive_bytes": 4446141,
+      "extra_ratio": -0.0002833115340847847
+    }
+  ],
+  "training": "frozen official checkpoints"
+}

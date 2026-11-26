@@ -1,0 +1,303 @@
+{
+  "cpu_output": [
+    "...............................s....................                     [100%]",
+    "=========================== short test summary info ============================",
+    "SKIPPED [1] cp_adaptok/tests/test_state_fingerprint.py:35: CUDA fingerprint equality",
+    "195 passed, 1 skipped, 13 deselected in 53.25s"
+  ],
+  "cuda_output": [
+    ".....                                                                    [100%]",
+    "5 passed, 31 deselected in 29.94s"
+  ],
+  "ruff": "PASS",
+  "mypy": "Success: no issues found in 18 source files",
+  "builds": {
+    "official_uf": "PASS",
+    "pht_cuda": "PASS",
+    "signed_and_conditional_entropy": "PASS",
+    "official_rt_abi": "PASS"
+  },
+  "contracts": {
+    "T1": {
+      "status": "PASS",
+      "evidence": "Native 1080p shape on H100, measured real Calibration and UVG"
+    },
+    "T2": {
+      "status": "PASS",
+      "evidence": "Manifest-contiguous positive and ordered chunk assembly tests"
+    },
+    "T3": {
+      "status": "PASS",
+      "evidence": "Official eight-frame CUDA analysis, within-chunk perturbation changes bytes"
+    },
+    "T4": {
+      "status": "PASS",
+      "evidence": "Later backing frames changed with unchanged current stream"
+    },
+    "T5": {
+      "status": "PASS",
+      "evidence": "One shared analysis call; repeated-call mutation detected"
+    },
+    "T6": {
+      "status": "PASS",
+      "evidence": "80 native full comparisons and 160 physical progressive full decodes"
+    },
+    "T7": {
+      "status": "PASS",
+      "evidence": "Each legal prefix equals an immutable byte slice"
+    },
+    "T8": {
+      "status": "PASS",
+      "evidence": "Fresh prefix receiver agrees with incremental output"
+    },
+    "T9": {
+      "status": "PASS",
+      "evidence": "Incomplete record boundary handling and explicit malformed errors"
+    },
+    "T10": {
+      "status": "PASS",
+      "evidence": "Hyperprior CRC, audit ledger and no-hyperprior-accounting mutation"
+    },
+    "T11": {
+      "status": "PASS",
+      "evidence": "Spatial order replay and exact full conditions"
+    },
+    "T12": {
+      "status": "PASS",
+      "evidence": "Nested all signed intervals with exact terminal recovery"
+    },
+    "T13": {
+      "status": "PASS",
+      "evidence": "No repeated entropy decode on subsequent append"
+    },
+    "T14": {
+      "status": "PASS",
+      "evidence": "Tensor-exact direct vs split reception with each candidate"
+    },
+    "T15": {
+      "status": "PASS",
+      "evidence": "Committed references from independent native endpoints"
+    },
+    "T16": {
+      "status": "PASS",
+      "evidence": "Committed state hash stable through all later enhancements"
+    },
+    "T17": {
+      "status": "PASS",
+      "evidence": "Real variable-budget CLOSED sequences, 16 P chunks each"
+    },
+    "T18": {
+      "status": "PASS",
+      "evidence": "Bad reference version rejected and explicit refresh recovered"
+    },
+    "T19": {
+      "status": "PASS",
+      "evidence": "Missing prefix and dependent chunk rejection, independent I recovered"
+    },
+    "T20": {
+      "status": "PASS",
+      "evidence": "Tail cases, real seven-frame chunks, and valid-frame accounting"
+    },
+    "T21": {
+      "status": "PASS",
+      "evidence": "Official I records and independent refresh included in byte totals"
+    },
+    "T22": {
+      "status": "PASS",
+      "evidence": "Accurate lengths including headers, CRC, z and actual entropy"
+    },
+    "T23": {
+      "status": "PASS",
+      "evidence": "Calibration source 30 fps, UVG 120 fps and 60 fps unit test"
+    },
+    "T24": {
+      "status": "PASS",
+      "evidence": "Exact native CDF indexes; deterministic normalized conditional families"
+    },
+    "T25": {
+      "status": "PASS",
+      "evidence": "Checksum, extra bytes and bounded rANS truncation tests"
+    },
+    "T26": {
+      "status": "PASS",
+      "evidence": "Network QP selection precedes encode; prefix chosen from returned boundaries"
+    },
+    "T27": {
+      "status": "PASS",
+      "evidence": "Two original native builds; all native symbols and reference states verified"
+    },
+    "T28": {
+      "status": "PASS",
+      "evidence": "Independent receiver accepts only bytes and its committed state"
+    },
+    "T29": {
+      "status": "NOT_RUN",
+      "evidence": "No training was performed"
+    },
+    "T30": {
+      "status": "PASS",
+      "evidence": "Network deadline and byte accounting, late-data and future-observation mutations"
+    }
+  },
+  "mutations": [
+    {
+      "name": "single_frame_rate_denominator",
+      "witness": "test_baseline.py",
+      "gpu": false,
+      "killed": true,
+      "returncode": 1,
+      "result": "        assert ledger[\"valid_frames\"] == 4 and ledger[\"tail_padding_frames\"] == 5\n>       assert ledger[\"bpp\"] == len(stream.getvalue()) * 8 / (4 * 1080 * 1920)\nE       AssertionError: assert 8.873456790123456e-05 == ((23 * 8) / ((4 * 1080) * 1920))\nE        +  where 23 = len(b'\\x00\\x848\\x87\\x80\\x10\\x10\\x02\\x05image \\x10\\x02\\x05inter')\nE        +    where b'\\x00\\x848\\x87\\x80\\x10\\x10\\x02\\x05image \\x10\\x02\\x05inter' = <built-in method getvalue of _io.BytesIO object at 0x72b0ffb1b240>()\nE        +      where <built-in method getvalue of _io.BytesIO object at 0x72b0ffb1b240> = <_io.BytesIO object at 0x72b0ffb1b240>.getvalue\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_baseline.py:19: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_baseline.py::test_physical_rate_counts_intra_tail_and_actual_source_clock\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s"
+    },
+    {
+      "name": "rewrite_prefix_header",
+      "witness": "test_bitstream.py",
+      "gpu": false,
+      "killed": true,
+      "returncode": 1,
+      "result": "            prefix = stream.truncate_to_budget(boundary)\n>           assert prefix == stream.data[:boundary]\nE           AssertionError: assert b'XHT1model-i...fe!bytesbytes' == b'PHT1model-i...fe!bytesbytes'\nE             \nE             At index 0 diff: b'X' != b'P'\nE             Use -v to get more diff\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_bitstream.py:17: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_bitstream.py::test_real_byte_boundaries_and_arbitrary_fragmentation\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s"
+    },
+    {
+      "name": "omit_hyperprior_from_ledger",
+      "witness": "test_bitstream.py",
+      "gpu": false,
+      "killed": true,
+      "returncode": 1,
+      "result": ">       assert stream.ledger[\"payload_bytes\"] == list(map(len, layers))\nE       assert [10, 15, 20, 25] == [5, 10, 15, 20, 25]\nE         \nE         At index 0 diff: 10 != 5\nE         Right contains one more item: 25\nE         Use -v to get more diff\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_bitstream.py:26: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_bitstream.py::test_real_byte_boundaries_and_arbitrary_fragmentation\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s"
+    },
+    {
+      "name": "invalid_cdf_normalization",
+      "witness": "test_precision.py",
+      "gpu": false,
+      "killed": true,
+      "returncode": 1,
+      "result": "            np.testing.assert_array_equal(a, b)\n            assert np.all(a[:, 0] == 0)\n>           assert np.all(a[:, -1] == 65536)\nE           assert np.False_\nE            +  where np.False_ = <function all at 0x74bb6695edb0>(array([65587], dtype=int32) == 65536)\nE            +    where <function all at 0x74bb6695edb0> = np.all\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_precision.py:27: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_precision.py::test_conditional_cdfs_are_strict_and_deterministic_even_in_tail\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.10s"
+    },
+    {
+      "name": "clip_escape_symbols",
+      "witness": "test_precision.py",
+      "gpu": false,
+      "killed": true,
+      "returncode": 1,
+      "result": "E        ACTUAL: array([-8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8,\nE              -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8,\nE              -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8, -8,...\nE        DESIRED: array([-128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118,\nE              -117, -116, -115, -114, -113, -112, -111, -110, -109, -108, -107,\nE              -106, -105, -104, -103, -102, -101, -100,  -99,  -98,  -97,  -96,...\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_precision.py:58: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_precision.py::test_native_coders_cover_the_full_signed_alphabet\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 2 passed in 1.47s"
+    },
+    {
+      "name": "include_tail_in_duration",
+      "witness": "test_baseline.py",
+      "gpu": false,
+      "killed": true,
+      "returncode": 1,
+      "result": "        assert ledger[\"bpp\"] == len(stream.getvalue()) * 8 / (4 * 1080 * 1920)\n>       assert ledger[\"mbps\"] == len(stream.getvalue()) * 8 / (4 / 60) / 1e6\nE       AssertionError: assert 0.0012266666666666667 == (((23 * 8) / (4 / 60)) / 1000000.0)\nE        +  where 23 = len(b'\\x00\\x848\\x87\\x80\\x10\\x10\\x02\\x05image \\x10\\x02\\x05inter')\nE        +    where b'\\x00\\x848\\x87\\x80\\x10\\x10\\x02\\x05image \\x10\\x02\\x05inter' = <built-in method getvalue of _io.BytesIO object at 0x7508cd9432e0>()\nE        +      where <built-in method getvalue of _io.BytesIO object at 0x7508cd9432e0> = <_io.BytesIO object at 0x7508cd9432e0>.getvalue\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_baseline.py:20: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_baseline.py::test_physical_rate_counts_intra_tail_and_actual_source_clock\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s"
+    },
+    {
+      "name": "count_late_as_on_time",
+      "witness": "test_pht_streaming.py",
+      "gpu": false,
+      "killed": true,
+      "returncode": 1,
+      "result": "        assert result.bytes_sent > 4000\n>       assert result.received_by(0.45) < result.bytes_received\nE       assert 4200 < 4200\nE        +  where 4200 = received_by(0.45)\nE        +    where received_by = Delivery(arrivals=(0.25112, 0.49600000000000005), packets=(Packet(wire_bytes=140, arrival=0.25112), Packet(wire_bytes=...et(wire_bytes=340, arrival=0.49600000000000005)), observation=Observation(at=0.506, bits_per_second=136585.3658536585)).received_by\nE        +  and   4200 = Delivery(arrivals=(0.25112, 0.49600000000000005), packets=(Packet(wire_bytes=140, arrival=0.25112), Packet(wire_bytes=...et(wire_bytes=340, arrival=0.49600000000000005)), observation=Observation(at=0.506, bits_per_second=136585.3658536585)).bytes_received\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_pht_streaming.py:18: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_pht_streaming.py::test_feedback_never_uses_future_observations_and_tardy_packets_are_charged\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.03s"
+    },
+    {
+      "name": "look_at_future_bandwidth",
+      "witness": "test_pht_streaming.py",
+      "gpu": false,
+      "killed": true,
+      "returncode": 1,
+      "result": "    def test_feedback_never_uses_future_observations_and_tardy_packets_are_charged():\n        feedback = (Observation(0.4, 2_000_000), Observation(0.6, 100_000_000))\n>       assert goodput_at(feedback, 0.5, 1_000_000) == goodput_at(feedback[:1], 0.5, 1_000_000)\nE       assert 45797500.0 == 1450000.0\nE        +  where 45797500.0 = goodput_at((Observation(at=0.4, bits_per_second=2000000), Observation(at=0.6, bits_per_second=100000000)), 0.5, 1000000)\nE        +  and   1450000.0 = goodput_at((Observation(at=0.4, bits_per_second=2000000),), 0.5, 1000000)\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_pht_streaming.py:13: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_pht_streaming.py::test_feedback_never_uses_future_observations_and_tardy_packets_are_charged\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.03s"
+    },
+    {
+      "name": "repeat_frame",
+      "witness": "test_codec.py::test_assemble_preserves_input_order_and_pads_only_the_tail",
+      "gpu": true,
+      "killed": true,
+      "returncode": 1,
+      "result": "        _, _, frames = peers\n        assembled = assemble(frames[:3]).reshape(8, 3, *frames.shape[-2:])\n>       assert torch.equal(assembled[:3], frames[:3])\nE       AssertionError: assert False\nE        +  where False = <built-in method equal of type object at 0x748a8c1d6c20>(tensor([[[[ 0.2031,  0.4629, -0.2559,  ..., -0.3862,  0.1680,  0.1772],\\n          [-0.3467, -0.2749, -0.4937,  ...,  0...          [-0.2107, -0.2986, -0.1970,  ...,  0.3843, -0.3037, -0.3945]]]],\\n       device='cuda:0', dtype=torch.float16), tensor([[[[ 0.2031,  0.4629, -0.2559,  ..., -0.3862,  0.1680,  0.1772],\\n          [-0.3467, -0.2749, -0.4937,  ...,  0...          [ 0.4028, -0.2449,  0.0405,  ...,  0.1221,  0.0566,  0.3145]]]],\\n       device='cuda:0', dtype=torch.float16))\nE        +    where <built-in method equal of type object at 0x748a8c1d6c20> = torch.equal\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py:32: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_assemble_preserves_input_order_and_pads_only_the_tail\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.20s"
+    },
+    {
+      "name": "reset_each_reference",
+      "witness": "test_native.py",
+      "gpu": true,
+      "killed": true,
+      "returncode": 1,
+      "result": "                official_z, official_y, official_indexes, official_skip = stock.video.proxy.pht_symbols(False)\n>               assert torch.equal(analysis.hyper, official_z)\nE               AssertionError: assert False\nE                +  where False = <built-in method equal of type object at 0x74bf09dd6c20>(tensor([[[[ 1,  1],\\n          [ 1,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[ 0,  1],\\n          [ 1,...         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]]]], device='cuda:0', dtype=torch.int8), tensor([[[[ 1,  1],\\n          [ 1,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[-1,  1],\\n          [ 1,...         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]]]], device='cuda:0', dtype=torch.int8))\nE                +    where <built-in method equal of type object at 0x74bf09dd6c20> = torch.equal\nE                +    and   tensor([[[[ 1,  1],\\n          [ 1,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[ 0,  1],\\n          [ 1,...         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]]]], device='cuda:0', dtype=torch.int8) = EncodedLatents(hyper=tensor([[[[ 1,  1],\\n          [ 1,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[ 0..., device='cuda:0',\\n       dtype=torch.int16), keep=tensor([True, True, True,  ..., True, True, True], device='cuda:0')).hyper\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_native.py:41: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_native.py::test_official_cuda_symbols_replay_on_independent_peer\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 9.70s"
+    },
+    {
+      "name": "read_next_frame",
+      "witness": "test_codec.py::test_one_encoder_call_and_chunk_causality_with_shared_backing_storage",
+      "gpu": true,
+      "killed": true,
+      "returncode": 1,
+      "result": "        future = tx.encode_chunk_once(changed_future[1:9], 32, 1, 2, commit=False)\n>       assert original.data == future.data\nE       AssertionError: assert b'PHT1test-id...EX6\\x18\\xdd(1' == b'PHT1test-id...e\\xa0\\xf8\\xc8'\nE         \nE         At index 39 diff: b'$' != b'('\nE         Use -v to get more diff\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py:86: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_one_encoder_call_and_chunk_causality_with_shared_backing_storage\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.42s"
+    },
+    {
+      "name": "need_hidden_full_stream",
+      "witness": "test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss",
+      "gpu": true,
+      "killed": true,
+      "returncode": 1,
+      "result": "    @torch.inference_mode()\n    def reconstruct(self) -> list[Tensor]:\n        self._active()\n        if not self.stage:\n>           raise MissingReference(\"no complete display prefix\")\nE           pht_tok.codec.MissingReference: no complete display prefix\n\npht_tok/codec.py:294: MissingReference\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.11s"
+    },
+    {
+      "name": "use_unreceived_precision",
+      "witness": "test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss",
+      "gpu": true,
+      "killed": true,
+      "returncode": 1,
+      "result": "                if stage >= 2:\n>                   assert reference == rx.adapter.reference.digest() == tx.adapter.reference.digest()\nE                   AssertionError: assert '0:ce3f8c856b...245e36a8e136a' == '0:9680aefcf1...0005a157b1011'\nE                     \nE                     - 0:9680aefcf143bcf0b05a75a54359b7f886a5ea7e6a79bdbfc2a0005a157b1011\nE                     + 0:ce3f8c856b0d9adf7987d2f1ce7c82be527bd4082e3cc84723d245e36a8e136a\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py:59: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.61s"
+    },
+    {
+      "name": "repeat_encoder",
+      "witness": "test_codec.py::test_one_encoder_call_and_chunk_causality_with_shared_backing_storage",
+      "gpu": true,
+      "killed": true,
+      "returncode": 1,
+      "result": "        tx.encode_intra(frames[:1], 32, 0)\n        with patch.object(tx.adapter, \"encode_chunk\", wraps=tx.adapter.encode_chunk) as analysis:\n            original = tx.encode_chunk_once(frames[1:9], 32, 1, 2, commit=False)\n>       assert analysis.call_count == 1\nE       AssertionError: assert 2 == 1\nE        +  where 2 = <MagicMock name='encode_chunk' id='138655906472992'>.call_count\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py:82: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_one_encoder_call_and_chunk_causality_with_shared_backing_storage\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.12s"
+    },
+    {
+      "name": "decode_old_layers_again",
+      "witness": "test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss",
+      "gpu": true,
+      "killed": true,
+      "returncode": 1,
+      "result": "indexes = array([45, 50, 38, ..., 44, 42, 42], shape=(1875,), dtype=uint8)\n\n    def decode_y(self, payload: bytes, indexes: np.ndarray) -> np.ndarray:\n>       return self.y_decoder.y(payload, indexes)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       ValueError: invalid or truncated PHT rANS record\n\npht_tok/entropy.py:67: ValueError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.64s"
+    },
+    {
+      "name": "pretend_full_synthesis_on_prefix",
+      "witness": "test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss",
+      "gpu": true,
+      "killed": true,
+      "returncode": 1,
+      "result": "                if stage >= 2:\n>                   assert reference == rx.adapter.reference.digest() == tx.adapter.reference.digest()\nE                   AssertionError: assert '0:ef1b77c689...1482097e93a9f' == '0:e249ce9192...660eb52a0f786'\nE                     \nE                     - 0:e249ce91921f1d96b402acd09539b05222a14f662d4167026b0660eb52a0f786\nE                     + 0:ef1b77c689999d220a00887a9aca950b4d15c38bfbb38885ca91482097e93a9f\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py:59: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.51s"
+    },
+    {
+      "name": "allow_unconfirmed_reference",
+      "witness": "test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss",
+      "gpu": true,
+      "killed": true,
+      "returncode": 1,
+      "result": "indexes = array([21, 24, 17, ..., 34, 22, 35], shape=(1781,), dtype=uint8)\n\n    def decode_y(self, payload: bytes, indexes: np.ndarray) -> np.ndarray:\n>       return self.y_decoder.y(payload, indexes)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       ValueError: invalid or truncated PHT rANS record\n\npht_tok/entropy.py:67: ValueError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.24s"
+    }
+  ],
+  "mutations_detected": 17,
+  "tool_equivalence": "No native Crapper/Dryer/Mutator runtime. Used measured coverage and Radon, an AST similarity pass, and independently applied source mutants.",
+  "test_pixel_reads": 0,
+  "additional_cuda_fingerprint": [
+    "....                                                                     [100%]",
+    "4 passed in 3.85s"
+  ],
+  "native_cuda_api_probe": {
+    "cudaDeviceSynchronize": 1,
+    "cudaStreamSynchronize": 14,
+    "cudaEventSynchronize": 0,
+    "cudaMemcpy": 0,
+    "cudaMemcpyAsync": 23,
+    "cudaGraphLaunch": 8,
+    "includes_one_final_measurement_device_sync": true
+  },
+  "figures": {
+    "pdfs": 5,
+    "alignment": "matched axes within 1.5 pt for all multipanel figures",
+    "glyphs": "minimum 6 pt, no violations",
+    "collisions": "all PASS; visual previews inspected",
+    "source": "no FAILs. PNG preview plus editable PDF/SVG supplied. Log-axis data explicitly checked for positive rate."
+  }
+}

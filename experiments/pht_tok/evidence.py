@@ -255,7 +255,7 @@ def rd(work: Path, archive: Path):
     fields = ("method", "qp", "stage", "frames", "bytes", "bpp", "mbps", "global_psnr", "lpips", "dists",
               "ms-ssim", "origin")
     with (OUT / "rate_distortion.csv").open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, list(fields), extrasaction="ignore")
+        writer = csv.DictWriter(handle, list(fields), extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         writer.writerows(old + [row | {"origin": "PHT Calibration rerun"} for row in measured])
     ledgers = [row for row in fixed["units"] if "ledger" in row]

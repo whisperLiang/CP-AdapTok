@@ -34,7 +34,9 @@ def save(fig, name):
     require_matplotlib_panel_alignment(fig, json_out=str(PLOT / f"{name}.alignment.json"),
                                        tolerance_pt=1.5, gutter_tolerance_pt=1.5, strict=True)
     fig.savefig(PLOT / f"{name}.pdf")
-    fig.savefig(PLOT / f"{name}.svg")
+    svg = PLOT / f"{name}.svg"
+    fig.savefig(svg)
+    svg.write_text("\n".join(line.rstrip() for line in svg.read_text().splitlines()) + "\n")
     fig.savefig(PLOT / f"{name}.png", dpi=600)
     plt.close(fig)
 
