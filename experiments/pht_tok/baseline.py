@@ -10,7 +10,12 @@ import sys
 from io import BytesIO
 from pathlib import Path
 
-from third_party.DCVC.src.utils.stream_helper import NalType, read_header, read_ip_remaining, read_sps_remaining
+from third_party.DCVC.src.utils.stream_helper import (
+    NalType,
+    read_header,
+    read_ip_remaining,
+    read_sps_remaining,
+)
 
 ROOT = Path(__file__).resolve().parents[2]
 DCVC = ROOT / "third_party/DCVC"
