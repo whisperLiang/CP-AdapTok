@@ -1,0 +1,44 @@
+{
+  "revision": 1,
+  "worktree_base": "e90ceda2d2875cd99061b8eb20946ebf67820a91",
+  "historical_branch": "experiment/hla-tok-hts-v2.1",
+  "historical_head": "7d9bbb471fd71555b963f4ecb51241363a9954dd",
+  "dcvc": "cbdae87a5445114cdc7f48816da63ea80bdeac40",
+  "official_settings": {"skip_threshold": 0.15, "reset_interval": 128, "initial_intra": true, "periodic_intra": false},
+  "chunk_frames": 8,
+  "batch_chunks": 1,
+  "native_resolution": [1080, 1920],
+  "calibration_qp": [0, 16, 32, 48, 63],
+  "calibration_i_qp": "equal to P QP",
+  "equivalence": {
+    "native_fp16_atol": 0,
+    "native_fp16_rtol": 0,
+    "integers_require_exact": true
+  },
+  "reference_prefix_candidates": [1, 2, 3],
+  "required_progressive_prefixes": 4,
+  "progressive_mean_quality": "positive PSNR, LPIPS and DISTS change between each successive point",
+  "maximum_full_extra_bytes": 0.10,
+  "target_full_extra_bytes": 0.05,
+  "target_medium_equal_quality_extra_rate": 0.15,
+  "minimum_encoder_fps": 30,
+  "minimum_decoder_fps": 30,
+  "target_retained_official_fps": 0.70,
+  "timing_warmup_chunks": 4,
+  "closed_minimum_p_chunks": 16,
+  "bd_rate_minimum_points_each": 4,
+  "perceptual_noninferiority_absolute": {
+    "lpips_alex": 0.002,
+    "dists": 0.002,
+    "basis": "Official replay must be deterministic. Select the practical tolerance of 0.002 used for adjacent perceptual budgets in the archived engineering protocol, distinct from the previous Core quality rule."
+  },
+  "calibration": "Four frozen Train-only DAVIS 1080p clips, 128 frames total",
+  "validation": "Frozen project cohort, serviceable only after development gates",
+  "test": "Sealed, no pixel reads",
+  "network": {
+    "static_mbps": [0.1, 0.25, 0.5, 1, 2, 5, 10, 20, 40],
+    "seed": 272026,
+    "playout_buffer_ms": 500,
+    "safety_margin_ms": 20
+  }
+}
