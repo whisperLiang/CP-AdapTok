@@ -1,0 +1,12 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____ test_wire_identity_preserves_signalled_shape_qp_and_independent_frame _____
+tests/hla_tok/uf_v3/test_deploy.py:59: in test_wire_identity_preserves_signalled_shape_qp_and_independent_frame
+    assert list(receiver.available()) == [frame]
+E   AssertionError: assert [BaseFrame(in...yload bytes')] == [BaseFrame(in...yload bytes')]
+E
+E     At index 0 diff: BaseFrame(info=FrameInfo(index=73, height=1080, width=1920, qp=8, intra=True, parallel=2, reset=False), payload=b'real payload bytes') != BaseFrame(info=FrameInfo(index=72, height=1080, width=1920, qp=8, intra=True, parallel=2, reset=False), payload=b'real payload bytes')
+E     Use -v to get more diff
+=========================== short test summary info ============================
+FAILED tests/hla_tok/uf_v3/test_deploy.py::test_wire_identity_preserves_signalled_shape_qp_and_independent_frame
+1 failed in 0.22s

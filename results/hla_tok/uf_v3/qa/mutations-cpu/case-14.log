@@ -1,0 +1,17 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________ test_end_to_end_clock_includes_full_max_generation ______________
+tests/hla_tok/uf_v2/test_v2_measurement.py:79: in test_end_to_end_clock_includes_full_max_generation
+    assert set(caps) == {evaluate.MAX_APPLICATION_BYTES}
+E   assert {20833} == {166666}
+E
+E     Extra items in the left set:
+E     20833
+E     Extra items in the right set:
+E     166666
+E     Use -v to get more diff
+----------------------------- Captured stdout call -----------------------------
+timing repetition 1
+=========================== short test summary info ============================
+FAILED tests/hla_tok/uf_v2/test_v2_measurement.py::test_end_to_end_clock_includes_full_max_generation
+1 failed in 0.60s

@@ -1,0 +1,130 @@
+{
+  "video": "DAVIS2017:blackswan",
+  "index": 5,
+  "original_height_width": [
+    1080,
+    1920
+  ],
+  "images": [
+    {
+      "scenario": "Source",
+      "file": "Source.png",
+      "sha256": "82d66f8ff2aae12a6d4435750e49ba6eafa7b174934ea3aa29c7868195760093",
+      "dimensions_hw": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "scenario": "Base",
+      "file": "Base.png",
+      "sha256": "f2e38c0a5677e2fdde55bd9ea06a7a3af6a6b20573b1a6045ea5fe47353e33c6",
+      "dimensions_hw": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "scenario": "budget_5",
+      "file": "budget_5.png",
+      "sha256": "499893093862f92333c68b2607d1a61f9a084fea2671be034c2d18ea32ec0d81",
+      "dimensions_hw": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "scenario": "budget_10",
+      "file": "budget_10.png",
+      "sha256": "b0fb1893f6768b8c0438eb42d5af16866bc2238ce4ebb33994020982f002164b",
+      "dimensions_hw": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "scenario": "budget_20",
+      "file": "budget_20.png",
+      "sha256": "dbf8651a05069d7238a7698e7d037d84fa1d818e063596fab08f89707ddfc671",
+      "dimensions_hw": [
+        1080,
+        1920
+      ]
+    },
+    {
+      "scenario": "budget_40",
+      "file": "budget_40.png",
+      "sha256": "fdaa25225888abedf8729b50e73f580f743a98ee5d13b4fa50c06c131b146624",
+      "dimensions_hw": [
+        1080,
+        1920
+      ]
+    }
+  ],
+  "crop_yxhw": [
+    400,
+    820,
+    224,
+    224
+  ],
+  "source_content_sha256": "3a36ed8c9b895a28f9f3fc5c8e3ce09caff75655051b7a7b7a608ee7d3c76239",
+  "checkpoint_sha256": "67fa65db233d20ed9a7f2141ebf938e4e316e16580a95d3a13d1b8c4cb8776aa",
+  "bitstream_sha256": "bc12595d545d3d2d2e25ee492d0ec0c995bc59ed1af59ab9f2b5eb4d4e1bd881",
+  "bitstream_bytes": 156021,
+  "prefix_bytes": {
+    "5": 20823,
+    "10": 41638,
+    "20": 83322,
+    "40": 156021
+  },
+  "base_bytes": 1735,
+  "model_tag": "57f93e05e94c0223",
+  "read_counts": {
+    "train": 0,
+    "validation": 6,
+    "test": 0
+  },
+  "native_temporal_luma_residual_change_mse": [
+    {
+      "index": 1,
+      "Base": 0.0030813696794211864,
+      "budget_5": 0.0025550834834575653,
+      "budget_10": 0.0021792843472212553,
+      "budget_20": 0.001886150217615068,
+      "budget_40": 0.0017417498165741563
+    },
+    {
+      "index": 2,
+      "Base": 0.0034428637009114027,
+      "budget_5": 0.002453774446621537,
+      "budget_10": 0.001913502812385559,
+      "budget_20": 0.0015541483880952,
+      "budget_40": 0.0013718776172026992
+    },
+    {
+      "index": 3,
+      "Base": 0.0034637905191630125,
+      "budget_5": 0.0025769260246306658,
+      "budget_10": 0.0021374383941292763,
+      "budget_20": 0.0018367836019024253,
+      "budget_40": 0.0016748430207371712
+    },
+    {
+      "index": 4,
+      "Base": 0.003424581838771701,
+      "budget_5": 0.002603730885311961,
+      "budget_10": 0.002167805563658476,
+      "budget_20": 0.0018557737348601222,
+      "budget_40": 0.0016892545390874147
+    },
+    {
+      "index": 5,
+      "Base": 0.0034302768763154745,
+      "budget_5": 0.002638341626152396,
+      "budget_10": 0.0022240588441491127,
+      "budget_20": 0.0018966618226841092,
+      "budget_40": 0.0017135989619418979
+    }
+  ],
+  "temporal_scope": "5 adjacent pairs on the sample clip, without motion compensation"
+}

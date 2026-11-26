@@ -15,3 +15,7 @@ V2 早期 41%–48% 是当时特定量化/概率配置在固定同符号支持�
 V2 的 E0 端点按实际等感知码率排序。其最终 E1 对照使用了较早校准表与 Seed 1，40 档同等画质有所压缩，低档等感知结果落后。V3 的选择使用当前 Seed 2 符号重新拟合的表。
 
 [机器摘要](../../../results/hla_tok/uf_v3/entropy/summary.json) · [同符号账本](../../../results/hla_tok/uf_v3/entropy/same_symbol.csv) · [同预算账本](../../../results/hla_tok/uf_v3/entropy/same_rate.csv)
+
+追加 48 帧同 Base D0 精度对照。将现有两级步长减半，40 Mbps 档使用 37.5201 Mbps，对照使用 29.8542 Mbps。PSNR 从 29.288 提至 29.439 dB，LPIPS 从 0.35868 变为 0.35722。全有效记录较原码率 30.9246 增至 53.1828 Mbps，仍为离线容量研究。此幅度不足以解释全部高端画质差，R0 的单潜在空间研究未增加协议精化等级。
+
+[实际字节精度消融](../../../results/hla_tok/uf_v3/diagnostics/precision.json)

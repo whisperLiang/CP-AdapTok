@@ -1,0 +1,22 @@
+Wrote /home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/.build/uf_v3/qa/mutator-sandbox/.metrics/mutate/hla_tok.uf_v3.joint.edn
+Wrote /home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/.build/uf_v3/qa/mutator-sandbox/.metrics/mutate/hla_tok.uf_v3.joint.DifferentiableUF.edn
+KILLED    hla_tok/uf_v3/joint.py:129 - -> +
+KILLED    hla_tok/uf_v3/joint.py:129 1 -> 0
+KILLED    hla_tok/uf_v3/joint.py:140 / -> *
+Function          Namespace                             Killed  Survived  Uncovered  Sites   Score
+--------------------------------------------------------------------------------------------------
+__init__          hla_tok.uf_v3.joint.DifferentiableUF       0         0          0      0    n/a
+coded_rate        hla_tok.uf_v3.joint                        0         0          0     11    n/a
+conditional_cost  hla_tok.uf_v3.joint                        0         0          0      9    n/a
+display           hla_tok.uf_v3.joint.DifferentiableUF       0         0          0      0    n/a
+encode_inter      hla_tok.uf_v3.joint.DifferentiableUF       0         0          0      5    n/a
+encode_intra      hla_tok.uf_v3.joint.DifferentiableUF       0         0          0      6    n/a
+forward           hla_tok.uf_v3.joint.DifferentiableUF       0         0          0      6    n/a
+prefix_masks      hla_tok.uf_v3.joint                        0         0          0      7    n/a
+progressive_frame hla_tok.uf_v3.joint                        0         0          0     36    n/a
+qp_row            hla_tok.uf_v3.joint                        0         0          0      2    n/a
+static_cost       hla_tok.uf_v3.joint                        0         0          0     39    n/a
+packed_prefix     hla_tok.uf_v3.joint                        2         0          0     19 100.0%
+refinement        hla_tok.uf_v3.joint                        1         0          0      6 100.0%
+--------------------------------------------------------------------------------------------------
+Total                                                        3         0          0    146  100.0%

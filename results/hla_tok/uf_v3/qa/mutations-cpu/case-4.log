@@ -1,0 +1,10 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________ test_bad_record_does_not_allow_render[dependency] _______________
+tests/hla_tok/uf_v2/test_v2_stream.py:70: in test_bad_record_does_not_allow_render
+    with pytest.raises(WireError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE WireError
+=========================== short test summary info ============================
+FAILED tests/hla_tok/uf_v2/test_v2_stream.py::test_bad_record_does_not_allow_render[dependency]
+1 failed in 0.05s

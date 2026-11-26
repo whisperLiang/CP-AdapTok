@@ -1,0 +1,10 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ test_deployment_takes_the_checkpoint_tensor_and_refreshes_the_proxy ______
+tests/hla_tok/uf_v3/test_deploy.py:40: in test_deployment_takes_the_checkpoint_tensor_and_refreshes_the_proxy
+    assert calls[0] == ("update", 0) and calls[1][0] == "proxy"
+                                         ^^^^^^^^
+E   IndexError: list index out of range
+=========================== short test summary info ============================
+FAILED tests/hla_tok/uf_v3/test_deploy.py::test_deployment_takes_the_checkpoint_tensor_and_refreshes_the_proxy
+1 failed in 0.22s

@@ -1,0 +1,11 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________________ test_fragments_decode_once_and_preserve_base _________________
+tests/hla_tok/uf_v2/test_v2_stream.py:35: in test_fragments_decode_once_and_preserve_base
+    full.finish()
+hla_tok/uf_v2/records.py:234: in finish
+    raise WireError("incomplete application frame")
+E   hla_tok.uf.wire.WireError: incomplete application frame
+=========================== short test summary info ============================
+FAILED tests/hla_tok/uf_v2/test_v2_stream.py::test_fragments_decode_once_and_preserve_base
+1 failed in 0.05s

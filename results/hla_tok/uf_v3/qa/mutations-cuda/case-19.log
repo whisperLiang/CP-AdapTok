@@ -1,0 +1,12 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_native_d1_caches_current_features_and_never_updates_reference_with_display _
+tests/hla_tok/uf_v2/test_v2_native.py:65: in test_native_d1_caches_current_features_and_never_updates_reference_with_display
+    assert torch.equal(zero, display.base)
+E   AssertionError: assert False
+E    +  where False = <built-in method equal of type object at 0x7121973d6c20>(tensor([[[[0.2581, 0.2563, 0.2550,  ..., 0.3009, 0.3141, 0.3277],\n          [0.2491, 0.2501, 0.2511,  ..., 0.3327, 0.3..., 0.1238, 0.1233, 0.1222],\n          [0.1719, 0.1662, 0.1636,  ..., 0.1247, 0.1238, 0.1223]]]],\n       device='cuda:0'), tensor([[[[0.2610, 0.2041, 0.2401,  ..., 0.1861, 0.2433, 0.2959],\n          [0.1468, 0.1646, 0.3427,  ..., 0.2993, 0.2..., 0.1987, 0.1381, 0.0734],\n          [0.2153, 0.1433, 0.1673,  ..., 0.2487, 0.1561, 0.1310]]]],\n       device='cuda:0'))
+E    +    where <built-in method equal of type object at 0x7121973d6c20> = torch.equal
+E    +    and   tensor([[[[0.2610, 0.2041, 0.2401,  ..., 0.1861, 0.2433, 0.2959],\n          [0.1468, 0.1646, 0.3427,  ..., 0.2993, 0.2..., 0.1987, 0.1381, 0.0734],\n          [0.2153, 0.1433, 0.1673,  ..., 0.2487, 0.1561, 0.1310]]]],\n       device='cuda:0') = <hla_tok.uf_v2.records.BatchReceiver object at 0x711f7e73b980>.base
+=========================== short test summary info ============================
+FAILED tests/hla_tok/uf_v2/test_v2_native.py::test_native_d1_caches_current_features_and_never_updates_reference_with_display
+1 failed in 9.12s

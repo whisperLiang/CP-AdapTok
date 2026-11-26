@@ -1,0 +1,6 @@
+hla_tok/uf_v2/static_entropy.py:35: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]
+hla_tok/uf_v2/decoder.py:66: error: Item "Tensor" of "Any | Tensor | Module" has no attribute "dec_2"  [union-attr]
+hla_tok/uf_v2/decoder.py:66: error: "Tensor" not callable  [operator]
+hla_tok/uf_v2/decoder.py:67: error: "Tensor" not callable  [operator]
+hla_tok/uf_v2/records.py:205: error: Argument 1 to "feed" of "FrameParser" has incompatible type "bytearray"; expected "bytes"  [arg-type]
+Found 4 errors in 2 files (checked 40 source files)

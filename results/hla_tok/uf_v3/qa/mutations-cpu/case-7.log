@@ -1,0 +1,9 @@
+.F                                                                       [100%]
+=================================== FAILURES ===================================
+_ test_actual_byte_ledger_includes_base_native_payload_and_record_headers[True] _
+tests/hla_tok/uf_v2/test_v2_measurement.py:38: in test_actual_byte_ledger_includes_base_native_payload_and_record_headers
+    assert row["bytes"] == row["full_max_bytes"] == len(full.raw)
+E   assert 168 == 217
+=========================== short test summary info ============================
+FAILED tests/hla_tok/uf_v2/test_v2_measurement.py::test_actual_byte_ledger_includes_base_native_payload_and_record_headers[True]
+1 failed, 1 passed in 0.54s

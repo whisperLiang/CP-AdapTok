@@ -1,0 +1,75 @@
+{
+  "cases": [
+    {
+      "name": "freeze an encoder during the joint step",
+      "module": "scripts.hla_tok.uf_v3.train",
+      "original": "if branch not in named or not named[branch].requires_grad:",
+      "replacement": "if branch not in named:",
+      "test": "test_joint.py::test_joint_probe_rejects_frozen_encoder_and_a_missing_rate_path",
+      "gpu": false,
+      "result": "KILLED",
+      "returncode": 1,
+      "log": "case-1.log"
+    },
+    {
+      "name": "remove the independent rate-gradient gate",
+      "module": "scripts.hla_tok.uf_v3.train",
+      "original": "for name in (\"distortion\", \"rate\"):",
+      "replacement": "for name in (\"distortion\",):",
+      "test": "test_joint.py::test_joint_probe_rejects_frozen_encoder_and_a_missing_rate_path",
+      "gpu": false,
+      "result": "KILLED",
+      "returncode": 1,
+      "log": "case-2.log"
+    },
+    {
+      "name": "admit cached features as video pixels",
+      "module": "scripts.hla_tok.uf_v3.train",
+      "original": "if frames.ndim != 4 or frames.shape[1] != 3 or not frames.is_floating_point() or min(frames.shape[-2:]) < 64:",
+      "replacement": "if frames.ndim != 4:",
+      "test": "test_joint.py::test_training_accepts_raw_rgb_and_rejects_cached_latent_or_feature",
+      "gpu": false,
+      "result": "KILLED",
+      "returncode": 1,
+      "log": "case-3.log"
+    },
+    {
+      "name": "execute the full P encoder again",
+      "module": "hla_tok.uf_v3.joint",
+      "original": "z = model.hyper_encoder(y)",
+      "replacement": "model.encoder(pixels, context, qp_row(model.q_encoder, qp, context.dtype))\n        z = model.hyper_encoder(y)",
+      "test": "test_joint.py::test_raw_rgb_unroll_routes_separate_encoder_gradients_and_keeps_base_state",
+      "gpu": false,
+      "result": "KILLED",
+      "returncode": 1,
+      "log": "case-4.log"
+    },
+    {
+      "name": "leave the CUDA proxy on its old parameters",
+      "module": "hla_tok.uf_v3.deploy",
+      "original": "network.proxy.set_param(network.add_cdf_to_state_dict(network.state_dict()),\n                                        network.gaussian_encoder.skip_thres)",
+      "replacement": "pass",
+      "test": "test_deploy.py::test_deployment_takes_the_checkpoint_tensor_and_refreshes_the_proxy",
+      "gpu": false,
+      "result": "KILLED",
+      "returncode": 1,
+      "log": "case-5.log"
+    },
+    {
+      "name": "emit a different frame index in the valid CRC header",
+      "module": "hla_tok.uf.wire",
+      "original": "BASE_HEADER.pack(MAGIC, tag, info.index,",
+      "replacement": "BASE_HEADER.pack(MAGIC, tag, info.index + 1,",
+      "test": "test_deploy.py::test_wire_identity_preserves_signalled_shape_qp_and_independent_frame",
+      "gpu": false,
+      "result": "KILLED",
+      "returncode": 1,
+      "log": "case-6.log"
+    }
+  ],
+  "counts": {
+    "KILLED": 6,
+    "SURVIVED": 0,
+    "ERROR": 0
+  }
+}
