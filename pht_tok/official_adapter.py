@@ -95,3 +95,6 @@ class HTSAdapter:
         if not 1 <= groups <= GROUPS:
             raise ValueError("at least one complete group is required")
         return list(self.proxy.pht_render(groups, qp, display, reset))
+
+    def display_feature(self) -> list[Tensor]:
+        return list(self.proxy.pht_display())

@@ -1,6 +1,6 @@
 --- a/dmc_hts_proxy.h
 +++ b/dmc_hts_proxy.h
-@@ -240,6 +240,16 @@
+@@ -240,6 +240,17 @@
      {
          return {m_memory.clone(), m_ctx.clone()};
      }
@@ -13,11 +13,12 @@
 +    std::vector<at::Tensor> pht_masks() const;
 +    void pht_group(const at::Tensor& y, int group);
 +    std::vector<at::Tensor> pht_render(int groups, int qp, bool display, bool reset);
++    std::vector<at::Tensor> pht_display();
 +    void pht_load_reference(const std::vector<at::Tensor>& reference, bool intra);
      py::tuple compress(const at::Tensor& x, const int qp, const bool reset_feature_memory,
                         const int padding_b, const int padding_r);
      std::vector<at::Tensor> decompress(const py::array_t<uint8_t>& bit_stream, const int qp,
-@@ -250,6 +260,8 @@
+@@ -250,6 +261,8 @@
  
  private:
      void worker();
@@ -26,9 +27,20 @@
  
  public:
  private:
+@@ -324,6 +337,10 @@
+     cudaGraphExec_t m_gexec_dec_1{ nullptr };
+     cudaGraphExec_t m_gexec_dec_2{ nullptr };
+     cudaGraphExec_t m_gexec_dec_3[g_qp_num]{ nullptr };
++    cudaGraphExec_t m_gexec_pht_context[2]{ nullptr };
++    cudaGraphExec_t m_gexec_pht_decoder[g_qp_num]{ nullptr };
++    cudaGraphExec_t m_gexec_pht_display{ nullptr };
++    cudaGraphExec_t m_gexec_pht_reset{ nullptr };
+     bool m_memory_has_value{ true };
+     at::Tensor m_mask_0;
+     at::Tensor m_mask_1;
 --- a/dmc_hts_proxy.cpp
 +++ b/dmc_hts_proxy.cpp
-@@ -501,6 +501,174 @@
+@@ -501,6 +501,183 @@
      m_memory_has_value = apply_adaptor;
  }
  
@@ -113,8 +125,10 @@
 +
 +void DMCHTSProxy::pht_prepare()
 +{
-+    apply_feature_adaptor(m_memory_has_value);
-+    m_ctx = m_feature_extractor.forward(m_memory);
++    run([&](bool memory) {
++        apply_feature_adaptor(memory);
++        m_ctx = m_feature_extractor.forward(m_memory);
++    }, m_gexec_pht_context, m_memory_has_value);
 +}
 +
 +void DMCHTSProxy::pht_prior(const at::Tensor& hyper, int qp)
@@ -179,14 +193,21 @@
 +            pht_group(m_y_q_r, group);
 +        }
 +    }
-+    m_feature_p = m_decoder.forward(m_y_hat, m_cat_decoder, m_q_decoder[qp]);
-+    if (display) {
-+        std::tie(m_x_hat, m_feature_i) = m_recon_head.forward(m_feature_p);
-+    } else if (reset) {
-+        m_feature_i = m_recon_head.forward_reset(m_feature_p);
-+    }
++    run([&]() { m_feature_p = m_decoder.forward(m_y_hat, m_cat_decoder, m_q_decoder[qp]); },
++        m_gexec_pht_decoder[qp]);
 +    if (accumulated.defined()) m_y_hat.copy_(accumulated);
-+    return display ? m_x_hat : std::vector<at::Tensor>();
++    if (display) return pht_display();
++    if (reset) {
++        run([&]() { m_feature_i = m_recon_head.forward_reset(m_feature_p); }, m_gexec_pht_reset);
++    }
++    return {};
++}
++
++std::vector<at::Tensor> DMCHTSProxy::pht_display()
++{
++    run([&]() { std::tie(m_x_hat, m_feature_i) = m_recon_head.forward(m_feature_p); },
++        m_gexec_pht_display);
++    return m_x_hat;
 +}
 +
 +void DMCHTSProxy::pht_load_reference(const std::vector<at::Tensor>& reference, bool intra)
@@ -203,7 +224,7 @@
  py::tuple DMCHTSProxy::compress(const at::Tensor& x, const int qp, const bool reset_feature_memory,
                                  const int padding_b, const int padding_r)
  {
-@@ -509,54 +677,7 @@
+@@ -509,54 +686,7 @@
  
      auto stream = at::cuda::getCurrentCUDAStream();
  
@@ -259,7 +280,7 @@
      // ------------ end of lambda_enc_0 ------------
  
      CUDA_CHECK(cudaEventRecord(m_event_y, stream));
-@@ -627,25 +748,7 @@
+@@ -627,25 +757,7 @@
      }
      CUDA_CHECK(cudaStreamWaitEvent(stream, m_event_z_ready));
  
@@ -286,7 +307,7 @@
      // ------------ end of lambda_dec_1 ------------
  
      CUDA_CHECK(cudaEventRecord(m_event_y, stream));
-@@ -676,24 +779,9 @@
+@@ -676,24 +788,9 @@
      auto lambda_dec_3 = [&](const int qp) {
          m_y_q_r = conditional_recover_with_type_conversion_cuda(m_y_decoded, m_skip_cond, m_y_num,
                                                                  m_dtype, m_y_q_r);
@@ -314,7 +335,25 @@
  
          // decoder + recon_head
          m_feature_p = m_decoder.forward(m_y_hat, m_cat_decoder, m_q_decoder[qp]);
-@@ -904,6 +992,9 @@
+@@ -854,6 +951,7 @@
+ {
+     for (int i = 0; i < g_qp_num; ++i) {
+         destroy_cuda_graph_exec(m_gexec_enc_0[i]);
++        destroy_cuda_graph_exec(m_gexec_pht_decoder[i]);
+         for (int j = 0; j < 2; ++j) {
+             destroy_cuda_graph_exec(m_gexec_enc_1[i][j]);
+         }
+@@ -864,6 +962,9 @@
+     }
+     destroy_cuda_graph_exec(m_gexec_dec_1);
+     destroy_cuda_graph_exec(m_gexec_dec_2);
++    destroy_cuda_graph_exec(m_gexec_pht_display);
++    destroy_cuda_graph_exec(m_gexec_pht_reset);
++    for (auto& context : m_gexec_pht_context) destroy_cuda_graph_exec(context);
+ }
+ 
+ std::tuple<at::Tensor, at::Tensor, at::Tensor, at::Tensor> DMCHTSProxy::get_mask_4x(const at::Tensor& y)
+@@ -904,6 +1005,9 @@
      m_H8 = H8;
      m_W8 = W8;
      clear_cuda_graph();
@@ -324,7 +363,7 @@
      g_tensor_pool.clear(H8, W8);
  
      auto options = frame.options().memory_format(at::MemoryFormat::ChannelsLast);
-@@ -997,4 +1088,5 @@
+@@ -997,4 +1101,5 @@
      m_feature_extractor.pre_allocate_tensors(m_memory, m_ctx);
      m_recon_head.pre_allocate_tensors(
          m_feature_p, m_feature_i);  // the recon is not used in cuda graph, only use feature for reset
@@ -333,7 +372,7 @@
 +}
 --- a/bind.cpp
 +++ b/bind.cpp
-@@ -32,7 +32,17 @@
+@@ -32,7 +32,18 @@
          .def("compress", &DMCHTSProxy::compress)
          .def("decompress", &DMCHTSProxy::decompress)
          .def("audit_reference", &DMCHTSProxy::audit_reference)
@@ -348,6 +387,7 @@
 +        .def("pht_masks", &DMCHTSProxy::pht_masks)
 +        .def("pht_group", &DMCHTSProxy::pht_group)
 +        .def("pht_render", &DMCHTSProxy::pht_render)
++        .def("pht_display", &DMCHTSProxy::pht_display)
 +        .def("pht_load_reference", &DMCHTSProxy::pht_load_reference);
  
      py::class_<DMCLDProxy>(m, "DMCLDProxy")
