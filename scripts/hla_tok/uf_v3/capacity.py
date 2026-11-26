@@ -14,6 +14,7 @@ from hla_tok.uf.latent import LATENT_UNIT, normalized_error, render_latent
 from hla_tok.uf.official import OfficialAssets, sha256_file
 from hla_tok.uf.wire import MAX_FRAME_BYTES
 from hla_tok.uf_v2.records import quantized_symbols
+from hla_tok.uf_v2.static_entropy import StaticAsset
 from scripts.hla_tok.continuous.quality import NativeQuality, summarize
 from scripts.hla_tok.temporal.inputs import source_frame
 from scripts.hla_tok.uf.inputs import inputs
@@ -189,7 +190,9 @@ def evaluate_seed(codec, reader, clips, out, limit, perception):
 @torch.no_grad()
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--v2", type=Path, required=True)
+    parser.add_argument("--v2", type=Path)
+    parser.add_argument("--fitted", type=Path)
+    parser.add_argument("--static", type=Path)
     parser.add_argument("--weights", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--split", choices=("calibration", "validation"), required=True)
@@ -197,16 +200,19 @@ def main():
     parser.add_argument("--seed", type=int, choices=(1, 2), nargs="+", default=[1, 2])
     parser.add_argument("--d0-timing", action="store_true")
     args = parser.parse_args()
+    if (args.v2 is None) == (args.fitted is None) or args.d0_timing and args.v2 is None:
+        parser.error("supply exactly one of --v2 or --fitted; --d0-timing uses the frozen V2 Seed 2")
     setup()
     reader, plans = inputs()
     assets = OfficialAssets.verify(args.weights)
     clips = plans[args.split]
     data = {}
-    for seed in args.seed:
-        checkpoint = checkpoints(args.v2, seed)[20000]
-        codec = load_v2(assets, checkpoint)
-        data[seed] = evaluate_seed(codec, reader, clips, args.output / f"seed{seed}", args.limit, seed == 2)
-        data[seed]["checkpoint_sha256"] = sha256_file(checkpoint)
+    candidates = {seed: checkpoints(args.v2, seed)[20000] for seed in args.seed} if args.v2 else {"V3": args.fitted}
+    static = StaticAsset.load(args.static) if args.static else None
+    for name, checkpoint in candidates.items():
+        codec = load_v2(assets, checkpoint, static=static)
+        data[name] = evaluate_seed(codec, reader, clips, args.output / f"seed{name}", args.limit, name == 2)
+        data[name]["checkpoint_sha256"] = sha256_file(checkpoint)
         del codec
         torch.cuda.empty_cache()
     if args.d0_timing:

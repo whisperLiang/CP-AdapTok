@@ -1,0 +1,238 @@
+{
+  "original": {
+    "identity": {
+      "archive_commit": "c935509ff6bd00390f2421d39ce8501774b11d4f",
+      "archive_sha256": {
+        "per_frame.csv": "9a9d6ef956328b36419f6214adcc706f04de9a534fde0defafc8f60ce71d1f3a",
+        "windows.csv": "ef10e14ddddf170f5e5f199f2cabd472638d580d78ceaf0da114ed8430f3e81f"
+      },
+      "archive_weights_sha256": "2c09af94fca99f9fdde8ea1dfbe7b1f7d509ffe2e5fb3e985f5aa9f7874d2909",
+      "cohort": {
+        "DAVIS2017:blackswan": 50,
+        "DAVIS2017:car-roundabout": 64,
+        "DAVIS2017:dog": 60
+      },
+      "cohort_sha256": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "budgets_per_group": [
+        96,
+        128,
+        256,
+        384,
+        480,
+        512
+      ],
+      "weights": {
+        "source": "a72076cf6474f930a181aa78971de70d65289b49",
+        "revision": "c514b22615a140c06f4c9792e93cbef9e5c79f32",
+        "weights_sha256_before": "be5432949a87dee253c86f7ccb87bb5370b435ed180f8cda546b09d6a63c8cdd",
+        "weights_sha256_after": "be5432949a87dee253c86f7ccb87bb5370b435ed180f8cda546b09d6a63c8cdd",
+        "metrics": {
+          "imagenet_alexnet": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02",
+          "imagenet_vgg16": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0",
+          "lpips_alex_v01": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+          "lpips_vgg_v01": "a78928a0af1e5f0fcb1f3b9e8f8c3a2a5a3de244d830ad5c1feddc79b8432868",
+          "dists": "f5e65c96230b7f6ca995691647d482237e4cab8a50c5c4a5784f219ef0748218"
+        }
+      },
+      "status": "PASS",
+      "rate_scope": "archived actual packed Fixed13 payload"
+    },
+    "frame_keys_verified": 1044,
+    "ledger": [
+      {
+        "budget_per_group": 96,
+        "quality": {
+          "mse": 0.006079040874523678,
+          "lpips": 0.2897786209466814,
+          "dists": 0.13729427121151452,
+          "frames": 174,
+          "global_psnr": 22.16164936477312,
+          "mean_frame_psnr": 22.70677622247483
+        },
+        "bytes": 1011168
+      },
+      {
+        "budget_per_group": 128,
+        "quality": {
+          "mse": 0.0050330155003205715,
+          "lpips": 0.2623474397535982,
+          "dists": 0.12258960118238953,
+          "frames": 174,
+          "global_psnr": 22.981717320917685,
+          "mean_frame_psnr": 23.532742563971237
+        },
+        "bytes": 1348128
+      },
+      {
+        "budget_per_group": 256,
+        "quality": {
+          "mse": 0.003086872898301795,
+          "lpips": 0.20427032478753177,
+          "dists": 0.0923934743322175,
+          "frames": 174,
+          "global_psnr": 25.104812521837854,
+          "mean_frame_psnr": 25.727770247475146
+        },
+        "bytes": 2695968
+      },
+      {
+        "budget_per_group": 384,
+        "quality": {
+          "mse": 0.0026300553504736215,
+          "lpips": 0.18748273516352149,
+          "dists": 0.08426416262812998,
+          "frames": 174,
+          "global_psnr": 25.80035111528374,
+          "mean_frame_psnr": 26.452964471724
+        },
+        "bytes": 4043808
+      },
+      {
+        "budget_per_group": 480,
+        "quality": {
+          "mse": 0.0025141634234031878,
+          "lpips": 0.1830228034877914,
+          "dists": 0.08236261619918647,
+          "frames": 174,
+          "global_psnr": 25.996064961108893,
+          "mean_frame_psnr": 26.662903022210433
+        },
+        "bytes": 5054688
+      },
+      {
+        "budget_per_group": 512,
+        "quality": {
+          "mse": 0.002515264602121094,
+          "lpips": 0.18255548166303798,
+          "dists": 0.08207778855301869,
+          "frames": 174,
+          "global_psnr": 25.99416321066733,
+          "mean_frame_psnr": 26.669196722435046
+        },
+        "bytes": 5391648
+      }
+    ],
+    "metric_weight_sha256": {
+      "imagenet_alexnet": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02",
+      "imagenet_vgg16": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0",
+      "lpips_alex_v01": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+      "dists": "f5e65c96230b7f6ca995691647d482237e4cab8a50c5c4a5784f219ef0748218"
+    },
+    "color": "RGB float32 [0,1], native 1080p before scoring; source conversion BGR\u2192RGB",
+    "spatial": "128\u00d7128 stride 128 tiles; matched coordinates stitched before scoring",
+    "lpips": "AlexNet v0.1, RGB [0,1] mapped to [-1,1]; frame-macro average",
+    "dists": "distributed weights; native RGB [0,1]; frame-macro average",
+    "psnr": "global MSE over equal-sized frames",
+    "temporal": {
+      "api_input_frames": 16,
+      "encoder_temporal_patch_frames": 4,
+      "decoder_temporal_patch_frames": 4,
+      "temporal_groups": 4,
+      "encoder_attention": "full_causal_type1",
+      "decoder_attention": "full_causal_type2",
+      "cross_window_state": false,
+      "frames_waited_after_first_input": 15,
+      "buffer_ms_at_30fps": 500.0,
+      "scope": "entire 16-frame input required by the measured evaluation API"
+    },
+    "wire": "actual Fixed13 + 24 B F13W per 16-frame window; average over 174 valid frames",
+    "hard_budget_equivalence": "NOT_COMPARABLE"
+  },
+  "same_actual_rate": [
+    {
+      "capacity_budget": 2,
+      "actual_mbps": 1.9932427586206896,
+      "reference": "Official UF-LD",
+      "status": "PASS",
+      "global_psnr": 30.76458884258749,
+      "lpips": 0.31596091402102255,
+      "dists": 0.1879447582851528
+    },
+    {
+      "capacity_budget": 2,
+      "actual_mbps": 1.9932427586206896,
+      "reference": "Anchor-Fast",
+      "status": "PASS",
+      "global_psnr": 26.446970766864872,
+      "lpips": 0.4972217448019702,
+      "dists": 0.2574945383355485
+    },
+    {
+      "capacity_budget": 5,
+      "actual_mbps": 4.994755862068965,
+      "reference": "Official UF-LD",
+      "status": "PASS",
+      "global_psnr": 34.19177556263029,
+      "lpips": 0.20351103043943142,
+      "dists": 0.1319768821450227
+    },
+    {
+      "capacity_budget": 5,
+      "actual_mbps": 4.994755862068965,
+      "reference": "Anchor-Fast",
+      "status": "PASS",
+      "global_psnr": 27.01253935971247,
+      "lpips": 0.46237200729739303,
+      "dists": 0.22656234070114914
+    },
+    {
+      "capacity_budget": 10,
+      "actual_mbps": 9.993535172413793,
+      "reference": "Official UF-LD",
+      "status": "PASS",
+      "global_psnr": 36.936802289873704,
+      "lpips": 0.13540804662193803,
+      "dists": 0.09499114233165984
+    },
+    {
+      "capacity_budget": 10,
+      "actual_mbps": 9.993535172413793,
+      "reference": "Anchor-Fast",
+      "status": "PASS",
+      "global_psnr": 27.94518787945273,
+      "lpips": 0.4030846390131248,
+      "dists": 0.19528091514937337
+    },
+    {
+      "capacity_budget": 20,
+      "actual_mbps": 19.99482206896552,
+      "reference": "Official UF-LD",
+      "status": "OUT_OF_RANGE",
+      "global_psnr": null,
+      "lpips": null,
+      "dists": null
+    },
+    {
+      "capacity_budget": 20,
+      "actual_mbps": 19.99482206896552,
+      "reference": "Anchor-Fast",
+      "status": "PASS",
+      "global_psnr": 29.689821221689286,
+      "lpips": 0.2800550093288644,
+      "dists": 0.1666458128932273
+    },
+    {
+      "capacity_budget": 40,
+      "actual_mbps": 35.79014068965517,
+      "reference": "Official UF-LD",
+      "status": "OUT_OF_RANGE",
+      "global_psnr": null,
+      "lpips": null,
+      "dists": null
+    },
+    {
+      "capacity_budget": 40,
+      "actual_mbps": 35.79014068965517,
+      "reference": "Anchor-Fast",
+      "status": "PASS",
+      "global_psnr": 30.49785677157098,
+      "lpips": 0.20069577461629667,
+      "dists": 0.14859988967325446
+    }
+  ],
+  "control_scope": "frozen actual native C5/C6 streams and log-rate interpolation within their observed ranges",
+  "available_official_mbps": [
+    0.277791724137931,
+    12.441063448275862
+  ]
+}

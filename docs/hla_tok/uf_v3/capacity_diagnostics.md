@@ -27,3 +27,9 @@ D0-Fast 使用 Seed 2 的量化器、Base 参数、批量评分和原生 rANS。
 逐帧亮度、色度、频带替换与边缘误差用于感知诊断。替换包含真值像素，因此只用于归因。原生裁块和配对全帧可检查同一坐标的细节。感知距离下降本身无法证明纹理忠实。当前控制未建立经过光流校正的时序闪烁结论。
 
 [Calibration](../../../results/hla_tok/uf_v3/diagnostics/calibration/capacity.json) · [Validation](../../../results/hla_tok/uf_v3/diagnostics/validation/capacity.json) · [路线与冻结标准](../../../results/hla_tok/uf_v3/diagnostics/capacity.json)
+
+Seed 2 的 C0 相对 C2 在 174/174 帧中提高 PSNR。以三个序列逐帧 PSNR 差作均值，改进分别为 0.547、0.382、0.715 dB。C2 相对 C3 的 PSNR 在 142/174 帧较高，三个序列均值差分别为 0.316、0.436、0.080 dB。三序列中 C2 的 LPIPS 均较高。12 帧局部机制检验中，C3 全符号的平均 LPIPS 为 0.23682。用真亮度替换后为 0.02991，用真色度替换后为 0.22147。替换高频误差后为 0.04562，替换低频误差后为 0.19903。此处低通取 9×9 原生 RGB 邻域。
+
+D0 旧打包与 D0-Fast 全量码流在 34 帧和 123,477 条边界逐字节相等，并从独立接收端恢复相同原生 RGB。C5 使用冻结的官方固定 GOP 码流，在 0.278–12.441 Mbps 的实际覆盖内比较。C6 的同率比较使用 Anchor-Fast 实际码率曲线。V2 40 档的 35.7901 Mbps 在 C6 覆盖内，C6 插值得 30.498 dB、LPIPS 0.20070、DISTS 0.14860。
+
+[配对逐帧](../../../results/hla_tok/uf_v3/diagnostics/validation/seed2/paired.csv) · [D0 比特等价](../../../results/hla_tok/uf_v3/diagnostics/d0_parity.json) · [同率历史对照](../../../results/hla_tok/uf_v3/diagnostics/same_actual_rate.csv)

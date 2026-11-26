@@ -61,8 +61,9 @@ def inventory(root, assets):
         if sha256_file(checkpoints(root, seed)[20000]) != expected:
             raise ValueError(f"V2 seed {seed} checkpoint does not match its ledger")
     official = {str(path.resolve()): sha256_file(path) for path in (assets.intra, assets.ld)}
-    extensions = {str(path.relative_to(ROOT)): sha256_file(path)
-                  for path in sorted((ROOT / ".build/uf_v3").glob("*/*.so"))}
+    build = ROOT / ".build/uf_v3"
+    original_builds = sorted(path for part in ("native", "records", "legacy") for path in (build / part).glob("*.so"))
+    extensions = {str(path.relative_to(ROOT)): sha256_file(path) for path in original_builds}
     return {"sources": manifest, "official_weights": official, "extensions": extensions}
 
 

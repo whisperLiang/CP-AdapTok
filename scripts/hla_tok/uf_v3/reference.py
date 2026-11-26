@@ -5,12 +5,31 @@ from collections import defaultdict
 from pathlib import Path
 
 from hla_tok.evaluation.io import write_csv, write_json
+from hla_tok.uf.official import sha256_file
 from scripts.hla_tok.continuous.quality import summarize
 from scripts.hla_tok.uf_v2.history import original
 from scripts.hla_tok.uf_v2.rate_analysis import at_rate
 from scripts.hla_tok.v2.protocol import ROOT, csv_at, json_at
 
 METRICS = ("global_psnr", "lpips", "dists")
+
+
+def metric_weights(expected):
+    import DISTS_pytorch
+    import lpips
+    import torch
+
+    checkpoints = Path(torch.hub.get_dir()) / "checkpoints"
+    paths = {
+        "imagenet_alexnet": checkpoints / "alexnet-owt-7be5be79.pth",
+        "imagenet_vgg16": checkpoints / "vgg16-397923af.pth",
+        "lpips_alex_v01": Path(lpips.__file__).parent / "weights/v0.1/alex.pth",
+        "dists": Path(DISTS_pytorch.__file__).with_name("weights.pt"),
+    }
+    actual = {name: sha256_file(path) for name, path in paths.items()}
+    if any(expected[name] != digest for name, digest in actual.items()):
+        raise ValueError("metric weights no longer match Original AdapTok")
+    return actual
 
 
 def original_scope():
@@ -38,6 +57,7 @@ def original_scope():
             raise ValueError("Original metric aggregation differs")
         ledger.append({"budget_per_group": budget, "quality": observed, "bytes": int(row["total_bytes"])})
     return {"identity": identity, "frame_keys_verified": len(keys), "ledger": ledger,
+            "metric_weight_sha256": metric_weights(identity["weights"]["metrics"]),
             "color": "RGB float32 [0,1], native 1080p before scoring; source conversion BGR→RGB",
             "spatial": "128×128 stride 128 tiles; matched coordinates stitched before scoring",
             "lpips": "AlexNet v0.1, RGB [0,1] mapped to [-1,1]; frame-macro average",

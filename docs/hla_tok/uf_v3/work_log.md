@@ -6,3 +6,8 @@
 - 实际回放 Calibration 和 Validation 的 C0–C3，写出逐帧质量、合法增强容量与配对差。第一次 Calibration 全窗诊断遇到 I 帧在 2 Mbps 超顶，加入明确的预算与下游失步状态。机制诊断使用四个冻结窗的前 12 帧。
 - 在同一 Seed 2 量化与 Base 参数下跑 D0-Fast 的 174 帧三轮 Full-max。核对 Original AdapTok 的 1,044 个档位与源帧键、实际窗口字节及指标聚合。
 - 从最终 V2 Seed 2 的 128 张 Calibration 帧重拟合 CDF。固定整数和组序，核对 E0/E1/E2 实际应用字节、D1 RGB 和 Full-max。按冻结规则选 E1。
+- 复现原始 D0 与批量 D0-Fast 的 34 帧字节、整数边界和 RGB。V2 Final Seed 2 共享相同已调整的原生权重。
+- 实测 L0 与预注册 L1。记录所有 I/P Base 的字节分布、可达帧、失步及完整 Base 诊断质量。L1 的最高 I 字节和感知质量均退化，留存失败资产。
+- Seed 1 启动原始 RGB 训练。第一个两步检查点已完成更新，首次输出对 CUDA 和 CPU 张量直接做差而失败。在差值函数边界统一设备后，重跑两步并通过 checkpoint 续训至累计 500 步。失败副本保留在 V3 构建目录。
+- P1 Calibration 的物理画质满足低档保护，但没有达到高档积极信号。首轮性能与主机另一项 GPU 工作重叠，保留原始结果并计划在实验独占时复核。P2 从已验证的 500 步 checkpoint 恢复。
+- 用 CPU 的真实 I/P 骨干测试状态和分离率失真梯度。定向故障覆盖冻结 Encoder、移除率梯度、错误像素输入、重复 Encoder、旧 CUDA 参数及 CRC 合法的错误帧头。
