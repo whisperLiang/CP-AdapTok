@@ -1,0 +1,24 @@
+{
+  "route": "R0",
+  "seeds": [1, 2],
+  "crop_hw": [192, 256],
+  "unroll": {"P1": 4, "P2": 4, "P3": 8, "P4": 16},
+  "max_steps": {"P1": 500, "P2": 2000, "P3": 8000, "P4": 20000},
+  "backbone_lr": 0.00001,
+  "display_lr": 0.0001,
+  "weight_decay": 0.01,
+  "clip": 1.0,
+  "weights": {
+    "rgb_mse": 10.0,
+    "lpips": 0.075,
+    "rate": 0.001,
+    "base": 0.10,
+    "protection": 0.50,
+    "protection_tolerance": 0.002,
+    "monotonic": 0.25
+  },
+  "budget_weights": {"2": 1.0, "5": 1.0, "10": 1.0, "20": 1.5, "40": 2.0},
+  "pilot_high_rate_signal": {"gain_psnr_db": 0.5, "max_lpips_increase": 0.005, "gain_lpips": 0.03, "max_psnr_drop_db": 0.05},
+  "pilot_low_rate": {"5": {"min_psnr": 27.20, "max_lpips": 0.31488}, "10": {"min_psnr": 27.90, "max_lpips": 0.29331}},
+  "bounded_joint_probe": {"seed": 1, "max_optimizer_updates": 64, "native_gradient_input_hw": [1080, 1920], "native_gradient_unroll": 4}
+}

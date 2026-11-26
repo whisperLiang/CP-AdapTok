@@ -33,7 +33,7 @@ def tensor_sha(value):
 
 
 def tensor_delta(before, after):
-    diff = (before.detach().float() - after.detach().float()).cpu()
+    diff = before.detach().float().cpu() - after.detach().float().cpu()
     return {"shape": list(before.shape), "before": tensor_sha(before), "after": tensor_sha(after),
             "changed": int(torch.count_nonzero(diff)), "numel": diff.numel(),
             "l2": float(diff.norm()), "max_abs": float(diff.abs().max())}
