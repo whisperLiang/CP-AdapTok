@@ -410,33 +410,36 @@ private:
         const int groups = layout.regions.size();
         const int scratch_size = 4 * layout.stride + 4;
         constexpr int batch = 512;
-        std::array<std::string, batch> payloads;
-        std::array<int, batch> modes;
+        struct Slot {
+            const uint8_t* payload;
+            int size, mode;
+        };
+        std::array<Slot, batch> slots;
+        // Each calling thread owns one workspace. OpenMP workers only write
+        // into disjoint record slots through the caller's shared pointer.
+        thread_local std::vector<uint8_t> workspace;
+        workspace.resize(batch * scratch_size);
+        auto* storage = workspace.data();
         const int records = order.size();
         for (int start = 0; start < records; start += batch) {
             const int count = std::min(batch, records - start);
             const int workers = count * layout.stride >= 262144 ? 8 : 4;
-            #pragma omp parallel if (count * layout.stride >= 32768) num_threads(workers)
-            {
-                std::vector<uint8_t> scratch(scratch_size);
-                auto* tail = scratch.data() + scratch_size;
-                #pragma omp for schedule(static)
-                for (int i = 0; i < count; ++i) {
-                    const auto& [score, level, group] = order[start + i];
-                    const int index = level * groups + group;
-                    const int8_t* input = values + index * layout.stride;
-                    const int width = layout.regions[group].count();
-                    auto* begin = encode(tail, input, width, tables[cdfs[index]]);
-                    const auto [size, mode] = choose_payload(input, width, begin, tail, cdfs[index], fallback);
-                    payloads[i].assign(reinterpret_cast<const char*>(begin), size);
-                    modes[i] = mode;
-                }
+            #pragma omp parallel for if (count * layout.stride >= 32768) num_threads(workers) schedule(static)
+            for (int i = 0; i < count; ++i) {
+                const auto& [score, level, group] = order[start + i];
+                const int index = level * groups + group;
+                const int8_t* input = values + index * layout.stride;
+                const int width = layout.regions[group].count();
+                auto* tail = storage + (i + 1) * scratch_size;
+                auto* begin = encode(tail, input, width, tables[cdfs[index]]);
+                const auto [size, mode] = choose_payload(input, width, begin, tail, cdfs[index], fallback);
+                slots[i] = {begin, size, mode};
             }
             for (int i = 0; i < count; ++i) {
-                auto& payload = payloads[i];
-                if (bytes.size() + header_bytes + payload.size() > static_cast<unsigned>(cap)) return;
+                const auto& packet = slots[i];
+                if (bytes.size() + header_bytes + packet.size > static_cast<unsigned>(cap)) return;
                 const auto& [score, level, group] = order[start + i];
-                append(bytes, group, level, modes[i], reinterpret_cast<const uint8_t*>(payload.data()), payload.size());
+                append(bytes, group, level, packet.mode, packet.payload, packet.size);
                 ends.push_back(bytes.size());
             }
         }

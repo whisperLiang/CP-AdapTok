@@ -45,3 +45,20 @@ def test_deployment_takes_the_checkpoint_tensor_and_refreshes_the_proxy(monkeypa
     mock.overlays = overlays | {"native_i": {intra_key: torch.tensor([float("nan"), 0., 0.])}}
     with pytest.raises(ValueError, match="invalid parameter tensor"):
         mock._install(endpoint)
+
+
+def test_wire_identity_preserves_signalled_shape_qp_and_independent_frame():
+    from hla_tok.uf.base import BaseFrame, FrameInfo
+    from hla_tok.uf.wire import FrameParser, pack_base
+
+    frame = BaseFrame(FrameInfo(72, 1080, 1920, 8, True, 2, False), b"real payload bytes")
+    tag = b"nativevq"
+    raw = pack_base(frame, tag)
+    receiver = FrameParser(tag)
+    receiver.feed(raw)
+    assert list(receiver.available()) == [frame]
+    receiver.finish()
+    rogue = FrameParser(b"lite-vq1")
+    rogue.feed(raw)
+    with pytest.raises(ValueError, match="unexpected model"):
+        list(rogue.available())

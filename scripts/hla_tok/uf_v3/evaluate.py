@@ -12,11 +12,19 @@ from hla_tok.uf.anchor import BUDGETS
 from hla_tok.uf.official import OfficialAssets, sha256_file
 from hla_tok.uf_v2.static_entropy import StaticAsset
 from scripts.hla_tok.uf.inputs import inputs
+from scripts.hla_tok.uf_v2.acceptance import timing_met
 from scripts.hla_tok.uf_v2.evaluate import quality_replay, summarize_quality, summarize_timing, timing
 from scripts.hla_tok.uf_v3.endpoint import load_endpoint
 from scripts.hla_tok.v2.protocol import setup
 
 RD_CUTS = (0, 0.5, 1, 1.3947, 1.395, 2, 3, 3.594, 4, 5, 10, 20, 40)
+REALTIME_LIMITS = {"minimum_fps": 30, "maximum_p95_ms": 33.33}
+
+
+def close_timing(data):
+    if not data:
+        return "NOT_RUN"
+    return "PASS" if all(str(b) in data and timing_met(data[str(b)], REALTIME_LIMITS) for b in BUDGETS) else "FAIL"
 
 
 def other_gpu_processes():

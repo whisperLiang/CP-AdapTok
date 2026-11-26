@@ -1,0 +1,30 @@
+{
+  "same_physical_bytes_counts_and_rgb_quality": true,
+  "measurements": {
+    "original": {
+      "fps": 34.935980748501365,
+      "p95_ms": 32.071202687802725,
+      "p99_ms": 53.64215164270719,
+      "pack_ms": 7.078162402194721,
+      "other_gpu": [
+        0,
+        0
+      ]
+    },
+    "reuse": {
+      "fps": 35.63300118102335,
+      "p95_ms": 29.976415490091313,
+      "p99_ms": 45.2029393875273,
+      "pack_ms": 7.921508240315234,
+      "other_gpu": [
+        0,
+        0
+      ]
+    }
+  },
+  "p95_change_ms": -2.094787197711412,
+  "minimal_investigation_threshold_ms": 1,
+  "threshold_signal": true,
+  "scope": "three paired native Calibration repetitions at 40 Mbps, local CPU pack candidate",
+  "deployment": "Calibration only; the deployment choice is recorded in selection.json"
+}

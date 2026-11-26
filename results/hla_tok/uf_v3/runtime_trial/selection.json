@@ -1,0 +1,14 @@
+{
+  "selected": "reuse",
+  "max_and_all_boundary_hashes_match": true,
+  "native_frames_with_paired_hashes": 174,
+  "contract_replay": true,
+  "both_modes_realtime": true,
+  "native_record_extension_sha256": "09b1051f18d7471a3f727815be87f5db3ec69561e5d59893bf6969ece9e7e7ea",
+  "timing": {
+    "full_max": "runtime_trial/validation_full_max/summary.json",
+    "on_demand": "runtime_trial/validation_on_demand/summary.json"
+  },
+  "contracts": "runtime_trial/reuse_contracts/summary.json",
+  "test_pixel_reads": 0
+}
