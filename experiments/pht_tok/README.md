@@ -23,6 +23,8 @@ bash experiments/pht_tok/native/build_entropy.sh
 export PYTHONPATH="$PWD/.build/pht-tok/official/site:$PWD"
 "$PYTHON_BIN" -m experiments.pht_tok.baseline \
   --weights "$PHT_WEIGHTS" --output .build/pht-tok/calibration.json
+"$PYTHON_BIN" -m experiments.pht_tok.baseline \
+  --weights "$PHT_WEIGHTS" --uvg "$PHT_UVG" --output .build/pht-tok/uvg.json
 
 export PYTHONPATH="$PWD/.build/pht-tok/pht/site:$PWD"
 "$PYTHON_BIN" -m experiments.pht_tok.study equivalence --weights "$PHT_WEIGHTS"
@@ -30,12 +32,18 @@ export PYTHONPATH="$PWD/.build/pht-tok/pht/site:$PWD"
 "$PYTHON_BIN" -m experiments.pht_tok.study closed --qps 32 --weights "$PHT_WEIGHTS" --uvg "$PHT_UVG"
 cp .build/pht-tok/profiling.json .build/pht-tok/profiling-before.json
 "$PYTHON_BIN" -m experiments.pht_tok.measure profile --weights "$PHT_WEIGHTS" --uvg "$PHT_UVG"
+c++ -std=c++17 -O2 -shared -fPIC -I"$CUDA_HOME/include" \
+  experiments/pht_tok/native/count_cuda_calls.cpp -ldl -o .build/pht-tok/count_cuda_calls.so
+LD_PRELOAD="$PWD/.build/pht-tok/count_cuda_calls.so" \
+  "$PYTHON_BIN" -m experiments.pht_tok.profile_stages --weights "$PHT_WEIGHTS" --uvg "$PHT_UVG"
 "$PYTHON_BIN" -m experiments.pht_tok.measure fixed-uvg --weights "$PHT_WEIGHTS" --uvg "$PHT_UVG"
 "$PYTHON_BIN" -m experiments.pht_tok.network --weights "$PHT_WEIGHTS" \
   --uvg "$PHT_UVG" --verizon .build/pht-tok/verizon-lte.down
 "$PYTHON_BIN" -m experiments.pht_tok.validation --weights "$PHT_WEIGHTS"
 
 "$PYTHON_BIN" -m pytest -q --import-mode=importlib tests/pht_tok
+"$PYTHON_BIN" -m experiments.pht_tok.mutations --output .build/pht-tok/mutations-cpu.json
+"$PYTHON_BIN" -m experiments.pht_tok.mutations --gpu --output .build/pht-tok/mutations-gpu.json
 ruff check pht_tok experiments/pht_tok tests/pht_tok
 mypy --python-version 3.12 --follow-imports=skip --ignore-missing-imports pht_tok experiments/pht_tok
 ```

@@ -1,6 +1,7 @@
 """Measure stage boundaries separately from the uninstrumented throughput run."""
 
 import argparse
+import ctypes
 import json
 from collections import defaultdict
 from contextlib import ExitStack
@@ -63,6 +64,25 @@ def feed(tx, rx, source, i):
     return session
 
 
+def api_probe(tx, rx, source):
+    runtime = ctypes.CDLL(None)
+    try:
+        start = runtime.pht_count_start
+        stop = runtime.pht_count_stop
+    except AttributeError:
+        return {"status": "UNAVAILABLE", "reason": "CUDA runtime counter library was not preloaded"}
+    names = ("cudaDeviceSynchronize", "cudaStreamSynchronize", "cudaEventSynchronize",
+             "cudaMemcpy", "cudaMemcpyAsync", "cudaGraphLaunch")
+    counts = (ctypes.c_uint64 * len(names))()
+    start.restype = stop.restype = None
+    torch.cuda.synchronize()
+    start()
+    feed(tx, rx, source, 49)
+    torch.cuda.synchronize()
+    stop(counts)
+    return dict(zip(names, counts, strict=True)) | {"includes_one_final_measurement_device_sync": True}
+
+
 @torch.inference_mode()
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -97,16 +117,7 @@ def main():
             timers.wrap_methods(stack, rx, {"commit": "Decoder reference commit"})
             for i in (25, 33, 41):
                 feed(tx, rx, source, i)
-        counts = {}
-        try:
-            from torch.profiler import ProfilerActivity, profile
-            with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA]) as trace:
-                feed(tx, rx, source, 49)
-                torch.cuda.synchronize()
-            for keyword in ("cudaDeviceSynchronize", "cudaStreamSynchronize", "cudaMemcpyAsync", "cudaGraphLaunch"):
-                counts[keyword] = sum(event.count for event in trace.key_averages() if event.key == keyword)
-        except (RuntimeError, OSError) as err:
-            counts["status"] = str(err)
+        counts = api_probe(tx, rx, source)
     path = args.work / "profiling.json"
     prior = json.loads(path.read_text())
     prior["stage_diagnostics"] = {
