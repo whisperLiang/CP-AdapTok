@@ -1,0 +1,30 @@
+{
+  "status": "FAIL",
+  "low_protection": true,
+  "high_improvement": false,
+  "realtime": false,
+  "delta": {
+    "5": {
+      "global_psnr": 0.018075279583715798,
+      "lpips": -0.0009268121793866158,
+      "dists": -0.00028378888964653015
+    },
+    "10": {
+      "global_psnr": 0.040578839578667925,
+      "lpips": -0.0003123336161176271,
+      "dists": -0.00012908875942230225
+    },
+    "20": {
+      "global_psnr": 0.04334973553872601,
+      "lpips": 0.0002684236193696843,
+      "dists": -0.000161570807298006
+    },
+    "40": {
+      "global_psnr": 0.02653033743698785,
+      "lpips": 0.0013914946466684341,
+      "dists": 0.0007228093842665539
+    }
+  },
+  "seed2": "NOT_RUN",
+  "reason": "thresholds retained after physical replay"
+}

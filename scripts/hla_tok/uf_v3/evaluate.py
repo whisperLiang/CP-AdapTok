@@ -1,6 +1,8 @@
 """Replay official FP16 HUF1 endpoints before and after joint training."""
 
 import argparse
+import os
+import subprocess
 from pathlib import Path
 
 import torch
@@ -17,6 +19,15 @@ from scripts.hla_tok.v2.protocol import setup
 RD_CUTS = (0, 0.5, 1, 1.3947, 1.395, 2, 3, 3.594, 4, 5, 10, 20, 40)
 
 
+def other_gpu_processes():
+    try:
+        report = subprocess.check_output(["nvidia-smi", "--query-compute-apps=pid",
+                                          "--format=csv,noheader,nounits"], text=True)
+        return sum(int(pid) != os.getpid() for pid in report.splitlines() if pid.strip().isdigit())
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return None
+
+
 @torch.no_grad()
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -28,6 +39,7 @@ def main():
     parser.add_argument("--limit", type=int, default=10000)
     parser.add_argument("--quality", nargs="+", type=float)
     parser.add_argument("--demand", action="store_true")
+    parser.add_argument("--timing-budgets", type=int, nargs="+", choices=tuple(BUDGETS), default=tuple(BUDGETS))
     parser.add_argument("--static", type=Path)
     parser.add_argument("--raw", action="store_true")
     args = parser.parse_args()
@@ -45,13 +57,15 @@ def main():
               "manifest_hashes": reader.hashes, "checkpoint_sha256": sha256_file(args.checkpoint),
               "runtime": environment(), "backend": "E2" if args.raw else "E1" if args.static else "E0"}
     if args.repetitions:
-        bud = tuple(BUDGETS)
+        bud = tuple(args.timing_budgets)
         torch.cuda.reset_peak_memory_stats()
+        gpu_peers_before = other_gpu_processes()
         rows = timing(codec, assets, reader, clips, bud, args.repetitions, args.limit, args.demand)
         write_csv(args.output / "timing.csv", rows)
         report.update({"timing": summarize_timing(rows, bud, args.repetitions),
                        "timing_peak_cuda_bytes": torch.cuda.max_memory_allocated(),
                        "timing_mode": "on-demand" if args.demand else "Full-max",
+                       "other_gpu_compute_before_after": [gpu_peers_before, other_gpu_processes()],
                        "40_mode_identity": BUDGETS[40] == 166666})
     if args.quality:
         rows = quality_replay(codec, assets, reader, clips, args.quality, args.limit)

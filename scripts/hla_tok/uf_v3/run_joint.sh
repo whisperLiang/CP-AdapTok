@@ -41,7 +41,6 @@ fit_node() {
   fi
 }
 
-evaluate "$out/evaluation/A2" "$init" --split validation
 latest="$checkpoints/r0-P2-seed1-step2000.pt"
 if [[ "$(status "$out/pilot/P2/gate.json")" != "PASS" ]]; then
   fit_node probe 2064 "$latest"
