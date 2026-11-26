@@ -28,6 +28,12 @@ FAULTS = (
           "if not points:", "test_comparison.py::test_equal_quality_comparison_requires_overlap_and_saves_physical_bytes"),
     Fault("allow Test pixel access", "hla_tok.evaluation.data", 'raise PermissionError("Test remains sealed")',
           "return {}", "test_hts_inputs.py::test_frozen_metadata_preserves_cohorts_and_seals_test_pixels"),
+    Fault("round YCbCr after centering", "hla_tok.hts.native",
+          "(yuv.half() - 0.5).contiguous", "(yuv - 0.5).half().contiguous",
+          "test_hts_native_contracts.py::test_cuda_rgb_and_payload_match_official_script", True),
+    Fault("discard the observed native DPB hash", "hla_tok.hts.native",
+          "return tensor_digest(self.video.proxy.audit_reference(unit.intra or unit.reset))", 'return "0" * 64',
+          "test_hts_native_contracts.py::test_cuda_rgb_and_payload_match_official_script", True),
 )
 
 
@@ -50,6 +56,7 @@ def check(output: Path, index: int, case: Fault) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--gpu", action="store_true")
     parser.add_argument("--case", type=int, choices=range(len(FAULTS)))
     args = parser.parse_args()
     if args.case is not None:
@@ -57,10 +64,10 @@ def main() -> int:
     if args.output is None:
         parser.error("--output is required for a full suite")
     args.output.mkdir(parents=True, exist_ok=True)
-    results = [check(args.output, i, case) for i, case in enumerate(FAULTS)]
+    results = [check(args.output, i, case) for i, case in enumerate(FAULTS) if case.gpu == args.gpu]
     count = sum(row["killed"] for row in results)
-    write_json(args.output / "summary.json", {"killed": count, "total": len(FAULTS), "cases": results})
-    return int(count != len(FAULTS))
+    write_json(args.output / "summary.json", {"killed": count, "total": len(results), "cases": results})
+    return int(count != len(results))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,10 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___ test_equal_quality_comparison_requires_overlap_and_saves_physical_bytes ____
+tests/hla_tok/hts/test_comparison.py:14: in test_equal_quality_comparison_requires_overlap_and_saves_physical_bytes
+    assert len(pairs) == 1
+E   AssertionError: assert 3 == 1
+E    +  where 3 = len([{'metric': 'global_psnr', 'quality': 24, 'candidate_mbps': 0.21, 'reference_mbps': 0.28, ...}, {'metric': 'global_psn...erence_mbps': 0.28, ...}, {'metric': 'global_psnr', 'quality': 29, 'candidate_mbps': 0.45, 'reference_mbps': 0.4, ...}])
+=========================== short test summary info ============================
+FAILED tests/hla_tok/hts/test_comparison.py::test_equal_quality_comparison_requires_overlap_and_saves_physical_bytes
+1 failed in 0.60s

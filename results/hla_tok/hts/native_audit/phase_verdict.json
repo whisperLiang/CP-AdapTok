@@ -1,0 +1,33 @@
+{
+  "verdict": "FAIL",
+  "native_correctness": true,
+  "native_cases_completed": 408,
+  "matched_low_rate_gains_over_ld": [],
+  "matched_low_rate_gains_over_a4_base": [],
+  "calibration_a4_base": {
+    "budget_mbps": 0.0,
+    "planned": 128,
+    "decoded": 128,
+    "base_exceeded": 0,
+    "desync": 0,
+    "mse": 0.002079730882542208,
+    "lpips": 0.441597472759895,
+    "dists": 0.25744741689413786,
+    "frames": 128,
+    "global_psnr": 26.81992859166314,
+    "mean_frame_psnr": 26.995316556380317,
+    "status": "PASS",
+    "actual_mbps": 0.376741875,
+    "actual_bpp": 0.006056164400077161,
+    "total_bytes": 200929,
+    "max": 8558,
+    "unused_bytes": 0
+  },
+  "byte_accounting": {
+    "streams": 1632,
+    "units": 21984,
+    "bytes": 543162476,
+    "valid_frames": 52224,
+    "padded_frames": 1120
+  }
+}

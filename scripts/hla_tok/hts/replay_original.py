@@ -16,6 +16,32 @@ from scripts.hla_tok.uf.inputs import inputs
 from scripts.hla_tok.v2.protocol import COHORT, ROOT, json_at, setup
 
 
+def replay_clip(reader, clip, model, metric, config, budgets) -> tuple[list[dict], list[dict]]:
+    reference = config["reference"]
+    frames: list[dict] = []
+    windows: list[dict] = []
+    for start in range(clip.start, clip.start + clip.length, CLIP_LENGTH):
+        stop = min(start + CLIP_LENGTH, clip.start + clip.length)
+        images = [reader.read(clip.split, clip.video, i) for i in range(start, stop)]
+        padded = torch.stack(images + [images[-1]] * (CLIP_LENGTH - len(images)))
+        with compute(config["compute_dtype"]):
+            target, decoded = _official_window(model, padded, start, len(images), reference, budgets)
+        windows.extend({"video": clip.video, **entry} for _, entry in decoded)
+        frames.extend(score_window(metric, clip.video, start, len(images), target, decoded))
+    return frames, windows
+
+
+def score_window(metric, video, start, length, original, decoded) -> list[dict]:
+    rows = []
+    for index in range(length):
+        metric.prepare(original[index:index + 1])
+        for rgb, entry in decoded:
+            tags = {key: entry[key] for key in ("budget_per_group", "tokens_per_tile")}
+            rows.append(tags | {"video": video, "frame": start + index}
+                        | metric.score(rgb[index:index + 1]))
+    return rows
+
+
 @torch.inference_mode()
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -35,19 +61,9 @@ def main() -> None:
     windows: list[dict] = []
     with torch.cuda.stream(torch.cuda.Stream()):
         for clip in plans["calibration"]:
-            for start in range(clip.start, clip.start + clip.length, CLIP_LENGTH):
-                stop = min(start + CLIP_LENGTH, clip.start + clip.length)
-                frames = [reader.read(clip.split, clip.video, i) for i in range(start, stop)]
-                padded = torch.stack(frames + [frames[-1]] * (CLIP_LENGTH - len(frames)))
-                with compute(config["compute_dtype"]):
-                    target, decoded = _official_window(model, padded, start, len(frames), reference, budgets)
-                windows.extend({"video": clip.video, **entry} for _, entry in decoded)
-                for index in range(len(frames)):
-                    metric.prepare(target[index:index + 1])
-                    for rgb, entry in decoded:
-                        tags = {key: entry[key] for key in ("budget_per_group", "tokens_per_tile")}
-                        rows.append(tags | {"video": clip.video, "frame": start + index}
-                                    | metric.score(rgb[index:index + 1]))
+            clip_frames, clip_windows = replay_clip(reader, clip, model, metric, config, budgets)
+            rows.extend(clip_frames)
+            windows.extend(clip_windows)
             print(clip.video, clip.length, flush=True)
     write_csv(args.output / "original_per_frame.csv", rows)
     write_csv(args.output / "original_window_ledger.csv", windows)

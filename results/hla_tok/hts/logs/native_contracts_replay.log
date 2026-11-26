@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok/scripts/hla_tok/hts/native_contracts.py", line 10, in <module>
+    import torch
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/__init__.py", line 1848, in <module>
+    from torch._tensor import Tensor  # usort: skip
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/_tensor.py", line 22, in <module>
+    from torch.overrides import (
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/overrides.py", line 1765, in <module>
+    has_torch_function = _add_docstr(
+                         ^^^^^^^^^^^^
+RuntimeError: function '_has_torch_function' already has a docstring
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/coverage/inorout.py:560: CoverageWarning: Module hla_tok.hts was never imported. (module-not-imported); see https://coverage.readthedocs.io/en/7.17.3/messages.html#warning-module-not-imported
+  self.warn(f"Module {pkg} was never imported.", slug="module-not-imported")

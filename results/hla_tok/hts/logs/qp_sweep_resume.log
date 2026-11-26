@@ -1,0 +1,1608 @@
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+hts matched-i01-p01 DAVIS2017:car-turn
+hts matched-i02-p02 DAVIS2017:car-turn
+hts matched-i03-p03 DAVIS2017:car-turn
+hts matched-i05-p05 DAVIS2017:car-turn
+hts matched-i06-p06 DAVIS2017:car-turn
+hts matched-i07-p07 DAVIS2017:car-turn
+hts matched-i09-p09 DAVIS2017:car-turn
+hts matched-i10-p10 DAVIS2017:car-turn
+hts matched-i11-p11 DAVIS2017:car-turn
+hts matched-i13-p13 DAVIS2017:car-turn
+hts matched-i14-p14 DAVIS2017:car-turn
+hts matched-i15-p15 DAVIS2017:car-turn
+hts matched-i16-p16 DAVIS2017:car-turn
+hts matched-i17-p17 DAVIS2017:car-turn
+hts matched-i18-p18 DAVIS2017:car-turn
+hts matched-i19-p19 DAVIS2017:car-turn
+hts matched-i20-p20 DAVIS2017:car-turn
+hts matched-i21-p21 DAVIS2017:car-turn
+hts matched-i22-p22 DAVIS2017:car-turn
+hts matched-i23-p23 DAVIS2017:car-turn
+hts matched-i24-p24 DAVIS2017:car-turn
+hts matched-i25-p25 DAVIS2017:car-turn
+hts matched-i26-p26 DAVIS2017:car-turn
+hts matched-i27-p27 DAVIS2017:car-turn
+hts matched-i28-p28 DAVIS2017:car-turn
+hts matched-i29-p29 DAVIS2017:car-turn
+hts matched-i30-p30 DAVIS2017:car-turn
+hts matched-i31-p31 DAVIS2017:car-turn
+hts matched-i32-p32 DAVIS2017:car-turn
+hts matched-i33-p33 DAVIS2017:car-turn
+hts matched-i34-p34 DAVIS2017:car-turn
+hts matched-i35-p35 DAVIS2017:car-turn
+hts matched-i36-p36 DAVIS2017:car-turn
+hts matched-i37-p37 DAVIS2017:car-turn
+hts matched-i38-p38 DAVIS2017:car-turn
+hts matched-i39-p39 DAVIS2017:car-turn
+hts matched-i40-p40 DAVIS2017:car-turn
+hts matched-i41-p41 DAVIS2017:car-turn
+hts matched-i42-p42 DAVIS2017:car-turn
+hts matched-i43-p43 DAVIS2017:car-turn
+hts matched-i44-p44 DAVIS2017:car-turn
+hts matched-i45-p45 DAVIS2017:car-turn
+hts matched-i46-p46 DAVIS2017:car-turn
+hts matched-i47-p47 DAVIS2017:car-turn
+hts matched-i48-p48 DAVIS2017:car-turn
+hts matched-i49-p49 DAVIS2017:car-turn
+hts matched-i50-p50 DAVIS2017:car-turn
+hts matched-i51-p51 DAVIS2017:car-turn
+hts matched-i52-p52 DAVIS2017:car-turn
+hts matched-i53-p53 DAVIS2017:car-turn
+hts matched-i54-p54 DAVIS2017:car-turn
+hts matched-i55-p55 DAVIS2017:car-turn
+hts matched-i56-p56 DAVIS2017:car-turn
+hts matched-i57-p57 DAVIS2017:car-turn
+hts matched-i58-p58 DAVIS2017:car-turn
+hts matched-i59-p59 DAVIS2017:car-turn
+hts matched-i60-p60 DAVIS2017:car-turn
+hts matched-i61-p61 DAVIS2017:car-turn
+hts matched-i62-p62 DAVIS2017:car-turn
+hts matched-i63-p63 DAVIS2017:car-turn
+hts matched-i00-p04 DAVIS2017:car-turn
+hts matched-i00-p08 DAVIS2017:car-turn
+hts matched-i00-p12 DAVIS2017:car-turn
+hts matched-i04-p00 DAVIS2017:car-turn
+hts matched-i04-p08 DAVIS2017:car-turn
+hts matched-i04-p12 DAVIS2017:car-turn
+hts matched-i08-p00 DAVIS2017:car-turn
+hts matched-i08-p04 DAVIS2017:car-turn
+hts matched-i08-p12 DAVIS2017:car-turn
+hts matched-i12-p00 DAVIS2017:car-turn
+hts matched-i12-p04 DAVIS2017:car-turn
+hts matched-i12-p08 DAVIS2017:car-turn
+hts matched-i01-p01 DAVIS2017:surf
+hts matched-i02-p02 DAVIS2017:surf
+hts matched-i03-p03 DAVIS2017:surf
+hts matched-i05-p05 DAVIS2017:surf
+hts matched-i06-p06 DAVIS2017:surf
+hts matched-i07-p07 DAVIS2017:surf
+hts matched-i09-p09 DAVIS2017:surf
+hts matched-i10-p10 DAVIS2017:surf
+hts matched-i11-p11 DAVIS2017:surf
+hts matched-i13-p13 DAVIS2017:surf
+hts matched-i14-p14 DAVIS2017:surf
+hts matched-i15-p15 DAVIS2017:surf
+hts matched-i16-p16 DAVIS2017:surf
+hts matched-i17-p17 DAVIS2017:surf
+hts matched-i18-p18 DAVIS2017:surf
+hts matched-i19-p19 DAVIS2017:surf
+hts matched-i20-p20 DAVIS2017:surf
+hts matched-i21-p21 DAVIS2017:surf
+hts matched-i22-p22 DAVIS2017:surf
+hts matched-i23-p23 DAVIS2017:surf
+hts matched-i24-p24 DAVIS2017:surf
+hts matched-i25-p25 DAVIS2017:surf
+hts matched-i26-p26 DAVIS2017:surf
+hts matched-i27-p27 DAVIS2017:surf
+hts matched-i28-p28 DAVIS2017:surf
+hts matched-i29-p29 DAVIS2017:surf
+hts matched-i30-p30 DAVIS2017:surf
+hts matched-i31-p31 DAVIS2017:surf
+hts matched-i32-p32 DAVIS2017:surf
+hts matched-i33-p33 DAVIS2017:surf
+hts matched-i34-p34 DAVIS2017:surf
+hts matched-i35-p35 DAVIS2017:surf
+hts matched-i36-p36 DAVIS2017:surf
+hts matched-i37-p37 DAVIS2017:surf
+hts matched-i38-p38 DAVIS2017:surf
+hts matched-i39-p39 DAVIS2017:surf
+hts matched-i40-p40 DAVIS2017:surf
+hts matched-i41-p41 DAVIS2017:surf
+hts matched-i42-p42 DAVIS2017:surf
+hts matched-i43-p43 DAVIS2017:surf
+hts matched-i44-p44 DAVIS2017:surf
+hts matched-i45-p45 DAVIS2017:surf
+hts matched-i46-p46 DAVIS2017:surf
+hts matched-i47-p47 DAVIS2017:surf
+hts matched-i48-p48 DAVIS2017:surf
+hts matched-i49-p49 DAVIS2017:surf
+hts matched-i50-p50 DAVIS2017:surf
+hts matched-i51-p51 DAVIS2017:surf
+hts matched-i52-p52 DAVIS2017:surf
+hts matched-i53-p53 DAVIS2017:surf
+hts matched-i54-p54 DAVIS2017:surf
+hts matched-i55-p55 DAVIS2017:surf
+hts matched-i56-p56 DAVIS2017:surf
+hts matched-i57-p57 DAVIS2017:surf
+hts matched-i58-p58 DAVIS2017:surf
+hts matched-i59-p59 DAVIS2017:surf
+hts matched-i60-p60 DAVIS2017:surf
+hts matched-i61-p61 DAVIS2017:surf
+hts matched-i62-p62 DAVIS2017:surf
+hts matched-i63-p63 DAVIS2017:surf
+hts matched-i00-p04 DAVIS2017:surf
+hts matched-i00-p08 DAVIS2017:surf
+hts matched-i00-p12 DAVIS2017:surf
+hts matched-i04-p00 DAVIS2017:surf
+hts matched-i04-p08 DAVIS2017:surf
+hts matched-i04-p12 DAVIS2017:surf
+hts matched-i08-p00 DAVIS2017:surf
+hts matched-i08-p04 DAVIS2017:surf
+hts matched-i08-p12 DAVIS2017:surf
+hts matched-i12-p00 DAVIS2017:surf
+hts matched-i12-p04 DAVIS2017:surf
+hts matched-i12-p08 DAVIS2017:surf
+hts matched-i01-p01 DAVIS2017:train
+hts matched-i02-p02 DAVIS2017:train
+hts matched-i03-p03 DAVIS2017:train
+hts matched-i05-p05 DAVIS2017:train
+hts matched-i06-p06 DAVIS2017:train
+hts matched-i07-p07 DAVIS2017:train
+hts matched-i09-p09 DAVIS2017:train
+hts matched-i10-p10 DAVIS2017:train
+hts matched-i11-p11 DAVIS2017:train
+hts matched-i13-p13 DAVIS2017:train
+hts matched-i14-p14 DAVIS2017:train
+hts matched-i15-p15 DAVIS2017:train
+hts matched-i16-p16 DAVIS2017:train
+hts matched-i17-p17 DAVIS2017:train
+hts matched-i18-p18 DAVIS2017:train
+hts matched-i19-p19 DAVIS2017:train
+hts matched-i20-p20 DAVIS2017:train
+hts matched-i21-p21 DAVIS2017:train
+hts matched-i22-p22 DAVIS2017:train
+hts matched-i23-p23 DAVIS2017:train
+hts matched-i24-p24 DAVIS2017:train
+hts matched-i25-p25 DAVIS2017:train
+hts matched-i26-p26 DAVIS2017:train
+hts matched-i27-p27 DAVIS2017:train
+hts matched-i28-p28 DAVIS2017:train
+hts matched-i29-p29 DAVIS2017:train
+hts matched-i30-p30 DAVIS2017:train
+hts matched-i31-p31 DAVIS2017:train
+hts matched-i32-p32 DAVIS2017:train
+hts matched-i33-p33 DAVIS2017:train
+hts matched-i34-p34 DAVIS2017:train
+hts matched-i35-p35 DAVIS2017:train
+hts matched-i36-p36 DAVIS2017:train
+hts matched-i37-p37 DAVIS2017:train
+hts matched-i38-p38 DAVIS2017:train
+hts matched-i39-p39 DAVIS2017:train
+hts matched-i40-p40 DAVIS2017:train
+hts matched-i41-p41 DAVIS2017:train
+hts matched-i42-p42 DAVIS2017:train
+hts matched-i43-p43 DAVIS2017:train
+hts matched-i44-p44 DAVIS2017:train
+hts matched-i45-p45 DAVIS2017:train
+hts matched-i46-p46 DAVIS2017:train
+hts matched-i47-p47 DAVIS2017:train
+hts matched-i48-p48 DAVIS2017:train
+hts matched-i49-p49 DAVIS2017:train
+hts matched-i50-p50 DAVIS2017:train
+hts matched-i51-p51 DAVIS2017:train
+hts matched-i52-p52 DAVIS2017:train
+hts matched-i53-p53 DAVIS2017:train
+hts matched-i54-p54 DAVIS2017:train
+hts matched-i55-p55 DAVIS2017:train
+hts matched-i56-p56 DAVIS2017:train
+hts matched-i57-p57 DAVIS2017:train
+hts matched-i58-p58 DAVIS2017:train
+hts matched-i59-p59 DAVIS2017:train
+hts matched-i60-p60 DAVIS2017:train
+hts matched-i61-p61 DAVIS2017:train
+hts matched-i62-p62 DAVIS2017:train
+hts matched-i63-p63 DAVIS2017:train
+hts matched-i00-p04 DAVIS2017:train
+hts matched-i00-p08 DAVIS2017:train
+hts matched-i00-p12 DAVIS2017:train
+hts matched-i04-p00 DAVIS2017:train
+hts matched-i04-p08 DAVIS2017:train
+hts matched-i04-p12 DAVIS2017:train
+hts matched-i08-p00 DAVIS2017:train
+hts matched-i08-p04 DAVIS2017:train
+hts matched-i08-p12 DAVIS2017:train
+hts matched-i12-p00 DAVIS2017:train
+hts matched-i12-p04 DAVIS2017:train
+hts matched-i12-p08 DAVIS2017:train
+hts matched-i01-p01 DAVIS2017:mallard-fly
+hts matched-i02-p02 DAVIS2017:mallard-fly
+hts matched-i03-p03 DAVIS2017:mallard-fly
+hts matched-i05-p05 DAVIS2017:mallard-fly
+hts matched-i06-p06 DAVIS2017:mallard-fly
+hts matched-i07-p07 DAVIS2017:mallard-fly
+hts matched-i09-p09 DAVIS2017:mallard-fly
+hts matched-i10-p10 DAVIS2017:mallard-fly
+hts matched-i11-p11 DAVIS2017:mallard-fly
+hts matched-i13-p13 DAVIS2017:mallard-fly
+hts matched-i14-p14 DAVIS2017:mallard-fly
+hts matched-i15-p15 DAVIS2017:mallard-fly
+hts matched-i16-p16 DAVIS2017:mallard-fly
+hts matched-i17-p17 DAVIS2017:mallard-fly
+hts matched-i18-p18 DAVIS2017:mallard-fly
+hts matched-i19-p19 DAVIS2017:mallard-fly
+hts matched-i20-p20 DAVIS2017:mallard-fly
+hts matched-i21-p21 DAVIS2017:mallard-fly
+hts matched-i22-p22 DAVIS2017:mallard-fly
+hts matched-i23-p23 DAVIS2017:mallard-fly
+hts matched-i24-p24 DAVIS2017:mallard-fly
+hts matched-i25-p25 DAVIS2017:mallard-fly
+hts matched-i26-p26 DAVIS2017:mallard-fly
+hts matched-i27-p27 DAVIS2017:mallard-fly
+hts matched-i28-p28 DAVIS2017:mallard-fly
+hts matched-i29-p29 DAVIS2017:mallard-fly
+hts matched-i30-p30 DAVIS2017:mallard-fly
+hts matched-i31-p31 DAVIS2017:mallard-fly
+hts matched-i32-p32 DAVIS2017:mallard-fly
+hts matched-i33-p33 DAVIS2017:mallard-fly
+hts matched-i34-p34 DAVIS2017:mallard-fly
+hts matched-i35-p35 DAVIS2017:mallard-fly
+hts matched-i36-p36 DAVIS2017:mallard-fly
+hts matched-i37-p37 DAVIS2017:mallard-fly
+hts matched-i38-p38 DAVIS2017:mallard-fly
+hts matched-i39-p39 DAVIS2017:mallard-fly
+hts matched-i40-p40 DAVIS2017:mallard-fly
+hts matched-i41-p41 DAVIS2017:mallard-fly
+hts matched-i42-p42 DAVIS2017:mallard-fly
+hts matched-i43-p43 DAVIS2017:mallard-fly
+hts matched-i44-p44 DAVIS2017:mallard-fly
+hts matched-i45-p45 DAVIS2017:mallard-fly
+hts matched-i46-p46 DAVIS2017:mallard-fly
+hts matched-i47-p47 DAVIS2017:mallard-fly
+hts matched-i48-p48 DAVIS2017:mallard-fly
+hts matched-i49-p49 DAVIS2017:mallard-fly
+hts matched-i50-p50 DAVIS2017:mallard-fly
+hts matched-i51-p51 DAVIS2017:mallard-fly
+hts matched-i52-p52 DAVIS2017:mallard-fly
+hts matched-i53-p53 DAVIS2017:mallard-fly
+hts matched-i54-p54 DAVIS2017:mallard-fly
+hts matched-i55-p55 DAVIS2017:mallard-fly
+hts matched-i56-p56 DAVIS2017:mallard-fly
+hts matched-i57-p57 DAVIS2017:mallard-fly
+hts matched-i58-p58 DAVIS2017:mallard-fly
+hts matched-i59-p59 DAVIS2017:mallard-fly
+hts matched-i60-p60 DAVIS2017:mallard-fly
+hts matched-i61-p61 DAVIS2017:mallard-fly
+hts matched-i62-p62 DAVIS2017:mallard-fly
+hts matched-i63-p63 DAVIS2017:mallard-fly
+hts matched-i00-p04 DAVIS2017:mallard-fly
+hts matched-i00-p08 DAVIS2017:mallard-fly
+hts matched-i00-p12 DAVIS2017:mallard-fly
+hts matched-i04-p00 DAVIS2017:mallard-fly
+hts matched-i04-p08 DAVIS2017:mallard-fly
+hts matched-i04-p12 DAVIS2017:mallard-fly
+hts matched-i08-p00 DAVIS2017:mallard-fly
+hts matched-i08-p04 DAVIS2017:mallard-fly
+hts matched-i08-p12 DAVIS2017:mallard-fly
+hts matched-i12-p00 DAVIS2017:mallard-fly
+hts matched-i12-p04 DAVIS2017:mallard-fly
+hts matched-i12-p08 DAVIS2017:mallard-fly
+hts matched-i01-p01 0.16064 Mbps 23.808 dB LPIPS 0.54292
+hts matched-i02-p02 0.17222 Mbps 23.947 dB LPIPS 0.53660
+hts matched-i03-p03 0.18548 Mbps 24.095 dB LPIPS 0.53056
+hts matched-i05-p05 0.21384 Mbps 24.367 dB LPIPS 0.51791
+hts matched-i06-p06 0.22898 Mbps 24.502 dB LPIPS 0.51233
+hts matched-i07-p07 0.24725 Mbps 24.644 dB LPIPS 0.50549
+hts matched-i09-p09 0.28397 Mbps 24.919 dB LPIPS 0.49262
+hts matched-i10-p10 0.30713 Mbps 25.075 dB LPIPS 0.48547
+hts matched-i11-p11 0.32811 Mbps 25.201 dB LPIPS 0.47971
+hts matched-i13-p13 0.37957 Mbps 25.507 dB LPIPS 0.46583
+hts matched-i14-p14 0.40829 Mbps 25.657 dB LPIPS 0.45897
+hts matched-i15-p15 0.43786 Mbps 25.809 dB LPIPS 0.45234
+hts matched-i16-p16 0.46902 Mbps 25.955 dB LPIPS 0.44551
+hts matched-i17-p17 0.50206 Mbps 26.106 dB LPIPS 0.43913
+hts matched-i18-p18 0.53754 Mbps 26.253 dB LPIPS 0.43303
+hts matched-i19-p19 0.57532 Mbps 26.397 dB LPIPS 0.42679
+hts matched-i20-p20 0.62019 Mbps 26.570 dB LPIPS 0.41937
+hts matched-i21-p21 0.65896 Mbps 26.703 dB LPIPS 0.41366
+hts matched-i22-p22 0.70880 Mbps 26.874 dB LPIPS 0.40631
+hts matched-i23-p23 0.75608 Mbps 27.019 dB LPIPS 0.39999
+hts matched-i24-p24 0.80939 Mbps 27.175 dB LPIPS 0.39338
+hts matched-i25-p25 0.86773 Mbps 27.346 dB LPIPS 0.38633
+hts matched-i26-p26 0.92819 Mbps 27.506 dB LPIPS 0.37935
+hts matched-i27-p27 0.99063 Mbps 27.662 dB LPIPS 0.37278
+hts matched-i28-p28 1.06105 Mbps 27.827 dB LPIPS 0.36602
+hts matched-i29-p29 1.13237 Mbps 27.985 dB LPIPS 0.35959
+hts matched-i30-p30 1.21224 Mbps 28.152 dB LPIPS 0.35226
+hts matched-i31-p31 1.29826 Mbps 28.328 dB LPIPS 0.34535
+hts matched-i32-p32 1.38840 Mbps 28.499 dB LPIPS 0.33851
+hts matched-i33-p33 1.48048 Mbps 28.665 dB LPIPS 0.33193
+hts matched-i34-p34 1.57859 Mbps 28.831 dB LPIPS 0.32519
+hts matched-i35-p35 1.68541 Mbps 29.005 dB LPIPS 0.31863
+hts matched-i36-p36 1.80651 Mbps 29.188 dB LPIPS 0.31126
+hts matched-i37-p37 1.92853 Mbps 29.366 dB LPIPS 0.30471
+hts matched-i38-p38 2.05769 Mbps 29.544 dB LPIPS 0.29804
+hts matched-i39-p39 2.19589 Mbps 29.726 dB LPIPS 0.29126
+hts matched-i40-p40 2.34760 Mbps 29.915 dB LPIPS 0.28427
+hts matched-i41-p41 2.49680 Mbps 30.084 dB LPIPS 0.27811
+hts matched-i42-p42 2.67336 Mbps 30.283 dB LPIPS 0.27071
+hts matched-i43-p43 2.84813 Mbps 30.464 dB LPIPS 0.26431
+hts matched-i44-p44 3.04300 Mbps 30.658 dB LPIPS 0.25761
+hts matched-i45-p45 3.23158 Mbps 30.839 dB LPIPS 0.25164
+hts matched-i46-p46 3.43231 Mbps 31.016 dB LPIPS 0.24551
+hts matched-i47-p47 3.64786 Mbps 31.194 dB LPIPS 0.23966
+hts matched-i48-p48 3.88124 Mbps 31.380 dB LPIPS 0.23379
+hts matched-i49-p49 4.11916 Mbps 31.553 dB LPIPS 0.22837
+hts matched-i50-p50 4.38025 Mbps 31.736 dB LPIPS 0.22244
+hts matched-i51-p51 4.63030 Mbps 31.899 dB LPIPS 0.21758
+hts matched-i52-p52 4.91585 Mbps 32.071 dB LPIPS 0.21243
+hts matched-i53-p53 5.19758 Mbps 32.229 dB LPIPS 0.20775
+hts matched-i54-p54 5.47385 Mbps 32.373 dB LPIPS 0.20355
+hts matched-i55-p55 5.80096 Mbps 32.534 dB LPIPS 0.19882
+hts matched-i56-p56 6.10755 Mbps 32.673 dB LPIPS 0.19479
+hts matched-i57-p57 6.41005 Mbps 32.797 dB LPIPS 0.19133
+hts matched-i58-p58 6.73258 Mbps 32.924 dB LPIPS 0.18769
+hts matched-i59-p59 7.06576 Mbps 33.043 dB LPIPS 0.18417
+hts matched-i60-p60 7.38976 Mbps 33.149 dB LPIPS 0.18109
+hts matched-i61-p61 7.71730 Mbps 33.247 dB LPIPS 0.17796
+hts matched-i62-p62 8.02995 Mbps 33.333 dB LPIPS 0.17530
+hts matched-i63-p63 8.35304 Mbps 33.414 dB LPIPS 0.17248
+hts matched-i00-p04 0.18284 Mbps 24.180 dB LPIPS 0.53100
+hts matched-i00-p08 0.22753 Mbps 24.685 dB LPIPS 0.51330
+hts matched-i00-p12 0.28829 Mbps 25.206 dB LPIPS 0.49434
+hts matched-i04-p00 0.16424 Mbps 23.691 dB LPIPS 0.54314
+hts matched-i04-p08 0.24397 Mbps 24.730 dB LPIPS 0.50639
+hts matched-i04-p12 0.30512 Mbps 25.259 dB LPIPS 0.48717
+hts matched-i08-p00 0.18460 Mbps 23.727 dB LPIPS 0.53700
+hts matched-i08-p04 0.21934 Mbps 24.255 dB LPIPS 0.51872
+hts matched-i08-p12 0.32726 Mbps 25.312 dB LPIPS 0.47952
+hts matched-i12-p00 0.20848 Mbps 23.746 dB LPIPS 0.53313
+hts matched-i12-p04 0.24345 Mbps 24.277 dB LPIPS 0.51274
+hts matched-i12-p08 0.29022 Mbps 24.807 dB LPIPS 0.49333
+ld official-i08-p08 DAVIS2017:car-turn
+ld official-i09-p09 DAVIS2017:car-turn
+ld official-i10-p10 DAVIS2017:car-turn
+ld official-i11-p11 DAVIS2017:car-turn
+ld official-i12-p12 DAVIS2017:car-turn
+ld official-i13-p13 DAVIS2017:car-turn
+ld official-i14-p14 DAVIS2017:car-turn
+ld official-i15-p15 DAVIS2017:car-turn
+ld official-i16-p16 DAVIS2017:car-turn
+ld official-i17-p17 DAVIS2017:car-turn
+ld official-i18-p18 DAVIS2017:car-turn
+ld official-i19-p19 DAVIS2017:car-turn
+ld official-i20-p20 DAVIS2017:car-turn
+ld official-i21-p21 DAVIS2017:car-turn
+ld official-i22-p22 DAVIS2017:car-turn
+ld official-i23-p23 DAVIS2017:car-turn
+ld official-i24-p24 DAVIS2017:car-turn
+ld official-i25-p25 DAVIS2017:car-turn
+ld official-i26-p26 DAVIS2017:car-turn
+ld official-i27-p27 DAVIS2017:car-turn
+ld official-i28-p28 DAVIS2017:car-turn
+ld official-i29-p29 DAVIS2017:car-turn
+ld official-i30-p30 DAVIS2017:car-turn
+ld official-i31-p31 DAVIS2017:car-turn
+ld official-i32-p32 DAVIS2017:car-turn
+ld official-i33-p33 DAVIS2017:car-turn
+ld official-i34-p34 DAVIS2017:car-turn
+ld official-i35-p35 DAVIS2017:car-turn
+ld official-i36-p36 DAVIS2017:car-turn
+ld official-i37-p37 DAVIS2017:car-turn
+ld official-i38-p38 DAVIS2017:car-turn
+ld official-i39-p39 DAVIS2017:car-turn
+ld official-i40-p40 DAVIS2017:car-turn
+ld official-i41-p41 DAVIS2017:car-turn
+ld official-i42-p42 DAVIS2017:car-turn
+ld official-i43-p43 DAVIS2017:car-turn
+ld official-i44-p44 DAVIS2017:car-turn
+ld official-i45-p45 DAVIS2017:car-turn
+ld official-i46-p46 DAVIS2017:car-turn
+ld official-i47-p47 DAVIS2017:car-turn
+ld official-i48-p48 DAVIS2017:car-turn
+ld official-i49-p49 DAVIS2017:car-turn
+ld official-i50-p50 DAVIS2017:car-turn
+ld official-i51-p51 DAVIS2017:car-turn
+ld official-i52-p52 DAVIS2017:car-turn
+ld official-i53-p53 DAVIS2017:car-turn
+ld official-i54-p54 DAVIS2017:car-turn
+ld official-i55-p55 DAVIS2017:car-turn
+ld official-i56-p56 DAVIS2017:car-turn
+ld official-i57-p57 DAVIS2017:car-turn
+ld official-i58-p58 DAVIS2017:car-turn
+ld official-i59-p59 DAVIS2017:car-turn
+ld official-i60-p60 DAVIS2017:car-turn
+ld official-i61-p61 DAVIS2017:car-turn
+ld official-i62-p62 DAVIS2017:car-turn
+ld official-i63-p63 DAVIS2017:car-turn
+ld official-i08-p08 DAVIS2017:surf
+ld official-i09-p09 DAVIS2017:surf
+ld official-i10-p10 DAVIS2017:surf
+ld official-i11-p11 DAVIS2017:surf
+ld official-i12-p12 DAVIS2017:surf
+ld official-i13-p13 DAVIS2017:surf
+ld official-i14-p14 DAVIS2017:surf
+ld official-i15-p15 DAVIS2017:surf
+ld official-i16-p16 DAVIS2017:surf
+ld official-i17-p17 DAVIS2017:surf
+ld official-i18-p18 DAVIS2017:surf
+ld official-i19-p19 DAVIS2017:surf
+ld official-i20-p20 DAVIS2017:surf
+ld official-i21-p21 DAVIS2017:surf
+ld official-i22-p22 DAVIS2017:surf
+ld official-i23-p23 DAVIS2017:surf
+ld official-i24-p24 DAVIS2017:surf
+ld official-i25-p25 DAVIS2017:surf
+ld official-i26-p26 DAVIS2017:surf
+ld official-i27-p27 DAVIS2017:surf
+ld official-i28-p28 DAVIS2017:surf
+ld official-i29-p29 DAVIS2017:surf
+ld official-i30-p30 DAVIS2017:surf
+ld official-i31-p31 DAVIS2017:surf
+ld official-i32-p32 DAVIS2017:surf
+ld official-i33-p33 DAVIS2017:surf
+ld official-i34-p34 DAVIS2017:surf
+ld official-i35-p35 DAVIS2017:surf
+ld official-i36-p36 DAVIS2017:surf
+ld official-i37-p37 DAVIS2017:surf
+ld official-i38-p38 DAVIS2017:surf
+ld official-i39-p39 DAVIS2017:surf
+ld official-i40-p40 DAVIS2017:surf
+ld official-i41-p41 DAVIS2017:surf
+ld official-i42-p42 DAVIS2017:surf
+ld official-i43-p43 DAVIS2017:surf
+ld official-i44-p44 DAVIS2017:surf
+ld official-i45-p45 DAVIS2017:surf
+ld official-i46-p46 DAVIS2017:surf
+ld official-i47-p47 DAVIS2017:surf
+ld official-i48-p48 DAVIS2017:surf
+ld official-i49-p49 DAVIS2017:surf
+ld official-i50-p50 DAVIS2017:surf
+ld official-i51-p51 DAVIS2017:surf
+ld official-i52-p52 DAVIS2017:surf
+ld official-i53-p53 DAVIS2017:surf
+ld official-i54-p54 DAVIS2017:surf
+ld official-i55-p55 DAVIS2017:surf
+ld official-i56-p56 DAVIS2017:surf
+ld official-i57-p57 DAVIS2017:surf
+ld official-i58-p58 DAVIS2017:surf
+ld official-i59-p59 DAVIS2017:surf
+ld official-i60-p60 DAVIS2017:surf
+ld official-i61-p61 DAVIS2017:surf
+ld official-i62-p62 DAVIS2017:surf
+ld official-i63-p63 DAVIS2017:surf
+ld official-i08-p08 DAVIS2017:train
+ld official-i09-p09 DAVIS2017:train
+ld official-i10-p10 DAVIS2017:train
+ld official-i11-p11 DAVIS2017:train
+ld official-i12-p12 DAVIS2017:train
+ld official-i13-p13 DAVIS2017:train
+ld official-i14-p14 DAVIS2017:train
+ld official-i15-p15 DAVIS2017:train
+ld official-i16-p16 DAVIS2017:train
+ld official-i17-p17 DAVIS2017:train
+ld official-i18-p18 DAVIS2017:train
+ld official-i19-p19 DAVIS2017:train
+ld official-i20-p20 DAVIS2017:train
+ld official-i21-p21 DAVIS2017:train
+ld official-i22-p22 DAVIS2017:train
+ld official-i23-p23 DAVIS2017:train
+ld official-i24-p24 DAVIS2017:train
+ld official-i25-p25 DAVIS2017:train
+ld official-i26-p26 DAVIS2017:train
+ld official-i27-p27 DAVIS2017:train
+ld official-i28-p28 DAVIS2017:train
+ld official-i29-p29 DAVIS2017:train
+ld official-i30-p30 DAVIS2017:train
+ld official-i31-p31 DAVIS2017:train
+ld official-i32-p32 DAVIS2017:train
+ld official-i33-p33 DAVIS2017:train
+ld official-i34-p34 DAVIS2017:train
+ld official-i35-p35 DAVIS2017:train
+ld official-i36-p36 DAVIS2017:train
+ld official-i37-p37 DAVIS2017:train
+ld official-i38-p38 DAVIS2017:train
+ld official-i39-p39 DAVIS2017:train
+ld official-i40-p40 DAVIS2017:train
+ld official-i41-p41 DAVIS2017:train
+ld official-i42-p42 DAVIS2017:train
+ld official-i43-p43 DAVIS2017:train
+ld official-i44-p44 DAVIS2017:train
+ld official-i45-p45 DAVIS2017:train
+ld official-i46-p46 DAVIS2017:train
+ld official-i47-p47 DAVIS2017:train
+ld official-i48-p48 DAVIS2017:train
+ld official-i49-p49 DAVIS2017:train
+ld official-i50-p50 DAVIS2017:train
+ld official-i51-p51 DAVIS2017:train
+ld official-i52-p52 DAVIS2017:train
+ld official-i53-p53 DAVIS2017:train
+ld official-i54-p54 DAVIS2017:train
+ld official-i55-p55 DAVIS2017:train
+ld official-i56-p56 DAVIS2017:train
+ld official-i57-p57 DAVIS2017:train
+ld official-i58-p58 DAVIS2017:train
+ld official-i59-p59 DAVIS2017:train
+ld official-i60-p60 DAVIS2017:train
+ld official-i61-p61 DAVIS2017:train
+ld official-i62-p62 DAVIS2017:train
+ld official-i63-p63 DAVIS2017:train
+ld official-i08-p08 DAVIS2017:mallard-fly
+ld official-i09-p09 DAVIS2017:mallard-fly
+ld official-i10-p10 DAVIS2017:mallard-fly
+ld official-i11-p11 DAVIS2017:mallard-fly
+ld official-i12-p12 DAVIS2017:mallard-fly
+ld official-i13-p13 DAVIS2017:mallard-fly
+ld official-i14-p14 DAVIS2017:mallard-fly
+ld official-i15-p15 DAVIS2017:mallard-fly
+ld official-i16-p16 DAVIS2017:mallard-fly
+ld official-i17-p17 DAVIS2017:mallard-fly
+ld official-i18-p18 DAVIS2017:mallard-fly
+ld official-i19-p19 DAVIS2017:mallard-fly
+ld official-i20-p20 DAVIS2017:mallard-fly
+ld official-i21-p21 DAVIS2017:mallard-fly
+ld official-i22-p22 DAVIS2017:mallard-fly
+ld official-i23-p23 DAVIS2017:mallard-fly
+ld official-i24-p24 DAVIS2017:mallard-fly
+ld official-i25-p25 DAVIS2017:mallard-fly
+ld official-i26-p26 DAVIS2017:mallard-fly
+ld official-i27-p27 DAVIS2017:mallard-fly
+ld official-i28-p28 DAVIS2017:mallard-fly
+ld official-i29-p29 DAVIS2017:mallard-fly
+ld official-i30-p30 DAVIS2017:mallard-fly
+ld official-i31-p31 DAVIS2017:mallard-fly
+ld official-i32-p32 DAVIS2017:mallard-fly
+ld official-i33-p33 DAVIS2017:mallard-fly
+ld official-i34-p34 DAVIS2017:mallard-fly
+ld official-i35-p35 DAVIS2017:mallard-fly
+ld official-i36-p36 DAVIS2017:mallard-fly
+ld official-i37-p37 DAVIS2017:mallard-fly
+ld official-i38-p38 DAVIS2017:mallard-fly
+ld official-i39-p39 DAVIS2017:mallard-fly
+ld official-i40-p40 DAVIS2017:mallard-fly
+ld official-i41-p41 DAVIS2017:mallard-fly
+ld official-i42-p42 DAVIS2017:mallard-fly
+ld official-i43-p43 DAVIS2017:mallard-fly
+ld official-i44-p44 DAVIS2017:mallard-fly
+ld official-i45-p45 DAVIS2017:mallard-fly
+ld official-i46-p46 DAVIS2017:mallard-fly
+ld official-i47-p47 DAVIS2017:mallard-fly
+ld official-i48-p48 DAVIS2017:mallard-fly
+ld official-i49-p49 DAVIS2017:mallard-fly
+ld official-i50-p50 DAVIS2017:mallard-fly
+ld official-i51-p51 DAVIS2017:mallard-fly
+ld official-i52-p52 DAVIS2017:mallard-fly
+ld official-i53-p53 DAVIS2017:mallard-fly
+ld official-i54-p54 DAVIS2017:mallard-fly
+ld official-i55-p55 DAVIS2017:mallard-fly
+ld official-i56-p56 DAVIS2017:mallard-fly
+ld official-i57-p57 DAVIS2017:mallard-fly
+ld official-i58-p58 DAVIS2017:mallard-fly
+ld official-i59-p59 DAVIS2017:mallard-fly
+ld official-i60-p60 DAVIS2017:mallard-fly
+ld official-i61-p61 DAVIS2017:mallard-fly
+ld official-i62-p62 DAVIS2017:mallard-fly
+ld official-i63-p63 DAVIS2017:mallard-fly
+ld official-i08-p08 0.37673 Mbps 26.952 dB LPIPS 0.43001
+ld official-i09-p09 0.39837 Mbps 27.093 dB LPIPS 0.42368
+ld official-i10-p10 0.42502 Mbps 27.261 dB LPIPS 0.41690
+ld official-i11-p11 0.45345 Mbps 27.412 dB LPIPS 0.41060
+ld official-i12-p12 0.48722 Mbps 27.590 dB LPIPS 0.40258
+ld official-i13-p13 0.51857 Mbps 27.745 dB LPIPS 0.39678
+ld official-i14-p14 0.54769 Mbps 27.884 dB LPIPS 0.39062
+ld official-i15-p15 0.59486 Mbps 28.090 dB LPIPS 0.38261
+ld official-i16-p16 0.64218 Mbps 28.282 dB LPIPS 0.37471
+ld official-i17-p17 0.67444 Mbps 28.411 dB LPIPS 0.36944
+ld official-i18-p18 0.72799 Mbps 28.608 dB LPIPS 0.36150
+ld official-i19-p19 0.77224 Mbps 28.757 dB LPIPS 0.35601
+ld official-i20-p20 0.82556 Mbps 28.934 dB LPIPS 0.34908
+ld official-i21-p21 0.88589 Mbps 29.121 dB LPIPS 0.34129
+ld official-i22-p22 0.95079 Mbps 29.307 dB LPIPS 0.33435
+ld official-i23-p23 1.01537 Mbps 29.476 dB LPIPS 0.32717
+ld official-i24-p24 1.08169 Mbps 29.650 dB LPIPS 0.32071
+ld official-i25-p25 1.15827 Mbps 29.836 dB LPIPS 0.31388
+ld official-i26-p26 1.24292 Mbps 30.026 dB LPIPS 0.30623
+ld official-i27-p27 1.32690 Mbps 30.209 dB LPIPS 0.29927
+ld official-i28-p28 1.42444 Mbps 30.409 dB LPIPS 0.29127
+ld official-i29-p29 1.53049 Mbps 30.609 dB LPIPS 0.28455
+ld official-i30-p30 1.65409 Mbps 30.826 dB LPIPS 0.27615
+ld official-i31-p31 1.75435 Mbps 30.996 dB LPIPS 0.27056
+ld official-i32-p32 1.89178 Mbps 31.219 dB LPIPS 0.26291
+ld official-i33-p33 2.02729 Mbps 31.420 dB LPIPS 0.25579
+ld official-i34-p34 2.16265 Mbps 31.608 dB LPIPS 0.25003
+ld official-i35-p35 2.30207 Mbps 31.795 dB LPIPS 0.24393
+ld official-i36-p36 2.45943 Mbps 31.999 dB LPIPS 0.23761
+ld official-i37-p37 2.63613 Mbps 32.211 dB LPIPS 0.23132
+ld official-i38-p38 2.82794 Mbps 32.430 dB LPIPS 0.22443
+ld official-i39-p39 3.01697 Mbps 32.632 dB LPIPS 0.21867
+ld official-i40-p40 3.21082 Mbps 32.828 dB LPIPS 0.21334
+ld official-i41-p41 3.44821 Mbps 33.056 dB LPIPS 0.20673
+ld official-i42-p42 3.67487 Mbps 33.259 dB LPIPS 0.20145
+ld official-i43-p43 3.90047 Mbps 33.453 dB LPIPS 0.19606
+ld official-i44-p44 4.17318 Mbps 33.676 dB LPIPS 0.19044
+ld official-i45-p45 4.43666 Mbps 33.879 dB LPIPS 0.18541
+ld official-i46-p46 4.73096 Mbps 34.093 dB LPIPS 0.17999
+ld official-i47-p47 5.00638 Mbps 34.284 dB LPIPS 0.17553
+ld official-i48-p48 5.34836 Mbps 34.510 dB LPIPS 0.16991
+ld official-i49-p49 5.66790 Mbps 34.709 dB LPIPS 0.16529
+ld official-i50-p50 6.01605 Mbps 34.914 dB LPIPS 0.16054
+ld official-i51-p51 6.38882 Mbps 35.122 dB LPIPS 0.15569
+ld official-i52-p52 6.78436 Mbps 35.333 dB LPIPS 0.15066
+ld official-i53-p53 7.21387 Mbps 35.547 dB LPIPS 0.14581
+ld official-i54-p54 7.63472 Mbps 35.749 dB LPIPS 0.14123
+ld official-i55-p55 8.10358 Mbps 35.960 dB LPIPS 0.13645
+ld official-i56-p56 8.60811 Mbps 36.176 dB LPIPS 0.13163
+ld official-i57-p57 9.09536 Mbps 36.372 dB LPIPS 0.12751
+ld official-i58-p58 9.60532 Mbps 36.568 dB LPIPS 0.12343
+ld official-i59-p59 10.16841 Mbps 36.774 dB LPIPS 0.11901
+ld official-i60-p60 10.72701 Mbps 36.965 dB LPIPS 0.11521
+ld official-i61-p61 11.30860 Mbps 37.155 dB LPIPS 0.11125
+ld official-i62-p62 11.89982 Mbps 37.338 dB LPIPS 0.10764
+ld official-i63-p63 12.49135 Mbps 37.510 dB LPIPS 0.10419
+ld matched-i00-p00 DAVIS2017:car-turn
+ld matched-i01-p01 DAVIS2017:car-turn
+ld matched-i02-p02 DAVIS2017:car-turn
+ld matched-i03-p03 DAVIS2017:car-turn
+ld matched-i04-p04 DAVIS2017:car-turn
+ld matched-i05-p05 DAVIS2017:car-turn
+ld matched-i06-p06 DAVIS2017:car-turn
+ld matched-i07-p07 DAVIS2017:car-turn
+ld matched-i08-p08 DAVIS2017:car-turn
+ld matched-i09-p09 DAVIS2017:car-turn
+ld matched-i10-p10 DAVIS2017:car-turn
+ld matched-i11-p11 DAVIS2017:car-turn
+ld matched-i12-p12 DAVIS2017:car-turn
+ld matched-i13-p13 DAVIS2017:car-turn
+ld matched-i14-p14 DAVIS2017:car-turn
+ld matched-i15-p15 DAVIS2017:car-turn
+ld matched-i16-p16 DAVIS2017:car-turn
+ld matched-i17-p17 DAVIS2017:car-turn
+ld matched-i18-p18 DAVIS2017:car-turn
+ld matched-i19-p19 DAVIS2017:car-turn
+ld matched-i20-p20 DAVIS2017:car-turn
+ld matched-i21-p21 DAVIS2017:car-turn
+ld matched-i22-p22 DAVIS2017:car-turn
+ld matched-i23-p23 DAVIS2017:car-turn
+ld matched-i24-p24 DAVIS2017:car-turn
+ld matched-i25-p25 DAVIS2017:car-turn
+ld matched-i26-p26 DAVIS2017:car-turn
+ld matched-i27-p27 DAVIS2017:car-turn
+ld matched-i28-p28 DAVIS2017:car-turn
+ld matched-i29-p29 DAVIS2017:car-turn
+ld matched-i30-p30 DAVIS2017:car-turn
+ld matched-i31-p31 DAVIS2017:car-turn
+ld matched-i32-p32 DAVIS2017:car-turn
+ld matched-i33-p33 DAVIS2017:car-turn
+ld matched-i34-p34 DAVIS2017:car-turn
+ld matched-i35-p35 DAVIS2017:car-turn
+ld matched-i36-p36 DAVIS2017:car-turn
+ld matched-i37-p37 DAVIS2017:car-turn
+ld matched-i38-p38 DAVIS2017:car-turn
+ld matched-i39-p39 DAVIS2017:car-turn
+ld matched-i40-p40 DAVIS2017:car-turn
+ld matched-i41-p41 DAVIS2017:car-turn
+ld matched-i42-p42 DAVIS2017:car-turn
+ld matched-i43-p43 DAVIS2017:car-turn
+ld matched-i44-p44 DAVIS2017:car-turn
+ld matched-i45-p45 DAVIS2017:car-turn
+ld matched-i46-p46 DAVIS2017:car-turn
+ld matched-i47-p47 DAVIS2017:car-turn
+ld matched-i48-p48 DAVIS2017:car-turn
+ld matched-i49-p49 DAVIS2017:car-turn
+ld matched-i50-p50 DAVIS2017:car-turn
+ld matched-i51-p51 DAVIS2017:car-turn
+ld matched-i52-p52 DAVIS2017:car-turn
+ld matched-i53-p53 DAVIS2017:car-turn
+ld matched-i54-p54 DAVIS2017:car-turn
+ld matched-i55-p55 DAVIS2017:car-turn
+ld matched-i56-p56 DAVIS2017:car-turn
+ld matched-i57-p57 DAVIS2017:car-turn
+ld matched-i58-p58 DAVIS2017:car-turn
+ld matched-i59-p59 DAVIS2017:car-turn
+ld matched-i60-p60 DAVIS2017:car-turn
+ld matched-i61-p61 DAVIS2017:car-turn
+ld matched-i62-p62 DAVIS2017:car-turn
+ld matched-i63-p63 DAVIS2017:car-turn
+ld matched-i00-p00 DAVIS2017:surf
+ld matched-i01-p01 DAVIS2017:surf
+ld matched-i02-p02 DAVIS2017:surf
+ld matched-i03-p03 DAVIS2017:surf
+ld matched-i04-p04 DAVIS2017:surf
+ld matched-i05-p05 DAVIS2017:surf
+ld matched-i06-p06 DAVIS2017:surf
+ld matched-i07-p07 DAVIS2017:surf
+ld matched-i08-p08 DAVIS2017:surf
+ld matched-i09-p09 DAVIS2017:surf
+ld matched-i10-p10 DAVIS2017:surf
+ld matched-i11-p11 DAVIS2017:surf
+ld matched-i12-p12 DAVIS2017:surf
+ld matched-i13-p13 DAVIS2017:surf
+ld matched-i14-p14 DAVIS2017:surf
+ld matched-i15-p15 DAVIS2017:surf
+ld matched-i16-p16 DAVIS2017:surf
+ld matched-i17-p17 DAVIS2017:surf
+ld matched-i18-p18 DAVIS2017:surf
+ld matched-i19-p19 DAVIS2017:surf
+ld matched-i20-p20 DAVIS2017:surf
+ld matched-i21-p21 DAVIS2017:surf
+ld matched-i22-p22 DAVIS2017:surf
+ld matched-i23-p23 DAVIS2017:surf
+ld matched-i24-p24 DAVIS2017:surf
+ld matched-i25-p25 DAVIS2017:surf
+ld matched-i26-p26 DAVIS2017:surf
+ld matched-i27-p27 DAVIS2017:surf
+ld matched-i28-p28 DAVIS2017:surf
+ld matched-i29-p29 DAVIS2017:surf
+ld matched-i30-p30 DAVIS2017:surf
+ld matched-i31-p31 DAVIS2017:surf
+ld matched-i32-p32 DAVIS2017:surf
+ld matched-i33-p33 DAVIS2017:surf
+ld matched-i34-p34 DAVIS2017:surf
+ld matched-i35-p35 DAVIS2017:surf
+ld matched-i36-p36 DAVIS2017:surf
+ld matched-i37-p37 DAVIS2017:surf
+ld matched-i38-p38 DAVIS2017:surf
+ld matched-i39-p39 DAVIS2017:surf
+ld matched-i40-p40 DAVIS2017:surf
+ld matched-i41-p41 DAVIS2017:surf
+ld matched-i42-p42 DAVIS2017:surf
+ld matched-i43-p43 DAVIS2017:surf
+ld matched-i44-p44 DAVIS2017:surf
+ld matched-i45-p45 DAVIS2017:surf
+ld matched-i46-p46 DAVIS2017:surf
+ld matched-i47-p47 DAVIS2017:surf
+ld matched-i48-p48 DAVIS2017:surf
+ld matched-i49-p49 DAVIS2017:surf
+ld matched-i50-p50 DAVIS2017:surf
+ld matched-i51-p51 DAVIS2017:surf
+ld matched-i52-p52 DAVIS2017:surf
+ld matched-i53-p53 DAVIS2017:surf
+ld matched-i54-p54 DAVIS2017:surf
+ld matched-i55-p55 DAVIS2017:surf
+ld matched-i56-p56 DAVIS2017:surf
+ld matched-i57-p57 DAVIS2017:surf
+ld matched-i58-p58 DAVIS2017:surf
+ld matched-i59-p59 DAVIS2017:surf
+ld matched-i60-p60 DAVIS2017:surf
+ld matched-i61-p61 DAVIS2017:surf
+ld matched-i62-p62 DAVIS2017:surf
+ld matched-i63-p63 DAVIS2017:surf
+ld matched-i00-p00 DAVIS2017:train
+ld matched-i01-p01 DAVIS2017:train
+ld matched-i02-p02 DAVIS2017:train
+ld matched-i03-p03 DAVIS2017:train
+ld matched-i04-p04 DAVIS2017:train
+ld matched-i05-p05 DAVIS2017:train
+ld matched-i06-p06 DAVIS2017:train
+ld matched-i07-p07 DAVIS2017:train
+ld matched-i08-p08 DAVIS2017:train
+ld matched-i09-p09 DAVIS2017:train
+ld matched-i10-p10 DAVIS2017:train
+ld matched-i11-p11 DAVIS2017:train
+ld matched-i12-p12 DAVIS2017:train
+ld matched-i13-p13 DAVIS2017:train
+ld matched-i14-p14 DAVIS2017:train
+ld matched-i15-p15 DAVIS2017:train
+ld matched-i16-p16 DAVIS2017:train
+ld matched-i17-p17 DAVIS2017:train
+ld matched-i18-p18 DAVIS2017:train
+ld matched-i19-p19 DAVIS2017:train
+ld matched-i20-p20 DAVIS2017:train
+ld matched-i21-p21 DAVIS2017:train
+ld matched-i22-p22 DAVIS2017:train
+ld matched-i23-p23 DAVIS2017:train
+ld matched-i24-p24 DAVIS2017:train
+ld matched-i25-p25 DAVIS2017:train
+ld matched-i26-p26 DAVIS2017:train
+ld matched-i27-p27 DAVIS2017:train
+ld matched-i28-p28 DAVIS2017:train
+ld matched-i29-p29 DAVIS2017:train
+ld matched-i30-p30 DAVIS2017:train
+ld matched-i31-p31 DAVIS2017:train
+ld matched-i32-p32 DAVIS2017:train
+ld matched-i33-p33 DAVIS2017:train
+ld matched-i34-p34 DAVIS2017:train
+ld matched-i35-p35 DAVIS2017:train
+ld matched-i36-p36 DAVIS2017:train
+ld matched-i37-p37 DAVIS2017:train
+ld matched-i38-p38 DAVIS2017:train
+ld matched-i39-p39 DAVIS2017:train
+ld matched-i40-p40 DAVIS2017:train
+ld matched-i41-p41 DAVIS2017:train
+ld matched-i42-p42 DAVIS2017:train
+ld matched-i43-p43 DAVIS2017:train
+ld matched-i44-p44 DAVIS2017:train
+ld matched-i45-p45 DAVIS2017:train
+ld matched-i46-p46 DAVIS2017:train
+ld matched-i47-p47 DAVIS2017:train
+ld matched-i48-p48 DAVIS2017:train
+ld matched-i49-p49 DAVIS2017:train
+ld matched-i50-p50 DAVIS2017:train
+ld matched-i51-p51 DAVIS2017:train
+ld matched-i52-p52 DAVIS2017:train
+ld matched-i53-p53 DAVIS2017:train
+ld matched-i54-p54 DAVIS2017:train
+ld matched-i55-p55 DAVIS2017:train
+ld matched-i56-p56 DAVIS2017:train
+ld matched-i57-p57 DAVIS2017:train
+ld matched-i58-p58 DAVIS2017:train
+ld matched-i59-p59 DAVIS2017:train
+ld matched-i60-p60 DAVIS2017:train
+ld matched-i61-p61 DAVIS2017:train
+ld matched-i62-p62 DAVIS2017:train
+ld matched-i63-p63 DAVIS2017:train
+ld matched-i00-p00 DAVIS2017:mallard-fly
+ld matched-i01-p01 DAVIS2017:mallard-fly
+ld matched-i02-p02 DAVIS2017:mallard-fly
+ld matched-i03-p03 DAVIS2017:mallard-fly
+ld matched-i04-p04 DAVIS2017:mallard-fly
+ld matched-i05-p05 DAVIS2017:mallard-fly
+ld matched-i06-p06 DAVIS2017:mallard-fly
+ld matched-i07-p07 DAVIS2017:mallard-fly
+ld matched-i08-p08 DAVIS2017:mallard-fly
+ld matched-i09-p09 DAVIS2017:mallard-fly
+ld matched-i10-p10 DAVIS2017:mallard-fly
+ld matched-i11-p11 DAVIS2017:mallard-fly
+ld matched-i12-p12 DAVIS2017:mallard-fly
+ld matched-i13-p13 DAVIS2017:mallard-fly
+ld matched-i14-p14 DAVIS2017:mallard-fly
+ld matched-i15-p15 DAVIS2017:mallard-fly
+ld matched-i16-p16 DAVIS2017:mallard-fly
+ld matched-i17-p17 DAVIS2017:mallard-fly
+ld matched-i18-p18 DAVIS2017:mallard-fly
+ld matched-i19-p19 DAVIS2017:mallard-fly
+ld matched-i20-p20 DAVIS2017:mallard-fly
+ld matched-i21-p21 DAVIS2017:mallard-fly
+ld matched-i22-p22 DAVIS2017:mallard-fly
+ld matched-i23-p23 DAVIS2017:mallard-fly
+ld matched-i24-p24 DAVIS2017:mallard-fly
+ld matched-i25-p25 DAVIS2017:mallard-fly
+ld matched-i26-p26 DAVIS2017:mallard-fly
+ld matched-i27-p27 DAVIS2017:mallard-fly
+ld matched-i28-p28 DAVIS2017:mallard-fly
+ld matched-i29-p29 DAVIS2017:mallard-fly
+ld matched-i30-p30 DAVIS2017:mallard-fly
+ld matched-i31-p31 DAVIS2017:mallard-fly
+ld matched-i32-p32 DAVIS2017:mallard-fly
+ld matched-i33-p33 DAVIS2017:mallard-fly
+ld matched-i34-p34 DAVIS2017:mallard-fly
+ld matched-i35-p35 DAVIS2017:mallard-fly
+ld matched-i36-p36 DAVIS2017:mallard-fly
+ld matched-i37-p37 DAVIS2017:mallard-fly
+ld matched-i38-p38 DAVIS2017:mallard-fly
+ld matched-i39-p39 DAVIS2017:mallard-fly
+ld matched-i40-p40 DAVIS2017:mallard-fly
+ld matched-i41-p41 DAVIS2017:mallard-fly
+ld matched-i42-p42 DAVIS2017:mallard-fly
+ld matched-i43-p43 DAVIS2017:mallard-fly
+ld matched-i44-p44 DAVIS2017:mallard-fly
+ld matched-i45-p45 DAVIS2017:mallard-fly
+ld matched-i46-p46 DAVIS2017:mallard-fly
+ld matched-i47-p47 DAVIS2017:mallard-fly
+ld matched-i48-p48 DAVIS2017:mallard-fly
+ld matched-i49-p49 DAVIS2017:mallard-fly
+ld matched-i50-p50 DAVIS2017:mallard-fly
+ld matched-i51-p51 DAVIS2017:mallard-fly
+ld matched-i52-p52 DAVIS2017:mallard-fly
+ld matched-i53-p53 DAVIS2017:mallard-fly
+ld matched-i54-p54 DAVIS2017:mallard-fly
+ld matched-i55-p55 DAVIS2017:mallard-fly
+ld matched-i56-p56 DAVIS2017:mallard-fly
+ld matched-i57-p57 DAVIS2017:mallard-fly
+ld matched-i58-p58 DAVIS2017:mallard-fly
+ld matched-i59-p59 DAVIS2017:mallard-fly
+ld matched-i60-p60 DAVIS2017:mallard-fly
+ld matched-i61-p61 DAVIS2017:mallard-fly
+ld matched-i62-p62 DAVIS2017:mallard-fly
+ld matched-i63-p63 DAVIS2017:mallard-fly
+ld matched-i00-p00 0.24243 Mbps 25.742 dB LPIPS 0.48218
+ld matched-i01-p01 0.25661 Mbps 25.882 dB LPIPS 0.47477
+ld matched-i02-p02 0.27684 Mbps 26.087 dB LPIPS 0.46648
+ld matched-i03-p03 0.28976 Mbps 26.195 dB LPIPS 0.46138
+ld matched-i04-p04 0.30940 Mbps 26.371 dB LPIPS 0.45491
+ld matched-i05-p05 0.32690 Mbps 26.512 dB LPIPS 0.44902
+ld matched-i06-p06 0.34507 Mbps 26.652 dB LPIPS 0.44283
+ld matched-i07-p07 0.37181 Mbps 26.837 dB LPIPS 0.43437
+ld matched-i08-p08 0.39431 Mbps 26.993 dB LPIPS 0.42750
+ld matched-i09-p09 0.41555 Mbps 27.120 dB LPIPS 0.42236
+ld matched-i10-p10 0.44359 Mbps 27.293 dB LPIPS 0.41493
+ld matched-i11-p11 0.46994 Mbps 27.436 dB LPIPS 0.40911
+ld matched-i12-p12 0.50423 Mbps 27.616 dB LPIPS 0.40086
+ld matched-i13-p13 0.53728 Mbps 27.775 dB LPIPS 0.39489
+ld matched-i14-p14 0.56637 Mbps 27.911 dB LPIPS 0.38873
+ld matched-i15-p15 0.61400 Mbps 28.116 dB LPIPS 0.38056
+ld matched-i16-p16 0.66140 Mbps 28.312 dB LPIPS 0.37273
+ld matched-i17-p17 0.69576 Mbps 28.442 dB LPIPS 0.36790
+ld matched-i18-p18 0.74769 Mbps 28.639 dB LPIPS 0.35952
+ld matched-i19-p19 0.79260 Mbps 28.792 dB LPIPS 0.35366
+ld matched-i20-p20 0.84737 Mbps 28.966 dB LPIPS 0.34695
+ld matched-i21-p21 0.90827 Mbps 29.158 dB LPIPS 0.33956
+ld matched-i22-p22 0.97306 Mbps 29.342 dB LPIPS 0.33184
+ld matched-i23-p23 1.04042 Mbps 29.522 dB LPIPS 0.32478
+ld matched-i24-p24 1.10570 Mbps 29.689 dB LPIPS 0.31810
+ld matched-i25-p25 1.18547 Mbps 29.877 dB LPIPS 0.31152
+ld matched-i26-p26 1.27058 Mbps 30.067 dB LPIPS 0.30373
+ld matched-i27-p27 1.35404 Mbps 30.248 dB LPIPS 0.29721
+ld matched-i28-p28 1.45242 Mbps 30.443 dB LPIPS 0.28928
+ld matched-i29-p29 1.56067 Mbps 30.649 dB LPIPS 0.28220
+ld matched-i30-p30 1.68532 Mbps 30.863 dB LPIPS 0.27424
+ld matched-i31-p31 1.78778 Mbps 31.040 dB LPIPS 0.26825
+ld matched-i32-p32 1.92471 Mbps 31.258 dB LPIPS 0.26074
+ld matched-i33-p33 2.06156 Mbps 31.459 dB LPIPS 0.25380
+ld matched-i34-p34 2.19552 Mbps 31.648 dB LPIPS 0.24771
+ld matched-i35-p35 2.33850 Mbps 31.834 dB LPIPS 0.24170
+ld matched-i36-p36 2.49737 Mbps 32.039 dB LPIPS 0.23546
+ld matched-i37-p37 2.67438 Mbps 32.251 dB LPIPS 0.22911
+ld matched-i38-p38 2.86666 Mbps 32.467 dB LPIPS 0.22253
+ld matched-i39-p39 3.05719 Mbps 32.669 dB LPIPS 0.21668
+ld matched-i40-p40 3.25344 Mbps 32.866 dB LPIPS 0.21126
+ld matched-i41-p41 3.48824 Mbps 33.089 dB LPIPS 0.20490
+ld matched-i42-p42 3.71965 Mbps 33.295 dB LPIPS 0.19956
+ld matched-i43-p43 3.94406 Mbps 33.489 dB LPIPS 0.19439
+ld matched-i44-p44 4.22025 Mbps 33.709 dB LPIPS 0.18879
+ld matched-i45-p45 4.48015 Mbps 33.908 dB LPIPS 0.18396
+ld matched-i46-p46 4.77548 Mbps 34.122 dB LPIPS 0.17852
+ld matched-i47-p47 5.05261 Mbps 34.314 dB LPIPS 0.17409
+ld matched-i48-p48 5.39349 Mbps 34.537 dB LPIPS 0.16869
+ld matched-i49-p49 5.71713 Mbps 34.735 dB LPIPS 0.16406
+ld matched-i50-p50 6.06120 Mbps 34.940 dB LPIPS 0.15938
+ld matched-i51-p51 6.43380 Mbps 35.145 dB LPIPS 0.15466
+ld matched-i52-p52 6.83451 Mbps 35.359 dB LPIPS 0.14949
+ld matched-i53-p53 7.26149 Mbps 35.570 dB LPIPS 0.14467
+ld matched-i54-p54 7.68398 Mbps 35.771 dB LPIPS 0.14007
+ld matched-i55-p55 8.15322 Mbps 35.980 dB LPIPS 0.13550
+ld matched-i56-p56 8.65613 Mbps 36.194 dB LPIPS 0.13077
+ld matched-i57-p57 9.14419 Mbps 36.390 dB LPIPS 0.12667
+ld matched-i58-p58 9.65399 Mbps 36.584 dB LPIPS 0.12254
+ld matched-i59-p59 10.21697 Mbps 36.790 dB LPIPS 0.11821
+ld matched-i60-p60 10.77845 Mbps 36.981 dB LPIPS 0.11446
+ld matched-i61-p61 11.35663 Mbps 37.169 dB LPIPS 0.11068
+ld matched-i62-p62 11.95112 Mbps 37.351 dB LPIPS 0.10705
+ld matched-i63-p63 12.54015 Mbps 37.523 dB LPIPS 0.10371
+htl official-i00-p00 DAVIS2017:car-turn
+htl official-i01-p01 DAVIS2017:car-turn
+htl official-i02-p02 DAVIS2017:car-turn
+htl official-i03-p03 DAVIS2017:car-turn
+htl official-i04-p04 DAVIS2017:car-turn
+htl official-i05-p05 DAVIS2017:car-turn
+htl official-i06-p06 DAVIS2017:car-turn
+htl official-i07-p07 DAVIS2017:car-turn
+htl official-i08-p08 DAVIS2017:car-turn
+htl official-i09-p09 DAVIS2017:car-turn
+htl official-i10-p10 DAVIS2017:car-turn
+htl official-i11-p11 DAVIS2017:car-turn
+htl official-i12-p12 DAVIS2017:car-turn
+htl official-i13-p13 DAVIS2017:car-turn
+htl official-i14-p14 DAVIS2017:car-turn
+htl official-i15-p15 DAVIS2017:car-turn
+htl official-i16-p16 DAVIS2017:car-turn
+htl official-i17-p17 DAVIS2017:car-turn
+htl official-i18-p18 DAVIS2017:car-turn
+htl official-i19-p19 DAVIS2017:car-turn
+htl official-i20-p20 DAVIS2017:car-turn
+htl official-i21-p21 DAVIS2017:car-turn
+htl official-i22-p22 DAVIS2017:car-turn
+htl official-i23-p23 DAVIS2017:car-turn
+htl official-i24-p24 DAVIS2017:car-turn
+htl official-i25-p25 DAVIS2017:car-turn
+htl official-i26-p26 DAVIS2017:car-turn
+htl official-i27-p27 DAVIS2017:car-turn
+htl official-i28-p28 DAVIS2017:car-turn
+htl official-i29-p29 DAVIS2017:car-turn
+htl official-i30-p30 DAVIS2017:car-turn
+htl official-i31-p31 DAVIS2017:car-turn
+htl official-i32-p32 DAVIS2017:car-turn
+htl official-i33-p33 DAVIS2017:car-turn
+htl official-i34-p34 DAVIS2017:car-turn
+htl official-i35-p35 DAVIS2017:car-turn
+htl official-i36-p36 DAVIS2017:car-turn
+htl official-i37-p37 DAVIS2017:car-turn
+htl official-i38-p38 DAVIS2017:car-turn
+htl official-i39-p39 DAVIS2017:car-turn
+htl official-i40-p40 DAVIS2017:car-turn
+htl official-i41-p41 DAVIS2017:car-turn
+htl official-i42-p42 DAVIS2017:car-turn
+htl official-i43-p43 DAVIS2017:car-turn
+htl official-i44-p44 DAVIS2017:car-turn
+htl official-i45-p45 DAVIS2017:car-turn
+htl official-i46-p46 DAVIS2017:car-turn
+htl official-i47-p47 DAVIS2017:car-turn
+htl official-i48-p48 DAVIS2017:car-turn
+htl official-i49-p49 DAVIS2017:car-turn
+htl official-i50-p50 DAVIS2017:car-turn
+htl official-i51-p51 DAVIS2017:car-turn
+htl official-i52-p52 DAVIS2017:car-turn
+htl official-i53-p53 DAVIS2017:car-turn
+htl official-i54-p54 DAVIS2017:car-turn
+htl official-i55-p55 DAVIS2017:car-turn
+htl official-i56-p56 DAVIS2017:car-turn
+htl official-i57-p57 DAVIS2017:car-turn
+htl official-i58-p58 DAVIS2017:car-turn
+htl official-i59-p59 DAVIS2017:car-turn
+htl official-i60-p60 DAVIS2017:car-turn
+htl official-i61-p61 DAVIS2017:car-turn
+htl official-i62-p62 DAVIS2017:car-turn
+htl official-i63-p63 DAVIS2017:car-turn
+htl official-i00-p00 DAVIS2017:surf
+htl official-i01-p01 DAVIS2017:surf
+htl official-i02-p02 DAVIS2017:surf
+htl official-i03-p03 DAVIS2017:surf
+htl official-i04-p04 DAVIS2017:surf
+htl official-i05-p05 DAVIS2017:surf
+htl official-i06-p06 DAVIS2017:surf
+htl official-i07-p07 DAVIS2017:surf
+htl official-i08-p08 DAVIS2017:surf
+htl official-i09-p09 DAVIS2017:surf
+htl official-i10-p10 DAVIS2017:surf
+htl official-i11-p11 DAVIS2017:surf
+htl official-i12-p12 DAVIS2017:surf
+htl official-i13-p13 DAVIS2017:surf
+htl official-i14-p14 DAVIS2017:surf
+htl official-i15-p15 DAVIS2017:surf
+htl official-i16-p16 DAVIS2017:surf
+htl official-i17-p17 DAVIS2017:surf
+htl official-i18-p18 DAVIS2017:surf
+htl official-i19-p19 DAVIS2017:surf
+htl official-i20-p20 DAVIS2017:surf
+htl official-i21-p21 DAVIS2017:surf
+htl official-i22-p22 DAVIS2017:surf
+htl official-i23-p23 DAVIS2017:surf
+htl official-i24-p24 DAVIS2017:surf
+htl official-i25-p25 DAVIS2017:surf
+htl official-i26-p26 DAVIS2017:surf
+htl official-i27-p27 DAVIS2017:surf
+htl official-i28-p28 DAVIS2017:surf
+htl official-i29-p29 DAVIS2017:surf
+htl official-i30-p30 DAVIS2017:surf
+htl official-i31-p31 DAVIS2017:surf
+htl official-i32-p32 DAVIS2017:surf
+htl official-i33-p33 DAVIS2017:surf
+htl official-i34-p34 DAVIS2017:surf
+htl official-i35-p35 DAVIS2017:surf
+htl official-i36-p36 DAVIS2017:surf
+htl official-i37-p37 DAVIS2017:surf
+htl official-i38-p38 DAVIS2017:surf
+htl official-i39-p39 DAVIS2017:surf
+htl official-i40-p40 DAVIS2017:surf
+htl official-i41-p41 DAVIS2017:surf
+htl official-i42-p42 DAVIS2017:surf
+htl official-i43-p43 DAVIS2017:surf
+htl official-i44-p44 DAVIS2017:surf
+htl official-i45-p45 DAVIS2017:surf
+htl official-i46-p46 DAVIS2017:surf
+htl official-i47-p47 DAVIS2017:surf
+htl official-i48-p48 DAVIS2017:surf
+htl official-i49-p49 DAVIS2017:surf
+htl official-i50-p50 DAVIS2017:surf
+htl official-i51-p51 DAVIS2017:surf
+htl official-i52-p52 DAVIS2017:surf
+htl official-i53-p53 DAVIS2017:surf
+htl official-i54-p54 DAVIS2017:surf
+htl official-i55-p55 DAVIS2017:surf
+htl official-i56-p56 DAVIS2017:surf
+htl official-i57-p57 DAVIS2017:surf
+htl official-i58-p58 DAVIS2017:surf
+htl official-i59-p59 DAVIS2017:surf
+htl official-i60-p60 DAVIS2017:surf
+htl official-i61-p61 DAVIS2017:surf
+htl official-i62-p62 DAVIS2017:surf
+htl official-i63-p63 DAVIS2017:surf
+htl official-i00-p00 DAVIS2017:train
+htl official-i01-p01 DAVIS2017:train
+htl official-i02-p02 DAVIS2017:train
+htl official-i03-p03 DAVIS2017:train
+htl official-i04-p04 DAVIS2017:train
+htl official-i05-p05 DAVIS2017:train
+htl official-i06-p06 DAVIS2017:train
+htl official-i07-p07 DAVIS2017:train
+htl official-i08-p08 DAVIS2017:train
+htl official-i09-p09 DAVIS2017:train
+htl official-i10-p10 DAVIS2017:train
+htl official-i11-p11 DAVIS2017:train
+htl official-i12-p12 DAVIS2017:train
+htl official-i13-p13 DAVIS2017:train
+htl official-i14-p14 DAVIS2017:train
+htl official-i15-p15 DAVIS2017:train
+htl official-i16-p16 DAVIS2017:train
+htl official-i17-p17 DAVIS2017:train
+htl official-i18-p18 DAVIS2017:train
+htl official-i19-p19 DAVIS2017:train
+htl official-i20-p20 DAVIS2017:train
+htl official-i21-p21 DAVIS2017:train
+htl official-i22-p22 DAVIS2017:train
+htl official-i23-p23 DAVIS2017:train
+htl official-i24-p24 DAVIS2017:train
+htl official-i25-p25 DAVIS2017:train
+htl official-i26-p26 DAVIS2017:train
+htl official-i27-p27 DAVIS2017:train
+htl official-i28-p28 DAVIS2017:train
+htl official-i29-p29 DAVIS2017:train
+htl official-i30-p30 DAVIS2017:train
+htl official-i31-p31 DAVIS2017:train
+htl official-i32-p32 DAVIS2017:train
+htl official-i33-p33 DAVIS2017:train
+htl official-i34-p34 DAVIS2017:train
+htl official-i35-p35 DAVIS2017:train
+htl official-i36-p36 DAVIS2017:train
+htl official-i37-p37 DAVIS2017:train
+htl official-i38-p38 DAVIS2017:train
+htl official-i39-p39 DAVIS2017:train
+htl official-i40-p40 DAVIS2017:train
+htl official-i41-p41 DAVIS2017:train
+htl official-i42-p42 DAVIS2017:train
+htl official-i43-p43 DAVIS2017:train
+htl official-i44-p44 DAVIS2017:train
+htl official-i45-p45 DAVIS2017:train
+htl official-i46-p46 DAVIS2017:train
+htl official-i47-p47 DAVIS2017:train
+htl official-i48-p48 DAVIS2017:train
+htl official-i49-p49 DAVIS2017:train
+htl official-i50-p50 DAVIS2017:train
+htl official-i51-p51 DAVIS2017:train
+htl official-i52-p52 DAVIS2017:train
+htl official-i53-p53 DAVIS2017:train
+htl official-i54-p54 DAVIS2017:train
+htl official-i55-p55 DAVIS2017:train
+htl official-i56-p56 DAVIS2017:train
+htl official-i57-p57 DAVIS2017:train
+htl official-i58-p58 DAVIS2017:train
+htl official-i59-p59 DAVIS2017:train
+htl official-i60-p60 DAVIS2017:train
+htl official-i61-p61 DAVIS2017:train
+htl official-i62-p62 DAVIS2017:train
+htl official-i63-p63 DAVIS2017:train
+htl official-i00-p00 DAVIS2017:mallard-fly
+htl official-i01-p01 DAVIS2017:mallard-fly
+htl official-i02-p02 DAVIS2017:mallard-fly
+htl official-i03-p03 DAVIS2017:mallard-fly
+htl official-i04-p04 DAVIS2017:mallard-fly
+htl official-i05-p05 DAVIS2017:mallard-fly
+htl official-i06-p06 DAVIS2017:mallard-fly
+htl official-i07-p07 DAVIS2017:mallard-fly
+htl official-i08-p08 DAVIS2017:mallard-fly
+htl official-i09-p09 DAVIS2017:mallard-fly
+htl official-i10-p10 DAVIS2017:mallard-fly
+htl official-i11-p11 DAVIS2017:mallard-fly
+htl official-i12-p12 DAVIS2017:mallard-fly
+htl official-i13-p13 DAVIS2017:mallard-fly
+htl official-i14-p14 DAVIS2017:mallard-fly
+htl official-i15-p15 DAVIS2017:mallard-fly
+htl official-i16-p16 DAVIS2017:mallard-fly
+htl official-i17-p17 DAVIS2017:mallard-fly
+htl official-i18-p18 DAVIS2017:mallard-fly
+htl official-i19-p19 DAVIS2017:mallard-fly
+htl official-i20-p20 DAVIS2017:mallard-fly
+htl official-i21-p21 DAVIS2017:mallard-fly
+htl official-i22-p22 DAVIS2017:mallard-fly
+htl official-i23-p23 DAVIS2017:mallard-fly
+htl official-i24-p24 DAVIS2017:mallard-fly
+htl official-i25-p25 DAVIS2017:mallard-fly
+htl official-i26-p26 DAVIS2017:mallard-fly
+htl official-i27-p27 DAVIS2017:mallard-fly
+htl official-i28-p28 DAVIS2017:mallard-fly
+htl official-i29-p29 DAVIS2017:mallard-fly
+htl official-i30-p30 DAVIS2017:mallard-fly
+htl official-i31-p31 DAVIS2017:mallard-fly
+htl official-i32-p32 DAVIS2017:mallard-fly
+htl official-i33-p33 DAVIS2017:mallard-fly
+htl official-i34-p34 DAVIS2017:mallard-fly
+htl official-i35-p35 DAVIS2017:mallard-fly
+htl official-i36-p36 DAVIS2017:mallard-fly
+htl official-i37-p37 DAVIS2017:mallard-fly
+htl official-i38-p38 DAVIS2017:mallard-fly
+htl official-i39-p39 DAVIS2017:mallard-fly
+htl official-i40-p40 DAVIS2017:mallard-fly
+htl official-i41-p41 DAVIS2017:mallard-fly
+htl official-i42-p42 DAVIS2017:mallard-fly
+htl official-i43-p43 DAVIS2017:mallard-fly
+htl official-i44-p44 DAVIS2017:mallard-fly
+htl official-i45-p45 DAVIS2017:mallard-fly
+htl official-i46-p46 DAVIS2017:mallard-fly
+htl official-i47-p47 DAVIS2017:mallard-fly
+htl official-i48-p48 DAVIS2017:mallard-fly
+htl official-i49-p49 DAVIS2017:mallard-fly
+htl official-i50-p50 DAVIS2017:mallard-fly
+htl official-i51-p51 DAVIS2017:mallard-fly
+htl official-i52-p52 DAVIS2017:mallard-fly
+htl official-i53-p53 DAVIS2017:mallard-fly
+htl official-i54-p54 DAVIS2017:mallard-fly
+htl official-i55-p55 DAVIS2017:mallard-fly
+htl official-i56-p56 DAVIS2017:mallard-fly
+htl official-i57-p57 DAVIS2017:mallard-fly
+htl official-i58-p58 DAVIS2017:mallard-fly
+htl official-i59-p59 DAVIS2017:mallard-fly
+htl official-i60-p60 DAVIS2017:mallard-fly
+htl official-i61-p61 DAVIS2017:mallard-fly
+htl official-i62-p62 DAVIS2017:mallard-fly
+htl official-i63-p63 DAVIS2017:mallard-fly
+htl official-i00-p00 0.13773 Mbps 23.852 dB LPIPS 0.54393
+htl official-i01-p01 0.14736 Mbps 23.972 dB LPIPS 0.53813
+htl official-i02-p02 0.15844 Mbps 24.125 dB LPIPS 0.53313
+htl official-i03-p03 0.16931 Mbps 24.250 dB LPIPS 0.52714
+htl official-i04-p04 0.18270 Mbps 24.399 dB LPIPS 0.52100
+htl official-i05-p05 0.19661 Mbps 24.538 dB LPIPS 0.51465
+htl official-i06-p06 0.21123 Mbps 24.667 dB LPIPS 0.50905
+htl official-i07-p07 0.22767 Mbps 24.818 dB LPIPS 0.50233
+htl official-i08-p08 0.24454 Mbps 24.955 dB LPIPS 0.49553
+htl official-i09-p09 0.26370 Mbps 25.119 dB LPIPS 0.48902
+htl official-i10-p10 0.28386 Mbps 25.282 dB LPIPS 0.48179
+htl official-i11-p11 0.30527 Mbps 25.431 dB LPIPS 0.47508
+htl official-i12-p12 0.32886 Mbps 25.586 dB LPIPS 0.46780
+htl official-i13-p13 0.35382 Mbps 25.741 dB LPIPS 0.46069
+htl official-i14-p14 0.37805 Mbps 25.888 dB LPIPS 0.45438
+htl official-i15-p15 0.40645 Mbps 26.050 dB LPIPS 0.44701
+htl official-i16-p16 0.43531 Mbps 26.189 dB LPIPS 0.44053
+htl official-i17-p17 0.46712 Mbps 26.344 dB LPIPS 0.43365
+htl official-i18-p18 0.49820 Mbps 26.492 dB LPIPS 0.42704
+htl official-i19-p19 0.53581 Mbps 26.648 dB LPIPS 0.42029
+htl official-i20-p20 0.57307 Mbps 26.796 dB LPIPS 0.41358
+htl official-i21-p21 0.61563 Mbps 26.962 dB LPIPS 0.40619
+htl official-i22-p22 0.65975 Mbps 27.119 dB LPIPS 0.39963
+htl official-i23-p23 0.70571 Mbps 27.272 dB LPIPS 0.39288
+htl official-i24-p24 0.75475 Mbps 27.425 dB LPIPS 0.38659
+htl official-i25-p25 0.80547 Mbps 27.573 dB LPIPS 0.37998
+htl official-i26-p26 0.86654 Mbps 27.755 dB LPIPS 0.37219
+htl official-i27-p27 0.92019 Mbps 27.896 dB LPIPS 0.36645
+htl official-i28-p28 0.98537 Mbps 28.066 dB LPIPS 0.35948
+htl official-i29-p29 1.05719 Mbps 28.241 dB LPIPS 0.35252
+htl official-i30-p30 1.12347 Mbps 28.386 dB LPIPS 0.34612
+htl official-i31-p31 1.20421 Mbps 28.564 dB LPIPS 0.33906
+htl official-i32-p32 1.28333 Mbps 28.727 dB LPIPS 0.33259
+htl official-i33-p33 1.37399 Mbps 28.908 dB LPIPS 0.32535
+htl official-i34-p34 1.46754 Mbps 29.078 dB LPIPS 0.31877
+htl official-i35-p35 1.56971 Mbps 29.259 dB LPIPS 0.31187
+htl official-i36-p36 1.67689 Mbps 29.439 dB LPIPS 0.30520
+htl official-i37-p37 1.78571 Mbps 29.608 dB LPIPS 0.29890
+htl official-i38-p38 1.90951 Mbps 29.796 dB LPIPS 0.29177
+htl official-i39-p39 2.03324 Mbps 29.967 dB LPIPS 0.28555
+htl official-i40-p40 2.17291 Mbps 30.160 dB LPIPS 0.27893
+htl official-i41-p41 2.31830 Mbps 30.342 dB LPIPS 0.27236
+htl official-i42-p42 2.47645 Mbps 30.525 dB LPIPS 0.26581
+htl official-i43-p43 2.64098 Mbps 30.710 dB LPIPS 0.25967
+htl official-i44-p44 2.80518 Mbps 30.884 dB LPIPS 0.25351
+htl official-i45-p45 2.99164 Mbps 31.074 dB LPIPS 0.24729
+htl official-i46-p46 3.19004 Mbps 31.259 dB LPIPS 0.24128
+htl official-i47-p47 3.38914 Mbps 31.433 dB LPIPS 0.23566
+htl official-i48-p48 3.60664 Mbps 31.614 dB LPIPS 0.22988
+htl official-i49-p49 3.83534 Mbps 31.792 dB LPIPS 0.22437
+htl official-i50-p50 4.07837 Mbps 31.967 dB LPIPS 0.21891
+htl official-i51-p51 4.31556 Mbps 32.124 dB LPIPS 0.21422
+htl official-i52-p52 4.59146 Mbps 32.298 dB LPIPS 0.20894
+htl official-i53-p53 4.83783 Mbps 32.437 dB LPIPS 0.20493
+htl official-i54-p54 5.11829 Mbps 32.590 dB LPIPS 0.20035
+htl official-i55-p55 5.40111 Mbps 32.731 dB LPIPS 0.19630
+htl official-i56-p56 5.69087 Mbps 32.863 dB LPIPS 0.19247
+htl official-i57-p57 6.00467 Mbps 32.998 dB LPIPS 0.18877
+htl official-i58-p58 6.30363 Mbps 33.119 dB LPIPS 0.18532
+htl official-i59-p59 6.61638 Mbps 33.235 dB LPIPS 0.18205
+htl official-i60-p60 6.93409 Mbps 33.339 dB LPIPS 0.17891
+htl official-i61-p61 7.22675 Mbps 33.428 dB LPIPS 0.17611
+htl official-i62-p62 7.54225 Mbps 33.514 dB LPIPS 0.17337
+htl official-i63-p63 7.83800 Mbps 33.590 dB LPIPS 0.17081
+htl matched-i00-p00 DAVIS2017:car-turn
+htl matched-i01-p01 DAVIS2017:car-turn
+htl matched-i02-p02 DAVIS2017:car-turn
+htl matched-i03-p03 DAVIS2017:car-turn
+htl matched-i04-p04 DAVIS2017:car-turn
+htl matched-i05-p05 DAVIS2017:car-turn
+htl matched-i06-p06 DAVIS2017:car-turn
+htl matched-i07-p07 DAVIS2017:car-turn
+htl matched-i08-p08 DAVIS2017:car-turn
+htl matched-i09-p09 DAVIS2017:car-turn
+htl matched-i10-p10 DAVIS2017:car-turn
+htl matched-i11-p11 DAVIS2017:car-turn
+htl matched-i12-p12 DAVIS2017:car-turn
+htl matched-i13-p13 DAVIS2017:car-turn
+htl matched-i14-p14 DAVIS2017:car-turn
+htl matched-i15-p15 DAVIS2017:car-turn
+htl matched-i16-p16 DAVIS2017:car-turn
+htl matched-i17-p17 DAVIS2017:car-turn
+htl matched-i18-p18 DAVIS2017:car-turn
+htl matched-i19-p19 DAVIS2017:car-turn
+htl matched-i20-p20 DAVIS2017:car-turn
+htl matched-i21-p21 DAVIS2017:car-turn
+htl matched-i22-p22 DAVIS2017:car-turn
+htl matched-i23-p23 DAVIS2017:car-turn
+htl matched-i24-p24 DAVIS2017:car-turn
+htl matched-i25-p25 DAVIS2017:car-turn
+htl matched-i26-p26 DAVIS2017:car-turn
+htl matched-i27-p27 DAVIS2017:car-turn
+htl matched-i28-p28 DAVIS2017:car-turn
+htl matched-i29-p29 DAVIS2017:car-turn
+htl matched-i30-p30 DAVIS2017:car-turn
+htl matched-i31-p31 DAVIS2017:car-turn
+htl matched-i32-p32 DAVIS2017:car-turn
+htl matched-i33-p33 DAVIS2017:car-turn
+htl matched-i34-p34 DAVIS2017:car-turn
+htl matched-i35-p35 DAVIS2017:car-turn
+htl matched-i36-p36 DAVIS2017:car-turn
+htl matched-i37-p37 DAVIS2017:car-turn
+htl matched-i38-p38 DAVIS2017:car-turn
+htl matched-i39-p39 DAVIS2017:car-turn
+htl matched-i40-p40 DAVIS2017:car-turn
+htl matched-i41-p41 DAVIS2017:car-turn
+htl matched-i42-p42 DAVIS2017:car-turn
+htl matched-i43-p43 DAVIS2017:car-turn
+htl matched-i44-p44 DAVIS2017:car-turn
+htl matched-i45-p45 DAVIS2017:car-turn
+htl matched-i46-p46 DAVIS2017:car-turn
+htl matched-i47-p47 DAVIS2017:car-turn
+htl matched-i48-p48 DAVIS2017:car-turn
+htl matched-i49-p49 DAVIS2017:car-turn
+htl matched-i50-p50 DAVIS2017:car-turn
+htl matched-i51-p51 DAVIS2017:car-turn
+htl matched-i52-p52 DAVIS2017:car-turn
+htl matched-i53-p53 DAVIS2017:car-turn
+htl matched-i54-p54 DAVIS2017:car-turn
+htl matched-i55-p55 DAVIS2017:car-turn
+htl matched-i56-p56 DAVIS2017:car-turn
+htl matched-i57-p57 DAVIS2017:car-turn
+htl matched-i58-p58 DAVIS2017:car-turn
+htl matched-i59-p59 DAVIS2017:car-turn
+htl matched-i60-p60 DAVIS2017:car-turn
+htl matched-i61-p61 DAVIS2017:car-turn
+htl matched-i62-p62 DAVIS2017:car-turn
+htl matched-i63-p63 DAVIS2017:car-turn
+htl matched-i00-p00 DAVIS2017:surf
+htl matched-i01-p01 DAVIS2017:surf
+htl matched-i02-p02 DAVIS2017:surf
+htl matched-i03-p03 DAVIS2017:surf
+htl matched-i04-p04 DAVIS2017:surf
+htl matched-i05-p05 DAVIS2017:surf
+htl matched-i06-p06 DAVIS2017:surf
+htl matched-i07-p07 DAVIS2017:surf
+htl matched-i08-p08 DAVIS2017:surf
+htl matched-i09-p09 DAVIS2017:surf
+htl matched-i10-p10 DAVIS2017:surf
+htl matched-i11-p11 DAVIS2017:surf
+htl matched-i12-p12 DAVIS2017:surf
+htl matched-i13-p13 DAVIS2017:surf
+htl matched-i14-p14 DAVIS2017:surf
+htl matched-i15-p15 DAVIS2017:surf
+htl matched-i16-p16 DAVIS2017:surf
+htl matched-i17-p17 DAVIS2017:surf
+htl matched-i18-p18 DAVIS2017:surf
+htl matched-i19-p19 DAVIS2017:surf
+htl matched-i20-p20 DAVIS2017:surf
+htl matched-i21-p21 DAVIS2017:surf
+htl matched-i22-p22 DAVIS2017:surf
+htl matched-i23-p23 DAVIS2017:surf
+htl matched-i24-p24 DAVIS2017:surf
+htl matched-i25-p25 DAVIS2017:surf
+htl matched-i26-p26 DAVIS2017:surf
+htl matched-i27-p27 DAVIS2017:surf
+htl matched-i28-p28 DAVIS2017:surf
+htl matched-i29-p29 DAVIS2017:surf
+htl matched-i30-p30 DAVIS2017:surf
+htl matched-i31-p31 DAVIS2017:surf
+htl matched-i32-p32 DAVIS2017:surf
+htl matched-i33-p33 DAVIS2017:surf
+htl matched-i34-p34 DAVIS2017:surf
+htl matched-i35-p35 DAVIS2017:surf
+htl matched-i36-p36 DAVIS2017:surf
+htl matched-i37-p37 DAVIS2017:surf
+htl matched-i38-p38 DAVIS2017:surf
+htl matched-i39-p39 DAVIS2017:surf
+htl matched-i40-p40 DAVIS2017:surf
+htl matched-i41-p41 DAVIS2017:surf
+htl matched-i42-p42 DAVIS2017:surf
+htl matched-i43-p43 DAVIS2017:surf
+htl matched-i44-p44 DAVIS2017:surf
+htl matched-i45-p45 DAVIS2017:surf
+htl matched-i46-p46 DAVIS2017:surf
+htl matched-i47-p47 DAVIS2017:surf
+htl matched-i48-p48 DAVIS2017:surf
+htl matched-i49-p49 DAVIS2017:surf
+htl matched-i50-p50 DAVIS2017:surf
+htl matched-i51-p51 DAVIS2017:surf
+htl matched-i52-p52 DAVIS2017:surf
+htl matched-i53-p53 DAVIS2017:surf
+htl matched-i54-p54 DAVIS2017:surf
+htl matched-i55-p55 DAVIS2017:surf
+htl matched-i56-p56 DAVIS2017:surf
+htl matched-i57-p57 DAVIS2017:surf
+htl matched-i58-p58 DAVIS2017:surf
+htl matched-i59-p59 DAVIS2017:surf
+htl matched-i60-p60 DAVIS2017:surf
+htl matched-i61-p61 DAVIS2017:surf
+htl matched-i62-p62 DAVIS2017:surf
+htl matched-i63-p63 DAVIS2017:surf
+htl matched-i00-p00 DAVIS2017:train
+htl matched-i01-p01 DAVIS2017:train
+htl matched-i02-p02 DAVIS2017:train
+htl matched-i03-p03 DAVIS2017:train
+htl matched-i04-p04 DAVIS2017:train
+htl matched-i05-p05 DAVIS2017:train
+htl matched-i06-p06 DAVIS2017:train
+htl matched-i07-p07 DAVIS2017:train
+htl matched-i08-p08 DAVIS2017:train
+htl matched-i09-p09 DAVIS2017:train
+htl matched-i10-p10 DAVIS2017:train
+htl matched-i11-p11 DAVIS2017:train
+htl matched-i12-p12 DAVIS2017:train
+htl matched-i13-p13 DAVIS2017:train
+htl matched-i14-p14 DAVIS2017:train
+htl matched-i15-p15 DAVIS2017:train
+htl matched-i16-p16 DAVIS2017:train
+htl matched-i17-p17 DAVIS2017:train
+htl matched-i18-p18 DAVIS2017:train
+htl matched-i19-p19 DAVIS2017:train
+htl matched-i20-p20 DAVIS2017:train
+htl matched-i21-p21 DAVIS2017:train
+htl matched-i22-p22 DAVIS2017:train
+htl matched-i23-p23 DAVIS2017:train
+htl matched-i24-p24 DAVIS2017:train
+htl matched-i25-p25 DAVIS2017:train
+htl matched-i26-p26 DAVIS2017:train
+htl matched-i27-p27 DAVIS2017:train
+htl matched-i28-p28 DAVIS2017:train
+htl matched-i29-p29 DAVIS2017:train
+htl matched-i30-p30 DAVIS2017:train
+htl matched-i31-p31 DAVIS2017:train
+htl matched-i32-p32 DAVIS2017:train
+htl matched-i33-p33 DAVIS2017:train
+htl matched-i34-p34 DAVIS2017:train
+htl matched-i35-p35 DAVIS2017:train
+htl matched-i36-p36 DAVIS2017:train
+htl matched-i37-p37 DAVIS2017:train
+htl matched-i38-p38 DAVIS2017:train
+htl matched-i39-p39 DAVIS2017:train
+htl matched-i40-p40 DAVIS2017:train
+htl matched-i41-p41 DAVIS2017:train
+htl matched-i42-p42 DAVIS2017:train
+htl matched-i43-p43 DAVIS2017:train
+htl matched-i44-p44 DAVIS2017:train
+htl matched-i45-p45 DAVIS2017:train
+htl matched-i46-p46 DAVIS2017:train
+htl matched-i47-p47 DAVIS2017:train
+htl matched-i48-p48 DAVIS2017:train
+htl matched-i49-p49 DAVIS2017:train
+htl matched-i50-p50 DAVIS2017:train
+htl matched-i51-p51 DAVIS2017:train
+htl matched-i52-p52 DAVIS2017:train
+htl matched-i53-p53 DAVIS2017:train
+htl matched-i54-p54 DAVIS2017:train
+htl matched-i55-p55 DAVIS2017:train
+htl matched-i56-p56 DAVIS2017:train
+htl matched-i57-p57 DAVIS2017:train
+htl matched-i58-p58 DAVIS2017:train
+htl matched-i59-p59 DAVIS2017:train
+htl matched-i60-p60 DAVIS2017:train
+htl matched-i61-p61 DAVIS2017:train
+htl matched-i62-p62 DAVIS2017:train
+htl matched-i63-p63 DAVIS2017:train
+htl matched-i00-p00 DAVIS2017:mallard-fly
+htl matched-i01-p01 DAVIS2017:mallard-fly
+htl matched-i02-p02 DAVIS2017:mallard-fly
+htl matched-i03-p03 DAVIS2017:mallard-fly
+htl matched-i04-p04 DAVIS2017:mallard-fly
+htl matched-i05-p05 DAVIS2017:mallard-fly
+htl matched-i06-p06 DAVIS2017:mallard-fly
+htl matched-i07-p07 DAVIS2017:mallard-fly
+htl matched-i08-p08 DAVIS2017:mallard-fly
+htl matched-i09-p09 DAVIS2017:mallard-fly
+htl matched-i10-p10 DAVIS2017:mallard-fly
+htl matched-i11-p11 DAVIS2017:mallard-fly
+htl matched-i12-p12 DAVIS2017:mallard-fly
+htl matched-i13-p13 DAVIS2017:mallard-fly
+htl matched-i14-p14 DAVIS2017:mallard-fly
+htl matched-i15-p15 DAVIS2017:mallard-fly
+htl matched-i16-p16 DAVIS2017:mallard-fly
+htl matched-i17-p17 DAVIS2017:mallard-fly
+htl matched-i18-p18 DAVIS2017:mallard-fly
+htl matched-i19-p19 DAVIS2017:mallard-fly
+htl matched-i20-p20 DAVIS2017:mallard-fly
+htl matched-i21-p21 DAVIS2017:mallard-fly
+htl matched-i22-p22 DAVIS2017:mallard-fly
+htl matched-i23-p23 DAVIS2017:mallard-fly
+htl matched-i24-p24 DAVIS2017:mallard-fly
+htl matched-i25-p25 DAVIS2017:mallard-fly
+htl matched-i26-p26 DAVIS2017:mallard-fly
+htl matched-i27-p27 DAVIS2017:mallard-fly
+htl matched-i28-p28 DAVIS2017:mallard-fly
+htl matched-i29-p29 DAVIS2017:mallard-fly
+htl matched-i30-p30 DAVIS2017:mallard-fly
+htl matched-i31-p31 DAVIS2017:mallard-fly
+htl matched-i32-p32 DAVIS2017:mallard-fly
+htl matched-i33-p33 DAVIS2017:mallard-fly
+htl matched-i34-p34 DAVIS2017:mallard-fly
+htl matched-i35-p35 DAVIS2017:mallard-fly
+htl matched-i36-p36 DAVIS2017:mallard-fly
+htl matched-i37-p37 DAVIS2017:mallard-fly
+htl matched-i38-p38 DAVIS2017:mallard-fly
+htl matched-i39-p39 DAVIS2017:mallard-fly
+htl matched-i40-p40 DAVIS2017:mallard-fly
+htl matched-i41-p41 DAVIS2017:mallard-fly
+htl matched-i42-p42 DAVIS2017:mallard-fly
+htl matched-i43-p43 DAVIS2017:mallard-fly
+htl matched-i44-p44 DAVIS2017:mallard-fly
+htl matched-i45-p45 DAVIS2017:mallard-fly
+htl matched-i46-p46 DAVIS2017:mallard-fly
+htl matched-i47-p47 DAVIS2017:mallard-fly
+htl matched-i48-p48 DAVIS2017:mallard-fly
+htl matched-i49-p49 DAVIS2017:mallard-fly
+htl matched-i50-p50 DAVIS2017:mallard-fly
+htl matched-i51-p51 DAVIS2017:mallard-fly
+htl matched-i52-p52 DAVIS2017:mallard-fly
+htl matched-i53-p53 DAVIS2017:mallard-fly
+htl matched-i54-p54 DAVIS2017:mallard-fly
+htl matched-i55-p55 DAVIS2017:mallard-fly
+htl matched-i56-p56 DAVIS2017:mallard-fly
+htl matched-i57-p57 DAVIS2017:mallard-fly
+htl matched-i58-p58 DAVIS2017:mallard-fly
+htl matched-i59-p59 DAVIS2017:mallard-fly
+htl matched-i60-p60 DAVIS2017:mallard-fly
+htl matched-i61-p61 DAVIS2017:mallard-fly
+htl matched-i62-p62 DAVIS2017:mallard-fly
+htl matched-i63-p63 DAVIS2017:mallard-fly
+htl matched-i00-p00 0.14205 Mbps 23.878 dB LPIPS 0.54204
+htl matched-i01-p01 0.15168 Mbps 23.996 dB LPIPS 0.53721
+htl matched-i02-p02 0.16265 Mbps 24.152 dB LPIPS 0.53153
+htl matched-i03-p03 0.17375 Mbps 24.271 dB LPIPS 0.52592
+htl matched-i04-p04 0.18740 Mbps 24.429 dB LPIPS 0.51946
+htl matched-i05-p05 0.20102 Mbps 24.562 dB LPIPS 0.51304
+htl matched-i06-p06 0.21644 Mbps 24.697 dB LPIPS 0.50737
+htl matched-i07-p07 0.23232 Mbps 24.837 dB LPIPS 0.50065
+htl matched-i08-p08 0.24966 Mbps 24.982 dB LPIPS 0.49426
+htl matched-i09-p09 0.26874 Mbps 25.146 dB LPIPS 0.48744
+htl matched-i10-p10 0.28936 Mbps 25.304 dB LPIPS 0.48081
+htl matched-i11-p11 0.31051 Mbps 25.452 dB LPIPS 0.47375
+htl matched-i12-p12 0.33427 Mbps 25.612 dB LPIPS 0.46609
+htl matched-i13-p13 0.35906 Mbps 25.765 dB LPIPS 0.45961
+htl matched-i14-p14 0.38428 Mbps 25.913 dB LPIPS 0.45256
+htl matched-i15-p15 0.41245 Mbps 26.078 dB LPIPS 0.44544
+htl matched-i16-p16 0.44167 Mbps 26.217 dB LPIPS 0.43914
+htl matched-i17-p17 0.47313 Mbps 26.370 dB LPIPS 0.43228
+htl matched-i18-p18 0.50522 Mbps 26.519 dB LPIPS 0.42548
+htl matched-i19-p19 0.54250 Mbps 26.673 dB LPIPS 0.41877
+htl matched-i20-p20 0.57990 Mbps 26.823 dB LPIPS 0.41200
+htl matched-i21-p21 0.62241 Mbps 26.983 dB LPIPS 0.40482
+htl matched-i22-p22 0.66643 Mbps 27.140 dB LPIPS 0.39813
+htl matched-i23-p23 0.71300 Mbps 27.294 dB LPIPS 0.39145
+htl matched-i24-p24 0.76221 Mbps 27.445 dB LPIPS 0.38514
+htl matched-i25-p25 0.81386 Mbps 27.600 dB LPIPS 0.37842
+htl matched-i26-p26 0.87514 Mbps 27.778 dB LPIPS 0.37078
+htl matched-i27-p27 0.92852 Mbps 27.922 dB LPIPS 0.36504
+htl matched-i28-p28 0.99475 Mbps 28.086 dB LPIPS 0.35793
+htl matched-i29-p29 1.06639 Mbps 28.267 dB LPIPS 0.35086
+htl matched-i30-p30 1.13270 Mbps 28.412 dB LPIPS 0.34449
+htl matched-i31-p31 1.21546 Mbps 28.593 dB LPIPS 0.33712
+htl matched-i32-p32 1.29453 Mbps 28.755 dB LPIPS 0.33078
+htl matched-i33-p33 1.38583 Mbps 28.933 dB LPIPS 0.32365
+htl matched-i34-p34 1.47919 Mbps 29.106 dB LPIPS 0.31718
+htl matched-i35-p35 1.58103 Mbps 29.287 dB LPIPS 0.31023
+htl matched-i36-p36 1.69007 Mbps 29.462 dB LPIPS 0.30364
+htl matched-i37-p37 1.79914 Mbps 29.631 dB LPIPS 0.29739
+htl matched-i38-p38 1.92301 Mbps 29.818 dB LPIPS 0.29023
+htl matched-i39-p39 2.04686 Mbps 29.991 dB LPIPS 0.28413
+htl matched-i40-p40 2.18657 Mbps 30.179 dB LPIPS 0.27768
+htl matched-i41-p41 2.33204 Mbps 30.362 dB LPIPS 0.27102
+htl matched-i42-p42 2.48902 Mbps 30.542 dB LPIPS 0.26477
+htl matched-i43-p43 2.65505 Mbps 30.727 dB LPIPS 0.25851
+htl matched-i44-p44 2.81853 Mbps 30.902 dB LPIPS 0.25255
+htl matched-i45-p45 3.00622 Mbps 31.090 dB LPIPS 0.24641
+htl matched-i46-p46 3.20397 Mbps 31.273 dB LPIPS 0.24034
+htl matched-i47-p47 3.40319 Mbps 31.446 dB LPIPS 0.23482
+htl matched-i48-p48 3.62005 Mbps 31.625 dB LPIPS 0.22922
+htl matched-i49-p49 3.84872 Mbps 31.802 dB LPIPS 0.22370
+htl matched-i50-p50 4.09191 Mbps 31.975 dB LPIPS 0.21838
+htl matched-i51-p51 4.32775 Mbps 32.132 dB LPIPS 0.21364
+htl matched-i52-p52 4.60289 Mbps 32.304 dB LPIPS 0.20852
+htl matched-i53-p53 4.84938 Mbps 32.443 dB LPIPS 0.20446
+htl matched-i54-p54 5.12920 Mbps 32.596 dB LPIPS 0.20005
+htl matched-i55-p55 5.41243 Mbps 32.735 dB LPIPS 0.19587
+htl matched-i56-p56 5.70188 Mbps 32.867 dB LPIPS 0.19215
+htl matched-i57-p57 6.01440 Mbps 33.002 dB LPIPS 0.18844
+htl matched-i58-p58 6.31541 Mbps 33.124 dB LPIPS 0.18505
+htl matched-i59-p59 6.62685 Mbps 33.236 dB LPIPS 0.18180
+htl matched-i60-p60 6.94317 Mbps 33.341 dB LPIPS 0.17868
+htl matched-i61-p61 7.23735 Mbps 33.431 dB LPIPS 0.17586
+htl matched-i62-p62 7.55421 Mbps 33.517 dB LPIPS 0.17313
+htl matched-i63-p63 7.84955 Mbps 33.592 dB LPIPS 0.17062

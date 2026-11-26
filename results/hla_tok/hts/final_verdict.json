@@ -1,0 +1,130 @@
+{
+  "verdict": "FAIL",
+  "phases": {
+    "0": "FAIL",
+    "1": "NOT_RUN",
+    "2": "NOT_RUN",
+    "3": "NOT_RUN",
+    "4": "NOT_RUN",
+    "5": "NOT_RUN"
+  },
+  "validation": "FAIL",
+  "validation_execution": "NOT_RUN",
+  "validation_pixel_read_count": 0,
+  "test": "NOT_RUN",
+  "test_pixel_read_count": 0,
+  "optimizer_steps": {
+    "1": 0,
+    "2": 0
+  },
+  "reason": "The measured native HT-S low-rate admission gate failed.",
+  "native_observations": {
+    "minimum_hts_measured_at_25_db": {
+      "model": "hts",
+      "profile": "official",
+      "qp_i": 0,
+      "qp_p": 12,
+      "mse": 0.003038784274849604,
+      "lpips": 0.4965472106123343,
+      "dists": 0.2920908024534583,
+      "frames": 128,
+      "global_psnr": 25.173001296561015,
+      "mean_frame_psnr": 25.47932298861028,
+      "actual_mbps": 0.280959375,
+      "actual_mbps_source_fps": 0.280959375,
+      "duration_source_fps_seconds": 4.266666666666667,
+      "bpp": 0.004516450858410494,
+      "total_bytes": 149845,
+      "native_payload_bytes": 149725,
+      "header_bytes": 120,
+      "padded_frames": 4,
+      "encode_fps": 489.77034286355257,
+      "decode_fps": 470.6601702169644,
+      "i_peak_bytes": 8437,
+      "p_peak_bytes": 11479,
+      "mean_unit_lpips": 0.48847354226080436
+    },
+    "matched_profile": "official",
+    "hts_ld_equal_quality": {
+      "official": [
+        {
+          "metric": "global_psnr",
+          "quality": 26.0,
+          "hts_mbps": 0.476611830475586,
+          "ld_mbps": 0.255225337803987
+        },
+        {
+          "metric": "lpips",
+          "quality": 0.45,
+          "hts_mbps": 0.44900424124553,
+          "ld_mbps": 0.31201107005396034
+        },
+        {
+          "metric": "lpips",
+          "quality": 0.28978,
+          "hts_mbps": 2.2509208857746628,
+          "ld_mbps": 1.4473129412744872
+        }
+      ],
+      "matched": [
+        {
+          "metric": "global_psnr",
+          "quality": 26.0,
+          "hts_mbps": 0.4786082131090391,
+          "ld_mbps": 0.26806529311960375
+        },
+        {
+          "metric": "lpips",
+          "quality": 0.45,
+          "hts_mbps": 0.44830736437693736,
+          "ld_mbps": 0.32391427042781584
+        },
+        {
+          "metric": "lpips",
+          "quality": 0.28978,
+          "hts_mbps": 2.2272031714862837,
+          "ld_mbps": 1.4460611926471805
+        }
+      ]
+    },
+    "ld_at_selected_hts_quality": {
+      "global_psnr": null,
+      "lpips": null
+    },
+    "hts_at_a4_lpips_mbps": 0.49068644968320957,
+    "hts_at_a4_psnr_mbps": 0.6904750509922802,
+    "hts_at_original_named_lpips_mbps": 2.2509208857746628,
+    "native_codec_compute_fps": 240.0125670726744,
+    "native_unit_compute_p95_ms": 28.32983575790422,
+    "strict_0486": {
+      "units": 20,
+      "affordable_units": 16,
+      "valid_frames": 128,
+      "affordable_valid_frames": 124,
+      "i_units_over_budget": 4
+    }
+  },
+  "continuous_native_diagnostics": [
+    {
+      "qp": 0,
+      "valid_p_frames": 124,
+      "psnr_gain_db": 2.126902248528191,
+      "lpips_reduction": 0.05452418988270147,
+      "dists_reduction": 0.03891917967027231
+    },
+    {
+      "qp": 12,
+      "valid_p_frames": 124,
+      "psnr_gain_db": 2.1112998055915395,
+      "lpips_reduction": 0.05516700001974262,
+      "dists_reduction": 0.02947379456412408
+    },
+    {
+      "qp": 32,
+      "valid_p_frames": 124,
+      "psnr_gain_db": 2.086513943878876,
+      "lpips_reduction": 0.048524487823728646,
+      "dists_reduction": 0.018702801196805896
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "official_commit": "cbdae87a5445114cdc7f48816da63ea80bdeac40",
+  "cutlass_commit": "4370102f9dacab813282e1d67722fceb0b90a019",
+  "previous_assets_sha256": {
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v2/CP-AdapTok/checkpoints/hla_tok/uf_v2/d1-joint-seed2-step20000.pt": "09bb3a578d89ddb9b2e621a9cf2a1c985edaa49538f236046439116c3864c1ec",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/checkpoints/hla_tok/uf_v3/r0-probe-seed1-step2001.pt": "67fa65db233d20ed9a7f2141ebf938e4e316e16580a95d3a13d1b8c4cb8776aa",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/results/hla_tok/uf_v3/entropy/static_cdf.json": "b3cba08bfffb7fa95628fb1b1d74d07b499697bbe397426beebbcc931af2e3d3",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/results/hla_tok/uf_v3/evaluation/A2/summary.json": "15beb57a4044964e60f49fcd171c3dd4408e546abbabf80cbc91d7f771e8a205",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/results/hla_tok/uf_v3/evaluation/A4/summary.json": "b02ba5439e9c0df796f79e7b39c44eac89d8a7f129ed1163ab3c46f7e08a384c",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/results/hla_tok/uf_v3/evaluation/rates.json": "adb3d11a98a16156fb4bd1f5246fe040c937095c9946dbab3fd228c179e4534f",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/results/hla_tok/uf_v3/final_report.md": "3420aa570a85718d6524be30ae6206b65a4bad53f817d6e457c86081b052bbec",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/results/hla_tok/compact/original_rd.csv": "4fb2d5eb328ba79093215fa26a91a21b1655fe277c486a0149388d135770c897",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/results/hla_tok/compact/original_window_ledger.csv": "e95fbc246e17d021aa685479bd7226f0a53f7994c7bbf7c3efbdbb4170fc5425",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/results/hla_tok/temporal/sequence_manifest.json": "ac9d702272da63ad5577c567b3bb3c7680ec58460a655720e1b6db863aee8d44",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/configs/hla_tok/validation_cohort.json": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/results/original_adaptok_1080p/checkpoint_manifest.json": "c5bc01994723a4647373fa778b403d4066eba5a9059cc93f7dc1859757629d27",
+    "/home/whisperliang/CP-AdapTok/checkpoints/original_adaptok_official/c514b22615a140c06f4c9792e93cbef9e5c79f32/model.safetensors": "be5432949a87dee253c86f7ccb87bb5370b435ed180f8cda546b09d6a63c8cdd",
+    "/home/whisperliang/CP-AdapTok/checkpoints/original_adaptok_official/c514b22615a140c06f4c9792e93cbef9e5c79f32/config.json": "7ebf3ed0bb451b39424a2c89154da95f542ce12559175061ef94702e7e01bc4c",
+    "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_image.pth.tar": "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302",
+    "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_video_ld.pth.tar": "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/.build/uf_v3/native/inference_extensions_cuda.cpython-312-x86_64-linux-gnu.so": "f8b9fbe6d89e32d618e51124ffb1a7b5505f55ea9df7b34aa2cc5793230f6897",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/.build/uf_v3/pack-reuse/hla_uf_v2_records.cpython-312-x86_64-linux-gnu.so": "09b1051f18d7471a3f727815be87f5db3ec69561e5d59893bf6969ece9e7e7ea",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/.build/uf_v3/records/hla_uf_v2_records.cpython-312-x86_64-linux-gnu.so": "5908137a29a3dc99c1f5c163e592db06802338ba33d7753b26132da179d1e9cc",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok/.build/uf_v3/legacy/hla_uf_rans.cpython-312-x86_64-linux-gnu.so": "d45b9fce8f3f683a949085c7c270cda8727a19e0d901d3090a445922529180a9"
+  },
+  "metric_weights_sha256": {
+    "imagenet_alexnet": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02",
+    "imagenet_vgg16": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0",
+    "lpips_alex_v01": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+    "lpips_vgg_v01": "a78928a0af1e5f0fcb1f3b9e8f8c3a2a5a3de244d830ad5c1feddc79b8432868",
+    "dists": "f5e65c96230b7f6ca995691647d482237e4cab8a50c5c4a5784f219ef0748218"
+  },
+  "frozen_dataset_manifest_sha256": {
+    "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
+    "validation": "8cca166ca7d1f6faf45cd6660b7074657164d2afa2fd14dec92d76f0cee25405",
+    "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
+  },
+  "weights": {
+    "image": {
+      "filename": "cvpr2026_image.pth.tar",
+      "bytes": 168845375,
+      "sha256": "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302",
+      "quickxor": "djlEVMhDjexrJb/on44uFwIjRik=",
+      "onedrive_item_id": "2866592D5C55DF8C!s7ad292cb29524f7eb73d238498e60a17"
+    },
+    "ld": {
+      "filename": "cvpr2026_video_ld.pth.tar",
+      "bytes": 38724071,
+      "sha256": "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799",
+      "quickxor": "JCP2tLHKkC9NEEacsZDf2wUjLmo=",
+      "onedrive_item_id": "2866592D5C55DF8C!s7b29377d4c8f49e99d068fe07f8abbad"
+    },
+    "hts": {
+      "filename": "cvpr2026_video_hts.pth.tar",
+      "bytes": 324891626,
+      "sha256": "565607d84943ee79072a5760d34a200d5724b4bb72c6bc24bfab41e8ae4f5f47",
+      "quickxor": "C4wvXNkpsCFrv48cOy5zXyMBCyo=",
+      "onedrive_item_id": "2866592D5C55DF8C!se6cad35f3d2642afa45f6d1666a09e77"
+    },
+    "htl": {
+      "filename": "cvpr2026_video_htl.pth.tar",
+      "bytes": 482470963,
+      "sha256": "934bde4a12fc0b6b0c679ec6ae21d41cb7722debf8b631ee0dd750d030b1a6b3",
+      "quickxor": "wJBhEyJmghctgFCxDcpL3ZB2TQI=",
+      "onedrive_item_id": "2866592D5C55DF8C!sd0e0017339094ec48d1e31c8c19b7804"
+    }
+  },
+  "extensions_sha256": {
+    "MLCodec_extensions_cpp": "7b763478abcc0fdab2a58415ff8fa1b711daf432e83469bf368e20106bc2c0bb",
+    "inference_extensions_cuda": "bda970caf8609cbec1486811b91ae22c0aebfc1b9bdc6046d29d74004d12a2d3"
+  },
+  "extension_sources_patch_sha256": "3f939594b76aa66f790aefc03f8bb60b151da1e6f40c63bffe65e31b876b8b87",
+  "python": "3.12.13",
+  "torch": "2.9.1+cu130",
+  "cuda": "13.0",
+  "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+  "compiler": "c++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+  "gpu": "NVIDIA H100 PCIe",
+  "compute_capability": [
+    9,
+    0
+  ],
+  "sm": "90a",
+  "nvidia_smi": "name, driver_version, memory.total [MiB]\nNVIDIA H100 PCIe, 580.159.03, 81559 MiB",
+  "protocol_sha256": "0eec7c192103cb6e2efd4bc0a76b2ac359b144032076eed9f2511d54550cd4dd"
+}

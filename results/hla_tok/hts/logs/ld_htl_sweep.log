@@ -1,0 +1,41 @@
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+ld official-i01-p01 0.24094 Mbps 25.862 dB LPIPS 0.47684
+ld official-i02-p02 0.26159 Mbps 26.059 dB LPIPS 0.46869
+ld official-i03-p03 0.27345 Mbps 26.172 dB LPIPS 0.46344
+ld official-i04-p04 0.29304 Mbps 26.342 dB LPIPS 0.45678
+ld official-i05-p05 0.31014 Mbps 26.486 dB LPIPS 0.45063
+ld official-i06-p06 0.32827 Mbps 26.629 dB LPIPS 0.44466
+ld official-i07-p07 0.35505 Mbps 26.814 dB LPIPS 0.43590
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok/scripts/hla_tok/hts/audit_native.py", line 240, in <module>
+    main()
+  File "/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok/scripts/hla_tok/hts/audit_native.py", line 235, in main
+    run_profile(args, variant, profile, sources, quality)
+  File "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok/scripts/hla_tok/hts/audit_native.py", line 195, in run_profile
+    report = run_point(models, schedule, point, variant, sources, quality, args.output)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok/scripts/hla_tok/hts/audit_native.py", line 168, in run_point
+    metrics.extend(decode_clip(models, source, units, stream, ledger, quality))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok/scripts/hla_tok/hts/audit_native.py", line 119, in decode_clip
+    row.update(summarize(stats), decoding_ms=decoding_ms, reference_state_hash=models.reference_hash(unit))
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok/hla_tok/hts/native.py", line 79, in reference_hash
+    return tensor_digest(self.video.proxy.audit_reference(unit.intra or unit.reset))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok/hla_tok/hts/native.py", line 35, in tensor_digest
+    digest.update(tensor.detach().cpu().contiguous().view(torch.uint8).numpy())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

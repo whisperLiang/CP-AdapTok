@@ -138,26 +138,42 @@ def decode_clip(models: NativeNetworks, source: Source, units: list[Unit], strea
 
 def aggregate(sequences: list[Source], rows: list[dict], frame_metrics: list[dict]) -> dict:
     summary = summarize(frame_metrics)
-    frames, nbytes = summary["frames"], sum(row["total_bytes"] for row in rows)
-    if frames != sum(s.clip.length for s in sequences) or frames != sum(row["valid_frames"] for row in rows):
+    frames = summary["frames"]
+    totals = sum_units(rows)
+    nbytes = totals["total_bytes"]
+    if frames != sum(source.clip.length for source in sequences) or frames != totals["valid_frames"]:
         raise ValueError("valid frame accounting differs from the frozen source")
-    elapsed_sec = sum(s.clip.length / s.fps for s in sequences)
-    types = {kind: [row for row in rows if row["unit_type"] == kind] for kind in ("I", "P")}
+    elapsed_sec = sum(source.clip.length / source.fps for source in sequences)
+    peaks = unit_peaks(rows)
     return summary | {
         "actual_mbps": 8 * nbytes * 30 / frames / 1e6,
         "actual_mbps_source_fps": 8 * nbytes / elapsed_sec / 1e6,
         "duration_source_fps_seconds": elapsed_sec,
         "bpp": 8 * nbytes / (frames * NATIVE_SHAPE[0] * NATIVE_SHAPE[1]),
         "total_bytes": nbytes,
-        "native_payload_bytes": sum(row["native_payload_bytes"] for row in rows),
-        "header_bytes": sum(row["header_bytes"] for row in rows),
-        "padded_frames": sum(row["padded_frames"] for row in rows),
-        "encode_fps": 1000 * frames / sum(row["encoding_ms"] for row in rows),
-        "decode_fps": 1000 * frames / sum(row["decoding_ms"] for row in rows),
-        "i_peak_bytes": max(row["total_bytes"] for row in types["I"]),
-        "p_peak_bytes": max((row["total_bytes"] for row in types["P"]), default=0),
+        "native_payload_bytes": totals["native_payload_bytes"],
+        "header_bytes": totals["header_bytes"],
+        "padded_frames": totals["padded_frames"],
+        "encode_fps": 1000 * frames / totals["encoding_ms"],
+        "decode_fps": 1000 * frames / totals["decoding_ms"],
+        "i_peak_bytes": peaks["I"],
+        "p_peak_bytes": peaks["P"],
         "mean_unit_lpips": mean(row["lpips"] for row in rows),
     }
+
+
+def sum_units(rows: list[dict]) -> dict:
+    fields = ("total_bytes", "native_payload_bytes", "header_bytes", "valid_frames", "padded_frames",
+              "encoding_ms", "decoding_ms")
+    return {field: sum(row[field] for row in rows) for field in fields}
+
+
+def unit_peaks(rows: list[dict]) -> dict[str, int]:
+    result = {"I": 0, "P": 0}
+    for entry in rows:
+        kind = entry["unit_type"]
+        result[kind] = max(result[kind], entry["total_bytes"])
+    return result
 
 
 def atomic_bytes(path: Path, raw: bytes) -> None:

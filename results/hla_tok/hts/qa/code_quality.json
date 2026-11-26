@@ -1,0 +1,909 @@
+{
+  "tooling": "Repository coverage CRAP and AST comparison",
+  "core_max_crap": 8.304,
+  "duplicate_pairs_at_0_8": [],
+  "functions": [
+    {
+      "file": "hla_tok/hts/native.py",
+      "function": "frame_input",
+      "line": 20,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/hts/native.py",
+      "function": "restore_native_rgb",
+      "line": 26,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/hts/native.py",
+      "function": "tensor_digest",
+      "line": 31,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/hts/native.py",
+      "function": "load_weights",
+      "line": 39,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/hts/native.py",
+      "function": "timed",
+      "line": 82,
+      "complexity": 1,
+      "coverage": 0.16666666666666666,
+      "crap": 1.5787037037037037
+    },
+    {
+      "file": "hla_tok/hts/native.py",
+      "function": "__init__",
+      "line": 49,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/hts/native.py",
+      "function": "encode",
+      "line": 54,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/hts/native.py",
+      "function": "decode",
+      "line": 67,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "hla_tok/hts/native.py",
+      "function": "reference_hash",
+      "line": 78,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "hla_tok/hts/units.py",
+      "function": "pad_indices",
+      "line": 52,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/hts/units.py",
+      "function": "__post_init__",
+      "line": 15,
+      "complexity": 6,
+      "coverage": 0.6,
+      "crap": 8.304
+    },
+    {
+      "file": "hla_tok/hts/units.py",
+      "function": "indices",
+      "line": 22,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "hla_tok/hts/units.py",
+      "function": "__post_init__",
+      "line": 32,
+      "complexity": 6,
+      "coverage": 0.6,
+      "crap": 8.304
+    },
+    {
+      "file": "hla_tok/hts/units.py",
+      "function": "units",
+      "line": 38,
+      "complexity": 6,
+      "coverage": 0.9090909090909091,
+      "crap": 6.027047332832457
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_assets.py",
+      "function": "read_json",
+      "line": 27,
+      "complexity": 1,
+      "coverage": 0.0,
+      "crap": 2.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_assets.py",
+      "function": "capture",
+      "line": 31,
+      "complexity": 1,
+      "coverage": 0.0,
+      "crap": 2.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_assets.py",
+      "function": "clean_checkout",
+      "line": 35,
+      "complexity": 3,
+      "coverage": 0.0,
+      "crap": 12.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_assets.py",
+      "function": "verified_weights",
+      "line": 42,
+      "complexity": 4,
+      "coverage": 0.0,
+      "crap": 20.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_assets.py",
+      "function": "old_identity",
+      "line": 51,
+      "complexity": 8,
+      "coverage": 0.0,
+      "crap": 72.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_assets.py",
+      "function": "main",
+      "line": 70,
+      "complexity": 7,
+      "coverage": 0.0,
+      "crap": 56.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "source_clips",
+      "line": 55,
+      "complexity": 5,
+      "coverage": 0.1,
+      "crap": 23.225
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "profile_schedule",
+      "line": 67,
+      "complexity": 4,
+      "coverage": 0.2,
+      "crap": 12.192000000000002
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "encode_clip",
+      "line": 74,
+      "complexity": 5,
+      "coverage": 0.07692307692307693,
+      "crap": 24.663177059626765
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "decode_clip",
+      "line": 121,
+      "complexity": 4,
+      "coverage": 0.06666666666666667,
+      "crap": 17.008592592592592
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "aggregate",
+      "line": 139,
+      "complexity": 6,
+      "coverage": 0.1,
+      "crap": 32.244
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "sum_units",
+      "line": 165,
+      "complexity": 3,
+      "coverage": 0.3333333333333333,
+      "crap": 5.666666666666668
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "unit_peaks",
+      "line": 171,
+      "complexity": 2,
+      "coverage": 0.16666666666666666,
+      "crap": 4.314814814814815
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "atomic_bytes",
+      "line": 179,
+      "complexity": 1,
+      "coverage": 0.2,
+      "crap": 1.512
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "run_clip",
+      "line": 186,
+      "complexity": 3,
+      "coverage": 0.07692307692307693,
+      "crap": 10.078743741465637
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "finish_point",
+      "line": 203,
+      "complexity": 8,
+      "coverage": 0.05555555555555555,
+      "crap": 61.91495198902606
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "point_grid",
+      "line": 226,
+      "complexity": 6,
+      "coverage": 0.2,
+      "crap": 24.432000000000006
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "run_profile",
+      "line": 233,
+      "complexity": 8,
+      "coverage": 0.058823529411764705,
+      "crap": 61.357215550580094
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "consolidate",
+      "line": 254,
+      "complexity": 5,
+      "coverage": 0.25,
+      "crap": 15.546875
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "parse_args",
+      "line": 261,
+      "complexity": 1,
+      "coverage": 0.1111111111111111,
+      "crap": 1.7023319615912207
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "main",
+      "line": 273,
+      "complexity": 7,
+      "coverage": 0.058823529411764705,
+      "crap": 47.85161815591288
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "key",
+      "line": 41,
+      "complexity": 1,
+      "coverage": 0.5,
+      "crap": 1.125
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "qp",
+      "line": 44,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "bind",
+      "line": 109,
+      "complexity": 2,
+      "coverage": 0.2,
+      "crap": 4.048
+    },
+    {
+      "file": "scripts/hla_tok/hts/audit_native.py",
+      "function": "score_at",
+      "line": 115,
+      "complexity": 1,
+      "coverage": 0.25,
+      "crap": 1.421875
+    },
+    {
+      "file": "scripts/hla_tok/hts/download_weights.py",
+      "function": "filename",
+      "line": 25,
+      "complexity": 2,
+      "coverage": 0.0,
+      "crap": 6.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/download_weights.py",
+      "function": "file_hashes",
+      "line": 29,
+      "complexity": 3,
+      "coverage": 0.0,
+      "crap": 12.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/download_weights.py",
+      "function": "official_files",
+      "line": 50,
+      "complexity": 4,
+      "coverage": 0.0,
+      "crap": 20.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/download_weights.py",
+      "function": "ranged_download",
+      "line": 71,
+      "complexity": 2,
+      "coverage": 0.0,
+      "crap": 6.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/download_weights.py",
+      "function": "verify",
+      "line": 100,
+      "complexity": 4,
+      "coverage": 0.0,
+      "crap": 20.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/download_weights.py",
+      "function": "download",
+      "line": 110,
+      "complexity": 5,
+      "coverage": 0.0,
+      "crap": 30.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/download_weights.py",
+      "function": "main",
+      "line": 129,
+      "complexity": 2,
+      "coverage": 0.0,
+      "crap": 6.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/figures.py",
+      "function": "numeric",
+      "line": 27,
+      "complexity": 3,
+      "coverage": 0.0,
+      "crap": 12.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/figures.py",
+      "function": "load_original",
+      "line": 31,
+      "complexity": 2,
+      "coverage": 0.0,
+      "crap": 6.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/figures.py",
+      "function": "load_legacy",
+      "line": 35,
+      "complexity": 3,
+      "coverage": 0.0,
+      "crap": 12.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/figures.py",
+      "function": "curves",
+      "line": 39,
+      "complexity": 5,
+      "coverage": 0.0,
+      "crap": 30.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/figures.py",
+      "function": "canvas",
+      "line": 46,
+      "complexity": 1,
+      "coverage": 0.0,
+      "crap": 2.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/figures.py",
+      "function": "plot_rd",
+      "line": 52,
+      "complexity": 9,
+      "coverage": 0.0,
+      "crap": 90.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/figures.py",
+      "function": "plot_equal_lpips",
+      "line": 76,
+      "complexity": 8,
+      "coverage": 0.0,
+      "crap": 72.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/figures.py",
+      "function": "peak_points",
+      "line": 94,
+      "complexity": 7,
+      "coverage": 0.0,
+      "crap": 56.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/figures.py",
+      "function": "peak_units",
+      "line": 105,
+      "complexity": 3,
+      "coverage": 0.0,
+      "crap": 12.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/figures.py",
+      "function": "plot_peaks",
+      "line": 114,
+      "complexity": 7,
+      "coverage": 0.0,
+      "crap": 56.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/figures.py",
+      "function": "main",
+      "line": 128,
+      "complexity": 7,
+      "coverage": 0.0,
+      "crap": 56.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/finalize.py",
+      "function": "format_number",
+      "line": 15,
+      "complexity": 2,
+      "coverage": 0.0,
+      "crap": 6.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/finalize.py",
+      "function": "native_table",
+      "line": 19,
+      "complexity": 5,
+      "coverage": 0.0,
+      "crap": 30.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/finalize.py",
+      "function": "weighted_metrics",
+      "line": 37,
+      "complexity": 4,
+      "coverage": 0.0,
+      "crap": 20.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/finalize.py",
+      "function": "capacity_rows",
+      "line": 44,
+      "complexity": 4,
+      "coverage": 0.0,
+      "crap": 20.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/finalize.py",
+      "function": "capacity_gain",
+      "line": 53,
+      "complexity": 1,
+      "coverage": 0.0,
+      "crap": 2.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/finalize.py",
+      "function": "modeled_rows",
+      "line": 60,
+      "complexity": 4,
+      "coverage": 0.0,
+      "crap": 20.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/finalize.py",
+      "function": "matching_rates",
+      "line": 65,
+      "complexity": 2,
+      "coverage": 0.0,
+      "crap": 6.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/finalize.py",
+      "function": "low_rate_observations",
+      "line": 71,
+      "complexity": 8,
+      "coverage": 0.0,
+      "crap": 72.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/finalize.py",
+      "function": "matched_table",
+      "line": 97,
+      "complexity": 4,
+      "coverage": 0.0,
+      "crap": 20.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/finalize.py",
+      "function": "render_report",
+      "line": 107,
+      "complexity": 3,
+      "coverage": 0.0,
+      "crap": 12.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/finalize.py",
+      "function": "pixel_audit",
+      "line": 202,
+      "complexity": 5,
+      "coverage": 0.0,
+      "crap": 30.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/finalize.py",
+      "function": "main",
+      "line": 218,
+      "complexity": 3,
+      "coverage": 0.0,
+      "crap": 12.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/mutations.py",
+      "function": "inject",
+      "line": 40,
+      "complexity": 1,
+      "coverage": 0.0,
+      "crap": 2.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/mutations.py",
+      "function": "check",
+      "line": 47,
+      "complexity": 3,
+      "coverage": 0.0,
+      "crap": 12.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/mutations.py",
+      "function": "main",
+      "line": 56,
+      "complexity": 6,
+      "coverage": 0.0,
+      "crap": 42.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_capacity.py",
+      "function": "continuous_frames",
+      "line": 21,
+      "complexity": 2,
+      "coverage": 0.0,
+      "crap": 6.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_capacity.py",
+      "function": "probe",
+      "line": 31,
+      "complexity": 10,
+      "coverage": 0.0,
+      "crap": 110.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_capacity.py",
+      "function": "main",
+      "line": 64,
+      "complexity": 3,
+      "coverage": 0.0,
+      "crap": 12.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_comparison.py",
+      "function": "compared_points",
+      "line": 14,
+      "complexity": 6,
+      "coverage": 0.0,
+      "crap": 42.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_comparison.py",
+      "function": "strict_fit",
+      "line": 31,
+      "complexity": 7,
+      "coverage": 0.0,
+      "crap": 56.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_comparison.py",
+      "function": "at_targets",
+      "line": 43,
+      "complexity": 5,
+      "coverage": 0.0,
+      "crap": 30.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_comparison.py",
+      "function": "compare_profiles",
+      "line": 56,
+      "complexity": 8,
+      "coverage": 0.0,
+      "crap": 72.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_comparison.py",
+      "function": "compare_hts",
+      "line": 76,
+      "complexity": 8,
+      "coverage": 0.0,
+      "crap": 72.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_comparison.py",
+      "function": "main",
+      "line": 91,
+      "complexity": 2,
+      "coverage": 0.0,
+      "crap": 6.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_contracts.py",
+      "function": "official_entry",
+      "line": 37,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_contracts.py",
+      "function": "direct_replay",
+      "line": 42,
+      "complexity": 2,
+      "coverage": 1.0,
+      "crap": 2.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_contracts.py",
+      "function": "wrapped_replay",
+      "line": 92,
+      "complexity": 7,
+      "coverage": 0.9523809523809523,
+      "crap": 7.005291005291006
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_contracts.py",
+      "function": "parameters_digest",
+      "line": 115,
+      "complexity": 3,
+      "coverage": 1.0,
+      "crap": 3.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_contracts.py",
+      "function": "compare_case",
+      "line": 119,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_contracts.py",
+      "function": "causality_probe",
+      "line": 130,
+      "complexity": 6,
+      "coverage": 1.0,
+      "crap": 6.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_contracts.py",
+      "function": "contract_cases",
+      "line": 143,
+      "complexity": 9,
+      "coverage": 1.0,
+      "crap": 9.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_contracts.py",
+      "function": "main",
+      "line": 158,
+      "complexity": 3,
+      "coverage": 0.9375,
+      "crap": 3.002197265625
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_contracts.py",
+      "function": "__init__",
+      "line": 25,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_contracts.py",
+      "function": "read_one_frame",
+      "line": 29,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/native_contracts.py",
+      "function": "close",
+      "line": 33,
+      "complexity": 1,
+      "coverage": 1.0,
+      "crap": 1.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/phase0_gate.py",
+      "function": "point_key",
+      "line": 13,
+      "complexity": 1,
+      "coverage": 0.0,
+      "crap": 2.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/phase0_gate.py",
+      "function": "grid",
+      "line": 17,
+      "complexity": 7,
+      "coverage": 0.0,
+      "crap": 56.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/phase0_gate.py",
+      "function": "fully_measured_control",
+      "line": 25,
+      "complexity": 5,
+      "coverage": 0.0,
+      "crap": 30.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/phase0_gate.py",
+      "function": "old_base_improvements",
+      "line": 32,
+      "complexity": 4,
+      "coverage": 0.0,
+      "crap": 20.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/phase0_gate.py",
+      "function": "select_qp",
+      "line": 48,
+      "complexity": 5,
+      "coverage": 0.0,
+      "crap": 30.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/phase0_gate.py",
+      "function": "inspect",
+      "line": 60,
+      "complexity": 10,
+      "coverage": 0.0,
+      "crap": 110.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/phase0_gate.py",
+      "function": "improvements_over_ld",
+      "line": 75,
+      "complexity": 5,
+      "coverage": 0.0,
+      "crap": 30.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/phase0_gate.py",
+      "function": "decide",
+      "line": 81,
+      "complexity": 7,
+      "coverage": 0.0,
+      "crap": 56.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/phase0_gate.py",
+      "function": "main",
+      "line": 99,
+      "complexity": 2,
+      "coverage": 0.0,
+      "crap": 6.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/qa_summary.py",
+      "function": "pytest_status",
+      "line": 11,
+      "complexity": 6,
+      "coverage": 0.0,
+      "crap": 42.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/qa_summary.py",
+      "function": "executed",
+      "line": 22,
+      "complexity": 2,
+      "coverage": 0.0,
+      "crap": 6.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/qa_summary.py",
+      "function": "contract_status",
+      "line": 30,
+      "complexity": 7,
+      "coverage": 0.0,
+      "crap": 56.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/qa_summary.py",
+      "function": "main",
+      "line": 43,
+      "complexity": 1,
+      "coverage": 0.0,
+      "crap": 2.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/replay_original.py",
+      "function": "replay_clip",
+      "line": 19,
+      "complexity": 4,
+      "coverage": 0.0,
+      "crap": 20.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/replay_original.py",
+      "function": "score_window",
+      "line": 34,
+      "complexity": 4,
+      "coverage": 0.0,
+      "crap": 20.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/replay_original.py",
+      "function": "main",
+      "line": 46,
+      "complexity": 5,
+      "coverage": 0.0,
+      "crap": 30.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/verify_ledger.py",
+      "function": "verify_stream",
+      "line": 12,
+      "complexity": 9,
+      "coverage": 0.0,
+      "crap": 90.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/verify_ledger.py",
+      "function": "verify",
+      "line": 34,
+      "complexity": 7,
+      "coverage": 0.0,
+      "crap": 56.0
+    },
+    {
+      "file": "scripts/hla_tok/hts/verify_ledger.py",
+      "function": "main",
+      "line": 61,
+      "complexity": 1,
+      "coverage": 0.0,
+      "crap": 2.0
+    }
+  ],
+  "scope": "Covers CPU tests, native CUDA parity, and exact native replay. Sweep and download command logs run without coverage tracing.",
+  "same_source_span_pairs": [
+    {
+      "a": [
+        "scripts/hla_tok/hts/download_weights.py",
+        "ranged_download"
+      ],
+      "b": [
+        "scripts/hla_tok/hts/download_weights.py",
+        "fetch"
+      ],
+      "similarity": 0.8482328482328483
+    }
+  ]
+}

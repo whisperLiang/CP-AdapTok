@@ -6,6 +6,7 @@ from pathlib import Path
 
 from hla_tok.evaluation.io import write_json
 from scripts.hla_tok.hts.native_comparison import CONFIG, compare_profiles
+from scripts.hla_tok.hts.verify_ledger import verify
 from scripts.hla_tok.v2.protocol import json_at
 
 
@@ -67,7 +68,14 @@ def inspect(directory: Path, config: dict) -> dict:
         return {"verdict": "BLOCKED", "missing_native_cases": missing, "missing_evidence": absent}
     if any(row["frames"] != config["calibration_frames"] for row in rows):
         raise ValueError("native points differ from the frozen Calibration cohort")
-    return decide(directory, config, points, rows)
+    accounting = verify(directory)
+    return decide(directory, config, points, rows) | {"byte_accounting": accounting}
+
+
+def improvements_over_ld(profiles: dict) -> list[dict]:
+    return [row | {"profile": name}
+            for name, report in profiles.items() for matches in report["hts_vs_ld_low_rate_matches"].values()
+            for row in matches if row["rate_saving_percent"] > 0]
 
 
 def decide(directory: Path, config: dict, points: list[dict], rows: list[dict]) -> dict:
@@ -76,8 +84,7 @@ def decide(directory: Path, config: dict, points: list[dict], rows: list[dict]) 
     correct = json_at(directory / "native_correctness.json")["verdict"] == "PASS"
     candidates = [row for row in rows if row["model"] == "hts"]
     profiles, _, _ = compare_profiles(points, config)
-    ld_gains = [row for profile in profiles.values() for rows in profile["hts_vs_ld_low_rate_matches"].values()
-                for row in rows if row["rate_saving_percent"] > 0]
+    ld_gains = improvements_over_ld(profiles)
     old_gains = old_base_improvements(candidates, baseline, config["phase0"])
     passed = correct and bool(ld_gains or old_gains)
     report = {"verdict": "PASS" if passed else "FAIL", "native_correctness": correct,

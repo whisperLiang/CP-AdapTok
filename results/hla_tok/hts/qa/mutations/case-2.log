@@ -1,0 +1,12 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______ test_matched_gop_keeps_four_whole_chunks_and_explicit_i_restarts _______
+tests/hla_tok/hts/test_units.py:25: in test_matched_gop_keeps_four_whole_chunks_and_explicit_i_restarts
+    assert [unit.start for unit in units if unit.reset] == [25, 58]
+E   assert [] == [25, 58]
+E     
+E     Right contains 2 more items, first extra item: 25
+E     Use -v to get more diff
+=========================== short test summary info ============================
+FAILED tests/hla_tok/hts/test_units.py::test_matched_gop_keeps_four_whole_chunks_and_explicit_i_restarts
+1 failed in 0.02s

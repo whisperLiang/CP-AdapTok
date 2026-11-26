@@ -1,0 +1,31 @@
+Setting up [LPIPS] perceptual loss: trunk [alex], v[0.1], spatial [off]
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=AlexNet_Weights.IMAGENET1K_V1`. You can also use `weights=AlexNet_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+Loading model from: /home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/lpips/weights/v0.1/alex.pth
+/home/whisperliang/CP-AdapTok/.venv-native/lib/python3.12/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=VGG16_Weights.IMAGENET1K_V1`. You can also use `weights=VGG16_Weights.DEFAULT` to get the most up-to-date weights.
+  warnings.warn(msg)
+deterministic True benchmark False
+prepare {'ms': 13.093739980831742, 'value': None}
+lpips {'ms': 2.7844860160257667, 'value': None}
+vgg {'ms': 13.120082003297284, 'value': None}
+score {'ms': 27.56993699586019, 'value': {'mse': 0.013045157305896282, 'psnr': 18.845506795633142, 'lpips': 0.2721124291419983, 'dists': 0.055844008922576904}}
+deterministic False benchmark False
+prepare {'ms': 13.10837100027129, 'value': None}
+lpips {'ms': 2.7484710153657943, 'value': None}
+vgg {'ms': 13.021702005062252, 'value': None}
+score {'ms': 27.68620100687258, 'value': {'mse': 0.013045157305896282, 'psnr': 18.845506795633142, 'lpips': 0.2721124291419983, 'dists': 0.055844008922576904}}
+deterministic True benchmark True
+prepare {'ms': 13.202258007368073, 'value': None}
+lpips {'ms': 2.9058810032438487, 'value': None}
+vgg {'ms': 13.165184995159507, 'value': None}
+score {'ms': 27.688685979228467, 'value': {'mse': 0.013045157305896282, 'psnr': 18.845506795633142, 'lpips': 0.2721124291419983, 'dists': 0.055844008922576904}}
+deterministic False benchmark True
+prepare {'ms': 13.10390600701794, 'value': None}
+lpips {'ms': 2.865975024178624, 'value': None}
+vgg {'ms': 13.187806005589664, 'value': None}
+score {'ms': 27.611238008830696, 'value': {'mse': 0.013045157305896282, 'psnr': 18.845506795633142, 'lpips': 0.2721124291419983, 'dists': 0.055844008922576904}}
+state CPU contiguous {'ms': 138.6045050167013, 'value': None}
+state CUDA contiguous {'ms': 2.6325610233470798, 'value': None}
+state native NHWC {'ms': 20.613228989532217, 'value': None}
