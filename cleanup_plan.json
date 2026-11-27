@@ -96,14 +96,16 @@
       "path": "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok/checkpoints/hla_tok/hts/official/cvpr2026_video_hts.pth.tar",
       "reason": "正式权重，必须在旧路径删除前完成逐个核验",
       "sha256": "565607d84943ee79072a5760d34a200d5724b4bb72c6bc24bfab41e8ae4f5f47",
-      "bytes": 324891626
+      "bytes": 324891626,
+      "destination": "checkpoints/cvpr2026_video_hts.pth.tar"
     },
     {
       "status": "MIGRATE",
       "path": "/home/whisperliang/.codex/worktrees/hla-tok-uf-v2/CP-AdapTok/checkpoints/hla_tok/uf_v2/d1-joint-seed2-step20000.pt",
       "reason": "正式权重，必须在旧路径删除前完成逐个核验",
       "sha256": "09bb3a578d89ddb9b2e621a9cf2a1c985edaa49538f236046439116c3864c1ec",
-      "bytes": 1457319
+      "bytes": 1457319,
+      "destination": "checkpoints/hla_tok_uf_v2/d1-seed2.pt"
     },
     {
       "status": "KEEP",
@@ -154,9 +156,10 @@
       "reason": "废弃实验专属 checkpoint 树"
     },
     {
-      "status": "DELETE",
+      "status": "MIGRATE",
       "path": "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_video_hts.pth.tar",
-      "reason": "废弃实验专属 checkpoint 树"
+      "reason": "废弃实验专属 checkpoint 树",
+      "destination": "checkpoints/cvpr2026_video_hts.pth.tar"
     },
     {
       "status": "DELETE",
@@ -956,22 +959,26 @@
     {
       "status": "MIGRATE",
       "path": "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/media/ShakeNDry_1920x1080_120fps_420_8bit_YUV.yuv",
-      "reason": "公开开发源样本，不能从旧 worktree 动态读取"
+      "reason": "公开开发源样本，不能从旧 worktree 动态读取",
+      "destination": "data/uvg/ShakeNDry_1920x1080_120fps_420_8bit_YUV.yuv"
     },
     {
       "status": "MIGRATE",
       "path": "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/media/ShakeNDry_Copyright.txt",
-      "reason": "UVG 源数据版权声明"
+      "reason": "UVG 源数据版权声明",
+      "destination": "data/uvg/ShakeNDry_Copyright.txt"
     },
     {
-      "status": "PROTECTED",
+      "status": "MIGRATE",
       "path": "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/media/uvg-complete.7z",
-      "reason": "原始 UVG 发布文件，成员待核对并迁出"
+      "reason": "原始 UVG 发布文件，成员待核对并迁出",
+      "destination": "data/uvg/uvg-complete.7z"
     },
     {
       "status": "MIGRATE",
       "path": "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/verizon-lte.down",
-      "reason": "原始网络轨迹，须检验归档 SHA256"
+      "reason": "原始网络轨迹，须检验归档 SHA256",
+      "destination": "data/traces/verizon-lte.down"
     },
     {
       "status": "PROTECTED",
@@ -7249,5 +7256,10 @@
     "types/hla_tok_uf/hla_uf_rans.pyi",
     "types/hla_tok_uf/inference_extensions_cuda.pyi",
     "types/hla_tok_uf_v2/hla_uf_v2_records.pyi"
-  ]
+  ],
+  "d1_original_seeds": {
+    "official_choice": "Seed 2 final E0",
+    "seed_1_sha256": "13ce52d63722d5fa01d0f780a5113ba36630921d55dd9738c55f4584ec3334d9",
+    "seed_2_sha256": "09bb3a578d89ddb9b2e621a9cf2a1c985edaa49538f236046439116c3864c1ec"
+  }
 }
