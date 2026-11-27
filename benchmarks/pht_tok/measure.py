@@ -54,7 +54,7 @@ def main():
             print("optimized", pattern, flush=True)
         first = run_closed(source, 32, tx, rx, Mode.MASK, 1, "base")
         first_profile = profile_report(first["per_unit"], source, first["process_cpu_seconds"])
-        before = json.loads((args.work / "profiling-before.json").read_text())
+        before = json.loads((ROOT / "results/pht_tok/profiling.json").read_text())["before"]
         write_json(args.work / "profiling.json", {
             "official": stock_profiles[0], "official_repetitions": stock_profiles,
             "mask_kref2": candidate, "first_legal_prefix_kref1": first_profile, "before": before,
