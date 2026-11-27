@@ -26,10 +26,17 @@ def dataset_path(recorded: str) -> Path:
     return path
 
 
+def sealed_roots(records: list[dict]) -> tuple[Path, ...]:
+    """Reject both relocated Test data and its original manifest locations."""
+    roots = (root for row in records for root in (Path(row["path"]), dataset_path(row["path"])))
+    return tuple(dict.fromkeys(root.resolve() for root in roots))
+
+
 def require_unsealed_path(path: Path) -> Path:
     candidate = path.resolve()
     manifest = ROOT / "data/manifests/cpat_test.json"
-    sealed = (dataset_path(row["path"]).resolve() for row in json.loads(manifest.read_bytes())["records"])
+    records = json.loads(manifest.read_bytes())["records"]
+    sealed = sealed_roots(records)
     if any(candidate.is_relative_to(source) or source.is_relative_to(candidate) for source in sealed):
         raise PermissionError("Test remains sealed")
     return candidate
@@ -54,7 +61,7 @@ class AuditedFrames:
             raise ValueError("manifest identity differs from the frozen Validation provenance")
         self.hashes = hashes
         self.counts = dict.fromkeys(splits, 0)
-        self._sealed_paths = tuple(dataset_path(row["path"]).resolve() for row in splits["test"])
+        self._sealed_paths = sealed_roots(splits["test"])
         self._sealed_hashes = {frame["sha256"] for row in splits["test"] for frame in row["frame_hashes"]}
         self._sealed_videos = {row["content_id"] for row in splits["test"]}
         self._catalog = {split: {row["content_id"]: row for row in rows} for split, rows in splits.items()
