@@ -1,0 +1,722 @@
+{
+  "source_modules": {
+    "pht_tok/__init__.py": [],
+    "pht_tok/bitstream.py": [
+      "bisect",
+      "dataclasses",
+      "enum",
+      "struct",
+      "zlib"
+    ],
+    "pht_tok/codec.py": [
+      "baselines.dcvc_uf.frames",
+      "baselines.dcvc_uf.native",
+      "baselines.dcvc_uf.official",
+      "dataclasses",
+      "hashlib",
+      "inference_extensions_cuda",
+      "numpy",
+      "pathlib",
+      "pht_tok.bitstream",
+      "pht_tok.entropy",
+      "pht_tok.official_adapter",
+      "pht_tok.precision",
+      "torch"
+    ],
+    "pht_tok/entropy.py": [
+      "MLCodec_extensions_cpp",
+      "numpy",
+      "pht_entropy_native",
+      "pht_tok.precision",
+      "torch",
+      "typing"
+    ],
+    "pht_tok/official_adapter.py": [
+      "baselines.dcvc_uf.native",
+      "dataclasses",
+      "torch",
+      "typing"
+    ],
+    "pht_tok/precision.py": [
+      "dataclasses",
+      "numpy"
+    ],
+    "pht_tok/streaming.py": [
+      "bisect",
+      "dataclasses",
+      "math",
+      "random"
+    ],
+    "common/artifacts.py": [
+      "csv",
+      "json",
+      "pathlib",
+      "subprocess",
+      "tempfile",
+      "torch"
+    ],
+    "common/data.py": [
+      "collections",
+      "common.paths",
+      "common.video",
+      "cv2",
+      "hashlib",
+      "json",
+      "numpy",
+      "os",
+      "pathlib",
+      "torch"
+    ],
+    "common/inputs.py": [
+      "common.data",
+      "common.paths",
+      "common.video",
+      "cv2",
+      "dataclasses",
+      "json",
+      "pathlib",
+      "torch"
+    ],
+    "common/integrity.py": [
+      "hashlib",
+      "pathlib",
+      "torch"
+    ],
+    "common/metrics.py": [
+      "DISTS_pytorch",
+      "common.integrity",
+      "common.video",
+      "lpips",
+      "math",
+      "pathlib",
+      "pytorch_msssim",
+      "statistics",
+      "torch",
+      "torch.nn"
+    ],
+    "common/paths.py": [
+      "pathlib"
+    ],
+    "common/performance.py": [
+      "collections.abc",
+      "numpy",
+      "time",
+      "torch",
+      "typing"
+    ],
+    "common/rate_distortion.py": [
+      "math",
+      "numpy"
+    ],
+    "common/video.py": [
+      "common.paths",
+      "cv2",
+      "dataclasses",
+      "numpy",
+      "pathlib",
+      "third_party.DCVC.src.utils.transforms",
+      "torch"
+    ],
+    "baselines/adaptok/artifacts.py": [
+      "PIL",
+      "contextlib",
+      "fcntl",
+      "numpy",
+      "pathlib",
+      "subprocess"
+    ],
+    "baselines/adaptok/benchmark.py": [
+      ".artifacts",
+      ".cli",
+      ".model_adapter",
+      ".profiling",
+      ".reconstruction",
+      ".runner",
+      ".tiling",
+      ".video_reader",
+      "argparse",
+      "common.artifacts",
+      "json",
+      "pathlib",
+      "torch",
+      "yaml"
+    ],
+    "baselines/adaptok/cli.py": [
+      ".artifacts",
+      ".equivalence",
+      ".metrics",
+      ".model_adapter",
+      ".runner",
+      ".video_reader",
+      "argparse",
+      "common.artifacts",
+      "common.data",
+      "importlib.metadata",
+      "json",
+      "pathlib",
+      "platform",
+      "subprocess",
+      "time",
+      "torch",
+      "yaml"
+    ],
+    "baselines/adaptok/download_checkpoint.py": [
+      ".model_adapter",
+      ".video_reader",
+      "argparse",
+      "concurrent.futures",
+      "hashlib",
+      "json",
+      "pathlib",
+      "time",
+      "urllib.request"
+    ],
+    "baselines/adaptok/equivalence.py": [
+      ".metrics",
+      ".tiling",
+      ".video_reader",
+      "torch"
+    ],
+    "baselines/adaptok/metrics.py": [
+      ".video_reader",
+      "DISTS_pytorch",
+      "common.metrics",
+      "importlib.metadata",
+      "lpips",
+      "math",
+      "pathlib",
+      "torch"
+    ],
+    "baselines/adaptok/model_adapter.py": [
+      "common.integrity",
+      "hashlib",
+      "huggingface_hub",
+      "json",
+      "models.adaptok",
+      "pathlib",
+      "subprocess",
+      "sys",
+      "torch"
+    ],
+    "baselines/adaptok/profiling.py": [
+      "numpy",
+      "time",
+      "torch"
+    ],
+    "baselines/adaptok/reconstruction.py": [
+      ".profiling",
+      ".tiling",
+      "time",
+      "torch"
+    ],
+    "baselines/adaptok/runner.py": [
+      ".artifacts",
+      ".metrics",
+      ".profiling",
+      ".reconstruction",
+      ".tiling",
+      ".video_reader",
+      "common.artifacts",
+      "hashlib",
+      "json",
+      "pathlib",
+      "time",
+      "torch"
+    ],
+    "baselines/adaptok/tiling.py": [
+      "dataclasses",
+      "math",
+      "torch",
+      "torch.nn"
+    ],
+    "baselines/adaptok/video_reader.py": [
+      "common.data",
+      "common.integrity",
+      "common.video",
+      "cv2",
+      "dataclasses",
+      "hashlib",
+      "json",
+      "numpy",
+      "pathlib",
+      "subprocess",
+      "time",
+      "torch"
+    ],
+    "baselines/dcvc_uf/evaluate.py": [
+      "argparse",
+      "common.artifacts",
+      "common.inputs",
+      "dataclasses",
+      "hashlib",
+      "io",
+      "json",
+      "math",
+      "os",
+      "pathlib",
+      "subprocess",
+      "sys",
+      "third_party.DCVC.src.utils.stream_helper"
+    ],
+    "baselines/dcvc_uf/frames.py": [
+      "dataclasses"
+    ],
+    "baselines/dcvc_uf/native.py": [
+      "baselines.dcvc_uf.frames",
+      "baselines.dcvc_uf.units",
+      "common.integrity",
+      "pathlib",
+      "third_party.DCVC.src.models.image_model",
+      "third_party.DCVC.src.models.video_model_ht",
+      "third_party.DCVC.src.models.video_model_ld",
+      "third_party.DCVC.src.utils.common",
+      "third_party.DCVC.src.utils.transforms",
+      "torch"
+    ],
+    "baselines/dcvc_uf/official.py": [
+      "baselines.dcvc_uf.frames",
+      "common.integrity",
+      "common.paths",
+      "common.video",
+      "dataclasses",
+      "inference_extensions_cuda",
+      "io",
+      "json",
+      "pathlib",
+      "subprocess",
+      "third_party.DCVC.src.models.image_model",
+      "third_party.DCVC.src.models.video_model_ld",
+      "third_party.DCVC.src.utils.common",
+      "third_party.DCVC.src.utils.stream_helper",
+      "third_party.DCVC.src.utils.transforms",
+      "torch"
+    ],
+    "baselines/dcvc_uf/units.py": [
+      "collections.abc",
+      "dataclasses"
+    ],
+    "baselines/hla_tok_uf_v2/decoder.py": [
+      "baselines.dcvc_uf.frames",
+      "baselines.dcvc_uf.official",
+      "common.video",
+      "dataclasses",
+      "third_party.DCVC.src.layers.layers",
+      "third_party.DCVC.src.models.image_model",
+      "third_party.DCVC.src.models.video_model_ld",
+      "torch",
+      "torch.nn"
+    ],
+    "baselines/hla_tok_uf_v2/dynamic.py": [
+      "__future__",
+      "argparse",
+      "baselines.dcvc_uf.official",
+      "baselines.hla_tok_uf_v2.entropy",
+      "baselines.hla_tok_uf_v2.evaluate",
+      "baselines.hla_tok_uf_v2.wire",
+      "common.artifacts",
+      "common.inputs",
+      "common.integrity",
+      "hashlib",
+      "pathlib",
+      "time",
+      "torch"
+    ],
+    "baselines/hla_tok_uf_v2/entropy.py": [
+      "dataclasses",
+      "hla_uf_rans",
+      "math",
+      "numpy",
+      "numpy.typing"
+    ],
+    "baselines/hla_tok_uf_v2/evaluate.py": [
+      "__future__",
+      "argparse",
+      "baselines.dcvc_uf.frames",
+      "baselines.dcvc_uf.official",
+      "baselines.hla_tok_uf_v2.decoder",
+      "baselines.hla_tok_uf_v2.latent",
+      "baselines.hla_tok_uf_v2.native_weights",
+      "baselines.hla_tok_uf_v2.runtime",
+      "baselines.hla_tok_uf_v2.wire",
+      "common.artifacts",
+      "common.inputs",
+      "common.integrity",
+      "common.metrics",
+      "common.paths",
+      "common.performance",
+      "decimal",
+      "pathlib",
+      "statistics",
+      "time",
+      "torch"
+    ],
+    "baselines/hla_tok_uf_v2/incremental_bench.py": [
+      "__future__",
+      "argparse",
+      "baselines.dcvc_uf.official",
+      "baselines.hla_tok_uf_v2.evaluate",
+      "baselines.hla_tok_uf_v2.latent",
+      "common.artifacts",
+      "common.inputs",
+      "common.performance",
+      "pathlib",
+      "time",
+      "torch"
+    ],
+    "baselines/hla_tok_uf_v2/latent.py": [
+      "baselines.hla_tok_uf_v2.refinement",
+      "dataclasses",
+      "hashlib",
+      "third_party.DCVC.src.models.image_model",
+      "third_party.DCVC.src.models.video_model_ld",
+      "torch"
+    ],
+    "baselines/hla_tok_uf_v2/native_weights.py": [
+      "baselines.dcvc_uf.official",
+      "hashlib",
+      "torch"
+    ],
+    "baselines/hla_tok_uf_v2/records.py": [
+      "__future__",
+      "baselines.dcvc_uf.frames",
+      "baselines.hla_tok_uf_v2.entropy",
+      "baselines.hla_tok_uf_v2.latent",
+      "baselines.hla_tok_uf_v2.refinement",
+      "baselines.hla_tok_uf_v2.wire",
+      "collections.abc",
+      "dataclasses",
+      "hla_uf_v2_records",
+      "numpy",
+      "numpy.typing",
+      "torch",
+      "typing"
+    ],
+    "baselines/hla_tok_uf_v2/refinement.py": [
+      "collections.abc",
+      "dataclasses",
+      "heapq",
+      "math",
+      "numpy",
+      "numpy.typing",
+      "torch"
+    ],
+    "baselines/hla_tok_uf_v2/runtime.py": [
+      "baselines.dcvc_uf.frames",
+      "baselines.dcvc_uf.official",
+      "baselines.hla_tok_uf_v2.decoder",
+      "baselines.hla_tok_uf_v2.entropy",
+      "baselines.hla_tok_uf_v2.latent",
+      "baselines.hla_tok_uf_v2.native_weights",
+      "baselines.hla_tok_uf_v2.records",
+      "baselines.hla_tok_uf_v2.wire",
+      "common.video",
+      "dataclasses",
+      "hashlib",
+      "time",
+      "torch"
+    ],
+    "baselines/hla_tok_uf_v2/static_entropy.py": [
+      "baselines.hla_tok_uf_v2.entropy",
+      "dataclasses",
+      "hashlib",
+      "json",
+      "numpy",
+      "numpy.typing",
+      "pathlib"
+    ],
+    "baselines/hla_tok_uf_v2/wire.py": [
+      "baselines.dcvc_uf.frames",
+      "bisect",
+      "collections.abc",
+      "dataclasses",
+      "struct",
+      "zlib"
+    ],
+    "benchmarks/__main__.py": [
+      "argparse",
+      "importlib",
+      "sys"
+    ],
+    "benchmarks/compare.py": [
+      "argparse",
+      "common.artifacts",
+      "common.inputs",
+      "common.metrics",
+      "pathlib",
+      "statistics"
+    ],
+    "benchmarks/pht_tok/closed.py": [
+      "baselines.dcvc_uf.frames",
+      "baselines.dcvc_uf.official",
+      "baselines.dcvc_uf.units",
+      "common.artifacts",
+      "common.performance",
+      "functools",
+      "numpy",
+      "pht_tok.bitstream",
+      "pht_tok.codec",
+      "statistics",
+      "time",
+      "torch"
+    ],
+    "benchmarks/pht_tok/entropy_rate.py": [
+      "numpy",
+      "pht_tok.bitstream",
+      "pht_tok.codec",
+      "pht_tok.entropy",
+      "pht_tok.official_adapter",
+      "pht_tok.precision"
+    ],
+    "benchmarks/pht_tok/examples.py": [
+      "PIL",
+      "argparse",
+      "baselines.dcvc_uf.native",
+      "benchmarks.pht_tok.study",
+      "common.artifacts",
+      "pathlib",
+      "pht_tok.bitstream",
+      "pht_tok.codec",
+      "third_party.DCVC.src.utils.common",
+      "third_party.DCVC.src.utils.transforms",
+      "torch"
+    ],
+    "benchmarks/pht_tok/measure.py": [
+      "argparse",
+      "baselines.dcvc_uf.native",
+      "benchmarks.pht_tok.closed",
+      "benchmarks.pht_tok.study",
+      "common.artifacts",
+      "json",
+      "pathlib",
+      "pht_tok.bitstream",
+      "pht_tok.codec",
+      "third_party.DCVC.src.utils.common",
+      "torch"
+    ],
+    "benchmarks/pht_tok/mutations.py": [
+      "argparse",
+      "dataclasses",
+      "json",
+      "os",
+      "pathlib",
+      "shutil",
+      "subprocess",
+      "sys",
+      "tempfile"
+    ],
+    "benchmarks/pht_tok/network.py": [
+      "argparse",
+      "baselines.dcvc_uf.native",
+      "baselines.dcvc_uf.official",
+      "baselines.dcvc_uf.units",
+      "benchmarks.pht_tok.closed",
+      "benchmarks.pht_tok.study",
+      "common.artifacts",
+      "common.performance",
+      "dataclasses",
+      "inference_extensions_cuda",
+      "json",
+      "numpy",
+      "pathlib",
+      "pht_tok.bitstream",
+      "pht_tok.codec",
+      "pht_tok.streaming",
+      "statistics",
+      "third_party.DCVC.src.utils.common",
+      "torch"
+    ],
+    "benchmarks/pht_tok/profile_stages.py": [
+      "argparse",
+      "baselines.dcvc_uf.native",
+      "benchmarks.pht_tok.study",
+      "collections",
+      "common.artifacts",
+      "contextlib",
+      "ctypes",
+      "functools",
+      "json",
+      "pathlib",
+      "pht_tok.bitstream",
+      "pht_tok.codec",
+      "pht_tok.entropy",
+      "pht_tok.official_adapter",
+      "statistics",
+      "third_party.DCVC.src.utils.common",
+      "time",
+      "torch",
+      "unittest.mock"
+    ],
+    "benchmarks/pht_tok/study.py": [
+      "PIL",
+      "argparse",
+      "baselines.dcvc_uf.native",
+      "baselines.dcvc_uf.official",
+      "baselines.dcvc_uf.units",
+      "benchmarks.pht_tok.closed",
+      "benchmarks.pht_tok.entropy_rate",
+      "common.artifacts",
+      "common.inputs",
+      "common.metrics",
+      "common.performance",
+      "csv",
+      "dataclasses",
+      "functools",
+      "hashlib",
+      "json",
+      "numpy",
+      "pathlib",
+      "pht_tok.bitstream",
+      "pht_tok.codec",
+      "pht_tok.official_adapter",
+      "statistics",
+      "third_party.DCVC.src.utils.common",
+      "third_party.DCVC.src.utils.transforms",
+      "third_party.DCVC.src.utils.video_reader",
+      "torch",
+      "torch.nn"
+    ],
+    "benchmarks/pht_tok/validation.py": [
+      "argparse",
+      "baselines.dcvc_uf.native",
+      "baselines.dcvc_uf.official",
+      "baselines.dcvc_uf.units",
+      "benchmarks.pht_tok.closed",
+      "benchmarks.pht_tok.study",
+      "common.artifacts",
+      "common.inputs",
+      "common.performance",
+      "functools",
+      "pathlib",
+      "pht_tok.bitstream",
+      "pht_tok.codec",
+      "third_party.DCVC.src.utils.common",
+      "third_party.DCVC.src.utils.transforms",
+      "torch"
+    ],
+    "benchmarks/smoke_adaptok.py": [
+      "argparse",
+      "baselines.adaptok.cli",
+      "baselines.adaptok.metrics",
+      "baselines.adaptok.model_adapter",
+      "baselines.adaptok.reconstruction",
+      "baselines.adaptok.tiling",
+      "baselines.adaptok.video_reader",
+      "common.data",
+      "cv2",
+      "hashlib",
+      "json",
+      "pathlib",
+      "time",
+      "torch"
+    ],
+    "benchmarks/smoke_d1.py": [
+      "argparse",
+      "baselines.dcvc_uf.official",
+      "baselines.hla_tok_uf_v2.evaluate",
+      "common.inputs",
+      "common.integrity",
+      "common.metrics",
+      "hashlib",
+      "json",
+      "pathlib",
+      "time",
+      "torch"
+    ],
+    "benchmarks/smoke_native.py": [
+      "argparse",
+      "baselines.dcvc_uf.native",
+      "baselines.dcvc_uf.official",
+      "baselines.dcvc_uf.units",
+      "benchmarks.pht_tok.closed",
+      "benchmarks.pht_tok.network",
+      "benchmarks.pht_tok.study",
+      "common.inputs",
+      "common.integrity",
+      "common.performance",
+      "hashlib",
+      "inference_extensions_cuda",
+      "json",
+      "numpy",
+      "pathlib",
+      "pht_tok.bitstream",
+      "pht_tok.codec",
+      "third_party.DCVC.src.utils.common",
+      "third_party.DCVC.src.utils.transforms",
+      "time",
+      "torch"
+    ]
+  },
+  "module_count": 59,
+  "benchmark_entries": {
+    "pht": {
+      "module": "benchmarks.pht_tok.study",
+      "help": "PASS"
+    },
+    "pht-codec": {
+      "module": "benchmarks.pht_tok.examples",
+      "help": "PASS"
+    },
+    "pht-validation": {
+      "module": "benchmarks.pht_tok.validation",
+      "help": "PASS"
+    },
+    "pht-latency": {
+      "module": "benchmarks.pht_tok.measure",
+      "help": "PASS"
+    },
+    "network": {
+      "module": "benchmarks.pht_tok.network",
+      "help": "PASS"
+    },
+    "dcvc": {
+      "module": "baselines.dcvc_uf.evaluate",
+      "help": "PASS"
+    },
+    "adaptok": {
+      "module": "baselines.adaptok.cli",
+      "help": "PASS"
+    },
+    "adaptok-latency": {
+      "module": "baselines.adaptok.benchmark",
+      "help": "PASS"
+    },
+    "d1": {
+      "module": "baselines.hla_tok_uf_v2.evaluate",
+      "help": "PASS"
+    },
+    "d1-closure": {
+      "module": "baselines.hla_tok_uf_v2.dynamic",
+      "help": "PASS"
+    },
+    "d1-incremental": {
+      "module": "baselines.hla_tok_uf_v2.incremental_bench",
+      "help": "PASS"
+    },
+    "smoke-native": {
+      "module": "benchmarks.smoke_native",
+      "help": "PASS"
+    },
+    "smoke-d1": {
+      "module": "benchmarks.smoke_d1",
+      "help": "PASS"
+    },
+    "smoke-adaptok": {
+      "module": "benchmarks.smoke_adaptok",
+      "help": "PASS"
+    },
+    "compare": {
+      "module": "benchmarks.compare",
+      "help": "PASS"
+    }
+  },
+  "shell_syntax_verified": [
+    "baselines/adaptok/setup.sh",
+    "baselines/hla_tok_uf_v2/build_legacy_rans.sh",
+    "baselines/hla_tok_uf_v2/build_native.sh",
+    "baselines/hla_tok_uf_v2/build_records.sh",
+    "benchmarks/pht_tok/native/build.sh",
+    "benchmarks/pht_tok/native/build_entropy.sh",
+    "scripts/build_native.sh"
+  ],
+  "retired_module_imports": 0
+}

@@ -1,0 +1,606 @@
+{
+  "status": "PASS",
+  "official_diagnostics": {
+    "ld": {
+      "16": [
+        {
+          "source": "car-turn",
+          "physical_bytes": 35242,
+          "physical_bits": 281936,
+          "payload_bytes": 35152,
+          "header_bytes": 90,
+          "i_bytes": 11457,
+          "p_bytes": 23780,
+          "sps_bytes": 5,
+          "valid_frames": 17,
+          "tail_padding_frames": 0,
+          "resolution": [
+            1080,
+            1920
+          ],
+          "spatial_padding": [
+            8,
+            0
+          ],
+          "source_fps": 30,
+          "seconds": 0.5666666666666667,
+          "bpp": 0.007997912127814089,
+          "mbps": 0.49753411764705885,
+          "units": [
+            {
+              "start": 0,
+              "valid": 1,
+              "coded": 1,
+              "intra": true,
+              "qp": 16,
+              "reset": false,
+              "offset": 5,
+              "payload_bytes": 11452,
+              "bytes": 11457,
+              "parallel": 2
+            },
+            {
+              "start": 1,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 11462,
+              "payload_bytes": 4018,
+              "bytes": 4023,
+              "parallel": 1
+            },
+            {
+              "start": 2,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 15485,
+              "payload_bytes": 897,
+              "bytes": 902,
+              "parallel": 1
+            },
+            {
+              "start": 3,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 16387,
+              "payload_bytes": 1777,
+              "bytes": 1782,
+              "parallel": 1
+            },
+            {
+              "start": 4,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 18169,
+              "payload_bytes": 822,
+              "bytes": 827,
+              "parallel": 1
+            },
+            {
+              "start": 5,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 18996,
+              "payload_bytes": 1258,
+              "bytes": 1263,
+              "parallel": 1
+            },
+            {
+              "start": 6,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 20259,
+              "payload_bytes": 748,
+              "bytes": 753,
+              "parallel": 1
+            },
+            {
+              "start": 7,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 21012,
+              "payload_bytes": 1410,
+              "bytes": 1415,
+              "parallel": 1
+            },
+            {
+              "start": 8,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 22427,
+              "payload_bytes": 957,
+              "bytes": 962,
+              "parallel": 1
+            },
+            {
+              "start": 9,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 23389,
+              "payload_bytes": 1635,
+              "bytes": 1640,
+              "parallel": 1
+            },
+            {
+              "start": 10,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 25029,
+              "payload_bytes": 948,
+              "bytes": 953,
+              "parallel": 1
+            },
+            {
+              "start": 11,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 25982,
+              "payload_bytes": 1801,
+              "bytes": 1806,
+              "parallel": 1
+            },
+            {
+              "start": 12,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 27788,
+              "payload_bytes": 1011,
+              "bytes": 1016,
+              "parallel": 1
+            },
+            {
+              "start": 13,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 28804,
+              "payload_bytes": 1885,
+              "bytes": 1890,
+              "parallel": 1
+            },
+            {
+              "start": 14,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 30694,
+              "payload_bytes": 1139,
+              "bytes": 1144,
+              "parallel": 1
+            },
+            {
+              "start": 15,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 31838,
+              "payload_bytes": 2093,
+              "bytes": 2098,
+              "parallel": 1
+            },
+            {
+              "start": 16,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 33936,
+              "payload_bytes": 1301,
+              "bytes": 1306,
+              "parallel": 1
+            }
+          ],
+          "sha256": "eaba34bed46463ca0eca1118c4479941ac1e6db47b397260d51352316b8099da"
+        }
+      ],
+      "32": [
+        {
+          "source": "car-turn",
+          "physical_bytes": 122090,
+          "physical_bits": 976720,
+          "payload_bytes": 121998,
+          "header_bytes": 92,
+          "i_bytes": 29362,
+          "p_bytes": 92723,
+          "sps_bytes": 5,
+          "valid_frames": 17,
+          "tail_padding_frames": 0,
+          "resolution": [
+            1080,
+            1920
+          ],
+          "spatial_padding": [
+            8,
+            0
+          ],
+          "source_fps": 30,
+          "seconds": 0.5666666666666667,
+          "bpp": 0.02770742556281772,
+          "mbps": 1.7236235294117648,
+          "units": [
+            {
+              "start": 0,
+              "valid": 1,
+              "coded": 1,
+              "intra": true,
+              "qp": 32,
+              "reset": false,
+              "offset": 5,
+              "payload_bytes": 29355,
+              "bytes": 29362,
+              "parallel": 6
+            },
+            {
+              "start": 1,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 29367,
+              "payload_bytes": 14931,
+              "bytes": 14936,
+              "parallel": 5
+            },
+            {
+              "start": 2,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 44303,
+              "payload_bytes": 3495,
+              "bytes": 3500,
+              "parallel": 2
+            },
+            {
+              "start": 3,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 47803,
+              "payload_bytes": 6317,
+              "bytes": 6322,
+              "parallel": 4
+            },
+            {
+              "start": 4,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 54125,
+              "payload_bytes": 2944,
+              "bytes": 2949,
+              "parallel": 2
+            },
+            {
+              "start": 5,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 57074,
+              "payload_bytes": 5241,
+              "bytes": 5246,
+              "parallel": 3
+            },
+            {
+              "start": 6,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 62320,
+              "payload_bytes": 2984,
+              "bytes": 2989,
+              "parallel": 2
+            },
+            {
+              "start": 7,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 65309,
+              "payload_bytes": 6035,
+              "bytes": 6040,
+              "parallel": 3
+            },
+            {
+              "start": 8,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 71349,
+              "payload_bytes": 3768,
+              "bytes": 3773,
+              "parallel": 2
+            },
+            {
+              "start": 9,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 75122,
+              "payload_bytes": 6709,
+              "bytes": 6714,
+              "parallel": 3
+            },
+            {
+              "start": 10,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 81836,
+              "payload_bytes": 3843,
+              "bytes": 3848,
+              "parallel": 2
+            },
+            {
+              "start": 11,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 85684,
+              "payload_bytes": 6979,
+              "bytes": 6984,
+              "parallel": 3
+            },
+            {
+              "start": 12,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 92668,
+              "payload_bytes": 4139,
+              "bytes": 4144,
+              "parallel": 2
+            },
+            {
+              "start": 13,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 96812,
+              "payload_bytes": 7295,
+              "bytes": 7300,
+              "parallel": 3
+            },
+            {
+              "start": 14,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 104112,
+              "payload_bytes": 4807,
+              "bytes": 4812,
+              "parallel": 2
+            },
+            {
+              "start": 15,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 108924,
+              "payload_bytes": 7929,
+              "bytes": 7934,
+              "parallel": 3
+            },
+            {
+              "start": 16,
+              "valid": 1,
+              "coded": 1,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 116858,
+              "payload_bytes": 5227,
+              "bytes": 5232,
+              "parallel": 2
+            }
+          ],
+          "sha256": "61e50f1e852f4fb96df6ee7c1b647d74c15fce0e131aa09ebcc41aca28592be8"
+        }
+      ]
+    },
+    "hts": {
+      "16": [
+        {
+          "source": "car-turn",
+          "physical_bytes": 28421,
+          "physical_bits": 227368,
+          "payload_bytes": 28401,
+          "header_bytes": 20,
+          "i_bytes": 11457,
+          "p_bytes": 16959,
+          "sps_bytes": 5,
+          "valid_frames": 17,
+          "tail_padding_frames": 0,
+          "resolution": [
+            1080,
+            1920
+          ],
+          "spatial_padding": [
+            8,
+            0
+          ],
+          "source_fps": 30,
+          "seconds": 0.5666666666666667,
+          "bpp": 0.006449936456063907,
+          "mbps": 0.40123764705882353,
+          "units": [
+            {
+              "start": 0,
+              "valid": 1,
+              "coded": 1,
+              "intra": true,
+              "qp": 16,
+              "reset": false,
+              "offset": 5,
+              "payload_bytes": 11452,
+              "bytes": 11457,
+              "parallel": 2
+            },
+            {
+              "start": 1,
+              "valid": 8,
+              "coded": 8,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 11462,
+              "payload_bytes": 8302,
+              "bytes": 8307,
+              "parallel": 3
+            },
+            {
+              "start": 9,
+              "valid": 8,
+              "coded": 8,
+              "intra": false,
+              "qp": 16,
+              "reset": false,
+              "offset": 19769,
+              "payload_bytes": 8647,
+              "bytes": 8652,
+              "parallel": 3
+            }
+          ],
+          "sha256": "4b3c21c4cdf2ff4904f3b4274a1779cc18af4d9472e040a46f47b2a2f1b36f8b"
+        }
+      ],
+      "32": [
+        {
+          "source": "car-turn",
+          "physical_bytes": 92448,
+          "physical_bits": 739584,
+          "payload_bytes": 92422,
+          "header_bytes": 26,
+          "i_bytes": 29362,
+          "p_bytes": 63081,
+          "sps_bytes": 5,
+          "valid_frames": 17,
+          "tail_padding_frames": 0,
+          "resolution": [
+            1080,
+            1920
+          ],
+          "spatial_padding": [
+            8,
+            0
+          ],
+          "source_fps": 30,
+          "seconds": 0.5666666666666667,
+          "bpp": 0.020980392156862746,
+          "mbps": 1.3051482352941175,
+          "units": [
+            {
+              "start": 0,
+              "valid": 1,
+              "coded": 1,
+              "intra": true,
+              "qp": 32,
+              "reset": false,
+              "offset": 5,
+              "payload_bytes": 29355,
+              "bytes": 29362,
+              "parallel": 6
+            },
+            {
+              "start": 1,
+              "valid": 8,
+              "coded": 8,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 29367,
+              "payload_bytes": 30598,
+              "bytes": 30605,
+              "parallel": 8
+            },
+            {
+              "start": 9,
+              "valid": 8,
+              "coded": 8,
+              "intra": false,
+              "qp": 32,
+              "reset": false,
+              "offset": 59972,
+              "payload_bytes": 32469,
+              "bytes": 32476,
+              "parallel": 8
+            }
+          ],
+          "sha256": "efc0b28e2624dd284dff3ec4f80bf9809af0001298fa006d785302a949188589"
+        }
+      ]
+    }
+  },
+  "test_pixel_reads": 0
+}

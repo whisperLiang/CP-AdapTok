@@ -1,0 +1,98 @@
+{
+  "crapper": {
+    "tool_commit": "fdd0c01387e4211c74b23c2cdd11c06d90883838",
+    "coverage_source": "Actual CPU test suite. CUDA and CLI smoke processes are outside this coverage capture.",
+    "target": "CRAP < 10",
+    "status": "TARGET_NOT_MET",
+    "functions_scored": 443,
+    "functions_at_or_above_target": 102,
+    "functions_with_complexity_at_least_10": [
+      {
+        "function": "benchmarks.pht_tok.study.fixed_point",
+        "cyclomatic_complexity": 21,
+        "cpu_coverage_percent": 0.0,
+        "crap": 462.0
+      },
+      {
+        "function": "benchmarks.pht_tok.network.simulate",
+        "cyclomatic_complexity": 20,
+        "cpu_coverage_percent": 0.0,
+        "crap": 420.0
+      },
+      {
+        "function": "benchmarks.pht_tok.closed.run_closed",
+        "cyclomatic_complexity": 18,
+        "cpu_coverage_percent": 0.0,
+        "crap": 342.0
+      },
+      {
+        "function": "baselines.hla_tok_uf_v2.dynamic.main",
+        "cyclomatic_complexity": 17,
+        "cpu_coverage_percent": 0.0,
+        "crap": 306.0
+      },
+      {
+        "function": "benchmarks.pht_tok.study.equivalence",
+        "cyclomatic_complexity": 12,
+        "cpu_coverage_percent": 0.0,
+        "crap": 156.0
+      },
+      {
+        "function": "benchmarks.smoke_native.pht",
+        "cyclomatic_complexity": 12,
+        "cpu_coverage_percent": 0.0,
+        "crap": 156.0
+      },
+      {
+        "function": "baselines.dcvc_uf.evaluate.account_stream",
+        "cyclomatic_complexity": 20,
+        "cpu_coverage_percent": 66.7,
+        "crap": 34.8
+      }
+    ]
+  },
+  "dryer": {
+    "tool_commit": "ad371d460854b937039410d2c3889a4da94a753a",
+    "similarity_threshold": 0.8,
+    "duplicate_candidates": 0
+  },
+  "mutations": {
+    "mutator_commit": "264dc965fa79b60942018143e7e323b517635a69",
+    "pht_targeted_mutations": [
+      {
+        "mutation": "single_frame_rate_denominator",
+        "killed": true
+      },
+      {
+        "mutation": "rewrite_prefix_header",
+        "killed": true
+      },
+      {
+        "mutation": "omit_hyperprior_from_ledger",
+        "killed": true
+      },
+      {
+        "mutation": "invalid_cdf_normalization",
+        "killed": true
+      },
+      {
+        "mutation": "clip_escape_symbols",
+        "killed": true
+      },
+      {
+        "mutation": "include_tail_in_duration",
+        "killed": true
+      },
+      {
+        "mutation": "count_late_as_on_time",
+        "killed": true
+      },
+      {
+        "mutation": "look_at_future_bandwidth",
+        "killed": true
+      }
+    ],
+    "test_seal_mutations_killed": 1,
+    "test_seal_mutations_run": 1
+  }
+}

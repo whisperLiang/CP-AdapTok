@@ -1,0 +1,1131 @@
+{
+  "schema_version": 1,
+  "branch": "pht-tok",
+  "cleanup_verdict": "PARTIAL_PASS",
+  "research_verdict": "PARTIAL_PASS",
+  "pht_tok_research_admission": "FAIL",
+  "gates": {
+    "G3": {
+      "status": "PASS",
+      "evidence": "post_deletion_gate.json"
+    },
+    "G4": {
+      "status": "PASS",
+      "evidence": "validation_receipts.json"
+    },
+    "G5": {
+      "status": "PASS",
+      "evidence": [
+        "isolated_h100_regression.json",
+        "pht_retiming.json",
+        "ld_retiming.json"
+      ]
+    },
+    "G6": {
+      "status": "PASS",
+      "quality_audit": "ub_mode_checks.json"
+    },
+    "G7": {
+      "status": "PASS",
+      "test_pixel_reads": 0
+    },
+    "G8": {
+      "status": "PASS",
+      "measured_at": "2026-11-27T13:16:41+08:00"
+    },
+    "G1": {
+      "status": "PARTIAL_PASS",
+      "pht_tok_ref_whitelist": "PASS",
+      "reason": "pht-tok 只包含白名单实现。用户正在使用的独立 UPG-Tok 分支受保护。"
+    },
+    "G2": {
+      "status": "PARTIAL_PASS",
+      "local_branches_deleted": 23,
+      "remote_branches_deleted": 15,
+      "historical_worktrees_deleted": 14,
+      "exact_primary_asset_paths_deleted": 172,
+      "retired_python_cache_files_deleted": 463,
+      "unresolved": [
+        {
+          "status": "PROTECTED",
+          "path": "experiment/aip-vtok-joint-v1",
+          "reason": "检出 worktree 存在用户未提交的报告修改",
+          "head": "73ea8b4b027587afd2149c298a82f5d14f013580",
+          "remote_head": "73ea8b4b027587afd2149c298a82f5d14f013580",
+          "local_head_at_audit": "73ea8b4b027587afd2149c298a82f5d14f013580",
+          "remote_head_at_audit": "73ea8b4b027587afd2149c298a82f5d14f013580"
+        },
+        {
+          "status": "PROTECTED",
+          "path": "experiment/aip-vtok-sparse-decoder",
+          "reason": "含用户未提交修改的 Joint V1 工作树通过该工作树引用五个依赖文件",
+          "head": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+          "remote_head": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+          "local_head_at_audit": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+          "remote_head_at_audit": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea"
+        },
+        {
+          "status": "PROTECTED",
+          "path": "experiment/hla-tok-hts",
+          "reason": "受保护的 PHT 工作树仍使用本工作树的官方 LD 和图像权重链接",
+          "head": "e90ceda2d2875cd99061b8eb20946ebf67820a91",
+          "remote_head": null,
+          "local_head_at_audit": "e90ceda2d2875cd99061b8eb20946ebf67820a91",
+          "remote_head_at_audit": null
+        },
+        {
+          "status": "PROTECTED",
+          "path": "experiment/pht-tok",
+          "reason": "正在运行的 UPG-Tok 通过五个符号链接使用该工作树的原生库、网络轨迹和基准数据",
+          "head": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+          "remote_head": null,
+          "local_head_at_audit": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+          "remote_head_at_audit": null
+        },
+        {
+          "path": "experiment/upg-tok",
+          "head": "d77322d12db878d04fbe3d91ac50160a39cdf776",
+          "remote_head": null,
+          "status": "PROTECTED",
+          "reason": "发现新分支、未提交修改和现场运行任务，保留工作树及被引用依赖",
+          "local_head_at_audit": "09e911816a173aabb650d85f7dc3f67dbebc9260",
+          "remote_head_at_audit": null
+        },
+        {
+          "status": "UNRESOLVED",
+          "path": "/home/whisperliang/.codex/worktrees/history-enhancement-run",
+          "reason": "其他项目或无法证明 Git 所有权"
+        },
+        {
+          "status": "UNRESOLVED",
+          "path": "/home/whisperliang/.codex/worktrees/remove-hglr",
+          "reason": "其他项目或无法证明 Git 所有权"
+        },
+        {
+          "status": "UNRESOLVED",
+          "path": "/home/whisperliang/.codex/worktrees/hla-tok-v3-qa.93UiIw",
+          "reason": "目录无 worktree 元数据，未认定为可删除资产"
+        },
+        {
+          "status": "PROTECTED",
+          "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/alignment.pt",
+          "reason": "Joint V1 脏工作树的现有跨工作树依赖"
+        },
+        {
+          "status": "PROTECTED",
+          "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_fix/fix_a/seed1/step_1000.pt",
+          "reason": "Joint V1 脏工作树的现有跨工作树依赖"
+        },
+        {
+          "status": "PROTECTED",
+          "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/projector_w128/latest.pt",
+          "reason": "Joint V1 脏工作树的现有跨工作树依赖"
+        }
+      ]
+    }
+  },
+  "retained_schemes": {
+    "pht_tok": {
+      "status": "PASS",
+      "source_commit": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+      "project_code": "pht_tok",
+      "results": "results/pht_tok",
+      "weights": "shared DCVC-UF image and HT-S",
+      "research_overall": "PARTIAL_PASS",
+      "research_admission": "FAIL"
+    },
+    "dcvc_uf": {
+      "status": "PASS",
+      "variants": {
+        "ld": "PASS",
+        "hts": "PASS"
+      },
+      "weights": {
+        "intra": {
+          "filename": "cvpr2026_image.pth.tar",
+          "sha256": "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302",
+          "bytes": 168845375,
+          "upstream_quickxorhash": "djlEVMhDjexrJb/on44uFwIjRik="
+        },
+        "ld": {
+          "filename": "cvpr2026_video_ld.pth.tar",
+          "sha256": "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799",
+          "bytes": 38724071,
+          "upstream_quickxorhash": "JCP2tLHKkC9NEEacsZDf2wUjLmo="
+        },
+        "hts": {
+          "filename": "cvpr2026_video_hts.pth.tar",
+          "bytes": 324891626,
+          "sha256": "565607d84943ee79072a5760d34a200d5724b4bb72c6bc24bfab41e8ae4f5f47",
+          "published_item": "2866592D5C55DF8C!se6cad35f3d2642afa45f6d1666a09e77"
+        }
+      },
+      "project_code": "baselines/dcvc_uf",
+      "results": "results/dcvc_uf"
+    },
+    "adaptok": {
+      "status": "PASS",
+      "project_code": "baselines/adaptok",
+      "results": "results/adaptok",
+      "weights": {
+        "source_commit": "a72076cf6474f930a181aa78971de70d65289b49",
+        "revision": "c514b22615a140c06f4c9792e93cbef9e5c79f32",
+        "files": {
+          "config.json": "7ebf3ed0bb451b39424a2c89154da95f542ce12559175061ef94702e7e01bc4c",
+          "model.safetensors": "be5432949a87dee253c86f7ccb87bb5370b435ed180f8cda546b09d6a63c8cdd"
+        }
+      },
+      "serialized_bytes": null,
+      "historical_modes": {
+        "no_overlap": {
+          "psnr_db": 24.6811,
+          "fps": 1.558
+        },
+        "overlap": {
+          "psnr_db": 25.1504,
+          "fps": 0.97
+        }
+      }
+    },
+    "hla_tok_uf_v2": {
+      "status": "PASS",
+      "project_code": "baselines/hla_tok_uf_v2",
+      "results": "results/hla_tok_uf_v2",
+      "checkpoint": {
+        "origin_commit": "ffbb7177e869b49934bcddf37c24fc7eade8bf41",
+        "selected_endpoint": "D1 / Seed 2 final E0",
+        "training_step": 20000,
+        "original_sha256": "09bb3a578d89ddb9b2e621a9cf2a1c985edaa49538f236046439116c3864c1ec",
+        "checkpoint": "checkpoints/hla_tok_uf_v2/d1-seed2.pt",
+        "sha256": "a7f9c641e3014447fb515eca273eb18b6ec1c003e635f883df65dd96485a0b35",
+        "checkpoint_bytes": 478654,
+        "original_bytes": 1457319,
+        "tensors": 55,
+        "tensor_equivalence": "EXACT",
+        "removed_keys": [
+          "cuda_rng",
+          "next_data_position",
+          "optimizer",
+          "rng",
+          "signature",
+          "step"
+        ],
+        "qp_i": 0,
+        "qp_p": 8,
+        "native_skip_threshold": 0,
+        "symbol_quantizer": "frozen E0",
+        "budgets_mbps": [
+          5,
+          10,
+          20,
+          40
+        ],
+        "gop": 32
+      },
+      "checkpoint_tensor_match": "EXACT",
+      "validation_admission": "FAIL",
+      "seed1_final_results_preserved": true
+    }
+  },
+  "correctness": {
+    "pht": {
+      "status": "PASS",
+      "actual_bytes_equal": true,
+      "frame_shape_and_output_digest_equal": true,
+      "psnr_lpips_dists_exact": true,
+      "source_frames": 17
+    },
+    "ld": {
+      "status": "PASS",
+      "actual_bytes_equal": true,
+      "frame_shape_and_output_digest_equal": true,
+      "psnr_lpips_dists_exact": true,
+      "source_frames": 17
+    },
+    "hts": {
+      "status": "PASS",
+      "actual_bytes_equal": true,
+      "frame_shape_and_output_digest_equal": true,
+      "psnr_lpips_dists_exact": true,
+      "source_frames": 17
+    },
+    "d1": {
+      "status": "PASS",
+      "actual_bytes_equal": true,
+      "frame_shape_and_output_digest_equal": true,
+      "psnr_lpips_dists_exact": true,
+      "source_frames": 17
+    },
+    "adaptok": {
+      "status": "PASS",
+      "actual_bytes_equal": null,
+      "frame_shape_and_output_digest_equal": true,
+      "psnr_lpips_dists_exact": true,
+      "source_frames": 17
+    }
+  },
+  "correctness_evidence": "results/cleanup/validation_receipts.json",
+  "performance": {
+    "matched_comparisons": {
+      "pht/controlled_four_pairs": {
+        "protocol": "four paired processes, ABBA, CPU affinity 34–41, original official HT-S warm-up, 129 native UVG frames, QP 32",
+        "status": "PASS",
+        "before": {
+          "encode_fps": 239.3711991732294,
+          "decode_fps": 128.2432781032938,
+          "serial_fps": 83.60668732648918,
+          "encode_p50_ms": 34.93097650061827,
+          "decode_p50_ms": 65.16764999105362,
+          "serial_p50_ms": 100.43992749706376,
+          "encode_p95_ms": 38.24726500752149,
+          "decode_p95_ms": 72.23303982827929,
+          "serial_p95_ms": 108.70708834554534,
+          "peak_bytes": 9332229632.0,
+          "load_ms": 9319.55914851278
+        },
+        "after": {
+          "encode_fps": 230.79149121450894,
+          "decode_fps": 123.74546634637247,
+          "serial_fps": 80.83767824046777,
+          "encode_p50_ms": 35.278135757835116,
+          "decode_p50_ms": 68.56974549009465,
+          "serial_p50_ms": 104.17795974353794,
+          "encode_p95_ms": 37.8262163438194,
+          "decode_p95_ms": 73.59167605172843,
+          "serial_p95_ms": 109.651080614276,
+          "peak_bytes": 9332229632.0,
+          "load_ms": 10618.750748006278
+        },
+        "percent": {
+          "encode_fps": -3.5842691135584137,
+          "decode_fps": -3.507249520944522,
+          "serial_fps": -3.3119468963149656,
+          "encode_p50_ms": 0.9938435508972887,
+          "decode_p50_ms": 5.220528129383317,
+          "serial_p50_ms": 3.7216596423603088,
+          "encode_p95_ms": -1.1008595349740524,
+          "decode_p95_ms": 1.8809068906404214,
+          "serial_p95_ms": 0.8683815223989866,
+          "peak_bytes": 0.0,
+          "load_ms": 13.940483436931906
+        },
+        "threshold_exceedances": {},
+        "samples": {
+          "before": {
+            "summary": {
+              "encode_fps": 239.3711991732294,
+              "decode_fps": 128.2432781032938,
+              "serial_fps": 83.60668732648918,
+              "encode_p50_ms": 34.93097650061827,
+              "decode_p50_ms": 65.16764999105362,
+              "serial_p50_ms": 100.43992749706376,
+              "encode_p95_ms": 38.24726500752149,
+              "decode_p95_ms": 72.23303982827929,
+              "serial_p95_ms": 108.70708834554534,
+              "peak_bytes": 9332229632.0,
+              "load_ms": 9319.55914851278
+            },
+            "runs": [
+              {
+                "encode_fps": 225.9546738324431,
+                "decode_fps": 118.9188233673801,
+                "serial_fps": 78.54355463272384,
+                "encode_p50_ms": 36.03750951879192,
+                "decode_p50_ms": 68.36561698582955,
+                "serial_p50_ms": 105.1793239894323,
+                "encode_p95_ms": 38.49291445367271,
+                "decode_p95_ms": 73.36693789548008,
+                "serial_p95_ms": 108.25431718549225,
+                "peak_bytes": 9332229632,
+                "load_ms": 9776.334333000705
+              },
+              {
+                "encode_fps": 239.69462602708123,
+                "decode_fps": 127.2130527651421,
+                "serial_fps": 83.10615141301419,
+                "encode_p50_ms": 34.674064998398535,
+                "decode_p50_ms": 61.9696829962777,
+                "serial_p50_ms": 99.88366099423729,
+                "encode_p95_ms": 39.04479730845196,
+                "decode_p95_ms": 72.26612725789892,
+                "serial_p95_ms": 109.28494300023885,
+                "peak_bytes": 9332229632,
+                "load_ms": 7449.8913410061505
+              },
+              {
+                "encode_fps": 239.04777231937754,
+                "decode_fps": 129.2735034414455,
+                "serial_fps": 84.10722323996417,
+                "encode_p50_ms": 35.18788800283801,
+                "decode_p50_ms": 68.4297329862602,
+                "serial_p50_ms": 100.99619399989024,
+                "encode_p95_ms": 37.74262075457955,
+                "decode_p95_ms": 72.19995239865966,
+                "serial_p95_ms": 109.15985950559843,
+                "peak_bytes": 9332229632,
+                "load_ms": 10990.775788988685
+              },
+              {
+                "encode_fps": 278.96392580813364,
+                "decode_fps": 153.60860010136022,
+                "serial_fps": 98.70811721064894,
+                "encode_p50_ms": 28.13205649727024,
+                "decode_p50_ms": 47.73468550411053,
+                "serial_p50_ms": 77.22655050747562,
+                "encode_p95_ms": 38.00161556137027,
+                "decode_p95_ms": 66.06136795162456,
+                "serial_p95_ms": 104.26694144698558,
+                "peak_bytes": 9332229632,
+                "load_ms": 8862.783964024857
+              }
+            ]
+          },
+          "after": {
+            "summary": {
+              "encode_fps": 230.79149121450894,
+              "decode_fps": 123.74546634637247,
+              "serial_fps": 80.83767824046777,
+              "encode_p50_ms": 35.278135757835116,
+              "decode_p50_ms": 68.56974549009465,
+              "serial_p50_ms": 104.17795974353794,
+              "encode_p95_ms": 37.8262163438194,
+              "decode_p95_ms": 73.59167605172843,
+              "serial_p95_ms": 109.651080614276,
+              "peak_bytes": 9332229632.0,
+              "load_ms": 10618.750748006278
+            },
+            "runs": [
+              {
+                "encode_fps": 224.8610620433772,
+                "decode_fps": 117.927478230994,
+                "serial_fps": 77.52072205729986,
+                "encode_p50_ms": 35.38139650481753,
+                "decode_p50_ms": 70.18974398670252,
+                "serial_p50_ms": 105.64036050345749,
+                "encode_p95_ms": 38.84436713706236,
+                "decode_p95_ms": 73.97525041451445,
+                "serial_p95_ms": 109.8581733967876,
+                "peak_bytes": 9332229632,
+                "load_ms": 10652.495043003
+              },
+              {
+                "encode_fps": 423.1431516512613,
+                "decode_fps": 262.6006465179607,
+                "serial_fps": 162.1765112230538,
+                "encode_p50_ms": 19.01737949810922,
+                "decode_p50_ms": 30.236896505812183,
+                "serial_p50_ms": 49.254276003921404,
+                "encode_p95_ms": 19.8776476943749,
+                "decode_p95_ms": 33.74585475830827,
+                "serial_p95_ms": 53.626655078551266,
+                "peak_bytes": 9332229632,
+                "load_ms": 8766.209976980463
+              },
+              {
+                "encode_fps": 236.7219203856407,
+                "decode_fps": 129.56345446175092,
+                "serial_fps": 84.15463442363566,
+                "encode_p50_ms": 35.1748750108527,
+                "decode_p50_ms": 66.94974699348677,
+                "serial_p50_ms": 102.7155589836184,
+                "encode_p95_ms": 37.504757635178976,
+                "decode_p95_ms": 73.66691433708183,
+                "serial_p95_ms": 109.44398783176439,
+                "peak_bytes": 9332229632,
+                "load_ms": 11130.969684018055
+              },
+              {
+                "encode_fps": 218.87128462584707,
+                "decode_fps": 114.16473309731688,
+                "serial_fps": 74.95201484379841,
+                "encode_p50_ms": 36.80973099835683,
+                "decode_p50_ms": 71.74540900450666,
+                "serial_p50_ms": 107.99501348810736,
+                "encode_p95_ms": 38.14767505245982,
+                "decode_p95_ms": 73.51643776637502,
+                "serial_p95_ms": 110.03244972089306,
+                "peak_bytes": 9332229632,
+                "load_ms": 10585.006453009555
+              }
+            ]
+          }
+        }
+      },
+      "ld/numa_local_eight_pairs": {
+        "before": {
+          "frames": 96.0,
+          "encode_fps": 370.45186193426207,
+          "encode_p50_ms": 2.6673864922486246,
+          "encode_p95_ms": 2.8318225049588364,
+          "decode_fps": 425.8356333323816,
+          "decode_p50_ms": 2.30261425167555,
+          "decode_p95_ms": 2.590424246591283,
+          "serial_fps": 198.4059485595991,
+          "serial_p50_ms": 4.98612824594602,
+          "serial_p95_ms": 5.395753258198965,
+          "load_ms": 2662.2679294960108,
+          "peak_bytes": 4772837376.0
+        },
+        "after": {
+          "frames": 96.0,
+          "encode_fps": 371.71991200633425,
+          "encode_p50_ms": 2.672484508366324,
+          "encode_p95_ms": 2.822503371135099,
+          "decode_fps": 428.4070908800661,
+          "decode_p50_ms": 2.295108512043953,
+          "decode_p95_ms": 2.5630184936744627,
+          "serial_fps": 199.15278902346728,
+          "serial_p50_ms": 4.97154075128492,
+          "serial_p95_ms": 5.3396469993458595,
+          "load_ms": 2679.1621835145634,
+          "peak_bytes": 4772837376.0
+        },
+        "percent": {
+          "frames": 0.0,
+          "encode_fps": 0.34229820453628435,
+          "encode_p50_ms": 0.19112401343091,
+          "encode_p95_ms": -0.3290860852831923,
+          "decode_fps": 0.6038615245890888,
+          "decode_p50_ms": -0.32596600260487163,
+          "decode_p95_ms": -1.0579638818963066,
+          "serial_fps": 0.3764203993328552,
+          "serial_p50_ms": -0.2925615616277133,
+          "serial_p95_ms": -1.039822545033009,
+          "load_ms": 0.6345812843018717,
+          "peak_bytes": 0.0
+        },
+        "threshold_exceedances": {},
+        "status": "PASS"
+      },
+      "hts/full": {
+        "before": {
+          "frames": 96,
+          "encode_fps": 571.7356343371888,
+          "encode_p50_ms": 14.167713496135548,
+          "encode_p95_ms": 14.377815389889292,
+          "decode_fps": 505.6529231857941,
+          "decode_p50_ms": 15.982056487700902,
+          "decode_p95_ms": 16.619138793612365,
+          "serial_fps": 268.33382698694265,
+          "serial_p50_ms": 30.196268475265242,
+          "serial_p95_ms": 30.830853291263338,
+          "load_ms": 4668.300641991664,
+          "peak_bytes": 15342585344
+        },
+        "after": {
+          "frames": 96,
+          "encode_fps": 573.0019222836013,
+          "encode_p50_ms": 14.095098493271507,
+          "encode_p95_ms": 14.335378601390403,
+          "decode_fps": 504.3613916520603,
+          "decode_p50_ms": 16.040071001043543,
+          "decode_p95_ms": 16.66798968653893,
+          "serial_fps": 268.2475291334465,
+          "serial_p50_ms": 30.052016489207745,
+          "serial_p95_ms": 30.816272032097913,
+          "load_ms": 4680.984973994782,
+          "peak_bytes": 15342585344
+        },
+        "percent": {
+          "frames": 0.0,
+          "encode_fps": 0.22148137537036927,
+          "encode_p50_ms": -0.5125386173559177,
+          "encode_p95_ms": -0.29515463474883985,
+          "decode_fps": -0.2554185834814704,
+          "decode_p50_ms": 0.362997799358844,
+          "decode_p95_ms": 0.2939435883726027,
+          "serial_fps": -0.032160631577904386,
+          "serial_p50_ms": -0.47771460959045164,
+          "serial_p95_ms": -0.04729437433234063,
+          "load_ms": 0.2717119777809973,
+          "peak_bytes": 0.0
+        },
+        "threshold_exceedances": {},
+        "status": "PASS"
+      },
+      "d1/40": {
+        "before": {
+          "encode_fps": 74.49504122256528,
+          "decode_fps": 66.04647681072089,
+          "serial_fps": 34.9035099102399,
+          "encode_p50_ms": 13.531164004234597,
+          "encode_p95_ms": 14.575013300054707,
+          "decode_p50_ms": 15.239299013046548,
+          "decode_p95_ms": 15.790295889019035,
+          "serial_p50_ms": 28.50689200568013,
+          "serial_p95_ms": 30.06538690533489,
+          "peak_bytes": 2279217664,
+          "load_ms": 3811.743619007757
+        },
+        "after": {
+          "encode_fps": 74.59329854933081,
+          "decode_fps": 68.11815055751207,
+          "serial_fps": 35.499343336900075,
+          "encode_p50_ms": 13.69274899479933,
+          "encode_p95_ms": 14.0268087037839,
+          "decode_p50_ms": 14.610776008339599,
+          "decode_p95_ms": 15.37857650546357,
+          "serial_p50_ms": 28.198403015267104,
+          "serial_p95_ms": 29.395307379309088,
+          "peak_bytes": 2279217664,
+          "load_ms": 3708.829693001462
+        },
+        "percent": {
+          "encode_fps": 0.13189780843529952,
+          "decode_fps": 3.1366907772056862,
+          "serial_fps": 1.7070874195530994,
+          "encode_p50_ms": 1.194169182445548,
+          "encode_p95_ms": -3.761263094482048,
+          "decode_p50_ms": -4.124356403590889,
+          "decode_p95_ms": -2.6074203197280488,
+          "serial_p50_ms": -1.0821558181493662,
+          "serial_p95_ms": -2.2287407380974122,
+          "peak_bytes": 0.0,
+          "load_ms": -2.6999173158735346
+        },
+        "threshold_exceedances": {},
+        "status": "PASS"
+      },
+      "adaptok/96": {
+        "before": {
+          "encode_fps": 1.982766290093135,
+          "decode_fps": 1.411387626445936,
+          "serial_fps": 0.8202889049046601,
+          "serial_ms": 19505.322946992237,
+          "native_encode_ms": 8067.19856262207,
+          "native_decode_ms": 11333.192226409912,
+          "serial_p50_ms": 19505.322946992237,
+          "serial_p95_ms": 19671.129478979856,
+          "peak_bytes": 5495881216,
+          "load_ms": 8475.415735010756
+        },
+        "after": {
+          "encode_fps": 1.97712754658187,
+          "decode_fps": 1.4068202246096926,
+          "serial_fps": 0.8178462967476553,
+          "serial_ms": 19563.578222005162,
+          "native_encode_ms": 8090.575881958008,
+          "native_decode_ms": 11370.663513183594,
+          "serial_p50_ms": 19563.578222005162,
+          "serial_p95_ms": 19598.998621109058,
+          "peak_bytes": 5495881216,
+          "load_ms": 6642.000552994432
+        },
+        "percent": {
+          "encode_fps": -0.284387703151856,
+          "decode_fps": -0.323610732492019,
+          "serial_fps": -0.29777413084585147,
+          "serial_ms": 0.2986634734079452,
+          "native_encode_ms": 0.28978237184160704,
+          "native_decode_ms": 0.33063311752854485,
+          "serial_p50_ms": 0.2986634734079452,
+          "serial_p95_ms": -0.3666838650412729,
+          "peak_bytes": 0.0,
+          "load_ms": -21.632156337095566
+        },
+        "threshold_exceedances": {},
+        "status": "PASS"
+      },
+      "adaptok/128": {
+        "before": {
+          "encode_fps": 3.2772436510545693,
+          "decode_fps": 2.3329644533594167,
+          "serial_fps": 1.3537437290014909,
+          "serial_ms": 11819.075987004908,
+          "native_encode_ms": 4880.687477111816,
+          "native_decode_ms": 6856.157569885254,
+          "serial_p50_ms": 11819.075987004908,
+          "serial_p95_ms": 11969.123073489754,
+          "peak_bytes": 4468719104,
+          "load_ms": 8475.415735010756
+        },
+        "after": {
+          "encode_fps": 3.2623919395780687,
+          "decode_fps": 2.3244303867017453,
+          "serial_fps": 1.3494074987364078,
+          "serial_ms": 11857.055792992469,
+          "native_encode_ms": 4903.13037109375,
+          "native_decode_ms": 6881.764087677002,
+          "serial_p50_ms": 11857.055792992469,
+          "serial_p95_ms": 12025.601888110396,
+          "peak_bytes": 4468719104,
+          "load_ms": 6642.000552994432
+        },
+        "percent": {
+          "encode_fps": -0.45317690894668416,
+          "decode_fps": -0.36580354430101325,
+          "serial_fps": -0.32031396875105145,
+          "serial_ms": 0.32134327615220837,
+          "native_encode_ms": 0.45983058917786757,
+          "native_decode_ms": 0.37348204924900763,
+          "serial_p50_ms": 0.32134327615220837,
+          "serial_p95_ms": 0.4718709488896078,
+          "peak_bytes": 0.0,
+          "load_ms": -21.632156337095566
+        },
+        "threshold_exceedances": {},
+        "status": "PASS"
+      }
+    },
+    "d1_all_budgets": {
+      "d1/5": {
+        "before": {
+          "encode_fps": 76.8530651591629,
+          "decode_fps": 107.61513209439485,
+          "serial_fps": 44.66172713515403,
+          "encode_p50_ms": 12.721766979666427,
+          "encode_p95_ms": 14.470286990399472,
+          "decode_p50_ms": 9.264785010600463,
+          "decode_p95_ms": 9.654629896976985,
+          "serial_p50_ms": 22.23116799723357,
+          "serial_p95_ms": 23.822934407508,
+          "peak_bytes": 2279217664,
+          "load_ms": 3811.743619007757
+        },
+        "after": {
+          "encode_fps": 78.55221390042986,
+          "decode_fps": 111.26814881038642,
+          "serial_fps": 45.86823092283439,
+          "encode_p50_ms": 12.68267398700118,
+          "encode_p95_ms": 13.668846696964465,
+          "decode_p50_ms": 8.978050987934694,
+          "decode_p95_ms": 9.339724192977883,
+          "serial_p50_ms": 21.625733003020287,
+          "serial_p95_ms": 22.76752288453281,
+          "peak_bytes": 2279217664,
+          "load_ms": 3708.829693001462
+        },
+        "percent": {
+          "encode_fps": 2.2109056258823534,
+          "decode_fps": 3.394519566994836,
+          "serial_fps": 2.7014266242531892,
+          "encode_p50_ms": -0.3072921609689083,
+          "encode_p95_ms": -5.538523831398335,
+          "decode_p50_ms": -3.0948804784751816,
+          "decode_p95_ms": -3.2617066356702473,
+          "serial_p50_ms": -2.7233611580310235,
+          "serial_p95_ms": -4.430233089348423,
+          "peak_bytes": 0.0,
+          "load_ms": -2.6999173158735346
+        },
+        "threshold_exceedances": {},
+        "status": "PASS"
+      },
+      "d1/10": {
+        "before": {
+          "encode_fps": 75.39933765785757,
+          "decode_fps": 94.81205292886182,
+          "serial_fps": 41.84380598546891,
+          "encode_p50_ms": 13.321731996256858,
+          "encode_p95_ms": 14.483687502797693,
+          "decode_p50_ms": 10.68307799869217,
+          "decode_p95_ms": 10.991938805091195,
+          "serial_p50_ms": 23.874522012192756,
+          "serial_p95_ms": 25.15297801583074,
+          "peak_bytes": 2279217664,
+          "load_ms": 3811.743619007757
+        },
+        "after": {
+          "encode_fps": 77.58899248650775,
+          "decode_fps": 98.94654480866956,
+          "serial_fps": 43.322365210731924,
+          "encode_p50_ms": 12.846761994296685,
+          "encode_p95_ms": 13.990598396048881,
+          "decode_p50_ms": 10.051999008283019,
+          "decode_p95_ms": 10.272540300502442,
+          "serial_p50_ms": 22.98878799774684,
+          "serial_p95_ms": 24.2274057934992,
+          "peak_bytes": 2279217664,
+          "load_ms": 3708.829693001462
+        },
+        "percent": {
+          "encode_fps": 2.904077007395278,
+          "decode_fps": 4.360723929171617,
+          "serial_fps": 3.5335199330970735,
+          "encode_p50_ms": -3.565377250447843,
+          "encode_p95_ms": -3.4044445287401137,
+          "decode_p50_ms": -5.907276821215834,
+          "decode_p95_ms": -6.544782657046322,
+          "serial_p50_ms": -3.70995496367873,
+          "serial_p95_ms": -3.679771921038544,
+          "peak_bytes": 0.0,
+          "load_ms": -2.6999173158735346
+        },
+        "threshold_exceedances": {},
+        "status": "PASS"
+      },
+      "d1/20": {
+        "before": {
+          "encode_fps": 72.39596691163847,
+          "decode_fps": 80.00878733164502,
+          "serial_fps": 37.87710331204643,
+          "encode_p50_ms": 13.98364402120933,
+          "encode_p95_ms": 14.678857289254665,
+          "decode_p50_ms": 12.66751199727878,
+          "decode_p95_ms": 13.36614160973113,
+          "serial_p50_ms": 26.41513798153028,
+          "serial_p95_ms": 27.82908271474298,
+          "peak_bytes": 2279217664,
+          "load_ms": 3811.743619007757
+        },
+        "after": {
+          "encode_fps": 76.20311946644907,
+          "decode_fps": 84.30711219562859,
+          "serial_fps": 39.88129343250276,
+          "encode_p50_ms": 13.420849019894376,
+          "encode_p95_ms": 14.040505603770725,
+          "decode_p50_ms": 11.788150994107127,
+          "decode_p95_ms": 12.23563690437004,
+          "serial_p50_ms": 25.30194600694813,
+          "serial_p95_ms": 26.03252801054623,
+          "peak_bytes": 2279217664,
+          "load_ms": 3708.829693001462
+        },
+        "percent": {
+          "encode_fps": 5.258790948199299,
+          "decode_fps": 5.37231597595218,
+          "serial_fps": 5.291297235548931,
+          "encode_p50_ms": -4.024666249093212,
+          "encode_p95_ms": -4.348783239082454,
+          "decode_p50_ms": -6.941860432897606,
+          "decode_p95_ms": -8.457973425465093,
+          "serial_p50_ms": -4.214219798361474,
+          "serial_p95_ms": -6.455673450009158,
+          "peak_bytes": 0.0,
+          "load_ms": -2.6999173158735346
+        },
+        "threshold_exceedances": {},
+        "status": "PASS"
+      },
+      "d1/40": {
+        "before": {
+          "encode_fps": 74.49504122256528,
+          "decode_fps": 66.04647681072089,
+          "serial_fps": 34.9035099102399,
+          "encode_p50_ms": 13.531164004234597,
+          "encode_p95_ms": 14.575013300054707,
+          "decode_p50_ms": 15.239299013046548,
+          "decode_p95_ms": 15.790295889019035,
+          "serial_p50_ms": 28.50689200568013,
+          "serial_p95_ms": 30.06538690533489,
+          "peak_bytes": 2279217664,
+          "load_ms": 3811.743619007757
+        },
+        "after": {
+          "encode_fps": 74.59329854933081,
+          "decode_fps": 68.11815055751207,
+          "serial_fps": 35.499343336900075,
+          "encode_p50_ms": 13.69274899479933,
+          "encode_p95_ms": 14.0268087037839,
+          "decode_p50_ms": 14.610776008339599,
+          "decode_p95_ms": 15.37857650546357,
+          "serial_p50_ms": 28.198403015267104,
+          "serial_p95_ms": 29.395307379309088,
+          "peak_bytes": 2279217664,
+          "load_ms": 3708.829693001462
+        },
+        "percent": {
+          "encode_fps": 0.13189780843529952,
+          "decode_fps": 3.1366907772056862,
+          "serial_fps": 1.7070874195530994,
+          "encode_p50_ms": 1.194169182445548,
+          "encode_p95_ms": -3.761263094482048,
+          "decode_p50_ms": -4.124356403590889,
+          "decode_p95_ms": -2.6074203197280488,
+          "serial_p50_ms": -1.0821558181493662,
+          "serial_p95_ms": -2.2287407380974122,
+          "peak_bytes": 0.0,
+          "load_ms": -2.6999173158735346
+        },
+        "threshold_exceedances": {},
+        "status": "PASS"
+      }
+    },
+    "initial_comparison": "results/cleanup/h100_regression.json",
+    "isolated_comparison": "results/cleanup/isolated_h100_regression.json",
+    "post_cleanup_correctness_with_timing_diagnostics": "results/cleanup/post_cleanup_equivalence.json"
+  },
+  "shared_h100_observation": {
+    "observed_before_exclusive_retry": true,
+    "exception": "ValueError: invalid or truncated PHT rANS record",
+    "first_post_cleanup_attempt": "GPU already used by external UPG-Tok jobs",
+    "resolution": "Both original and retained CUDA suites were run independently after the device became idle",
+    "concurrent_correctness": "NOT_VERIFIED"
+  },
+  "final_tests": {
+    "cpu": "122 passed, 9 deselected in 8.77s",
+    "pht_cuda": "4 passed, 9 deselected in 15.29s",
+    "pht_original_cuda": "4 passed, 9 deselected in 16.04s",
+    "d1_cuda": "4 passed, 59 deselected in 122.32s (0:02:02)",
+    "adaptok_cuda": "1 passed, 38 deselected in 15.08s",
+    "adaptok_suite": "40 passed in 16.09s",
+    "ruff": "All checks passed!",
+    "mypy": "Success: no issues found in 59 source files"
+  },
+  "native_and_dependency_checks": {
+    "cli_entries": 15,
+    "ast_modules": 59,
+    "submodules": "PINNED_CLEAN",
+    "hosted_ci": {
+      "conclusion": "success",
+      "head_sha": "f09b357cdc9aed5d8c985d3356928486f116c0c1",
+      "html_url": "https://github.com/whisperLiang/CP-AdapTok/actions/runs/45939175689",
+      "status": "completed"
+    },
+    "source_builds": "results/cleanup/source_builds.json"
+  },
+  "ub_mode_checks": {
+    "crapper": {
+      "tool_commit": "fdd0c01387e4211c74b23c2cdd11c06d90883838",
+      "coverage_source": "Actual CPU test suite. CUDA and CLI smoke processes are outside this coverage capture.",
+      "target": "CRAP < 10",
+      "status": "TARGET_NOT_MET",
+      "functions_scored": 443,
+      "functions_at_or_above_target": 102,
+      "functions_with_complexity_at_least_10": [
+        {
+          "function": "benchmarks.pht_tok.study.fixed_point",
+          "cyclomatic_complexity": 21,
+          "cpu_coverage_percent": 0.0,
+          "crap": 462.0
+        },
+        {
+          "function": "benchmarks.pht_tok.network.simulate",
+          "cyclomatic_complexity": 20,
+          "cpu_coverage_percent": 0.0,
+          "crap": 420.0
+        },
+        {
+          "function": "benchmarks.pht_tok.closed.run_closed",
+          "cyclomatic_complexity": 18,
+          "cpu_coverage_percent": 0.0,
+          "crap": 342.0
+        },
+        {
+          "function": "baselines.hla_tok_uf_v2.dynamic.main",
+          "cyclomatic_complexity": 17,
+          "cpu_coverage_percent": 0.0,
+          "crap": 306.0
+        },
+        {
+          "function": "benchmarks.pht_tok.study.equivalence",
+          "cyclomatic_complexity": 12,
+          "cpu_coverage_percent": 0.0,
+          "crap": 156.0
+        },
+        {
+          "function": "benchmarks.smoke_native.pht",
+          "cyclomatic_complexity": 12,
+          "cpu_coverage_percent": 0.0,
+          "crap": 156.0
+        },
+        {
+          "function": "baselines.dcvc_uf.evaluate.account_stream",
+          "cyclomatic_complexity": 20,
+          "cpu_coverage_percent": 66.7,
+          "crap": 34.8
+        }
+      ]
+    },
+    "dryer": {
+      "tool_commit": "ad371d460854b937039410d2c3889a4da94a753a",
+      "similarity_threshold": 0.8,
+      "duplicate_candidates": 0
+    },
+    "mutations": {
+      "mutator_commit": "264dc965fa79b60942018143e7e323b517635a69",
+      "pht_targeted_mutations": [
+        {
+          "mutation": "single_frame_rate_denominator",
+          "killed": true
+        },
+        {
+          "mutation": "rewrite_prefix_header",
+          "killed": true
+        },
+        {
+          "mutation": "omit_hyperprior_from_ledger",
+          "killed": true
+        },
+        {
+          "mutation": "invalid_cdf_normalization",
+          "killed": true
+        },
+        {
+          "mutation": "clip_escape_symbols",
+          "killed": true
+        },
+        {
+          "mutation": "include_tail_in_duration",
+          "killed": true
+        },
+        {
+          "mutation": "count_late_as_on_time",
+          "killed": true
+        },
+        {
+          "mutation": "look_at_future_bandwidth",
+          "killed": true
+        }
+      ],
+      "test_seal_mutations_killed": 1,
+      "test_seal_mutations_run": 1
+    }
+  },
+  "deleted_assets": {
+    "primary_paths": 172,
+    "generated_python_cache_files": 463,
+    "historical_worktrees": 14,
+    "local_branches": 23,
+    "remote_branches": 15
+  },
+  "protected_datasets": {
+    "train": {
+      "metadata_sha256": "f60d8b418085f69cfab71dfec2f864eba4cfc1615ea4ed17079e90d3b1d1f576",
+      "manifest_sha256": "88e18e6a6a38f61e335f48882aab855460e76f72205d5724cb761e7d3604dcc1",
+      "frames": 10209,
+      "sequences": 120,
+      "pixel_decodes": 0,
+      "source_byte_hashes_verified": 10209
+    },
+    "validation": {
+      "metadata_sha256": "842b32f62bfbc52162ac67751a6c0f1c1eb6e57a9c026b9beb85eb58b79c3067",
+      "manifest_sha256": "6e1753a5026d60f8e4b279bd15043b73e2e3a1bda01263159f7b93ddedcb5d37",
+      "frames": 1323,
+      "sequences": 21,
+      "pixel_decodes": 0,
+      "source_byte_hashes_verified": 1323
+    },
+    "test": {
+      "metadata_sha256": "be320f2f6bafd2c2cb34c5fbd05b110b64c53291c49f0307d5007edda10f64bb",
+      "manifest_sha256": "09738a77219eb1d78269a0788c109b268de29b54dec3aab68a365599e08bed5e",
+      "frames": 676,
+      "sequences": 9,
+      "pixel_decodes": 0,
+      "source_byte_hashes_verified": 0
+    }
+  },
+  "test_pixel_reads": 0,
+  "remaining_blockers": [
+    {
+      "status": "PROTECTED",
+      "path": "experiment/aip-vtok-joint-v1",
+      "reason": "检出 worktree 存在用户未提交的报告修改",
+      "head": "73ea8b4b027587afd2149c298a82f5d14f013580",
+      "remote_head": "73ea8b4b027587afd2149c298a82f5d14f013580",
+      "local_head_at_audit": "73ea8b4b027587afd2149c298a82f5d14f013580",
+      "remote_head_at_audit": "73ea8b4b027587afd2149c298a82f5d14f013580"
+    },
+    {
+      "status": "PROTECTED",
+      "path": "experiment/aip-vtok-sparse-decoder",
+      "reason": "含用户未提交修改的 Joint V1 工作树通过该工作树引用五个依赖文件",
+      "head": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+      "remote_head": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+      "local_head_at_audit": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+      "remote_head_at_audit": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea"
+    },
+    {
+      "status": "PROTECTED",
+      "path": "experiment/hla-tok-hts",
+      "reason": "受保护的 PHT 工作树仍使用本工作树的官方 LD 和图像权重链接",
+      "head": "e90ceda2d2875cd99061b8eb20946ebf67820a91",
+      "remote_head": null,
+      "local_head_at_audit": "e90ceda2d2875cd99061b8eb20946ebf67820a91",
+      "remote_head_at_audit": null
+    },
+    {
+      "status": "PROTECTED",
+      "path": "experiment/pht-tok",
+      "reason": "正在运行的 UPG-Tok 通过五个符号链接使用该工作树的原生库、网络轨迹和基准数据",
+      "head": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+      "remote_head": null,
+      "local_head_at_audit": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+      "remote_head_at_audit": null
+    },
+    {
+      "path": "experiment/upg-tok",
+      "head": "d77322d12db878d04fbe3d91ac50160a39cdf776",
+      "remote_head": null,
+      "status": "PROTECTED",
+      "reason": "发现新分支、未提交修改和现场运行任务，保留工作树及被引用依赖",
+      "local_head_at_audit": "09e911816a173aabb650d85f7dc3f67dbebc9260",
+      "remote_head_at_audit": null
+    },
+    {
+      "status": "UNRESOLVED",
+      "path": "/home/whisperliang/.codex/worktrees/history-enhancement-run",
+      "reason": "其他项目或无法证明 Git 所有权"
+    },
+    {
+      "status": "UNRESOLVED",
+      "path": "/home/whisperliang/.codex/worktrees/remove-hglr",
+      "reason": "其他项目或无法证明 Git 所有权"
+    },
+    {
+      "status": "UNRESOLVED",
+      "path": "/home/whisperliang/.codex/worktrees/hla-tok-v3-qa.93UiIw",
+      "reason": "目录无 worktree 元数据，未认定为可删除资产"
+    },
+    {
+      "status": "PROTECTED",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/alignment.pt",
+      "reason": "Joint V1 脏工作树的现有跨工作树依赖"
+    },
+    {
+      "status": "PROTECTED",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_fix/fix_a/seed1/step_1000.pt",
+      "reason": "Joint V1 脏工作树的现有跨工作树依赖"
+    },
+    {
+      "status": "PROTECTED",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/projector_w128/latest.pt",
+      "reason": "Joint V1 脏工作树的现有跨工作树依赖"
+    }
+  ],
+  "stats_before": {
+    "project_allocated_bytes": 180207976448,
+    "results_bytes": 55681139708,
+    "logs_bytes": 69685233,
+    "checkpoint_count": 811,
+    "checkpoint_bytes": 76507538777,
+    "worktree_count": 19,
+    "local_branch_count": 28,
+    "python_production_lines": 48223,
+    "python_test_lines": 7723,
+    "python_files": 476,
+    "tracked_files": 2795,
+    "config_files": 43,
+    "remote_branch_count": 18
+  },
+  "stats_after": {
+    "project_allocated_bytes": 51115216896,
+    "results_bytes": 3622354709,
+    "logs_bytes": 61181460,
+    "checkpoint_count": 147,
+    "checkpoint_bytes": 2597792824,
+    "worktree_count": 6,
+    "local_branch_count": 7,
+    "python_production_lines": 6556,
+    "python_test_lines": 1661,
+    "python_files": 91,
+    "tracked_files": 275,
+    "config_files": 9,
+    "remote_branch_count": 4
+  },
+  "reclaimed_project_allocated_bytes": 129092759552,
+  "git": {
+    "validated_code_commit": "f09b357cdc9aed5d8c985d3356928486f116c0c1",
+    "local_commit_before_delivery_manifest": "f09b357cdc9aed5d8c985d3356928486f116c0c1",
+    "remote_commit_before_delivery_manifest": "f09b357cdc9aed5d8c985d3356928486f116c0c1",
+    "main_code_snapshot": {
+      "status": "PASS",
+      "before": "534696b2f78b7e1bc74bf5c5eefe83e88f41b864",
+      "local": "f09b357cdc9aed5d8c985d3356928486f116c0c1",
+      "remote": "f09b357cdc9aed5d8c985d3356928486f116c0c1",
+      "method": "fast-forward verified snapshot"
+    },
+    "delivery_ref": "refs/heads/pht-tok",
+    "manifest_delivery_commit_reference": "The commit containing this file"
+  }
+}

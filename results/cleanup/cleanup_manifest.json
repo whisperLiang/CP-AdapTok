@@ -1,0 +1,1742 @@
+{
+  "schema_version": 1,
+  "tracked_base": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+  "source_cleanup_plan": "cleanup_plan.json",
+  "retained": {
+    "pht_tok": {
+      "status": "PASS",
+      "source_commit": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+      "project_code": "pht_tok",
+      "results": "results/pht_tok",
+      "weights": "shared DCVC-UF image and HT-S",
+      "research_overall": "PARTIAL_PASS",
+      "research_admission": "FAIL"
+    },
+    "dcvc_uf": {
+      "status": "PASS",
+      "variants": {
+        "ld": "PASS",
+        "hts": "PASS"
+      },
+      "weights": {
+        "intra": {
+          "filename": "cvpr2026_image.pth.tar",
+          "sha256": "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302",
+          "bytes": 168845375,
+          "upstream_quickxorhash": "djlEVMhDjexrJb/on44uFwIjRik="
+        },
+        "ld": {
+          "filename": "cvpr2026_video_ld.pth.tar",
+          "sha256": "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799",
+          "bytes": 38724071,
+          "upstream_quickxorhash": "JCP2tLHKkC9NEEacsZDf2wUjLmo="
+        },
+        "hts": {
+          "filename": "cvpr2026_video_hts.pth.tar",
+          "bytes": 324891626,
+          "sha256": "565607d84943ee79072a5760d34a200d5724b4bb72c6bc24bfab41e8ae4f5f47",
+          "published_item": "2866592D5C55DF8C!se6cad35f3d2642afa45f6d1666a09e77"
+        }
+      },
+      "project_code": "baselines/dcvc_uf",
+      "results": "results/dcvc_uf"
+    },
+    "adaptok": {
+      "status": "PASS",
+      "project_code": "baselines/adaptok",
+      "results": "results/adaptok",
+      "weights": {
+        "source_commit": "a72076cf6474f930a181aa78971de70d65289b49",
+        "revision": "c514b22615a140c06f4c9792e93cbef9e5c79f32",
+        "files": {
+          "config.json": "7ebf3ed0bb451b39424a2c89154da95f542ce12559175061ef94702e7e01bc4c",
+          "model.safetensors": "be5432949a87dee253c86f7ccb87bb5370b435ed180f8cda546b09d6a63c8cdd"
+        }
+      },
+      "serialized_bytes": null,
+      "historical_modes": {
+        "no_overlap": {
+          "psnr_db": 24.6811,
+          "fps": 1.558
+        },
+        "overlap": {
+          "psnr_db": 25.1504,
+          "fps": 0.97
+        }
+      }
+    },
+    "hla_tok_uf_v2": {
+      "status": "PASS",
+      "project_code": "baselines/hla_tok_uf_v2",
+      "results": "results/hla_tok_uf_v2",
+      "checkpoint": {
+        "origin_commit": "ffbb7177e869b49934bcddf37c24fc7eade8bf41",
+        "selected_endpoint": "D1 / Seed 2 final E0",
+        "training_step": 20000,
+        "original_sha256": "09bb3a578d89ddb9b2e621a9cf2a1c985edaa49538f236046439116c3864c1ec",
+        "checkpoint": "checkpoints/hla_tok_uf_v2/d1-seed2.pt",
+        "sha256": "a7f9c641e3014447fb515eca273eb18b6ec1c003e635f883df65dd96485a0b35",
+        "checkpoint_bytes": 478654,
+        "original_bytes": 1457319,
+        "tensors": 55,
+        "tensor_equivalence": "EXACT",
+        "removed_keys": [
+          "cuda_rng",
+          "next_data_position",
+          "optimizer",
+          "rng",
+          "signature",
+          "step"
+        ],
+        "qp_i": 0,
+        "qp_p": 8,
+        "native_skip_threshold": 0,
+        "symbol_quantizer": "frozen E0",
+        "budgets_mbps": [
+          5,
+          10,
+          20,
+          40
+        ],
+        "gop": 32
+      },
+      "checkpoint_tensor_match": "EXACT",
+      "validation_admission": "FAIL",
+      "seed1_final_results_preserved": true
+    }
+  },
+  "project_disk_scope": "primary checkout and registered project worktrees, including shared Git objects once",
+  "physical_asset_deletions": {
+    "assets": [
+      {
+        "path": "/home/whisperliang/CP-AdapTok/.build/native-dcvc",
+        "status": "DELETED",
+        "allocated_bytes_before": 291676160
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/adaptok_hr",
+        "status": "DELETED",
+        "allocated_bytes_before": 367947776
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/adaptok_hr_fine_detail_v2",
+        "status": "DELETED",
+        "allocated_bytes_before": 2018373632
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/adaptok_hr_fine_recovery",
+        "status": "DELETED",
+        "allocated_bytes_before": 583778304
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/large_scale",
+        "status": "DELETED",
+        "allocated_bytes_before": 10803998720
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/official_weights_manifest.json",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/optimization_20261115",
+        "status": "DELETED",
+        "allocated_bytes_before": 1179095040
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/pretrained_resume_replay",
+        "status": "DELETED",
+        "allocated_bytes_before": 236171264
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/pretrained_s1",
+        "status": "DELETED",
+        "allocated_bytes_before": 472338432
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/s1_smoke",
+        "status": "DELETED",
+        "allocated_bytes_before": 472338432
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/s2_smoke",
+        "status": "DELETED",
+        "allocated_bytes_before": 236171264
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/s3_smoke",
+        "status": "DELETED",
+        "allocated_bytes_before": 438005760
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/s4_smoke",
+        "status": "DELETED",
+        "allocated_bytes_before": 439132160
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/acceptance_final.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/acceptance_followup.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/acceptance_run.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/adaptive_stream_rate",
+        "status": "DELETED",
+        "allocated_bytes_before": 28672
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/adaptive_stream_rate.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/adaptok_hr",
+        "status": "DELETED",
+        "allocated_bytes_before": 595951616
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/adaptok_hr_fine_detail_v2",
+        "status": "DELETED",
+        "allocated_bytes_before": 576389120
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/adaptok_hr_fine_recovery",
+        "status": "DELETED",
+        "allocated_bytes_before": 971722752
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/adaptok_hr_perceptual_recovery",
+        "status": "DELETED",
+        "allocated_bytes_before": 413696
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/aip_vtok",
+        "status": "DELETED",
+        "allocated_bytes_before": 248553472
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/benchmark",
+        "status": "DELETED",
+        "allocated_bytes_before": 16384
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/benchmark_smoke100.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/budget_quality.csv",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/build_report.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 8192
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/complexity.json",
+        "status": "DELETED",
+        "allocated_bytes_before": 65536
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/coverage.json",
+        "status": "DELETED",
+        "allocated_bytes_before": 286720
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/coverage_before_streaming_followup.json",
+        "status": "DELETED",
+        "allocated_bytes_before": 253952
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/delivery_summary.json",
+        "status": "DELETED",
+        "allocated_bytes_before": 8192
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/environment.json",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/eval_smoke100.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/eval_smoke100_fp64.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/extended_state_tests.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/figures",
+        "status": "DELETED",
+        "allocated_bytes_before": 323584
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_720_eval",
+        "status": "DELETED",
+        "allocated_bytes_before": 5451776
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_720_eval.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_benchmark",
+        "status": "DELETED",
+        "allocated_bytes_before": 20480
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_benchmark.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_benchmark_five",
+        "status": "DELETED",
+        "allocated_bytes_before": 20480
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_benchmark_five.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_benchmark_two",
+        "status": "DELETED",
+        "allocated_bytes_before": 16384
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_benchmark_two.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_eval",
+        "status": "DELETED",
+        "allocated_bytes_before": 11722752
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_eval.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_extended8192",
+        "status": "DELETED",
+        "allocated_bytes_before": 11436032
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_extended8192.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_spatial_control",
+        "status": "DELETED",
+        "allocated_bytes_before": 8601600
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_spatial_control.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_stream",
+        "status": "DELETED",
+        "allocated_bytes_before": 5681152
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/final_stream.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/fingerprint_after.json",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/fingerprint_before.json",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/fingerprint_state_tests.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/fixed2048",
+        "status": "ALREADY_ABSENT"
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/followup_validation",
+        "status": "DELETED",
+        "allocated_bytes_before": 248209408
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/full_cache_regression.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/instrumented_final_bench",
+        "status": "DELETED",
+        "allocated_bytes_before": 16384
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/instrumented_final_bench.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/large_scale",
+        "status": "DELETED",
+        "allocated_bytes_before": 11436175360
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/mutation_final.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/mutation_followup.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/mutation_run.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/mutations",
+        "status": "DELETED",
+        "allocated_bytes_before": 73728
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/native1080_structural.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/native_cpp_build.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/native_cuda_build.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/native_cuda_latent_build.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/native_cutlass_clone.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/native_decoded_latent_patch.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/native_dependencies_install.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/native_environment.json",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/native_environment_freeze.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/native_environment_install.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/native_setup_repeat.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/native_toolkit_install.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/optimization_20261115",
+        "status": "DELETED",
+        "allocated_bytes_before": 7217004544
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/optimized_benchmark_720",
+        "status": "DELETED",
+        "allocated_bytes_before": 16384
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/optimized_benchmark_720.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/optimized_benchmark_five",
+        "status": "DELETED",
+        "allocated_bytes_before": 20480
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/optimized_benchmark_five.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/optimized_benchmark_two",
+        "status": "DELETED",
+        "allocated_bytes_before": 16384
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/optimized_benchmark_two.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/optimized_eval",
+        "status": "DELETED",
+        "allocated_bytes_before": 11722752
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/optimized_eval.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/optimized_stream",
+        "status": "DELETED",
+        "allocated_bytes_before": 5681152
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/optimized_stream.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/original_adaptok_1080p",
+        "status": "DELETED",
+        "allocated_bytes_before": 10974507008
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/prefix_utilization",
+        "status": "DELETED",
+        "allocated_bytes_before": 7133609984
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_adaptive_tcp",
+        "status": "DELETED",
+        "allocated_bytes_before": 28672
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_benchmark_five",
+        "status": "DELETED",
+        "allocated_bytes_before": 20480
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_benchmark_two",
+        "status": "DELETED",
+        "allocated_bytes_before": 16384
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_initial",
+        "status": "DELETED",
+        "allocated_bytes_before": 75657216
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_long_eval",
+        "status": "DELETED",
+        "allocated_bytes_before": 305946624
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_native",
+        "status": "DELETED",
+        "allocated_bytes_before": 32636928
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_native_baseline",
+        "status": "DELETED",
+        "allocated_bytes_before": 16384
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_native_benchmark",
+        "status": "DELETED",
+        "allocated_bytes_before": 12288
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_native_data_prepare.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_native_data_repeat.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_native_preflight.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_resume_replay",
+        "status": "DELETED",
+        "allocated_bytes_before": 12288
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_s1",
+        "status": "DELETED",
+        "allocated_bytes_before": 133881856
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_s1_cli.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pretrained_s1_test",
+        "status": "DELETED",
+        "allocated_bytes_before": 72368128
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pytest_after_weights.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pytest_coverage.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 8192
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pytest_coverage_final.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pytest_current.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pytest_final.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pytest_more.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/pytest_temporal_sampling.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/quality_audit.json",
+        "status": "DELETED",
+        "allocated_bytes_before": 49152
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/quality_audit.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/quality_audit_final.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/quality_audit_followup_initial.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 8192
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/refactor_eval_tests.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/refactor_tests.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/required_commands",
+        "status": "DELETED",
+        "allocated_bytes_before": 28672
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/required_commands_initial_delivery",
+        "status": "DELETED",
+        "allocated_bytes_before": 28672
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/resume102.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/resume103.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/s1_smoke",
+        "status": "DELETED",
+        "allocated_bytes_before": 11743232
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/s1_tokenizer",
+        "status": "DELETED",
+        "allocated_bytes_before": 16384
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/s2_smoke",
+        "status": "DELETED",
+        "allocated_bytes_before": 12288
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/s3_smoke",
+        "status": "DELETED",
+        "allocated_bytes_before": 11825152
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/s4_smoke",
+        "status": "DELETED",
+        "allocated_bytes_before": 12288
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/smoke100_fp64_eval",
+        "status": "DELETED",
+        "allocated_bytes_before": 11722752
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/smoke100_full_eval",
+        "status": "DELETED",
+        "allocated_bytes_before": 11726848
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/stage2_smoke2.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/stage4_smoke2.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/stream_demo",
+        "status": "DELETED",
+        "allocated_bytes_before": 5685248
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/stream_demo_smoke100.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/streaming_followup",
+        "status": "DELETED",
+        "allocated_bytes_before": 5910528
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/streaming_followup.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/streaming_latency_fix",
+        "status": "DELETED",
+        "allocated_bytes_before": 5910528
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/streaming_verified",
+        "status": "DELETED",
+        "allocated_bytes_before": 5910528
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/streaming_verified.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_adaptive_cli_red.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_adaptive_primitives_red.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_adaptive_session_red.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_bad_budget_red.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_core.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_initial_red.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_keep_base_red.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_observed_display_reserve_red.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_rate_red.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_runtime_red.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_session_boundaries_red.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 8192
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_state.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_state_red.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_temporal_sampling_red.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/tdd_typed_budget_red.txt",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/train_entropy_scorer_smoke100.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/train_smoke100.log",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/results/weight_download",
+        "status": "DELETED",
+        "allocated_bytes_before": 61440
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/data/adaptok_hr",
+        "status": "DELETED",
+        "allocated_bytes_before": 917504
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/data/basketball_center720.mp4",
+        "status": "DELETED",
+        "allocated_bytes_before": 11632640
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/data/center720_manifest.json",
+        "status": "DELETED",
+        "allocated_bytes_before": 4096
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/.coverage",
+        "status": "DELETED",
+        "allocated_bytes_before": 53248
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/.pytest_cache",
+        "status": "DELETED",
+        "allocated_bytes_before": 77824
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/.ruff_cache",
+        "status": "DELETED",
+        "allocated_bytes_before": 126976
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/.venv",
+        "status": "DELETED",
+        "allocated_bytes_before": 36352000
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/c1",
+        "status": "ALREADY_ABSENT"
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/c1_followup",
+        "status": "DELETED",
+        "allocated_bytes_before": 1462272
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/engineering",
+        "status": "DELETED",
+        "allocated_bytes_before": 16953344
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/engineering_final",
+        "status": "DELETED",
+        "allocated_bytes_before": 17162240
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/engineering_rng",
+        "status": "DELETED",
+        "allocated_bytes_before": 462848
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_seed1",
+        "status": "DELETED",
+        "allocated_bytes_before": 9584640
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_seed2",
+        "status": "DELETED",
+        "allocated_bytes_before": 9584640
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_smoke",
+        "status": "DELETED",
+        "allocated_bytes_before": 8470528
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/sparse_rfsq",
+        "status": "ALREADY_ABSENT"
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_fix/fix_a/smoke",
+        "status": "DELETED",
+        "allocated_bytes_before": 8019968
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_fix/fix_a/seed1/latest.pt",
+        "status": "DELETED",
+        "allocated_bytes_before": 9912320
+      },
+      {
+        "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_fix/fix_a/seed1/step_0500.pt",
+        "status": "DELETED",
+        "allocated_bytes_before": 8749056
+      }
+    ],
+    "worktrees": [
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/adaptok-hr-unified/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "f895364ddbe006d9afc2522da89ba62c72161c62",
+        "branch": "refs/heads/experiment/adaptok-hr-unified",
+        "disk": 4493950976
+      },
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "630e8146ab8b10e0d7593e019d2c8d8782ed142f",
+        "branch": "refs/heads/experiment/fixed2048-reconstruction",
+        "disk": 6593265664
+      },
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/hla-tok-cc/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "a483a212d8efeaeab045daf4f0f5d0830d69928f",
+        "branch": "refs/heads/experiment/hla-tok-cc",
+        "disk": 1542926336
+      },
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/hla-tok-compact/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "533ac3b533ae62fea7b64f16124727817794254d",
+        "branch": "refs/heads/experiment/hla-tok-compact",
+        "disk": 1048772608
+      },
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/hla-tok-continuous/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "5dd96da0512fb788eaf9e4c85ad05ccc7135599a",
+        "branch": "refs/heads/experiment/hla-tok-continuous",
+        "disk": 262434816
+      },
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/hla-tok-hts-v2-1/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "7d9bbb471fd71555b963f4ecb51241363a9954dd",
+        "branch": "refs/heads/experiment/hla-tok-hts-v2.1",
+        "disk": 21654413312
+      },
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/hla-tok-hts-v2/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "38071a49810112f7a6a7c4e8ab1a6dff144306c6",
+        "branch": "refs/heads/experiment/hla-tok-hts-v2",
+        "disk": 27843284992
+      },
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/hla-tok-temporal/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "502eaf64f6fe8693dc90ddf6164c87799f1aebfe",
+        "branch": "refs/heads/experiment/hla-tok-temporal",
+        "disk": 516173824
+      },
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/hla-tok-uf-v2/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "ffbb7177e869b49934bcddf37c24fc7eade8bf41",
+        "branch": "refs/heads/experiment/hla-tok-uf-v2",
+        "disk": 953339904
+      },
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "5a415c98a57c4198f2e792974c14275217ad5952",
+        "branch": "refs/heads/experiment/hla-tok-uf-v3",
+        "disk": 797380608,
+        "details": "Command '('git', 'status', '--porcelain=v1', '--untracked-files=all')' returned non-zero exit status 128.",
+        "resolved_details": "Pinned DCVC objects verified and alternate pointed to canonical clone"
+      },
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/hla-tok-uf/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "3efe25ea47308cd7786888f0f5adbd0eb449e64d",
+        "branch": "refs/heads/experiment/hla-tok-uf",
+        "disk": 465952768
+      },
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/hla-tok-v2/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "50bd9cc6f28c6cde0e65f82723af2e7b11e48bd9",
+        "branch": "refs/heads/experiment/hla-tok-v2",
+        "disk": 3067842560
+      },
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/hla-tok-v3/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "b3b3366bba277906c97cad291ab643395280786b",
+        "branch": "refs/heads/experiment/hla-tok-v3",
+        "disk": 3913703424
+      },
+      {
+        "status": "DELETED",
+        "path": "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok",
+        "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+        "head": "7c158491b18fab87bea03b114a7ac242368e99b4",
+        "branch": "refs/heads/experiment/hla-tok",
+        "disk": 617689088
+      }
+    ],
+    "joint_v1_weight_links": [
+      {
+        "link": "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/checkpoints/cvpr2026_image.pth.tar",
+        "previous": "/home/whisperliang/.codex/worktrees/aip-vtok-sparse-decoder/CP-AdapTok/checkpoints/cvpr2026_image.pth.tar",
+        "target": "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_image.pth.tar",
+        "sha256": "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302"
+      },
+      {
+        "link": "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok/checkpoints/cvpr2026_video_ld.pth.tar",
+        "previous": "/home/whisperliang/.codex/worktrees/aip-vtok-sparse-decoder/CP-AdapTok/checkpoints/cvpr2026_video_ld.pth.tar",
+        "target": "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_video_ld.pth.tar",
+        "sha256": "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799"
+      }
+    ],
+    "joint_v1_diff_sha256": "3191cedb1356dfcf05ab8adc1ad729bc127aa14ed3a3ad3bf55d421da253ea2a",
+    "remediated_git_alternates": [
+      {
+        "worktree": "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok",
+        "previous_git_alternate": "/home/whisperliang/CP-AdapTok/.git/worktrees/CP-AdapTok12/modules/third_party/DCVC/objects",
+        "canonical_objects": "/home/whisperliang/CP-AdapTok/third_party/DCVC/.git/objects",
+        "head": "cbdae87a5445114cdc7f48816da63ea80bdeac40"
+      },
+      {
+        "worktree": "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok",
+        "previous_git_alternate": "/home/whisperliang/CP-AdapTok/.git/worktrees/CP-AdapTok13/modules/third_party/DCVC/objects",
+        "canonical_objects": "/home/whisperliang/CP-AdapTok/third_party/DCVC/.git/objects",
+        "head": "cbdae87a5445114cdc7f48816da63ea80bdeac40"
+      }
+    ]
+  },
+  "retired_python_caches": {
+    "cache_files_deleted": 463,
+    "allocated_file_bytes": 5070848,
+    "empty_retired_directories_removed": [
+      "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/__pycache__",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/codec",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/codec/__pycache__",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/data",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/data/__pycache__",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/evaluation",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/evaluation/__pycache__",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/models",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/models/__pycache__",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/tests",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/training",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/training/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/backbones",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/backbones/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/c1",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/decoder",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/decoder/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/models",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/models/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/tokenizer",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/tokenizer/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/training",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/baselines",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/baselines/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/cli",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/decoder",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/decoder/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/models",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/models/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/tests",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer/__pycache__",
+      "/home/whisperliang/CP-AdapTok/experiments",
+      "/home/whisperliang/CP-AdapTok/experiments/__pycache__",
+      "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr",
+      "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/__pycache__",
+      "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2",
+      "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__",
+      "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery",
+      "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__",
+      "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p",
+      "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__",
+      "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests",
+      "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__"
+    ],
+    "status": "PASS",
+    "path_receipt": "retired_cache_cleanup.json"
+  },
+  "deleted_and_preserved_branches": {
+    "planned": {
+      "experiment/adaptok-hr": {
+        "status": "DELETE",
+        "path": "experiment/adaptok-hr",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "cc87bd4d6a36ec45f051d2764c3c7d40dbe37333",
+        "remote_head": "cc87bd4d6a36ec45f051d2764c3c7d40dbe37333",
+        "unique_vs_pht": 8
+      },
+      "experiment/adaptok-hr-fine-detail-v2": {
+        "status": "DELETE",
+        "path": "experiment/adaptok-hr-fine-detail-v2",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "1851ecf9fea2837781f099e34c1d5da68322ba2e",
+        "remote_head": "1851ecf9fea2837781f099e34c1d5da68322ba2e",
+        "unique_vs_pht": 55
+      },
+      "experiment/adaptok-hr-fine-recovery": {
+        "status": "DELETE",
+        "path": "experiment/adaptok-hr-fine-recovery",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "ab0b85ba2c22ae9098f2b6a91549fd37aad6af2a",
+        "remote_head": "ab0b85ba2c22ae9098f2b6a91549fd37aad6af2a",
+        "unique_vs_pht": 16
+      },
+      "experiment/adaptok-hr-perceptual-recovery": {
+        "status": "DELETE",
+        "path": "experiment/adaptok-hr-perceptual-recovery",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "e20333add3cdbc84ce8837a1cc05ffeb34e10593",
+        "remote_head": null,
+        "unique_vs_pht": 56
+      },
+      "experiment/adaptok-hr-unified": {
+        "status": "DELETE",
+        "path": "experiment/adaptok-hr-unified",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "f895364ddbe006d9afc2522da89ba62c72161c62",
+        "remote_head": "f895364ddbe006d9afc2522da89ba62c72161c62",
+        "unique_vs_pht": 78
+      },
+      "experiment/aip-vtok": {
+        "status": "DELETE",
+        "path": "experiment/aip-vtok",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "3cb36413dc1e29fd1e01b941a59dc6aae3557a38",
+        "remote_head": "3cb36413dc1e29fd1e01b941a59dc6aae3557a38",
+        "unique_vs_pht": 15
+      },
+      "experiment/aip-vtok-c1": {
+        "status": "DELETE",
+        "path": "experiment/aip-vtok-c1",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "a0f5eb82bf138ac9ed8fa44413261c6a8dfe9dd6",
+        "remote_head": "a0f5eb82bf138ac9ed8fa44413261c6a8dfe9dd6",
+        "unique_vs_pht": 18
+      },
+      "experiment/aip-vtok-c1-followup": {
+        "status": "DELETE",
+        "path": "experiment/aip-vtok-c1-followup",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "a8474eefaf7bcdc9c66a229c87471eee67536513",
+        "remote_head": "a8474eefaf7bcdc9c66a229c87471eee67536513",
+        "unique_vs_pht": 21
+      },
+      "experiment/aip-vtok-sparse-rfsq": {
+        "status": "DELETE",
+        "path": "experiment/aip-vtok-sparse-rfsq",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "606216e768c277aa59b4dde6d3bd84247a02f905",
+        "remote_head": "606216e768c277aa59b4dde6d3bd84247a02f905",
+        "unique_vs_pht": 24
+      },
+      "experiment/fixed2048-reconstruction": {
+        "status": "DELETE",
+        "path": "experiment/fixed2048-reconstruction",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "630e8146ab8b10e0d7593e019d2c8d8782ed142f",
+        "remote_head": "630e8146ab8b10e0d7593e019d2c8d8782ed142f",
+        "unique_vs_pht": 7
+      },
+      "experiment/hla-tok": {
+        "status": "DELETE",
+        "path": "experiment/hla-tok",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "7c158491b18fab87bea03b114a7ac242368e99b4",
+        "remote_head": "7c158491b18fab87bea03b114a7ac242368e99b4",
+        "unique_vs_pht": 0
+      },
+      "experiment/hla-tok-cc": {
+        "status": "DELETE",
+        "path": "experiment/hla-tok-cc",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "a483a212d8efeaeab045daf4f0f5d0830d69928f",
+        "remote_head": null,
+        "unique_vs_pht": 10
+      },
+      "experiment/hla-tok-compact": {
+        "status": "DELETE",
+        "path": "experiment/hla-tok-compact",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "533ac3b533ae62fea7b64f16124727817794254d",
+        "remote_head": "533ac3b533ae62fea7b64f16124727817794254d",
+        "unique_vs_pht": 0
+      },
+      "experiment/hla-tok-continuous": {
+        "status": "DELETE",
+        "path": "experiment/hla-tok-continuous",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "5dd96da0512fb788eaf9e4c85ad05ccc7135599a",
+        "remote_head": "5dd96da0512fb788eaf9e4c85ad05ccc7135599a",
+        "unique_vs_pht": 0
+      },
+      "experiment/hla-tok-hts-v2": {
+        "status": "DELETE",
+        "path": "experiment/hla-tok-hts-v2",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "38071a49810112f7a6a7c4e8ab1a6dff144306c6",
+        "remote_head": null,
+        "unique_vs_pht": 5
+      },
+      "experiment/hla-tok-hts-v2.1": {
+        "status": "DELETE",
+        "path": "experiment/hla-tok-hts-v2.1",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "7d9bbb471fd71555b963f4ecb51241363a9954dd",
+        "remote_head": null,
+        "unique_vs_pht": 43
+      },
+      "experiment/hla-tok-temporal": {
+        "status": "DELETE",
+        "path": "experiment/hla-tok-temporal",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "502eaf64f6fe8693dc90ddf6164c87799f1aebfe",
+        "remote_head": null,
+        "unique_vs_pht": 0
+      },
+      "experiment/hla-tok-uf": {
+        "status": "DELETE",
+        "path": "experiment/hla-tok-uf",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "3efe25ea47308cd7786888f0f5adbd0eb449e64d",
+        "remote_head": null,
+        "unique_vs_pht": 0
+      },
+      "experiment/hla-tok-uf-v2": {
+        "status": "DELETE",
+        "path": "experiment/hla-tok-uf-v2",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "ffbb7177e869b49934bcddf37c24fc7eade8bf41",
+        "remote_head": null,
+        "unique_vs_pht": 0
+      },
+      "experiment/hla-tok-uf-v3": {
+        "status": "DELETE",
+        "path": "experiment/hla-tok-uf-v3",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "5a415c98a57c4198f2e792974c14275217ad5952",
+        "remote_head": null,
+        "unique_vs_pht": 0
+      },
+      "experiment/hla-tok-v2": {
+        "status": "DELETE",
+        "path": "experiment/hla-tok-v2",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "50bd9cc6f28c6cde0e65f82723af2e7b11e48bd9",
+        "remote_head": "50bd9cc6f28c6cde0e65f82723af2e7b11e48bd9",
+        "unique_vs_pht": 0
+      },
+      "experiment/hla-tok-v3": {
+        "status": "DELETE",
+        "path": "experiment/hla-tok-v3",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "b3b3366bba277906c97cad291ab643395280786b",
+        "remote_head": "b3b3366bba277906c97cad291ab643395280786b",
+        "unique_vs_pht": 0
+      },
+      "experiment/original-adaptok-1080p": {
+        "status": "DELETE",
+        "path": "experiment/original-adaptok-1080p",
+        "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+        "head": "c935509ff6bd00390f2421d39ce8501774b11d4f",
+        "remote_head": "c935509ff6bd00390f2421d39ce8501774b11d4f",
+        "unique_vs_pht": 0
+      }
+    },
+    "local_deleted": [
+      "experiment/adaptok-hr",
+      "experiment/adaptok-hr-fine-detail-v2",
+      "experiment/adaptok-hr-fine-recovery",
+      "experiment/adaptok-hr-perceptual-recovery",
+      "experiment/adaptok-hr-unified",
+      "experiment/aip-vtok",
+      "experiment/aip-vtok-c1",
+      "experiment/aip-vtok-c1-followup",
+      "experiment/aip-vtok-sparse-rfsq",
+      "experiment/fixed2048-reconstruction",
+      "experiment/hla-tok",
+      "experiment/hla-tok-cc",
+      "experiment/hla-tok-compact",
+      "experiment/hla-tok-continuous",
+      "experiment/hla-tok-hts-v2",
+      "experiment/hla-tok-hts-v2.1",
+      "experiment/hla-tok-temporal",
+      "experiment/hla-tok-uf",
+      "experiment/hla-tok-uf-v2",
+      "experiment/hla-tok-uf-v3",
+      "experiment/hla-tok-v2",
+      "experiment/hla-tok-v3",
+      "experiment/original-adaptok-1080p"
+    ],
+    "remote_deleted": [
+      "experiment/adaptok-hr",
+      "experiment/adaptok-hr-fine-detail-v2",
+      "experiment/adaptok-hr-fine-recovery",
+      "experiment/adaptok-hr-unified",
+      "experiment/aip-vtok",
+      "experiment/aip-vtok-c1",
+      "experiment/aip-vtok-c1-followup",
+      "experiment/aip-vtok-sparse-rfsq",
+      "experiment/fixed2048-reconstruction",
+      "experiment/hla-tok",
+      "experiment/hla-tok-compact",
+      "experiment/hla-tok-continuous",
+      "experiment/hla-tok-v2",
+      "experiment/hla-tok-v3",
+      "experiment/original-adaptok-1080p"
+    ],
+    "failures": [],
+    "preserved": [
+      {
+        "status": "PROTECTED",
+        "path": "experiment/aip-vtok-joint-v1",
+        "reason": "检出 worktree 存在用户未提交的报告修改",
+        "head": "73ea8b4b027587afd2149c298a82f5d14f013580",
+        "remote_head": "73ea8b4b027587afd2149c298a82f5d14f013580",
+        "unique_vs_pht": 29
+      },
+      {
+        "status": "PROTECTED",
+        "path": "experiment/aip-vtok-sparse-decoder",
+        "reason": "含用户未提交修改的 Joint V1 工作树通过该工作树引用五个依赖文件",
+        "head": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+        "remote_head": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+        "unique_vs_pht": 28
+      },
+      {
+        "status": "PROTECTED",
+        "path": "experiment/hla-tok-hts",
+        "reason": "受保护的 PHT 工作树仍使用本工作树的官方 LD 和图像权重链接",
+        "head": "e90ceda2d2875cd99061b8eb20946ebf67820a91",
+        "remote_head": null,
+        "unique_vs_pht": 0
+      },
+      {
+        "status": "PROTECTED",
+        "path": "experiment/pht-tok",
+        "reason": "正在运行的 UPG-Tok 通过五个符号链接使用该工作树的原生库、网络轨迹和基准数据",
+        "head": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+        "remote_head": null,
+        "unique_vs_pht": 0
+      },
+      {
+        "status": "KEEP",
+        "path": "main",
+        "reason": "稳定基础分支",
+        "head": "534696b2f78b7e1bc74bf5c5eefe83e88f41b864",
+        "remote_head": "534696b2f78b7e1bc74bf5c5eefe83e88f41b864",
+        "unique_vs_pht": 0
+      },
+      {
+        "path": "experiment/upg-tok",
+        "head": "d77322d12db878d04fbe3d91ac50160a39cdf776",
+        "remote_head": null,
+        "status": "PROTECTED",
+        "reason": "发现新分支、未提交修改和现场运行任务，保留工作树及被引用依赖"
+      }
+    ],
+    "remote_heads": {
+      "experiment/aip-vtok-joint-v1": "73ea8b4b027587afd2149c298a82f5d14f013580",
+      "experiment/aip-vtok-sparse-decoder": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+      "main": "534696b2f78b7e1bc74bf5c5eefe83e88f41b864",
+      "pht-tok": "f09b357cdc9aed5d8c985d3356928486f116c0c1"
+    }
+  },
+  "deleted_worktrees": [
+    "/home/whisperliang/.codex/worktrees/adaptok-hr-unified/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/fixed2048-reconstruction/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/hla-tok-cc/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/hla-tok-compact/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/hla-tok-continuous/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/hla-tok-hts-v2-1/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/hla-tok-hts-v2/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/hla-tok-temporal/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v2/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf-v3/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/hla-tok-uf/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/hla-tok-v2/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/hla-tok-v3/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/hla-tok/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/research-consolidation/CP-AdapTok"
+  ],
+  "initial_git": {
+    "refs/heads": [
+      "experiment/adaptok-hr cc87bd4d6a36ec45f051d2764c3c7d40dbe37333 origin/experiment/adaptok-hr docs(hr): include verified checkpoint metadata in the evidence archive",
+      "experiment/adaptok-hr-fine-detail-v2 1851ecf9fea2837781f099e34c1d5da68322ba2e origin/experiment/adaptok-hr-fine-detail-v2 data(hr): deliver native Fine-detail validation, endpoint timings, curves and verified raw evidence",
+      "experiment/adaptok-hr-fine-recovery ab0b85ba2c22ae9098f2b6a91549fd37aad6af2a origin/experiment/adaptok-hr-fine-recovery docs(hr): record verified Fine recovery branch delivery",
+      "experiment/adaptok-hr-perceptual-recovery e20333add3cdbc84ce8837a1cc05ffeb34e10593  docs(hr): design a paired chroma and Fine luminance recovery study",
+      "experiment/adaptok-hr-unified f895364ddbe006d9afc2522da89ba62c72161c62 origin/experiment/adaptok-hr-unified data(hr): publish the complete gated two-seed unified experiment",
+      "experiment/aip-vtok 3cb36413dc1e29fd1e01b941a59dc6aae3557a38 origin/experiment/aip-vtok docs(aip-vtok): publish the Diag-0 measurements and decision",
+      "experiment/aip-vtok-c1 a0f5eb82bf138ac9ed8fa44413261c6a8dfe9dd6 origin/experiment/aip-vtok-c1 data(aip-vtok): publish the dual-seed C1-A stop decision",
+      "experiment/aip-vtok-c1-followup a8474eefaf7bcdc9c66a229c87471eee67536513 origin/experiment/aip-vtok-c1-followup docs(aip-vtok): record C1 follow-up publication",
+      "experiment/aip-vtok-joint-v1 73ea8b4b027587afd2149c298a82f5d14f013580 origin/experiment/aip-vtok-joint-v1 feat(aip-vtok): implement and test the Joint V1 native progressive codec",
+      "experiment/aip-vtok-sparse-decoder c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea origin/experiment/aip-vtok-sparse-decoder data(aip-vtok): publish the sparse decoder pilot and stop decision",
+      "experiment/aip-vtok-sparse-rfsq 606216e768c277aa59b4dde6d3bd84247a02f905 origin/experiment/aip-vtok-sparse-rfsq data(aip-vtok): publish the sparse recovery pilot stop",
+      "experiment/fixed2048-reconstruction 630e8146ab8b10e0d7593e019d2c8d8782ed142f origin/experiment/fixed2048-reconstruction docs(experiment): publish sealed fixed-2048 negative reconstruction results",
+      "experiment/hla-tok 7c158491b18fab87bea03b114a7ac242368e99b4 origin/experiment/hla-tok experiment(hla): record fixed-budget quality gate and stop decision",
+      "experiment/hla-tok-cc a483a212d8efeaeab045daf4f0f5d0830d69928f  Archive H100 measurements and the HLA-Tok-CC research verdict",
+      "experiment/hla-tok-compact 533ac3b533ae62fea7b64f16124727817794254d origin/experiment/hla-tok-compact Publish H100 acceptance and the HLA-Tok-CP final verdict",
+      "experiment/hla-tok-continuous 5dd96da0512fb788eaf9e4c85ad05ccc7135599a origin/experiment/hla-tok-continuous report(hla): publish H100 timings, engineering gates and continuous experiment verdict",
+      "experiment/hla-tok-hts e90ceda2d2875cd99061b8eb20946ebf67820a91  Archive the measured HLA-Tok-HTS Phase 0 rejection",
+      "experiment/hla-tok-hts-v2 38071a49810112f7a6a7c4e8ab1a6dff144306c6  Record measured dual-seed progressive HTS pilot outcome",
+      "experiment/hla-tok-hts-v2.1 7d9bbb471fd71555b963f4ecb51241363a9954dd  Complete native incremental enhancement timing and seal delivery",
+      "experiment/hla-tok-temporal 502eaf64f6fe8693dc90ddf6164c87799f1aebfe  Publish H100 acceptance, quality limits and final temporal evidence",
+      "experiment/hla-tok-uf 3efe25ea47308cd7786888f0f5adbd0eb449e64d  docs(uf): report validation limits and freeze local acceptance evidence",
+      "experiment/hla-tok-uf-v2 ffbb7177e869b49934bcddf37c24fc7eade8bf41  Deliver the measured UF-V2 study and sealed Test disposition",
+      "experiment/hla-tok-uf-v3 5a415c98a57c4198f2e792974c14275217ad5952  Deliver measured UF-V3 evaluation, figures and reproducibility ledger",
+      "experiment/hla-tok-v2 50bd9cc6f28c6cde0e65f82723af2e7b11e48bd9 origin/experiment/hla-tok-v2 report(hla): publish V2 fixed-budget evidence and stop decision",
+      "experiment/hla-tok-v3 b3b3366bba277906c97cad291ab643395280786b origin/experiment/hla-tok-v3 report(hla): publish the V3 continuous pass and fixed-discrete stop",
+      "experiment/original-adaptok-1080p c935509ff6bd00390f2421d39ce8501774b11d4f origin/experiment/original-adaptok-1080p docs(experiment): seal official 1080p reconstruction evidence",
+      "experiment/pht-tok 54674cc164cc29b449c1682d3d4b05ec774baa70  Archive final PHT-Tok evidence and negative research findings",
+      "main 534696b2f78b7e1bc74bf5c5eefe83e88f41b864 origin/main docs: record completed formal training and sealed final results"
+    ],
+    "refs/tags": [],
+    "refs/remotes": [
+      "origin/experiment/adaptok-hr cc87bd4d6a36ec45f051d2764c3c7d40dbe37333  docs(hr): include verified checkpoint metadata in the evidence archive",
+      "origin/experiment/adaptok-hr-fine-detail-v2 1851ecf9fea2837781f099e34c1d5da68322ba2e  data(hr): deliver native Fine-detail validation, endpoint timings, curves and verified raw evidence",
+      "origin/experiment/adaptok-hr-fine-recovery ab0b85ba2c22ae9098f2b6a91549fd37aad6af2a  docs(hr): record verified Fine recovery branch delivery",
+      "origin/experiment/adaptok-hr-unified f895364ddbe006d9afc2522da89ba62c72161c62  data(hr): publish the complete gated two-seed unified experiment",
+      "origin/experiment/aip-vtok 3cb36413dc1e29fd1e01b941a59dc6aae3557a38  docs(aip-vtok): publish the Diag-0 measurements and decision",
+      "origin/experiment/aip-vtok-c1 a0f5eb82bf138ac9ed8fa44413261c6a8dfe9dd6  data(aip-vtok): publish the dual-seed C1-A stop decision",
+      "origin/experiment/aip-vtok-c1-followup a8474eefaf7bcdc9c66a229c87471eee67536513  docs(aip-vtok): record C1 follow-up publication",
+      "origin/experiment/aip-vtok-joint-v1 73ea8b4b027587afd2149c298a82f5d14f013580  feat(aip-vtok): implement and test the Joint V1 native progressive codec",
+      "origin/experiment/aip-vtok-sparse-decoder c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea  data(aip-vtok): publish the sparse decoder pilot and stop decision",
+      "origin/experiment/aip-vtok-sparse-rfsq 606216e768c277aa59b4dde6d3bd84247a02f905  data(aip-vtok): publish the sparse recovery pilot stop",
+      "origin/experiment/fixed2048-reconstruction 630e8146ab8b10e0d7593e019d2c8d8782ed142f  docs(experiment): publish sealed fixed-2048 negative reconstruction results",
+      "origin/experiment/hla-tok 7c158491b18fab87bea03b114a7ac242368e99b4  experiment(hla): record fixed-budget quality gate and stop decision",
+      "origin/experiment/hla-tok-compact 533ac3b533ae62fea7b64f16124727817794254d  Publish H100 acceptance and the HLA-Tok-CP final verdict",
+      "origin/experiment/hla-tok-continuous 5dd96da0512fb788eaf9e4c85ad05ccc7135599a  report(hla): publish H100 timings, engineering gates and continuous experiment verdict",
+      "origin/experiment/hla-tok-v2 50bd9cc6f28c6cde0e65f82723af2e7b11e48bd9  report(hla): publish V2 fixed-budget evidence and stop decision",
+      "origin/experiment/hla-tok-v3 b3b3366bba277906c97cad291ab643395280786b  report(hla): publish the V3 continuous pass and fixed-discrete stop",
+      "origin/experiment/original-adaptok-1080p c935509ff6bd00390f2421d39ce8501774b11d4f  docs(experiment): seal official 1080p reconstruction evidence",
+      "origin/main 534696b2f78b7e1bc74bf5c5eefe83e88f41b864  docs: record completed formal training and sealed final results"
+    ]
+  },
+  "local_refs_at_code_validation": {
+    "experiment/aip-vtok-joint-v1": "73ea8b4b027587afd2149c298a82f5d14f013580",
+    "experiment/aip-vtok-sparse-decoder": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+    "experiment/hla-tok-hts": "e90ceda2d2875cd99061b8eb20946ebf67820a91",
+    "experiment/pht-tok": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+    "experiment/upg-tok": "09e911816a173aabb650d85f7dc3f67dbebc9260",
+    "main": "f09b357cdc9aed5d8c985d3356928486f116c0c1",
+    "pht-tok": "f09b357cdc9aed5d8c985d3356928486f116c0c1"
+  },
+  "remote_refs_at_code_validation": {
+    "experiment/aip-vtok-joint-v1": "73ea8b4b027587afd2149c298a82f5d14f013580",
+    "experiment/aip-vtok-sparse-decoder": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+    "main": "f09b357cdc9aed5d8c985d3356928486f116c0c1",
+    "pht-tok": "f09b357cdc9aed5d8c985d3356928486f116c0c1"
+  },
+  "publication_refs": [
+    "refs/heads/pht-tok",
+    "refs/heads/main"
+  ],
+  "final_worktree_paths": [
+    "/home/whisperliang/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/aip-vtok-sparse-decoder/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok",
+    "/home/whisperliang/.codex/worktrees/upg-tok/CP-AdapTok"
+  ],
+  "protected_data": {
+    "train": {
+      "metadata_sha256": "f60d8b418085f69cfab71dfec2f864eba4cfc1615ea4ed17079e90d3b1d1f576",
+      "manifest_sha256": "88e18e6a6a38f61e335f48882aab855460e76f72205d5724cb761e7d3604dcc1",
+      "frames": 10209,
+      "sequences": 120,
+      "pixel_decodes": 0,
+      "source_byte_hashes_verified": 10209
+    },
+    "validation": {
+      "metadata_sha256": "842b32f62bfbc52162ac67751a6c0f1c1eb6e57a9c026b9beb85eb58b79c3067",
+      "manifest_sha256": "6e1753a5026d60f8e4b279bd15043b73e2e3a1bda01263159f7b93ddedcb5d37",
+      "frames": 1323,
+      "sequences": 21,
+      "pixel_decodes": 0,
+      "source_byte_hashes_verified": 1323
+    },
+    "test": {
+      "metadata_sha256": "be320f2f6bafd2c2cb34c5fbd05b110b64c53291c49f0307d5007edda10f64bb",
+      "manifest_sha256": "09738a77219eb1d78269a0788c109b268de29b54dec3aab68a365599e08bed5e",
+      "frames": 676,
+      "sequences": 9,
+      "pixel_decodes": 0,
+      "source_byte_hashes_verified": 0
+    }
+  },
+  "file_access_audit": {
+    "d1-files": {
+      "file_open_calls": 4220,
+      "sealed_dataset_paths_seen": 0,
+      "old_worktree_path_mentions": 0,
+      "huggingface_cache_mentions": 0
+    },
+    "adaptok-files": {
+      "file_open_calls": 7394,
+      "sealed_dataset_paths_seen": 0,
+      "old_worktree_path_mentions": 0,
+      "huggingface_cache_mentions": 0
+    },
+    "pht-post-clean": {
+      "file_open_calls": 3998,
+      "sealed_dataset_paths_seen": 0,
+      "old_worktree_path_mentions": 0
+    }
+  },
+  "protected_worktrees": [
+    {
+      "status": "PROTECTED",
+      "path": "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok",
+      "reason": "用户未提交修改，保留 worktree、分支和运行依赖",
+      "head": "73ea8b4b027587afd2149c298a82f5d14f013580",
+      "branch": "refs/heads/experiment/aip-vtok-joint-v1",
+      "disk": 1571827712
+    },
+    {
+      "status": "PROTECTED",
+      "path": "/home/whisperliang/.codex/worktrees/aip-vtok-sparse-decoder/CP-AdapTok",
+      "reason": "含用户未提交修改的 Joint V1 工作树通过该工作树引用五个依赖文件",
+      "head": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+      "branch": "refs/heads/experiment/aip-vtok-sparse-decoder",
+      "disk": 523440128
+    },
+    {
+      "status": "PROTECTED",
+      "path": "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok",
+      "reason": "受保护的 PHT 工作树仍使用本工作树的官方 LD 和图像权重链接",
+      "head": "e90ceda2d2875cd99061b8eb20946ebf67820a91",
+      "branch": "refs/heads/experiment/hla-tok-hts",
+      "disk": 2106449920
+    },
+    {
+      "status": "PROTECTED",
+      "path": "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok",
+      "reason": "正在运行的 UPG-Tok 通过五个符号链接使用该工作树的原生库、网络轨迹和基准数据",
+      "head": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+      "branch": "refs/heads/experiment/pht-tok",
+      "disk": 14885482496
+    },
+    {
+      "path": "/home/whisperliang/.codex/worktrees/upg-tok/CP-AdapTok",
+      "head": "d77322d12db878d04fbe3d91ac50160a39cdf776",
+      "branch": "refs/heads/experiment/upg-tok",
+      "status": "PROTECTED",
+      "reason": "发现新分支、未提交修改和现场运行任务，保留工作树及被引用依赖"
+    }
+  ],
+  "protected_dependency_checkpoints": [
+    {
+      "status": "PROTECTED",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/alignment.pt",
+      "reason": "Joint V1 脏工作树的现有跨工作树依赖"
+    },
+    {
+      "status": "PROTECTED",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_fix/fix_a/seed1/step_1000.pt",
+      "reason": "Joint V1 脏工作树的现有跨工作树依赖"
+    },
+    {
+      "status": "PROTECTED",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/projector_w128/latest.pt",
+      "reason": "Joint V1 脏工作树的现有跨工作树依赖"
+    }
+  ],
+  "before": {
+    "project_allocated_bytes": 180207976448,
+    "results_bytes": 55681139708,
+    "logs_bytes": 69685233,
+    "checkpoint_count": 811,
+    "checkpoint_bytes": 76507538777,
+    "worktree_count": 19,
+    "local_branch_count": 28,
+    "python_production_lines": 48223,
+    "python_test_lines": 7723,
+    "python_files": 476,
+    "tracked_files": 2795,
+    "config_files": 43,
+    "remote_branch_count": 18
+  },
+  "after": {
+    "project_allocated_bytes": 51115216896,
+    "results_bytes": 3622354709,
+    "logs_bytes": 61181460,
+    "checkpoint_count": 147,
+    "checkpoint_bytes": 2597792824,
+    "worktree_count": 6,
+    "local_branch_count": 7,
+    "python_production_lines": 6556,
+    "python_test_lines": 1661,
+    "python_files": 91,
+    "tracked_files": 275,
+    "config_files": 9,
+    "remote_branch_count": 4
+  },
+  "inventory_measured_at": "2026-11-27T13:16:41+08:00",
+  "reclaimed_project_allocated_bytes": 129092759552,
+  "git_object_bytes_before": 926539776,
+  "git_object_bytes_after": 929034240,
+  "git_lfs_bytes_after": 0,
+  "unexpected_ownership_paths": [
+    {
+      "status": "UNRESOLVED",
+      "path": "/home/whisperliang/.codex/worktrees/history-enhancement-run",
+      "reason": "其他项目或无法证明 Git 所有权"
+    },
+    {
+      "status": "UNRESOLVED",
+      "path": "/home/whisperliang/.codex/worktrees/remove-hglr",
+      "reason": "其他项目或无法证明 Git 所有权"
+    },
+    {
+      "status": "UNRESOLVED",
+      "path": "/home/whisperliang/.codex/worktrees/hla-tok-v3-qa.93UiIw",
+      "reason": "目录无 worktree 元数据，未认定为可删除资产"
+    }
+  ],
+  "change_manifest_file_count": 2733
+}

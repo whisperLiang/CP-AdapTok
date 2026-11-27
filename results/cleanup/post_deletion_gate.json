@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "commit": "f09b357cdc9aed5d8c985d3356928486f116c0c1",
+  "run_status": {
+    "dcvc-ld": "0",
+    "dcvc-hts": "0",
+    "pht": "0",
+    "pht-cuda": "0",
+    "d1": "0",
+    "d1-cuda": "0",
+    "adaptok": "0",
+    "adaptok-suite": "0",
+    "unified-comparison": "0",
+    "pht-original-exclusive": "0",
+    "official-entry": "0"
+  },
+  "same_validation_pixels_and_bytes": true,
+  "plausibly_inherited_shared_device_case": {
+    "observed_before_exclusive_retry": true,
+    "exception": "ValueError: invalid or truncated PHT rANS record",
+    "first_post_cleanup_attempt": "GPU already used by external UPG-Tok jobs",
+    "resolution": "Both original and retained CUDA suites were run independently after the device became idle",
+    "concurrent_correctness": "NOT_VERIFIED"
+  },
+  "test_pixel_reads": 0
+}

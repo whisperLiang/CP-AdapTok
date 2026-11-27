@@ -1,0 +1,484 @@
+[
+  {
+    "trace": "Verizon_LTE_short_100ms",
+    "policy": "S1_adaptive_qp",
+    "rtt_ms": 60.0,
+    "jitter_ms": 6.0,
+    "configured_packet_loss": 0.0,
+    "frames": 17,
+    "displayed_frames": 17,
+    "dropped_frames": 0,
+    "deadline_hit_rate": 1.0,
+    "stall_seconds": 0.0,
+    "startup_seconds": 0.5,
+    "quality_fluctuation_psnr_db": 5.387875556945801,
+    "metrics": {
+      "mse": 0.0007503119088462828,
+      "psnr": 32.29398379606359,
+      "lpips": 0.19239554641877904,
+      "dists": 0.0954620873226839,
+      "ms-ssim": 0.9639051065725439
+    },
+    "qoe_drop_penalized_psnr": 32.29398379606359,
+    "wasted_bytes_including_transport": 17080,
+    "feedback_wire_bytes": 144,
+    "recovery_i_wire_bytes": 0,
+    "actual_sent_bytes": 528190,
+    "actual_received_bytes": 528190,
+    "late_received_bytes": 0,
+    "late_enhancement_bytes": 0,
+    "useful_delivered_bytes": 511110,
+    "codec_sent_bytes": 511110,
+    "forward_headers_sent_bytes": 17080,
+    "forward_headers_received_bytes": 17080,
+    "units": [
+      {
+        "source_start": 0,
+        "valid_frames": 1,
+        "intra": true,
+        "qp": 52,
+        "goodput_estimate_bps": 3000000.0,
+        "deadline": 0.5,
+        "encoded_at": 0.013027141976635903,
+        "causal_pacing_seconds": 0.24,
+        "attempted_stage": 1,
+        "received_stage": 1,
+        "displayed_stage": 1,
+        "reference_commit": true,
+        "actual_sent_bytes": 61470,
+        "actual_received_bytes": 61470,
+        "useful_delivered_bytes": 59470,
+        "codec_sent_bytes": 59470,
+        "forward_headers_sent_bytes": 2000,
+        "forward_headers_received_bytes": 2000,
+        "late_received_bytes": 0,
+        "late_enhancement_bytes": 0,
+        "scheduled_encode_ms": 13.027141976635903,
+        "feedback_wire_bytes": 48,
+        "scheduled_decode_ms": 10.326557006919757,
+        "capture_to_display_ms": 500.0,
+        "receiver_ready_ms": 94.9533671613723,
+        "quality": [
+          {
+            "mse": 0.00012623138900380582,
+            "psnr": 38.98832702636719,
+            "lpips": 0.08277393877506256,
+            "dists": 0.05804550647735596,
+            "ms-ssim": 0.9896001815795898
+          }
+        ]
+      },
+      {
+        "source_start": 1,
+        "valid_frames": 8,
+        "intra": false,
+        "qp": 57,
+        "goodput_estimate_bps": 7211999.999999995,
+        "deadline": 0.5333333333333333,
+        "encoded_at": 0.27864841516226685,
+        "causal_pacing_seconds": 0.24,
+        "attempted_stage": 1,
+        "received_stage": 1,
+        "displayed_stage": 1,
+        "reference_commit": true,
+        "actual_sent_bytes": 213180,
+        "actual_received_bytes": 213180,
+        "useful_delivered_bytes": 206300,
+        "codec_sent_bytes": 206300,
+        "forward_headers_sent_bytes": 6880,
+        "forward_headers_received_bytes": 6880,
+        "late_received_bytes": 0,
+        "late_enhancement_bytes": 0,
+        "scheduled_encode_ms": 11.981748495600186,
+        "feedback_wire_bytes": 48,
+        "scheduled_decode_ms": 16.28558502125088,
+        "capture_to_display_ms": 500.0,
+        "receiver_ready_ms": 419.92067290718956,
+        "quality": [
+          {
+            "mse": 0.0012781863333657384,
+            "psnr": 28.934059143066406,
+            "lpips": 0.254938542842865,
+            "dists": 0.12448567152023315,
+            "ms-ssim": 0.9407385587692261
+          },
+          {
+            "mse": 0.00047129084123298526,
+            "psnr": 33.267112731933594,
+            "lpips": 0.17200444638729095,
+            "dists": 0.08409500122070312,
+            "ms-ssim": 0.9725527763366699
+          },
+          {
+            "mse": 0.001177801750600338,
+            "psnr": 29.28927993774414,
+            "lpips": 0.24676674604415894,
+            "dists": 0.12080729007720947,
+            "ms-ssim": 0.9493221044540405
+          },
+          {
+            "mse": 0.0004610742616932839,
+            "psnr": 33.3622932434082,
+            "lpips": 0.17528009414672852,
+            "dists": 0.08830326795578003,
+            "ms-ssim": 0.9703544974327087
+          },
+          {
+            "mse": 0.0012198543408885598,
+            "psnr": 29.13692283630371,
+            "lpips": 0.2549389600753784,
+            "dists": 0.12044167518615723,
+            "ms-ssim": 0.9482240676879883
+          },
+          {
+            "mse": 0.0004657254903577268,
+            "psnr": 33.318702697753906,
+            "lpips": 0.16966363787651062,
+            "dists": 0.08594119548797607,
+            "ms-ssim": 0.9727184176445007
+          },
+          {
+            "mse": 0.001334823202341795,
+            "psnr": 28.745763778686523,
+            "lpips": 0.26112762093544006,
+            "dists": 0.12332028150558472,
+            "ms-ssim": 0.9422703981399536
+          },
+          {
+            "mse": 0.0001796543219825253,
+            "psnr": 37.45562744140625,
+            "lpips": 0.10275506228208542,
+            "dists": 0.061951279640197754,
+            "ms-ssim": 0.987005352973938
+          }
+        ]
+      },
+      {
+        "source_start": 9,
+        "valid_frames": 8,
+        "intra": false,
+        "qp": 62,
+        "goodput_estimate_bps": 10158948.17163529,
+        "deadline": 0.8,
+        "encoded_at": 0.5453150818289335,
+        "causal_pacing_seconds": 0.24,
+        "attempted_stage": 1,
+        "received_stage": 1,
+        "displayed_stage": 1,
+        "reference_commit": true,
+        "actual_sent_bytes": 253540,
+        "actual_received_bytes": 253540,
+        "useful_delivered_bytes": 245340,
+        "codec_sent_bytes": 245340,
+        "forward_headers_sent_bytes": 8200,
+        "forward_headers_received_bytes": 8200,
+        "late_received_bytes": 0,
+        "late_enhancement_bytes": 0,
+        "scheduled_encode_ms": 11.981748495600186,
+        "feedback_wire_bytes": 48,
+        "scheduled_decode_ms": 16.28558502125088,
+        "capture_to_display_ms": 500.0,
+        "receiver_ready_ms": 457.47903309820174,
+        "quality": [
+          {
+            "mse": 0.0010276100365445018,
+            "psnr": 29.881715774536133,
+            "lpips": 0.22537045180797577,
+            "dists": 0.11108928918838501,
+            "ms-ssim": 0.9553788900375366
+          },
+          {
+            "mse": 0.00044510094448924065,
+            "psnr": 33.51541519165039,
+            "lpips": 0.17287763953208923,
+            "dists": 0.08215397596359253,
+            "ms-ssim": 0.9722598791122437
+          },
+          {
+            "mse": 0.0011233433615416288,
+            "psnr": 29.494874954223633,
+            "lpips": 0.24076275527477264,
+            "dists": 0.11434930562973022,
+            "ms-ssim": 0.952197790145874
+          },
+          {
+            "mse": 0.00039943307638168335,
+            "psnr": 33.98556137084961,
+            "lpips": 0.15797285735607147,
+            "dists": 0.07828664779663086,
+            "ms-ssim": 0.9766949415206909
+          },
+          {
+            "mse": 0.0012102564796805382,
+            "psnr": 29.171226501464844,
+            "lpips": 0.2599518597126007,
+            "dists": 0.1263304352760315,
+            "ms-ssim": 0.9459317922592163
+          },
+          {
+            "mse": 0.0004387095686979592,
+            "psnr": 33.57822799682617,
+            "lpips": 0.16306811571121216,
+            "dists": 0.07834434509277344,
+            "ms-ssim": 0.9744524359703064
+          },
+          {
+            "mse": 0.0012290301965549588,
+            "psnr": 29.1043758392334,
+            "lpips": 0.2446630597114563,
+            "dists": 0.11541122198104858,
+            "ms-ssim": 0.9493175745010376
+          },
+          {
+            "mse": 0.00016717685502953827,
+            "psnr": 37.76823806762695,
+            "lpips": 0.08580850064754486,
+            "dists": 0.04949909448623657,
+            "ms-ssim": 0.9873671531677246
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "trace": "Verizon_LTE_short_100ms",
+    "policy": "S4_adaptive_prefix",
+    "rtt_ms": 60.0,
+    "jitter_ms": 6.0,
+    "configured_packet_loss": 0.0,
+    "frames": 17,
+    "displayed_frames": 17,
+    "dropped_frames": 0,
+    "deadline_hit_rate": 1.0,
+    "stall_seconds": 0.0,
+    "startup_seconds": 0.5,
+    "quality_fluctuation_psnr_db": 4.015279054641724,
+    "metrics": {
+      "mse": 0.0019563803207882516,
+      "psnr": 28.178904813878678,
+      "lpips": 0.23708859699613907,
+      "dists": 0.13148580929812262,
+      "ms-ssim": 0.929177413968479
+    },
+    "qoe_drop_penalized_psnr": 28.178904813878678,
+    "wasted_bytes_including_transport": 13760,
+    "feedback_wire_bytes": 144,
+    "recovery_i_wire_bytes": 0,
+    "actual_sent_bytes": 422822,
+    "actual_received_bytes": 422822,
+    "late_received_bytes": 0,
+    "late_enhancement_bytes": 0,
+    "useful_delivered_bytes": 409062,
+    "codec_sent_bytes": 409062,
+    "forward_headers_sent_bytes": 13760,
+    "forward_headers_received_bytes": 13760,
+    "units": [
+      {
+        "source_start": 0,
+        "valid_frames": 1,
+        "intra": true,
+        "qp": 52,
+        "goodput_estimate_bps": 3000000.0,
+        "deadline": 0.5,
+        "encoded_at": 0.020186692010611296,
+        "causal_pacing_seconds": 0.24,
+        "attempted_stage": 1,
+        "received_stage": 1,
+        "displayed_stage": 1,
+        "reference_commit": true,
+        "actual_sent_bytes": 61514,
+        "actual_received_bytes": 61514,
+        "useful_delivered_bytes": 59514,
+        "codec_sent_bytes": 59514,
+        "forward_headers_sent_bytes": 2000,
+        "forward_headers_received_bytes": 2000,
+        "late_received_bytes": 0,
+        "late_enhancement_bytes": 0,
+        "scheduled_encode_ms": 20.186692010611296,
+        "feedback_wire_bytes": 48,
+        "scheduled_decode_ms": 17.951908987015486,
+        "capture_to_display_ms": 500.0,
+        "receiver_ready_ms": 109.73826917544342,
+        "quality": [
+          {
+            "mse": 0.00012623138900380582,
+            "psnr": 38.98832702636719,
+            "lpips": 0.08277393877506256,
+            "dists": 0.05804550647735596,
+            "ms-ssim": 0.9896001815795898
+          }
+        ]
+      },
+      {
+        "source_start": 1,
+        "valid_frames": 8,
+        "intra": false,
+        "qp": 63,
+        "goodput_estimate_bps": 7211999.999999995,
+        "deadline": 0.5333333333333333,
+        "encoded_at": 0.2851335336784056,
+        "causal_pacing_seconds": 0.24,
+        "attempted_stage": 2,
+        "received_stage": 2,
+        "displayed_stage": 2,
+        "reference_commit": true,
+        "actual_sent_bytes": 149181,
+        "actual_received_bytes": 149181,
+        "useful_delivered_bytes": 144341,
+        "codec_sent_bytes": 144341,
+        "forward_headers_sent_bytes": 4840,
+        "forward_headers_received_bytes": 4840,
+        "late_received_bytes": 0,
+        "late_enhancement_bytes": 0,
+        "scheduled_encode_ms": 18.46686701173894,
+        "feedback_wire_bytes": 48,
+        "scheduled_decode_ms": 24.38146098575089,
+        "capture_to_display_ms": 500.0,
+        "receiver_ready_ms": 393.8511181743758,
+        "quality": [
+          {
+            "mse": 0.0035563709679991007,
+            "psnr": 24.48992919921875,
+            "lpips": 0.3278549909591675,
+            "dists": 0.17673403024673462,
+            "ms-ssim": 0.8785838484764099
+          },
+          {
+            "mse": 0.002109840279445052,
+            "psnr": 26.757505416870117,
+            "lpips": 0.23726005852222443,
+            "dists": 0.1390480399131775,
+            "ms-ssim": 0.9243561029434204
+          },
+          {
+            "mse": 0.003643350675702095,
+            "psnr": 24.384990692138672,
+            "lpips": 0.3367532789707184,
+            "dists": 0.18516534566879272,
+            "ms-ssim": 0.8803050518035889
+          },
+          {
+            "mse": 0.001891923719085753,
+            "psnr": 27.23096466064453,
+            "lpips": 0.23616433143615723,
+            "dists": 0.13920891284942627,
+            "ms-ssim": 0.9266859292984009
+          },
+          {
+            "mse": 0.003379656933248043,
+            "psnr": 24.711275100708008,
+            "lpips": 0.33913588523864746,
+            "dists": 0.1801363229751587,
+            "ms-ssim": 0.8867286443710327
+          },
+          {
+            "mse": 0.0020947104785591364,
+            "psnr": 26.788759231567383,
+            "lpips": 0.23701965808868408,
+            "dists": 0.1445763111114502,
+            "ms-ssim": 0.923302173614502
+          },
+          {
+            "mse": 0.003591711400076747,
+            "psnr": 24.446985244750977,
+            "lpips": 0.334555447101593,
+            "dists": 0.18164151906967163,
+            "ms-ssim": 0.8804921507835388
+          },
+          {
+            "mse": 0.0008743876242078841,
+            "psnr": 30.582962036132812,
+            "lpips": 0.136480912566185,
+            "dists": 0.08688056468963623,
+            "ms-ssim": 0.9633747935295105
+          }
+        ]
+      },
+      {
+        "source_start": 9,
+        "valid_frames": 8,
+        "intra": false,
+        "qp": 63,
+        "goodput_estimate_bps": 10162793.952940416,
+        "deadline": 0.8,
+        "encoded_at": 0.5518002003450723,
+        "causal_pacing_seconds": 0.24,
+        "attempted_stage": 3,
+        "received_stage": 3,
+        "displayed_stage": 3,
+        "reference_commit": true,
+        "actual_sent_bytes": 212127,
+        "actual_received_bytes": 212127,
+        "useful_delivered_bytes": 205207,
+        "codec_sent_bytes": 205207,
+        "forward_headers_sent_bytes": 6920,
+        "forward_headers_received_bytes": 6920,
+        "late_received_bytes": 0,
+        "late_enhancement_bytes": 0,
+        "scheduled_encode_ms": 18.46686701173894,
+        "feedback_wire_bytes": 48,
+        "scheduled_decode_ms": 27.847387013025582,
+        "capture_to_display_ms": 500.0,
+        "receiver_ready_ms": 452.401434782906,
+        "quality": [
+          {
+            "mse": 0.001866619917564094,
+            "psnr": 27.289443969726562,
+            "lpips": 0.2604216933250427,
+            "dists": 0.14379382133483887,
+            "ms-ssim": 0.9317247271537781
+          },
+          {
+            "mse": 0.0011229210067540407,
+            "psnr": 29.49650764465332,
+            "lpips": 0.19763801991939545,
+            "dists": 0.10189568996429443,
+            "ms-ssim": 0.9537093043327332
+          },
+          {
+            "mse": 0.0021556641440838575,
+            "psnr": 26.6641902923584,
+            "lpips": 0.2763502299785614,
+            "dists": 0.14520466327667236,
+            "ms-ssim": 0.9238208532333374
+          },
+          {
+            "mse": 0.0009638668270781636,
+            "psnr": 30.159832000732422,
+            "lpips": 0.17790880799293518,
+            "dists": 0.09411400556564331,
+            "ms-ssim": 0.9587085247039795
+          },
+          {
+            "mse": 0.002163562225177884,
+            "psnr": 26.64830780029297,
+            "lpips": 0.2942313551902771,
+            "dists": 0.15468138456344604,
+            "ms-ssim": 0.9191039800643921
+          },
+          {
+            "mse": 0.0011063815327361226,
+            "psnr": 29.560951232910156,
+            "lpips": 0.1873026192188263,
+            "dists": 0.10054975748062134,
+            "ms-ssim": 0.9542955160140991
+          },
+          {
+            "mse": 0.0022440494503825903,
+            "psnr": 26.48967742919922,
+            "lpips": 0.2772865891456604,
+            "dists": 0.14661169052124023,
+            "ms-ssim": 0.9211820363998413
+          },
+          {
+            "mse": 0.00036721688229590654,
+            "psnr": 34.350772857666016,
+            "lpips": 0.09136833250522614,
+            "dists": 0.056971192359924316,
+            "ms-ssim": 0.9800422191619873
+          }
+        ]
+      }
+    ]
+  }
+]

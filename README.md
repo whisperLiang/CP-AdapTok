@@ -13,18 +13,17 @@ PHT-Tok 沿用官方 DCVC-UF HT-S 的八帧 P-Chunk 分析。发送端和接收�
 
 ## 开始
 
-初始化两个官方子模块并按[复现说明](docs/reproduction.md)准备权重、CUDA 扩展和冻结数据清单。所有新评估默认使用 Validation 或冻结的 Train Calibration，Test 保持封存。
+初始化两个官方子模块，然后按复现说明安装锁定的环境、准备官方权重和数据清单、构建 CUDA 扩展。新评估使用 Validation 或冻结的 Train Calibration，Test 保持封存。 [安装与资产准备](docs/reproduction.md#准备)
 
 ```bash
 git submodule update --init
-python -m benchmarks --help
-python -m benchmarks pht-codec --help
-python -m benchmarks dcvc --help
-python -m benchmarks adaptok --help
-python -m benchmarks d1 --help
+export CP_ADAPTOK_DATA_ROOT="$PWD/data"
+export PYTHONPATH="$PWD/.build/pht-tok/pht/site:$PWD"
+.venv-native/bin/python -m benchmarks pht-codec \
+  --weights "$PWD/checkpoints" --output .build/examples
 ```
 
-构建 PHT 扩展后，可以用冻结 Calibration 样本生成 I/P 码流和四个渐进前缀。具体环境变量、静态率失真、渐进质量、编解码性能和网络传输命令见[复现说明](docs/reproduction.md)。
+命令使用冻结的 Calibration 样本生成 I/P 码流，增量解码 P1/P2 各四个前缀，并写出真实字节账本。 [单项评估](docs/reproduction.md#单项评估) · [共同 Validation 与回归](docs/reproduction.md#共同-validation-与回归)
 
 ## 已验证能力与研究限制
 

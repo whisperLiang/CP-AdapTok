@@ -1,0 +1,67 @@
+{
+  "all_built_from_pinned_source": true,
+  "historical_worktree_used": false,
+  "compile_caches_used": false,
+  "python": "3.12.13",
+  "torch": "2.9.1+cu130",
+  "gcc": "11.4.0",
+  "toolkit": "Cuda compilation tools, release 13.0, V13.0.88",
+  "cutlass": "4370102f9dacab813282e1d67722fceb0b90a019",
+  "builds": {
+    "official": {
+      "status": "PASS",
+      "outputs": [
+        {
+          "filename": "MLCodec_extensions_cpp.cpython-312-x86_64-linux-gnu.so",
+          "bytes": 413176,
+          "sha256": "7b763478abcc0fdab2a58415ff8fa1b711daf432e83469bf368e20106bc2c0bb"
+        },
+        {
+          "filename": "inference_extensions_cuda.cpython-312-x86_64-linux-gnu.so",
+          "bytes": 84554376,
+          "sha256": "bb1109170acc1765554090d798965b7fc44496e9f32bea71b8fa20229a6a550c"
+        }
+      ]
+    },
+    "pht": {
+      "status": "PASS",
+      "outputs": [
+        {
+          "filename": "MLCodec_extensions_cpp.cpython-312-x86_64-linux-gnu.so",
+          "bytes": 413176,
+          "sha256": "7b763478abcc0fdab2a58415ff8fa1b711daf432e83469bf368e20106bc2c0bb"
+        },
+        {
+          "filename": "inference_extensions_cuda.cpython-312-x86_64-linux-gnu.so",
+          "bytes": 85270344,
+          "sha256": "b1f829af9fa82528d2d9ac6aa90e18fde05b4a856093e98df991698b5a3cc4f2"
+        },
+        {
+          "filename": "pht_entropy_native.cpython-312-x86_64-linux-gnu.so",
+          "bytes": 294216,
+          "sha256": "cb080197ba50fa8cda36723a5c2acdf3e814f06506c17f10ac137974258d4d72"
+        }
+      ]
+    },
+    "d1": {
+      "status": "PASS",
+      "outputs": [
+        {
+          "filename": "inference_extensions_cuda.cpython-312-x86_64-linux-gnu.so",
+          "bytes": 84793328,
+          "sha256": "23c69bcd52692824d79ff3f7cea05f8bc0f57167a5f5712781c15db8086a9b6e"
+        },
+        {
+          "filename": "hla_uf_v2_records.cpython-312-x86_64-linux-gnu.so",
+          "bytes": 326696,
+          "sha256": "6075d989e1dbe95a04bcadff58170416262f8a4fa781b2266be7fafedbeae60c"
+        },
+        {
+          "filename": "hla_uf_rans.cpython-312-x86_64-linux-gnu.so",
+          "bytes": 339040,
+          "sha256": "d45b9fce8f3f683a949085c7c270cda8727a19e0d901d3090a445922529180a9"
+        }
+      ]
+    }
+  }
+}

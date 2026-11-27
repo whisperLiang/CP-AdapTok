@@ -1,0 +1,2856 @@
+{
+  "validated_commit": "f09b357cdc9aed5d8c985d3356928486f116c0c1",
+  "exact_deleted_paths": [
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 455,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/__pycache__/config.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 6513,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/__pycache__/runtime.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 5791,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/codec/__pycache__/bitstream.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 6592,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/codec/__pycache__/codec.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 10898,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/data/__pycache__/dataset.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 5817,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/data/__pycache__/manifest.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 7112,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/evaluation/__pycache__/benchmark.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 18973,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/evaluation/__pycache__/evaluate.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 24369,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/evaluation/__pycache__/report.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 27039,
+      "allocated_bytes": 28672
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/models/__pycache__/decoder.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 9382,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/models/__pycache__/encoder.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 6374,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/models/__pycache__/model.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 6910,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/models/__pycache__/scorer.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 4187,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/models/__pycache__/temporal_state.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 2348,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/models/__pycache__/tokenizer.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 7644,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/models/__pycache__/vq.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 10445,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/models/__pycache__/window_attention.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 3414,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/conftest.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 1357,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/conftest.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 1214,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_bitstream.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 11623,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_bitstream.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 6125,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_data.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 7190,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_data.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 4755,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_evaluation.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 9581,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_evaluation.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 2283,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_fine_detail_decoder.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 28346,
+      "allocated_bytes": 28672
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_fine_detail_evaluation.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 21683,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_fine_detail_fork.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 6222,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_fine_detail_v2.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 29357,
+      "allocated_bytes": 32768
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_fine_diagnostics.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 4909,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_fine_evaluation.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 1897,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_fine_recovery.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 36265,
+      "allocated_bytes": 36864
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_lifecycle.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 23970,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_lifecycle.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 14296,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_model.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 50580,
+      "allocated_bytes": 53248
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_model.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 19589,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_stream.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 12584,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_stream.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 5914,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_training.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 19195,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__/test_training.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 8126,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/training/__pycache__/checkpoint.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 8115,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/training/__pycache__/fine_detail.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 4104,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/training/__pycache__/losses.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 4004,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/training/__pycache__/train.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 24393,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/adaptok_hr/training/__pycache__/train_scorer.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "bytes": 7656,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 241,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/__pycache__/runtime.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 3367,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/backbones/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 215,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/backbones/__pycache__/dcvc_aligned.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 13468,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/backbones/__pycache__/latent_to_ref.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 2527,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/backbones/__pycache__/temporal_predictor.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 1842,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 226,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__/artifacts.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 9300,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__/calibrate.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 18306,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__/channels.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 5437,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__/dense_eval.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 9194,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__/diagnostic.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 24085,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__/frames.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 3443,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__/metrics.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 8865,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__/pilot.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 8609,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__/recovery_net.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 4578,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__/scan.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 7145,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__/tokens.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 7323,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__/training.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 26200,
+      "allocated_bytes": 28672
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 159,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/__pycache__/calibration.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 16553,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/__pycache__/dense.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 19722,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/__pycache__/experiment.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 18115,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/__pycache__/gates.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 7424,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/__pycache__/io.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 12193,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/__pycache__/quantization.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 9666,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/__pycache__/report.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 30936,
+      "allocated_bytes": 32768
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/__pycache__/rollout.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 7819,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/__pycache__/sparse.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 23761,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/__pycache__/training.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 17950,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/decoder/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 208,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/decoder/__pycache__/causal_state.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 3966,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/decoder/__pycache__/fusion_decoder.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 2092,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/decoder/__pycache__/latent_canvas.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 4290,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 232,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/__pycache__/basis.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 5540,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/__pycache__/closed.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 17005,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/__pycache__/fit.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 11693,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/__pycache__/io.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 10336,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/__pycache__/matched.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 18242,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/__pycache__/metrics.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 5072,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/__pycache__/packets.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 10260,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/__pycache__/sparse.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 11691,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 220,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/audit.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 4488,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/benchmark.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 2265,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/diagnose.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 11411,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/evaluate.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 12786,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/figures.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 12265,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/fix.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 20156,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/fix_audit.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 4353,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/fix_gate.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 22394,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/fix_metrics.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 6248,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/formal.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 19897,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/gate0.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 1845,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/gate1.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 7774,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/gates.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 4505,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/horizon.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 7641,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/report.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 10508,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/report_fix.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 33785,
+      "allocated_bytes": 36864
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/report_stage1.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 12386,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/smoke.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 6727,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__/tokenizer_oracle.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 6672,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/models/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 232,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/models/__pycache__/codec.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 10585,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/tokenizer/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 224,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/tokenizer/__pycache__/fsq.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 4321,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/tokenizer/__pycache__/halton.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 1791,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/tokenizer/__pycache__/residual_tokenizer.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 8009,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/tokenizer/__pycache__/tier_map.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 4348,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 206,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/budgets.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 829,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/checkpoint.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 3745,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/components.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 2614,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/data.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 5235,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/determinism.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 723,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/diagnostics.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 2898,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/fix.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 9739,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/formal.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 11286,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/losses.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 8782,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/paired_step.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 6726,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/prefix.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 4650,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/smoke.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 12689,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__/trainer.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "bytes": 9126,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/__init__.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 251,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 261,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/data.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 8241,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/data.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 14193,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/diagnostics.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 7252,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/diagnostics_prefix.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 23651,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/evaluation.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 12529,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/evaluation.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 26566,
+      "allocated_bytes": 28672
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/large_scale.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 21701,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/large_scale_analysis.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 34428,
+      "allocated_bytes": 36864
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/large_scale_data.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 11251,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/large_scale_tracking.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 18171,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/large_scale_validation.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 13128,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/metrics.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2543,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/metrics.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 4567,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/profiling.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1414,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/profiling.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2327,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/runtime.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 11496,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/runtime.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 19265,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/training.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 10359,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/training.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 38213,
+      "allocated_bytes": 40960
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/training_initialization.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 4338,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__/training_state.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 4610,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones/__pycache__/__init__.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 155,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 159,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones/__pycache__/causal_state.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5022,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones/__pycache__/causal_state.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 8370,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones/__pycache__/intra_adapter.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2616,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones/__pycache__/intra_adapter.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 4057,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones/__pycache__/ld_adapter.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2241,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones/__pycache__/ld_adapter.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3462,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones/__pycache__/native_baseline.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 6777,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones/__pycache__/native_baseline.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 12204,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/baselines/__pycache__/__init__.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 213,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/baselines/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 250,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/baselines/__pycache__/fixed_spatial.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1339,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/baselines/__pycache__/fixed_spatial.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2360,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__/__init__.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 149,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 153,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__/benchmark.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1849,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__/benchmark.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3073,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__/common.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1107,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__/common.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1683,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__/eval.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3762,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__/eval.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 6131,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__/stream_demo.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 10908,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__/stream_demo.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 17136,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__/train.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2400,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__/train.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3848,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/decoder/__pycache__/__init__.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 153,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/decoder/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 157,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/decoder/__pycache__/prefix_cache.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1805,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/decoder/__pycache__/prefix_cache.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3328,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/decoder/__pycache__/prefix_latent_decoder.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1822,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/decoder/__pycache__/prefix_latent_decoder.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2617,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/decoder/__pycache__/progressive_token_aggregator.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 8534,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/decoder/__pycache__/token_grid_projector.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3796,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/decoder/__pycache__/token_grid_projector.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 7242,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/models/__pycache__/__init__.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 152,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/models/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 156,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/models/__pycache__/causal_progressive_codec.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 9097,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/models/__pycache__/causal_progressive_codec.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 15335,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/__init__.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 155,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 159,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/bitstream.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5878,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/bitstream.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 9953,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/causal_scorer.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1486,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/causal_scorer.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2688,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/entropy_codec.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 6074,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/entropy_codec.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 10391,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/online_allocator.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5099,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/online_allocator.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 6611,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/packetizer.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2985,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/packetizer.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5224,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/receiver.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5208,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/receiver.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 11070,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/sender.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5375,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/sender.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 10331,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/session.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 11649,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/session.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 20674,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/transport.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2589,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__/transport.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3829,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/conftest.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 810,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/conftest.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 671,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/conftest.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1056,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/conftest.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 913,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_adaptive_stream.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 28789,
+      "allocated_bytes": 32768
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_adaptive_stream.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 60179,
+      "allocated_bytes": 61440
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_adaptive_stream.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 25296,
+      "allocated_bytes": 28672
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_budget_alloc.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 4497,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_budget_alloc.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1497,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_budget_alloc.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 8909,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_budget_alloc.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2288,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_causality.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3076,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_causality.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1448,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_causality.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5426,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_causality.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2398,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_entropy_training.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2579,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_entropy_training.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 907,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_entropy_training.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5315,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_entropy_training.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1710,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_extended_state.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3109,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_extended_state.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1721,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_extended_state.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 6083,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_extended_state.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3097,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_intra_inter.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3073,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_intra_inter.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 956,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_intra_inter.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 6083,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_intra_inter.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1735,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_large_scale_lifecycle.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 34657,
+      "allocated_bytes": 36864
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_large_scale_lifecycle.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 14940,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_large_scale_training.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 27609,
+      "allocated_bytes": 28672
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_large_scale_training.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 15080,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_large_scale_validation.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 17738,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_large_scale_validation.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 8948,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_native_codec.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 8585,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_native_codec.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 21335,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_native_codec.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 9362,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_native_eval_options.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5168,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_native_eval_options.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 8538,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_native_eval_options.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 4592,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_optimization.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 73304,
+      "allocated_bytes": 73728
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_optimization.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 31911,
+      "allocated_bytes": 32768
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_packet_roundtrip.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 9533,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_packet_roundtrip.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 4443,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_packet_roundtrip.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 19084,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_packet_roundtrip.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 7169,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_prefix.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 4889,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_prefix.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2959,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_prefix.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 9275,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_prefix.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5086,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_prefix_gain.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 4274,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_prefix_gain.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1778,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_prefix_gradient.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 13193,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_prefix_gradient.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5007,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_prefix_information.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 20512,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_prefix_information.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 7323,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_prefix_stream_invariants.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 7532,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_prefix_stream_invariants.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3487,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_progressive_aggregator.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 14049,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_progressive_aggregator.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 8465,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_reference_state.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5734,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_reference_state.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2557,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_reference_state.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 12912,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_reference_state.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5934,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_regression.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 6450,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_regression.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1810,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_regression.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 13008,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_regression.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 4217,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_shapes.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5064,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_shapes.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2904,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_shapes.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 9815,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_shapes.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5466,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_state_fingerprint.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3539,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_state_fingerprint.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1355,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_state_fingerprint.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 8763,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_state_fingerprint.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3733,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_streaming.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 8641,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_streaming.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3498,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_streaming.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 17972,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_streaming.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 8510,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_temporal_sampling.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 5207,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_temporal_sampling.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 10329,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_temporal_sampling.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3683,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_training.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 8981,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_training.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1987,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_training.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 19069,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_training.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 9915,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_vq.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 6545,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_vq.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2127,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_vq.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 13827,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__/test_vq.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 4566,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer/__pycache__/__init__.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 155,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 159,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer/__pycache__/learned_queries.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3798,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer/__pycache__/learned_queries.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 6344,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer/__pycache__/lightweight_attention.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2277,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer/__pycache__/lightweight_attention.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 4310,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer/__pycache__/prefix_masking.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 1180,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer/__pycache__/prefix_masking.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 3020,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer/__pycache__/vector_quantizer.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 8334,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer/__pycache__/vector_quantizer.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 16638,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer/__pycache__/vq_initialization.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "bytes": 2793,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/__pycache__/__init__.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 232,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 239,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/__pycache__/acceptance.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 15517,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/__pycache__/decision.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 8467,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/__pycache__/pilot.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 10521,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/__pycache__/quality.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 9115,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/__pycache__/sequence_benchmark.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 4757,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/archive.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 11067,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/benchmark.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 6871,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/decisions.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 6532,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/decoder_stage.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 11986,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/evaluate.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 16445,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/figures.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 14767,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/fork.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 8840,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/probe.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 7514,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/quality_checks.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 3604,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/report.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 22478,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/run.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 6137,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/study.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 10271,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/texture.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 8146,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/verify.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 32103,
+      "allocated_bytes": 32768
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__/zero_reference.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 5791,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 267,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/acceptance.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 11112,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/benchmark.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 8802,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/common.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 809,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/diagnose.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 24121,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/evaluate.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 15526,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/figure_qa.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 3124,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/figures.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 9807,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/gradient_balance.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 6127,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/gradient_probe.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 7925,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/mechanism.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 3827,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/quality.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 3853,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/report.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 21132,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__/run.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 8601,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/__init__.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 260,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/__init__.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 267,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/artifacts.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 3619,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/artifacts.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 6336,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/cli.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 7799,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/comparison.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 5538,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/download_checkpoint.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 3813,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/equivalence.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 2363,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/metrics.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 4977,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/model_adapter.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 5335,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/mutation_check.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 3285,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/profiling.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 2750,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/quality_check.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 2246,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/reconstruction.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 3035,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/report.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 19069,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/runner.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 10755,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/tiling.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 4471,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/verify_cp_inputs.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 3376,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/verify_cp_inputs.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 4768,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/video_reader.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 5631,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__/video_reader.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 9268,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_artifacts.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 2057,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_artifacts.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 712,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_download.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 5576,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_metrics.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 4372,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_metrics.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 1747,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_official_equivalence.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 3127,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_official_equivalence.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 1634,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_reconstruction.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 4233,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_reconstruction.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 2523,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_temporal.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 4577,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_temporal.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 1674,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_tiling.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 4006,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_tiling.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 2110,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_video_reader.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 10089,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_video_reader.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 3802,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__/test_workflow.cpython-310-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/experiments",
+      "bytes": 2198,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/audit_optimization_data.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/audit_optimization_data.cpython-312.pyc",
+      "bytes": 3050,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/benchmark_controls.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/benchmark_controls.cpython-312.pyc",
+      "bytes": 2655,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/benchmark_native.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/benchmark_native.cpython-312.pyc",
+      "bytes": 4573,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/build_optimization_report.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/build_optimization_report.cpython-312.pyc",
+      "bytes": 17910,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/build_prefix_utilization_report.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/build_prefix_utilization_report.cpython-312.pyc",
+      "bytes": 37792,
+      "allocated_bytes": 40960
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/build_pretrained_report.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/build_pretrained_report.cpython-312.pyc",
+      "bytes": 19449,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/build_report.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/build_report.cpython-312.pyc",
+      "bytes": 28520,
+      "allocated_bytes": 28672
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/check_large_scale_resume.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/check_large_scale_resume.cpython-312.pyc",
+      "bytes": 8053,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/compare_attention_precision.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/compare_attention_precision.cpython-312.pyc",
+      "bytes": 6476,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/compare_prefix_decoders.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/compare_prefix_decoders.cpython-312.pyc",
+      "bytes": 1828,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/compare_prefix_training.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/compare_prefix_training.cpython-312.pyc",
+      "bytes": 9576,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/diagnose_baseline.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/diagnose_baseline.cpython-312.pyc",
+      "bytes": 4334,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/diagnose_prefix_utilization.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/diagnose_prefix_utilization.cpython-312.pyc",
+      "bytes": 5698,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/diagnose_teacher.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/diagnose_teacher.cpython-312.pyc",
+      "bytes": 5896,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/evaluate_capacity_native.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/evaluate_capacity_native.cpython-312.pyc",
+      "bytes": 2219,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/evaluate_prefix_gain.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/evaluate_prefix_gain.cpython-312.pyc",
+      "bytes": 8357,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/extend_representation_training.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/extend_representation_training.cpython-312.pyc",
+      "bytes": 2852,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/measure_fused_fingerprint.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/measure_fused_fingerprint.cpython-312.pyc",
+      "bytes": 2946,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/measure_optimization.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/measure_optimization.cpython-312.pyc",
+      "bytes": 4244,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/measure_prefix_accumulation.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/measure_prefix_accumulation.cpython-312.pyc",
+      "bytes": 5212,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/mutation_check.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/mutation_check.cpython-312.pyc",
+      "bytes": 11529,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_720p.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_720p.cpython-312.pyc",
+      "bytes": 1419,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_compile_env.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_compile_env.cpython-312.pyc",
+      "bytes": 1638,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_large_scale_data.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_large_scale_data.cpython-312.pyc",
+      "bytes": 5357,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_optimization_data.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_optimization_data.cpython-312.pyc",
+      "bytes": 7536,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_prefix_validation.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_prefix_validation.cpython-312.pyc",
+      "bytes": 5065,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_pretrained_data.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_pretrained_data.cpython-312.pyc",
+      "bytes": 5416,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_reds_large_scale.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/prepare_reds_large_scale.cpython-312.pyc",
+      "bytes": 9118,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/profile_pipeline.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/profile_pipeline.cpython-312.pyc",
+      "bytes": 3364,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/quality_audit.cpython-310.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/quality_audit.cpython-310.pyc",
+      "bytes": 3857,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/quality_audit.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/quality_audit.cpython-312.pyc",
+      "bytes": 6429,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/remote_archive.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/remote_archive.cpython-312.pyc",
+      "bytes": 5001,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/report_large_scale.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/report_large_scale.cpython-312.pyc",
+      "bytes": 1088,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_acceptance.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_acceptance.cpython-312.pyc",
+      "bytes": 2439,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_capacity_ablation.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_capacity_ablation.cpython-312.pyc",
+      "bytes": 3777,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_final_validation.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_final_validation.cpython-312.pyc",
+      "bytes": 3321,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_optimization_checks.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_optimization_checks.cpython-312.pyc",
+      "bytes": 4971,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_optimization_experiments.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_optimization_experiments.cpython-312.pyc",
+      "bytes": 9046,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_prefix_validation.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_prefix_validation.cpython-312.pyc",
+      "bytes": 8663,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_resolution_curriculum.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_resolution_curriculum.cpython-312.pyc",
+      "bytes": 3893,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_streaming_experiments.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/run_streaming_experiments.cpython-312.pyc",
+      "bytes": 6124,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/snapshot_quantizer.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/snapshot_quantizer.cpython-312.pyc",
+      "bytes": 4221,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/train_large_scale.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/train_large_scale.cpython-312.pyc",
+      "bytes": 4093,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/validate_large_scale_pilot.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/validate_large_scale_pilot.cpython-312.pyc",
+      "bytes": 3186,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/verify_historical_stream.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/verify_historical_stream.cpython-312.pyc",
+      "bytes": 4755,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/write_optimization_report.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/__pycache__/write_optimization_report.cpython-312.pyc",
+      "bytes": 31395,
+      "allocated_bytes": 32768
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/__pycache__/check_training_path.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/__pycache__/check_training_path.cpython-312.pyc",
+      "bytes": 5441,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/__pycache__/finalize.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/__pycache__/finalize.cpython-312.pyc",
+      "bytes": 6647,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/__pycache__/merge_coverage.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/__pycache__/merge_coverage.cpython-312.pyc",
+      "bytes": 2359,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/__pycache__/mutation_check.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/__pycache__/mutation_check.cpython-312.pyc",
+      "bytes": 4868,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/__pycache__/quality_audit.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/__pycache__/quality_audit.cpython-312.pyc",
+      "bytes": 3030,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/__pycache__/recheck_evaluation.cpython-312.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/scripts/aip_vtok/__pycache__/recheck_evaluation.cpython-312.pyc",
+      "bytes": 2685,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_append_complexity.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_append_complexity.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 5658,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_c1_followup.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_c1_followup.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 90362,
+      "allocated_bytes": 94208
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_canvas.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_canvas.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 9611,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_causal_state_and_canvas.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_causal_state_and_canvas.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 7879,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_checkpoint_resume.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_checkpoint_resume.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 9625,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_chroma_diagnostics.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_chroma_diagnostics.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 2975,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_cli.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_cli.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 3015,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_data.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_data.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 4406,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_deterministic_training.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_deterministic_training.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 2933,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_diag0.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_diag0.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 39292,
+      "allocated_bytes": 40960
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_diag05_c1.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_diag05_c1.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 89623,
+      "allocated_bytes": 90112
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_fsq_bijection.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_fsq_bijection.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 13635,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_gate0_acceptance.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_gate0_acceptance.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 4316,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_gate1_acceptance.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_gate1_acceptance.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 5134,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_gate1_fix.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_gate1_fix.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 51720,
+      "allocated_bytes": 53248
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_geometry_and_alignment.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_geometry_and_alignment.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 15690,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_gpu_integration.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_gpu_integration.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 23588,
+      "allocated_bytes": 24576
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_gpu_temporal.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_gpu_temporal.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 15008,
+      "allocated_bytes": 16384
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_losses.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_losses.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 11001,
+      "allocated_bytes": 12288
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_projector.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_projector.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 4226,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_smoke_gate.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_smoke_gate.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 1800,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_state_boundaries.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_state_boundaries.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 3636,
+      "allocated_bytes": 4096
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_tier_map_and_prefix.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_tier_map_and_prefix.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 18182,
+      "allocated_bytes": 20480
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_training_invariants.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_training_invariants.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 4888,
+      "allocated_bytes": 8192
+    },
+    {
+      "path": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_training_prefix.cpython-312-pytest-9.2.0.pyc",
+      "scope": "/home/whisperliang/CP-AdapTok/tests/aip_vtok/__pycache__/test_training_prefix.cpython-312-pytest-9.2.0.pyc",
+      "bytes": 4097,
+      "allocated_bytes": 8192
+    }
+  ],
+  "reason": "Ignored Python bytecode from retired source. Git, runtime and linked-worktree checks passed before removal.",
+  "verified": {
+    "cache_files_deleted": 463,
+    "allocated_file_bytes": 5070848,
+    "empty_retired_directories_removed": [
+      "/home/whisperliang/CP-AdapTok/adaptok_hr",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/__pycache__",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/codec",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/codec/__pycache__",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/data",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/data/__pycache__",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/evaluation",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/evaluation/__pycache__",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/models",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/models/__pycache__",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/tests",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/tests/__pycache__",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/training",
+      "/home/whisperliang/CP-AdapTok/adaptok_hr/training/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/backbones",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/backbones/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/c1",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/c1/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/c1_followup/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/decoder",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/decoder/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/diagnostics/diag0/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/evaluation/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/models",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/models/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/tokenizer",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/tokenizer/__pycache__",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/training",
+      "/home/whisperliang/CP-AdapTok/aip_vtok/training/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/backbones/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/baselines",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/baselines/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/cli",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/cli/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/decoder",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/decoder/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/models",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/models/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/streaming/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/tests",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/tests/__pycache__",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer",
+      "/home/whisperliang/CP-AdapTok/cp_adaptok/tokenizer/__pycache__",
+      "/home/whisperliang/CP-AdapTok/experiments",
+      "/home/whisperliang/CP-AdapTok/experiments/__pycache__",
+      "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr",
+      "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/__pycache__",
+      "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2",
+      "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_detail_v2/__pycache__",
+      "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery",
+      "/home/whisperliang/CP-AdapTok/experiments/adaptok_hr/fine_recovery/__pycache__",
+      "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p",
+      "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/__pycache__",
+      "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests",
+      "/home/whisperliang/CP-AdapTok/experiments/original_adaptok_1080p/tests/__pycache__"
+    ],
+    "status": "PASS"
+  }
+}
