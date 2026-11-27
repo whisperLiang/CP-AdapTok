@@ -1,0 +1,22 @@
+{
+  "source": "https://ultravideo.fi/dataset.html",
+  "content": "ShakeNDry",
+  "license": "CC BY-NC 3.0, Digiturk",
+  "tested_frames": 129,
+  "original_frames": 300,
+  "resolution": [
+    1080,
+    1920
+  ],
+  "fps": 120,
+  "archive": {
+    "filename": "uvg-complete.7z",
+    "bytes": 460046003,
+    "sha256": "5f034adbcc1c2fc4c1f3d757ea8aa22b08dcc31f70edb2d6ad0de49495d34328"
+  },
+  "yuv": {
+    "filename": "ShakeNDry_1920x1080_120fps_420_8bit_YUV.yuv",
+    "bytes": 933120000,
+    "sha256": "d0a024c975e0c6b671c53272b6265ce04066785c2e5ae0d0f30b061a9e47b925"
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "T01": {
+    "test": "原生形状",
+    "status": "PASS",
+    "evidence": "test_native, native sample manifest"
+  },
+  "T02": {
+    "test": "官方 UF-LD",
+    "status": "PASS",
+    "evidence": "baseline_audit, fresh native base sweep, profiler"
+  },
+  "T03": {
+    "test": "Anchor-Fast 等价",
+    "status": "PASS",
+    "evidence": "full-parity, A2 Validation metrics"
+  },
+  "T04": {
+    "test": "D0 正确性参考",
+    "status": "PASS",
+    "evidence": "legacy wire and D0 batch parity"
+  },
+  "T05": {
+    "test": "D1 零增强",
+    "status": "PASS",
+    "evidence": "test_native, identical complete Base RGB"
+  },
+  "T06": {
+    "test": "D1 I 帧",
+    "status": "PASS",
+    "evidence": "test_native and real 174-frame replay"
+  },
+  "T07": {
+    "test": "D1 P 帧",
+    "status": "PASS",
+    "evidence": "test_native and real 174-frame replay"
+  },
+  "T08": {
+    "test": "D1 有效梯度",
+    "status": "PASS",
+    "evidence": "test_decoder and optimizer step ledgers"
+  },
+  "T09": {
+    "test": "增量残差",
+    "status": "PASS",
+    "evidence": "test_records and dynamic-static frames"
+  },
+  "T10": {
+    "test": "追加不重解",
+    "status": "PASS",
+    "evidence": "test_native and test_stream"
+  },
+  "T11": {
+    "test": "整数前缀",
+    "status": "PASS",
+    "evidence": "quantized canvas parity, exact acceptance fixed symbols"
+  },
+  "T12": {
+    "test": "字节前缀",
+    "status": "PASS",
+    "evidence": "full-parity 108432 boundaries"
+  },
+  "T13": {
+    "test": "一次最大码流",
+    "status": "PASS",
+    "evidence": "full-max canonical evaluate, timing contract"
+  },
+  "T14": {
+    "test": "动态 Base 一致",
+    "status": "PASS",
+    "evidence": "189 independent real frames"
+  },
+  "T15": {
+    "test": "时序 context",
+    "status": "PASS",
+    "evidence": "old render retained over native next-frame commit, injected fault"
+  },
+  "T16": {
+    "test": "Base 每帧提交一次",
+    "status": "PASS",
+    "evidence": "test_stream and dynamic-static"
+  },
+  "T17": {
+    "test": "增强隔离",
+    "status": "PASS",
+    "evidence": "exact native DPB state symmetric between endpoints"
+  },
+  "T18": {
+    "test": "Tensor alias",
+    "status": "PASS",
+    "evidence": "isolated copy and post-next-context render parity"
+  },
+  "T19": {
+    "test": "实际 CDF",
+    "status": "PASS",
+    "evidence": "stable integer tables, adjusted CUDA proxy exact decode"
+  },
+  "T20": {
+    "test": "CC-S 同符号",
+    "status": "PASS",
+    "evidence": "Calibration 128-frame integer canvas parity"
+  },
+  "T21": {
+    "test": "Raw fallback",
+    "status": "PASS",
+    "evidence": "Raw8 fallback exercised, calibration maintained rANS"
+  },
+  "T22": {
+    "test": "预算无关 Header",
+    "status": "PASS",
+    "evidence": "CRC and bytes as slices, header mutation"
+  },
+  "T23": {
+    "test": "半段保留",
+    "status": "PASS",
+    "evidence": "test_stream, native dynamic truncated packets"
+  },
+  "T24": {
+    "test": "分片",
+    "status": "PASS",
+    "evidence": "randomized byte fragmentation and real mixed replay"
+  },
+  "T25": {
+    "test": "精化依赖",
+    "status": "PASS",
+    "evidence": "valid but out-of-order range-coded fine segment"
+  },
+  "T26": {
+    "test": "损坏、未知记录",
+    "status": "PASS",
+    "evidence": "wire CRC, layout tests, family checks"
+  },
+  "T27": {
+    "test": "Base 丢失和 I 恢复",
+    "status": "PASS",
+    "evidence": "2 real-I recoveries and 38 rejects"
+  },
+  "T28": {
+    "test": "增强丢失",
+    "status": "PASS",
+    "evidence": "no enhancement every ninth real dynamic frame"
+  },
+  "T29": {
+    "test": "I/P 真实字节",
+    "status": "PASS",
+    "evidence": "base-validation and per-frame validation CSV"
+  },
+  "T30": {
+    "test": "硬 Base 上限",
+    "status": "PASS",
+    "evidence": "runtime refuses oversize, standard real maxima"
+  },
+  "T31": {
+    "test": "族隔离",
+    "status": "PASS",
+    "evidence": "valid CRC wrong tag and independent Lite profile"
+  },
+  "T32": {
+    "test": "未来帧扰动",
+    "status": "PASS",
+    "evidence": "binary comparison of earlier native access units"
+  },
+  "T33": {
+    "test": "长闭环",
+    "status": "PARTIAL_PASS",
+    "evidence": "99 and 90 continuous, 128 and 256 NOT_AVAILABLE"
+  },
+  "T34": {
+    "test": "CUDA 与参考",
+    "status": "PARTIAL_PASS",
+    "evidence": "same-ABI E0 exact and official bitstream parity, cross-device NOT_AVAILABLE"
+  },
+  "T35": {
+    "test": "checkpoint 重载",
+    "status": "PASS",
+    "evidence": "native independent decode of qualified trained endpoints"
+  },
+  "T36": {
+    "test": "断点续训",
+    "status": "PASS",
+    "evidence": "Both seeds resumed through P1/P2/P3; verified effective AdamW counts, source signatures, CPU/CUDA RNG and data position at every retained node."
+  },
+  "T37": {
+    "test": "历史资产",
+    "status": "PASS",
+    "evidence": "SHA-256 validated against isolated snapshots"
+  },
+  "T38": {
+    "test": "Test 封存",
+    "status": "PASS",
+    "evidence": "frozen audit, direct preadmission access fault"
+  },
+  "T39": {
+    "test": "Full-max 计时",
+    "status": "PASS",
+    "evidence": "independent wall timing, timing fault negative tests"
+  },
+  "T40": {
+    "test": "真实与估计",
+    "status": "PASS",
+    "evidence": "actual header/length ledger vs RD proxy, injected estimate fault"
+  }
+}

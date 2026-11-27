@@ -1,0 +1,95 @@
+{
+  "cases": [
+    {
+      "frames": 1,
+      "units": 1,
+      "bytes": 6658,
+      "payload_and_nal_parity": true,
+      "rgb_parity": true,
+      "context_parity": true,
+      "reference_parity": true
+    },
+    {
+      "frames": 2,
+      "units": 2,
+      "bytes": 21893,
+      "payload_and_nal_parity": true,
+      "rgb_parity": true,
+      "context_parity": true,
+      "reference_parity": true
+    },
+    {
+      "frames": 3,
+      "units": 2,
+      "bytes": 22372,
+      "payload_and_nal_parity": true,
+      "rgb_parity": true,
+      "context_parity": true,
+      "reference_parity": true
+    },
+    {
+      "frames": 4,
+      "units": 2,
+      "bytes": 20312,
+      "payload_and_nal_parity": true,
+      "rgb_parity": true,
+      "context_parity": true,
+      "reference_parity": true
+    },
+    {
+      "frames": 5,
+      "units": 2,
+      "bytes": 20471,
+      "payload_and_nal_parity": true,
+      "rgb_parity": true,
+      "context_parity": true,
+      "reference_parity": true
+    },
+    {
+      "frames": 6,
+      "units": 2,
+      "bytes": 18089,
+      "payload_and_nal_parity": true,
+      "rgb_parity": true,
+      "context_parity": true,
+      "reference_parity": true
+    },
+    {
+      "frames": 7,
+      "units": 2,
+      "bytes": 17667,
+      "payload_and_nal_parity": true,
+      "rgb_parity": true,
+      "context_parity": true,
+      "reference_parity": true
+    },
+    {
+      "frames": 8,
+      "units": 2,
+      "bytes": 15721,
+      "payload_and_nal_parity": true,
+      "rgb_parity": true,
+      "context_parity": true,
+      "reference_parity": true
+    },
+    {
+      "frames": 32,
+      "units": 5,
+      "bytes": 51134,
+      "payload_and_nal_parity": true,
+      "rgb_parity": true,
+      "context_parity": true,
+      "reference_parity": true
+    }
+  ],
+  "chunk_causality": true,
+  "independent_i": true,
+  "frozen_weight_and_buffer_sha256": "00540d7c9091381540fc08ebbe8dabc4c52d69fd43d9deb7c77473d6061002bd",
+  "weights_and_buffers_unchanged": true,
+  "verdict": "PASS",
+  "pixels_read": {
+    "train": 32,
+    "validation": 0,
+    "test": 0
+  }
+}

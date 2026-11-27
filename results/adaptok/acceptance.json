@@ -1,0 +1,55 @@
+{
+  "strict_official_weights_and_immutable_state": true,
+  "official_equivalence": true,
+  "source_and_metric_parity": {
+    "windows": 12,
+    "source_frames": 192,
+    "rgb_sha256_equal": true,
+    "metric_weight_sha256_equal": true,
+    "cp_metric_versions": {
+      "lpips": "0.1.4",
+      "DISTS-pytorch": "0.1",
+      "pytorch-msssim": "1.0.0",
+      "opencv-python-headless": "5.0.0.93"
+    }
+  },
+  "layouts": {
+    "final_1080p": {
+      "rows": 576,
+      "all_metrics_measured": true,
+      "bpp_null": true,
+      "videos": 9,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "real_frames_each": 64
+    },
+    "token_ablation/overlap": {
+      "rows": 576,
+      "all_metrics_measured": true,
+      "bpp_null": true,
+      "videos": 9,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "real_frames_each": 64
+    }
+  },
+  "tail": {
+    "real_frames": 17,
+    "scored_per_window": [
+      16,
+      1
+    ],
+    "refactor_vs_original_run_metric_max_abs_error": 0.0
+  },
+  "protected": {
+    "existing_code_configs_submodules_unchanged": true,
+    "historical_cp_results_unchanged": true
+  },
+  "all_acceptance_checks_passed": true,
+  "real_measured_source_frames": 192,
+  "reconstructed_frame_budget_layout_pairs": 1152
+}

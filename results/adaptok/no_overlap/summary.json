@@ -1,0 +1,141 @@
+{
+  "quality_only": true,
+  "bpp": null,
+  "budgets": {
+    "2048": {
+      "metrics": {
+        "mse": 0.00353069587436039,
+        "ms-ssim": 0.8816292025148869,
+        "lpips": 0.1376856924034655,
+        "lpips-vgg": 0.22252091486006975,
+        "dists": 0.03801688179373741,
+        "boundary_mse": 0.005095220141811296,
+        "interior_mse": 0.003434486308833584,
+        "boundary_minus_interior_mse": 0.0016607338329777122,
+        "frames": 16,
+        "psnr_mean_db": 24.741625954134214,
+        "psnr_from_global_mse_db": 24.521396899065873,
+        "bpp": null,
+        "quality_only": true,
+        "boundary_psnr_from_mse_db": 22.928370473183026,
+        "interior_psnr_from_mse_db": 24.641382105467926
+      },
+      "latency": {
+        "windows": [
+          {
+            "valid_frames": 16,
+            "tile_count": 135,
+            "tile_batch_size": 4,
+            "read_ms": 386.66904502315447,
+            "tiling_ms": 45.78435095027089,
+            "encode_ms": 4956.309663015418,
+            "decode_ms": 5107.650211837608,
+            "encode_cuda_ms": 4954.584991455078,
+            "decode_cuda_ms": 5106.432083129883,
+            "stitch_ms": 8.86754592647776,
+            "compute_ms": 10124.283348035533,
+            "shared_overhead_ms": 5.671576305758208,
+            "write_ms": 6314.33443602873,
+            "metrics_ms": 4948.000675009098,
+            "all_budgets_compute_wall_ms": 10124.283348035533,
+            "timing_attribution": "single budget measured wall"
+          }
+        ],
+        "source_frames": 16,
+        "encode_ms": {
+          "total": 4956.309663015418,
+          "mean": 4956.309663015418,
+          "p50": 4956.309663015418,
+          "p95": 4956.309663015418
+        },
+        "decode_ms": {
+          "total": 5107.650211837608,
+          "mean": 5107.650211837608,
+          "p50": 5107.650211837608,
+          "p95": 5107.650211837608
+        },
+        "tiling_ms": {
+          "total": 45.78435095027089,
+          "mean": 45.78435095027089,
+          "p50": 45.78435095027089,
+          "p95": 45.78435095027089
+        },
+        "stitch_ms": {
+          "total": 8.86754592647776,
+          "mean": 8.86754592647776,
+          "p50": 8.86754592647776,
+          "p95": 8.86754592647776
+        },
+        "compute_ms": {
+          "total": 10124.283348035533,
+          "mean": 10124.283348035533,
+          "p50": 10124.283348035533,
+          "p95": 10124.283348035533
+        },
+        "read_ms": {
+          "total": 386.66904502315447,
+          "mean": 386.66904502315447,
+          "p50": 386.66904502315447,
+          "p95": 386.66904502315447
+        },
+        "write_ms": {
+          "total": 6314.33443602873,
+          "mean": 6314.33443602873,
+          "p50": 6314.33443602873,
+          "p95": 6314.33443602873
+        },
+        "metrics_ms": {
+          "total": 4948.000675009098,
+          "mean": 4948.000675009098,
+          "p50": 4948.000675009098,
+          "p95": 4948.000675009098
+        },
+        "neural": {
+          "total_ms": 10063.959874853026,
+          "total_fps": 1.589831457891585,
+          "mean_ms_per_frame": 628.9974921783141,
+          "p50_ms_per_frame": 628.9974921783141,
+          "p95_ms_per_frame": 628.9974921783141
+        },
+        "compute": {
+          "total_ms": 10124.283348035533,
+          "total_fps": 1.5803587720709695,
+          "mean_ms_per_frame": 632.7677092522208,
+          "p50_ms_per_frame": 632.7677092522208,
+          "p95_ms_per_frame": 632.7677092522208
+        },
+        "pipeline": {
+          "total_ms": 16825.286829087418,
+          "total_fps": 0.9509496130752036,
+          "mean_ms_per_frame": 1051.5804268179636,
+          "p50_ms_per_frame": 1051.5804268179636,
+          "p95_ms_per_frame": 1051.5804268179636
+        },
+        "neural_cuda_events": {
+          "total_ms": 10061.017074584961,
+          "total_fps": 1.5902964761303753,
+          "mean_ms_per_frame": 628.8135671615601,
+          "p50_ms_per_frame": 628.8135671615601,
+          "p95_ms_per_frame": 628.8135671615601
+        },
+        "metrics_excluded_from_all_fps": true
+      },
+      "peak_inference_allocated_mib": 3044.95263671875,
+      "peak_inference_reserved_mib": 3504.0
+    }
+  },
+  "video_count": 1,
+  "boundary_definition": "union of [line-2,line+2) pixel strips at internal multiples of 128, same mask for both strides",
+  "temporal_state": "each native window independent; repeat last real frame for tail; score only real frames",
+  "timing": "single-budget E1/E2 directly measured; multi-budget runs charge shared encoder/read cost to each budget",
+  "video_mean_metrics": {
+    "2048": {
+      "mse": 0.00353069587436039,
+      "psnr_mean_db": 24.741625954134214,
+      "ms-ssim": 0.8816292025148869,
+      "lpips": 0.1376856924034655,
+      "lpips-vgg": 0.22252091486006975,
+      "dists": 0.03801688179373741
+    }
+  }
+}

@@ -17,7 +17,7 @@
 
 ## 官方 HT-S 与完整接管
 
-在官方源码、发布权重和相同 128 帧 Calibration 下，LD、HT-S 和 HT-L 的 60 份码流与历史归档逐字节一致。UVG YUV420 另复现三个 UF 模型。DCVC-RT 在同一 DAVIS Calibration 上重跑 20 个序列/QP 点。历史 HT-S 在等 26 dB 时使用 0.47661 Mbps，LD 使用 0.25523 Mbps。这一差距在真实复现中保留。历史 LPIPS 0.45 的 0.44831 和 0.32391 Mbps 来自 matched 配置，official 配置对应 0.44900 和 0.31201 Mbps。证据支持在该 RGB 短片段和低码率范围报告真实差距。 [官方基线复现](official_baseline_report.md)
+在官方源码、发布权重和相同 128 帧 Calibration 下，LD、HT-S 和 HT-L 的 60 份码流与历史归档逐字节一致。UVG YUV420 另复现三个 UF 模型。DCVC-RT 在同一 DAVIS Calibration 上重跑 20 个序列/QP 点。历史 HT-S 在等 26 dB 时使用 0.47661 Mbps，LD 使用 0.25523 Mbps。这一差距在真实复现中保留。历史 LPIPS 0.45 的 0.44831 和 0.32391 Mbps 来自 matched 配置，official 配置对应 0.44900 和 0.31201 Mbps。证据支持在该 RGB 短片段和低码率范围报告真实差距。 [官方基线复现](../dcvc_uf/calibration.md)
 
 原生 1080p 接管在 80 个 P-Chunk 上核对了量化参数、Y/Z 整数、尺度索引、skip 掩码、潜变量、八帧 FP16 输出及跨 Chunk 参考。容差为零。原始官方比特流和 PHT 封包分别核验。主潜变量和超先验的原生形状分别为 `[1, 256, 68, 120]` 和 `[1, 128, 17, 30]`。可读 PyTorch 复算在同一输入上观察到 293 个 Y 和 13 个 Z 整数量化差异，逐值验收统一使用 CUDA 路径。 [接管验收](latent_equivalence.json)
 
@@ -71,7 +71,7 @@ P1 第二前缀在 QP 32 的等质量额外码率为 PSNR +30.18%、LPIPS-Alex +
 
 用冻结 P1、参考前缀 2、QP 32 只读重放 174 个 Validation 帧。官方 HT-S 为 1.4498 Mbps、28.07 dB、LPIPS-Alex 0.38830、DISTS 0.20812。P1 闭环 Full 为 1.4644 Mbps、27.94 dB、0.39529、0.21369，感知退化均高于冻结的 0.002 容差。参考逐块同步通过，正式研究准入未通过。完整工程和吞吐证据支持保留 PHT-Tok 作为研究对照。率失真与动态结果未支持启动微调。Test 保持封存，像素读取为 0。 [Validation 账本](validation.json) [训练记录](training_manifest.json) [机器裁决](final_verdict.json)
 
-- [代码与复现入口](../../experiments/pht_tok/README.md)
+- [代码与复现入口](../../docs/reproduction.md)
 - [原生重建图、局部裁图及可解码码流](samples/manifest.json)
 - [测试及定向变异](test_report.json)
-- [工作日志](work_log.md)
+-

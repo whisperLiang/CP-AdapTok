@@ -1,7 +1,7 @@
 # Attribution
 
-AdapTok (VisionXLab), pinned in third_party/manifest.json, is MIT licensed. Its learned latent query, prefix masking, VQ, quality scorer and offline allocation designs informed this causal single-frame implementation. See third_party/AdapTok/LICENSE.
+AdapTok (VisionXLab) is used through the pinned upstream source and official pretrained assets. See `third_party/AdapTok/LICENSE`.
 
-DCVC (Microsoft), pinned in third_party/manifest.json, supplies the original LD/DMCI modules and the independent native CUDA control. See third_party/DCVC/LICENSE.txt and individual source-file notices. In particular its stream helper retains an Apache-2.0 header credited to InterDigital; file-specific notices take precedence over the repository's default MIT label.
+DCVC (Microsoft) supplies the official DMCI, UF LD and UF HT-S implementations. See `third_party/DCVC/LICENSE.txt` and `third_party/DCVC/NOTICE.txt`. The stream helper carries an Apache-2.0 notice credited to InterDigital. Research patches apply only to copies in local build directories.
 
-No upstream source files were edited. Native and fixed-spatial controls are explicit experiments, not alternate recovery paths for the main codec.
+The Verizon LTE packet schedule comes from the pinned Mahimahi trace recorded in `results/dcvc_uf/upstream_manifest.json`. The UVG release includes `ShakeNDry_Copyright.txt`.

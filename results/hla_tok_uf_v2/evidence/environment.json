@@ -1,0 +1,29 @@
+{
+  "python": "3.12.13",
+  "torch": "2.9.1+cu130",
+  "cuda": "13.0",
+  "gpu_driver_memory": "NVIDIA H100 PCIe, 580.159.03, 81559 MiB",
+  "machine": "x86_64",
+  "official_weight_sha256": {
+    "cvpr2026_image.pth.tar": "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302",
+    "cvpr2026_video_ld.pth.tar": "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799"
+  },
+  "native_binary_sha256": {
+    "MLCodec_extensions_cpp": "7b763478abcc0fdab2a58415ff8fa1b711daf432e83469bf368e20106bc2c0bb",
+    "inference_extensions_cuda": "f8b9fbe6d89e32d618e51124ffb1a7b5505f55ea9df7b34aa2cc5793230f6897",
+    "hla_uf_rans": "d45b9fce8f3f683a949085c7c270cda8727a19e0d901d3090a445922529180a9",
+    "hla_uf_v2_records": "5908137a29a3dc99c1f5c163e592db06802338ba33d7753b26132da179d1e9cc"
+  },
+  "metric_sha256": {
+    "imagenet_alexnet": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02",
+    "imagenet_vgg16": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0",
+    "lpips_alex_v01": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+    "dists": "f5e65c96230b7f6ca995691647d482237e4cab8a50c5c4a5784f219ef0748218"
+  },
+  "frozen_manifest_sha256": {
+    "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
+    "validation": "8cca166ca7d1f6faf45cd6660b7074657164d2afa2fd14dec92d76f0cee25405",
+    "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
+  },
+  "native_graph": "pinned FP16 CUDA proxy; FP32 metrics and latent arithmetic"
+}

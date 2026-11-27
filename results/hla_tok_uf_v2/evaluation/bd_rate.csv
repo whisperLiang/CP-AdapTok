@@ -1,0 +1,121 @@
+method,reference,metric,status,common_range,rate_delta_percent
+HLA-Tok-T,Original AdapTok,global_psnr,PASS,"[22.16164936477312, 25.996064961108893]",187.96432296375437
+HLA-Tok-T,Original AdapTok,lpips,PASS,"[0.18255548166303798, 0.2897786209466814]",496.78686187913945
+HLA-Tok-T,Original AdapTok,dists,PASS,"[0.08207778855301869, 0.13729427121151452]",869.6345167855613
+Official UF-LD,Original AdapTok,global_psnr,PASS,"[24.86863007820057, 25.996064961108893]",-92.3760837982728
+Official UF-LD,Original AdapTok,lpips,PASS,"[0.18255548166303798, 0.2897786209466814]",46.03098413336242
+Official UF-LD,Original AdapTok,dists,PASS,"[0.08458854001143883, 0.13729427121151452]",202.74750623183357
+Official DCVC-RT,Original AdapTok,global_psnr,PASS,"[24.925713051796397, 25.996064961108893]",-93.52645003761306
+Official DCVC-RT,Original AdapTok,lpips,PASS,"[0.18255548166303798, 0.2897786209466814]",28.524972948223443
+Official DCVC-RT,Original AdapTok,dists,PASS,"[0.08646470650859263, 0.13729427121151452]",202.2232898264128
+UF-Progressive D0,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+UF-Progressive D0,Original AdapTok,lpips,OUT_OF_RANGE,,
+UF-Progressive D0,Original AdapTok,dists,OUT_OF_RANGE,,
+CC-S,Original AdapTok,global_psnr,PASS,"[22.793274585569595, 25.996064961108893]",126.96619027510756
+CC-S,Original AdapTok,lpips,PASS,"[0.18255548166303798, 0.2897786209466814]",359.4985331907067
+CC-S,Original AdapTok,dists,PASS,"[0.08207778855301869, 0.13729427121151452]",516.8665873085856
+CC-N,Original AdapTok,global_psnr,PASS,"[22.798045947529722, 25.996064961108893]",126.64305685749567
+CC-N,Original AdapTok,lpips,PASS,"[0.18255548166303798, 0.2897786209466814]",359.1336142721111
+CC-N,Original AdapTok,dists,PASS,"[0.08207778855301869, 0.13729427121151452]",516.295846592147
+CC-J,Original AdapTok,global_psnr,PASS,"[22.670133355792824, 25.996064961108893]",135.04909317473135
+CC-J,Original AdapTok,lpips,PASS,"[0.18255548166303798, 0.2897786209466814]",362.3994842176505
+CC-J,Original AdapTok,dists,PASS,"[0.08207778855301869, 0.13729427121151452]",513.7706128154636
+Anchor-Fast,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+Anchor-Fast,Original AdapTok,lpips,PASS,"[0.18577973780104484, 0.2897786209466814]",976.0580316521011
+Anchor-Fast,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / 500,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / 500,Original AdapTok,lpips,OUT_OF_RANGE,,
+D1 / 500,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / 2000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / 2000,Original AdapTok,lpips,OUT_OF_RANGE,,
+D1 / 2000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / static,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / static,Original AdapTok,lpips,OUT_OF_RANGE,,
+D1 / static,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / perceptual,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / perceptual,Original AdapTok,lpips,OUT_OF_RANGE,,
+D1 / perceptual,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / fixed,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / fixed,Original AdapTok,lpips,OUT_OF_RANGE,,
+D1 / fixed,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / fixed static,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / fixed static,Original AdapTok,lpips,OUT_OF_RANGE,,
+D1 / fixed static,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / Seed 2,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / Seed 2,Original AdapTok,lpips,OUT_OF_RANGE,,
+D1 / Seed 2,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / joint 4000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / joint 4000,Original AdapTok,lpips,OUT_OF_RANGE,,
+D1 / joint 4000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / L0 4000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / L0 4000,Original AdapTok,lpips,OUT_OF_RANGE,,
+D1 / L0 4000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / joint 6000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / joint 6000,Original AdapTok,lpips,PASS,"[0.28753865638683584, 0.2897786209466814]",2198.9958983899533
+D1 / joint 6000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / joint 8000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / joint 8000,Original AdapTok,lpips,PASS,"[0.2788493864495179, 0.2897786209466814]",1445.373374670595
+D1 / joint 8000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / joint static,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / joint static,Original AdapTok,lpips,PASS,"[0.2787053273327049, 0.2897786209466814]",1081.0726660338305
+D1 / joint static,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / formal static,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / formal static,Original AdapTok,lpips,PASS,"[0.2584978282965463, 0.2897786209466814]",930.549816147493
+D1 / formal static,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / formal static fast,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / formal static fast,Original AdapTok,lpips,PASS,"[0.2584978282965463, 0.2897786209466814]",930.549816147493
+D1 / formal static fast,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / formal E0,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / formal E0,Original AdapTok,lpips,PASS,"[0.25858654415812987, 0.2897786209466814]",889.2437660687987
+D1 / formal E0,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / formal E0 fast,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / formal E0 fast,Original AdapTok,lpips,PASS,"[0.25858654415812987, 0.2897786209466814]",889.2404113185727
+D1 / formal E0 fast,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / Seed 2 final E0,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / Seed 2 final E0,Original AdapTok,lpips,PASS,"[0.2571371263642421, 0.2897786209466814]",834.2806253302774
+D1 / Seed 2 final E0,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed1 10000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed1 10000,Original AdapTok,lpips,PASS,"[0.2764421894118704, 0.2897786209466814]",1278.503334272846
+D1 / seed1 10000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed1 12000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed1 12000,Original AdapTok,lpips,PASS,"[0.2678998252269865, 0.2897786209466814]",972.393384285284
+D1 / seed1 12000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed1 14000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed1 14000,Original AdapTok,lpips,PASS,"[0.2677861231154409, 0.2897786209466814]",1012.0997249506621
+D1 / seed1 14000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed1 16000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed1 16000,Original AdapTok,lpips,PASS,"[0.2641407596482628, 0.2897786209466814]",948.9219843510389
+D1 / seed1 16000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed1 18000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed1 18000,Original AdapTok,lpips,PASS,"[0.26088909428010043, 0.2897786209466814]",921.0334659551481
+D1 / seed1 18000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed1 20000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed1 20000,Original AdapTok,lpips,PASS,"[0.25858654415812987, 0.2897786209466814]",888.8772697825311
+D1 / seed1 20000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed2 10000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed2 10000,Original AdapTok,lpips,PASS,"[0.273367998500665, 0.2897786209466814]",1159.321843951788
+D1 / seed2 10000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed2 12000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed2 12000,Original AdapTok,lpips,PASS,"[0.2679477037712075, 0.2897786209466814]",982.9124312353555
+D1 / seed2 12000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed2 14000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed2 14000,Original AdapTok,lpips,PASS,"[0.26612025533599415, 0.2897786209466814]",968.5587082541824
+D1 / seed2 14000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed2 16000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed2 16000,Original AdapTok,lpips,PASS,"[0.26194697978167697, 0.2897786209466814]",914.7750275722524
+D1 / seed2 16000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed2 18000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed2 18000,Original AdapTok,lpips,PASS,"[0.2613268190588074, 0.2897786209466814]",923.1613127248106
+D1 / seed2 18000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed2 20000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed2 20000,Original AdapTok,lpips,PASS,"[0.2571371263642421, 0.2897786209466814]",833.6204750414121
+D1 / seed2 20000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed2 4000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed2 4000,Original AdapTok,lpips,OUT_OF_RANGE,,
+D1 / seed2 4000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed2 6000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed2 6000,Original AdapTok,lpips,PASS,"[0.28872533801985883, 0.2897786209466814]",2317.8873050464713
+D1 / seed2 6000,Original AdapTok,dists,OUT_OF_RANGE,,
+D1 / seed2 8000,Original AdapTok,global_psnr,OUT_OF_RANGE,,
+D1 / seed2 8000,Original AdapTok,lpips,PASS,"[0.2818507746547118, 0.2897786209466814]",1638.0797725048349
+D1 / seed2 8000,Original AdapTok,dists,OUT_OF_RANGE,,

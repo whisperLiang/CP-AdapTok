@@ -1,43 +1,34 @@
-# 架构、形状与因果边界
+# PHT-Tok 架构
 
-## 上游固定接口
+## 原生推理接入
 
-| 组件 | 本实现复用的真实接口 | 1080p 对应形状 |
+同一个 HT-S 分析图将连续八帧映射到主潜变量和超先验。官方 CUDA 卷积、时序特征、权重、残差量化和重建头继续执行。接管层可读取各掩码组的整数残差、超先验、尺度索引、跳过掩码和条件参数。原生 1080p 的实际主潜变量是 `[1, 256, 68, 120]`，超先验是 `[1, 128, 17, 30]`。
+
+PHT CUDA 扩展只在本地构建目录应用补丁。官方原始源码和独立构建用作对照。实验中发现原生 TensorPool 的跨代理复用能覆盖活跃先验。补丁为每个 HT-S 分配阶段隔离工作缓冲区，并保留 CUDA Graph。PyTorch 可读诊断使用了相同参考，仍测到若干 FP16 舍入差异。逐值验收采用原生 CUDA 路径。
+
+## 渐进符号
+
+| 模式 | 前缀 1 至 4 | 重建条件 |
 |---|---|---|
-| 输入 | RGB float [0,1] → 上游 BT.709 YCbCr − 0.5 → replicate pad 到 64 倍数 | `[1,3,1088,1920]` |
-| LD Encoder | `DMC.encoder(x,ctx,q_encoder[qp])` | y `[1,128,68,120]` |
-| I Encoder | `DMCI.enc(x,q_scale_enc[qp])` | y `[1,256,68,120]` |
-| I 参考 | DMCI 解码的、裁剪前 centered YUV → pixel_unshuffle(8) | `[1,192,136,240]` |
-| P 参考 | `DMC.decoder(y_hat,ctx,q_decoder[qp])` | `[1,256,136,240]` |
-| context | `feature_adaptor_i` 或 `feature_adaptor_m`，随后 `feature_extractor` | memory/ctx `[1,256,136,240]` |
-| LD 重建 | `decoder` → `recon_head` → YCbCr→RGB → 原始尺寸裁剪 | `[1,3,1080,1920]` |
+| P1 | 按官方顺序加入四组互补空间掩码 | 已收符号按组累计，未收位置用条件均值生成显示图像 |
+| P2 | 同一有符号残差从 8 宽整数区间细化到 4、2、1 | 从收到的区间构造残差代表值，每次按四组顺序重算局部均值 |
 
-`forward_one_frame` 产生训练用 bit estimates，并修改上游 memory/ref_feature/ctx；它不是实际码流 API。本实现从不以其输出当作真实压缩。原生 `compress/decompress` 使用 `DMCLDProxy/DMCIProxy`，包括自己的 prior、entropy coder 与状态管理，不能插入新的 token bottleneck。新主路径调用其 PyTorch 子模块；Proxy 仅留在独立 native baseline / teacher 路径。
+HT-S 的四组共享超先验和时序条件确定的尺度。组间空间先验根据当前已恢复的值预测均值。P1 的补全在临时状态上运行，随后恢复已收组的累计状态。P2 的细化 CDF 根据父区间和原生尺度从离散 CDF 计算，并显式分配官方 escape 概率。区间覆盖 `[-128, 127]`，每个有效编码整数在 Full 恢复。固定权重协议省去位置或精度表信令。
 
-## EncodeOnce 与共享 Decoder
+## 位流格式
 
-每帧只用 `encode_full(current_rgb, decoded_state)` 计算一次 N_max 个固定顺序 learned queries。Query 没有绑定到二维位置，也没有预算参数。低分辨率 latent 经过轻量投影与约 17×30 池化；局部高频支路、历史 ctx 和空间坐标只用于 K/V。两个 cross-attention 层聚合出统一 1D 特征。
+每个块以 `PHT1` 开头。32 字节头部和 4 字节 CRC 记录模型标识、时空尺寸、有效帧数、QP、块标识、父参考和版本、编码类型、参考前缀和记忆重置标记。P 块依次含一条超先验记录和四条质量记录。I 块含一条独立官方 SPS/IP 记录。每条记录用 4 字节长度和 4 字节 CRC32 限定，负载使用完整 rANS 结束状态。
 
-VQ 使用 normalized nearest-neighbor、确定性 argmin、16 维/8192 codebook 默认值、ST 梯度、commitment/codebook loss、usage/perplexity。4096 codebook、32 维、N_max 4096/8192 可配置。发送方返回的连续 embedding/latent 从不写入码流。
+`Chunk.prefix_boundaries` 给出四个可显示的独立字节前缀。块头在生产时一次写定。接收器缓冲未满一层的尾字节，验证已完成层的 CRC，并逐层解码。P1 的每层写入对应的整数位置。P2 只熵解码尚未收到的细化位。显示会调用原生非线性 Decoder，重复显示同一前缀时重用缓存。
 
-接收方只有 ID：查共享码本 → token position embedding → fixed grid queries 的 cross-attention → 轻量卷积与 latent 尺寸恢复 → 对应 I/P 官方解码骨干。所有 K 共享同一套参数；I/P 输出 channel adapter 可不同。没有单独 Base/Enhancement Decoder，也没有像素残差压缩器。
+## 参考与传输
 
-完整 Attention 支持严格 softmax mask。缓存只保存 token-to-grid 的 query、running max、exp sum 与 weighted value；追加 K/V 后重新归一化。默认 float64 累加以控制深层随机骨干对浮点误差的放大，输出回到网络参数精度。float32 是明确的精度消融，需重新验证重建误差。每个显示点仍重新运行卷积和 LD/DMCI 解码器，计数单独报告。
+发送端和接收端在收到约定的 `k_ref` 时形成各自的公共状态快照。增强显示可以继续写解码工作缓冲。公共状态快照保留完整的有效历史分支，包含普通参考的 memory 与 feature，或刷新后由 I adaptor 消费的特征。下一个块先校验块 ID 和刷新版本，再从快照计算上下文。缺失参考时，接收端显式拒绝后续依赖块，并可从带完整官方 I 记录的独立刷新继续。
 
-## 单一参考所有权
+网络模拟用真实编码字节、分包、独立接收和播放截止时间。编码前的 QP 控制只读取已经到达的反馈与本地预测的发送积压。编码结束后选择物理字节前缀。已有显示会话在后续块接管工作区后过期。
 
-`CausalState` 保存模型 ID、上一帧编号、基础前缀解码 feature、memory、基础 IDs 摘要。`FrozenFrameContext` 由 `begin_frame` 创建；feature adaptor/extractor 每帧各调用一次。所有增强显示复用该 context，不能调用上游有副作用的 `apply_feature_adaptor`。
+## 对照与共同输入
 
-编码方先把整帧 IDs 分包为 rANS bytes，再实际解包基础前缀并本地重建。双方只提交 `ids[:K_ref]` 对应 feature，`commit` 对同一 context 只能执行一次。显示 `decode_base` 是幂等接口。P 帧 memory 来自上一基础状态；I 帧清空 memory 并从独立前缀生成参考。
+官方解释器与 PHT 使用同一个 DCVC-UF Gitlink 和权重库。官方、历史对齐和 PHT 直接对照参数分别见 [DCVC-UF 配置](../configs/baselines/dcvc_profiles.json)。PHT 的 CUDA 探针编译在独立构建目录，官方入口仍使用未修改的第三方源码。D1 使用单帧 LD 因果状态和自己已冻结的 HUF1 增量协议。AdapTok 使用独立的官方 PyTorch 版本与原生 Token 预算。
 
-Header 检查 frame_id、reference_id、model/codebook/CDF ID 和参考 feature/memory 指纹。状态指纹对每个 float32 bit pattern 及其位置做确定性的 int64 modulo-2^64 混合/双重累加，再以 SHA256 截取128 bit，只传回16-byte设备摘要，避免把大 feature/memory 搬到 CPU。它检测意外漂移，不提供攻击者认证。普通 Tensor 按 PyTorch mutation version 缓存结果；inference Tensor 没有 version counter，明确每次重新计算，不能隐藏原地修改。该算法版本绑定 model ID，不能混用不同配置的流。指纹计算在双方基础状态提交中计时，后续重复读取只命中合法缓存。
-
-增强包丢失后可正常推进；基础包缺失必须可靠恢复或显式 reset + I 帧。重复、乱序、损坏、跨帧包均显式拒绝。当前接收器只保留当前显示帧的 packet/cache，会拒绝已经切到下一帧后才抵达的旧增强包。
-
-`CodecEncoder.select_prefix` 只根据当前 Scorer 预测、实际前缀字节、带宽、排队字节与截止时间选择现有 packet slice。不能修改 IDs 或重排。Offline Oracle 采用整段实际失真的 byte-constrained MILP，明确是非因果对照，不进入主发送器。
-
-`SocketSender` 在 EncodeOnce 和本地基础提交后发送原始 FrameHeader/Packet；`SocketReceiver` 独立拥有当前 decoder/state/cache，只读取这些字节和 CPDS 显示请求。CPAK 确认绑定帧号、已显示K和唯一基础参考摘要。接收端初始化只需共享权重；CPDS 仅声明当前显示点，不需要预先共享预算表或源 RGB。会话选择先等待基础显示，再按尚未发送的实际字节和当前带宽选择增强；已经显示的前缀以零增量成本保留为候选。若增强尾部被舍弃，下一 P 帧继续使用同一基础闭环。
-
-`PacedRecordWriter` 在 record 序列化时延之后向真实 socket 交付，应用层队列至多一帧；每个增强包独立复查 deadline。播放时间从源释放时刻计算，积压保留，接收显示与 ACK 延迟都记录。CRC/帧/K/参考校验失败、基础缺失、非规范整数预算都在边界拒绝；错误不会被标成正常会话完成。
-
-Glossary：reference prefix = 唯一影响未来状态的前 K_ref 个 ID；display prefix = 当前已收到并显示的前 K 个 ID；packet = 独立终止的 entropy block；frozen context = 一帧内不可由增强重建更新的时序条件；model ID = 参数与结构配置摘要；entropy ID = 整数 CDF 表摘要；release time = 源视频时间轴上的帧释放时刻；deadline = release time + 播放时延；display ACK = 显示完成并确认基础状态一致的控制记录；enhancement tail omission = 舍弃尚未发送的连续增强尾部。
+[数据划分](../data/manifests)保留原清单和哈希。 PHT、DCVC-UF 和 D1 共享冻结选片、RGB 读取、度量权重、码流核算与 H100 同步计时。AdapTok 的分块流程保留自己的重建和 LPIPS-VGG 口径，并调用相同的 RGB 转换及感知度量实现。
