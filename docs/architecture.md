@@ -29,6 +29,6 @@ HT-S 的四组共享超先验和时序条件确定的尺度。组间空间先验
 
 ## 对照与共同输入
 
-官方解释器与 PHT 使用同一个 DCVC-UF Gitlink 和权重库。官方、历史对齐和 PHT 直接对照参数分别见 [DCVC-UF 配置](../configs/baselines/dcvc_profiles.json)。PHT 的 CUDA 探针编译在独立构建目录，官方入口仍使用未修改的第三方源码。D1 使用单帧 LD 因果状态和自己已冻结的 HUF1 增量协议。AdapTok 使用独立的官方 PyTorch 版本与原生 Token 预算。
+官方编解码器与 PHT 使用同一个 DCVC-UF Gitlink 和权重库。官方、历史对齐和 PHT 直接对照参数分别见 [DCVC-UF 配置](../configs/baselines/dcvc_profiles.json)。PHT 的 CUDA 探针编译在独立构建目录，官方入口仍使用未修改的第三方源码。D1 使用单帧 LD 因果状态和自己已冻结的 HUF1 增量协议。AdapTok 使用独立的官方 PyTorch 版本与原生 Token 预算。
 
 [数据划分](../data/manifests)保留原清单和哈希。 PHT、DCVC-UF 和 D1 共享冻结选片、RGB 读取、度量权重、码流核算与 H100 同步计时。AdapTok 的分块流程保留自己的重建和 LPIPS-VGG 口径，并调用相同的 RGB 转换及感知度量实现。

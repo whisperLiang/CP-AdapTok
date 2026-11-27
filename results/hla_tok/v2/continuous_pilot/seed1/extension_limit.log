@@ -1,6 +1,0 @@
-Traceback (most recent call last):
-  File "/home/whisperliang/.codex/worktrees/hla-tok-v2/CP-AdapTok/scripts/hla_tok/v2/extend_pilot.py", line 66, in <module>
-    main()
-  File "/home/whisperliang/.codex/worktrees/hla-tok-v2/CP-AdapTok/scripts/hla_tok/v2/extend_pilot.py", line 48, in main
-    raise RuntimeError("the paired extension has already been scheduled")
-RuntimeError: the paired extension has already been scheduled

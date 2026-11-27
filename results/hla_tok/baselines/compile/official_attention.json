@@ -1,7 +1,0 @@
-{
-  "precision": "bf16",
-  "profile_ops": [
-    "aten::_scaled_dot_product_efficient_attention",
-    "aten::scaled_dot_product_attention"
-  ]
-}

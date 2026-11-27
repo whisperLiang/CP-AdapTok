@@ -1,7 +1,0 @@
-extends: s1_tokenizer.yaml
-data:
-  test:
-    - path: /home/whisperliang/InfoTok/data/chp_vtok/basketball.mp4
-      frames: 8
-      fps: 50
-      purpose: native-1080p-causal-tcp-deadline-engineering

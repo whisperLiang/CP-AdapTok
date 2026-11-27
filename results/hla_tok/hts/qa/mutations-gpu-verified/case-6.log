@@ -1,9 +1,0 @@
-F                                                                        [100%]
-=================================== FAILURES ===================================
-_______________ test_cuda_rgb_and_payload_match_official_script ________________
-tests/hla_tok/hts/test_hts_native_contracts.py:30: in test_cuda_rgb_and_payload_match_official_script
-    assert fields["payload_and_nal_parity"]
-E   assert False
-=========================== short test summary info ============================
-FAILED tests/hla_tok/hts/test_hts_native_contracts.py::test_cuda_rgb_and_payload_match_official_script
-1 failed in 10.93s
