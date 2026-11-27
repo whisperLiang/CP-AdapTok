@@ -1,5 +1,4 @@
 import hashlib
-from pathlib import Path
 from types import SimpleNamespace
 
 import cv2
@@ -11,6 +10,7 @@ from baselines.adaptok import cli
 from baselines.adaptok.artifacts import write_video
 from baselines.adaptok.runner import prepare_source
 from baselines.adaptok.video_reader import manifest_sources, read_input, source_metadata
+from common.paths import ROOT
 from common.video import VideoSpec, read_video
 
 
@@ -64,11 +64,10 @@ def test_raw_yuv_range_is_explicit(tmp_path):
 
 
 def test_manifest_selection_is_by_content_id():
-    path = Path(__file__).resolve().parents[3] / "data/manifests/cpat_test.json"
-    if not path.exists():
-        pytest.skip("sealed local data manifest is not distributed in Git")
-    selected = manifest_sources(path, ["DAVIS2017:cows", "DAVIS2017:goat", "DAVIS2017:parkour"])
-    assert [r["content_id"] for r in selected] == ["DAVIS2017:cows", "DAVIS2017:goat", "DAVIS2017:parkour"]
+    path = ROOT / "data/manifests/cpat_validation.json"
+    requested = ["DAVIS2017:dog", "DAVIS2017:blackswan", "DAVIS2017:car-roundabout"]
+    selected = manifest_sources(path, requested)
+    assert [r["content_id"] for r in selected] == requested
     with pytest.raises(ValueError, match="missing content"):
         manifest_sources(path, ["does-not-exist"])
 
