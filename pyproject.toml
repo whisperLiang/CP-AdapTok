@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "cp-adaptok"
 version = "0.2.0"
 requires-python = ">=3.10"
-dependencies = ["torch", "numpy", "PyYAML", "Pillow", "opencv-python-headless"]
+dependencies = ["torch", "numpy", "PyYAML", "Pillow", "scipy", "opencv-python-headless"]
 
 [project.optional-dependencies]
 eval = ["lpips", "pytorch-msssim", "DISTS-pytorch"]
