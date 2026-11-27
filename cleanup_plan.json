@@ -151,15 +151,16 @@
       "reason": "废弃实验专属 checkpoint 树"
     },
     {
-      "status": "DELETE",
+      "status": "PROTECTED",
       "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok",
-      "reason": "废弃实验专属 checkpoint 树"
+      "reason": "内含三个须保留的 Joint V1 检查点，其他历史兄弟路径逐一列出"
     },
     {
-      "status": "MIGRATE",
+      "status": "KEEP",
       "path": "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_video_hts.pth.tar",
-      "reason": "废弃实验专属 checkpoint 树",
-      "destination": "checkpoints/cvpr2026_video_hts.pth.tar"
+      "reason": "PHT-Tok 及官方 HT-S 的唯一项目权重库目标",
+      "destination": "checkpoints/cvpr2026_video_hts.pth.tar",
+      "sha256": "565607d84943ee79072a5760d34a200d5724b4bb72c6bc24bfab41e8ae4f5f47"
     },
     {
       "status": "DELETE",
@@ -999,6 +1000,81 @@
       "status": "UNRESOLVED",
       "path": "/home/whisperliang/.codex/worktrees/hla-tok-v3-qa.93UiIw",
       "reason": "目录无 worktree 元数据，未认定为可删除资产"
+    },
+    {
+      "status": "PROTECTED",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/alignment.pt",
+      "reason": "Joint V1 脏工作树的现有跨工作树依赖"
+    },
+    {
+      "status": "PROTECTED",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_fix/fix_a/seed1/step_1000.pt",
+      "reason": "Joint V1 脏工作树的现有跨工作树依赖"
+    },
+    {
+      "status": "PROTECTED",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/projector_w128/latest.pt",
+      "reason": "Joint V1 脏工作树的现有跨工作树依赖"
+    },
+    {
+      "status": "DELETE",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/c1",
+      "reason": "精确到受保护 Joint V1 检查点之外的历史 AIP 资产"
+    },
+    {
+      "status": "DELETE",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/c1_followup",
+      "reason": "精确到受保护 Joint V1 检查点之外的历史 AIP 资产"
+    },
+    {
+      "status": "DELETE",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/engineering",
+      "reason": "精确到受保护 Joint V1 检查点之外的历史 AIP 资产"
+    },
+    {
+      "status": "DELETE",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/engineering_final",
+      "reason": "精确到受保护 Joint V1 检查点之外的历史 AIP 资产"
+    },
+    {
+      "status": "DELETE",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/engineering_rng",
+      "reason": "精确到受保护 Joint V1 检查点之外的历史 AIP 资产"
+    },
+    {
+      "status": "DELETE",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_seed1",
+      "reason": "精确到受保护 Joint V1 检查点之外的历史 AIP 资产"
+    },
+    {
+      "status": "DELETE",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_seed2",
+      "reason": "精确到受保护 Joint V1 检查点之外的历史 AIP 资产"
+    },
+    {
+      "status": "DELETE",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_smoke",
+      "reason": "精确到受保护 Joint V1 检查点之外的历史 AIP 资产"
+    },
+    {
+      "status": "DELETE",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/sparse_rfsq",
+      "reason": "精确到受保护 Joint V1 检查点之外的历史 AIP 资产"
+    },
+    {
+      "status": "DELETE",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_fix/fix_a/smoke",
+      "reason": "精确到受保护 Joint V1 检查点之外的历史 AIP 资产"
+    },
+    {
+      "status": "DELETE",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_fix/fix_a/seed1/latest.pt",
+      "reason": "精确到受保护 Joint V1 检查点之外的历史 AIP 资产"
+    },
+    {
+      "status": "DELETE",
+      "path": "/home/whisperliang/CP-AdapTok/checkpoints/aip_vtok/gate1_fix/fix_a/seed1/step_0500.pt",
+      "reason": "精确到受保护 Joint V1 检查点之外的历史 AIP 资产"
     }
   ],
   "branch_candidates": [
@@ -1075,9 +1151,9 @@
       "unique_vs_pht": 29
     },
     {
-      "status": "DELETE",
+      "status": "PROTECTED",
       "path": "experiment/aip-vtok-sparse-decoder",
-      "reason": "Joint V1 的两条权重链接已验证可直接指向相同 canonical 文件",
+      "reason": "含用户未提交修改的 Joint V1 工作树通过该工作树引用五个依赖文件",
       "head": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
       "remote_head": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
       "unique_vs_pht": 28
@@ -1131,9 +1207,9 @@
       "unique_vs_pht": 0
     },
     {
-      "status": "DELETE",
+      "status": "PROTECTED",
       "path": "experiment/hla-tok-hts",
-      "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+      "reason": "受保护的 PHT 工作树仍使用本工作树的官方 LD 和图像权重链接",
       "head": "e90ceda2d2875cd99061b8eb20946ebf67820a91",
       "remote_head": null,
       "unique_vs_pht": 0
@@ -1211,9 +1287,9 @@
       "unique_vs_pht": 0
     },
     {
-      "status": "DELETE",
+      "status": "PROTECTED",
       "path": "experiment/pht-tok",
-      "reason": "已识别的历史实验；只有新分支推送并核实本地和远端 HEAD 后执行",
+      "reason": "正在运行的 UPG-Tok 通过五个符号链接使用该工作树的原生库、网络轨迹和基准数据",
       "head": "54674cc164cc29b449c1682d3d4b05ec774baa70",
       "remote_head": null,
       "unique_vs_pht": 0
@@ -1225,6 +1301,13 @@
       "head": "534696b2f78b7e1bc74bf5c5eefe83e88f41b864",
       "remote_head": "534696b2f78b7e1bc74bf5c5eefe83e88f41b864",
       "unique_vs_pht": 0
+    },
+    {
+      "path": "experiment/upg-tok",
+      "head": "d77322d12db878d04fbe3d91ac50160a39cdf776",
+      "remote_head": null,
+      "status": "PROTECTED",
+      "reason": "发现新分支、未提交修改和现场运行任务，保留工作树及被引用依赖"
     }
   ],
   "worktree_candidates": [
@@ -1253,9 +1336,9 @@
       "disk": 1571827712
     },
     {
-      "status": "DELETE",
+      "status": "PROTECTED",
       "path": "/home/whisperliang/.codex/worktrees/aip-vtok-sparse-decoder/CP-AdapTok",
-      "reason": "Joint V1 的两条权重链接已验证可直接指向相同 canonical 文件",
+      "reason": "含用户未提交修改的 Joint V1 工作树通过该工作树引用五个依赖文件",
       "head": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
       "branch": "refs/heads/experiment/aip-vtok-sparse-decoder",
       "disk": 523440128
@@ -1309,9 +1392,9 @@
       "disk": 27843284992
     },
     {
-      "status": "DELETE",
+      "status": "PROTECTED",
       "path": "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok",
-      "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+      "reason": "受保护的 PHT 工作树仍使用本工作树的官方 LD 和图像权重链接",
       "head": "e90ceda2d2875cd99061b8eb20946ebf67820a91",
       "branch": "refs/heads/experiment/hla-tok-hts",
       "disk": 2106449920
@@ -1373,12 +1456,19 @@
       "disk": 617689088
     },
     {
-      "status": "DELETE",
+      "status": "PROTECTED",
       "path": "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok",
-      "reason": "Git common dir 已验证，迁移必要资产及运行验证之后移除",
+      "reason": "正在运行的 UPG-Tok 通过五个符号链接使用该工作树的原生库、网络轨迹和基准数据",
       "head": "54674cc164cc29b449c1682d3d4b05ec774baa70",
       "branch": "refs/heads/experiment/pht-tok",
       "disk": 14885482496
+    },
+    {
+      "path": "/home/whisperliang/.codex/worktrees/upg-tok/CP-AdapTok",
+      "head": "d77322d12db878d04fbe3d91ac50160a39cdf776",
+      "branch": "refs/heads/experiment/upg-tok",
+      "status": "PROTECTED",
+      "reason": "发现新分支、未提交修改和现场运行任务，保留工作树及被引用依赖"
     }
   ],
   "retained_model_sha256": {
@@ -4518,9 +4608,9 @@
     "数据集 Test 清单仅核查元数据及路径，不访问图片实体"
   ],
   "disk_preflight": {
-    "estimated_allocated_bytes_by_exact_path": 149837950976,
-    "direct_asset_paths": 165,
-    "known_worktrees": 17
+    "estimated_allocated_bytes_by_exact_path": 131995299840,
+    "direct_asset_paths": 175,
+    "known_worktrees": 14
   },
   "tracked_delete_paths": [
     ".coveragerc",
@@ -7261,5 +7351,17 @@
     "official_choice": "Seed 2 final E0",
     "seed_1_sha256": "13ce52d63722d5fa01d0f780a5113ba36630921d55dd9738c55f4584ec3334d9",
     "seed_2_sha256": "09bb3a578d89ddb9b2e621a9cf2a1c985edaa49538f236046439116c3864c1ec"
+  },
+  "post_audit_activity": {
+    "active_branch": "experiment/upg-tok",
+    "other_user_edits": "experiment/aip-vtok-joint-v1",
+    "classification": "PROTECTED",
+    "references": [
+      "/home/whisperliang/.codex/worktrees/upg-tok/CP-AdapTok",
+      "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok",
+      "/home/whisperliang/.codex/worktrees/hla-tok-hts/CP-AdapTok",
+      "/home/whisperliang/.codex/worktrees/aip-vtok-joint-v1/CP-AdapTok",
+      "/home/whisperliang/.codex/worktrees/aip-vtok-sparse-decoder/CP-AdapTok"
+    ]
   }
 }
