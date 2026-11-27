@@ -1,0 +1,26 @@
+{
+  "train": {
+    "metadata_sha256": "f60d8b418085f69cfab71dfec2f864eba4cfc1615ea4ed17079e90d3b1d1f576",
+    "manifest_sha256": "88e18e6a6a38f61e335f48882aab855460e76f72205d5724cb761e7d3604dcc1",
+    "frames": 10209,
+    "sequences": 120,
+    "pixel_decodes": 0,
+    "source_byte_hashes_verified": 10209
+  },
+  "validation": {
+    "metadata_sha256": "842b32f62bfbc52162ac67751a6c0f1c1eb6e57a9c026b9beb85eb58b79c3067",
+    "manifest_sha256": "6e1753a5026d60f8e4b279bd15043b73e2e3a1bda01263159f7b93ddedcb5d37",
+    "frames": 1323,
+    "sequences": 21,
+    "pixel_decodes": 0,
+    "source_byte_hashes_verified": 1323
+  },
+  "test": {
+    "metadata_sha256": "be320f2f6bafd2c2cb34c5fbd05b110b64c53291c49f0307d5007edda10f64bb",
+    "manifest_sha256": "09738a77219eb1d78269a0788c109b268de29b54dec3aab68a365599e08bed5e",
+    "frames": 676,
+    "sequences": 9,
+    "pixel_decodes": 0,
+    "source_byte_hashes_verified": 0
+  }
+}

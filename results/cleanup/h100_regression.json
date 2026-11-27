@@ -1,0 +1,527 @@
+{
+  "data": "DAVIS2017:car-roundabout / first 17 Validation frames",
+  "gpu": "NVIDIA H100 PCIe",
+  "checks": {
+    "pht": {
+      "status": "PASS",
+      "actual_bytes_equal": true,
+      "frame_shape_and_output_digest_equal": true,
+      "psnr_lpips_dists_exact": true,
+      "source_frames": 17
+    },
+    "ld": {
+      "status": "PASS",
+      "actual_bytes_equal": true,
+      "frame_shape_and_output_digest_equal": true,
+      "psnr_lpips_dists_exact": true,
+      "source_frames": 17
+    },
+    "hts": {
+      "status": "PASS",
+      "actual_bytes_equal": true,
+      "frame_shape_and_output_digest_equal": true,
+      "psnr_lpips_dists_exact": true,
+      "source_frames": 17
+    },
+    "d1": {
+      "status": "PASS",
+      "actual_bytes_equal": true,
+      "frame_shape_and_output_digest_equal": true,
+      "psnr_lpips_dists_exact": true,
+      "source_frames": 17
+    },
+    "adaptok": {
+      "status": "PASS",
+      "actual_bytes_equal": null,
+      "frame_shape_and_output_digest_equal": true,
+      "psnr_lpips_dists_exact": true,
+      "source_frames": 17
+    }
+  },
+  "performance": {
+    "pht/full": {
+      "before": {
+        "encode_fps": 428.31143014062025,
+        "decode_fps": 279.258222095969,
+        "serial_fps": 169.05578353567577,
+        "encode_p50_ms": 18.72285500576254,
+        "decode_p50_ms": 28.694588501821272,
+        "serial_p50_ms": 47.41744350758381,
+        "encode_p95_ms": 19.744255095429253,
+        "decode_p95_ms": 31.348678504582494,
+        "serial_p95_ms": 51.09479859675048,
+        "peak_bytes": 11925908480,
+        "load_ms": 7847.117930999957
+      },
+      "after": {
+        "encode_fps": 439.13607001544153,
+        "decode_fps": 284.02929457789566,
+        "serial_fps": 172.42467956732557,
+        "encode_p50_ms": 18.235567011288367,
+        "decode_p50_ms": 28.384088989696465,
+        "serial_p50_ms": 46.62006502621807,
+        "encode_p95_ms": 19.25619210669538,
+        "decode_p95_ms": 30.627634866687004,
+        "serial_p95_ms": 49.883826973382384,
+        "peak_bytes": 11925808128,
+        "load_ms": 8171.775838010944
+      },
+      "percent": {
+        "encode_fps": 2.5272825129293075,
+        "decode_fps": 1.7084805761912403,
+        "serial_fps": 1.9927718302159558,
+        "encode_p50_ms": -2.60263722773153,
+        "decode_p50_ms": -1.0820838643673114,
+        "serial_p50_ms": -1.6816142380982835,
+        "encode_p95_ms": -2.4719240425882583,
+        "decode_p95_ms": -2.3000766612541246,
+        "serial_p95_ms": -2.3700487263396575,
+        "peak_bytes": -0.0008414621005092826,
+        "load_ms": 4.137288490700897
+      },
+      "threshold_exceedances": {},
+      "status": "PASS"
+    },
+    "ld/full": {
+      "before": {
+        "frames": 96,
+        "encode_fps": 373.6309342781079,
+        "encode_p50_ms": 2.6506959984544665,
+        "encode_p95_ms": 2.755869492830243,
+        "decode_fps": 425.16822454949005,
+        "decode_p50_ms": 2.2880295000504702,
+        "decode_p95_ms": 2.582445988082327,
+        "serial_fps": 198.86851307773557,
+        "serial_p50_ms": 4.958637015079148,
+        "serial_p95_ms": 5.716933250369038,
+        "load_ms": 2798.777650023112,
+        "peak_bytes": 4772837376
+      },
+      "after": {
+        "frames": 96,
+        "encode_fps": 370.76969046763224,
+        "encode_p50_ms": 2.6617789990268648,
+        "encode_p95_ms": 2.877400242141448,
+        "decode_fps": 427.7008759947425,
+        "decode_p50_ms": 2.288949996000156,
+        "decode_p95_ms": 2.776742505375296,
+        "serial_fps": 198.60283906003983,
+        "serial_p50_ms": 4.96837601531297,
+        "serial_p95_ms": 5.687242999556474,
+        "load_ms": 2721.692646999145,
+        "peak_bytes": 4772837376
+      },
+      "percent": {
+        "frames": 0.0,
+        "encode_fps": -0.7657941428227399,
+        "encode_p50_ms": 0.4181166221573607,
+        "encode_p95_ms": 4.409887682540248,
+        "decode_fps": 0.5956822027177733,
+        "decode_p50_ms": 0.040230947619557256,
+        "decode_p95_ms": 7.52373982610377,
+        "serial_fps": -0.13359280138626195,
+        "serial_p50_ms": 0.19640478228604152,
+        "serial_p95_ms": -0.5193387697966845,
+        "load_ms": -2.754238194782299,
+        "peak_bytes": 0.0
+      },
+      "threshold_exceedances": {
+        "decode_p95_ms": 7.52373982610377
+      },
+      "status": "REPEAT"
+    },
+    "ld/median_of_three_pairs": {
+      "before": {
+        "frames": 96,
+        "encode_fps": 372.31125375329924,
+        "encode_p50_ms": 2.676919015357271,
+        "encode_p95_ms": 2.8125500030000694,
+        "decode_fps": 423.1337631857743,
+        "decode_p50_ms": 2.299212501384318,
+        "decode_p95_ms": 2.728228246269282,
+        "serial_fps": 198.049467307322,
+        "serial_p50_ms": 4.986366999219172,
+        "serial_p95_ms": 5.750756761699449,
+        "load_ms": 2778.448736993596,
+        "peak_bytes": 4772837376
+      },
+      "after": {
+        "frames": 96,
+        "encode_fps": 373.14093430424435,
+        "encode_p50_ms": 2.673519993550144,
+        "encode_p95_ms": 2.795354259433225,
+        "decode_fps": 421.0686506305152,
+        "decode_p50_ms": 2.3097020020941272,
+        "decode_p95_ms": 2.929058755398728,
+        "serial_fps": 197.8293295407715,
+        "serial_p50_ms": 5.000094999559224,
+        "serial_p95_ms": 5.758073762990534,
+        "load_ms": 2848.648320999928,
+        "peak_bytes": 4772837376
+      },
+      "percent": {
+        "frames": 0.0,
+        "encode_fps": 0.22284595015085173,
+        "encode_p50_ms": -0.1269751452183221,
+        "encode_p95_ms": -0.6113933458428256,
+        "decode_fps": -0.48805194360073134,
+        "decode_p50_ms": 0.4562214542367826,
+        "decode_p95_ms": 7.361206284850685,
+        "serial_fps": -0.1111529202999062,
+        "serial_p50_ms": 0.2753106689138862,
+        "serial_p95_ms": 0.12723545081609888,
+        "load_ms": 2.526574741929233,
+        "peak_bytes": 0.0
+      },
+      "threshold_exceedances": {
+        "decode_p95_ms": 7.361206284850685
+      },
+      "status": "REPEAT"
+    },
+    "ld/numa_local_eight_pairs": {
+      "before": {
+        "frames": 96.0,
+        "encode_fps": 370.45186193426207,
+        "encode_p50_ms": 2.6673864922486246,
+        "encode_p95_ms": 2.8318225049588364,
+        "decode_fps": 425.8356333323816,
+        "decode_p50_ms": 2.30261425167555,
+        "decode_p95_ms": 2.590424246591283,
+        "serial_fps": 198.4059485595991,
+        "serial_p50_ms": 4.98612824594602,
+        "serial_p95_ms": 5.395753258198965,
+        "load_ms": 2662.2679294960108,
+        "peak_bytes": 4772837376.0
+      },
+      "after": {
+        "frames": 96.0,
+        "encode_fps": 371.71991200633425,
+        "encode_p50_ms": 2.672484508366324,
+        "encode_p95_ms": 2.822503371135099,
+        "decode_fps": 428.4070908800661,
+        "decode_p50_ms": 2.295108512043953,
+        "decode_p95_ms": 2.5630184936744627,
+        "serial_fps": 199.15278902346728,
+        "serial_p50_ms": 4.97154075128492,
+        "serial_p95_ms": 5.3396469993458595,
+        "load_ms": 2679.1621835145634,
+        "peak_bytes": 4772837376.0
+      },
+      "percent": {
+        "frames": 0.0,
+        "encode_fps": 0.34229820453628435,
+        "encode_p50_ms": 0.19112401343091,
+        "encode_p95_ms": -0.3290860852831923,
+        "decode_fps": 0.6038615245890888,
+        "decode_p50_ms": -0.32596600260487163,
+        "decode_p95_ms": -1.0579638818963066,
+        "serial_fps": 0.3764203993328552,
+        "serial_p50_ms": -0.2925615616277133,
+        "serial_p95_ms": -1.039822545033009,
+        "load_ms": 0.6345812843018717,
+        "peak_bytes": 0.0
+      },
+      "threshold_exceedances": {},
+      "status": "PASS"
+    },
+    "hts/full": {
+      "before": {
+        "frames": 96,
+        "encode_fps": 571.7356343371888,
+        "encode_p50_ms": 14.167713496135548,
+        "encode_p95_ms": 14.377815389889292,
+        "decode_fps": 505.6529231857941,
+        "decode_p50_ms": 15.982056487700902,
+        "decode_p95_ms": 16.619138793612365,
+        "serial_fps": 268.33382698694265,
+        "serial_p50_ms": 30.196268475265242,
+        "serial_p95_ms": 30.830853291263338,
+        "load_ms": 4668.300641991664,
+        "peak_bytes": 15342585344
+      },
+      "after": {
+        "frames": 96,
+        "encode_fps": 574.3800059948549,
+        "encode_p50_ms": 14.096508006332442,
+        "encode_p95_ms": 14.21204500074964,
+        "decode_fps": 508.083658578694,
+        "decode_p50_ms": 15.850659998250194,
+        "decode_p95_ms": 16.708472758182324,
+        "serial_fps": 269.60082302188835,
+        "serial_p50_ms": 29.978495513205417,
+        "serial_p95_ms": 30.782015054137446,
+        "load_ms": 4706.8324759893585,
+        "peak_bytes": 15342585344
+      },
+      "percent": {
+        "frames": 0.0,
+        "encode_fps": 0.46251650218227525,
+        "encode_p50_ms": -0.5025898485491509,
+        "encode_p95_ms": -1.1529595049344143,
+        "decode_fps": 0.4807122200709113,
+        "decode_p50_ms": -0.8221500753161859,
+        "decode_p95_ms": 0.5375366658848524,
+        "serial_fps": 0.4721715667280968,
+        "serial_p50_ms": -0.7211916341193336,
+        "serial_p95_ms": -0.15840702384883887,
+        "load_ms": 0.8253931559398353,
+        "peak_bytes": 0.0
+      },
+      "threshold_exceedances": {},
+      "status": "PASS"
+    },
+    "d1/5": {
+      "before": {
+        "encode_fps": 76.8530651591629,
+        "decode_fps": 107.61513209439485,
+        "serial_fps": 44.66172713515403,
+        "encode_p50_ms": 12.721766979666427,
+        "encode_p95_ms": 14.470286990399472,
+        "decode_p50_ms": 9.264785010600463,
+        "decode_p95_ms": 9.654629896976985,
+        "serial_p50_ms": 22.23116799723357,
+        "serial_p95_ms": 23.822934407508,
+        "peak_bytes": 2279217664,
+        "load_ms": 3811.743619007757
+      },
+      "after": {
+        "encode_fps": 80.0778885836274,
+        "decode_fps": 110.62135726254775,
+        "serial_fps": 46.280250661798405,
+        "encode_p50_ms": 12.362854002276435,
+        "encode_p95_ms": 13.612700402154587,
+        "decode_p50_ms": 8.999888988910243,
+        "decode_p95_ms": 9.421862682211213,
+        "serial_p50_ms": 21.378677018219605,
+        "serial_p95_ms": 22.916367987636477,
+        "peak_bytes": 2279217664,
+        "load_ms": 3596.260104008252
+      },
+      "percent": {
+        "encode_fps": 4.1960895349923755,
+        "decode_fps": 2.7934967040843084,
+        "serial_fps": 3.623960895525702,
+        "encode_p50_ms": -2.821250994171265,
+        "encode_p95_ms": -5.926534759219804,
+        "decode_p50_ms": -2.8591707350697715,
+        "decode_p95_ms": -2.4109387646092495,
+        "serial_p50_ms": -3.8346657230067582,
+        "serial_p95_ms": -3.805435570463611,
+        "peak_bytes": 0.0,
+        "load_ms": -5.653148179352052
+      },
+      "threshold_exceedances": {},
+      "status": "PASS"
+    },
+    "d1/10": {
+      "before": {
+        "encode_fps": 75.39933765785757,
+        "decode_fps": 94.81205292886182,
+        "serial_fps": 41.84380598546891,
+        "encode_p50_ms": 13.321731996256858,
+        "encode_p95_ms": 14.483687502797693,
+        "decode_p50_ms": 10.68307799869217,
+        "decode_p95_ms": 10.991938805091195,
+        "serial_p50_ms": 23.874522012192756,
+        "serial_p95_ms": 25.15297801583074,
+        "peak_bytes": 2279217664,
+        "load_ms": 3811.743619007757
+      },
+      "after": {
+        "encode_fps": 79.45686240085111,
+        "decode_fps": 98.30423408709588,
+        "serial_fps": 43.775769689555766,
+        "encode_p50_ms": 12.404465989675373,
+        "encode_p95_ms": 13.663229809026234,
+        "decode_p50_ms": 10.122339008376002,
+        "decode_p95_ms": 10.878092388156801,
+        "serial_p50_ms": 22.706714982632548,
+        "serial_p95_ms": 24.115958978654817,
+        "peak_bytes": 2279217664,
+        "load_ms": 3596.260104008252
+      },
+      "percent": {
+        "encode_fps": 5.381379822466759,
+        "decode_fps": 3.683267106191934,
+        "serial_fps": 4.617084078723055,
+        "encode_p50_ms": -6.885486112760852,
+        "encode_p95_ms": -5.6647017108935716,
+        "decode_p50_ms": -5.24885234746778,
+        "decode_p95_ms": -1.0357264441980152,
+        "serial_p50_ms": -4.891436272373573,
+        "serial_p95_ms": -4.122847944777142,
+        "peak_bytes": 0.0,
+        "load_ms": -5.653148179352052
+      },
+      "threshold_exceedances": {},
+      "status": "PASS"
+    },
+    "d1/20": {
+      "before": {
+        "encode_fps": 72.39596691163847,
+        "decode_fps": 80.00878733164502,
+        "serial_fps": 37.87710331204643,
+        "encode_p50_ms": 13.98364402120933,
+        "encode_p95_ms": 14.678857289254665,
+        "decode_p50_ms": 12.66751199727878,
+        "decode_p95_ms": 13.36614160973113,
+        "serial_p50_ms": 26.41513798153028,
+        "serial_p95_ms": 27.82908271474298,
+        "peak_bytes": 2279217664,
+        "load_ms": 3811.743619007757
+      },
+      "after": {
+        "encode_fps": 77.14065984613931,
+        "decode_fps": 85.45569920647405,
+        "serial_fps": 40.40177953310272,
+        "encode_p50_ms": 12.912384001538157,
+        "encode_p95_ms": 13.501749184797518,
+        "decode_p50_ms": 11.675211018882692,
+        "decode_p95_ms": 11.98128892283421,
+        "serial_p50_ms": 24.77491501485929,
+        "serial_p95_ms": 25.203611605684273,
+        "peak_bytes": 2279217664,
+        "load_ms": 3596.260104008252
+      },
+      "percent": {
+        "encode_fps": 6.55380836378896,
+        "decode_fps": 6.807892053470321,
+        "serial_fps": 6.665441652855586,
+        "encode_p50_ms": -7.6608072834689285,
+        "encode_p95_ms": -8.019071793271149,
+        "decode_p50_ms": -7.833432315747979,
+        "decode_p95_ms": -10.360900904182301,
+        "serial_p50_ms": -6.209405257764889,
+        "serial_p95_ms": -9.434271103976466,
+        "peak_bytes": 0.0,
+        "load_ms": -5.653148179352052
+      },
+      "threshold_exceedances": {},
+      "status": "PASS"
+    },
+    "d1/40": {
+      "before": {
+        "encode_fps": 74.49504122256528,
+        "decode_fps": 66.04647681072089,
+        "serial_fps": 34.9035099102399,
+        "encode_p50_ms": 13.531164004234597,
+        "encode_p95_ms": 14.575013300054707,
+        "decode_p50_ms": 15.239299013046548,
+        "decode_p95_ms": 15.790295889019035,
+        "serial_p50_ms": 28.50689200568013,
+        "serial_p95_ms": 30.06538690533489,
+        "peak_bytes": 2279217664,
+        "load_ms": 3811.743619007757
+      },
+      "after": {
+        "encode_fps": 77.06586826167334,
+        "decode_fps": 69.04296489011574,
+        "serial_fps": 36.31031825574048,
+        "encode_p50_ms": 13.065603008726612,
+        "encode_p95_ms": 14.118471994879656,
+        "decode_p50_ms": 14.420296996831894,
+        "decode_p95_ms": 15.245880381553434,
+        "serial_p50_ms": 27.579222980421036,
+        "serial_p95_ms": 28.72681840090081,
+        "peak_bytes": 2279217664,
+        "load_ms": 3596.260104008252
+      },
+      "percent": {
+        "encode_fps": 3.451004250641776,
+        "decode_fps": 4.536938568248439,
+        "serial_fps": 4.030564115524271,
+        "encode_p50_ms": -3.440657399188185,
+        "encode_p95_ms": -3.1323560107717863,
+        "decode_p50_ms": -5.374276175784043,
+        "decode_p95_ms": -3.4477853441885253,
+        "serial_p50_ms": -3.254192091772934,
+        "serial_p95_ms": -4.452191181336696,
+        "peak_bytes": 0.0,
+        "load_ms": -5.653148179352052
+      },
+      "threshold_exceedances": {},
+      "status": "PASS"
+    },
+    "adaptok/96": {
+      "before": {
+        "encode_fps": 1.982766290093135,
+        "decode_fps": 1.411387626445936,
+        "serial_fps": 0.8202889049046601,
+        "serial_ms": 19505.322946992237,
+        "native_encode_ms": 8067.19856262207,
+        "native_decode_ms": 11333.192226409912,
+        "serial_p50_ms": 19505.322946992237,
+        "serial_p95_ms": 19671.129478979856,
+        "peak_bytes": 5495881216,
+        "load_ms": 8475.415735010756
+      },
+      "after": {
+        "encode_fps": 1.9824242468855418,
+        "decode_fps": 1.4108129354894694,
+        "serial_fps": 0.8202062615246637,
+        "serial_ms": 19507.28828899446,
+        "native_encode_ms": 8068.68879699707,
+        "native_decode_ms": 11337.9926071167,
+        "serial_p50_ms": 19507.28828899446,
+        "serial_p95_ms": 19533.744615205796,
+        "peak_bytes": 5495881216,
+        "load_ms": 8880.817411991302
+      },
+      "percent": {
+        "encode_fps": -0.01725080809081847,
+        "decode_fps": -0.040718151817276116,
+        "serial_fps": -0.010074911351631854,
+        "serial_ms": 0.010075926492292275,
+        "native_encode_ms": 0.018472761807353244,
+        "native_decode_ms": 0.042356827722378476,
+        "serial_p50_ms": 0.010075926492292275,
+        "serial_p95_ms": -0.6984086191942684,
+        "peak_bytes": 0.0,
+        "load_ms": 4.783265973678286
+      },
+      "threshold_exceedances": {},
+      "status": "PASS"
+    },
+    "adaptok/128": {
+      "before": {
+        "encode_fps": 3.2772436510545693,
+        "decode_fps": 2.3329644533594167,
+        "serial_fps": 1.3537437290014909,
+        "serial_ms": 11819.075987004908,
+        "native_encode_ms": 4880.687477111816,
+        "native_decode_ms": 6856.157569885254,
+        "serial_p50_ms": 11819.075987004908,
+        "serial_p95_ms": 11969.123073489754,
+        "peak_bytes": 4468719104,
+        "load_ms": 8475.415735010756
+      },
+      "after": {
+        "encode_fps": 3.279930158299711,
+        "decode_fps": 2.3329737097491305,
+        "serial_fps": 1.3545655280448368,
+        "serial_ms": 11811.905492009828,
+        "native_encode_ms": 4876.7141036987305,
+        "native_decode_ms": 6856.194053649902,
+        "serial_p50_ms": 11811.905492009828,
+        "serial_p95_ms": 11922.8890658007,
+        "peak_bytes": 4468719104,
+        "load_ms": 8880.817411991302
+      },
+      "percent": {
+        "encode_fps": 0.081974596068779,
+        "decode_fps": 0.0003967651414749085,
+        "serial_fps": 0.06070565837095199,
+        "serial_ms": -0.06066882895890968,
+        "native_encode_ms": -0.08141011756477301,
+        "native_decode_ms": 0.0005321313618633638,
+        "serial_p50_ms": -0.06066882895890968,
+        "serial_p95_ms": -0.38627731877415306,
+        "peak_bytes": 0.0,
+        "load_ms": 4.783265973678286
+      },
+      "threshold_exceedances": {},
+      "status": "PASS"
+    }
+  },
+  "test_pixel_reads": 0
+}
