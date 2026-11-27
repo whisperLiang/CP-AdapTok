@@ -6,7 +6,7 @@ from typing import Any
 import torch
 from torch import Tensor
 
-from hla_tok.hts.native import tensor_digest
+from baselines.dcvc_uf.native import tensor_digest
 
 GROUPS = 4
 CHUNK_FRAMES = 8

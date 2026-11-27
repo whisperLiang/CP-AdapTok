@@ -1,20 +1,41 @@
 [build-system]
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
+
 [project]
 name = "cp-adaptok"
-version = "0.1.0"
+version = "0.2.0"
 requires-python = ">=3.10"
-dependencies = ["torch>=2.6", "numpy", "PyYAML", "Pillow", "scipy", "opencv-python-headless"]
+dependencies = ["torch", "numpy", "PyYAML", "Pillow", "opencv-python-headless"]
+
 [project.optional-dependencies]
-eval = ["lpips", "pytorch-msssim", "DISTS-pytorch", "matplotlib"]
-dev = ["pytest", "pytest-cov", "radon", "ruff"]
+eval = ["lpips", "pytorch-msssim", "DISTS-pytorch"]
+dev = ["pytest", "pytest-cov", "mypy", "ruff", "radon"]
+
+[project.scripts]
+codec-bench = "benchmarks.__main__:main"
+
 [tool.setuptools.packages.find]
-include = ["cp_adaptok*", "hla_tok*", "pht_tok*"]
+include = ["pht_tok*", "baselines*", "common*", "benchmarks*"]
+
 [tool.pytest.ini_options]
-testpaths = ["cp_adaptok/tests", "tests/hla_tok", "tests/pht_tok"]
+testpaths = ["tests"]
 markers = ["integration: actual upstream networks", "gpu: CUDA required", "slow: native resolution"]
+
 [tool.ruff]
 line-length = 110
+extend-exclude = ["third_party"]
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.mypy]
+python_version = "3.12"
+explicit_package_bases = true
+files = ["pht_tok", "baselines", "common", "benchmarks"]
+mypy_path = "$MYPY_CONFIG_FILE_DIR/types"
+ignore_missing_imports = true
+exclude = ["^third_party/", "^\\.build/"]
+
+[[tool.mypy.overrides]]
+module = ["third_party.*"]
+follow_imports = "skip"

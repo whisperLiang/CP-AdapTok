@@ -1,0 +1,97 @@
+--- a/dmc_hts_proxy.h
++++ b/dmc_hts_proxy.h
+@@ -227,6 +227,19 @@
+     ~DMCHTSProxy();
+ 
+     void add_ref_feature_from_frame(const at::Tensor& frame, const bool apply_adaptor);
++    // Snapshots are detached from the proxy's reusable CUDA allocations.
++    std::vector<at::Tensor> audit_reference(bool intra_style) const
++    {
++        if (intra_style) {
++            return {m_feature_i.clone()};
++        }
++        return {m_memory.clone(), m_feature_p.clone()};
++    }
++
++    std::vector<at::Tensor> audit_context() const
++    {
++        return {m_memory.clone(), m_ctx.clone()};
++    }
+     py::tuple compress(const at::Tensor& x, const int qp, const bool reset_feature_memory,
+                        const int padding_b, const int padding_r);
+     std::vector<at::Tensor> decompress(const py::array_t<uint8_t>& bit_stream, const int qp,
+--- a/dmc_htl_proxy.h
++++ b/dmc_htl_proxy.h
+@@ -237,6 +237,19 @@
+ 
+ public:
+     void add_ref_feature_from_frame(const at::Tensor& frame, const bool apply_adaptor);
++    // Snapshots are detached from the proxy's reusable CUDA allocations.
++    std::vector<at::Tensor> audit_reference(bool intra_style) const
++    {
++        if (intra_style) {
++            return {m_feature_i.clone()};
++        }
++        return {m_memory.clone(), m_feature_p.clone()};
++    }
++
++    std::vector<at::Tensor> audit_context() const
++    {
++        return {m_memory.clone(), m_ctx.clone()};
++    }
+     py::tuple compress(const at::Tensor& x, const int qp, const bool reset_feature_memory,
+                        const int padding_b, const int padding_r);
+     std::vector<at::Tensor> decompress(const py::array_t<uint8_t>& bit_stream, const int qp,
+--- a/dmc_ld_proxy.h
++++ b/dmc_ld_proxy.h
+@@ -214,6 +214,19 @@
+     ~DMCLDProxy();
+ 
+     void add_ref_feature_from_frame(const at::Tensor& frame, const bool apply_adaptor);
++    // Snapshots are detached from the proxy's reusable CUDA allocations.
++    std::vector<at::Tensor> audit_reference(bool intra_style) const
++    {
++        if (intra_style) {
++            return {m_feature_i.clone()};
++        }
++        return {m_memory.clone(), m_feature_p.clone()};
++    }
++
++    std::vector<at::Tensor> audit_context() const
++    {
++        return {m_memory.clone(), m_ctx.clone()};
++    }
+     py::tuple compress(const at::Tensor& x, const int qp, const bool reset_feature_memory,
+                        const int padding_b, const int padding_r);
+     at::Tensor decompress(const py::array_t<uint8_t>& bit_stream, const int qp, const int height,
+--- a/bind.cpp
++++ b/bind.cpp
+@@ -21,19 +21,25 @@
+         .def("set_param", &DMCHTLProxy::set_param)
+         .def("add_ref_feature_from_frame", &DMCHTLProxy::add_ref_feature_from_frame)
+         .def("compress", &DMCHTLProxy::compress)
+-        .def("decompress", &DMCHTLProxy::decompress);
++        .def("decompress", &DMCHTLProxy::decompress)
++        .def("audit_reference", &DMCHTLProxy::audit_reference)
++        .def("audit_context", &DMCHTLProxy::audit_context);
+ 
+     py::class_<DMCHTSProxy>(m, "DMCHTSProxy")
+         .def(py::init<>())
+         .def("set_param", &DMCHTSProxy::set_param)
+         .def("add_ref_feature_from_frame", &DMCHTSProxy::add_ref_feature_from_frame)
+         .def("compress", &DMCHTSProxy::compress)
+-        .def("decompress", &DMCHTSProxy::decompress);
++        .def("decompress", &DMCHTSProxy::decompress)
++        .def("audit_reference", &DMCHTSProxy::audit_reference)
++        .def("audit_context", &DMCHTSProxy::audit_context);
+ 
+     py::class_<DMCLDProxy>(m, "DMCLDProxy")
+         .def(py::init<>())
+         .def("set_param", &DMCLDProxy::set_param)
+         .def("add_ref_feature_from_frame", &DMCLDProxy::add_ref_feature_from_frame)
+         .def("compress", &DMCLDProxy::compress)
+-        .def("decompress", &DMCLDProxy::decompress);
++        .def("decompress", &DMCLDProxy::decompress)
++        .def("audit_reference", &DMCLDProxy::audit_reference)
++        .def("audit_context", &DMCLDProxy::audit_context);
+ }

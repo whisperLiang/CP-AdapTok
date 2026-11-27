@@ -8,9 +8,9 @@ import numpy as np
 import torch
 from torch import Tensor
 
-from hla_tok.hts.native import NativeNetworks
-from hla_tok.uf.base import BaseFrame, FrameInfo
-from hla_tok.uf.official import NativeNAL
+from baselines.dcvc_uf.frames import BaseFrame, FrameInfo
+from baselines.dcvc_uf.native import NativeNetworks
+from baselines.dcvc_uf.official import NativeNAL
 from pht_tok.bitstream import NO_REFERENCE, Chunk, ChunkHeader, CorruptStream, Mode, StreamReader
 from pht_tok.entropy import NativeEntropy
 from pht_tok.official_adapter import CHUNK_FRAMES, GROUPS, EncodedLatents, HTSAdapter

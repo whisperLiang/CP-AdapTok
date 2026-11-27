@@ -1,0 +1,26 @@
+{
+  "official": {
+    "entry": "third_party/DCVC/test_video.py",
+    "qp_grid": [0, 16, 32, 48, 63],
+    "skip_threshold": 0.15,
+    "reset_interval": 128,
+    "intra_period": -1,
+    "temporal_delay": {"ld": 1, "hts": 8}
+  },
+  "historical_matched": {
+    "source_commit": "e90ceda2d2875cd99061b8eb20946ebf67820a91",
+    "skip_threshold": 0,
+    "reset_interval": 32,
+    "gop_frames": {"ld": 32, "hts": 33},
+    "results": "results/dcvc_uf/qp_sweep.csv"
+  },
+  "pht_control": {
+    "source_commit": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+    "skip_threshold": 0.15,
+    "reset_interval": 128,
+    "chunk_frames": 8,
+    "static": "whole HT-S physical SPS/I/P stream",
+    "dynamic_policy": "S1_adaptive_qp",
+    "dynamic_scope": "same pacing, packet overhead, capture deadlines, and I refresh as S4"
+  }
+}

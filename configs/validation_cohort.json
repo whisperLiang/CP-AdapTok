@@ -1,0 +1,894 @@
+{
+  "joint_commit": "73ea8b4b027587afd2149c298a82f5d14f013580",
+  "joint_training_base": "c5cd06dfc8cb6afd19c6da668d7664eb3f32c2ea",
+  "joint_seed": 1,
+  "joint_step": 40000,
+  "joint_checkpoint_sha256": "a42ff1df5fffb5698b54428bf8cf327dba5a8e01f79db2be283b20e709fa6c85",
+  "joint_per_frame_sha256": "c6d0a9c0f49d2dfb16060e6a060b36268489997ba1ff9cf98ffe0345bdd53ae6",
+  "joint_step_40000_per_frame_sha256": "73c678396138992a05a0fd5b3ce3213fa1cd55149233398b51bb829057ebf67d",
+  "manifest_hashes": {
+    "train": "254e5a72a38a3e309203c2dd359490773dc0563fae4840816d63be4697ae168c",
+    "validation": "8cca166ca7d1f6faf45cd6660b7074657164d2afa2fd14dec92d76f0cee25405",
+    "test": "7c1eedc2d6554fc061889c1e055c0e55ea61766acdfe957c9c4d467d10958c4e"
+  },
+  "metric_weights": {
+    "imagenet_alexnet": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02",
+    "imagenet_vgg16": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0",
+    "lpips_alex_v01": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+    "dists": "f5e65c96230b7f6ca995691647d482237e4cab8a50c5c4a5784f219ef0748218",
+    "lpips_vgg_v01": "a78928a0af1e5f0fcb1f3b9e8f8c3a2a5a3de244d830ad5c1feddc79b8432868"
+  },
+  "hash_semantics": "SHA-256 of the original source file, as recorded as input_rgb_sha256 by Joint V1",
+  "frames": [
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 0,
+      "source_sha256": "df2d660f746794275711d3ab1af46d2b0b3a254cc52ddeda0f6ba5be8d581e3e"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 1,
+      "source_sha256": "7496e03c3cb82b793fd889cf4b695c4006c68fb4570e9ef813af951980f150c2"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 2,
+      "source_sha256": "1b55b1edfea4c2f745980b1b43a31e8bc13a096262cad4817f445d9f42607a73"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 3,
+      "source_sha256": "9303c31d8fdf9a025e787021aa8e8edf84ec0fcd3e1be31a0c6ab1dddb4b0725"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 4,
+      "source_sha256": "cba172c2219a2d412458afdc799b76c4a4e759217b473aff68fe5ab16746ea28"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 5,
+      "source_sha256": "3a36ed8c9b895a28f9f3fc5c8e3ce09caff75655051b7a7b7a608ee7d3c76239"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 6,
+      "source_sha256": "b46bfa4bd4c606478df970848b0f74770cfaf2b780e1e193d91e3d997d6d08dd"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 7,
+      "source_sha256": "28fb2835be4a6523055d9aed4a2c831183b89ffa1b71d9d011e76e170382db20"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 8,
+      "source_sha256": "b0890cd71e78927968de449729a3be9415bba707c06e983858a76c835c6abcb1"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 9,
+      "source_sha256": "ce8bc81a9f345fd00273e51889ad89b99b904dea9858c8779b618ecbfde1fecd"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 10,
+      "source_sha256": "b6baa536ece55c8e24792932e59dd3c601b883f5f4e99dc33c34692f6cbaed27"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 11,
+      "source_sha256": "f85ad109577a64af58b0a20990823767dc0621f30a8c1994315eeaeff5bda4c3"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 12,
+      "source_sha256": "002b4a9c4eb441c3f92d4a152ad3588d5e84108f7c8c0ae536e46cbbee18feca"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 13,
+      "source_sha256": "e44f70f913e6ee153718ce926d08e0a2223497a823b586b4ae29d100103a76e0"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 14,
+      "source_sha256": "4738d35ba31403f0db6f6092adf0825842f3d18c091c45d4237915093c7f2fe5"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 15,
+      "source_sha256": "d4776b8a7c262d95ae3bd515b19b58eb5ff96d81001c962a3571a34e4a511de5"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 16,
+      "source_sha256": "12780ce5536c7a4082f5935a7bf105a21884473c2f7dd03072a57ee1df5360f4"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 17,
+      "source_sha256": "2795b6cda108b79ada5eab87c63dd67e139d3f70152113aa3658e5807764ce86"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 18,
+      "source_sha256": "a52760cc6046ad2210503b913f404eadfe981e5bdcc5380bc3feb885bf1210bf"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 19,
+      "source_sha256": "a7495b4e9ad7812a0c0a9e5a8176a89404f922a6a089f8010c27527b056dca03"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 20,
+      "source_sha256": "467af3db9481521dd1fd7b3e600585baf3e305416aecb4fcfc0a1cacf9f42dcc"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 21,
+      "source_sha256": "08df19d6e6e6fffad317bb3a4fda065aa615d074e3841db21ecfff62798140ce"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 22,
+      "source_sha256": "18e2e4ec10bc6ae96ea1815fa467dbda7a69c72478d572b851b5757ffff05901"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 23,
+      "source_sha256": "6f69a412068021995dc2d3573a792d656b888a7882af78936930a9122b479122"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 24,
+      "source_sha256": "945e222b9145df16a509c44dcfb6d78c90c348b3ee5c8a8e37f3eae74acd2bbd"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 25,
+      "source_sha256": "5e9066122d5050b3ea6df37869b4c3905d6fd5cf8d9cfeec7ffed3e3621cd429"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 26,
+      "source_sha256": "6b8a3164c37f58980f8873d9c8d81c80ee26879505c2ccead133b0da5bf2f7cc"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 27,
+      "source_sha256": "9f7e60cc8b734c71de4e42fa8e31d49ba474b92430d4c9ea8145169f32ceaa28"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 28,
+      "source_sha256": "f725326dd0511e62753c00907ca28d8280048bf4c9abaeb23e6ce3051deb8fed"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 29,
+      "source_sha256": "2b59650ec72ba463e2adb09782cc5b40416db278ee84bf0645ed72ebf0165793"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 30,
+      "source_sha256": "faecd6fbeba3c90ccddd949921984886f7c45a45eb91b98d4ea0bcd5a8f4b1d4"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 31,
+      "source_sha256": "1cb335dd144a6317aba7efe9747b5ccb66e2caee45553eee047ebe1976acc1b7"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 32,
+      "source_sha256": "7760766aebbbd92b73d4ee42ec0279b5cb0550723bc96b7f301d92364ff13f60"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 33,
+      "source_sha256": "cc7eb3d77d4042504b5171122296102e2463260095d2a3060e6fe90a9494c9bb"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 34,
+      "source_sha256": "5a185101946d0dd344cd64a78bd83bcade09c2ea7993878e9f5c048ed5339948"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 35,
+      "source_sha256": "9d31f47bc20fdc570d36cef02248e1aa3d342f772301d3b382efcbd33f17711c"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 36,
+      "source_sha256": "dc63b5875168489186807ef0eedf47aa9fb8172837e0fe2719c9ffb34a430432"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 37,
+      "source_sha256": "b5bc3b53d94eeb5973bfb0d4d52a526a849539e3efadc8213230912021046105"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 38,
+      "source_sha256": "79c04ee04bd4092b637a886ade5ed05f578cf767dad97da7bf18d865f189aeb3"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 39,
+      "source_sha256": "9de0ac2078af5b80ca22a94f78ae102bd1fd5d22f392d646e9cb166bef0fc416"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 40,
+      "source_sha256": "5cc0469be896bd743c6823441c663c1de50c54bb7281c55b9c8602d736b1b5da"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 41,
+      "source_sha256": "650f84cb434480d9102d5afa095c9f58b910bdde7803fde6e6204e4a25dd8654"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 42,
+      "source_sha256": "8adf69ee2d342a867b1999c5f756149d4abc74e60be3880f19b5cd926829eaa6"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 43,
+      "source_sha256": "7613d114f0d507a525092a26f366bca760a504f8e75a67a2f6f4abcb499790f5"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 44,
+      "source_sha256": "cc9bf431e8b44d62a76edf62ca409a228957e154c10b75e3d1907bc5985b4045"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 45,
+      "source_sha256": "4d3c3a6ba8af673fd751ddde0759c42f6460fdd8bbf32681ede4fe398ceff341"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 46,
+      "source_sha256": "aad8c123531c2443d14b6667b467b7fd83a73561ca45a1636c7c6d9dbece763a"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 47,
+      "source_sha256": "b926f567d9bcf1551c1d6b68ee5334ca76eaf8ba16be05b7c70c681cfcefc9b1"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 48,
+      "source_sha256": "52df0481ecc1c5e3a2279ccc535b9e4ccc7a21ff7af64b8d6beaeaaca3d927a6"
+    },
+    {
+      "video": "DAVIS2017:blackswan",
+      "index": 49,
+      "source_sha256": "2d553fa3bbfb2ccd5f1cdd9bf1780da1f4b024f768e73c7898ec94fa3dbe867d"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 0,
+      "source_sha256": "21d774553947b8b1636ea501e1795feaff26d301a005732f5666a39691c3bfdf"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 1,
+      "source_sha256": "6b2b5861cb0da9719b82735df059d34a23d414c0d1df633c9da9819fbf52ee78"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 2,
+      "source_sha256": "a5402f5d12da1e114235b268d353d3b7f9ed2812da4091bd52b36d221495a232"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 3,
+      "source_sha256": "66531574bb5e5e97dd88662e549d91533ff79e717d3eb629e32f116712a2fc39"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 4,
+      "source_sha256": "60b57d73d218d8073b6081b947af673795603e23fbee6566b6b833ae16810b24"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 5,
+      "source_sha256": "42523ea2dc48088fa7cced8d41265e7be300360dec18b3b6b42621a8b3e67b56"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 6,
+      "source_sha256": "201ef7a19c2b65c2711df3305b6fda240b8ae4b25b199bfd53794622445136d1"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 7,
+      "source_sha256": "74f0dcc8314453d924df48e6b9d57d70dba4aa886160271f9232ccffe4d37820"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 8,
+      "source_sha256": "de6bb8ec4974cf4e25038d4d46d5b4411e10f0ecd74a8de2dbd5585155950aac"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 9,
+      "source_sha256": "c923c01911a6feb600fb68d4e1eee9ef87b51f776866b40b241a57d251f4e26e"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 10,
+      "source_sha256": "e28261f3b563ac95bbd3071852723bdbb23bb5c4ec162e856cef4dbd30268cc1"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 11,
+      "source_sha256": "797addd0e0f836f0aef80dc970231951053fc4ab0fd115fb3b227b5f460c9365"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 12,
+      "source_sha256": "8bebc811e0bd47a956a67dca16ea4afbac29c106faa71382b6965240785aeb6c"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 13,
+      "source_sha256": "54fab7941b806c6b2c68305331ba43d511f3588e3a9e298d524dacf42cea98de"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 14,
+      "source_sha256": "a73f92d3848b0a00edc15e7af8a8a108bdcde08fff107a2a99e55da8bb1bec84"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 15,
+      "source_sha256": "f90e768e0b91303fbf22b6db40dba8ff0f634fc1ff81ccd34eba34f0a6afa4f9"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 16,
+      "source_sha256": "45e582f3ea35e598dad938b7ea02742f7ed5d6f38eabfbbe470066ace054fef2"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 17,
+      "source_sha256": "2c0299e9a56bff759a415ac700976aa28e8af2bdb8cac16207913ac89da479e5"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 18,
+      "source_sha256": "646cb95975722143bb21e4560a96f2c1e5170c5bff59501e7f10228c8fef295b"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 19,
+      "source_sha256": "ec53d95fd6b8fa53f6a3712f5b9f34d1b18b114c903404a132baf194ac93ec7e"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 20,
+      "source_sha256": "2037a6554916c0072e8918fc0c7db3ac3be00a180ed80463d25a7a9cc8ba3b36"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 21,
+      "source_sha256": "7ed7d9806e074b69dee4cea7147485b9acdf1da76b955488c683c290226dcc2e"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 22,
+      "source_sha256": "d56aaccbb149181cf0b64d1dc6f08c649c464a63229441088071d1555d524ecb"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 23,
+      "source_sha256": "a2a3265abb327f99c349c53235ef4dfbf6c659c117f749beaea28a27c5e1fcf0"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 24,
+      "source_sha256": "bb7817385cab5155a28e75e96bafa3c9177a457390e45d60904a5cc3851693f9"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 25,
+      "source_sha256": "8b5ef7141a7055c7a65466770ecb91446219442ee0c7e6bf213d5efbb2d1fc5e"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 26,
+      "source_sha256": "8e557fb1d24ef7a48f83932c0c04ce2c16f5a6e765d02e1d91f952579a6e63c2"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 27,
+      "source_sha256": "d1364c2bfdc26a0086794d1d1d7d46f59164c6cc3ae8920d16bcf95dffed54f9"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 28,
+      "source_sha256": "b59338644a28339deec950f3f63d5bf651741b9feb2594676c8b9a800a0f11aa"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 29,
+      "source_sha256": "490af363f6ed6447e8e5cd046bc56b56d6101f9e90278f0406dcfb851e6a2699"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 30,
+      "source_sha256": "9f30d1d7de1ad80f866506160b5b1f656afffbd2908f93783facf9fcbd0bbb54"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 31,
+      "source_sha256": "e66e63e6ea85bb22f54e935b11dc204215a618dfe8b1177fa101b7f263b5dd56"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 32,
+      "source_sha256": "e4e3b4d2583b7528630a308bbb8d965e83036767d7507dc7d7004b4f574b7414"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 33,
+      "source_sha256": "d1283e333ac84f9daca510d2fe1f51321c69f32bc3cbb2b4cd3b96144f3bc551"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 34,
+      "source_sha256": "4ad3e7d759982ddf0170f9801e2c3b9b2070602345634aca899f555804109641"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 35,
+      "source_sha256": "48ac5fe3760d3d24bcf4c8de83e4d2e488c2e6634ea4e049b47d39d7a92d0a05"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 36,
+      "source_sha256": "3986c5dad949e7bc69281a9b965c04b1f3f19942ad4f3525fde43774c9f43bfa"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 37,
+      "source_sha256": "610f36710ec554c046551ada739375aae82e2de32e95ebad6881df5b8ed7180a"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 38,
+      "source_sha256": "7af788686bbfaa7ac1d28f84d3b2caacc8c47d4de12159bb4f3dae985701287a"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 39,
+      "source_sha256": "76681de9ca513251b0c43e84b8e16ee8c1b01cc1b7246814794d26da3fa869f6"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 40,
+      "source_sha256": "dd1a20154778055f4fd6baf3dd37b3a20ea5d56137fb1c6d2d0f466e1d075dd3"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 41,
+      "source_sha256": "34416de6106ef1c5abf9ade944aae6d6d3e7aed1df8caac008c897a500b0e5e3"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 42,
+      "source_sha256": "238d13fddeb476c0684ff18f0888e3b71a9c6d0cc3483f7c1bb484328fa6dfb2"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 43,
+      "source_sha256": "77481809f3f217ccabed53bc54205fd860c6b0c806c09416a7a45a44f3c04a0b"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 44,
+      "source_sha256": "ca454a96a8718914f19b357eb565315903d49ffa943f8e4bc7228b5a528a0d75"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 45,
+      "source_sha256": "e5870a10d6b2f8bc9c703fa9fd9ed1fb5807bc6bf61a15cb1579a43949bfe703"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 46,
+      "source_sha256": "7daa1cc6aebbfdb263ab4ef79b4d5153503f3e205aa74d6466e18fb0b95c1589"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 47,
+      "source_sha256": "bf7b43779823d53a99cdef50919d66fa17d8fa05db1a5632ac6244fe798111db"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 48,
+      "source_sha256": "49106e3a9f1fbcd061a199924c3a2ed2870594f116b72d6f1b7f3edaa1bae200"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 49,
+      "source_sha256": "318d0f49705611a7c2e8fd19d2fff18959c6468390ceccf0551a7ac1f9072ec6"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 50,
+      "source_sha256": "a0b229bd2e74322b45ae1ed25da3348946886fe85714fc07bcbeb387cd423a07"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 51,
+      "source_sha256": "571c781817a2eda21d0bf3e7d484f7d0f7b51782230c6f4ae290d338eec32b42"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 52,
+      "source_sha256": "5b2b4ec6f599f93d7bd9a418f3fea6ddf5c707e7754368f2a5766446b3708400"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 53,
+      "source_sha256": "725f76e1247dafe257599e364c77ba4b15ef66dde34279ee4e05b7399532945e"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 54,
+      "source_sha256": "bf7d750ffbab235105eaba3a76bc14612e66171ea66635d65410caee106329ff"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 55,
+      "source_sha256": "bcd2e7ee78f8933ba2e3e7f4600527203204b92245e00888dc203a414cbd98a9"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 56,
+      "source_sha256": "9a53eca6128a5bd339ffc16a5dcd1f2e94ce1492c7421e0b67b8abb5258b1705"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 57,
+      "source_sha256": "46f36beaa8a71cdce34719f63f4f5ac753b6549a80ee3b8de2248e7ae6862397"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 58,
+      "source_sha256": "34133cf64734c948fa23af05b4fa3aae92adda9ede04620fdcdc3e278418e32d"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 59,
+      "source_sha256": "6cb3c2f66ed6dbb96b68e7eeef235a186998bdd412b20174a1438b2e6c7720d6"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 60,
+      "source_sha256": "b0e424676a9e26e3e028ed6ca423557a50f8c7a9f0fe462f599c1a2c60470b28"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 61,
+      "source_sha256": "ab4646e2bb5f43dde1d62a1adc4496ee1acfbf14f77acccb59a52b878a423f0c"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 62,
+      "source_sha256": "7a07598856b79d117346fa3d6a7f4d0303f1e5ecf52969770dbf3244646506e8"
+    },
+    {
+      "video": "DAVIS2017:car-roundabout",
+      "index": 63,
+      "source_sha256": "c21de371f49a9664d81a4e52de17f8751a5d4b4ff8425907c5c8e84e38f643db"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 0,
+      "source_sha256": "ab474cec5ca76b3a4dd3e5e32bd08bc1600b9bbbb64cb4e931230059bd1600cd"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 1,
+      "source_sha256": "6448ed3d3db3654f8990255a1a720b35fe87118c1dedc7f0b388aa5fa91c4a79"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 2,
+      "source_sha256": "53b7e6cd0e08eec44b48ac9a6d81cbabdb4edb665be974d5ee5eb7f6157c2d87"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 3,
+      "source_sha256": "6b8c03a29b33e2e668bd4c7897eaf463dc2cf4d843c3c3496b6ce278a10560f5"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 4,
+      "source_sha256": "c2d62af4168293082b1f22cc1c7aed3052ca60515f6f8c488121f7f3cd1433fe"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 5,
+      "source_sha256": "cf6a6aec6582185b93f1b34069b7610de139a22d4b4ea985f29891d920474d61"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 6,
+      "source_sha256": "68f0437175c6bfe5825f924e80d0f33db80ddbdbc29511183285c476be701839"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 7,
+      "source_sha256": "c43d714968799a05e5d0a67bd7d7ea57cec1c0a3c7843b038eccfa8d5278c543"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 8,
+      "source_sha256": "dce02288f21d594f547a4fce698d2d56afa1ff6e116b33fe53f27accd1b5db07"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 9,
+      "source_sha256": "21c74d4d712f3ffff6698b12f62ee05780b8808e0783b6587d82c3278ee71627"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 10,
+      "source_sha256": "1678d24726edd98e35c1944087b72a77fdfbb7750249167a831580668b71d8d2"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 11,
+      "source_sha256": "237037875758e4af2a705aaa840696caa1c8a315b44fd6581513709f1d865c38"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 12,
+      "source_sha256": "f7fcca7a761d789d34b9fd7bc9088fa5deeac3b90be8dc62c663e2d4bb3fbb6a"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 13,
+      "source_sha256": "4fc4fdd995d9ef527ceb920f6783e104a1531173fb64112fe423dd8ef782e300"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 14,
+      "source_sha256": "a820a1aed509911265b94b92eb559293754e87bfab42d3533361a66cf35bcaae"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 15,
+      "source_sha256": "dcd23e010d2c6e28304089f3bc686ba911e67aef5842aca24f0bef40511fa8ab"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 16,
+      "source_sha256": "2a68fda4c63c87e38c82d075dafd8fd3daf801883edc2c7add0a62575e79eecb"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 17,
+      "source_sha256": "79d03bb6172ddfa8e18981f303a1f26d3f14f992cbc2d27c4b6101c25f1823e6"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 18,
+      "source_sha256": "49c2d208dc2cea9b4adb321ded1baac0810bff10757899784755cddb49b8d123"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 19,
+      "source_sha256": "4a896702600426bf515535636e592a4d82c5a3e4c9fc63c4783e04675fd6b06a"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 20,
+      "source_sha256": "e6e95d4d11b24e914b8234786d7f3d01d61287ab795487957314bbf2d62055b5"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 21,
+      "source_sha256": "82a745a3c6ae80341d20754cc31b215e66b0b894e23905194632c529afa38b98"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 22,
+      "source_sha256": "1008f437d0f8be4048cc970f99442c741fc9626a285e47bec432009c0ba4a12c"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 23,
+      "source_sha256": "c6895fd6e91ea037a5309a15dba3237870e4a06b5f3f946fac3dc822a5d6bb92"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 24,
+      "source_sha256": "5ff738bb272d6699c691065ba2cf8914f02b9b21b4d3730e214b9f8e5570f940"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 25,
+      "source_sha256": "94df5a6dd1b64f50f44a3e2d98d13cca23d22938b16ca6d30981eeb3c7e324ac"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 26,
+      "source_sha256": "778f9b5e6a630964ff99a9547249c5173efb0c9caf1340790df902388555280f"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 27,
+      "source_sha256": "4e9ef5271d22f45e077d9b2239c3ef8c507d3f913cd890db314e3e93747e19ed"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 28,
+      "source_sha256": "691c03d5c6fb841378e9f489ce146c57a695c249968db82cc05a9886e13d2a4c"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 29,
+      "source_sha256": "a6054ba9078acae8ec48805aa9bc259fc7d53fc787ce00d1cad7999c816917ed"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 30,
+      "source_sha256": "a1f6577b41ed4b0b37125e1f583799bd48c376e52d5cee4ed17de8ed8eb12040"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 31,
+      "source_sha256": "1517c1baa641b78eb9b467e7c78489709348a594f9bbbc8d0a639dad13e84877"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 32,
+      "source_sha256": "4f0c9432eb2d4ed102eec378a819d32d53dca3177fa413b7edd2eda44525afa1"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 33,
+      "source_sha256": "42951268899f2f97a5af298dcdd888f145f8b97c4695dca8fb20b6c0c58aef02"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 34,
+      "source_sha256": "d3280042560af93702dbeeeb4a1304a6b0a1da4ca1e3cabf706774ab89d26a26"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 35,
+      "source_sha256": "5bd211ad9d8785cf2d463c37b63394e99ff0dee7f79a1e827991be4a19243fa8"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 36,
+      "source_sha256": "5432d977f6a1807d6d7ab1e66fdc61b762eaa7384150a43cea66925792b4396c"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 37,
+      "source_sha256": "ebb363c34b53c11b73a98bd0fbb97ee8942e396fbb22d43774a41f91ae945a9c"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 38,
+      "source_sha256": "c867741ca67706d4a5e34ca2f0ec4707516786baac564a136d1eb4c8ff681527"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 39,
+      "source_sha256": "99ab94c9c9b2e637b8d0c2d9bf674d9004f01bea28a484d08102cd59577fd97b"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 40,
+      "source_sha256": "072019e74205e69a44b3631a386e581d76f6cc3224a4f8064ac66fdc313adf3d"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 41,
+      "source_sha256": "fae88de364edaea45d0fe5dbbd8d8565cc2ca4a6b92c413a886c2934a87c7010"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 42,
+      "source_sha256": "226b23a5bc47ecfc42d83edbcbdabb93782bbda023a7ebae43309bd997ce088b"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 43,
+      "source_sha256": "b92118adff3374891c2eb83bd9fda038e0bcaf40dcd0c034ab3093250f04c88b"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 44,
+      "source_sha256": "3124d9a701d5a0f8ecba306fc758edfd41ab5fbce459aa46c394d565bd6fe92c"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 45,
+      "source_sha256": "18e10696f391ddb0f89dc9bf07f706dfc0acc87e630a504d5d70ff2eb74f61c7"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 46,
+      "source_sha256": "b514a6ec7ac587d6e357b2fdb4c7a200dc72a833d8d46c51826f55695052e409"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 47,
+      "source_sha256": "d121b325a2032bcffa7d1ecd350bd85f35a5702e6c848a5e628929e565d9962b"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 48,
+      "source_sha256": "33ebeae5efaa3d5e9d8ce07eda21333df9f1fcd0bf74805f0ed2cd3d78ae88c1"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 49,
+      "source_sha256": "50bd34b9d9aab2813f49908a4a076a80400e3a510faae87448e790fb8a87132f"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 50,
+      "source_sha256": "6593caeaa763eeaa2bd3a1321d04e9e585370430cdac373c0dc3d5fb4fcb9729"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 51,
+      "source_sha256": "ebd06d136e52cc02137f60f9500f196af774c4fbacc01d6060045951b21e479b"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 52,
+      "source_sha256": "dfca1fe9a7b938a5bc2519d91016c8ab3af6082a0a84b1283af5ab84c20090a9"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 53,
+      "source_sha256": "61f32f8e0b3823f961c196470d5b4b52d55022fae4358386344dc0a64051a067"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 54,
+      "source_sha256": "a826dd70df16b9ed397198875068bda6ece2e96ab2aa42f7d3439b716fbd18da"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 55,
+      "source_sha256": "0f3694431904e2465c6d633da452df54acfee96bd66c0acaa3dde4b21b6878ef"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 56,
+      "source_sha256": "f69464d7d04768d3cecec90ae10ade4c45bba350beffba6571f5d3a1bfb2e6d6"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 57,
+      "source_sha256": "4ce54e0ae2c38d9d0824da377beae4cf67596903fd6ad56504732d10bc451e31"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 58,
+      "source_sha256": "bebedd4f84bf6a4eb5e237108232da84fd050af0a3952624eee6448f3984c5fe"
+    },
+    {
+      "video": "DAVIS2017:dog",
+      "index": 59,
+      "source_sha256": "7c10ab2aadf57ad9cbb1bb819d291bf1ddfbc2f6c2db0fa20e3917925453a49c"
+    }
+  ]
+}
