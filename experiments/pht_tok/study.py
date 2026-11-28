@@ -14,17 +14,16 @@ import torch
 from torch import Tensor
 from torch.nn import functional as F
 
-from cp_adaptok.metrics import MetricSuite
-from hla_tok.evaluation.metrics import metric_hashes
-from hla_tok.hts.native import NativeNetworks, frame_input, timed
-from hla_tok.hts.units import NativeSchedule, Unit
-from hla_tok.uf.official import NativeNAL
+from baselines.dcvc_uf.native import NativeNetworks, frame_input
+from baselines.dcvc_uf.official import NativeNAL
+from baselines.dcvc_uf.units import NativeSchedule, Unit
+from common.artifacts import write_json
+from common.inputs import COHORT, inputs, source_clips
+from common.metrics import MetricSuite, metric_hashes
+from common.performance import timed
 from pht_tok.bitstream import Mode
 from pht_tok.codec import PHTDecoder, PHTEncoder, ReferenceKey, model_identifier
 from pht_tok.official_adapter import EncodedLatents, HTSAdapter, Reference
-from scripts.hla_tok.hts.audit_native import source_clips
-from scripts.hla_tok.uf.inputs import inputs
-from scripts.hla_tok.v2.protocol import COHORT
 from third_party.DCVC.src.utils.common import set_torch_env
 from third_party.DCVC.src.utils.transforms import rgb2ycbcr, ycbcr2rgb, ycbcr420_to_444_np
 from third_party.DCVC.src.utils.video_reader import YUV420Reader
@@ -61,10 +60,6 @@ def uvg_source(path: Path, count: int) -> Source:
     return Source("UVG:ShakeNDry", 120, rgb, yuv)
 
 
-def write_json(path: Path, data) -> None:
-    pending = path.with_suffix(".tmp")
-    pending.write_text(json.dumps(data, allow_nan=False, indent=2) + "\n")
-    pending.replace(path)
 
 
 def exact(left, right, field):
@@ -179,6 +174,9 @@ class Quality:
 
     def score(self, source: Tensor, decoded: list[Tensor]) -> list[dict]:
         output = ycbcr2rgb(torch.cat(decoded)[..., :HEIGHT, :WIDTH] + 0.5).float()
+        return self.score_rgb(source, output)
+
+    def score_rgb(self, source: Tensor, output: Tensor) -> list[dict]:
         original = source.float().contiguous(memory_format=torch.channels_last)
         error = (output - original).square().mean(dim=(1, 2, 3))
         columns = {"mse": error, "psnr": -10 * error.clamp_min(1e-12).log10()}
@@ -203,14 +201,19 @@ def coding_frame(source: Source, unit: Unit) -> Tensor:
     return source.yuv[unit.start:unit.start + unit.valid]
 
 
-def summarize(rows: list[dict]) -> dict:
+def summarize_quality(rows: list[dict]) -> dict:
     per_frame = [item for row in rows for item in row["frame_metrics"]]
-    count = len(per_frame)
+    stats = {metric: mean(item[metric] for item in per_frame) for metric in per_frame[0]}
+    return {"frames": len(per_frame), "global_psnr": float(-10 * np.log10(stats["mse"])), **stats}
+
+
+def summarize(rows: list[dict]) -> dict:
+    quality = summarize_quality(rows)
+    count = quality["frames"]
     bits = sum(row["bytes"] for row in rows) * 8
     seconds = sum(row["unit_valid"] / row["fps"] for row in rows)
-    stats = {metric: mean(item[metric] for item in per_frame) for metric in per_frame[0]}
     return {"frames": count, "bytes": bits // 8, "bpp": bits / (count * HEIGHT * WIDTH),
-            "mbps": bits / seconds / 1e6, "global_psnr": float(-10 * np.log10(stats["mse"])), **stats}
+            "mbps": bits / seconds / 1e6, **quality}
 
 
 def ledger_row(source: Source, unit: Unit, qp: int, method: str, stage: int, size: int,

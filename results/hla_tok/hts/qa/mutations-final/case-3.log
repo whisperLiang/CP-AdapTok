@@ -1,9 +1,0 @@
-F                                                                        [100%]
-=================================== FAILURES ===================================
-__________ test_strict_fit_charges_all_bytes_against_valid_frame_time __________
-tests/hla_tok/hts/test_comparison.py:27: in test_strict_fit_charges_all_bytes_against_valid_frame_time
-    assert result["affordable_units"] == 2
-E   assert 3 == 2
-=========================== short test summary info ============================
-FAILED tests/hla_tok/hts/test_comparison.py::test_strict_fit_charges_all_bytes_against_valid_frame_time
-1 failed in 0.59s

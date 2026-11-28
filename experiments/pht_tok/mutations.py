@@ -34,7 +34,7 @@ MUTATIONS = (
     Mutation("repeat_frame", "pht_tok/codec.py", "torch.cat((frames, padding))",
              "torch.cat((frames[:1].expand_as(frames), padding))",
              "test_codec.py::test_assemble_preserves_input_order_and_pads_only_the_tail", True),
-    Mutation("single_frame_rate_denominator", "experiments/pht_tok/baseline.py",
+    Mutation("single_frame_rate_denominator", "baselines/dcvc_uf/evaluate.py",
              "bits / (height * width * frames)", "bits / (height * width)", RATE),
     Mutation("reset_each_reference", "pht_tok/official_adapter.py",
              '        self.commit_reference(self.snapshot_reference(intra=True))',
@@ -72,7 +72,7 @@ MUTATIONS = (
     Mutation("allow_unconfirmed_reference", "pht_tok/codec.py",
              '            raise MissingReference("required reference chunk or version is missing")',
              "            pass", INCREMENTAL, True),
-    Mutation("include_tail_in_duration", "experiments/pht_tok/baseline.py",
+    Mutation("include_tail_in_duration", "baselines/dcvc_uf/evaluate.py",
              "bits, duration = 8 * len(raw), frames / fps", "bits, duration = 8 * len(raw), (frames + padding) / fps",
              RATE),
     Mutation("count_late_as_on_time", "pht_tok/streaming.py",
@@ -98,9 +98,8 @@ def execute(mutation: Mutation) -> dict:
     with TemporaryDirectory(prefix="pht-mutation-") as folder:
         scratch = Path(folder)
         shutil.copytree(ROOT / "pht_tok", scratch / "pht_tok", ignore=shutil.ignore_patterns("__pycache__"))
-        (scratch / "experiments").mkdir()
-        shutil.copy(ROOT / "experiments/__init__.py", scratch / "experiments/__init__.py")
-        shutil.copytree(ROOT / "experiments/pht_tok", scratch / "experiments/pht_tok",
+        (scratch / "baselines").mkdir()
+        shutil.copytree(ROOT / "baselines/dcvc_uf", scratch / "baselines/dcvc_uf",
                         ignore=shutil.ignore_patterns("__pycache__"))
         apply(mutation, scratch)
         env = dict(os.environ)

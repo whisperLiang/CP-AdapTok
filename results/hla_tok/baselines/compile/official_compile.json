@@ -1,5 +1,0 @@
-{
-  "status": "FAILED",
-  "reason": "backend='inductor' raised:\nCalledProcessError: Command '['/usr/bin/gcc', '/tmp/tmp435w11w_/main.c', '-O3', '-shared', '-fPIC', '-o', '/tmp/tmp435w11w_/__triton_launcher.cpython-310-x86_64-linux-gnu.so', '-lcuda', '-L/home/whisperliang/CP-AdapTok/.venv-adaptok-official/lib/python3.10/site-packages/triton/backends/nvidia/lib', '-L/lib/x86_64-linux-gnu', '-L/lib/i386-linux-gnu', '-I/home/whisperliang/CP-AdapTok/.venv-adaptok-official/lib/python3.10/site-packages/triton/backends/nvidia/include', '-I/tmp/tmp435w11w_', '-I/usr/include/python3.10']' returned non-zero exit status 1.\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n",
-  "elapsed_s": 8.515775480998855
-}

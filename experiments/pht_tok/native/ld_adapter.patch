@@ -1,0 +1,259 @@
+--- a/dmc_ld_proxy.h
++++ b/dmc_ld_proxy.h
+@@ -221,7 +221,21 @@
+                           const bool reset_feature_memory);
+     void set_param(const std::map<std::string, at::Tensor>& state_dict, const float skip_threshold);
+ 
++    // Use the same LD kernels with externally chunked rANS records.
++    void pht_prepare();
++    void pht_analyze(const at::Tensor& x, int qp, int padding_b, int padding_r);
++    void pht_prior(const at::Tensor& z, int qp);
++    std::vector<at::Tensor> pht_symbols(bool encoding) const;
++    std::vector<at::Tensor> pht_masks() const;
++    void pht_render(const at::Tensor& residuals, int qp, bool reset);
++    at::Tensor pht_display();
++    void pht_load_reference(const std::vector<at::Tensor>& reference, bool refresh);
++
+ private:
++    void prepare_context(bool has_memory);
++    void decode_prior(int qp);
++    void reconstruct_y(const at::Tensor& residuals, int qp);
++
+     // compress and decompress components
+     void add_ref_feature_and_apply_adaptor(const at::Tensor& feature, const bool reset_feature_memory);
+     void apply_feature_adaptor(const bool memory_none);
+@@ -290,6 +304,10 @@
+     cudaGraphExec_t m_gexec_dec_1[g_qp_num]{ nullptr };
+     cudaGraphExec_t m_gexec_dec_2{ nullptr };
+     cudaGraphExec_t m_gexec_dec_3[g_qp_num]{ nullptr };
++    cudaGraphExec_t m_gexec_pht_context[2]{ nullptr };
++    cudaGraphExec_t m_gexec_pht_synthesis[g_qp_num]{ nullptr };
++    cudaGraphExec_t m_gexec_pht_display{ nullptr };
++    cudaGraphExec_t m_gexec_pht_refresh{ nullptr };
+     bool m_memory_has_value{ true };
+     at::Tensor m_mask_0;
+     at::Tensor m_mask_1;
+--- a/dmc_ld_proxy.cpp
++++ b/dmc_ld_proxy.cpp
+@@ -407,7 +407,7 @@
+ void DMCLDProxy::add_ref_feature_from_frame(const at::Tensor& frame, const bool apply_adaptor)
+ {
+     pre_allocate_tensors(frame);
+-    // must NOT use cuda graph becase frame.data_ptr() is non-const
++    // must NOT use cuda graph because frame.data_ptr() is non-const
+     m_feature_i = pixel_unshuffle_cuda(frame, 8, m_feature_i);
+     if (apply_adaptor) {
+         m_memory = m_feature_adaptor_i.forward(m_feature_i);
+@@ -417,15 +417,9 @@
+     m_memory_has_value = apply_adaptor;
+ }
+ 
+-py::tuple DMCLDProxy::compress(const at::Tensor& x, const int qp, const bool reset_feature_memory,
+-                               const int padding_b, const int padding_r)
++void DMCLDProxy::pht_analyze(const at::Tensor& x, int qp, int padding_b, int padding_r)
+ {
+-    m_result_ready = false;
+-    m_qp = qp;
+-
+-    auto stream = at::cuda::getCurrentCUDAStream();
+-
+-    // must NOT use cuda graph becase x.data_ptr() is non-const
++    // must NOT use cuda graph because x.data_ptr() is non-const
+     m_enc_unshuffle_out = pad_and_unshuffle_8_cuda(x, padding_b, padding_r, m_enc_unshuffle_out);
+ 
+     // ----------- start of lambda_enc_0 -----------
+@@ -455,8 +449,103 @@
+             conditional_index_part1_cuda(m_y_symbol_prev, m_skip_cond, m_y_symbol, m_y_size, m_y_num);
+     };
+ 
+-    run(lambda_enc_0, m_gexec_enc_0, m_qp);
+-    // ------------ end of lambda_enc_0 ------------
++    run(lambda_enc_0, m_gexec_enc_0, qp);
++}
++
++void DMCLDProxy::decode_prior(int qp)
++{
++    m_z_hat = int8_to_dtype_cuda(m_z_hat_io, m_dtype, g_ch_z, m_z_height, m_z_width, m_z_hat);
++    m_hyper_params_pad4 = m_hyper_decoder.forward(m_z_hat);
++    m_hyper_params = crop_hyper_params(m_hyper_params_pad4, m_temporal_params.size(2),
++                                       m_temporal_params.size(3), m_hyper_params);
++    m_temporal_params = multiply_with_broadcast_cuda(m_temporal_params, m_q_feature[qp],
++                                                     m_temporal_params);  // inplace
++    m_common_params = m_y_prior_fusion.forward(m_cat_prior_fusion);
++    const auto [q_dec, scales, means] = chunk_tensors_3(m_common_params);
++    std::tie(m_y_indexes_prev, m_skip_cond) = build_index_dec_cuda(
++        scales, m_skip_threshold, at::nullopt, 0, m_y_indexes_prev, m_skip_cond);
++    std::tie(m_y_indexes, m_y_size, m_y_num) =
++        conditional_index_part1_cuda(m_y_indexes_prev, m_skip_cond, m_y_indexes, m_y_size, m_y_num);
++}
++
++void DMCLDProxy::reconstruct_y(const at::Tensor& residuals, int qp)
++{
++    const auto [q_dec, scales, means] = chunk_tensors_3(m_common_params);
++    m_y_hat = restore_y_cuda(residuals, means, m_mask_0, m_y_hat);
++    m_means = m_y_spatial_prior.forward(m_cat_spatial_prior);
++    m_y_hat = restore_y_and_add_multiply_inplace_cuda(residuals, m_means, m_mask_1, m_y_hat, q_dec);
++    m_feature_p = m_decoder.forward(m_y_hat, m_cat_decoder, m_q_decoder[qp]);
++}
++
++void DMCLDProxy::prepare_context(bool has_memory)
++{
++    apply_feature_adaptor(has_memory);
++    m_temporal_params = m_temporal_prior_encoder.forward(m_memory);
++    m_ctx = m_feature_extractor.forward(m_memory);
++}
++
++void DMCLDProxy::pht_prepare()
++{
++    run([&](bool has_memory) { prepare_context(has_memory); },
++        m_gexec_pht_context, m_memory_has_value);
++}
++
++void DMCLDProxy::pht_prior(const at::Tensor& z, int qp)
++{
++    m_z_height = m_z_hat_io.size(2);
++    m_z_width = m_z_hat_io.size(3);
++    m_z_hat_io.copy_(z);
++    run([&](int q) { decode_prior(q); }, m_gexec_dec_1, qp);
++}
++
++std::vector<at::Tensor> DMCLDProxy::pht_symbols(bool encoding) const
++{
++    if (encoding) return {m_z_hat_io, m_y_q, m_y_symbol_prev, m_skip_cond};
++    return {m_z_hat_io, m_y_q_r, m_y_indexes_prev, m_skip_cond};
++}
++
++std::vector<at::Tensor> DMCLDProxy::pht_masks() const
++{
++    return {m_mask_0, m_mask_1};
++}
++
++void DMCLDProxy::pht_render(const at::Tensor& residuals, int qp, bool reset)
++{
++    m_y_q_r.copy_(residuals);
++    run([&](int q) { reconstruct_y(m_y_q_r, q); }, m_gexec_pht_synthesis, qp);
++    if (reset) {
++        run([&]() { m_feature_i = m_recon_head.forward_reset(m_feature_p); },
++            m_gexec_pht_refresh);
++    }
++}
++
++at::Tensor DMCLDProxy::pht_display()
++{
++    run([&]() { m_x_hat = m_recon_head.forward(m_feature_p); }, m_gexec_pht_display);
++    return m_x_hat;
++}
++
++
++void DMCLDProxy::pht_load_reference(const std::vector<at::Tensor>& reference, bool refresh)
++{
++    if (refresh) {
++        m_feature_i.copy_(reference.at(0));
++    } else {
++        m_memory.copy_(reference.at(0));
++        m_feature_p.copy_(reference.at(1));
++    }
++    m_memory_has_value = !refresh;
++}
++
++py::tuple DMCLDProxy::compress(const at::Tensor& x, const int qp, const bool reset_feature_memory,
++                               const int padding_b, const int padding_r)
++{
++    m_result_ready = false;
++    m_qp = qp;
++
++    auto stream = at::cuda::getCurrentCUDAStream();
++
++    pht_analyze(x, qp, padding_b, padding_r);
+ 
+     CUDA_CHECK(cudaEventRecord(m_event_y, stream));
+     {
+@@ -525,28 +614,7 @@
+     }
+     CUDA_CHECK(cudaStreamWaitEvent(stream, m_event_z_ready));
+ 
+-    at::Tensor q_dec;
+-    at::Tensor scales;
+-    at::Tensor means;
+-    // ----------- start of lambda_dec_1 -----------
+-    auto lambda_dec_1 = [&](const int qp) {
+-        // need to output [m_y_indexes, m_y_size] for cpu thread
+-        m_z_hat = int8_to_dtype_cuda(m_z_hat_io, m_dtype, g_ch_z, m_z_height, m_z_width, m_z_hat);
+-        m_hyper_params_pad4 = m_hyper_decoder.forward(m_z_hat);
+-        m_hyper_params = crop_hyper_params(m_hyper_params_pad4, m_temporal_params.size(2),
+-                                           m_temporal_params.size(3), m_hyper_params);
+-        m_temporal_params = multiply_with_broadcast_cuda(m_temporal_params, m_q_feature[qp],
+-                                                         m_temporal_params);  // inplace
+-        m_common_params = m_y_prior_fusion.forward(m_cat_prior_fusion);
+-        std::tie(q_dec, scales, means) = chunk_tensors_3(m_common_params);
+-        std::tie(m_y_indexes_prev, m_skip_cond) = build_index_dec_cuda(
+-            scales, m_skip_threshold, at::nullopt, 0, m_y_indexes_prev, m_skip_cond);
+-        std::tie(m_y_indexes, m_y_size, m_y_num) =
+-            conditional_index_part1_cuda(m_y_indexes_prev, m_skip_cond, m_y_indexes, m_y_size, m_y_num);
+-    };
+-
+-    run(lambda_dec_1, m_gexec_dec_1, m_qp);
+-    // ------------ end of lambda_dec_1 ------------
++    run([&](int q) { decode_prior(q); }, m_gexec_dec_1, m_qp);
+ 
+     CUDA_CHECK(cudaEventRecord(m_event_y, stream));
+     {
+@@ -576,11 +644,7 @@
+     auto lambda_dec_3 = [&](const int qp) {
+         m_y_q_r = conditional_recover_with_type_conversion_cuda(m_y_decoded, m_skip_cond, m_y_num,
+                                                                 m_dtype, m_y_q_r);
+-        m_y_hat = restore_y_cuda(m_y_q_r, means, m_mask_0, m_y_hat);
+-        m_means = m_y_spatial_prior.forward(m_cat_spatial_prior);
+-        m_y_hat = restore_y_and_add_multiply_inplace_cuda(m_y_q_r, m_means, m_mask_1, m_y_hat, q_dec);
+-        // decoder + recon_head
+-        m_feature_p = m_decoder.forward(m_y_hat, m_cat_decoder, m_q_decoder[qp]);
++        reconstruct_y(m_y_q_r, qp);
+         m_x_hat = m_recon_head.forward(m_feature_p);  // m_feature_i is also updated for reset purpose
+     };
+ 
+@@ -661,14 +725,18 @@
+ {
+     for (int i = 0; i < g_qp_num; ++i) {
+         destroy_cuda_graph_exec(m_gexec_enc_0[i]);
++        destroy_cuda_graph_exec(m_gexec_pht_synthesis[i]);
+         for (int j = 0; j < 2; ++j) {
+             destroy_cuda_graph_exec(m_gexec_enc_1[i][j]);
+         }
+     }
+     for (int i = 0; i < 2; ++i) {
+         destroy_cuda_graph_exec(m_gexec_dec_0[i]);
++        destroy_cuda_graph_exec(m_gexec_pht_context[i]);
+     }
+     destroy_cuda_graph_exec(m_gexec_dec_2);
++    destroy_cuda_graph_exec(m_gexec_pht_display);
++    destroy_cuda_graph_exec(m_gexec_pht_refresh);
+     for (int i = 0; i < g_qp_num; ++i) {
+         destroy_cuda_graph_exec(m_gexec_dec_1[i]);
+         destroy_cuda_graph_exec(m_gexec_dec_3[i]);
+@@ -758,7 +826,8 @@
+     std::tie(m_y_hat, m_common_params) = split_tensors_2(m_cat_spatial_prior, g_ch_y, g_ch_y * 3);
+ 
+     // pre allocate other tensors
+-    m_feature_i = g_tensor_pool.empty(feature_i_shape, options);
++    // The feature adaptor may release its input into the shared scratch pool.
++    m_feature_i = at::empty(feature_i_shape, options);
+ 
+     m_z_hat = at::empty(z_shape, options.dtype(at::kHalf));
+     m_z_hat_io = at::empty(z_shape, options.dtype(at::kChar));
+--- a/bind.cpp
++++ b/bind.cpp
+@@ -52,5 +52,13 @@
+         .def("compress", &DMCLDProxy::compress)
+         .def("decompress", &DMCLDProxy::decompress)
+         .def("audit_reference", &DMCLDProxy::audit_reference)
+-        .def("audit_context", &DMCLDProxy::audit_context);
++        .def("audit_context", &DMCLDProxy::audit_context)
++        .def("pht_prepare", &DMCLDProxy::pht_prepare)
++        .def("pht_analyze", &DMCLDProxy::pht_analyze)
++        .def("pht_prior", &DMCLDProxy::pht_prior)
++        .def("pht_symbols", &DMCLDProxy::pht_symbols)
++        .def("pht_masks", &DMCLDProxy::pht_masks)
++        .def("pht_render", &DMCLDProxy::pht_render)
++        .def("pht_display", &DMCLDProxy::pht_display)
++        .def("pht_load_reference", &DMCLDProxy::pht_load_reference);
+ }

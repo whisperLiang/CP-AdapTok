@@ -6,6 +6,8 @@ from pathlib import Path
 
 import torch
 
+from baselines.dcvc_uf.native import NativeNetworks
+from common.artifacts import write_json
 from experiments.pht_tok.closed import official_profile, profile_report, run_closed
 from experiments.pht_tok.study import (
     ROOT,
@@ -14,9 +16,7 @@ from experiments.pht_tok.study import (
     aggregate_curves,
     fixed_point,
     uvg_source,
-    write_json,
 )
-from hla_tok.hts.native import NativeNetworks
 from pht_tok.bitstream import Mode
 from pht_tok.codec import PHTDecoder, PHTEncoder, model_identifier
 from third_party.DCVC.src.utils.common import set_torch_env
@@ -54,7 +54,7 @@ def main():
             print("optimized", pattern, flush=True)
         first = run_closed(source, 32, tx, rx, Mode.MASK, 1, "base")
         first_profile = profile_report(first["per_unit"], source, first["process_cpu_seconds"])
-        before = json.loads((args.work / "profiling-before.json").read_text())
+        before = json.loads((ROOT / "results/pht_tok/profiling.json").read_text())["before"]
         write_json(args.work / "profiling.json", {
             "official": stock_profiles[0], "official_repetitions": stock_profiles,
             "mask_kref2": candidate, "first_legal_prefix_kref1": first_profile, "before": before,

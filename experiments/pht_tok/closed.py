@@ -7,12 +7,12 @@ from time import process_time
 import numpy as np
 import torch
 
-from hla_tok.hts.native import timed
-from hla_tok.hts.units import NativeSchedule, Unit
-from hla_tok.uf.base import BaseFrame, FrameInfo
-from hla_tok.uf.official import NativeNAL
+from baselines.dcvc_uf.official import NativeNAL
+from baselines.dcvc_uf.units import NativeSchedule, Unit
+from common.artifacts import write_json
+from common.performance import timed
 from pht_tok.bitstream import Chunk, ChunkHeader, Mode, StreamReader
-from pht_tok.codec import MissingReference, assemble
+from pht_tok.codec import MissingReference
 
 PATTERNS = ("base", "mid", "full", "alternating", "random", "burst", "late_enhancement",
             "lost_enhancement", "lost_reference", "bad_reference_version")
@@ -53,16 +53,7 @@ def summarized_speed(rows: list[dict], fps: float) -> dict:
 
 def official_encode(stock, source, unit, qp, writer):
     frames = source.yuv[unit.start:unit.start + unit.valid]
-    height, width = frames.shape[-2:]
-    padding = ((-height) % 16, (-width) % 16)
-    if unit.intra:
-        x = frames.contiguous(memory_format=torch.channels_last)
-        packet = stock.intra.compress(x, qp, *padding)
-        stock.video.add_ref_feature_from_frame(packet["x_hat"])
-    else:
-        packet = stock.video.compress(assemble(frames), qp, unit.reset, *padding)
-    info = FrameInfo(unit.start, height, width, qp, unit.intra, packet["ec_parallel"], unit.reset)
-    return writer.encode(BaseFrame(info, packet["bit_stream"]))
+    return writer.encode(stock.encode_centered(frames, unit, qp))
 
 
 def official_decode(stock, unit, wire, reader):
@@ -206,7 +197,6 @@ def receive(rx, boundaries, prefix, incremental):
 
 
 def closed_study(source, qps, stock, tx, rx, quality, work):
-    from experiments.pht_tok.study import write_json
 
     qp = qps[0]
     rows = []

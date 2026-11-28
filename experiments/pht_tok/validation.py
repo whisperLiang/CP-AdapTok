@@ -6,15 +6,16 @@ from pathlib import Path
 
 import torch
 
+from baselines.dcvc_uf.native import NativeNetworks
+from baselines.dcvc_uf.official import NativeNAL
+from baselines.dcvc_uf.units import NativeSchedule
+from common.artifacts import write_json
+from common.inputs import inputs, source_clips
+from common.performance import timed
 from experiments.pht_tok.closed import official_encode
-from experiments.pht_tok.study import ROOT, SKIP, Quality, Source, aggregate_curves, ledger_row, write_json
-from hla_tok.hts.native import NativeNetworks, timed
-from hla_tok.hts.units import NativeSchedule
-from hla_tok.uf.official import NativeNAL
+from experiments.pht_tok.study import ROOT, SKIP, Quality, Source, aggregate_curves, ledger_row
 from pht_tok.bitstream import Mode
 from pht_tok.codec import PHTDecoder, PHTEncoder, model_identifier
-from scripts.hla_tok.hts.audit_native import source_clips
-from scripts.hla_tok.uf.inputs import inputs
 from third_party.DCVC.src.utils.common import set_torch_env
 from third_party.DCVC.src.utils.transforms import rgb2ycbcr
 

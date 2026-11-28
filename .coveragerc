@@ -1,12 +1,11 @@
 [run]
-source = cp_adaptok
+source =
+    baselines
+    common
+    pht_tok
 branch = True
 relative_files = True
-omit =
-    cp_adaptok/tests/*
 
 [report]
 omit =
-    cp_adaptok/tests/*
     */third_party/*
-    */config-*.py

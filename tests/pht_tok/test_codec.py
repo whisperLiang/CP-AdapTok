@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 import torch
 
-from hla_tok.hts.native import NativeNetworks
+from baselines.dcvc_uf.native import NativeNetworks
 from pht_tok.bitstream import Mode
 from pht_tok.codec import MissingReference, PHTDecoder, PHTEncoder, assemble
 from third_party.DCVC.src.utils.common import set_torch_env

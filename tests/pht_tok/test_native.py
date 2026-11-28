@@ -4,8 +4,8 @@ from pathlib import Path
 import pytest
 import torch
 
-from hla_tok.hts.native import NativeNetworks, frame_input
-from hla_tok.hts.units import NativeSchedule
+from baselines.dcvc_uf.native import NativeNetworks, frame_input
+from baselines.dcvc_uf.units import NativeSchedule
 from pht_tok.official_adapter import HTSAdapter
 
 pytestmark = pytest.mark.gpu

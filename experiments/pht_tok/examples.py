@@ -6,8 +6,9 @@ from pathlib import Path
 import torch
 from PIL import Image
 
-from experiments.pht_tok.study import ROOT, SKIP, calibration, write_json
-from hla_tok.hts.native import NativeNetworks
+from baselines.dcvc_uf.native import NativeNetworks
+from common.artifacts import write_json
+from experiments.pht_tok.study import ROOT, SKIP, calibration
 from pht_tok.bitstream import Mode
 from pht_tok.codec import PHTDecoder, PHTEncoder, model_identifier
 from third_party.DCVC.src.utils.common import set_torch_env
@@ -27,7 +28,7 @@ def save(img, folder: Path, stem: str):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--weights", type=Path, required=True)
-    parser.add_argument("--output", type=Path, default=ROOT / "results/pht_tok/samples")
+    parser.add_argument("--output", type=Path, default=ROOT / ".build/pht-tok/examples")
     args = parser.parse_args()
     args.output.mkdir(exist_ok=True, parents=True)
     set_torch_env()

@@ -4,8 +4,8 @@ cd "$(dirname "${BASH_SOURCE[0]}")/../../.."
 
 variant="${1:-pht}"
 case "$variant" in
-  official|pht) ;;
-  *) printf '%s\n' 'usage: build.sh [official|pht]' >&2; exit 2 ;;
+  official|pht|dual) ;;
+  *) printf '%s\n' 'usage: build.sh [official|pht|dual]' >&2; exit 2 ;;
 esac
 python_bin="${PYTHON_BIN:-python}"
 cutlass="$(realpath "${CUTLASS_HOME:?set CUTLASS_HOME to the pinned CUTLASS checkout}")"
@@ -26,9 +26,12 @@ ln -sfn "$cutlass" "$build/third_party/cutlass"
 cp -a "$source_dir/cpp/." "$build/src/cpp/"
 cp -a "$source_dir/layers/extensions/inference/." "$proxy/"
 
-if [[ "$variant" == pht ]]; then
-  patch --batch --directory="$proxy" -p1 --fuzz=0 < configs/hla_tok/hts/native_state_audit.patch
+if [[ "$variant" != official ]]; then
+  patch --batch --directory="$proxy" -p1 --fuzz=0 < experiments/pht_tok/native/native_state_audit.patch
   patch --batch --directory="$proxy" -p1 --fuzz=0 < experiments/pht_tok/native/hts_adapter.patch
+fi
+if [[ "$variant" == dual ]]; then
+  patch --batch --directory="$proxy" -p1 --fuzz=0 < experiments/pht_tok/native/ld_adapter.patch
 fi
 
 if [[ -z "${PHT_NATIVE_CACHE:-}" ]]; then

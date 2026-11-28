@@ -9,11 +9,13 @@ from statistics import mean, median
 import numpy as np
 import torch
 
+from baselines.dcvc_uf.native import NativeNetworks
+from baselines.dcvc_uf.official import NativeNAL
+from baselines.dcvc_uf.units import NativeSchedule
+from common.artifacts import write_json
+from common.performance import timed
 from experiments.pht_tok.closed import official_encode
-from experiments.pht_tok.study import ROOT, SKIP, Quality, uvg_source, write_json
-from hla_tok.hts.native import NativeNetworks, timed
-from hla_tok.hts.units import NativeSchedule
-from hla_tok.uf.official import NativeNAL
+from experiments.pht_tok.study import ROOT, SKIP, Quality, uvg_source
 from pht_tok.bitstream import Mode
 from pht_tok.codec import MissingReference, PHTDecoder, PHTEncoder, model_identifier
 from pht_tok.streaming import (
@@ -286,11 +288,13 @@ def main():
     parser.add_argument("--weights", type=Path, required=True)
     parser.add_argument("--uvg", type=Path, required=True)
     parser.add_argument("--work", type=Path, default=ROOT / ".build/pht-tok")
-    parser.add_argument("--verizon", type=Path)
+    parser.add_argument("--verizon", type=Path, default=ROOT / "data/traces/verizon-lte.down")
+    parser.add_argument("--calibration", type=Path, default=ROOT / "configs/pht_tok/network_calibration.json")
+    parser.add_argument("--profile", type=Path, default=ROOT / "results/pht_tok/profiling.json")
     args = parser.parse_args()
     set_torch_env()
-    fixed = json.loads((args.work / "fixed.json").read_text())
-    profile = json.loads((args.work / "profiling.json").read_text())
+    rates = rate_models(json.loads(args.calibration.read_text()))
+    profile = json.loads(args.profile.read_text())
     policies = ("S0_fixed_qp", "S1_adaptive_qp", "S2_whole_gated", "S3_fixed_prefix",
                 "S4_adaptive_prefix", "S6_oracle")
     with torch.cuda.stream(torch.cuda.Stream()):
@@ -304,12 +308,8 @@ def main():
             selected = ("S1_adaptive_qp", "S4_adaptive_prefix") if static else policies
             for policy in selected:
                 destination = args.work / f"network-{case.name}-{policy}.json"
-                if destination.is_file():
-                    result = json.loads(destination.read_text())
-                else:
-                    result = simulate(codec, source, policy, case, rate_models(fixed),
-                                      fast_metrics if static else quality, profile)
-                    write_json(destination, result)
+                result = simulate(codec, source, policy, case, rates, fast_metrics if static else quality, profile)
+                write_json(destination, result)
                 rows.append(result)
                 print(case.name, policy, result["deadline_hit_rate"], flush=True)
     write_json(args.work / "network_results.json",

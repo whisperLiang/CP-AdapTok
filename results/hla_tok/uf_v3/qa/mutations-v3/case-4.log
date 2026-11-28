@@ -1,9 +1,0 @@
-F                                                                        [100%]
-=================================== FAILURES ===================================
-__ test_raw_rgb_unroll_routes_separate_encoder_gradients_and_keeps_base_state __
-tests/hla_tok/uf_v3/test_joint.py:105: in test_raw_rgb_unroll_routes_separate_encoder_gradients_and_keeps_base_state
-    assert count == 1
-E   assert 2 == 1
-=========================== short test summary info ============================
-FAILED tests/hla_tok/uf_v3/test_joint.py::test_raw_rgb_unroll_routes_separate_encoder_gradients_and_keeps_base_state
-1 failed in 1.27s

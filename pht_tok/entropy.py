@@ -17,7 +17,8 @@ class NativeEntropy:
         self.y_tables = y, y_sizes = model.gaussian_encoder.get_cdf_info()
         self.z_tables = z, z_sizes = model.bit_estimator_z.get_cdf_info()
         self._writer_type = RansEncoder
-        self._mask_writers: tuple[Any, ...] | None = None
+        self._mask_writers: list[Any] = []
+        self._mask_layers = 0
         self.writer = RansEncoder()
         self.writer.set_entropy_coder_parallel(1)
         self.writer.set_cdf(y, y_sizes, 1)
@@ -34,22 +35,23 @@ class NativeEntropy:
 
     def start_mask_encoding(self, hyper: np.ndarray, qp: int, channels: int,
                             layers: tuple[np.ndarray, ...]) -> None:
-        if self._mask_writers is None:
-            self._mask_writers = tuple(self._writer_type() for _ in range(4))
-            for writer in self._mask_writers:
-                writer.set_entropy_coder_parallel(1)
-                writer.set_cdf(*self.y_tables, 1)
+        self._mask_layers = len(layers)
+        while len(self._mask_writers) < self._mask_layers:
+            writer = self._writer_type()
+            writer.set_entropy_coder_parallel(1)
+            writer.set_cdf(*self.y_tables, 1)
+            self._mask_writers.append(writer)
         self.writer.reset()
         self.writer.encode_z(hyper, qp * channels, channels)
         self.writer.flush()
-        for writer, packed in zip(self._mask_writers, layers, strict=True):
+        for writer, packed in zip(self._mask_writers[:self._mask_layers], layers, strict=True):
             writer.reset()
             writer.encode_y(packed)
             writer.flush()
 
     def finish_mask_encoding(self) -> tuple[bytes, ...]:
-        assert self._mask_writers is not None
-        return tuple(writer.get_encoded_stream().tobytes() for writer in (self.writer, *self._mask_writers))
+        return tuple(writer.get_encoded_stream().tobytes()
+                     for writer in (self.writer, *self._mask_writers[:self._mask_layers]))
 
     def encode_z(self, hyper: np.ndarray, qp: int, channels: int) -> bytes:
         self.writer.reset()

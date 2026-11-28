@@ -14,8 +14,9 @@ from unittest.mock import patch
 import torch
 
 import pht_tok.codec
-from experiments.pht_tok.study import ROOT, SKIP, uvg_source, write_json
-from hla_tok.hts.native import NativeNetworks
+from baselines.dcvc_uf.native import NativeNetworks
+from common.artifacts import write_json
+from experiments.pht_tok.study import ROOT, SKIP, uvg_source
 from pht_tok.bitstream import Chunk
 from pht_tok.codec import PHTDecoder, PHTEncoder, model_identifier
 from pht_tok.entropy import NativeEntropy

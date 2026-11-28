@@ -1,7 +1,0 @@
-extends: base.yaml
-stage: 1
-control: fixed_spatial
-paths:
-  checkpoint: checkpoints/spatial_control/latest.pt
-  save_checkpoint: checkpoints/spatial_control/latest.pt
-  output: results/spatial_control
