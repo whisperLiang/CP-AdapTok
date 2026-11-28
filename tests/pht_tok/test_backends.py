@@ -154,3 +154,22 @@ def test_public_api_encodes_and_reconstructs_native_rgb(peers):
     result = codec.decode(minimum[6:], new_unit=False, offset=6)
     assert result.stage == 1 and result.reference_committed and result.consumed_bytes == len(minimum)
     assert result.frames.shape == (delay, 3, *frames.shape[-2:])
+
+
+def test_continuous_minimum_then_random_budgets_over_refresh(peers):
+    tx, rx, _, frames, mode, delay = peers
+    tx.key = rx.key = None
+    rx.decode_prefix(tx.encode_intra(frames[:1], 32, 0).data)
+    count = 40
+    rng = torch.Generator().manual_seed(521)
+    random = torch.randint(1, 9, (count - 24,), generator=rng).tolist()
+    budgets = (1,) * 24 + tuple(random)
+    for j, budget in enumerate(budgets):
+        i = 1 + j * delay
+        stream = tx.encode_chunk_once(frames[1:1 + delay], 16 + j % 41, i, 1, mode=mode, reset=j % 8 == 7)
+        session = rx.decode_prefix(stream.prefix(max_bytes=stream.prefix_boundaries[budget - 1]))
+        assert len(session.reconstruct()) == delay
+        assert rx.key == tx.key
+        assert session.reference_committed
+        for a, b in zip(tx.adapter.reference.tensors, rx.adapter.reference.tensors, strict=True):
+            assert torch.equal(a, b)

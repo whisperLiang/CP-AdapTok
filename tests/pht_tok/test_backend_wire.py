@@ -1,4 +1,5 @@
 from dataclasses import replace
+from random import Random
 from struct import pack
 
 import pytest
@@ -81,3 +82,19 @@ def test_pht1_refresh_is_byte_stable_and_v2_geometry_is_backend_specific():
     assert StreamReader().append_bytes(encoded.data) == (b"four",)
     with pytest.raises(CorruptStream, match="length"):
         ChunkHeader.unpack(encoded.data[:HEADER_BYTES - 1])
+
+
+def test_random_truncations_keep_only_complete_entropy_records():
+    packet, records = make_stream(Mode.LD_MASK)
+    rng = Random(272026)
+    ends = (HEADER_BYTES + RECORD.size + len(records[0]), *packet.prefix_boundaries)
+    for _ in range(40):
+        cutoff = rng.randrange(len(packet.data) + 1)
+        reader = StreamReader()
+        found = []
+        offset = 0
+        while offset < cutoff:
+            next_offset = min(offset + rng.randint(1, 20), cutoff)
+            found.extend(reader.append_bytes(packet.data[offset:next_offset], offset=offset))
+            offset = next_offset
+        assert tuple(found) == records[:sum(end <= cutoff for end in ends)]

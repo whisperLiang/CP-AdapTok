@@ -33,7 +33,7 @@ class PHTTok:
         if backend not in NATIVE_FRAMES:
             raise ValueError("backend must be ld or hts")
         self.mode = self._mode(backend, layers)
-        self.reference_layers = reference_layers if reference_layers is not None else (2 if self.mode == Mode.MASK else 1)
+        self.reference_layers = reference_layers if reference_layers is not None else {Mode.MASK: 2}.get(self.mode, 1)
         if not 1 <= self.reference_layers <= self.mode.layers:
             raise ValueError("reference_layers must select a legal prefix")
         placement = torch.device(device)

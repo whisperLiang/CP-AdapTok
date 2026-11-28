@@ -61,6 +61,8 @@ def eligible(trace, starts, wire_sizes, decode_free, decode, deadline):
 
 
 def oracle_prefix(ep, packet, source, unit, trace, link_ready, decoder_ready, dec_seconds, quality):
+    if unit.intra:
+        return 1
     first_deadline = unit.start / source.fps + PLAYOUT
     stages = eligible(trace, link_ready, network_sizes(packet.prefix_boundaries),
                       decoder_ready, dec_seconds, first_deadline)

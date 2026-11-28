@@ -44,10 +44,15 @@ class NativeSymbols:
 EncodedLatents = NativeSymbols
 
 
+def require_centered_frames(frames: Tensor, maximum: int) -> None:
+    if frames.ndim != 4 or frames.shape[1] != 3 or not 1 <= len(frames) <= maximum:
+        raise ValueError(f"provide 1–{maximum} consecutive native YCbCr frames")
+    if frames.dtype != torch.float16 or not frames.is_cuda:
+        raise ValueError("provide centered CUDA FP16 YCbCr frames")
+
+
 def assemble(frames: Tensor) -> Tensor:
-    if (frames.ndim != 4 or frames.shape[1] != 3 or not 1 <= len(frames) <= CHUNK_FRAMES
-            or frames.dtype != torch.float16 or not frames.is_cuda):
-        raise ValueError("provide one to eight consecutive native FP16 YCbCr frames")
+    require_centered_frames(frames, CHUNK_FRAMES)
     padding = frames[-1:].expand(CHUNK_FRAMES - len(frames), -1, -1, -1)
     return torch.cat((frames, padding)).reshape(1, 24, *frames.shape[-2:]).contiguous(
         memory_format=torch.channels_last

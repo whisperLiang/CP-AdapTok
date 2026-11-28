@@ -13,7 +13,13 @@ from baselines.dcvc_uf.native import NativeNetworks, decode_intra
 from baselines.dcvc_uf.official import NativeNAL
 from pht_tok.bitstream import NO_REFERENCE, Chunk, ChunkHeader, CorruptStream, Mode, StreamReader
 from pht_tok.entropy import NativeEntropy
-from pht_tok.official_adapter import HTSBackend, LDBackend, NativeBackend, NativeSymbols
+from pht_tok.official_adapter import (
+    HTSBackend,
+    LDBackend,
+    NativeBackend,
+    NativeSymbols,
+    require_centered_frames,
+)
 from pht_tok.official_adapter import assemble as assemble
 from pht_tok.precision import WIDTHS
 
@@ -96,8 +102,7 @@ class Peer:
 class PHTEncoder(Peer):
     @torch.inference_mode()
     def encode_intra(self, frame: Tensor, qp: int, chunk_id: int) -> Chunk:
-        if frame.ndim != 4 or frame.shape[:2] != (1, 3) or frame.dtype != torch.float16 or not frame.is_cuda:
-            raise ValueError("expected one centered CUDA FP16 YCbCr frame")
+        require_centered_frames(frame, 1)
         height, width = frame.shape[-2:]
         if self.key is not None and chunk_id <= self.key.chunk_id:
             raise ValueError("I-frame IDs must advance")
@@ -119,7 +124,7 @@ class PHTEncoder(Peer):
         if self.key is None or self.layout is None:
             raise MissingReference("send a complete I-frame first")
         if mode is None:
-            mode = Mode.MASK if self.backend == "hts" else Mode.LD_MASK
+            mode = {"hts": Mode.MASK, "ld": Mode.LD_MASK}[self.backend]
         if frames.shape[-2:] != (self.key.height, self.key.width) or mode.is_intra or mode.backend != self.backend:
             raise ValueError("a progressive chunk must match its reference dimensions")
         header = ChunkHeader(self.model_id, chunk_id, self.key.chunk_id, self.key.version,

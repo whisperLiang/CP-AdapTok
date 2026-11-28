@@ -18,6 +18,8 @@ STREAMING = "test_pht_streaming.py"
 NATIVE = "test_native.py"
 INCREMENTAL = "test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss"
 CAUSAL = "test_codec.py::test_one_encoder_call_and_chunk_causality_with_shared_backing_storage"
+BACKEND = "test_backends.py"
+BACKEND_WIRE = "test_backend_wire.py"
 
 
 @dataclass(frozen=True, slots=True)
@@ -31,7 +33,7 @@ class Mutation:
 
 
 MUTATIONS = (
-    Mutation("repeat_frame", "pht_tok/codec.py", "torch.cat((frames, padding))",
+    Mutation("repeat_frame", "pht_tok/official_adapter.py", "torch.cat((frames, padding))",
              "torch.cat((frames[:1].expand_as(frames), padding))",
              "test_codec.py::test_assemble_preserves_input_order_and_pads_only_the_tail", True),
     Mutation("single_frame_rate_denominator", "baselines/dcvc_uf/evaluate.py",
@@ -40,7 +42,7 @@ MUTATIONS = (
              '        self.commit_reference(self.snapshot_reference(intra=True))',
              '        self._warm_anchor = self.snapshot_reference(intra=True)\n'
              '        self.commit_reference(self._warm_anchor)', NATIVE, True),
-    Mutation("read_next_frame", "pht_tok/codec.py", "    padding = frames[-1:]",
+    Mutation("read_next_frame", "pht_tok/official_adapter.py", "    padding = frames[-1:]",
              "    if len(frames) == CHUNK_FRAMES:\n"
              "        frames = frames.as_strided(frames.size(), frames.stride(),"
              " frames.storage_offset() + frames.stride(0))\n"
@@ -61,14 +63,14 @@ MUTATIONS = (
     Mutation("clip_escape_symbols", "pht_tok/entropy.py",
              "return representative(lows, width).astype(np.int8)",
              "return np.clip(representative(lows, width), -8, 8).astype(np.int8)", PRECISION),
-    Mutation("repeat_encoder", "pht_tok/codec.py", "        analysis = self.adapter.encode_chunk(assemble(frames), qp)",
-             "        analysis = self.adapter.encode_chunk(assemble(frames), qp)\n"
-             "        analysis = self.adapter.encode_chunk(assemble(frames), qp)", CAUSAL, True),
+    Mutation("repeat_encoder", "pht_tok/codec.py", "        analysis = self.adapter.analyze(frames, qp)",
+             "        analysis = self.adapter.analyze(frames, qp)\n"
+             "        analysis = self.adapter.analyze(frames, qp)", CAUSAL, True),
     Mutation("decode_old_layers_again", "pht_tok/codec.py", "        self.pending.clear()\n        return self.stage",
              "        return self.stage", INCREMENTAL, True),
-    Mutation("pretend_full_synthesis_on_prefix", "pht_tok/codec.py",
-             "out = peer.adapter.reconstruct(self.stage,",
-             "out = peer.adapter.reconstruct(GROUPS,", INCREMENTAL, True),
+    Mutation("pretend_full_synthesis_on_prefix", "pht_tok/official_adapter.py",
+             "return self.reconstruct(groups, header.qp", "return self.reconstruct(GROUPS if received else groups, header.qp",
+             INCREMENTAL, True),
     Mutation("allow_unconfirmed_reference", "pht_tok/codec.py",
              '            raise MissingReference("required reference chunk or version is missing")',
              "            pass", INCREMENTAL, True),
@@ -80,6 +82,17 @@ MUTATIONS = (
              "if packet.arrival is not None", STREAMING),
     Mutation("look_at_future_bandwidth", "pht_tok/streaming.py",
              "        if item.at > now:\n            break\n", "", STREAMING),
+    Mutation("ignore_prefix_index_mismatch", "pht_tok/bitstream.py",
+             "ends[int(not header.mode.is_intra):] != self.prefix_boundaries or ", "",
+             BACKEND_WIRE),
+    Mutation("ignore_pht2_record_order", "pht_tok/bitstream.py",
+             "index + 1 if self.mode.magic == MAGIC_V2 else 0", "0", BACKEND_WIRE),
+    Mutation("allow_wrong_backend", "pht_tok/codec.py",
+             '            raise CorruptStream("PHT backend mismatch")', "            pass",
+             BACKEND + "::test_backend_mismatch_and_truncated_header_precede_native_decoding", True),
+    Mutation("allow_polluted_reference", "pht_tok/official_adapter.py",
+             "        self.reference.require_intact()\n", "",
+             BACKEND + "::test_modified_reference_is_rejected_and_an_i_frame_recovers", True),
 )
 
 

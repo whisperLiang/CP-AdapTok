@@ -142,7 +142,7 @@ def plot_network(folder, table, ledger):
             stats = ledger["paired_video_intervals"][trace][backend]
             low, high = stats["bootstrap_95_db"]
             ax.hlines(i, low, high, linewidth=1.05, color="#9199a2")
-            effect = index[trace, method] - index[trace, native]
+            effect = np.mean(list(stats["per_video_db"].values()))
             oracle = index[trace, f"{method}_oracle"] - index[trace, native]
             ax.plot(effect, i, marker="o", color=color, ms=3.5, label="Online" if i == 0 else "")
             ax.plot(oracle, i, marker="D", markerfacecolor="white", color=color, ms=3.8,

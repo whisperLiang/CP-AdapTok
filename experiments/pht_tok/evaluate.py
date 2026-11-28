@@ -29,6 +29,7 @@ from third_party.DCVC.src.utils.transforms import rgb2ycbcr
 
 SPLIT = {"ld": Mode.LD_MASK, "hts": Mode.MASK_FINE}
 EXPECTED_READS = {"train": 0, "validation": 174, "test": 0}
+STEADY_START = 33  # I plus four eight-frame P chunks, matched across both backends.
 
 
 @dataclass(frozen=True)
@@ -213,7 +214,7 @@ def validation(weights, output, qps, backends=tuple(SPLIT)):
         fresh = PHTDecoder(NativeNetworks(weights, backend, SKIP), closed.tx.model_id, backend=backend)
         for qp in qps:
             for source in sources:
-                part = output / "parts" / f"{backend}-{qp}-{source.name.split(':')[-1]}.json"
+                part = output / "parts" / equivalent.tx.model_id.hex() / f"{backend}-{qp}-{source.name.split(':')[-1]}.json"
                 if part.is_file():
                     measured = json.loads(part.read_text())
                 else:
@@ -268,10 +269,17 @@ def bd(left, right, quality, mode):
     lower, upper = max(x[0], u[0]), min(x[-1], u[-1])
     if lower >= upper or np.any(np.diff(x) == 0) or np.any(np.diff(u) == 0):
         return None
-    diff = (PchipInterpolator(u, v).integrate(lower, upper) -
-            PchipInterpolator(x, y).integrate(lower, upper)) / (upper - lower)
+    baseline = PchipInterpolator(x, y, extrapolate=False)
+    candidate = PchipInterpolator(u, v, extrapolate=False)
+    diff = (candidate.integrate(lower, upper) - baseline.integrate(lower, upper)) / (upper - lower)
+    center = (lower + upper) / 2
+    point = ({"rate_mbps": float(np.exp(center)), "native": float(baseline(center)),
+              "progressive": float(candidate(center))} if mode == "quality" else
+             {"quality": float(center), "native_mbps": float(np.exp(baseline(center))),
+              "progressive_mbps": float(np.exp(candidate(center)))})
     return {"shared_interval": [float(lower), float(upper)],
-            "delta": float(diff if mode == "quality" else 100 * np.expm1(diff))}
+            "delta": float(diff if mode == "quality" else 100 * np.expm1(diff)),
+            "matched_midpoint": point}
 
 
 def write_rd_analysis(output, curves, rows):
@@ -377,6 +385,8 @@ def kernel_time(ep, source, units, qp):
     def totals(prof):
         events = [event for event in prof.events() if str(event.device_type).endswith("CUDA")]
         kernels = [event for event in events if not event.name.startswith(("Memcpy", "Memset"))]
+        if not kernels:
+            return {"kernels": 0, "kernel_sum_ms": None, "status": "CUPTI emitted no kernel events"}
         return {"kernels": len(kernels), "kernel_sum_ms": sum(e.device_time_total for e in kernels) / 1000}
 
     unit = units[5]
@@ -399,12 +409,12 @@ def runtime_rows(ep, source, units, qp, incremental, repetitions):
     torch.cuda.reset_peak_memory_stats()
     for repeat in range(repetitions):
         ep.reset()
-        for i, unit in enumerate(units):
+        for unit in units:
             raw, enc, dec, first, meta = benchmark_unit(ep, source, unit, qp, incremental)
             wait = (unit.valid - 1) * 1000 / source.fps
             rows.append({"method": ep.case.name + ("_incremental" if incremental else ""),
                          "repeat": repeat, "start": unit.start, "frames": unit.valid,
-                         "intra": unit.intra, "warmup": i <= 4, "wire_bytes": raw,
+                         "intra": unit.intra, "warmup": unit.start < STEADY_START, "wire_bytes": raw,
                          "envelope_bytes": meta, "encode_ms": enc, "decode_ms": dec,
                          "serial_ms": enc + dec, "capture_wait_ms": wait, "first_display_ms": wait + enc + first,
                          "sampled_process_peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
@@ -451,7 +461,8 @@ def runtime(weights, output, uvg, repetitions):
     write_csv(output / "throughput.csv", metrics)
     write_csv(output / "latency.csv", details)
     write_json(output / "runtime_diagnostics.json", {"capture_fps": source.fps, "resolution": [1080, 1920],
-        "repetitions": repetitions, "warmup_p_units": 4, "gpu_kernel_profile": gpu,
+        "repetitions": repetitions, "first_steady_frame": STEADY_START,
+        "warmup_p_units": {"ld": 32, "hts": 4}, "gpu_kernel_profile": gpu,
         "wall_scope": "CUDA-synchronized encoder/decoder wall time, entropy and serialization, preloaded input, batch 1",
         "cpu_memory_scope": "Linux process high-water RSS sampled at completed units, cumulative within the runtime process"})
 
