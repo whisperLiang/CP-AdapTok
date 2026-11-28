@@ -1,0 +1,375 @@
+{
+  "cli-hts-native": {
+    "backend": "hts",
+    "mode": "native",
+    "fps": 30.0,
+    "units": [
+      {
+        "file": "00000000.bin",
+        "start": 0,
+        "valid_frames": 1,
+        "bytes": 27465,
+        "complete_stream_boundaries": [
+          27465
+        ],
+        "encode_ms": 386.49367401376367,
+        "decode_ms": 107.00961400289088,
+        "capture_wait_ms": 0.0,
+        "sha256": "2dfdb524368731e741b2580f674ecb370da8a27f75da8d1fa7d1d458d333926f"
+      },
+      {
+        "file": "00000001.bin",
+        "start": 1,
+        "valid_frames": 8,
+        "bytes": 55031,
+        "complete_stream_boundaries": [
+          55031
+        ],
+        "encode_ms": 323.89121601590887,
+        "decode_ms": 305.91878900304437,
+        "capture_wait_ms": 233.33333333333334,
+        "sha256": "c29a13f969ab3411592aa7e7f47d0f548e9e7070824d48e824fcca8fc1f45f42"
+      }
+    ]
+  },
+  "cli-hts-progressive": {
+    "backend": "hts",
+    "mode": "progressive",
+    "fps": 30.0,
+    "units": [
+      {
+        "file": "00000000.pht",
+        "start": 0,
+        "valid_frames": 1,
+        "bytes": 27509,
+        "complete_stream_boundaries": [
+          27509
+        ],
+        "encode_ms": 3021.332112024538,
+        "decode_ms": 2584.3621990061365,
+        "capture_wait_ms": 0.0,
+        "sha256": "db16991e3582bb1356ceeb31d2261603b4ae641fb87f54bb455e8c57f1de88ec"
+      },
+      {
+        "file": "00000001.pht",
+        "start": 1,
+        "valid_frames": 8,
+        "bytes": 55077,
+        "complete_stream_boundaries": [
+          21586,
+          35717,
+          46090,
+          55077
+        ],
+        "encode_ms": 135.37117798114195,
+        "decode_ms": 186.7518819635734,
+        "capture_wait_ms": 233.33333333333334,
+        "sha256": "5f368fe54b2e06cdcd5add8cd4965e31b5be92d2f271d04675cb535a87d3e4d2"
+      }
+    ]
+  },
+  "cli-ld-native": {
+    "backend": "ld",
+    "mode": "native",
+    "fps": 30.0,
+    "units": [
+      {
+        "file": "00000000.bin",
+        "start": 0,
+        "valid_frames": 1,
+        "bytes": 27465,
+        "complete_stream_boundaries": [
+          27465
+        ],
+        "encode_ms": 484.8441479844041,
+        "decode_ms": 101.5274099772796,
+        "capture_wait_ms": 0.0,
+        "sha256": "2dfdb524368731e741b2580f674ecb370da8a27f75da8d1fa7d1d458d333926f"
+      },
+      {
+        "file": "00000001.bin",
+        "start": 1,
+        "valid_frames": 1,
+        "bytes": 19311,
+        "complete_stream_boundaries": [
+          19311
+        ],
+        "encode_ms": 191.8063549674116,
+        "decode_ms": 65.78342500142753,
+        "capture_wait_ms": 0.0,
+        "sha256": "528e2d119622a5ccb1185ed24fc1dda0c2fb694bf480426c07105f6489ce2d2e"
+      },
+      {
+        "file": "00000002.bin",
+        "start": 2,
+        "valid_frames": 1,
+        "bytes": 10139,
+        "complete_stream_boundaries": [
+          10139
+        ],
+        "encode_ms": 3.0715239699929953,
+        "decode_ms": 2.808578952681273,
+        "capture_wait_ms": 0.0,
+        "sha256": "80875142086c135ffeeb21f53acf9a68daba9e9abd357ecb8cd1e54b759fe723"
+      },
+      {
+        "file": "00000003.bin",
+        "start": 3,
+        "valid_frames": 1,
+        "bytes": 12127,
+        "complete_stream_boundaries": [
+          12127
+        ],
+        "encode_ms": 2.5457620504312217,
+        "decode_ms": 2.3080899845808744,
+        "capture_wait_ms": 0.0,
+        "sha256": "b21882eb1cfdd760b94a08b10e325e1b101dee9ec6ec38f78015f7a93167622d"
+      },
+      {
+        "file": "00000004.bin",
+        "start": 4,
+        "valid_frames": 1,
+        "bytes": 8786,
+        "complete_stream_boundaries": [
+          8786
+        ],
+        "encode_ms": 2.524781972169876,
+        "decode_ms": 2.255262981634587,
+        "capture_wait_ms": 0.0,
+        "sha256": "44c37074247981f3cbfc5938bbf5cf32040093f1c266839e97dacafa1f6cc66d"
+      },
+      {
+        "file": "00000005.bin",
+        "start": 5,
+        "valid_frames": 1,
+        "bytes": 11554,
+        "complete_stream_boundaries": [
+          11554
+        ],
+        "encode_ms": 2.5213719927705824,
+        "decode_ms": 2.2706659510731697,
+        "capture_wait_ms": 0.0,
+        "sha256": "a46143c9f17f78c37aa1ff0eb73b3c779d51b17a3f046da260a897cd03df6261"
+      },
+      {
+        "file": "00000006.bin",
+        "start": 6,
+        "valid_frames": 1,
+        "bytes": 8075,
+        "complete_stream_boundaries": [
+          8075
+        ],
+        "encode_ms": 2.5243640411645174,
+        "decode_ms": 2.236778032965958,
+        "capture_wait_ms": 0.0,
+        "sha256": "22df4e1da3b22d789b12e4089c1a01bf866240c8e15c5ba3b2034dcfacefc0e3"
+      },
+      {
+        "file": "00000007.bin",
+        "start": 7,
+        "valid_frames": 1,
+        "bytes": 11444,
+        "complete_stream_boundaries": [
+          11444
+        ],
+        "encode_ms": 2.51127703813836,
+        "decode_ms": 2.491607971023768,
+        "capture_wait_ms": 0.0,
+        "sha256": "4fe6ba8ed07a755ed2342680131d35c3411dc3510f104c6c8a1be100914f5b68"
+      },
+      {
+        "file": "00000008.bin",
+        "start": 8,
+        "valid_frames": 1,
+        "bytes": 8111,
+        "complete_stream_boundaries": [
+          8111
+        ],
+        "encode_ms": 2.511735016014427,
+        "decode_ms": 2.239920955616981,
+        "capture_wait_ms": 0.0,
+        "sha256": "215888e9cc5eda68a0137b90e1c22ac97b87086b7c98f8f04f0cf00696120375"
+      }
+    ]
+  },
+  "cli-ld-progressive": {
+    "backend": "ld",
+    "mode": "progressive",
+    "fps": 30.0,
+    "units": [
+      {
+        "file": "00000000.pht",
+        "start": 0,
+        "valid_frames": 1,
+        "bytes": 27509,
+        "complete_stream_boundaries": [
+          27509
+        ],
+        "encode_ms": 1805.1928809727542,
+        "decode_ms": 1526.183970971033,
+        "capture_wait_ms": 0.0,
+        "sha256": "ba9bfdb0280094a21655a9f9a80682dbf6ae8180a63cb53687d80c549608d112"
+      },
+      {
+        "file": "00000001.pht",
+        "start": 1,
+        "valid_frames": 1,
+        "bytes": 19418,
+        "complete_stream_boundaries": [
+          3984,
+          5813,
+          8561,
+          13035,
+          14553,
+          15407,
+          16807,
+          19418
+        ],
+        "encode_ms": 211.739330959972,
+        "decode_ms": 77.66396302031353,
+        "capture_wait_ms": 0.0,
+        "sha256": "ff1c9caf6ccd0a77c3a8585c1fb63c57e2bc4672114eefa1d141bb173ef57c59"
+      },
+      {
+        "file": "00000002.pht",
+        "start": 2,
+        "valid_frames": 1,
+        "bytes": 11342,
+        "complete_stream_boundaries": [
+          2517,
+          3341,
+          5011,
+          8099,
+          8855,
+          9110,
+          9815,
+          11342
+        ],
+        "encode_ms": 11.30312297027558,
+        "decode_ms": 14.487472013570368,
+        "capture_wait_ms": 0.0,
+        "sha256": "83c447cc7fbe425a435fbffdcfe9db7c931f905480d93c7e2cd5ae6c38a4e942"
+      },
+      {
+        "file": "00000003.pht",
+        "start": 3,
+        "valid_frames": 1,
+        "bytes": 13579,
+        "complete_stream_boundaries": [
+          2659,
+          3723,
+          5880,
+          9467,
+          10390,
+          10796,
+          11732,
+          13579
+        ],
+        "encode_ms": 8.855653984937817,
+        "decode_ms": 15.380116004962474,
+        "capture_wait_ms": 0.0,
+        "sha256": "3216523d47228fc87f84a0cd01de5bfce95b0f95bc29d24f9a437864cfba80b7"
+      },
+      {
+        "file": "00000004.pht",
+        "start": 4,
+        "valid_frames": 1,
+        "bytes": 10928,
+        "complete_stream_boundaries": [
+          2142,
+          2912,
+          4704,
+          7867,
+          8548,
+          8779,
+          9487,
+          10928
+        ],
+        "encode_ms": 7.870101020671427,
+        "decode_ms": 13.250308984424919,
+        "capture_wait_ms": 0.0,
+        "sha256": "03c76c55e9ddb6197109afe945a18c135d0f4a6e8f33449a2f5209517d22c53b"
+      },
+      {
+        "file": "00000005.pht",
+        "start": 5,
+        "valid_frames": 1,
+        "bytes": 14272,
+        "complete_stream_boundaries": [
+          2575,
+          3749,
+          6090,
+          9984,
+          10952,
+          11383,
+          12331,
+          14272
+        ],
+        "encode_ms": 7.965247961692512,
+        "decode_ms": 14.829468040261418,
+        "capture_wait_ms": 0.0,
+        "sha256": "77102124c6eea8c9e1b9134549a586c92ca622090e141bb2c7d06dbf6345ef8c"
+      },
+      {
+        "file": "00000006.pht",
+        "start": 6,
+        "valid_frames": 1,
+        "bytes": 10981,
+        "complete_stream_boundaries": [
+          2093,
+          2849,
+          4686,
+          7865,
+          8551,
+          8794,
+          9480,
+          10981
+        ],
+        "encode_ms": 7.73170602042228,
+        "decode_ms": 12.848846963606775,
+        "capture_wait_ms": 0.0,
+        "sha256": "52a20976c73cb7a865e78a944849856f268d07bf5b1aa497b474831f92036524"
+      },
+      {
+        "file": "00000007.pht",
+        "start": 7,
+        "valid_frames": 1,
+        "bytes": 14742,
+        "complete_stream_boundaries": [
+          2675,
+          3952,
+          6353,
+          10258,
+          11234,
+          11700,
+          12711,
+          14742
+        ],
+        "encode_ms": 8.092785021290183,
+        "decode_ms": 14.86535498406738,
+        "capture_wait_ms": 0.0,
+        "sha256": "6af0297d2dc389c3169f2f31ddfd0d60f3ac50efbd6c02722037a9a67297bc80"
+      },
+      {
+        "file": "00000008.pht",
+        "start": 8,
+        "valid_frames": 1,
+        "bytes": 11388,
+        "complete_stream_boundaries": [
+          2096,
+          2923,
+          4878,
+          8055,
+          8778,
+          9040,
+          9784,
+          11388
+        ],
+        "encode_ms": 7.87503900937736,
+        "decode_ms": 12.764870014507324,
+        "capture_wait_ms": 0.0,
+        "sha256": "c0c88a2c5b04fe73505ee8359c166fea5d37136468dddb8243858bce3ce0db68"
+      }
+    ]
+  }
+}

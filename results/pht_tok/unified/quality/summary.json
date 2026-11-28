@@ -1,0 +1,58 @@
+{
+  "tested": {
+    "cpu": {
+      "tests": 76,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "gpu": {
+      "tests": 16,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "adaptok": {
+      "tests": 1,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  },
+  "directed_mutations": {
+    "cpu": {
+      "tested": 10,
+      "killed": 10
+    },
+    "gpu": {
+      "tested": 11,
+      "killed": 11
+    }
+  },
+  "mutator_operator_subset": {
+    "tested": 10,
+    "killed": 10
+  },
+  "physical_python_lines": {
+    "pht_tok": 1349,
+    "baselines": 1492,
+    "common": 555,
+    "benchmarks": 30,
+    "experiments/pht_tok": 2447
+  },
+  "all_python_lines": 5873,
+  "shared_pht_python_lines": 1288,
+  "ld_backend_python_lines": 13,
+  "ld_cuda_patch_added_lines": 135,
+  "hts_backend_python_lines": 48,
+  "hts_cuda_patch_added_lines": 222,
+  "public_exports": [
+    "PHTTok",
+    "DecodeResult"
+  ],
+  "duplicate_candidates_at_0_8": 0,
+  "crapper_functions": 383,
+  "crapper_at_or_above_10": 92,
+  "pht_package_crapper_at_or_above_10": 5,
+  "cyclomatic_complexity_at_or_above_10": 5
+}

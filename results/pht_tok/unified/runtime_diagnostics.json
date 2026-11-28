@@ -1,0 +1,81 @@
+{
+  "capture_fps": 120,
+  "resolution": [
+    1080,
+    1920
+  ],
+  "repetitions": 3,
+  "warmup_p_units": {
+    "ld": 32,
+    "hts": 4
+  },
+  "gpu_kernel_profile": {
+    "native_ld": {
+      "encode": {
+        "kernels": 0,
+        "kernel_sum_ms": null,
+        "status": "CUPTI emitted no kernel events for the warmed native LD encode sample"
+      },
+      "decode": {
+        "kernels": 141,
+        "kernel_sum_ms": 2.326352
+      },
+      "definition": "CUPTI CUDA kernel-duration sum; overlapping kernels counted individually"
+    },
+    "pht2_ld_r1": {
+      "encode": {
+        "kernels": 195,
+        "kernel_sum_ms": 2.7774729999999925
+      },
+      "decode": {
+        "kernels": 305,
+        "kernel_sum_ms": 3.4905820000000185
+      },
+      "definition": "CUPTI CUDA kernel-duration sum; overlapping kernels counted individually"
+    },
+    "native_hts": {
+      "encode": {
+        "kernels": 262,
+        "kernel_sum_ms": 12.777414999999994
+      },
+      "decode": {
+        "kernels": 374,
+        "kernel_sum_ms": 17.005961000000006
+      },
+      "definition": "CUPTI CUDA kernel-duration sum; overlapping kernels counted individually"
+    },
+    "pht1_hts": {
+      "encode": {
+        "kernels": 340,
+        "kernel_sum_ms": 13.533482999999988
+      },
+      "decode": {
+        "kernels": 528,
+        "kernel_sum_ms": 19.405129999999975
+      },
+      "definition": "CUPTI CUDA kernel-duration sum; overlapping kernels counted individually"
+    },
+    "pht2_hts_r1": {
+      "encode": {
+        "kernels": 357,
+        "kernel_sum_ms": 13.568961000000002
+      },
+      "decode": {
+        "kernels": 617,
+        "kernel_sum_ms": 20.241662000000034
+      },
+      "definition": "CUPTI CUDA kernel-duration sum; overlapping kernels counted individually"
+    }
+  },
+  "wall_scope": "CUDA-synchronized encoder/decoder wall time, entropy and serialization, preloaded input, batch 1",
+  "cpu_memory_scope": "Linux process high-water RSS sampled at completed units, cumulative within the runtime process",
+  "first_steady_frame": 33,
+  "native_ld_encode_followup": {
+    "backend": "native_ld",
+    "qp": 32,
+    "steady_frames": 4,
+    "kernels": 644,
+    "mean_gpu_kernel_duration_sum_ms": 2.4799364999999947,
+    "method": "CUPTI after an independent profiler warmup, device activity only"
+  }
+}

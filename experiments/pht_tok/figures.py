@@ -3,6 +3,7 @@
 import argparse
 import csv
 import json
+from collections import defaultdict
 from pathlib import Path
 
 import matplotlib as mpl
@@ -43,7 +44,9 @@ def save(fig, folder, name):
     require_matplotlib_panel_alignment(fig, json_out=str(folder / f"{name}.alignment.json"),
                                        tolerance_pt=1.5, gutter_tolerance_pt=1.5, strict=True)
     fig.savefig(folder / f"{name}.pdf", metadata={"CreationDate": None, "ModDate": None})
-    fig.savefig(folder / f"{name}.svg", metadata={"Date": None})
+    vector = folder / f"{name}.svg"
+    fig.savefig(vector, metadata={"Date": None})
+    vector.write_text("\n".join(line.rstrip() for line in vector.read_text().splitlines()) + "\n")
     fig.savefig(folder / f"{name}.png", dpi=600)
     plt.close(fig)
 
@@ -77,6 +80,8 @@ def plot_rd(folder, rows):
             ax.scatter(*variables(closed, "mbps", field), c=color, alpha=.42, s=13,
                        marker=MARKERS[backend], label=f"PHT2 {'LD' if backend == 'ld' else 'HT-S'}")
         ax.set(xscale="log", xlabel="Physical rate (Mbps)", ylabel=label)
+        ticks = (.25, .5, 1, 2, 5, 10)
+        ax.set_xticks(ticks, [str(level) for level in ticks])
     ax = axes[1, 1]
     panel(ax, "d", "All eight prefixes at QP 32")
     for backend, color in COLORS.items():
@@ -127,12 +132,21 @@ def plot_runtime(folder, throughput, overhead):
     save(fig, folder, "runtime")
 
 
-def plot_network(folder, table, ledger):
-    fig, axes = plt.subplots(1, 2, figsize=(7.1, 2.55))
+def delivery_scores_by_video(units):
+    scores, counts = defaultdict(float), defaultdict(int)
+    for row in units:
+        key = row["trace"], row["method"], row["source"]
+        scores[key] += row["penalized_psnr_sum"]
+        counts[key] += row["frames"]
+    return {key: value / counts[key] for key, value in scores.items()}
+
+
+def plot_network(folder, ledger):
+    fig, axes = plt.subplots(1, 2, figsize=(7.1, 2.55), sharex=True)
     fig.subplots_adjust(left=.16, bottom=.25, right=.97, top=.83, wspace=.48)
     traces = ("stable", "pre_encode_change", "post_encode_drop", "recovery", "random")
     labels = ("Stable", "Before encode", "After encode", "Recovery", "Random")
-    index = {(row["trace"], row["method"]): float(row["drop_penalized_psnr_db"]) for row in table}
+    index = delivery_scores_by_video(ledger["units"])
     for ax, (backend, color), letter in zip(axes, COLORS.items(), "ab", strict=True):
         panel(ax, letter, "LD frames" if backend == "ld" else "HT-S chunks")
         method = f"pht2_{backend}_r1"
@@ -141,15 +155,17 @@ def plot_network(folder, table, ledger):
         for i, trace in enumerate(traces):
             stats = ledger["paired_video_intervals"][trace][backend]
             low, high = stats["bootstrap_95_db"]
-            ax.hlines(i, low, high, linewidth=1.05, color="#9199a2")
+            ax.hlines(i - .13, low, high, linewidth=1.05, color="#9199a2")
             effect = np.mean(list(stats["per_video_db"].values()))
-            oracle = index[trace, f"{method}_oracle"] - index[trace, native]
-            ax.plot(effect, i, marker="o", color=color, ms=3.5, label="Online" if i == 0 else "")
-            ax.plot(oracle, i, marker="D", markerfacecolor="white", color=color, ms=3.8,
+            oracle = np.mean([index[trace, f"{method}_oracle", source] - index[trace, native, source]
+                              for source in stats["per_video_db"]])
+            ax.plot(effect, i - .13, marker="o", linestyle="none", color=color, ms=3.5,
+                    label="Online" if i == 0 else "")
+            ax.plot(oracle, i + .13, marker="D", linestyle="none", markerfacecolor="white", color=color, ms=3.8,
                     label="Clairvoyant comparison" if i == 0 else "")
         ax.set(yticks=np.arange(5), yticklabels=labels, xlabel="Delivery score change (dB)")
         ax.invert_yaxis()
-    axes[0].legend(loc="upper center", bbox_to_anchor=(.62, -.31), ncol=2)
+    axes[0].legend(loc="upper center", bbox_to_anchor=(.62, -.26), ncol=2)
     save(fig, folder, "dynamic_network")
 
 
@@ -162,8 +178,7 @@ def main():
     folder.mkdir(parents=True, exist_ok=True)
     plot_rd(folder, csv_rows(source / "rate_distortion.csv"))
     plot_runtime(folder, csv_rows(source / "throughput.csv"), csv_rows(source / "ablation.csv"))
-    plot_network(folder, csv_rows(source / "dynamic_network.csv"),
-                 json.loads((source / "dynamic_evidence.json").read_text()))
+    plot_network(folder, json.loads((source / "dynamic_evidence.json").read_text()))
 
 
 if __name__ == "__main__":

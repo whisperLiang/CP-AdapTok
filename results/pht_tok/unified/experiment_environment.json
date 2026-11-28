@@ -1,0 +1,29 @@
+{
+  "baseline": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+  "implementation": "ba82b94600244c8df3c05d25297a90c88a5761dc",
+  "main": "a1c1997c2117321d26ffbedcbe2d433d560904df",
+  "pinned_dcvc": "cbdae87a5445114cdc7f48816da63ea80bdeac40",
+  "cuda_device": "NVIDIA H100 PCIe, 580.159.03, 81559 MiB",
+  "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0",
+  "python": "3.12.13",
+  "validation_fp16": true,
+  "test_pixel_reads": 0,
+  "additional_optimizer_updates": 0,
+  "pht_assets_sha256": {
+    "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_image.pth.tar": "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302",
+    "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_video_ld.pth.tar": "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799",
+    "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_video_hts.pth.tar": "565607d84943ee79072a5760d34a200d5724b4bb72c6bc24bfab41e8ae4f5f47"
+  },
+  "native_and_protocol_sha256": {
+    ".build/pht-tok/dual/site/MLCodec_extensions_cpp.cpython-312-x86_64-linux-gnu.so": "7b763478abcc0fdab2a58415ff8fa1b711daf432e83469bf368e20106bc2c0bb",
+    ".build/pht-tok/dual/site/inference_extensions_cuda.cpython-312-x86_64-linux-gnu.so": "140978f93cb1a0580d498bb25a4437bbdc45de5fbe887840262a6a3ba3a70053",
+    ".build/pht-tok/dual/site/pht_entropy_native.cpython-312-x86_64-linux-gnu.so": "cb080197ba50fa8cda36723a5c2acdf3e814f06506c17f10ac137974258d4d72",
+    "configs/pht_tok/protocol.json": "226914462097266dc25ec8bb4464ecd298baf0a0fb8e69a5cd3ba354f15efc6a",
+    "configs/validation_cohort.json": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+    "configs/sequence_manifest.json": "ac9d702272da63ad5577c567b3bb3c7680ec58460a655720e1b6db863aee8d44",
+    "experiments/pht_tok/native/ld_adapter.patch": "566e05d62b09615bad913835cd87bef63e40397f77fb1dae6235ef31c42e6fab",
+    "experiments/pht_tok/native/hts_adapter.patch": "d21b841f4555f2697c10d50faf56d514794fa2854fcf5cf75f91cda62bda0eae",
+    "experiments/pht_tok/native/native_state_audit.patch": "3f939594b76aa66f790aefc03f8bb60b151da1e6f40c63bffe65e31b876b8b87"
+  },
+  "retained_asset_recheck_count": 29
+}

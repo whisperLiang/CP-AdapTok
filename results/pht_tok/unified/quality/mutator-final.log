@@ -1,0 +1,41 @@
+Wrote /home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.metrics/mutate/pht_tok.bitstream.Chunk.edn
+Wrote /home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.metrics/mutate/pht_tok.bitstream.ChunkHeader.edn
+Wrote /home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.metrics/mutate/pht_tok.bitstream.Mode.edn
+Wrote /home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.metrics/mutate/pht_tok.bitstream.StreamReader.edn
+KILLED    pht_tok/bitstream.py:44 <= -> <
+KILLED    pht_tok/bitstream.py:132 delete not
+KILLED    pht_tok/bitstream.py:132 != -> ==
+KILLED    pht_tok/bitstream.py:132 or -> and
+KILLED    pht_tok/bitstream.py:132 delete -
+KILLED    pht_tok/bitstream.py:132 1 -> 0
+KILLED    pht_tok/bitstream.py:132 != -> ==
+KILLED    pht_tok/bitstream.py:142 0 -> 1
+KILLED    pht_tok/bitstream.py:142 != -> ==
+KILLED    pht_tok/bitstream.py:209 True -> False
+Function           Namespace                       Killed  Survived  Uncovered  Sites   Score
+---------------------------------------------------------------------------------------------
+__init__           pht_tok.bitstream.StreamReader       0         0          0      3    n/a
+__post_init__      pht_tok.bitstream.ChunkHeader        0         0          0     15    n/a
+_check_dependency  pht_tok.bitstream.ChunkHeader        0         0          0     18    n/a
+_is_replay         pht_tok.bitstream.StreamReader       0         0          0     12    n/a
+_payload_at        pht_tok.bitstream.StreamReader       0         0          0      8    n/a
+_read_records      pht_tok.bitstream.StreamReader       0         0          0      8    n/a
+at_boundary        pht_tok.bitstream.StreamReader       0         0          0      5    n/a
+backend            pht_tok.bitstream.Mode               0         0          0      0    n/a
+complete           pht_tok.bitstream.StreamReader       0         0          0      2    n/a
+is_intra           pht_tok.bitstream.Mode               0         0          0      0    n/a
+layers             pht_tok.bitstream.Mode               0         0          0      0    n/a
+ledger             pht_tok.bitstream.Chunk              0         0          0      3    n/a
+pack               pht_tok.bitstream.ChunkHeader        0         0          0      1    n/a
+pack               pht_tok.bitstream.Chunk              0         0          0      5    n/a
+prefix             pht_tok.bitstream.Chunk              0         0          0      0    n/a
+record_checksum    pht_tok.bitstream.ChunkHeader        0         0          0      4    n/a
+record_count       pht_tok.bitstream.ChunkHeader        0         0          0      2    n/a
+truncate_to_budget pht_tok.bitstream.Chunk              0         0          0      2    n/a
+unpack             pht_tok.bitstream.ChunkHeader        0         0          0      4    n/a
+__post_init__      pht_tok.bitstream.Chunk              6         0          0      7 100.0%
+_record_ends       pht_tok.bitstream.Chunk              2         0          0      9 100.0%
+append_bytes       pht_tok.bitstream.StreamReader       1         0          0      2 100.0%
+magic              pht_tok.bitstream.Mode               1         0          0      1 100.0%
+---------------------------------------------------------------------------------------------
+Total                                                  10         0          0    111  100.0%

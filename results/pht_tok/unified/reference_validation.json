@@ -1,0 +1,149 @@
+{
+  "aggregates": [
+    {
+      "backend": "ld",
+      "qp": 16,
+      "mode": 1,
+      "coding_units": 174,
+      "reference_bytes": 194416,
+      "full_bytes": 736910,
+      "exact": true
+    },
+    {
+      "backend": "ld",
+      "qp": 16,
+      "mode": 8,
+      "coding_units": 174,
+      "reference_bytes": 513988,
+      "full_bytes": 513988,
+      "exact": true
+    },
+    {
+      "backend": "ld",
+      "qp": 32,
+      "mode": 1,
+      "coding_units": 174,
+      "reference_bytes": 447962,
+      "full_bytes": 2110632,
+      "exact": true
+    },
+    {
+      "backend": "ld",
+      "qp": 32,
+      "mode": 8,
+      "coding_units": 174,
+      "reference_bytes": 1489048,
+      "full_bytes": 1489048,
+      "exact": true
+    },
+    {
+      "backend": "ld",
+      "qp": 48,
+      "mode": 1,
+      "coding_units": 174,
+      "reference_bytes": 1028025,
+      "full_bytes": 5364815,
+      "exact": true
+    },
+    {
+      "backend": "ld",
+      "qp": 48,
+      "mode": 8,
+      "coding_units": 174,
+      "reference_bytes": 3947121,
+      "full_bytes": 3947121,
+      "exact": true
+    },
+    {
+      "backend": "ld",
+      "qp": 63,
+      "mode": 1,
+      "coding_units": 174,
+      "reference_bytes": 2060992,
+      "full_bytes": 11455428,
+      "exact": true
+    },
+    {
+      "backend": "ld",
+      "qp": 63,
+      "mode": 8,
+      "coding_units": 174,
+      "reference_bytes": 8759998,
+      "full_bytes": 8759998,
+      "exact": true
+    },
+    {
+      "backend": "hts",
+      "qp": 16,
+      "mode": 1,
+      "coding_units": 26,
+      "reference_bytes": 134473,
+      "full_bytes": 374558,
+      "exact": true
+    },
+    {
+      "backend": "hts",
+      "qp": 16,
+      "mode": 8,
+      "coding_units": 26,
+      "reference_bytes": 348843,
+      "full_bytes": 348843,
+      "exact": true
+    },
+    {
+      "backend": "hts",
+      "qp": 32,
+      "mode": 1,
+      "coding_units": 26,
+      "reference_bytes": 315514,
+      "full_bytes": 1115394,
+      "exact": true
+    },
+    {
+      "backend": "hts",
+      "qp": 32,
+      "mode": 8,
+      "coding_units": 26,
+      "reference_bytes": 1053376,
+      "full_bytes": 1053376,
+      "exact": true
+    },
+    {
+      "backend": "hts",
+      "qp": 48,
+      "mode": 1,
+      "coding_units": 26,
+      "reference_bytes": 678738,
+      "full_bytes": 2959437,
+      "exact": true
+    },
+    {
+      "backend": "hts",
+      "qp": 48,
+      "mode": 8,
+      "coding_units": 26,
+      "reference_bytes": 2790524,
+      "full_bytes": 2790524,
+      "exact": true
+    },
+    {
+      "backend": "hts",
+      "qp": 63,
+      "mode": 1,
+      "coding_units": 26,
+      "reference_bytes": 1256853,
+      "full_bytes": 6147531,
+      "exact": true
+    },
+    {
+      "backend": "hts",
+      "qp": 63,
+      "mode": 8,
+      "coding_units": 26,
+      "reference_bytes": 5832239,
+      "full_bytes": 5832239,
+      "exact": true
+    }
+  ],
+  "test_pixel_reads": 0
+}

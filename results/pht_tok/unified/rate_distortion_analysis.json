@@ -1,0 +1,1614 @@
+{
+  "ld": {
+    "1": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": null,
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.3887870326002068,
+            1.0447710444173823
+          ],
+          "delta": -9.320192579424434,
+          "matched_midpoint": {
+            "rate_mbps": 1.3881778750242268,
+            "native": 29.758437899786173,
+            "progressive": 20.504355433834267
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.4453448000867134,
+            0.45326824965833246
+          ],
+          "delta": 274.57727887683075,
+          "matched_midpoint": {
+            "quality": 0.4493065248725229,
+            "native_mbps": 0.6969945809316198,
+            "progressive_mbps": 2.6103009083025284
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.3887870326002068,
+            1.0447710444173823
+          ],
+          "delta": 0.1291794269631603,
+          "matched_midpoint": {
+            "rate_mbps": 1.3881778750242268,
+            "native": 0.3562174616977243,
+            "progressive": 0.4828782031174927
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": null,
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.3887870326002068,
+            1.0447710444173823
+          ],
+          "delta": 0.1587169672971812,
+          "matched_midpoint": {
+            "rate_mbps": 1.3881778750242268,
+            "native": 0.20626862586168115,
+            "progressive": 0.36360298005666386
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": null,
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.3887870326002068,
+            1.0447710444173823
+          ],
+          "delta": -0.25386692705374214,
+          "matched_midpoint": {
+            "rate_mbps": 1.3881778750242268,
+            "native": 0.9109940351896479,
+            "progressive": 0.6558373019083931
+          }
+        }
+      }
+    },
+    "2": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": null,
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.3887870326002068,
+            1.5646289575510417
+          ],
+          "delta": -10.008276020298226,
+          "matched_midpoint": {
+            "rate_mbps": 1.8002417518649183,
+            "native": 30.603295722489452,
+            "progressive": 20.71815434073201
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.36982146832535323,
+            0.45326824965833246
+          ],
+          "delta": 202.13784700074774,
+          "matched_midpoint": {
+            "quality": 0.41154485899184284,
+            "native_mbps": 0.9143036145985003,
+            "progressive_mbps": 2.7349388821506855
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.3887870326002068,
+            1.5646289575510417
+          ],
+          "delta": 0.12551891622043918,
+          "matched_midpoint": {
+            "rate_mbps": 1.8002417518649183,
+            "native": 0.32288566990596557,
+            "progressive": 0.4469500888017392
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": null,
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.3887870326002068,
+            1.5646289575510417
+          ],
+          "delta": 0.1459680103117994,
+          "matched_midpoint": {
+            "rate_mbps": 1.8002417518649183,
+            "native": 0.1903866769901823,
+            "progressive": 0.3344523723539862
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": null,
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.3887870326002068,
+            1.5646289575510417
+          ],
+          "delta": -0.25071801334785454,
+          "matched_midpoint": {
+            "rate_mbps": 1.8002417518649183,
+            "native": 0.9259821745959502,
+            "progressive": 0.6719066776187818
+          }
+        }
+      }
+    },
+    "3": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": null,
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.3887870326002068,
+            1.9712903541076439
+          ],
+          "delta": -9.739784161962493,
+          "matched_midpoint": {
+            "rate_mbps": 2.2061560577885246,
+            "native": 31.28750227876891,
+            "progressive": 21.669413299736963
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.28686284978242443,
+            0.45326824965833246
+          ],
+          "delta": 165.15639256081104,
+          "matched_midpoint": {
+            "quality": 0.3700655497203784,
+            "native_mbps": 1.2471235754711842,
+            "progressive_mbps": 3.241954557915998
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.3887870326002068,
+            1.9712903541076439
+          ],
+          "delta": 0.1199784709122503,
+          "matched_midpoint": {
+            "rate_mbps": 2.2061560577885246,
+            "native": 0.29746587364936494,
+            "progressive": 0.4184378720425351
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.200884317872168,
+            0.25130391018144016
+          ],
+          "delta": 322.7314500058575,
+          "matched_midpoint": {
+            "quality": 0.22609411402680407,
+            "native_mbps": 1.0083318674208828,
+            "progressive_mbps": 4.190263639361285
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.3887870326002068,
+            1.9712903541076439
+          ],
+          "delta": 0.09082585285976341,
+          "matched_midpoint": {
+            "rate_mbps": 2.2061560577885246,
+            "native": 0.17811158676751723,
+            "progressive": 0.2665921505534463
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": null,
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.3887870326002068,
+            1.9712903541076439
+          ],
+          "delta": -0.20336443717492247,
+          "matched_midpoint": {
+            "rate_mbps": 2.2061560577885246,
+            "native": 0.9360461313280151,
+            "progressive": 0.7290763536633071
+          }
+        }
+      }
+    },
+    "4": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            27.610822122016906,
+            31.233576101427076
+          ],
+          "delta": 347.80202978794966,
+          "matched_midpoint": {
+            "quality": 29.42219911172199,
+            "native_mbps": 1.2445248950566141,
+            "progressive_mbps": 5.471549833894181
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.23513411720458363,
+            2.3393195615022617
+          ],
+          "delta": -4.772634752582591,
+          "matched_midpoint": {
+            "rate_mbps": 2.8636376497404794,
+            "native": 32.21342813980539,
+            "progressive": 27.425703385817442
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.18263435305963302,
+            0.45326824965833246
+          ],
+          "delta": 120.33689795075311,
+          "matched_midpoint": {
+            "quality": 0.31795130135898275,
+            "native_mbps": 1.8723122824141072,
+            "progressive_mbps": 4.093703644064049
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.23513411720458363,
+            2.3393195615022617
+          ],
+          "delta": 0.10751898614573986,
+          "matched_midpoint": {
+            "rate_mbps": 2.8636376497404794,
+            "native": 0.2652517514557409,
+            "progressive": 0.3809157380709274
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.12183161987655464,
+            0.25130391018144016
+          ],
+          "delta": 138.42291621832737,
+          "matched_midpoint": {
+            "quality": 0.1865677650289974,
+            "native_mbps": 1.9175178293854993,
+            "progressive_mbps": 4.48071617621662
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.23513411720458363,
+            2.3393195615022617
+          ],
+          "delta": 0.06246131118878147,
+          "matched_midpoint": {
+            "rate_mbps": 2.8636376497404794,
+            "native": 0.16241706524555183,
+            "progressive": 0.2287720219290542
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.8589733338904106,
+            0.9481992673599857
+          ],
+          "delta": 274.09205685994164,
+          "matched_midpoint": {
+            "quality": 0.9035863006251982,
+            "native_mbps": 1.1999693380333243,
+            "progressive_mbps": 4.471142675367583
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.23513411720458363,
+            2.3393195615022617
+          ],
+          "delta": -0.07872249379655069,
+          "matched_midpoint": {
+            "rate_mbps": 2.8636376497404794,
+            "native": 0.9476747651188288,
+            "progressive": 0.8676412657013644
+          }
+        }
+      }
+    },
+    "5": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            27.610822122016906,
+            31.947216716831655
+          ],
+          "delta": 312.13283703183896,
+          "matched_midpoint": {
+            "quality": 29.77901941942428,
+            "native_mbps": 1.3947333912732958,
+            "progressive_mbps": 5.593274254476154
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.17494140892838153,
+            2.4555940769996107
+          ],
+          "delta": -4.6361630382105155,
+          "matched_midpoint": {
+            "rate_mbps": 3.1277889026341943,
+            "native": 32.53698210499211,
+            "progressive": 27.880468694911645
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.1679691054654875,
+            0.45326824965833246
+          ],
+          "delta": 116.55117789804841,
+          "matched_midpoint": {
+            "quality": 0.31061867756191,
+            "native_mbps": 1.9850970366181426,
+            "progressive_mbps": 4.283308991739271
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.17494140892838153,
+            2.4555940769996107
+          ],
+          "delta": 0.10321126298682684,
+          "matched_midpoint": {
+            "rate_mbps": 3.1277889026341943,
+            "native": 0.2545444960981956,
+            "progressive": 0.3648819375426655
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.11292341454275723,
+            0.25130391018144016
+          ],
+          "delta": 132.30015255569523,
+          "matched_midpoint": {
+            "quality": 0.1821136623620987,
+            "native_mbps": 2.0644384474785666,
+            "progressive_mbps": 4.721559512026335
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.17494140892838153,
+            2.4555940769996107
+          ],
+          "delta": 0.05931939220796454,
+          "matched_midpoint": {
+            "rate_mbps": 3.1277889026341943,
+            "native": 0.15715347966424364,
+            "progressive": 0.21999972505321216
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.8589733338904106,
+            0.9567443882596904
+          ],
+          "delta": 242.28659442079703,
+          "matched_midpoint": {
+            "quality": 0.9078588610750505,
+            "native_mbps": 1.2913464474535532,
+            "progressive_mbps": 4.385008353373735
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.17494140892838153,
+            2.4555940769996107
+          ],
+          "delta": -0.07093839060250415,
+          "matched_midpoint": {
+            "rate_mbps": 3.1277889026341943,
+            "native": 0.9512992142825376,
+            "progressive": 0.8808671525131808
+          }
+        }
+      }
+    },
+    "6": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            27.610822122016906,
+            32.3693874128921
+          ],
+          "delta": 307.47918230914723,
+          "matched_midpoint": {
+            "quality": 29.990104767454504,
+            "native_mbps": 1.4905678600719234,
+            "progressive_mbps": 5.909196896472567
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.16950963624870757,
+            2.4899498882668345
+          ],
+          "delta": -4.625757773875317,
+          "matched_midpoint": {
+            "rate_mbps": 3.1906355406879476,
+            "native": 32.61050068660976,
+            "progressive": 27.94157862284021
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.15544447283549556,
+            0.45326824965833246
+          ],
+          "delta": 114.63714744255317,
+          "matched_midpoint": {
+            "quality": 0.304356361246914,
+            "native_mbps": 2.087180855002186,
+            "progressive_mbps": 4.477032490568472
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.16950963624870757,
+            2.4899498882668345
+          ],
+          "delta": 0.10283321078007329,
+          "matched_midpoint": {
+            "rate_mbps": 3.1906355406879476,
+            "native": 0.25214963349407193,
+            "progressive": 0.3626609949333791
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.10636453690200016,
+            0.25130391018144016
+          ],
+          "delta": 130.2659667530544,
+          "matched_midpoint": {
+            "quality": 0.17883422354172016,
+            "native_mbps": 2.179736178441558,
+            "progressive_mbps": 4.9533793703026285
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.16950963624870757,
+            2.4899498882668345
+          ],
+          "delta": 0.0592761449900815,
+          "matched_midpoint": {
+            "rate_mbps": 3.1906355406879476,
+            "native": 0.155971981155624,
+            "progressive": 0.21901251156434326
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.8589733338904106,
+            0.959293517230571
+          ],
+          "delta": 248.67140847558466,
+          "matched_midpoint": {
+            "quality": 0.9091334255604908,
+            "native_mbps": 1.3205289564940859,
+            "progressive_mbps": 4.564930566113119
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.16950963624870757,
+            2.4899498882668345
+          ],
+          "delta": -0.07132415958663424,
+          "matched_midpoint": {
+            "rate_mbps": 3.1906355406879476,
+            "native": 0.9520932449120998,
+            "progressive": 0.8810363597635752
+          }
+        }
+      }
+    },
+    "7": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            27.610822122016906,
+            33.291114259762004
+          ],
+          "delta": 265.46572227354056,
+          "matched_midpoint": {
+            "quality": 30.450968190889455,
+            "native_mbps": 1.7189298373871795,
+            "progressive_mbps": 6.074820747607246
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.13641554780438558,
+            2.4899498882668345
+          ],
+          "delta": -4.395476308603464,
+          "matched_midpoint": {
+            "rate_mbps": 3.243870352815579,
+            "native": 32.671795677515476,
+            "progressive": 28.18395892822045
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.14142487581348281,
+            0.45326824965833246
+          ],
+          "delta": 108.68178400314538,
+          "matched_midpoint": {
+            "quality": 0.29734656273590765,
+            "native_mbps": 2.207679878624973,
+            "progressive_mbps": 4.62182470389021
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.13641554780438558,
+            2.4899498882668345
+          ],
+          "delta": 0.10068170660672056,
+          "matched_midpoint": {
+            "rate_mbps": 3.243870352815579,
+            "native": 0.2501636338661564,
+            "progressive": 0.3588320354176477
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.09715802779142883,
+            0.25130391018144016
+          ],
+          "delta": 114.88229170419079,
+          "matched_midpoint": {
+            "quality": 0.1742309689864345,
+            "native_mbps": 2.352398736060844,
+            "progressive_mbps": 4.987574028298859
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.13641554780438558,
+            2.4899498882668345
+          ],
+          "delta": 0.055497302775367345,
+          "matched_midpoint": {
+            "rate_mbps": 3.243870352815579,
+            "native": 0.1549909227793548,
+            "progressive": 0.21396797041955462
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.8589733338904106,
+            0.966348211998227
+          ],
+          "delta": 229.46210762548526,
+          "matched_midpoint": {
+            "quality": 0.9126607729443188,
+            "native_mbps": 1.406194471530426,
+            "progressive_mbps": 4.606362088933485
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.13641554780438558,
+            2.4899498882668345
+          ],
+          "delta": -0.06892901500747471,
+          "matched_midpoint": {
+            "rate_mbps": 3.243870352815579,
+            "native": 0.952747052590533,
+            "progressive": 0.8839047272659976
+          }
+        }
+      }
+    },
+    "8": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            27.610822122016906,
+            37.06875859456912
+          ],
+          "delta": 106.93522881584252,
+          "matched_midpoint": {
+            "quality": 32.339790358293016,
+            "native_mbps": 2.9652272031164144,
+            "progressive_mbps": 5.965046096323664
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            0.016294113188530978,
+            2.4899498882668345
+          ],
+          "delta": -2.9245321431956817,
+          "matched_midpoint": {
+            "rate_mbps": 3.5012568384223526,
+            "native": 32.95617969221232,
+            "progressive": 29.796552469333047
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.12319739460516935,
+            0.45326824965833246
+          ],
+          "delta": 101.87295572671971,
+          "matched_midpoint": {
+            "quality": 0.2882328221317509,
+            "native_mbps": 2.3750399399593602,
+            "progressive_mbps": 4.856079023949588
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            0.016294113188530978,
+            2.4899498882668345
+          ],
+          "delta": 0.09726848421039092,
+          "matched_midpoint": {
+            "rate_mbps": 3.5012568384223526,
+            "native": 0.24107576486705112,
+            "progressive": 0.3461942852056276
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.08684405513193416,
+            0.25130391018144016
+          ],
+          "delta": 103.00081433725757,
+          "matched_midpoint": {
+            "quality": 0.16907398265668716,
+            "native_mbps": 2.562344200532511,
+            "progressive_mbps": 5.198994914670722
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            0.016294113188530978,
+            2.4899498882668345
+          ],
+          "delta": 0.05056740252308884,
+          "matched_midpoint": {
+            "rate_mbps": 3.5012568384223526,
+            "native": 0.15048575012682114,
+            "progressive": 0.20486314163070926
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.8589733338904106,
+            0.9836124147491894
+          ],
+          "delta": 137.59847285469482,
+          "matched_midpoint": {
+            "quality": 0.9212928743198,
+            "native_mbps": 1.6491332492347717,
+            "progressive_mbps": 4.0566472550316295
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            0.016294113188530978,
+            2.4899498882668345
+          ],
+          "delta": -0.04920890789655636,
+          "matched_midpoint": {
+            "rate_mbps": 3.5012568384223526,
+            "native": 0.9556842578571556,
+            "progressive": 0.9083362492698581
+          }
+        }
+      }
+    },
+    "nonmonotonic_adjacent_frames": {
+      "pairs": 4788,
+      "decreases": {
+        "psnr": 0,
+        "lpips": 5,
+        "dists": 42,
+        "ms-ssim": 1
+      }
+    },
+    "paired_qp32_full_minus_native_db": {
+      "unit": "video",
+      "videos": 3,
+      "per_video_db": {
+        "DAVIS2017:blackswan": -2.394276504516604,
+        "DAVIS2017:car-roundabout": -1.6683400571346283,
+        "DAVIS2017:dog": -1.697519111633298
+      },
+      "bootstrap_95_db": [
+        -2.394276504516604,
+        -1.6683400571346283
+      ]
+    }
+  },
+  "hts": {
+    "1": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": null,
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            0.5501946017895618
+          ],
+          "delta": -5.030723047674985,
+          "matched_midpoint": {
+            "rate_mbps": 0.9096959310708697,
+            "native": 26.785552281562467,
+            "progressive": 21.809982573959026
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.5016087615841079,
+            0.5151551030148035
+          ],
+          "delta": 198.11084024298833,
+          "matched_midpoint": {
+            "quality": 0.5083819322994557,
+            "native_mbps": 0.5070417408129291,
+            "progressive_mbps": 1.5109766337514816
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            0.5501946017895618
+          ],
+          "delta": 0.0931802223986925,
+          "matched_midpoint": {
+            "rate_mbps": 0.9096959310708697,
+            "native": 0.4420845603220378,
+            "progressive": 0.5344928054368935
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": null,
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            0.5501946017895618
+          ],
+          "delta": 0.09237648636258958,
+          "matched_midpoint": {
+            "rate_mbps": 0.9096959310708697,
+            "native": 0.23486732296573407,
+            "progressive": 0.3272344058847232
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": null,
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            0.5501946017895618
+          ],
+          "delta": -0.16650263824801462,
+          "matched_midpoint": {
+            "rate_mbps": 0.9096959310708697,
+            "native": 0.8408052194973843,
+            "progressive": 0.6741908980168917
+          }
+        }
+      }
+    },
+    "2": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": null,
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.0717659331502487
+          ],
+          "delta": -3.805285489096837,
+          "matched_midpoint": {
+            "rate_mbps": 1.1807393247657485,
+            "native": 27.492378669580027,
+            "progressive": 23.848552617888444
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.39381307562620477,
+            0.5151551030148035
+          ],
+          "delta": 69.86093900092871,
+          "matched_midpoint": {
+            "quality": 0.4544840893205041,
+            "native_mbps": 0.8160916652584413,
+            "progressive_mbps": 1.3573334487298128
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.0717659331502487
+          ],
+          "delta": 0.05736883012713971,
+          "matched_midpoint": {
+            "rate_mbps": 1.1807393247657485,
+            "native": 0.4120841532650249,
+            "progressive": 0.46693947214013476
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.22885131287848812,
+            0.2744173887132228
+          ],
+          "delta": 146.59626234924937,
+          "matched_midpoint": {
+            "quality": 0.25163435079585544,
+            "native_mbps": 0.686194552976361,
+            "progressive_mbps": 1.6741998407845606
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.0717659331502487
+          ],
+          "delta": 0.04913539481380499,
+          "matched_midpoint": {
+            "rate_mbps": 1.1807393247657485,
+            "native": 0.21970784149500616,
+            "progressive": 0.26799042451797156
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.7797284986095867,
+            0.7925581277787
+          ],
+          "delta": 336.69579531158723,
+          "matched_midpoint": {
+            "quality": 0.7861433131941433,
+            "native_mbps": 0.5047282499982316,
+            "progressive_mbps": 2.1924003041795754
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.0717659331502487
+          ],
+          "delta": -0.09803911784967455,
+          "matched_midpoint": {
+            "rate_mbps": 1.1807393247657485,
+            "native": 0.8624723081757364,
+            "progressive": 0.7656363278281065
+          }
+        }
+      }
+    },
+    "3": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            25.160250302388867,
+            25.58730620922265
+          ],
+          "delta": 336.29358875727405,
+          "matched_midpoint": {
+            "quality": 25.37377825580576,
+            "native_mbps": 0.5208612826228425,
+            "progressive_mbps": 2.1429503322121364
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.37500501349411
+          ],
+          "delta": -3.1023567334123263,
+          "matched_midpoint": {
+            "rate_mbps": 1.374046902376711,
+            "native": 27.914913142645478,
+            "progressive": 25.036630293621442
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.34170454374418174,
+            0.5151551030148035
+          ],
+          "delta": 53.39552465374867,
+          "matched_midpoint": {
+            "quality": 0.42842982337949265,
+            "native_mbps": 1.0245562325175912,
+            "progressive_mbps": 1.540912040105993
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.37500501349411
+          ],
+          "delta": 0.04783388253215838,
+          "matched_midpoint": {
+            "rate_mbps": 1.374046902376711,
+            "native": 0.3945297196013191,
+            "progressive": 0.4402378601818951
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.19721853082207427,
+            0.2744173887132228
+          ],
+          "delta": 93.90956518526677,
+          "matched_midpoint": {
+            "quality": 0.23581795976764852,
+            "native_mbps": 0.8937197194097686,
+            "progressive_mbps": 1.7103372530953933
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.37500501349411
+          ],
+          "delta": 0.03692848258514584,
+          "matched_midpoint": {
+            "rate_mbps": 1.374046902376711,
+            "native": 0.2111196594427005,
+            "progressive": 0.24717507109316553
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.7797284986095867,
+            0.8459969080727676
+          ],
+          "delta": 149.11258964506547,
+          "matched_midpoint": {
+            "quality": 0.8128627033411772,
+            "native_mbps": 0.6556580030687815,
+            "progressive_mbps": 1.5456041573845651
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.37500501349411
+          ],
+          "delta": -0.06954611175225539,
+          "matched_midpoint": {
+            "rate_mbps": 1.374046902376711,
+            "native": 0.8741805656070549,
+            "progressive": 0.8059846294143551
+          }
+        }
+      }
+    },
+    "4": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            25.160250302388867,
+            27.39651898747262
+          ],
+          "delta": 114.43434735826072,
+          "matched_midpoint": {
+            "quality": 26.278384644930746,
+            "native_mbps": 0.7467146396184826,
+            "progressive_mbps": 1.4839159048151433
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.603788605797918
+          ],
+          "delta": -2.183012288522074,
+          "matched_midpoint": {
+            "rate_mbps": 1.5405694564874606,
+            "native": 28.241081523824494,
+            "progressive": 26.318088712623826
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.2953412476070653,
+            0.5151551030148035
+          ],
+          "delta": 40.56919310731879,
+          "matched_midpoint": {
+            "quality": 0.4052481753109344,
+            "native_mbps": 1.2526593899063003,
+            "progressive_mbps": 1.7282968375044947
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.603788605797918
+          ],
+          "delta": 0.038588111903258275,
+          "matched_midpoint": {
+            "rate_mbps": 1.5405694564874606,
+            "native": 0.38119293314634217,
+            "progressive": 0.418754574390309
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.17260512298551098,
+            0.2744173887132228
+          ],
+          "delta": 69.42933606983402,
+          "matched_midpoint": {
+            "quality": 0.22351125584936687,
+            "native_mbps": 1.1046164784385468,
+            "progressive_mbps": 1.867055627885757
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.603788605797918
+          ],
+          "delta": 0.02994267794184284,
+          "matched_midpoint": {
+            "rate_mbps": 1.5405694564874606,
+            "native": 0.20476365508582287,
+            "progressive": 0.23429710586081146
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.7797284986095867,
+            0.891972880596402
+          ],
+          "delta": 78.02815924305942,
+          "matched_midpoint": {
+            "quality": 0.8358506896029944,
+            "native_mbps": 0.8487425320775428,
+            "progressive_mbps": 1.4454668032673814
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.603788605797918
+          ],
+          "delta": -0.04396451930947502,
+          "matched_midpoint": {
+            "rate_mbps": 1.5405694564874606,
+            "native": 0.8826007024726445,
+            "progressive": 0.8397680059805276
+          }
+        }
+      }
+    },
+    "5": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            25.160250302388867,
+            28.448354620011354
+          ],
+          "delta": 85.95493699580989,
+          "matched_midpoint": {
+            "quality": 26.80430246120011,
+            "native_mbps": 0.9139856137212128,
+            "progressive_mbps": 1.591784858377765
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.7715795155808267
+          ],
+          "delta": -1.8462254749807026,
+          "matched_midpoint": {
+            "rate_mbps": 1.6753926905283614,
+            "native": 28.490452331581302,
+            "progressive": 26.889493270206493
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.26673579941792736,
+            0.5151551030148035
+          ],
+          "delta": 36.46241181676912,
+          "matched_midpoint": {
+            "quality": 0.3909454512163654,
+            "native_mbps": 1.4171341883949096,
+            "progressive_mbps": 1.9067981417923856
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.7715795155808267
+          ],
+          "delta": 0.03524620771817983,
+          "matched_midpoint": {
+            "rate_mbps": 1.6753926905283614,
+            "native": 0.3712473732777972,
+            "progressive": 0.4067633613389312
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.15582408952987056,
+            0.2744173887132228
+          ],
+          "delta": 55.3131671522973,
+          "matched_midpoint": {
+            "quality": 0.21512073912154667,
+            "native_mbps": 1.2799590924331352,
+            "progressive_mbps": 2.0013679505876554
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.7715795155808267
+          ],
+          "delta": 0.025366968575365724,
+          "matched_midpoint": {
+            "rate_mbps": 1.6753926905283614,
+            "native": 0.20020599396784686,
+            "progressive": 0.22543270214918354
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.7797284986095867,
+            0.9141835638846474
+          ],
+          "delta": 60.78414168198157,
+          "matched_midpoint": {
+            "quality": 0.846956031247117,
+            "native_mbps": 0.9703214770103362,
+            "progressive_mbps": 1.5038218840329465
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.7715795155808267
+          ],
+          "delta": -0.03513785989399917,
+          "matched_midpoint": {
+            "rate_mbps": 1.6753926905283614,
+            "native": 0.8886685831611167,
+            "progressive": 0.854453127724499
+          }
+        }
+      }
+    },
+    "6": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            25.160250302388867,
+            29.73003599058373
+          ],
+          "delta": 63.58601980368853,
+          "matched_midpoint": {
+            "quality": 27.4451431464863,
+            "native_mbps": 1.1602656171803765,
+            "progressive_mbps": 1.789922753908004
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.9168510071844074
+          ],
+          "delta": -1.4481772914393947,
+          "matched_midpoint": {
+            "rate_mbps": 1.8016147132675369,
+            "native": 28.712556437179597,
+            "progressive": 27.45123312588522
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.2402549089071737,
+            0.5151551030148035
+          ],
+          "delta": 32.176185672601164,
+          "matched_midpoint": {
+            "quality": 0.3777050059609886,
+            "native_mbps": 1.5867644913115744,
+            "progressive_mbps": 2.080032776150429
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.9168510071844074
+          ],
+          "delta": 0.031905424609702956,
+          "matched_midpoint": {
+            "rate_mbps": 1.8016147132675369,
+            "native": 0.3625418771910366,
+            "progressive": 0.3961909429561529
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.1408396698962683,
+            0.2744173887132228
+          ],
+          "delta": 45.38813348993005,
+          "matched_midpoint": {
+            "quality": 0.20762852930474557,
+            "native_mbps": 1.4626284903893942,
+            "progressive_mbps": 2.1626000758697512
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.9168510071844074
+          ],
+          "delta": 0.02203975872367551,
+          "matched_midpoint": {
+            "rate_mbps": 1.8016147132675369,
+            "native": 0.19632427037722122,
+            "progressive": 0.2185663912199056
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.7797284986095867,
+            0.9354583727217268
+          ],
+          "delta": 47.206802496561345,
+          "matched_midpoint": {
+            "quality": 0.8575934356656567,
+            "native_mbps": 1.1083966199505904,
+            "progressive_mbps": 1.5960208219607381
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7394843557683106,
+            1.9168510071844074
+          ],
+          "delta": -0.027465969362364135,
+          "matched_midpoint": {
+            "rate_mbps": 1.8016147132675369,
+            "native": 0.8938441564352417,
+            "progressive": 0.8667122213423408
+          }
+        }
+      }
+    },
+    "7": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            25.160250302388867,
+            31.14865741809373
+          ],
+          "delta": 42.146119027952835,
+          "matched_midpoint": {
+            "quality": 28.154453860241297,
+            "native_mbps": 1.4950817937695322,
+            "progressive_mbps": 2.0199966365227966
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7226512808493929,
+            2.034003846528704
+          ],
+          "delta": -0.9981445506109022,
+          "matched_midpoint": {
+            "rate_mbps": 1.9264448985641414,
+            "native": 28.921387238060916,
+            "progressive": 28.01414441478244
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.22046290999599572,
+            0.5151551030148035
+          ],
+          "delta": 29.383081064162596,
+          "matched_midpoint": {
+            "quality": 0.3678090065053996,
+            "native_mbps": 1.724204482131325,
+            "progressive_mbps": 2.230460078431571
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7226512808493929,
+            2.034003846528704
+          ],
+          "delta": 0.029702341066785782,
+          "matched_midpoint": {
+            "rate_mbps": 1.9264448985641414,
+            "native": 0.354458402147374,
+            "progressive": 0.3870837121574248
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.1295229658998292,
+            0.2744173887132228
+          ],
+          "delta": 38.800077408504386,
+          "matched_midpoint": {
+            "quality": 0.201970177306526,
+            "native_mbps": 1.6214150187379757,
+            "progressive_mbps": 2.3044963614034595
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7226512808493929,
+            2.034003846528704
+          ],
+          "delta": 0.01953167680417938,
+          "matched_midpoint": {
+            "rate_mbps": 1.9264448985641414,
+            "native": 0.19278854867302814,
+            "progressive": 0.21283944729171667
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.7797284986095867,
+            0.95175470223372
+          ],
+          "delta": 35.080329500441096,
+          "matched_midpoint": {
+            "quality": 0.8657416004216534,
+            "native_mbps": 1.2307907562370302,
+            "progressive_mbps": 1.6523338119478472
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.7226512808493929,
+            2.034003846528704
+          ],
+          "delta": -0.020836631427512263,
+          "matched_midpoint": {
+            "rate_mbps": 1.9264448985641414,
+            "native": 0.8985392539026678,
+            "progressive": 0.877812606241875
+          }
+        }
+      }
+    },
+    "8": {
+      "global_psnr": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            25.160250302388867,
+            32.81441543924204
+          ],
+          "delta": 20.50334772073534,
+          "matched_midpoint": {
+            "quality": 28.987332870815454,
+            "native_mbps": 1.9677089152637297,
+            "progressive_mbps": 2.3479448958080944
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.6604249907247919,
+            2.084599252276229
+          ],
+          "delta": -0.5334393898945352,
+          "matched_midpoint": {
+            "rate_mbps": 2.038240897633713,
+            "native": 29.099462401719286,
+            "progressive": 28.51237808847447
+          }
+        }
+      },
+      "lpips": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.2032914793910994,
+            0.5151551030148035
+          ],
+          "delta": 26.986445515290193,
+          "matched_midpoint": {
+            "quality": 0.35922329120295143,
+            "native_mbps": 1.8517212585127751,
+            "progressive_mbps": 2.3687966077392213
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.6604249907247919,
+            2.084599252276229
+          ],
+          "delta": 0.028114927201724507,
+          "matched_midpoint": {
+            "rate_mbps": 2.038240897633713,
+            "native": 0.3476268393646859,
+            "progressive": 0.37950125534688084
+          }
+        }
+      },
+      "dists": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.1211384356706992,
+            0.2744173887132228
+          ],
+          "delta": 34.694475877692184,
+          "matched_midpoint": {
+            "quality": 0.197777912191961,
+            "native_mbps": 1.753070794142674,
+            "progressive_mbps": 2.4188633798185313
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.6604249907247919,
+            2.084599252276229
+          ],
+          "delta": 0.01792734988148503,
+          "matched_midpoint": {
+            "rate_mbps": 2.038240897633713,
+            "native": 0.18983890999262404,
+            "progressive": 0.20826912508513293
+          }
+        }
+      },
+      "ms-ssim": {
+        "equal_quality_bd_rate_percent": {
+          "shared_interval": [
+            0.7797284986095867,
+            0.9658567497785064
+          ],
+          "delta": 25.15687300986404,
+          "matched_midpoint": {
+            "quality": 0.8727926241940466,
+            "native_mbps": 1.3499488397053747,
+            "progressive_mbps": 1.7222955503509603
+          }
+        },
+        "equal_rate_bd_quality": {
+          "shared_interval": [
+            -0.6604249907247919,
+            2.084599252276229
+          ],
+          "delta": -0.015659258685777205,
+          "matched_midpoint": {
+            "rate_mbps": 2.038240897633713,
+            "native": 0.9024250438643344,
+            "progressive": 0.8864546183947332
+          }
+        }
+      }
+    },
+    "nonmonotonic_adjacent_frames": {
+      "pairs": 4788,
+      "decreases": {
+        "psnr": 1,
+        "lpips": 13,
+        "dists": 24,
+        "ms-ssim": 3
+      }
+    },
+    "paired_qp32_full_minus_native_db": {
+      "unit": "video",
+      "videos": 3,
+      "per_video_db": {
+        "DAVIS2017:blackswan": -0.5752418518066413,
+        "DAVIS2017:car-roundabout": -0.2542952001094818,
+        "DAVIS2017:dog": -0.3373661994934096
+      },
+      "bootstrap_95_db": [
+        -0.5752418518066413,
+        -0.2542952001094818
+      ]
+    }
+  }
+}

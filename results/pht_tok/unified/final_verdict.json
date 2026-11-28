@@ -1,0 +1,103 @@
+{
+  "verdicts": {
+    "Cleanup Verdict": "PASS",
+    "Engineering Verdict": "PARTIAL_PASS",
+    "PHT-Tok-LD Verdict": "PARTIAL_PASS",
+    "PHT-Tok-HT-S Verdict": "PARTIAL_PASS",
+    "Progressive RD Verdict": "FAIL",
+    "Runtime Verdict": "PARTIAL_PASS",
+    "Dynamic Streaming Verdict": "PARTIAL_PASS",
+    "Overall Verdict": "PARTIAL_PASS"
+  },
+  "correctness": {
+    "full_native_equivalence": true,
+    "tested_physical_prefixes": true,
+    "tested_incremental_display": true,
+    "committed_reference_drift_count": 0,
+    "test_pixel_reads": 0,
+    "additional_optimizer_updates": 0,
+    "validation_frames_per_replay": 174,
+    "validation_clips": 3,
+    "validated_qp": [
+      16,
+      32,
+      48,
+      63
+    ],
+    "pht1_carried_streams": 49,
+    "pht1_carried_legal_prefixes": 187
+  },
+  "backend_results": {
+    "ld": {
+      "coding_units_with_strict_full_equivalence": 696,
+      "progressive_layers": 8,
+      "native_serial_fps": 213.50726431804952,
+      "progressive_serial_fps": 55.3719980619025,
+      "incremental_serial_fps": 40.792106667949014,
+      "relative_serial_throughput_retained": 0.2593447967157596,
+      "maximum_same_integer_container_extra_percent": 4.583467287399645,
+      "qp32_minimum_reference_bytes": 447962,
+      "qp32_full_closed_loop_bytes": 2110632,
+      "dynamic_score_delta_by_trace_db": {
+        "stable": -9.467975583569757,
+        "pre_encode_change": -15.08106251420646,
+        "post_encode_drop": -9.162285618398386,
+        "recovery": -4.129528495087023,
+        "random": -13.130882208374725
+      },
+      "dynamic_trajectories_with_gain": 0
+    },
+    "hts": {
+      "coding_units_with_strict_full_equivalence": 104,
+      "progressive_layers": 8,
+      "native_serial_fps": 282.45424222015794,
+      "progressive_serial_fps": 146.5787291564582,
+      "incremental_serial_fps": 60.64994268732411,
+      "relative_serial_throughput_retained": 0.5189468141965733,
+      "maximum_same_integer_container_extra_percent": 0.7966228047364021,
+      "qp32_minimum_reference_bytes": 315514,
+      "qp32_full_closed_loop_bytes": 1115394,
+      "dynamic_score_delta_by_trace_db": {
+        "stable": -0.44298733239886445,
+        "pre_encode_change": 9.85974766742224,
+        "post_encode_drop": 1.310057431801983,
+        "recovery": 8.624642635213918,
+        "random": 3.7947842828158684
+      },
+      "dynamic_trajectories_with_gain": 4
+    }
+  },
+  "targets": {
+    "serial_fps_minimum": 30,
+    "native_throughput_max_drop_fraction": 0.1,
+    "same_integer_extra_percent": 2,
+    "crapper_strict_upper_bound": 10
+  },
+  "dimensions_and_scope": {
+    "validation": [
+      1080,
+      1920
+    ],
+    "runtime": "UVG 129 frames, matched frames 33 through 128",
+    "network": "five packet-level traces on the frozen Validation; not live network transport",
+    "oracle": "best feasible prefix for the current unit and queue with future bandwidth",
+    "adaptok": "matched 174 frames, official FP32; 512/1024/2048 tokens per tile/window; quality only"
+  },
+  "git": {
+    "baseline": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+    "implementation": "ba82b94600244c8df3c05d25297a90c88a5761dc",
+    "main": "a1c1997c2117321d26ffbedcbe2d433d560904df",
+    "remote_deletions_executed": false,
+    "local_branches": [
+      "main",
+      "experiment/pht-tok"
+    ]
+  },
+  "reason": {
+    "engineering": "Functional, corruption, and legacy compatibility checks passed. Functions above the CRAP target remain.",
+    "ld": "Full-reference and fixed-reference invariants passed. QP 16 wire overhead, closed-loop RD and relative throughput missed the targets.",
+    "hts": "Native-equivalent full budget and eight-prefix operation passed. Closed-loop RD and relative throughput missed the targets.",
+    "dynamic": "Online HT-S gained on four of five traces. Online LD gained on zero of five traces.",
+    "overall": "Both backends perform real coding and pass correctness checks. Efficiency and research-quality gates remain unmet."
+  }
+}

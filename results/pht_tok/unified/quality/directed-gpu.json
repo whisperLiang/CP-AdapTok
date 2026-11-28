@@ -1,0 +1,90 @@
+[
+  {
+    "name": "repeat_frame",
+    "witness": "test_codec.py::test_assemble_preserves_input_order_and_pads_only_the_tail",
+    "gpu": true,
+    "killed": true,
+    "returncode": 1,
+    "result": "        _, _, frames = peers\n        assembled = assemble(frames[:3]).reshape(8, 3, *frames.shape[-2:])\n>       assert torch.equal(assembled[:3], frames[:3])\nE       AssertionError: assert False\nE        +  where False = <built-in method equal of type object at 0x789132dd6c20>(tensor([[[[ 0.2031,  0.4629, -0.2559,  ..., -0.3862,  0.1680,  0.1772],\\n          [-0.3467, -0.2749, -0.4937,  ...,  0...          [-0.2107, -0.2986, -0.1970,  ...,  0.3843, -0.3037, -0.3945]]]],\\n       device='cuda:0', dtype=torch.float16), tensor([[[[ 0.2031,  0.4629, -0.2559,  ..., -0.3862,  0.1680,  0.1772],\\n          [-0.3467, -0.2749, -0.4937,  ...,  0...          [ 0.4028, -0.2449,  0.0405,  ...,  0.1221,  0.0566,  0.3145]]]],\\n       device='cuda:0', dtype=torch.float16))\nE        +    where <built-in method equal of type object at 0x789132dd6c20> = torch.equal\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py:32: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_assemble_preserves_input_order_and_pads_only_the_tail\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.10s"
+  },
+  {
+    "name": "reset_each_reference",
+    "witness": "test_native.py",
+    "gpu": true,
+    "killed": true,
+    "returncode": 1,
+    "result": "                official_z, official_y, official_indexes, official_skip = stock.video.proxy.pht_symbols(False)\n>               assert torch.equal(analysis.hyper, official_z)\nE               AssertionError: assert False\nE                +  where False = <built-in method equal of type object at 0x713f937d6c20>(tensor([[[[ 1,  1],\\n          [ 1,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[ 0,  1],\\n          [ 1,...         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]]]], device='cuda:0', dtype=torch.int8), tensor([[[[ 1,  1],\\n          [ 1,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[-1,  1],\\n          [ 1,...         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]]]], device='cuda:0', dtype=torch.int8))\nE                +    where <built-in method equal of type object at 0x713f937d6c20> = torch.equal\nE                +    and   tensor([[[[ 1,  1],\\n          [ 1,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[ 0,  1],\\n          [ 1,...         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]]]], device='cuda:0', dtype=torch.int8) = NativeSymbols(hyper=tensor([[[[ 1,  1],\\n          [ 1,  0]],\\n\\n         [[ 0,  0],\\n          [ 0,  0]],\\n\\n         [[ 0,..., device='cuda:0',\\n       dtype=torch.int16), keep=tensor([True, True, True,  ..., True, True, True], device='cuda:0')).hyper\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_native.py:41: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_native.py::test_official_cuda_symbols_replay_on_independent_peer\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 9.48s"
+  },
+  {
+    "name": "read_next_frame",
+    "witness": "test_codec.py::test_one_encoder_call_and_chunk_causality_with_shared_backing_storage",
+    "gpu": true,
+    "killed": true,
+    "returncode": 1,
+    "result": "        future = tx.encode_chunk_once(changed_future[1:9], 32, 1, 2, commit=False)\n>       assert original.data == future.data\nE       AssertionError: assert b'PHT1test-id...EX6\\x18\\xdd(1' == b'PHT1test-id...e\\xa0\\xf8\\xc8'\nE         \nE         At index 39 diff: b'$' != b'('\nE         Use -v to get more diff\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py:86: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_one_encoder_call_and_chunk_causality_with_shared_backing_storage\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.25s"
+  },
+  {
+    "name": "need_hidden_full_stream",
+    "witness": "test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss",
+    "gpu": true,
+    "killed": true,
+    "returncode": 1,
+    "result": "    @torch.inference_mode()\n    def reconstruct(self) -> list[Tensor]:\n        self._active()\n        if not self.stage:\n>           raise MissingReference(\"no complete display prefix\")\nE           pht_tok.codec.MissingReference: no complete display prefix\n\npht_tok/codec.py:295: MissingReference\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.23s"
+  },
+  {
+    "name": "use_unreceived_precision",
+    "witness": "test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss",
+    "gpu": true,
+    "killed": true,
+    "returncode": 1,
+    "result": "                if stage >= 2:\n>                   assert reference == rx.adapter.reference.digest() == tx.adapter.reference.digest()\nE                   AssertionError: assert '0:ce3f8c856b...245e36a8e136a' == '0:9680aefcf1...0005a157b1011'\nE                     \nE                     - 0:9680aefcf143bcf0b05a75a54359b7f886a5ea7e6a79bdbfc2a0005a157b1011\nE                     + 0:ce3f8c856b0d9adf7987d2f1ce7c82be527bd4082e3cc84723d245e36a8e136a\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py:59: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.52s"
+  },
+  {
+    "name": "repeat_encoder",
+    "witness": "test_codec.py::test_one_encoder_call_and_chunk_causality_with_shared_backing_storage",
+    "gpu": true,
+    "killed": true,
+    "returncode": 1,
+    "result": "        tx.encode_intra(frames[:1], 32, 0)\n        with patch.object(tx.adapter, \"encode_chunk\", wraps=tx.adapter.encode_chunk) as analysis:\n            original = tx.encode_chunk_once(frames[1:9], 32, 1, 2, commit=False)\n>       assert analysis.call_count == 1\nE       AssertionError: assert 2 == 1\nE        +  where 2 = <MagicMock name='encode_chunk' id='133876054791408'>.call_count\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py:82: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_one_encoder_call_and_chunk_causality_with_shared_backing_storage\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.13s"
+  },
+  {
+    "name": "decode_old_layers_again",
+    "witness": "test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss",
+    "gpu": true,
+    "killed": true,
+    "returncode": 1,
+    "result": "indexes = array([45, 50, 38, ..., 44, 42, 42], shape=(1875,), dtype=uint8)\n\n    def decode_y(self, payload: bytes, indexes: np.ndarray) -> np.ndarray:\n>       return self.y_decoder.y(payload, indexes)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       ValueError: invalid or truncated PHT rANS record\n\npht_tok/entropy.py:63: ValueError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.61s"
+  },
+  {
+    "name": "pretend_full_synthesis_on_prefix",
+    "witness": "test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss",
+    "gpu": true,
+    "killed": true,
+    "returncode": 1,
+    "result": "                if stage >= 2:\n>                   assert reference == rx.adapter.reference.digest() == tx.adapter.reference.digest()\nE                   AssertionError: assert '0:ef1b77c689...1482097e93a9f' == '0:e249ce9192...660eb52a0f786'\nE                     \nE                     - 0:e249ce91921f1d96b402acd09539b05222a14f662d4167026b0660eb52a0f786\nE                     + 0:ef1b77c689999d220a00887a9aca950b4d15c38bfbb38885ca91482097e93a9f\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py:59: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.60s"
+  },
+  {
+    "name": "allow_unconfirmed_reference",
+    "witness": "test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss",
+    "gpu": true,
+    "killed": true,
+    "returncode": 1,
+    "result": "indexes = array([21, 24, 17, ..., 34, 22, 35], shape=(1781,), dtype=uint8)\n\n    def decode_y(self, payload: bytes, indexes: np.ndarray) -> np.ndarray:\n>       return self.y_decoder.y(payload, indexes)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       ValueError: invalid or truncated PHT rANS record\n\npht_tok/entropy.py:63: ValueError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_codec.py::test_mask_and_precision_incremental_decode_refresh_and_reference_loss\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 7.45s"
+  },
+  {
+    "name": "allow_wrong_backend",
+    "witness": "test_backends.py::test_backend_mismatch_and_truncated_header_precede_native_decoding",
+    "gpu": true,
+    "killed": true,
+    "returncode": 1,
+    "result": "        records = parser.append_bytes(anchor.data)\n        other = Mode.INTRA if mode is Mode.LD_MASK else Mode.LD_INTRA\n        header = replace(ChunkHeader.unpack(anchor.data[:HEADER_BYTES]), mode=other)\n>       with pytest.raises(CorruptStream, match=\"backend\"):\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       Failed: DID NOT RAISE CorruptStream\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_backends.py:121: Failed\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_backends.py::test_backend_mismatch_and_truncated_header_precede_native_decoding[peers0]\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 6.29s"
+  },
+  {
+    "name": "allow_polluted_reference",
+    "witness": "test_backends.py::test_modified_reference_is_rejected_and_an_i_frame_recovers",
+    "gpu": true,
+    "killed": true,
+    "returncode": 1,
+    "result": "        rx.adapter.reference.tensors[0].zero_()\n>       with pytest.raises(ValueError, match=\"reference tensors\"):\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       AssertionError: Regex pattern did not match.\nE         Expected regex: 'reference tensors'\nE         Actual message: 'invalid or truncated PHT rANS record'\n\n/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_backends.py:134: AssertionError\n=========================== short test summary info ============================\nFAILED ../../home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/tests/pht_tok/test_backends.py::test_modified_reference_is_rejected_and_an_i_frame_recovers[peers0]\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 6.57s"
+  }
+]

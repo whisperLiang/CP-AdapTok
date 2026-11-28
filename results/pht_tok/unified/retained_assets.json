@@ -1,0 +1,70 @@
+{
+  "sha256_verified_before_after": {
+    "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_image.pth.tar": "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302",
+    "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_video_htl.pth.tar": "934bde4a12fc0b6b0c679ec6ae21d41cb7722debf8b631ee0dd750d030b1a6b3",
+    "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_video_hts.pth.tar": "565607d84943ee79072a5760d34a200d5724b4bb72c6bc24bfab41e8ae4f5f47",
+    "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_video_ld.pth.tar": "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799",
+    "/home/whisperliang/CP-AdapTok/checkpoints/hla_tok_uf_v2/d1-seed2.pt": "a7f9c641e3014447fb515eca273eb18b6ec1c003e635f883df65dd96485a0b35",
+    "/home/whisperliang/CP-AdapTok/checkpoints/original_adaptok_official/c514b22615a140c06f4c9792e93cbef9e5c79f32/config.json": "7ebf3ed0bb451b39424a2c89154da95f542ce12559175061ef94702e7e01bc4c",
+    "/home/whisperliang/CP-AdapTok/checkpoints/original_adaptok_official/c514b22615a140c06f4c9792e93cbef9e5c79f32/model.safetensors": "be5432949a87dee253c86f7ccb87bb5370b435ed180f8cda546b09d6a63c8cdd",
+    "/home/whisperliang/CP-AdapTok/data/manifests/cpat_test.json": "09738a77219eb1d78269a0788c109b268de29b54dec3aab68a365599e08bed5e",
+    "/home/whisperliang/CP-AdapTok/data/manifests/cpat_train.json": "88e18e6a6a38f61e335f48882aab855460e76f72205d5724cb761e7d3604dcc1",
+    "/home/whisperliang/CP-AdapTok/data/manifests/cpat_validation.json": "6e1753a5026d60f8e4b279bd15043b73e2e3a1bda01263159f7b93ddedcb5d37",
+    "/home/whisperliang/CP-AdapTok/data/traces/verizon-lte.down": "c918436fbd6246af134c76585d9395881fdd27203c59a8902b9a7c675b8a8e3e",
+    "/home/whisperliang/CP-AdapTok/data/uvg/ShakeNDry_1920x1080_120fps_420_8bit_YUV.yuv": "d0a024c975e0c6b671c53272b6265ce04066785c2e5ae0d0f30b061a9e47b925",
+    "/home/whisperliang/CP-AdapTok/data/uvg/ShakeNDry_Copyright.txt": "bdbb8a6d1f307df4206ddfbdd19bbfa05ac83c03af89d871ea719b15e6b62938",
+    "/home/whisperliang/CP-AdapTok/data/uvg/uvg-complete.7z": "5f034adbcc1c2fc4c1f3d757ea8aa22b08dcc31f70edb2d6ad0de49495d34328",
+    "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/official/site/MLCodec_extensions_cpp.cpython-312-x86_64-linux-gnu.so": "7b763478abcc0fdab2a58415ff8fa1b711daf432e83469bf368e20106bc2c0bb",
+    "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/official/site/inference_extensions_cuda.cpython-312-x86_64-linux-gnu.so": "d1ddb116cbf50ccc3da939227a1cf8f587b3e4362213f6ae13116bcb9d7e9cd8",
+    "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/pht/site/MLCodec_extensions_cpp.cpython-312-x86_64-linux-gnu.so": "7b763478abcc0fdab2a58415ff8fa1b711daf432e83469bf368e20106bc2c0bb",
+    "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/pht/site/inference_extensions_cuda.cpython-312-x86_64-linux-gnu.so": "df25a5bc0a1b46035d31674387c2c3c2125df1b807b7e3a22b54c3bc07a6bc37",
+    "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/pht/site/pht_entropy_native.cpython-312-x86_64-linux-gnu.so": "cb080197ba50fa8cda36723a5c2acdf3e814f06506c17f10ac137974258d4d72",
+    "/home/whisperliang/.cache/torch/hub/checkpoints/alexnet-owt-7be5be79.pth": "7be5be791159472b1fbf3c69796f7cb30dca7ad8466c2df70058c37116cdee02",
+    "/home/whisperliang/.cache/torch/hub/checkpoints/densenet121-a639ec97.pth": "a639ec97d7c33b07ae66f0b5fb7d0192f95a3b11b7576c66c0126c2a727c4395",
+    "/home/whisperliang/.cache/torch/hub/checkpoints/googlenet-1378be20.pth": "1378be20a8e875cf1568b8a71654e704449655e34711a959a38b04fb34905cef",
+    "/home/whisperliang/.cache/torch/hub/checkpoints/mobilenet_v3_large-8738ca79.pth": "8738ca797c879b547d18bbd15da5736ff2557b2036a9af72225393ca61759a04",
+    "/home/whisperliang/.cache/torch/hub/checkpoints/resnet18-f37072fd.pth": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "/home/whisperliang/.cache/torch/hub/checkpoints/resnet50-0676ba61.pth": "0676ba61b6795bbe1773cffd859882e5e297624d384b6993f7c9e683e722fb8a",
+    "/home/whisperliang/.cache/torch/hub/checkpoints/resnet50-19c8e357.pth": "19c8e3572231adff6824a2da93fd67b5986919a2e65f8b6007eab4edee220097",
+    "/home/whisperliang/.cache/torch/hub/checkpoints/vgg.pth": "a78928a0af1e5f0fcb1f3b9e8f8c3a2a5a3de244d830ad5c1feddc79b8432868",
+    "/home/whisperliang/.cache/torch/hub/checkpoints/vgg16-397923af.pth": "397923af8e79cdbb6a7127f12361acd7a2f83e06b05044ddf496e83de57a5bf0",
+    "/home/whisperliang/.cache/torch/hub/checkpoints/vgg16_features-amdegroot-88682ab5.pth": "88682ab5faf66146879955d307dc25d9cc4d5c7fb4c20a4ffe640842707da55e"
+  },
+  "public_data_roots_preserved": {
+    "/home/whisperliang/CP-AdapTok/data/pretrained_native": true,
+    "/home/whisperliang/CP-AdapTok/data/traces": true,
+    "/home/whisperliang/CP-AdapTok/data/uvg": true,
+    "/home/whisperliang/CP-AdapTok/data/manifests": true,
+    "/home/whisperliang/CP-AdapTok/data/davis2017": true,
+    "/home/whisperliang/CP-AdapTok/data/large_scale": true
+  },
+  "test_pixel_reads": 0,
+  "retained_code": [
+    "experiment/pht-tok",
+    "main"
+  ],
+  "pht_evidence": "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/results/pht_tok",
+  "public_native_checkout": "cbdae87a5445114cdc7f48816da63ea80bdeac40",
+  "public_adaptok_checkout": "a72076cf6474f930a181aa78971de70d65289b49",
+  "runtime": [
+    "/home/whisperliang/CP-AdapTok/.venv-native",
+    "/home/whisperliang/CP-AdapTok/.venv-adaptok-official",
+    "/home/whisperliang/CP-AdapTok/.build/cutlass",
+    "/home/whisperliang/CP-AdapTok/.build/cuda-packages",
+    "/home/whisperliang/CP-AdapTok/.build/pht-tok/official/site"
+  ],
+  "retained_main_baseline": "D1/HLA paths present in the intact main snapshot",
+  "experiment_pht_tok_original": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+  "pht_branch_preserved_tracked_assets": [
+    "pht_tok/",
+    "tests/pht_tok/",
+    "experiments/pht_tok/",
+    "results/pht_tok/",
+    "baselines/dcvc_uf/",
+    "baselines/adaptok/",
+    "configs/sequence_manifest.json",
+    "configs/validation_cohort.json",
+    "data/manifests/",
+    "data/traces/"
+  ]
+}
