@@ -1,0 +1,637 @@
+{
+  "reads": {
+    "train": 0,
+    "validation": 174,
+    "test": 0
+  },
+  "entries": [
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 0,
+      "native_bytes": 29182,
+      "mode": "INTRA",
+      "bytes": [
+        29226
+      ],
+      "sha256": "92322b5524f1802ce06a84da306c189b31598be9c242d23ce9ca177038a919dc"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 1,
+      "native_bytes": 38438,
+      "mode": "MASK",
+      "bytes": [
+        15513,
+        25133,
+        32456,
+        38485
+      ],
+      "sha256": "e50628fe08f8218f6a9eab40cfeebab809dfe3dd783604135f0ff94d516c9a63"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 1,
+      "native_bytes": 38438,
+      "mode": "PRECISION",
+      "bytes": [
+        19244,
+        19592,
+        22261,
+        38511
+      ],
+      "sha256": "f4d1ae1f0aed592d71c716de75be37cf6a85a7ecf118d81771a81e594d5b39e7"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 9,
+      "native_bytes": 35661,
+      "mode": "MASK",
+      "bytes": [
+        14298,
+        23111,
+        29982,
+        35708
+      ],
+      "sha256": "d38a756e2d91691a010a837c4ea03296d3881c6d85357926f326f5ab369db268"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 9,
+      "native_bytes": 35661,
+      "mode": "PRECISION",
+      "bytes": [
+        17675,
+        18030,
+        20642,
+        35732
+      ],
+      "sha256": "98eacbfd7314c5d98ece79ebbfb31bde29dd1b8adde05c41a991b31a582ad443"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 17,
+      "native_bytes": 39806,
+      "mode": "MASK",
+      "bytes": [
+        15368,
+        25465,
+        33287,
+        39851
+      ],
+      "sha256": "d8e7a7070e952252b26cc8234b4601f2c90b60134d5611a3981a695752ad12e4"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 17,
+      "native_bytes": 39806,
+      "mode": "PRECISION",
+      "bytes": [
+        19473,
+        19871,
+        22889,
+        39880
+      ],
+      "sha256": "f6987999c350b8c1ed516c8ad35f917095155c892e97801702b855fa0333e2cd"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 25,
+      "native_bytes": 38215,
+      "mode": "MASK",
+      "bytes": [
+        14834,
+        24407,
+        31913,
+        38264
+      ],
+      "sha256": "945ad8d023a772a09cd77945a475485559cdbb247a3a3cd6237ecd9e4e396ced"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 25,
+      "native_bytes": 38215,
+      "mode": "PRECISION",
+      "bytes": [
+        18775,
+        19162,
+        21958,
+        38290
+      ],
+      "sha256": "8c010ad7132dec75deae538e39cf49bf44f21e69379ca2fe44d900c5fd1242f1"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 33,
+      "native_bytes": 36713,
+      "mode": "MASK",
+      "bytes": [
+        14434,
+        23495,
+        30739,
+        36759
+      ],
+      "sha256": "b65eb6d901415a097ee46111f321be87470420c7f7e1cbcbea3f7c66c4126a2d"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 33,
+      "native_bytes": 36713,
+      "mode": "PRECISION",
+      "bytes": [
+        18068,
+        18422,
+        21023,
+        36784
+      ],
+      "sha256": "5a8e975426dd6d98f72913e52ae69e8a82ed0b9461c749d0f630598f46647260"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 41,
+      "native_bytes": 34658,
+      "mode": "MASK",
+      "bytes": [
+        13832,
+        22354,
+        29158,
+        34704
+      ],
+      "sha256": "1dbd07db6cc5bd0e384b856ab0ca6efb3e921b1404c07bd6af371b5569b3bd55"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 41,
+      "native_bytes": 34658,
+      "mode": "PRECISION",
+      "bytes": [
+        17098,
+        17427,
+        19867,
+        34731
+      ],
+      "sha256": "f447fe11a7696c5d71b5c5124c2b7f8d9e0bd3cfc7ca3daf242e5f4d5784d5fa"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 49,
+      "native_bytes": 32428,
+      "mode": "MASK",
+      "bytes": [
+        12306,
+        20165,
+        26851,
+        32475
+      ],
+      "sha256": "1cd1d80d64a9bfac21376e2375017fc508cf3ac2bdefc23b9d9a9dbceb27058d"
+    },
+    {
+      "source": "DAVIS2017:blackswan",
+      "frame": 49,
+      "native_bytes": 32428,
+      "mode": "PRECISION",
+      "bytes": [
+        16310,
+        16467,
+        18709,
+        32496
+      ],
+      "sha256": "b8f65c675cdc69e2bfa4cfebac435f7f76ed815039dd2e9851f39364ec0d78cc"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 0,
+      "native_bytes": 27447,
+      "mode": "INTRA",
+      "bytes": [
+        27491
+      ],
+      "sha256": "671fd2a698f7c72143114235b276a31ee4790089e98e62ce170bf90906b275b3"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 1,
+      "native_bytes": 54886,
+      "mode": "MASK",
+      "bytes": [
+        21555,
+        35695,
+        46022,
+        54932
+      ],
+      "sha256": "a54dae009e9d99d74b4e71b5c8f64c773f722cae7c4a8c45afeed66b87ba3aa5"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 1,
+      "native_bytes": 54886,
+      "mode": "PRECISION",
+      "bytes": [
+        25931,
+        27113,
+        32552,
+        54950
+      ],
+      "sha256": "fabdf7370868d5908bcd9bfc455dc26c9f8dbffe6a45e062f0c4035124411bf3"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 9,
+      "native_bytes": 52312,
+      "mode": "MASK",
+      "bytes": [
+        20119,
+        33564,
+        43581,
+        52359
+      ],
+      "sha256": "5558930216a4b19cbe0372e832b09968f5a957bce89d37748dbfd8437f1081fb"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 9,
+      "native_bytes": 52312,
+      "mode": "PRECISION",
+      "bytes": [
+        24886,
+        25840,
+        30668,
+        52381
+      ],
+      "sha256": "7d02a4e851d6798b1d04de570c42ef3bafa328ca81e803eed950f584cbe3d3cf"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 17,
+      "native_bytes": 51590,
+      "mode": "MASK",
+      "bytes": [
+        20032,
+        33192,
+        42998,
+        51638
+      ],
+      "sha256": "1838cacf8672e5f1d6c994b8339ca38f1861aef60311190bca381391ea23092b"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 17,
+      "native_bytes": 51590,
+      "mode": "PRECISION",
+      "bytes": [
+        24565,
+        25474,
+        30283,
+        51660
+      ],
+      "sha256": "ccdb1121c17641ea43bd1789a3e0589ff08424dd771692333a031b8aae3f68f2"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 25,
+      "native_bytes": 50239,
+      "mode": "MASK",
+      "bytes": [
+        19894,
+        32795,
+        42083,
+        50286
+      ],
+      "sha256": "44f1d94d2f53946570064417c705d407a3d9a8ab1458c2eb53ccd019441c2414"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 25,
+      "native_bytes": 50239,
+      "mode": "PRECISION",
+      "bytes": [
+        24072,
+        24929,
+        29451,
+        50311
+      ],
+      "sha256": "8b16b22337ca3001cebf9593935151fa48c48dc44ef2aa32f94d97615009091a"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 33,
+      "native_bytes": 51094,
+      "mode": "MASK",
+      "bytes": [
+        20223,
+        33380,
+        42786,
+        51139
+      ],
+      "sha256": "e9bb176266af480cd0b8aca5c670d020d4a4042590e64220a7d5d40d54e4c113"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 33,
+      "native_bytes": 51094,
+      "mode": "PRECISION",
+      "bytes": [
+        24474,
+        25344,
+        29986,
+        51163
+      ],
+      "sha256": "10a9494aee52a34f42c03d231eba1998e7670e270482a1c260fee841a425a443"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 41,
+      "native_bytes": 54151,
+      "mode": "MASK",
+      "bytes": [
+        21082,
+        35051,
+        45247,
+        54197
+      ],
+      "sha256": "7ed204312d86abb0ed8ca1dc35439a9fd0541934bea72a6d8244fab3b6973119"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 41,
+      "native_bytes": 54151,
+      "mode": "PRECISION",
+      "bytes": [
+        25862,
+        26876,
+        31826,
+        54220
+      ],
+      "sha256": "37ae878a61964affe5d6f43c198d32e31bbd6edbe5f0ab74816f4613228bb76c"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 49,
+      "native_bytes": 59070,
+      "mode": "MASK",
+      "bytes": [
+        22839,
+        38062,
+        49347,
+        59115
+      ],
+      "sha256": "0e56dcc77ac575df6b578a302099a8979d46b248d2aedfb9c49d72c28f653bc3"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 49,
+      "native_bytes": 59070,
+      "mode": "PRECISION",
+      "bytes": [
+        28107,
+        29160,
+        34599,
+        59144
+      ],
+      "sha256": "f6b70c89d97367c47ef221647e9bda30b67b10f86c5fa168a8c92585e7293e6c"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 57,
+      "native_bytes": 58382,
+      "mode": "MASK",
+      "bytes": [
+        23286,
+        38010,
+        48922,
+        58427
+      ],
+      "sha256": "1b44b1a9790dea09ce44184169005f9c33584540c3b01ce4b00f7b9c4dcbbfdd"
+    },
+    {
+      "source": "DAVIS2017:car-roundabout",
+      "frame": 57,
+      "native_bytes": 58382,
+      "mode": "PRECISION",
+      "bytes": [
+        27942,
+        28845,
+        33926,
+        58457
+      ],
+      "sha256": "8dd3a1b0b44d0a4c52ddd441cc6c68e5fe9c84d3cc0cfd197fa4b0e1c2cd9e6b"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 0,
+      "native_bytes": 20427,
+      "mode": "INTRA",
+      "bytes": [
+        20471
+      ],
+      "sha256": "5954af0f4a64a2db226a9d6be1a4d761cc1c70715c92059db852604819d06601"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 1,
+      "native_bytes": 40428,
+      "mode": "MASK",
+      "bytes": [
+        15825,
+        26126,
+        33904,
+        40475
+      ],
+      "sha256": "3bebe33ec84ff3f2a7f87092435977ca3d2c30307a470828a8729c539c632709"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 1,
+      "native_bytes": 40428,
+      "mode": "PRECISION",
+      "bytes": [
+        19756,
+        20133,
+        23322,
+        40498
+      ],
+      "sha256": "d7fd8929a4f2e337347b8ba98403a6c6fe3c4dea27d6b7f2fbc088772fa519ef"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 9,
+      "native_bytes": 37827,
+      "mode": "MASK",
+      "bytes": [
+        14584,
+        24269,
+        31645,
+        37875
+      ],
+      "sha256": "a0f6931f4c36d5590b1b22fda4788c30698e2d08437784adfb07bb191056014d"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 9,
+      "native_bytes": 37827,
+      "mode": "PRECISION",
+      "bytes": [
+        18391,
+        18713,
+        21470,
+        37902
+      ],
+      "sha256": "ba1eef38631fe316b944bc2f50018a6d08cb9bd1bf12487b3eedf30862420b5f"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 17,
+      "native_bytes": 26061,
+      "mode": "MASK",
+      "bytes": [
+        10609,
+        17203,
+        21978,
+        26108
+      ],
+      "sha256": "fddba072d1653c3b478488b95b715678af65f3a6d889adf20198f9eb752b845b"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 17,
+      "native_bytes": 26061,
+      "mode": "PRECISION",
+      "bytes": [
+        12991,
+        13165,
+        14818,
+        26128
+      ],
+      "sha256": "83c6f7c1ea6234fffd84293451380e15594f94058d87c3c0405869365d990007"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 25,
+      "native_bytes": 42066,
+      "mode": "MASK",
+      "bytes": [
+        16125,
+        26890,
+        35115,
+        42112
+      ],
+      "sha256": "33cf7e19f07930bfb7bac7737564bb5aef91e3817c7510f02e459dfa67993dcc"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 25,
+      "native_bytes": 42066,
+      "mode": "PRECISION",
+      "bytes": [
+        20607,
+        21004,
+        24139,
+        42138
+      ],
+      "sha256": "7b78a8e0fbe10030b98d61ad7f6da6e4ed44bf39a6523b1005d95ea235b85ad5"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 33,
+      "native_bytes": 28363,
+      "mode": "MASK",
+      "bytes": [
+        11437,
+        18698,
+        23924,
+        28409
+      ],
+      "sha256": "8d627e41e75134c193025f72e1c78db52ad86c7d7fefa4138f20a5f03c6f3118"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 33,
+      "native_bytes": 28363,
+      "mode": "PRECISION",
+      "bytes": [
+        14057,
+        14284,
+        16258,
+        28431
+      ],
+      "sha256": "235df759f1edb41744eef68c50b4a7eb20f1fcfc9b98d3ca0b94ed41c9e4577b"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 41,
+      "native_bytes": 22922,
+      "mode": "MASK",
+      "bytes": [
+        10333,
+        16382,
+        19901,
+        22977
+      ],
+      "sha256": "62dd04bf941c2d00cef1ebba4afa7d727a6f7e65353f81f6153c642647a0bc38"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 41,
+      "native_bytes": 22922,
+      "mode": "PRECISION",
+      "bytes": [
+        11321,
+        11547,
+        13330,
+        22994
+      ],
+      "sha256": "c493580c757697dabffe789bc0f4036234f885418f78a44c1d2f0b0f5f15b917"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 49,
+      "native_bytes": 44106,
+      "mode": "MASK",
+      "bytes": [
+        16528,
+        27871,
+        36628,
+        44153
+      ],
+      "sha256": "837994d3895950acd9188a4098db793c7a8a2d9484c1edecdcbefa265ef51742"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 49,
+      "native_bytes": 44106,
+      "mode": "PRECISION",
+      "bytes": [
+        21197,
+        21661,
+        25272,
+        44179
+      ],
+      "sha256": "f3a84ebc1b4cbc2c6fdedb9b97785e00415fc4c14e88c6815c0426abb4755071"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 57,
+      "native_bytes": 44639,
+      "mode": "MASK",
+      "bytes": [
+        17183,
+        28239,
+        37247,
+        44684
+      ],
+      "sha256": "e151d2eeb01ddf2452c20a5994ca6d8f6963bf337023545fc31b58a4065b8603"
+    },
+    {
+      "source": "DAVIS2017:dog",
+      "frame": 57,
+      "native_bytes": 44639,
+      "mode": "PRECISION",
+      "bytes": [
+        21150,
+        22150,
+        26571,
+        44705
+      ],
+      "sha256": "c418f707cda778b1b9be208269456ff82a670e44d558082be720f1e30bed9f74"
+    }
+  ]
+}

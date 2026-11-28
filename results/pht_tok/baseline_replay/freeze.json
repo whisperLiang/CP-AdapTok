@@ -1,0 +1,61 @@
+{
+  "baseline": "54674cc164cc29b449c1682d3d4b05ec774baa70",
+  "dcvc": "cbdae87a5445114cdc7f48816da63ea80bdeac40",
+  "device": "NVIDIA H100 PCIe",
+  "precision": "FP16",
+  "native_resolution": [
+    1080,
+    1920
+  ],
+  "qp": 32,
+  "reset_interval": 128,
+  "skip_threshold": 0.15,
+  "validation_frames": {
+    "train": 0,
+    "validation": 174,
+    "test": 0
+  },
+  "archived_rd_columns_match_exactly": true,
+  "full_comparison_tolerances": [
+    0,
+    0
+  ],
+  "additional_optimizer_updates": 0,
+  "hashes": {
+    "config": {
+      "results/pht_tok/frozen_protocol.json": "226914462097266dc25ec8bb4464ecd298baf0a0fb8e69a5cd3ba354f15efc6a",
+      "configs/hla_tok/validation_cohort.json": "d5bd3d50081a25b4ca9c66907d190be33a5fa00ddc760913bcdc30b1d3c5a5b8",
+      "results/hla_tok/temporal/sequence_manifest.json": "ac9d702272da63ad5577c567b3bb3c7680ec58460a655720e1b6db863aee8d44"
+    },
+    "weights": {
+      "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_image.pth.tar": "b3b900de23f30e4fc437010ddffe6a5413a56d6cfd97fb6235adbcd2b6973302",
+      "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_video_ld.pth.tar": "263172f25e04f3db6fd95487e1895df6f0fc2a5084e6e21d9016934fcdabc799",
+      "/home/whisperliang/CP-AdapTok/checkpoints/cvpr2026_video_hts.pth.tar": "565607d84943ee79072a5760d34a200d5724b4bb72c6bc24bfab41e8ae4f5f47"
+    },
+    "splits": {
+      "data/manifests/cpat_test.json": "09738a77219eb1d78269a0788c109b268de29b54dec3aab68a365599e08bed5e",
+      "data/manifests/cpat_train.json": "88e18e6a6a38f61e335f48882aab855460e76f72205d5724cb761e7d3604dcc1",
+      "data/manifests/cpat_validation.json": "6e1753a5026d60f8e4b279bd15043b73e2e3a1bda01263159f7b93ddedcb5d37"
+    },
+    "wire": {
+      "pht_tok/bitstream.py": "e4b0b2661e87a4836567100805e007392e7fed7cfc11828ff02ed85e3ba3ce17",
+      "experiments/pht_tok/native/hts_adapter.patch": "d21b841f4555f2697c10d50faf56d514794fa2854fcf5cf75f91cda62bda0eae"
+    },
+    "binary": {
+      "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/pht/site/MLCodec_extensions_cpp.cpython-312-x86_64-linux-gnu.so": "7b763478abcc0fdab2a58415ff8fa1b711daf432e83469bf368e20106bc2c0bb",
+      "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/pht/site/inference_extensions_cuda.cpython-312-x86_64-linux-gnu.so": "df25a5bc0a1b46035d31674387c2c3c2125df1b807b7e3a22b54c3bc07a6bc37",
+      "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/pht/site/pht_entropy_native.cpython-312-x86_64-linux-gnu.so": "cb080197ba50fa8cda36723a5c2acdf3e814f06506c17f10ac137974258d4d72",
+      "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/official/site/MLCodec_extensions_cpp.cpython-312-x86_64-linux-gnu.so": "7b763478abcc0fdab2a58415ff8fa1b711daf432e83469bf368e20106bc2c0bb",
+      "/home/whisperliang/.codex/worktrees/pht-tok/CP-AdapTok/.build/pht-tok/official/site/inference_extensions_cuda.cpython-312-x86_64-linux-gnu.so": "d1ddb116cbf50ccc3da939227a1cf8f587b3e4362213f6ae13116bcb9d7e9cd8"
+    },
+    "probe_outputs": {
+      "results/pht_tok/baseline_replay/freeze_probe.py": "e2921338aa006f4682a843bd8b38ac79688ad050939fac2f8b6d5217623a51e1",
+      "results/pht_tok/baseline_replay/native_equivalence.json": "14296c902c49689b778e80fe3872f284a54b8b21858da35f928e19670a657a7b",
+      "results/pht_tok/baseline_replay/prefix_validation.json": "65d178213ace12a097742c65972da29ded8535e1f9d82cb38e099f42257b52ca",
+      "results/pht_tok/baseline_replay/profiling.json": "1626f3938f40baebea6dbfed10da97b34b1f728467b99cf8a5c7cdd2738f1ed2",
+      "results/pht_tok/baseline_replay/pytest.xml": "00917f711489721ab891b85ebd168460e36836a29af82a5f5951390bef2fdce8",
+      "results/pht_tok/baseline_replay/validation.json": "4cf5ecb523b0d95ebe03b1f008d2f9bbe246805032a22dacf3f6c1920a462814"
+    }
+  },
+  "hardware_timing": "GPU-synchronized wall clock, entropy and wire included, 4 warm-up P chunks per repeat, 3 repeats"
+}
